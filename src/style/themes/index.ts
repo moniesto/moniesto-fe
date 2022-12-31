@@ -15,11 +15,11 @@ export const theme = (mode: string) => {
     mode: mode,
     colors: color,
     borderRadius: "15px",
-    textMain: mode == 'light' ? color.lightTextMain : color.darkTextMain,
-    appBar: mode == 'light' ? color.darkTextMain : color.primaryMain,
-    backgroundPrimary: mode == 'light' ? color.backgroundLightPrimary : color.backgroundDarkPrimary,
-    backgroundSecondary: mode == 'light' ? color.backgroundLightSecondary : color.backgroundDarkSecondary,
-    sectionPrimary: mode == 'light' ? color.darkTextMain : color.lightTextMain,
+    textMain: mode === 'light' ? color.lightTextMain : color.darkTextMain,
+    appBar: mode === 'light' ? color.darkTextMain : color.primaryMain,
+    backgroundPrimary: mode === 'light' ? color.backgroundLightPrimary : color.backgroundDarkPrimary,
+    backgroundSecondary: mode === 'light' ? color.backgroundLightSecondary : color.backgroundDarkSecondary,
+    sectionPrimary: mode === 'light' ? color.darkTextMain : color.lightTextMain,
   };
 
   const themeOptions: any = {

@@ -8,7 +8,7 @@ const instance = axios.create({
         return true
     }
 });
-instance.defaults.headers.common['Authorization'] = `Barear ${localStorage.getItem('moniestoToken')}`;
+instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('moniestoToken')}`;
 instance.interceptors.response.use(function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
@@ -34,8 +34,8 @@ class http {
     get(url: string, params?: {}) {
         return instance.get(url, params)
     }
-    post(url: string, params?: {}) {
-        return instance.post(url, params)
+    post<Type>(url: string, params?: {}): Promise<Type> {
+        return instance.post(url, params) 
     }
     put(url: string, params?: {}) {
         return instance.put(url, params)

@@ -14,6 +14,8 @@ import Navigator from "../../components/shared/common/navigatior";
 import { PermIdentity } from "@mui/icons-material";
 import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import httpService from "../../services/httpService";
+import { LoadingButton } from "@mui/lab";
+import { useState } from "react";
 
 type RegisterForm = {
   username: string;
@@ -47,10 +49,16 @@ const validationSchema = yup.object({
 
 const Register = () => {
   const theme = useTheme();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = (values: RegisterForm) => {
     console.log("values :", values);
-    httpService.post("account/register", values).then(console.log).catch(console.error);
+    setLoading(true);
+    httpService
+      .post("account/register", values)
+      .then(console.log)
+      .catch(console.error)
+      .finally(() => setLoading(false));
   };
 
   const formik = useFormik<RegisterForm>({
@@ -171,7 +179,7 @@ const Register = () => {
               }}
             />
           </Stack>
-          <Button
+          {/* <Button
             size="large"
             color="secondary"
             variant="contained"
@@ -179,7 +187,16 @@ const Register = () => {
             type="submit"
           >
             Register
-          </Button>
+          </Button> */}
+          <LoadingButton
+            type="submit"
+            size="large"
+            color="secondary"
+            loading={loading}
+            variant="contained"
+          >
+            Register
+          </LoadingButton>
           <Stack
             columnGap={1}
             alignItems="center"

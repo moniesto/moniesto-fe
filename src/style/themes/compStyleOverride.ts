@@ -17,6 +17,7 @@ export default function componentStyleOverrides(theme: any) {
                     },
                     '&.MuiButton-containedSecondary': {
                         color: theme?.colors?.white,
+                        // backgroundColor: theme?.colors.secondaryMain + "!important",
                         ".MuiSvgIcon-root": {
                             color: theme.colors.darkTextMain
                         },
@@ -135,12 +136,12 @@ export default function componentStyleOverrides(theme: any) {
             styleOverrides: {
                 root: {
                     "&.MuiInputBase-colorSecondary": {
-                        background: theme.mode == "light" ? theme.backgroundSecondary : theme.colors.backgroundDarkPrimary,
+                        background: theme.mode === "light" ? theme.backgroundSecondary : theme.colors.backgroundDarkPrimary,
                         input: {
-                            background: theme.mode == "light" ? theme.backgroundSecondary : theme.colors.backgroundDarkPrimary,
+                            background: theme.mode === "light" ? theme.backgroundSecondary : theme.colors.backgroundDarkPrimary,
                         },
                         textarea: {
-                            background: theme.mode == "light" ? theme.backgroundSecondary : theme.colors.backgroundDarkPrimary,
+                            background: theme.mode === "light" ? theme.backgroundSecondary : theme.colors.backgroundDarkPrimary,
                         }
                     },
                     background: theme.backgroundSecondary,

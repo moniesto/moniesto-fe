@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import localStorageService, { emptyStorage, StorageState } from '../../services/localStorageService'
+import localStorageService, { StorageState } from '../../services/localStorageService'
 
 // Define the initial state using that type
 const initialState: StorageState = localStorageService.getStorage()

@@ -12,8 +12,6 @@ import Explore from "../pages/main/explore";
 import Profile from "../pages/main/profile/profile";
 import BeMoniest from "../pages/main/beMoniest/beMoniest";
 
-
-const redirectIfUser = () => false
 const Router = createBrowserRouter([
     {
         path: "/",
@@ -43,7 +41,6 @@ const Router = createBrowserRouter([
     },
     {
         element: <Authorization />,
-        loader: redirectIfUser,
         children: [
             {
                 path: "login",

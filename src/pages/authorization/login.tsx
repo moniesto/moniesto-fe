@@ -12,6 +12,12 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import KeyOutlinedIcon from "@mui/icons-material/KeyOutlined";
 import Navigator from "../../components/shared/common/navigatior";
 import httpService from "../../services/httpService";
+import { LoadingButton } from "@mui/lab";
+import { useState } from "react";
+import { useAppDispatch } from "../../store/hooks";
+import { setUser } from "../../store/slices/userSlice";
+import { User } from "../../interfaces/user";
+import { useNavigate } from "react-router-dom";
 
 type LoginForm = {
   identifier: string;
@@ -30,12 +36,20 @@ const validationSchema = yup.object({
 
 const Login = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = (values: LoginForm) => {
+    setLoading(true);
     httpService
-      .post("account/login", values)
-      .then(console.log)
-      .catch(console.error);
+      .post<User>("account/login", values)
+      .then((res: User) => {
+        dispatch(setUser(res));
+        navigate("/timeline");
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
   };
 
   const formik = useFormik<LoginForm>({
@@ -70,7 +84,9 @@ const Login = () => {
               placeholder="Email or username"
               value={formik.values.identifier}
               onChange={formik.handleChange}
-              error={formik.touched.identifier && Boolean(formik.errors.identifier)}
+              error={
+                formik.touched.identifier && Boolean(formik.errors.identifier)
+              }
               helperText={formik.touched.identifier && formik.errors.identifier}
               InputProps={{
                 autoComplete: "new-email",
@@ -109,7 +125,16 @@ const Login = () => {
               </Stack>
             </Navigator>
           </Stack>
-          <Button
+          <LoadingButton
+            type="submit"
+            size="large"
+            color="secondary"
+            loading={loading}
+            variant="contained"
+          >
+            Login
+          </LoadingButton>
+          {/* <Button
             size="large"
             color="secondary"
             variant="contained"
@@ -117,7 +142,7 @@ const Login = () => {
             type="submit"
           >
             Login
-          </Button>
+          </Button> */}
           <Stack
             columnGap={1}
             alignItems="center"
