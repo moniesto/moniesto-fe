@@ -71,16 +71,19 @@ const SideBar = () => {
           </List>
         </Stack>
         <Stack>
-          <Button
-            size="large"
-            startIcon={<RocketLaunchIcon />}
-            color="secondary"
-            variant="contained"
-            fullWidth
-            type="submit"
-          >
-            <Navigator path="/bemoniest"> Be moniest</Navigator>
-          </Button>
+          <Navigator path="/bemoniest">
+            <Button
+              size="large"
+              startIcon={<RocketLaunchIcon />}
+              color="secondary"
+              variant="contained"
+              fullWidth
+              type="submit"
+            >
+              Be moniest
+            </Button>
+          </Navigator>
+
           <Stack
             padding={"20px 0"}
             flexDirection="row"

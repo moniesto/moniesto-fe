@@ -1,5 +1,4 @@
 import {
-  Button,
   InputAdornment,
   TextField,
   Typography,
@@ -16,7 +15,8 @@ import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
-import { User } from "../../interfaces/user";
+import { setToken } from "../../store/slices/localStorageSlice";
+import { LoginResponse } from "../../interfaces/requests";
 import { useNavigate } from "react-router-dom";
 
 type LoginForm = {
@@ -43,12 +43,13 @@ const Login = () => {
   const handleSubmit = (values: LoginForm) => {
     setLoading(true);
     httpService
-      .post<User>("account/login", values)
-      .then((res: User) => {
-        dispatch(setUser(res));
+      .post<LoginResponse>("account/login", values)
+      .then((res) => {
+        dispatch(setUser(res.user));
+        dispatch(setToken(res.token));
         navigate("/timeline");
       })
-      .catch(console.error)
+      .catch((e) => console.error("error :", e))
       .finally(() => setLoading(false));
   };
 

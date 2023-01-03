@@ -16,6 +16,11 @@ import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import httpService from "../../services/httpService";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../store/hooks";
+import { setUser } from "../../store/slices/userSlice";
+import { LoginResponse } from "../../interfaces/requests";
+import { setToken } from "../../store/slices/localStorageSlice";
 
 type RegisterForm = {
   username: string;
@@ -49,16 +54,21 @@ const validationSchema = yup.object({
 
 const Register = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = (values: RegisterForm) => {
-    console.log("values :", values);
     setLoading(true);
     httpService
-      .post("account/register", values)
-      .then(console.log)
+      .post<LoginResponse>("account/register", values)
+      .then((res) => {
+        dispatch(setUser(res.user));
+        dispatch(setToken(res.token));
+        navigate("/timeline");
+      })
       .catch(console.error)
-      .finally(() => setLoading(false));
+      .finally(() => {setLoading(false); navigate("/timeline");});
   };
 
   const formik = useFormik<RegisterForm>({

@@ -1,10 +1,13 @@
 export type StorageState = {
-    theme_mode: "light" | "dark"
+    theme_mode: ThemeMode,
+    token: string,
 }
 
 export const emptyStorage: StorageState = {
     theme_mode: "light",
+    token: ""
 }
+export type ThemeMode = "light" | "dark"
 
 class localStorageService {
 

@@ -1,11 +1,19 @@
 import { AppBar, Container, Grid, Stack, Toolbar } from "@mui/material";
 import { useTheme } from "@mui/system";
-import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import Header from "../components/layout/header";
 import SideBar from "../components/layout/sideBar/sideBar";
+import { useAppSelector } from "../store/hooks";
 
 const MainLayout = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const user = useAppSelector((state) => state.user.user);
+  useEffect(() => {
+    console.log("user :", user);
+    if (!user.id) navigate("login");
+  }, [user]);
 
   return (
     <Stack sx={{ background: theme.palette.background.primary }}>
