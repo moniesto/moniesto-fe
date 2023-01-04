@@ -1,5 +1,4 @@
 export default function componentStyleOverrides(theme: any) {
-    console.log("theme :", theme)
     return {
         MuiButton: {
             styleOverrides: {

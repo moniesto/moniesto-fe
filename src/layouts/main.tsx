@@ -4,15 +4,19 @@ import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import Header from "../components/layout/header";
 import SideBar from "../components/layout/sideBar/sideBar";
-import { useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { setToken } from "../store/slices/localStorageSlice";
 
 const MainLayout = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.user);
   useEffect(() => {
-    console.log("user :", user);
-    if (!user.id) navigate("login");
+    if (!user.id) {
+      dispatch(setToken(""));
+      navigate("login");
+    }
   }, [user]);
 
   return (

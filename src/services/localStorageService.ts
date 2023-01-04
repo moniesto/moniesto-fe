@@ -1,3 +1,5 @@
+import jwt_decode from "jwt-decode";
+
 export type StorageState = {
     theme_mode: ThemeMode,
     token: string,
@@ -6,6 +8,15 @@ export type StorageState = {
 export const emptyStorage: StorageState = {
     theme_mode: "light",
     token: ""
+}
+export type DecodeToken = {
+    id: string
+    user: {
+        username: string
+        id: string
+    },
+    issued_at: string
+    expired_at: string
 }
 export type ThemeMode = "light" | "dark"
 
@@ -23,6 +34,23 @@ class localStorageService {
     }
     setStorage(_storage: StorageState) {
         localStorage.setItem("moniesto-local", JSON.stringify(_storage))
+    }
+    getDecodedToken(): DecodeToken {
+        let decoded: DecodeToken = {
+            id: "",
+            user: {
+                username: "",
+                id: ""
+            },
+            issued_at: "",
+            expired_at: ""
+        };
+        try {
+            decoded = jwt_decode(this.getStorage().token) as DecodeToken
+        } catch (error) {
+            console.log(error)
+        }
+        return decoded
     }
 }
 

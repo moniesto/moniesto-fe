@@ -12,7 +12,6 @@ import Explore from "../pages/main/explore";
 import Profile from "../pages/main/profile/profile";
 import BeMoniest from "../pages/main/beMoniest/beMoniest";
 import ProtectedRoutes from "../components/layout/protectedRoutes";
-import PublicRoutes from "../components/layout/publicRoutes";
 
 const Router = createBrowserRouter([
     {
@@ -49,31 +48,28 @@ const Router = createBrowserRouter([
     },
     {
         element: <Authorization />,
-        children: [{
-            element: <PublicRoutes />,
-            children: [
-                {
-                    path: "login",
-                    element: <Login />,
+        children: [
 
-                },
-                {
-                    path: "register",
-                    element: <Register />,
-                },
+            {
+                path: "login",
+                element: <Login />,
 
-                {
-                    path: "forget-password",
-                    element: <ForgetPassword />,
-                },
+            },
+            {
+                path: "register",
+                element: <Register />,
+            },
 
-                {
-                    path: "change-password",
-                    element: <ChangePassword />,
-                },
+            {
+                path: "forget-password",
+                element: <ForgetPassword />,
+            },
 
-            ],
-        }]
+            {
+                path: "change-password",
+                element: <ChangePassword />,
+            },
+        ]
     },
     {
         path: "*",

@@ -13,11 +13,16 @@ import {
 import { Stack } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { emptyUser } from "../../../interfaces/user";
+import { useAppDispatch } from "../../../store/hooks";
+import { setToken } from "../../../store/slices/localStorageSlice";
+import { setUser } from "../../../store/slices/userSlice";
 import ThemeModeButton from "./themeModeButton";
 
 const HeaderProfile = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const menuItems = [
     {
       icon: <PersonOutlineOutlinedIcon />,
@@ -36,6 +41,10 @@ const HeaderProfile = () => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleLogout = () => {
+    dispatch(setUser(emptyUser));
+    dispatch(setToken(""));
   };
 
   return (
@@ -136,7 +145,7 @@ const HeaderProfile = () => {
           </MenuItem>
         ))}
         <Divider></Divider>
-        <MenuItem>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout />
           </ListItemIcon>

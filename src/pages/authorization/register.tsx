@@ -1,5 +1,6 @@
 import {
   Button,
+  CircularProgress,
   InputAdornment,
   TextField,
   Typography,
@@ -15,12 +16,14 @@ import { PermIdentity } from "@mui/icons-material";
 import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import httpService from "../../services/httpService";
 import { LoadingButton } from "@mui/lab";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
-import { LoginResponse } from "../../interfaces/requests";
+import { LoginResponse, UsernameCheck } from "../../interfaces/requests";
 import { setToken } from "../../store/slices/localStorageSlice";
+import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
+import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
 
 type RegisterForm = {
   username: string;
@@ -57,6 +60,9 @@ const Register = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
+  const [checkLoading, setCheckLoading] = useState<boolean>(false);
+  const [isCorrectName, setIsCorrectName] = useState<boolean>(false);
+  const [displayCheckIcon, setDisplayCheckIcon] = useState<boolean>(false);
 
   const handleSubmit = (values: RegisterForm) => {
     setLoading(true);
@@ -68,9 +74,8 @@ const Register = () => {
         navigate("/timeline");
       })
       .catch(console.error)
-      .finally(() => {setLoading(false); navigate("/timeline");});
+      .finally(() => setLoading(false));
   };
-
   const formik = useFormik<RegisterForm>({
     initialValues: {
       username: "",
@@ -84,6 +89,25 @@ const Register = () => {
       handleSubmit(values);
     },
   });
+
+  useEffect(() => {
+    if (!formik.values.username || formik.values.username.length < 5) {
+      setIsCorrectName(false);
+      setDisplayCheckIcon(false);
+      return;
+    }
+    setDisplayCheckIcon(true);
+    setCheckLoading(true);
+
+    httpService
+      .get<UsernameCheck>(`account/usernames/${formik.values.username}/check`)
+      .then((res) => setIsCorrectName(res.validity))
+      .finally(() =>
+        setTimeout(() => {
+          setCheckLoading(false);
+        }, 1000)
+      );
+  }, [formik.values.username]);
 
   return (
     <Stack width={"100%"} maxWidth={500} spacing={8}>
@@ -109,10 +133,36 @@ const Register = () => {
               onChange={formik.handleChange}
               error={formik.touched.username && Boolean(formik.errors.username)}
               helperText={formik.touched.username && formik.errors.username}
+              sx={{
+                ".MuiInputAdornment-positionEnd": {
+                  "> *": {
+                    animation: "fade 0.2s ease",
+                  },
+                },
+              }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
                     <PermIdentity />
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <InputAdornment position="end">
+                    {checkLoading ? (
+                      <CircularProgress size={25} color="inherit" />
+                    ) : displayCheckIcon ? (
+                      isCorrectName ? (
+                        <DoneOutlinedIcon
+                          sx={{ color: theme.palette.secondary.main }}
+                        />
+                      ) : (
+                        <HighlightOffOutlinedIcon
+                          sx={{ color: theme.palette.error.light }}
+                        />
+                      )
+                    ) : (
+                      ""
+                    )}
                   </InputAdornment>
                 ),
               }}
