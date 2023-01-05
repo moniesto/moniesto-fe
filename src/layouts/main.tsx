@@ -1,4 +1,4 @@
-import { AppBar, Container, Grid, Stack, Toolbar } from "@mui/material";
+import { AppBar, Box, Container, Grid, Stack, Toolbar } from "@mui/material";
 import { useTheme } from "@mui/system";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -21,7 +21,13 @@ const MainLayout = () => {
 
   return (
     <Stack sx={{ background: theme.palette.background.primary }}>
-      <AppBar elevation={0} position="fixed">
+      <AppBar
+        elevation={0}
+        sx={{
+          boxShadow: "0px 4px 6px -1px " + theme.palette.background.primary,
+        }}
+        position="fixed"
+      >
         <Toolbar sx={{ height: "80px" }}>
           <Header></Header>
         </Toolbar>
@@ -36,7 +42,9 @@ const MainLayout = () => {
       >
         <Grid container item md={12}>
           <Grid sx={{ display: { xs: "none", md: "block" } }} item md={3}>
-            <SideBar></SideBar>
+            <Box sx={{ position: "sticky", top: "120px" }}>
+              <SideBar></SideBar>
+            </Box>
           </Grid>
           <Grid
             width={"100%"}

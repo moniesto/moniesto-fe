@@ -6,7 +6,7 @@ const Logo = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   return (
-    <Stack onClick={() => navigate("/")}>
+    <Stack sx={{ cursor: "pointer" }} onClick={() => navigate("/timeline")}>
       <BrandText
         sx={{ fontSize: "1.5em" }}
         color={theme.palette.text.primary}
