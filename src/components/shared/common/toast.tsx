@@ -4,7 +4,7 @@ import { useAppSelector } from "../../../store/hooks";
 
 const Toast = () => {
   const [open, setOpen] = useState(false);
-  const messageProps = useAppSelector((state) => state.toast.props);
+  const messageProps = useAppSelector((state) => state.toast);
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,

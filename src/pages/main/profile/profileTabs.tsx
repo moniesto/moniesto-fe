@@ -1,29 +1,31 @@
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { Box, Paper, Tab, useTheme } from "@mui/material";
-import { useState } from "react";
+import { Box, Tab, useTheme } from "@mui/material";
+import { ReactNode, useState } from "react";
 import AboutTab from "./tabs/aboutTab";
 import PostsTab from "./tabs/postsTab";
 import SubscribersTab from "./tabs/subscribersTab";
 import SubscribtionsTab from "./tabs/subscribtionsTab";
 
+type Tab = { title: string; value: string; content: ReactNode };
+
 const ProfileTabs = () => {
   const theme = useTheme();
   const [tabValue, setTabValue] = useState("posts");
-  const [tabs, setTabs] = useState([
+  const [tabs, setTabs] = useState<Tab[]>([
     {
-      title: "Posts (26)",
+      title: "Posts (0)",
       value: "posts",
       content: <PostsTab />,
     },
     {
-      title: "Subscribers (54)",
+      title: "Subscribers (0)",
       value: "subscribers",
       content: <SubscribersTab />,
     },
     {
-      title: "Subscribtions (12)",
+      title: "Subscribtions (0)",
       value: "subscribtions",
       content: <SubscribtionsTab />,
     },
@@ -33,6 +35,7 @@ const ProfileTabs = () => {
       content: <AboutTab />,
     },
   ]);
+
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };

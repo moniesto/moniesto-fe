@@ -3,17 +3,16 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { AlertColor } from '@mui/material'
 
 // Define the initial state using that type
-type initialStateType = {
-    props: {
-        severity?: AlertColor,
-        message: string
-    }
+export type ToastState = {
+
+    severity?: AlertColor,
+    message: string
+
 }
 
-const initialState: initialStateType = {
-    props: {
-        message: ""
-    }
+const initialState: ToastState = {
+    message: "",
+    severity: "info"
 }
 
 
@@ -22,11 +21,10 @@ export const toastSlice = createSlice({
     // `createSlice` will infer the state type from the `initialState` argument
     initialState,
     reducers: {
-        openToast: (state, action: PayloadAction<initialStateType>) => {
-            state.props = {
-                severity: action.payload.props.severity,
-                message: action.payload.props.message
-            }
+        openToast: (state, action: PayloadAction<ToastState>) => {
+
+            state.severity = action.payload.severity
+            state.message = action.payload.message
 
         },
     },

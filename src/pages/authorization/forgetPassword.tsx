@@ -6,11 +6,19 @@ import {
   useTheme,
 } from "@mui/material";
 import { Stack } from "@mui/system";
-import { useEffect } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import Navigator from "../../components/shared/common/navigatior";
+import httpService from "../../services/httpService";
+import toastService from "../../services/toastService";
+import { useNavigate } from "react-router-dom";
+import { LoadingButton } from "@mui/lab";
+import { useState } from "react";
+
+type ForgetPasswordForm = {
+  email: string;
+};
 
 const validationSchema = yup.object({
   email: yup
@@ -20,15 +28,30 @@ const validationSchema = yup.object({
 });
 
 const ForgetPassword = () => {
+  const navigate = useNavigate();
   const theme = useTheme();
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const formik = useFormik({
+  const handleForgetPassword = (values: ForgetPasswordForm) => {
+    setLoading(true);
+    httpService
+      .post("account/password/send_email", { email: values.email })
+      .then(() => {
+        toastService.open({
+          message: "We send an mail to you. Please check your email address.",
+          severity: "success",
+        });
+        navigate("/login");
+      })
+      .finally(() => setLoading(false));
+  };
+  const formik = useFormik<ForgetPasswordForm>({
     initialValues: {
       email: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      handleForgetPassword(values);
     },
   });
 
@@ -67,9 +90,15 @@ const ForgetPassword = () => {
             />
           </Stack>
 
-          <Button size="large"  color="secondary" variant="contained" fullWidth type="submit">
+          <LoadingButton
+            type="submit"
+            size="large"
+            color="secondary"
+            loading={loading}
+            variant="contained"
+          >
             Continue
-          </Button>
+          </LoadingButton>
 
           <Stack
             columnGap={1}
@@ -78,7 +107,7 @@ const ForgetPassword = () => {
             justifyContent="center"
             color={theme.palette.text.secondary}
           >
-           Back to
+            Back to
             <Navigator path="/login">
               <Typography
                 sx={{ cursor: "pointer" }}

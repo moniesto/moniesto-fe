@@ -4,8 +4,8 @@ import { Dispatch } from "react";
 import { setUser } from "../store/slices/userSlice";
 import { emptyUser } from "../interfaces/user";
 import localStorageService from "./localStorageService";
-import { openToast } from "../store/slices/toastSlice";
 import { ErrorCodes } from "./error_codes";
+import toastService from "./toastService";
 
 class http {
     private dispatch!: Dispatch<AnyAction>;
@@ -20,14 +20,17 @@ class http {
         });
 
         this.instance.defaults.headers.common['Authorization'] = `Bearer ${localStorageService.getStorage().token}`;
+
         this.instance.interceptors.response.use((response) => {
             return Promise.resolve(response.data);
         }, (error) => {
+
             const code = error.response.data.error_code;
-            this.dispatch(openToast({ props: { severity: "error", message: ErrorCodes[code] } }))
+            toastService.open({ severity: "error", message: ErrorCodes[code] })
             if (error.response.status === 401) this.dispatch(setUser(emptyUser))
 
             return Promise.reject(error.response.data);
+
         });
 
     }

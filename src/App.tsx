@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import Toast from "./components/shared/common/toast";
 import localStorageService from "./services/localStorageService";
 import { setUser } from "./store/slices/userSlice";
+import toastService from "./services/toastService";
 
 function App() {
   const mode = useAppSelector((state) => state.storage.theme_mode);
@@ -22,6 +23,7 @@ function App() {
 
   useEffect(() => {
     httpService.setDispatch(dispatch);
+    toastService.setDispatch(dispatch);
     if (localStorageService.getStorage().token) {
       const decoded = localStorageService.getDecodedToken();
       if (!decoded.user.id) {
