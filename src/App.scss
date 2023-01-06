@@ -1,41 +1,44 @@
-body, html, #app {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  #app {
-    height: 100vh;
-    overflow: hidden;
-    touch-action: pan-up;
-    color: #ffffff;
-    font-family: 'Montserrat', sans-serif;
-    text-align: center;
-    text-shadow: 0 0 5px #ffffff, 0 0 20px #000, 0 0 30px #000;
-  }
-  
-  #app h1 {
-    --fontSize: 60px;
-    --lineHeight: 80px;
+body,
+html,
+#app {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#app {
+  height: 100vh;
+  overflow: hidden;
+  touch-action: pan-up;
+  text-align: center;
+  text-shadow: 1px 0px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all             */
+  -ms-user-select: none; /* Internet Explorer  10+  */
+  user-select: none; /* Likely future           */
+  h1 {
+    --fontSize: 2.7rem;
+    --lineHeight: 3rem;
     width: auto;
     height: calc(2 * var(--lineHeight));
     line-height: var(--lineHeight);
-    margin: calc(50vh - var(--lineHeight)) auto 0;
     font-size: var(--fontSize);
     text-transform: uppercase;
+    color: #ffffff;
   }
-  
-  #app a {
+  h3 {
     margin-top: 10px;
     display: inline-block;
     text-decoration: none;
     color: #fff;
   }
-  
-  #app canvas {
+  canvas {
     display: block;
     position: fixed;
     z-index: -1;
     top: 0;
   }
-  
+}
