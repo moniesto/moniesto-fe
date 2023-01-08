@@ -4,13 +4,14 @@ import { Dispatch } from "react";
 import { setUser } from "../store/slices/userSlice";
 import { emptyUser } from "../interfaces/user";
 import localStorageService from "./localStorageService";
-import { ErrorCodes } from "./error_codes";
 import toastService from "./toastService";
+import configService from "./configService";
 
 class http {
     private dispatch!: Dispatch<AnyAction>;
     private instance!: AxiosInstance;
     constructor() {
+        console.log("wii")
         this.instance = axios.create({
             baseURL: 'http://localhost:8080/',
             validateStatus: (status) => {
@@ -25,7 +26,7 @@ class http {
         }, (error) => {
 
             const code = error.response.data.error_code;
-            toastService.open({ severity: "error", message: ErrorCodes[code] })
+            toastService.open({ severity: "error", message: configService.errors[code] })
             if (error.response.status === 401) this.dispatch(setUser(emptyUser))
 
             return Promise.reject(error.response.data);

@@ -18,6 +18,7 @@ import toastService from "./services/toastService";
 import { User } from "./interfaces/user";
 import { openToast } from "./store/slices/toastSlice";
 import { setToken } from "./store/slices/localStorageSlice";
+import configService from "./services/configService";
 
 function App() {
   const mode = useAppSelector((state) => state.storage.theme_mode);
@@ -27,6 +28,7 @@ function App() {
   useEffect(() => {
     httpService.setDispatch(dispatch);
     toastService.setDispatch(dispatch);
+    configService.initialize();
 
     if (!localStorageService.getStorage().token) {
       setLoading(false);
