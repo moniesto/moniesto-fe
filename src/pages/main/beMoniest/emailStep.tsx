@@ -2,41 +2,50 @@ import { Button, Stack, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 import DoneAllOutlinedIcon from "@mui/icons-material/DoneAllOutlined";
 import httpService from "../../../services/httpService";
+import { Requests } from "../../../interfaces/requests";
+import toastService from "../../../services/toastService";
+import { User } from "../../../interfaces/user";
+import { LoadingButton } from "@mui/lab";
 
-type propType = { handleNext: () => void };
+type propType = { handleNext: () => void; user: User };
 
-const EmailStep = ({ handleNext }: propType) => {
+const EmailStep = ({ handleNext, user }: propType) => {
   const [isSendVerifyMail, setIsSendVerifyMail] = useState<boolean>(false);
-  const [hasEmailVerified, setHasEmailVerified] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const theme = useTheme();
 
   const handleSendVerifyEmail = () => {
-    // httpService.get
-    setIsSendVerifyMail(true);
+    setLoading(true);
+    httpService
+      .post(Requests.account.send_verification_email, {
+        redirect_url: "http://localhost:3000/bemoniest",
+      })
+      .then(() => {
+        toastService.open({
+          message: "We send an email to your email address.",
+          severity: "success",
+        });
+        setIsSendVerifyMail(true);
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
     <Stack rowGap={2} justifyContent="center" alignItems="center">
-      {hasEmailVerified ? (
+      {user.email_verified ? (
         <>
-          <>
-            <DoneAllOutlinedIcon
-              sx={{
-                fontSize: "4.6rem",
-                color: theme.palette.secondary.main,
-              }}
-            />
-            <Typography variant="h3">Your email is verified</Typography>
-            <Stack mt={4} width="80%" alignItems="end">
-              <Button
-                onClick={handleNext}
-                variant="contained"
-                color="secondary"
-              >
-                Next
-              </Button>
-            </Stack>
-          </>
+          <DoneAllOutlinedIcon
+            sx={{
+              fontSize: "4.6rem",
+              color: theme.palette.secondary.main,
+            }}
+          />
+          <Typography variant="h3">Your email is verified</Typography>
+          <Stack mt={4} width="80%" alignItems="end">
+            <Button onClick={handleNext} variant="contained" color="secondary">
+              Next
+            </Button>
+          </Stack>
         </>
       ) : isSendVerifyMail ? (
         <>
@@ -48,7 +57,7 @@ const EmailStep = ({ handleNext }: propType) => {
           />
           <Stack alignItems="center" rowGap={1}>
             <Typography variant="h3">
-              We sent the mail to test@gmail.com
+              We sent the mail to {user.email}
             </Typography>
             <Typography variant="h3">Please check your email</Typography>
           </Stack>
@@ -58,14 +67,16 @@ const EmailStep = ({ handleNext }: propType) => {
           <Typography sx={{ paddingTop: "2rem" }} variant="h3">
             You need to verify your email address to become a Moniest
           </Typography>
-          <Button
+          <LoadingButton
             sx={{ marginTop: "1rem" }}
             onClick={handleSendVerifyEmail}
-            variant="contained"
+            type="submit"
             color="secondary"
+            loading={loading}
+            variant="contained"
           >
             Verify Email
-          </Button>
+          </LoadingButton>
         </>
       )}
     </Stack>

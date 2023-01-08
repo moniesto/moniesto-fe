@@ -52,12 +52,6 @@ const BeMoniest = () => {
   const theme = useTheme();
   const user = useAppSelector((state) => state.user.user);
 
-  useEffect(() => {
-    if (user && user.email_verified) {
-      handleNext();
-    }
-  }, []);
-
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
@@ -69,7 +63,12 @@ const BeMoniest = () => {
     let content: ReactNode;
     switch (activeStep) {
       case 1:
-        content = <EmailStep handleNext={handleNext}></EmailStep>;
+        content = (
+          <EmailStep
+            user={user}
+            handleNext={handleNext}
+          ></EmailStep>
+        );
         break;
       case 2:
         content = (

@@ -1,4 +1,4 @@
-import {  createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Authorization from "../layouts/authorization";
 import ChangePassword from "../pages/authorization/changePassword";
 import ForgetPassword from "../pages/authorization/forgetPassword";
@@ -13,6 +13,7 @@ import Profile from "../pages/main/profile/profile";
 import BeMoniest from "../pages/main/beMoniest/beMoniest";
 import ProtectedRoutes from "../components/layout/protectedRoutes";
 import UnprotectedRoutes from "../components/layout/unprotectedRoutes";
+import VerifyEmail from "../pages/main/verifyEmail";
 
 const Router = createBrowserRouter([
     {
@@ -70,6 +71,10 @@ const Router = createBrowserRouter([
                     {
                         path: "bemoniest",
                         element: <BeMoniest />,
+                    },
+                    {
+                        path: "verify-email",
+                        element: <VerifyEmail />
                     },
                 ],
             }

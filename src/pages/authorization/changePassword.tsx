@@ -191,13 +191,13 @@ const ChangePassword = () => {
           <Typography variant="h2">Sorry, this page is unavailable.</Typography>
           <Typography variant="h4">
             The link you clicked may be broken or the page may have been
-            removed. Back to{" "}
+            removed. Back to
             <Navigator path="/">
               <Typography fontWeight="bold" component="span" color="secondary">
                 moniesto
-              </Typography>{" "}
+              </Typography>
+              .
             </Navigator>
-            .
           </Typography>
         </Stack>
       )}

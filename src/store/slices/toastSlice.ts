@@ -5,7 +5,7 @@ import { AlertColor } from '@mui/material'
 // Define the initial state using that type
 export type ToastState = {
 
-    severity?: AlertColor,
+    severity: AlertColor,
     message: string
 
 }
