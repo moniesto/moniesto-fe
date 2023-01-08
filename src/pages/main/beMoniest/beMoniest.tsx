@@ -8,7 +8,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { ReactNode, useMemo, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined";
@@ -18,6 +18,7 @@ import EmailStep from "./emailStep";
 import MoniestInfoStep from "./moniestInfoStep";
 import PaymentStep from "./paymentStep";
 import SubmitStep from "./submitStep";
+import { useAppSelector } from "../../../store/hooks";
 
 type Step = {
   order: number;
@@ -49,6 +50,13 @@ const steps: Step[] = [
 const BeMoniest = () => {
   const [activeStep, setActiveStep] = useState<number>(1);
   const theme = useTheme();
+  const user = useAppSelector((state) => state.user.user);
+
+  useEffect(() => {
+    if (user && user.email_verified) {
+      handleNext();
+    }
+  }, []);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);

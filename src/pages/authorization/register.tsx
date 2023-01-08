@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
-import { LoginResponse, UsernameCheck } from "../../interfaces/requests";
+import { LoginResponse, Requests, UsernameCheck } from "../../interfaces/requests";
 import { setToken } from "../../store/slices/localStorageSlice";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
@@ -66,7 +66,7 @@ const Register = () => {
   const handleSubmit = (values: RegisterForm) => {
     setLoading(true);
     httpService
-      .post<LoginResponse>("account/register", values)
+      .post<LoginResponse>(Requests.auth.register, values)
       .then((res) => {
         dispatch(setUser(res.user));
         dispatch(setToken(res.token));

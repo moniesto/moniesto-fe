@@ -15,6 +15,7 @@ import toastService from "../../services/toastService";
 import { useNavigate } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
+import { Requests } from "../../interfaces/requests";
 
 type ForgetPasswordForm = {
   email: string;
@@ -35,7 +36,7 @@ const ForgetPassword = () => {
   const handleForgetPassword = (values: ForgetPasswordForm) => {
     setLoading(true);
     httpService
-      .post("account/password/send_email", { email: values.email })
+      .post(Requests.password.send_email, { email: values.email })
       .then(() => {
         toastService.open({
           message: "We send an mail to you. Please check your email address.",

@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import httpService from "../../services/httpService";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import toastService from "../../services/toastService";
+import { Requests } from "../../interfaces/requests";
 
 type ChangePasswordForm = {
   password: string;
@@ -49,7 +50,7 @@ const ChangePassword = () => {
     }
     setToken(token);
     httpService
-      .post("account/password/verify_token", { token })
+      .post(Requests.password.verify_token, { token })
       .then(() => setValidationTokenState(1))
       .catch(() => setValidationTokenState(2));
   }, []);
@@ -57,7 +58,7 @@ const ChangePassword = () => {
   const handleChangePassword = (values: ChangePasswordForm) => {
     setLoading(true);
     httpService
-      .post("/account/password/change_password", {
+      .post(Requests.password.change_password_with_token, {
         new: values.password,
         token,
       })

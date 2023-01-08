@@ -11,7 +11,7 @@ import { useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
 import { setToken } from "../../store/slices/localStorageSlice";
-import { LoginResponse } from "../../interfaces/requests";
+import { LoginResponse, Requests } from "../../interfaces/requests";
 import { useNavigate } from "react-router-dom";
 
 type LoginForm = {
@@ -38,7 +38,7 @@ const Login = () => {
   const handleSubmit = (values: LoginForm) => {
     setLoading(true);
     httpService
-      .post<LoginResponse>("account/login", values)
+      .post<LoginResponse>(Requests.auth.login, values)
       .then((res) => {
         dispatch(setUser(res.user));
         dispatch(setToken(res.token));

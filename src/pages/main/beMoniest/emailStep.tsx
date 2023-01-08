@@ -1,15 +1,17 @@
 import { Button, Stack, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 import DoneAllOutlinedIcon from "@mui/icons-material/DoneAllOutlined";
+import httpService from "../../../services/httpService";
 
 type propType = { handleNext: () => void };
 
 const EmailStep = ({ handleNext }: propType) => {
   const [isSendVerifyMail, setIsSendVerifyMail] = useState<boolean>(false);
-  const [hasEmailVerified, setHasEmailVerified] = useState<boolean>(true);
+  const [hasEmailVerified, setHasEmailVerified] = useState<boolean>(false);
   const theme = useTheme();
 
   const handleSendVerifyEmail = () => {
+    // httpService.get
     setIsSendVerifyMail(true);
   };
 
