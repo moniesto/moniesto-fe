@@ -11,7 +11,6 @@ class http {
     private dispatch!: Dispatch<AnyAction>;
     private instance!: AxiosInstance;
     constructor() {
-        console.log("hey")
         this.instance = axios.create({
             baseURL: 'http://localhost:8080/',
             validateStatus: (status) => {

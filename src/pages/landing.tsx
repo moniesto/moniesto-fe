@@ -278,7 +278,7 @@ const Landing = () => {
   return (
     <div id="app">
       <div id="hero">
-        <Navigator path="/timeline">
+        <Navigator path="/login">
           <Typography sx={{ cursor: "pointer" }} variant="h1">
             Moniesto
           </Typography>

@@ -15,6 +15,9 @@ import Toast from "./components/shared/common/toast";
 import localStorageService from "./services/localStorageService";
 import { setUser } from "./store/slices/userSlice";
 import toastService from "./services/toastService";
+import { User } from "./interfaces/user";
+import { openToast } from "./store/slices/toastSlice";
+import { setToken } from "./store/slices/localStorageSlice";
 
 function App() {
   const mode = useAppSelector((state) => state.storage.theme_mode);
@@ -24,31 +27,26 @@ function App() {
   useEffect(() => {
     httpService.setDispatch(dispatch);
     toastService.setDispatch(dispatch);
-    if (localStorageService.getStorage().token) {
-      const decoded = localStorageService.getDecodedToken();
-      if (!decoded.user.id) {
-        setLoading(false);
-        return;
-      }
-      httpService
-        .get("/users/" + decoded.user.username)
-        .then(() => {
-          dispatch(
-            setUser({
-              id: "89fb044f-6fe0-4ad2-a675-63366c86ae76",
-              name: "test",
-              surname: "test",
-              username: "testt",
-              email: "davutturug@teknodev.biz",
-              email_verified: false,
-            })
-          );
-        })
-        .finally(() => setLoading(false));
-    } else
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
+
+    if (!localStorageService.getStorage().token) {
+      setLoading(false);
+      return;
+    }
+
+    const decoded = localStorageService.getDecodedToken();
+    if (!decoded.user.id) {
+      dispatch(openToast({ message: "Need authorization", severity: "error" }));
+      dispatch(setToken(""));
+      setLoading(false);
+      return;
+    }
+
+    httpService
+      .get<User>("/users/" + decoded.user.username)
+      .then((res) => {
+        dispatch(setUser(res));
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   return (

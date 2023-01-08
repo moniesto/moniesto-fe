@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAppSelector } from "../../store/hooks";
 
-const ProtectedRoutes = () => {
+const UnprotectedRoutes = () => {
   const user = useAppSelector((state) => state.user.user);
-  return user.id ? <Outlet /> : <Navigate to="/" />;
+  return user.id ? <Navigate to="/timeline" /> : <Outlet />;
 };
 
-export default ProtectedRoutes;
+export default UnprotectedRoutes;

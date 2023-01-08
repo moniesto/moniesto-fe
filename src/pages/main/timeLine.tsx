@@ -6,7 +6,6 @@ import { TestPost } from "../../services/tempDatas";
 
 const TimeLine = () => {
   const [posts, setPosts] = useState<Post[]>([]);
-
   useEffect(() => {
     setPosts([TestPost, TestPost, TestPost]);
   }, []);
