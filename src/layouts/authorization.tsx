@@ -2,6 +2,7 @@ import { Box, Grid, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/system";
 import { Outlet } from "react-router-dom";
 import BrandText from "../components/shared/common/brandText";
+import Fly from "../components/shared/common/fly";
 const AuthorizationLayout = () => {
   const theme = useTheme();
   return (
@@ -17,17 +18,19 @@ const AuthorizationLayout = () => {
       container
     >
       <Grid width={"100%"} item md={7}>
-        <Box
-          sx={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Outlet />
-        </Box>
+        <Fly>
+          <Box
+            sx={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Outlet />
+          </Box>
+        </Fly>
       </Grid>
       <Grid
         sx={{
