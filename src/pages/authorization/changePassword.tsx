@@ -14,7 +14,8 @@ import Navigator from "../../components/shared/common/navigatior";
 import { LoadingButton } from "@mui/lab";
 import { useEffect, useState } from "react";
 import httpService from "../../services/httpService";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import toastService from "../../services/toastService";
 
 type ChangePasswordForm = {
   password: string;
@@ -24,14 +25,16 @@ type ChangePasswordForm = {
 const validationSchema = yup.object({
   password: yup
     .string()
-    .min(8, "Password should be of minimum 8 characters length")
+    .min(6, "Password should be of minimum 6 characters length")
     .required("Password is required"),
   repassword: yup.string().required("Repassword is required"),
 });
 
 const ChangePassword = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   let [searchParams, setSearchParams] = useSearchParams();
+  const [token, setToken] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
   const [validationTokenState, setValidationTokenState] = useState<0 | 1 | 2>(
     0
@@ -39,23 +42,40 @@ const ChangePassword = () => {
 
   useEffect(() => {
     const token = searchParams.get("token");
+
     if (!token) {
       setValidationTokenState(2);
       return;
     }
+    setToken(token);
     httpService
       .post("account/password/verify_token", { token })
       .then(() => setValidationTokenState(1))
       .catch(() => setValidationTokenState(2));
-
-    // console.log("token :", token);
-    //
   }, []);
 
   const handleChangePassword = (values: ChangePasswordForm) => {
     setLoading(true);
-    // httpService.post()
+    httpService
+      .post("/account/password/change_password", {
+        new: values.password,
+        token,
+      })
+      .then(() => {
+        toastService.open({
+          message:
+            "You changed your password successfully. You can login with your new credentials.",
+          severity: "success",
+        });
+        navigate("/login");
+      })
+      .catch(() => setValidationTokenState(2))
+      .finally(() => setLoading(false));
   };
+
+  useEffect(() => {
+    console.log("validationTokenState :", validationTokenState);
+  }, [validationTokenState]);
 
   const formik = useFormik<ChangePasswordForm>({
     initialValues: {
@@ -74,7 +94,7 @@ const ChangePassword = () => {
         <Box sx={{ display: "flex" }}>
           <CircularProgress />
         </Box>
-      ) : 1 ? (
+      ) : validationTokenState == 1 ? (
         <Stack width={"100%"} maxWidth={500} spacing={8}>
           <Stack spacing={1.8}>
             <Typography fontSize={"2.2rem"}>Change Password</Typography>
@@ -113,8 +133,8 @@ const ChangePassword = () => {
                   fullWidth
                   id="repassword"
                   name="repassword"
-                  placeholder="Repassword"
-                  type="repassword"
+                  placeholder="Confirm password"
+                  type="password"
                   value={formik.values.repassword}
                   onChange={formik.handleChange}
                   error={
@@ -166,7 +186,19 @@ const ChangePassword = () => {
           </form>
         </Stack>
       ) : (
-        <div>not valid</div>
+        <Stack rowGap={3}>
+          <Typography variant="h2">Sorry, this page is unavailable.</Typography>
+          <Typography variant="h4">
+            The link you clicked may be broken or the page may have been
+            removed. Back to{" "}
+            <Navigator path="/">
+              <Typography fontWeight="bold" component="span" color="secondary">
+                moniesto
+              </Typography>{" "}
+            </Navigator>
+            .
+          </Typography>
+        </Stack>
       )}
     </>
   );
