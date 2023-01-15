@@ -3,12 +3,15 @@ import { Stack } from "@mui/system";
 import { useState } from "react";
 import CardItem from "../../../components/shared/common/cardItem";
 import { Card } from "../../../interfaces/card";
+import { BeMoniestReq } from "../../../interfaces/requests";
 import { TestCard } from "../../../services/tempDatas";
 
-type propType = { handleNext: () => void; handleBack: () => void };
+type propType = {
+  handleNext: (data: Partial<BeMoniestReq>) => void;
+  handleBack: () => void;
+};
 
 const SubmitStep = ({ handleNext, handleBack }: propType) => {
-
   const [card, setCard] = useState<Card>(TestCard);
 
   return (
@@ -31,7 +34,6 @@ const SubmitStep = ({ handleNext, handleBack }: propType) => {
         <CardItem card={card} selectedCardId={card.id}></CardItem>
       </Stack>
       <Typography mt={4} variant="h5" textAlign="center">
-        {" "}
         By taking this step, you agree to our{" "}
         <Typography component="span" color="secondary">
           terms and policies.
@@ -47,7 +49,11 @@ const SubmitStep = ({ handleNext, handleBack }: propType) => {
           <Button onClick={handleBack} variant="contained" color="inherit">
             Back
           </Button>
-          <Button onClick={handleNext} variant="contained" color="secondary">
+          <Button
+            onClick={() => handleNext({})}
+            variant="contained"
+            color="secondary"
+          >
             Next
           </Button>
         </Stack>

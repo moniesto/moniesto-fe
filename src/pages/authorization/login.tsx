@@ -5,14 +5,14 @@ import * as yup from "yup";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import KeyOutlinedIcon from "@mui/icons-material/KeyOutlined";
 import Navigator from "../../components/shared/common/navigatior";
-import httpService from "../../services/httpService";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
 import { setToken } from "../../store/slices/localStorageSlice";
-import { LoginResponse, Requests } from "../../interfaces/requests";
 import { useNavigate } from "react-router-dom";
+import api from "../../services/api";
+import toastService from "../../services/toastService";
 
 type LoginForm = {
   identifier: string;
@@ -37,14 +37,17 @@ const Login = () => {
 
   const handleSubmit = (values: LoginForm) => {
     setLoading(true);
-    httpService
-      .post<LoginResponse>(Requests.auth.login, values)
+    api.auth
+      .login(values)
       .then((res) => {
+        toastService.open({
+          severity: "success",
+          message: "Login success",
+        });
         dispatch(setUser(res.user));
         dispatch(setToken(res.token));
         navigate("/timeline");
       })
-      .catch((e) => console.error("error :", e))
       .finally(() => setLoading(false));
   };
 

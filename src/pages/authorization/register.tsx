@@ -19,10 +19,16 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
-import { LoginResponse, Requests, UsernameCheck } from "../../interfaces/requests";
+import {
+  LoginResponse,
+  Requests,
+  UsernameCheck,
+} from "../../interfaces/requests";
 import { setToken } from "../../store/slices/localStorageSlice";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
+import api from "../../services/api";
+import toastService from "../../services/toastService";
 
 type RegisterForm = {
   username: string;
@@ -65,12 +71,17 @@ const Register = () => {
 
   const handleSubmit = (values: RegisterForm) => {
     setLoading(true);
-    httpService
-      .post<LoginResponse>(Requests.auth.register, values)
+
+    api.auth
+      .register(values)
       .then((res) => {
         dispatch(setUser(res.user));
         dispatch(setToken(res.token));
         navigate("/timeline");
+        toastService.open({
+          severity: "success",
+          message: "Registiration success",
+        });
       })
       .catch(console.error)
       .finally(() => setLoading(false));
@@ -134,9 +145,7 @@ const Register = () => {
               helperText={formik.touched.username && formik.errors.username}
               sx={{
                 ".MuiInputAdornment-positionEnd": {
-                  "> *": {
-                    animation: "fade 0.2s ease",
-                  },
+                  "*>": { animation: "fade 0.2s ease" },
                 },
               }}
               InputProps={{
@@ -146,16 +155,22 @@ const Register = () => {
                   </InputAdornment>
                 ),
                 endAdornment: (
-                  <InputAdornment position="end">
+                  <InputAdornment className="notFly" position="end">
                     {checkLoading ? (
-                      <CircularProgress size={25} color="inherit" />
+                      <CircularProgress
+                        className="notFly"
+                        size={25}
+                        color="inherit"
+                      />
                     ) : displayCheckIcon ? (
                       isCorrectName ? (
                         <DoneOutlinedIcon
+                          className="notFly"
                           sx={{ color: theme.palette.secondary.main }}
                         />
                       ) : (
                         <HighlightOffOutlinedIcon
+                          className="notFly"
                           sx={{ color: theme.palette.error.light }}
                         />
                       )

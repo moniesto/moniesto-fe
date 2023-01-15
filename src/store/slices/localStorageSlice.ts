@@ -21,8 +21,9 @@ export const storageSlice = createSlice({
       setStorage("theme_mode", action.payload)
     },
     setToken: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
       setStorage("token", action.payload)
+      state.token = action.payload;
+     
     },
   },
 })

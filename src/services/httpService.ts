@@ -6,6 +6,7 @@ import { emptyUser } from "../interfaces/user";
 import localStorageService from "./localStorageService";
 import toastService from "./toastService";
 import configService from "./configService";
+import { setToken } from "../store/slices/localStorageSlice";
 
 class http {
     private dispatch!: Dispatch<AnyAction>;
@@ -27,7 +28,7 @@ class http {
 
             const code = error.response.data.error_code;
             toastService.open({ severity: "error", message: configService.errors[code] })
-            if (error.response.status === 401) this.dispatch(setUser(emptyUser))
+            if (error.response.status === 401) { this.dispatch(setUser(emptyUser)); this.dispatch(setToken("")) }
 
             return Promise.reject(error.response.data);
 
@@ -52,4 +53,3 @@ class http {
 }
 
 export default new http()
-

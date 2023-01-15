@@ -27,7 +27,6 @@ export interface Moniest {
     description: string
     score: number
     subscription_info: SubscriptionInfo
-
 }
 export interface SubscriptionInfo {
 	fee: number

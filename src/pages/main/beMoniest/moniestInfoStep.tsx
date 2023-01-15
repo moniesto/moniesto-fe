@@ -1,35 +1,43 @@
-import {
-  Button,
-  InputAdornment,
-  TextField,
-} from "@mui/material";
+import { Button, InputAdornment, TextField } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
+import { BeMoniestReq } from "../../../interfaces/requests";
 
 const validationSchema = yup.object({
-  fee: yup.string().email("Enter a valid email").required("Email is required"),
-  password: yup
+  fee: yup
+    .number()
+    .min(1, "Fee should be greater then 0")
+    .required("Fee is required"),
+  bio: yup
     .string()
-    .min(8, "Password should be of minimum 8 characters length")
-    .required("Password is required"),
+    .min(5, "Bio should be of minimum 5 characters length")
+    .required("Bio is required"),
+  description: yup
+    .string()
+    .min(5, "Description should be of minimum 5 characters length")
+    .required("Description is required"),
 });
 
-type propType = { handleNext: () => void; handleBack: () => void };
+type propType = {
+  handleNext: (data: Partial<BeMoniestReq>) => void;
+  handleBack: () => void;
+};
 
 const MoniestInfoStep = ({ handleNext, handleBack }: propType) => {
   const formik = useFormik({
     initialValues: {
-      fee: "",
+      fee: 0,
       bio: "",
       description: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      handleNext(values)
+      // alert(JSON.stringify(values, null, 2));
     },
   });
 
@@ -41,8 +49,8 @@ const MoniestInfoStep = ({ handleNext, handleBack }: propType) => {
             <TextField
               fullWidth
               name="fee"
+              type="number"
               placeholder="Monthly fee (USDT)"
-              value={formik.values.fee}
               onChange={formik.handleChange}
               error={formik.touched.fee && Boolean(formik.errors.fee)}
               helperText={formik.touched.fee && formik.errors.fee}
@@ -121,9 +129,9 @@ const MoniestInfoStep = ({ handleNext, handleBack }: propType) => {
                 Back
               </Button>
               <Button
-                onClick={handleNext}
                 variant="contained"
                 color="secondary"
+                type="submit"
               >
                 Next
               </Button>

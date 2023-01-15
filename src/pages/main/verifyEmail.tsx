@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
 
 const VerifyEmail = () => {
-  let [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -17,12 +17,11 @@ const VerifyEmail = () => {
 
   useEffect(() => {
     const token = searchParams.get("token");
-    console.log("token :",token)
     if (!token) {
       setLoading(false);
       return;
     }
-
+    setLoading(false);
     httpService
       .post(Requests.account.verify_email, { token })
       .then(() => {
@@ -33,7 +32,15 @@ const VerifyEmail = () => {
   }, []);
 
   return (
-    <Box>
+    <Box
+      sx={{
+        width: "100%",
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       {loading ? (
         <CircularProgress />
       ) : (
@@ -41,10 +48,15 @@ const VerifyEmail = () => {
           <Typography variant="h2">Sorry, this page is unavailable.</Typography>
           <Typography variant="h4">
             The link you clicked may be broken or the page may have been
-            removed. Back to 
+            removed. Back to
             <Navigator path="/">
-              <Typography pl={0.5} fontWeight="bold" component="span" color="secondary">
-                 home
+              <Typography
+                pl={0.5}
+                fontWeight="bold"
+                component="span"
+                color="secondary"
+              >
+                home
               </Typography>
             </Navigator>
           </Typography>

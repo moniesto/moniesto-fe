@@ -3,8 +3,54 @@ export interface LoginResponse {
     user: User,
     token: string
 }
+export interface LoginReq {
+    identifier: string,
+    password: string
+}
+
+export interface RegisterReq {
+    username: string;
+    name: string;
+    surname: string;
+    email: string;
+    password: string;
+}
+export interface ChangePasswordReq {
+    new: string;
+    token: string;
+}
+
+
 export interface UsernameCheck {
     validity: boolean
+}
+export interface VerifyTokenReq {
+    token: string
+}
+
+export interface SendMailReq {
+    token: string
+}
+
+export interface SendVerificationMailReq {
+    redirect_url: string
+}
+export interface BeMoniestReq {
+    bio: string,
+    card_id: string,
+    description: string,
+    fee: number,
+    message: string
+}
+export interface CreatePostReq {
+    currency: string,
+    description: string,
+    direction: string,
+    duration: string,
+    stop: number,
+    target1: number,
+    target2: number,
+    target3: number
 }
 
 
@@ -51,7 +97,7 @@ export const Requests: {
     },
     auth: {
         login: "account/login",
-        register: "account/login"
+        register: "account/register"
     },
     account: {
         send_verification_email: "account/email/send_verification_email",

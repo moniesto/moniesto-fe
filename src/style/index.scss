@@ -40,9 +40,8 @@ table {
 }
 .fly {
   @for $i from 1 through 1000 {
-    *:not(input):nth-child(#{$i}) {
+    *>:not(input,.notFly):nth-child(#{$i}) {
       animation-delay: #{$i * 80} + "ms";
-      --webkit-animation-delay: #{$i * 80} + "ms";
     }
   }
 }

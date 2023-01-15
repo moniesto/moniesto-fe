@@ -20,12 +20,28 @@ import { useState } from "react";
 import { Card } from "../../../interfaces/card";
 import { TestCard, TestCard2 } from "../../../services/tempDatas";
 import CardItem from "../../../components/shared/common/cardItem";
-type propType = { handleNext: () => void; handleBack: () => void };
+import { Moniest } from "../../../interfaces/user";
+import { BeMoniestReq } from "../../../interfaces/requests";
+
+type propType = {
+  handleNext: (data: Partial<BeMoniestReq>) => void;
+  handleBack: () => void;
+};
 
 const PaymentStep = ({ handleNext, handleBack }: propType) => {
   const theme = useTheme();
   const [cards, setCards] = useState<Card[]>([TestCard, TestCard2]);
   const [selectedCard, setSelectedCard] = useState<string>();
+
+  const [card, setCard] = useState({
+    cardNumber: "",
+    expiry: "",
+    cvc: "",
+  });
+  const handleChangeCard = (value: any) => {
+    console.log("value :", value);
+  };
+
   return (
     <Stack spacing={4}>
       <Stack
@@ -45,6 +61,7 @@ const PaymentStep = ({ handleNext, handleBack }: propType) => {
         </Stack>
         <ArrowForwardIosOutlinedIcon sx={{ fontSize: "1rem" }} />
       </Stack>
+
       <Divider></Divider>
 
       <RadioGroup
@@ -107,7 +124,11 @@ const PaymentStep = ({ handleNext, handleBack }: propType) => {
           <Button onClick={handleBack} variant="contained" color="inherit">
             Back
           </Button>
-          <Button onClick={handleNext} variant="contained" color="secondary">
+          <Button
+            onClick={() => handleNext({ card_id: "test_card_id" })}
+            variant="contained"
+            color="secondary"
+          >
             Next
           </Button>
         </Stack>

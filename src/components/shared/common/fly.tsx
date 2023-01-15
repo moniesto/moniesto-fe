@@ -14,12 +14,10 @@ const Fly = ({ children }: PageProp) => {
       component="span"
       className="fly"
       sx={{
-        "*:not(input)": {
+        "*>:not(input,.notFly)": {
           opacity: 0,
           animation: "fly 0.3s ease",
-          WebkitAnimation:"fly 0.3s ease",
           animationFillMode: "forwards",
-          WebkitAnimationFillMode:"forwards"
         },
       }}
     >

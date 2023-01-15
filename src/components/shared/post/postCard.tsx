@@ -75,7 +75,7 @@ const PostCard = ({ post }: propTypes) => {
         }
         title={<Typography variant="h4">Davut Turug</Typography>}
         subheader={
-          <Stack flexDirection="row" columnGap={1} alignItems="center">
+          <Stack flexDirection="row" columnGap={1} alignItems="baseline">
             <Typography
               color={theme.palette.grey[500]}
               lineHeight="17px"

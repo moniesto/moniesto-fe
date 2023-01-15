@@ -2,12 +2,12 @@ import { Button, Stack, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 import DoneAllOutlinedIcon from "@mui/icons-material/DoneAllOutlined";
 import httpService from "../../../services/httpService";
-import { Requests } from "../../../interfaces/requests";
+import { BeMoniestReq, Requests } from "../../../interfaces/requests";
 import toastService from "../../../services/toastService";
-import { User } from "../../../interfaces/user";
+import {  User } from "../../../interfaces/user";
 import { LoadingButton } from "@mui/lab";
 
-type propType = { handleNext: () => void; user: User };
+type propType = { handleNext: (data: Partial<BeMoniestReq>) => void; user: User };
 
 const EmailStep = ({ handleNext, user }: propType) => {
   const [isSendVerifyMail, setIsSendVerifyMail] = useState<boolean>(false);
@@ -42,7 +42,11 @@ const EmailStep = ({ handleNext, user }: propType) => {
           />
           <Typography variant="h3">Your email is verified</Typography>
           <Stack mt={4} width="80%" alignItems="end">
-            <Button onClick={handleNext} variant="contained" color="secondary">
+            <Button
+              onClick={() => handleNext({})}
+              variant="contained"
+              color="secondary"
+            >
               Next
             </Button>
           </Stack>

@@ -19,6 +19,10 @@ import MoniestInfoStep from "./moniestInfoStep";
 import PaymentStep from "./paymentStep";
 import SubmitStep from "./submitStep";
 import { useAppSelector } from "../../../store/hooks";
+import { Moniest } from "../../../interfaces/user";
+import api from "../../../services/api";
+import { BeMoniestReq } from "../../../interfaces/requests";
+import toastService from "../../../services/toastService";
 
 type Step = {
   order: number;
@@ -51,9 +55,31 @@ const BeMoniest = () => {
   const [activeStep, setActiveStep] = useState<number>(1);
   const theme = useTheme();
   const user = useAppSelector((state) => state.user.user);
+  const [moniest, setMoniest] = useState<Partial<BeMoniestReq>>();
 
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
+  useEffect(() => {
+    console.log("hey :", moniest);
+  }, [moniest]);
+
+  const handleNext = (data?: Partial<Moniest>) => {
+ 
+    setMoniest({ ...moniest, ...data });
+    if (activeStep == steps.length) {
+      api.moniest
+        .be_moniest({
+          bio: moniest?.bio as string,
+          card_id: moniest?.card_id as string,
+          description: moniest?.description as string,
+          fee: moniest?.fee as number,
+          message: "test message",
+        })
+        .then(() =>
+          toastService.open({
+            severity: "success",
+            message: "Congratulations... You are moniest now",
+          })
+        );
+    } else setActiveStep(activeStep + 1);
   };
   const handleBack = () => {
     setActiveStep(activeStep - 1);
@@ -63,12 +89,7 @@ const BeMoniest = () => {
     let content: ReactNode;
     switch (activeStep) {
       case 1:
-        content = (
-          <EmailStep
-            user={user}
-            handleNext={handleNext}
-          ></EmailStep>
-        );
+        content = <EmailStep user={user} handleNext={handleNext}></EmailStep>;
         break;
       case 2:
         content = (

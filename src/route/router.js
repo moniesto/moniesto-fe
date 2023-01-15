@@ -72,15 +72,14 @@ const Router = createBrowserRouter([
                         path: "bemoniest",
                         element: <BeMoniest />,
                     },
-                    {
-                        path: "verify-email",
-                        element: <VerifyEmail />
-                    },
                 ],
             }
         ]
     },
-
+    {
+        path: "verify-email",
+        element: <VerifyEmail />
+    },
     {
         path: "*",
         element: <NotFound />
