@@ -76,7 +76,7 @@ const AuthorizationLayout = () => {
               </Typography>
               <img
                 style={{ width: "16rem" }}
-                src="images/auth/auth_bg.svg"
+                src="images/auth/auth_bg.gif"
                 alt=""
               />
             </Stack>
