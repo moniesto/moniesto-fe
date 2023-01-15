@@ -10,6 +10,7 @@ export const TestSubscriptionInfo: SubscriptionInfo = {
 }
 
 export const TestMoniest: Moniest = {
+    id:"1",
     bio: "test bio",
     description: "test description",
     score: 20,

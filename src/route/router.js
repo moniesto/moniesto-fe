@@ -14,6 +14,7 @@ import BeMoniest from "../pages/main/beMoniest/beMoniest";
 import ProtectedRoutes from "../components/layout/protectedRoutes";
 import UnprotectedRoutes from "../components/layout/unprotectedRoutes";
 import VerifyEmail from "../pages/main/verifyEmail";
+import { SharePost } from "../pages/main/sharePost";
 
 const Router = createBrowserRouter([
     {
@@ -71,6 +72,10 @@ const Router = createBrowserRouter([
                     {
                         path: "bemoniest",
                         element: <BeMoniest />,
+                    },
+                    {
+                        path: "share",
+                        element: <SharePost />,
                     },
                 ],
             }

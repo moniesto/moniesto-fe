@@ -76,7 +76,7 @@ export const Requests: {
         error_codes: string
     },
     crypto: {
-        search_currencies: string
+        search_currencies: (name: string) => string
     },
     moniest: {
         be_moniest: string
@@ -108,7 +108,7 @@ export const Requests: {
         error_codes: "assets/error-codes"
     },
     crypto: {
-        search_currencies: "crypto/currencies"
+        search_currencies: (name: string) => `crypto/currencies?name=${name}`
     },
     moniest: {
         be_moniest: "moniests"

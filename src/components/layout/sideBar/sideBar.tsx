@@ -16,10 +16,13 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import { useNavigate, useLocation } from "react-router-dom";
 import Navigator from "../../shared/common/navigatior";
+import { useAppSelector } from "../../../store/hooks";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 const SideBar = () => {
   const [selectedLink, setSelectedLink] = useState("timeline");
   const theme = useTheme();
+  const user = useAppSelector((state) => state.user.user);
   const { pathname } = useLocation();
   const links = [
     {
@@ -71,16 +74,18 @@ const SideBar = () => {
           </List>
         </Stack>
         <Stack>
-          <Navigator path="/bemoniest">
+          <Navigator path={user.moniest ? "share" : "bemoniest"}>
             <Button
               size="large"
-              startIcon={<RocketLaunchIcon />}
+              startIcon={
+                user.moniest ? <AddOutlinedIcon /> : <RocketLaunchIcon />
+              }
               color="secondary"
               variant="contained"
               fullWidth
               type="submit"
             >
-              Be moniest
+              {user.moniest ? "Share post" : "Be moniest"}
             </Button>
           </Navigator>
 

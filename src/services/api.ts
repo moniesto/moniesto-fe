@@ -41,7 +41,7 @@ class api {
         error_codes: () => httpService.get(Requests.asset.error_codes),
     }
     crypto = {
-        search_currencies: (name: string) => httpService.get(Requests.crypto.search_currencies, { name }),
+        search_currencies: (name: string) => httpService.get(Requests.crypto.search_currencies(name)),
     }
     moniest = {
         be_moniest: (params: BeMoniestReq) => httpService.post<User>(Requests.moniest.be_moniest, params),

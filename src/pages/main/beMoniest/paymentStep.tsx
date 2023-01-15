@@ -1,15 +1,11 @@
 import { Stack } from "@mui/system";
 import AddCardOutlinedIcon from "@mui/icons-material/AddCardOutlined";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
-import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined";
 import {
   Button,
   Divider,
   List,
-  ListItem,
   ListItemAvatar,
-  ListItemButton,
-  ListItemText,
   Radio,
   RadioGroup,
   Typography,
@@ -20,7 +16,6 @@ import { useState } from "react";
 import { Card } from "../../../interfaces/card";
 import { TestCard, TestCard2 } from "../../../services/tempDatas";
 import CardItem from "../../../components/shared/common/cardItem";
-import { Moniest } from "../../../interfaces/user";
 import { BeMoniestReq } from "../../../interfaces/requests";
 
 type propType = {
@@ -32,15 +27,6 @@ const PaymentStep = ({ handleNext, handleBack }: propType) => {
   const theme = useTheme();
   const [cards, setCards] = useState<Card[]>([TestCard, TestCard2]);
   const [selectedCard, setSelectedCard] = useState<string>();
-
-  const [card, setCard] = useState({
-    cardNumber: "",
-    expiry: "",
-    cvc: "",
-  });
-  const handleChangeCard = (value: any) => {
-    console.log("value :", value);
-  };
 
   return (
     <Stack spacing={4}>
@@ -59,6 +45,7 @@ const PaymentStep = ({ handleNext, handleBack }: propType) => {
           <AddCardOutlinedIcon sx={{ fontSize: "1.2rem" }} />
           <Typography variant="h4">Add new card</Typography>
         </Stack>
+
         <ArrowForwardIosOutlinedIcon sx={{ fontSize: "1rem" }} />
       </Stack>
 

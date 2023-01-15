@@ -21,8 +21,8 @@ type LoginForm = {
 const validationSchema = yup.object({
   identifier: yup
     .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
+    // .email("Enter a valid email")
+    .required("Email or username is required"),
   password: yup
     .string()
     .min(6, "Password should be of minimum 6 characters length")

@@ -23,6 +23,7 @@ export interface User {
     moniest?: Moniest
 }
 export interface Moniest {
+    id:string
     bio: string
     description: string
     score: number

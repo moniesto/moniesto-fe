@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import localStorageService, { StorageState, ThemeMode } from '../../services/localStorageService'
+import httpService from '../../services/httpService'
 
 // Define the initial state using that type
 const initialState: StorageState = localStorageService.getStorage()
@@ -22,8 +23,9 @@ export const storageSlice = createSlice({
     },
     setToken: (state, action: PayloadAction<string>) => {
       setStorage("token", action.payload)
+      httpService.createInstance(action.payload);
       state.token = action.payload;
-     
+
     },
   },
 })

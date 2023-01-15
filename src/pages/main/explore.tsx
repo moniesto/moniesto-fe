@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import PostCard from "../../components/shared/post/postCard";
 import MoniestCard from "../../components/shared/user/moniestCard";
 import { Post } from "../../interfaces/post";
-import { Moniest, User } from "../../interfaces/user";
+import { User } from "../../interfaces/user";
 import { TestMoniest, TestPost, TestUser } from "../../services/tempDatas";
 
 const Explore = () => {
@@ -19,14 +19,14 @@ const Explore = () => {
   return (
     <Stack rowGap={2}>
       <Grid container spacing={{ xs: 1, md: 2 }}>
-        {moniests.map((moniest,i) => (
+        {moniests.map((moniest, i) => (
           <Grid key={i} item xs={6}>
             <MoniestCard user={moniest} />
           </Grid>
         ))}
       </Grid>
       <Stack rowGap={3}>
-        {posts.map((post,i) => (
+        {posts.map((post, i) => (
           <PostCard key={i} post={post} />
         ))}
       </Stack>
