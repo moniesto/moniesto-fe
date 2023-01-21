@@ -23,6 +23,7 @@ import { Moniest } from "../../../interfaces/user";
 import api from "../../../services/api";
 import { BeMoniestReq } from "../../../interfaces/requests";
 import toastService from "../../../services/toastService";
+import { useNavigate } from "react-router-dom";
 
 type Step = {
   order: number;
@@ -56,13 +57,9 @@ const BeMoniest = () => {
   const theme = useTheme();
   const user = useAppSelector((state) => state.user.user);
   const [moniest, setMoniest] = useState<Partial<BeMoniestReq>>();
-
-  useEffect(() => {
-    console.log("hey :", moniest);
-  }, [moniest]);
+  const navigate = useNavigate();
 
   const handleNext = (data?: Partial<Moniest>) => {
- 
     setMoniest({ ...moniest, ...data });
     if (activeStep == steps.length) {
       api.moniest
@@ -73,12 +70,15 @@ const BeMoniest = () => {
           fee: moniest?.fee as number,
           message: "test message",
         })
-        .then(() =>
+        .then(() => {
           toastService.open({
             severity: "success",
             message: "Congratulations... You are moniest now",
-          })
-        );
+          });
+          setTimeout(() => {
+            navigate("/timeline");
+          }, 1000);
+        });
     } else setActiveStep(activeStep + 1);
   };
   const handleBack = () => {

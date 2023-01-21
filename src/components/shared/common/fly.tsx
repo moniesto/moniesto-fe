@@ -1,14 +1,11 @@
 import { Typography } from "@mui/material";
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 
 type PageProp = {
   children: ReactNode;
 };
 
 const Fly = ({ children }: PageProp) => {
-  useEffect(() => {
-    console.log("ref :", children);
-  }, [children]);
   return (
     <Typography
       component="span"
