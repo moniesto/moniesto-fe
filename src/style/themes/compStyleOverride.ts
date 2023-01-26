@@ -131,6 +131,13 @@ export default function componentStyleOverrides(theme: any) {
                 }
             }
         },
+        MuiFormLabel: {
+            styleOverrides: {
+                root: {
+                    color: theme.textMain + " !important",
+                }
+            }
+        },
         MuiOutlinedInput: {
             styleOverrides: {
                 root: {
@@ -140,6 +147,10 @@ export default function componentStyleOverrides(theme: any) {
                             background: theme.mode === "light" ? theme.backgroundSecondary : theme.colors.backgroundDarkPrimary,
                         },
                         textarea: {
+                            background: theme.mode === "light" ? theme.backgroundSecondary : theme.colors.backgroundDarkPrimary,
+                        }
+                        ,
+                        ".MuiSelect-select": {
                             background: theme.mode === "light" ? theme.backgroundSecondary : theme.colors.backgroundDarkPrimary,
                         }
                     },
@@ -257,6 +268,24 @@ export default function componentStyleOverrides(theme: any) {
                     backgroundColor: theme.sectionPrimary + " !important",
                     '&::before': {
                         backgroundColor: theme.sectionPrimary + " !important",
+                    }
+                }
+            }
+        },
+        // MuiCalendarPicker: {
+        //     styleOverrides: {
+        //         root: {
+        //             ".MuiClock-clock": {
+        //                 backgroundColor: theme.colors?.primaryLight + " !important",
+        //             }
+        //         }
+        //     }
+        // },
+        MuiClockPicker: {
+            styleOverrides: {
+                root: {
+                    ".MuiClock-clock": {
+                        backgroundColor: theme.colors?.primaryLight + " !important",
                     }
                 }
             }

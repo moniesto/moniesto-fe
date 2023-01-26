@@ -83,7 +83,6 @@ const Register = () => {
           message: "Registiration success",
         });
       })
-      .catch(console.error)
       .finally(() => setLoading(false));
   };
   const formik = useFormik<RegisterForm>({

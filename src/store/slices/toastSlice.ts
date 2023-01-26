@@ -22,10 +22,8 @@ export const toastSlice = createSlice({
     initialState,
     reducers: {
         openToast: (state, action: PayloadAction<ToastState>) => {
-
-            state.severity = action.payload.severity
-            state.message = action.payload.message
-
+            state = action.payload
+            return state
         },
     },
 })

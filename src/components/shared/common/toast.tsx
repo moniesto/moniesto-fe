@@ -10,10 +10,10 @@ const Toast = () => {
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
+    setOpen(false);
     if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
   };
 
   useEffect(() => {

@@ -28,7 +28,7 @@ class http {
         this.dispatch = dispatch
     }
     createInstance(token: string) {
-        console.log("token :", token)
+
         this.instance = axios.create({
             baseURL: 'http://localhost:8080/',
             validateStatus: (status) => {
@@ -36,14 +36,14 @@ class http {
             }
         });
 
-
         this.instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
         this.instance.interceptors.response.use((response) => {
             return Promise.resolve(response.data);
         }, (error) => {
-
+            
             const code = error.response.data.error_code;
+
             toastService.open({ severity: "error", message: configService.errors[code] })
             if (error.response.status === 401) { this.dispatch(setUser(emptyUser)); this.dispatch(setToken("")) }
 

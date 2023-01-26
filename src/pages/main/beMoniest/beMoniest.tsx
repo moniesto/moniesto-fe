@@ -18,12 +18,13 @@ import EmailStep from "./emailStep";
 import MoniestInfoStep from "./moniestInfoStep";
 import PaymentStep from "./paymentStep";
 import SubmitStep from "./submitStep";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { Moniest } from "../../../interfaces/user";
 import api from "../../../services/api";
 import { BeMoniestReq } from "../../../interfaces/requests";
 import toastService from "../../../services/toastService";
 import { useNavigate } from "react-router-dom";
+import { setUser } from "../../../store/slices/userSlice";
 
 type Step = {
   order: number;
@@ -58,6 +59,13 @@ const BeMoniest = () => {
   const user = useAppSelector((state) => state.user.user);
   const [moniest, setMoniest] = useState<Partial<BeMoniestReq>>();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (user && user.moniest) {
+      navigate("/timeline");
+    }
+  }, [user]);
 
   const handleNext = (data?: Partial<Moniest>) => {
     setMoniest({ ...moniest, ...data });
@@ -70,7 +78,8 @@ const BeMoniest = () => {
           fee: moniest?.fee as number,
           message: "test message",
         })
-        .then(() => {
+        .then((res) => {
+          dispatch(setUser(res));
           toastService.open({
             severity: "success",
             message: "Congratulations... You are moniest now",
