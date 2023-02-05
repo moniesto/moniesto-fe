@@ -1258,26 +1258,12 @@
   dependencies:
     "@date-io/core" "^2.16.0"
 
-"@editorjs/attaches@^1.2.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@editorjs/attaches/-/attaches-1.3.0.tgz#594fac7d399d2342016d29f1bec0ac22736bfd2e"
-  integrity sha512-D+dj55EsC5bvXV///Dh/+KN4unuI0j6SU3f5QcMA5zrfda47PNKwbKOuwMBJwn0O+o5qwqrFv67g98lAo2qqVQ==
-  dependencies:
-    "@codexteam/icons" "^0.0.4"
-
 "@editorjs/checklist@^1.3.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@editorjs/checklist/-/checklist-1.4.0.tgz#64a558efc7a3d4dbd18b3c85c938996e3c8c1870"
   integrity sha512-KmkgWFYwkcFFvh7oBaUiqg8NBmJSnB87EC0P6obfqo3uDjCXXnen+KJfP+7JBcQx/OsiDlOS/lTxkyhxNtKtsA==
   dependencies:
     "@codexteam/icons" "^0.0.4"
-
-"@editorjs/code@^2.7.0":
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/@editorjs/code/-/code-2.8.0.tgz#d31fdd947b9c763daae2cd2eabdf8dc37c0c6f5a"
-  integrity sha512-qlv1OqSEPKnLv/ZQgNFmVgqsMbGDkh/qgTEnbVWsS+yujo1nlwgVkqCB8tOkQGVsrpmAYLiWRlA413nKxxCN5w==
-  dependencies:
-    "@codexteam/icons" "^0.0.5"
 
 "@editorjs/delimiter@latest":
   version "1.3.0"
@@ -1297,11 +1283,6 @@
     html-janitor "^2.0.4"
     nanoid "^3.1.22"
 
-"@editorjs/embed@latest":
-  version "2.5.3"
-  resolved "https://registry.npmjs.org/@editorjs/embed/-/embed-2.5.3.tgz"
-  integrity sha512-+X0xX2tiwQjU/B2rPDv8DOwg0suiqrt2h/o9frjR308YuY1VTpqjLRF1lIV4TmelQyVr9cXkZruaa4Ty1wvfJg==
-
 "@editorjs/header@latest":
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/@editorjs/header/-/header-2.7.0.tgz#755d104a9210a8e2d9ccf22b175b2a93bdbb2330"
@@ -1315,28 +1296,6 @@
   integrity sha512-4WscDAoi6OO0F6L7N1mkQymADwj8hHgH/ICk5wGRPdkesUZW1TgldX8XvSmy+f5VylsEi3F/gUggaZsrYxu2sA==
   dependencies:
     "@codexteam/icons" "^0.0.6"
-
-"@editorjs/inline-code@latest":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@editorjs/inline-code/-/inline-code-1.4.0.tgz#25e9728bc6c73b7af2a009689679b4950e744417"
-  integrity sha512-nJJx2eBgQyml7U8MdMdJNFY2RgZCOuvvXHEW73xsdu36ZXCd44eAo7vq1S5Jz9l8bC676SvNbRfeH/nojXK37A==
-  dependencies:
-    "@codexteam/icons" "^0.0.5"
-
-"@editorjs/link@^2.3.1":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@editorjs/link/-/link-2.5.0.tgz#f2eff28030d858cd4d719cc07c4888c7840106d0"
-  integrity sha512-3Oa1VweBY7Sscjzw8pv1QcWGyP+XdPl6+yu+gXnSETyjz9TQRZUjved0qw2OomYOjMZ3RumrdDJXxoALlZdvuQ==
-  dependencies:
-    "@babel/runtime" "^7.10.2"
-    "@codexteam/icons" "^0.0.4"
-
-"@editorjs/list@latest":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@editorjs/list/-/list-1.8.0.tgz#c64b88679f23c0129ffac589004300832c345d3b"
-  integrity sha512-Vq6cjyTXBzgegYv/MtTfuDdiz59yGhDEc/yAVXr6lmvoWAFs9cJ4TLuh4/9SbrbhIptcQLDvUjMDKmRrV6v2NQ==
-  dependencies:
-    "@codexteam/icons" "^0.0.4"
 
 "@editorjs/marker@latest":
   version "1.3.0"
@@ -1365,20 +1324,6 @@
   integrity sha512-24Mu8cESaj34a0kg1Enj7qiZ3yiCOsZI59+8xpfXLO/NkO7hBYWNForVcBy5yIWs/VLlEZK11FP37f/mHrKugQ==
   dependencies:
     "@codexteam/icons" "^0.0.5"
-
-"@editorjs/raw@latest":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@editorjs/raw/-/raw-2.4.0.tgz#b22731fea9130354ae9320f6f5eeac7bb02ed3f7"
-  integrity sha512-6k7ngx1T8+ztTG4/i5QcGPKXkF2YvdqgKgtzpOTaG6Pzm17D7Hr30Krbqz2E2Y/uoV8SiR/X1UAyKTQxrk9B6Q==
-  dependencies:
-    "@codexteam/icons" "^0.0.4"
-
-"@editorjs/simple-image@^1.5.1":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@editorjs/simple-image/-/simple-image-1.5.1.tgz#a4b96f3dcabcf3db0770591d345d11470f218603"
-  integrity sha512-eXfNzYMOPE7I/HllX00XvEO1MGiFu34lzOIyQzxQ3GdD+GlEJgIN9IhLGN7glsyAhCVmNyxNXGa9kUHzWQ9c5Q==
-  dependencies:
-    "@codexteam/icons" "^0.0.6"
 
 "@editorjs/table@latest":
   version "2.2.0"
@@ -2355,11 +2300,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/editorjs__header@^2.6.0":
-  version "2.6.0"
-  resolved "https://registry.npmjs.org/@types/editorjs__header/-/editorjs__header-2.6.0.tgz"
-  integrity sha512-J9TyO/BjNVddi+syyXpvMRMtVz5Z62pwmFKynWsgP+wnJYdWF8ABqgomokIsAvuEwH5NHa/YxsTltYcPPGCRRQ==
-
 "@types/eslint-scope@^3.7.3":
   version "3.7.4"
   resolved "https://registry.npmjs.org/@types/eslint-scope/-/eslint-scope-3.7.4.tgz"
@@ -2530,13 +2470,6 @@
   version "17.0.3"
   resolved "https://registry.npmjs.org/@types/react-is/-/react-is-17.0.3.tgz"
   integrity sha512-aBTIWg1emtu95bLTLx0cpkxwGW3ueZv71nE2YFBpL8k/z5czEW8yYpOo8Dp+UUAFAtKwNaOsh/ioSeQnWlZcfw==
-  dependencies:
-    "@types/react" "*"
-
-"@types/react-payment-inputs@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@types/react-payment-inputs/-/react-payment-inputs-1.1.0.tgz"
-  integrity sha512-vSUyliEpPPSgZTrkYR7Ifmv2HgCAsuKcwOOdlRIikFVA0zRrJRfOfRIpTeuP9SSAiefDPLEaE/ozE/5vJnDqhw==
   dependencies:
     "@types/react" "*"
 
@@ -4347,16 +4280,6 @@ editorjs-button@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/editorjs-button/-/editorjs-button-1.0.4.tgz#14fa4750f420278f9963177d38ea618c1997bfbb"
   integrity sha512-3wn8VrcGgil0gCTrgJNktiYnsC8YdS1TueNOyWr2geZLSUE9KPSVyQpPAduCdVEy+wbWQqrftczENNdLpxDGsQ==
-
-editorjs-hyperlink@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/editorjs-hyperlink/-/editorjs-hyperlink-1.0.6.tgz#f75ba7d3e8dab4527993ed165fd44cbfcae3a672"
-  integrity sha512-E8UZA9AM3jPwMTE40ul4eGCFzH3+XoUR5YRCy5O1+Yrl5UZQXeJppZ0IHHKaNmHAikDN9dUbKGLabxXZkPRi9w==
-
-editorjs-paragraph-with-alignment@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/editorjs-paragraph-with-alignment/-/editorjs-paragraph-with-alignment-3.0.0.tgz#831b34b59fcb432296af56bca0f5787131872d93"
-  integrity sha512-vSjjB/KUECEBxYqbj9yn1L799L14n0uoKrvk5qfaAokIHB8mYg5hZ8mOTtoS2cJu+xE3QZ/jmHY/Fh0EJeM8ZQ==
 
 ee-first@1.1.1:
   version "1.1.1"

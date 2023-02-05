@@ -1,5 +1,4 @@
 // import Embed from '@editorjs/embed';
-const Embed = require('@editorjs/embed');
 const Table = require('@editorjs/table');
 // import List from '@editorjs/list'
 const Warning = require('@editorjs/warning');
@@ -12,7 +11,7 @@ const Quote = require('@editorjs/quote');
 const Marker = require('@editorjs/marker');
 const CheckList = require('@editorjs/checklist');
 const Delimiter = require('@editorjs/delimiter');
-const InlineCode = require('@editorjs/inline-code');
+// const InlineCode = require('@editorjs/inline-code');
 // const  SimpleImage  = require('@editorjs/simple-image');
 // const  Paragraph  = require('@editorjs/table');
 const NestedList = require('@editorjs/nested-list');
@@ -20,7 +19,6 @@ const NestedList = require('@editorjs/nested-list');
 const AnyButton = require('editorjs-button');
 
 export const EDITOR_JS_TOOLS: any = {
-  embed: Embed,
   table: Table,
   marker: Marker,
   list: NestedList,
@@ -62,7 +60,6 @@ export const EDITOR_JS_TOOLS: any = {
   quote: Quote,
   checklist: CheckList,
   delimiter: Delimiter,
-  inlineCode: InlineCode,
 };
 
 
