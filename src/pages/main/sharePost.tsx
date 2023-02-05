@@ -14,6 +14,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useTheme } from "@mui/system";
+
 import StarIcon from "@mui/icons-material/Star";
 import { FormikValues, useFormik } from "formik";
 import * as yup from "yup";
@@ -24,7 +26,7 @@ import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import React from "react";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -34,13 +36,23 @@ import dayjs from "dayjs";
 import { SwapVertOutlined } from "@mui/icons-material";
 import toastService from "../../services/toastService";
 import { useNavigate } from "react-router-dom";
+import { Editor } from "../../components/shared/common/editor/editor";
+import { Box } from "@mui/system";
+import { LoadingButton } from "@mui/lab";
 
 export const SharePost = () => {
   const [open, setOpen] = React.useState(false);
   const [calendarOpen, setCalendarOpen] = React.useState(false);
+  const [showDescription, setShowDescription] = useState<boolean>(false);
+
+  const theme = useTheme();
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+  const editorJs = useRef<{
+    save(): Promise<any>;
+  }>(null);
 
   const [options, setOptions] = React.useState<
     { currency: string; price: number }[]
@@ -64,6 +76,7 @@ export const SharePost = () => {
         duration: yup.string().required("duration is required"),
         direction: yup.string().required("Direction is required"),
         currency: yup.string().required("Currency is required"),
+        description: yup.string(),
         stop: yup
           .number()
           .max(
@@ -97,16 +110,29 @@ export const SharePost = () => {
           )
           .required("TP3 is required"),
       }),
-    onSubmit: (values) => {
-      api.post.create_post(values).then(() => {
-        toastService.open({
-          message: "Your post successfully created",
-          severity: "success",
-        });
-        navigate("/timeline");
-      });
+    onSubmit: async (values) => {
+      setSubmitLoading(true);
+      const savedData = await editorJs.current?.save();
+
+      values.description = JSON.stringify(savedData || {});
+      api.post
+        .create_post(values)
+        .then(() => {
+          toastService.open({
+            message: "Your post successfully created",
+            severity: "success",
+          });
+          navigate("/timeline");
+        })
+        .finally(() => setSubmitLoading(false));
     },
   });
+
+  const handleShare = async () => {
+    const [coin] = await api.crypto.search_currencies(formik.values.currency);
+    setSelectedOption(Number(coin.price));
+    formik.submitForm();
+  };
 
   React.useEffect(() => {
     if (!open) {
@@ -137,10 +163,12 @@ export const SharePost = () => {
   }, [formik.values.currency]);
 
   const fixedTo = (value: number) =>
-    value ? value.toFixed(4).replace(/\.?0+$/, "") : "";
+    value ? value.toFixed(3).replace(/\.?0+$/, "") : "";
 
   const calculatedRound = (value: number = 0) =>
-    fixedTo(value / (selectedOption || 1));
+    value
+      ? fixedTo(((value - (selectedOption || 0)) * 100) / (selectedOption || 0))
+      : 0;
 
   return (
     <Paper sx={{ minHeight: "calc(100vh - 150px)", padding: "1.8rem 2rem" }}>
@@ -321,7 +349,7 @@ export const SharePost = () => {
                     name="target1"
                     placeholder="TP1"
                     type="number"
-                    value={formik.values.target1}
+                    // value={formik.values.target1}
                     onChange={formik.handleChange}
                     error={
                       formik.touched.target1 && Boolean(formik.errors.target1)
@@ -365,7 +393,7 @@ export const SharePost = () => {
                     name="target2"
                     placeholder="TP2"
                     type="number"
-                    value={formik.values.target2}
+                    // value={formik.values.target2}
                     onChange={formik.handleChange}
                     error={
                       formik.touched.target2 && Boolean(formik.errors.target2)
@@ -408,7 +436,7 @@ export const SharePost = () => {
                     name="target3"
                     placeholder="TP3"
                     type="number"
-                    value={formik.values.target3}
+                    // value={formik.values.target3}
                     onChange={formik.handleChange}
                     error={
                       formik.touched.target3 && Boolean(formik.errors.target3)
@@ -490,15 +518,39 @@ export const SharePost = () => {
                 </Stack>
               </Stack>
             </Stack>
+            <Divider></Divider>
+            {showDescription ? (
+              <Editor
+                label="Description (optional)"
+                editorJs={editorJs}
+              ></Editor>
+            ) : (
+              <Stack
+                sx={{
+                  height: "80px",
+                  backgroundColor: theme.palette.background.secondary,
+                  borderRadius: theme.palette.borderRadius.large,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
+                onClick={() => setShowDescription(true)}
+              >
+                + Add Description (Optional)
+              </Stack>
+            )}
+
             <Stack alignItems="end">
-              <Button
+              <LoadingButton
                 startIcon={<AddOutlinedIcon />}
                 variant="contained"
                 color="secondary"
-                type="submit"
+                type="button"
+                onClick={handleShare}
+                loading={submitLoading}
               >
                 Share
-              </Button>
+              </LoadingButton>
             </Stack>
           </Stack>
         </form>
