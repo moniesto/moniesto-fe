@@ -4,6 +4,7 @@ import { MutableRefObject, useCallback, useEffect, useRef } from "react";
 import { createReactEditorJS } from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./constants";
 import { OutputData } from "@editorjs/editorjs";
+import "./editor.scss";
 
 const ReactEditorJS = createReactEditorJS();
 
@@ -15,7 +16,6 @@ type EditorJsType = {
 
 export const Editor = ({ editorJs, label, defaultValue }: EditorJsType) => {
   const theme = useTheme();
-  console.log();
 
   useEffect(() => {}, []);
   const handleInitialize = useCallback((instance: any) => {
@@ -24,9 +24,10 @@ export const Editor = ({ editorJs, label, defaultValue }: EditorJsType) => {
 
   return (
     <Box
+      className={theme.palette.mode == "dark" ? "dark-editor" : ""}
       style={{
         position: "relative",
-        backgroundColor: theme.palette.background.secondary,
+        backgroundColor: theme.palette.background.input,
         borderRadius: theme.palette.borderRadius.large,
         padding: 16,
         marginTop: 24,

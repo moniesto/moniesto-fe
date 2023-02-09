@@ -73,7 +73,8 @@ export default function themePalette(theme: any) {
                 background: {
                     paper: theme.colors.white,
                     primary: theme.colors?.backgroundLightPrimary,
-                    secondary: theme.colors?.backgroundLightSecondary
+                    secondary: theme.colors?.backgroundLightSecondary,
+                    input: theme.colors?.backgroundLightSecondary
                 },
             }
             : {
@@ -87,6 +88,7 @@ export default function themePalette(theme: any) {
                     paper: theme.colors?.backgroundDarkSecondary,
                     primary: theme.colors?.backgroundDarkPrimary,
                     secondary: theme.colors?.backgroundDarkSecondary,
+                    input: theme.colors?.backgroundDarkPrimary
                 },
                 primary: {
                     light: theme.colors?.primaryDark,

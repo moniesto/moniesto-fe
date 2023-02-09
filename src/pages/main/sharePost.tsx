@@ -37,7 +37,6 @@ import { SwapVertOutlined } from "@mui/icons-material";
 import toastService from "../../services/toastService";
 import { useNavigate } from "react-router-dom";
 import { Editor } from "../../components/shared/common/editor/editor";
-import { Box } from "@mui/system";
 import { LoadingButton } from "@mui/lab";
 
 export const SharePost = () => {
@@ -58,7 +57,7 @@ export const SharePost = () => {
     { currency: string; price: number }[]
   >([]);
 
-  const [selectedOption, setSelectedOption] = useState<number>();
+  const [selectedOption, setSelectedOption] = useState<number>(0);
 
   const formik: FormikValues = useFormik({
     initialValues: {
@@ -79,32 +78,23 @@ export const SharePost = () => {
         description: yup.string(),
         stop: yup
           .number()
-          .max(
-            selectedOption || 0,
-            `Stop should be lower than ${selectedOption || 0}`
-          )
-          .max(
-            selectedOption || 0,
-            `Stop should be lower than ${selectedOption || 0}`
-          )
+          .max(selectedOption, `Stop should be lower than ${selectedOption}`)
+          .max(selectedOption, `Stop should be lower than ${selectedOption}`)
           .required("Stop is required"),
         target1: yup
           .number()
-          .min(
-            selectedOption || 0,
-            `TP1 should be greater than ${selectedOption || 0}`
-          )
+          .min(selectedOption, `TP1 should be greater than ${selectedOption}`)
           .required("TP1 is required"),
         target2: yup
           .number()
-          .min(
+          .moreThan(
             formik.values.target1 || 0,
             `TP2 should be greater than ${formik.values.target1 || 0}`
           )
           .required("TP2 is required"),
         target3: yup
           .number()
-          .min(
+          .moreThan(
             formik.values.target2 || 0,
             `TP3 should be greater than ${formik.values.target2 || 0}`
           )
@@ -166,9 +156,7 @@ export const SharePost = () => {
     value ? value.toFixed(3).replace(/\.?0+$/, "") : "";
 
   const calculatedRound = (value: number = 0) =>
-    value
-      ? fixedTo(((value - (selectedOption || 0)) * 100) / (selectedOption || 0))
-      : 0;
+    value ? fixedTo(((value - selectedOption) * 100) / selectedOption) : 0;
 
   return (
     <Paper sx={{ minHeight: "calc(100vh - 150px)", padding: "1.8rem 2rem" }}>
@@ -216,7 +204,7 @@ export const SharePost = () => {
                 loading={loading}
                 onChange={(_, event) => {
                   formik.setFieldValue("currency", event?.currency, true);
-                  setSelectedOption(Number(event?.price));
+                  setSelectedOption(Number(event?.price) || 0);
                 }}
                 renderInput={(params) => (
                   <TextField
@@ -502,7 +490,7 @@ export const SharePost = () => {
                   <TextField
                     placeholder="0"
                     value={fixedTo(
-                      100 - (formik.values.stop / (selectedOption || 0)) * 100
+                      100 - (formik.values.stop / selectedOption) * 100
                     )}
                     InputProps={{
                       color: "secondary",
@@ -528,7 +516,7 @@ export const SharePost = () => {
               <Stack
                 sx={{
                   height: "80px",
-                  backgroundColor: theme.palette.background.secondary,
+                  backgroundColor: theme.palette.background.input,
                   borderRadius: theme.palette.borderRadius.large,
                   justifyContent: "center",
                   alignItems: "center",
@@ -542,7 +530,6 @@ export const SharePost = () => {
 
             <Stack alignItems="end">
               <LoadingButton
-                startIcon={<AddOutlinedIcon />}
                 variant="contained"
                 color="secondary"
                 type="button"
