@@ -15,6 +15,11 @@ import ProtectedRoutes from "../components/layout/protectedRoutes";
 import UnprotectedRoutes from "../components/layout/unprotectedRoutes";
 import VerifyEmail from "../pages/main/verifyEmail";
 import { SharePost } from "../pages/main/sharePost";
+import { AccountSettings } from "../pages/settings/account";
+import { MoniestSettings } from "../pages/settings/moniest";
+import { CardSettings } from "../pages/settings/card";
+import { PasswordSettings } from "../pages/settings/password";
+import { VerifyEmailSettings } from "../pages/settings/verifyEmail";
 
 const Router = createBrowserRouter([
     {
@@ -60,6 +65,7 @@ const Router = createBrowserRouter([
                     {
                         path: "/:username",
                         element: <Profile />,
+
                     },
                     {
                         path: "timeline",
@@ -77,20 +83,44 @@ const Router = createBrowserRouter([
                         path: "share",
                         element: <SharePost />,
                     },
-                ],
+                    {
+                        path: "settings",
+                        children: [
+                            {
+                                path: "account",
+                                element: <AccountSettings />,
+                            },
+                            {
+                                path: "moniest",
+                                element: <MoniestSettings />,
+                            },
+                            {
+                                path: "card",
+                                element: <CardSettings />,
+                            },
+                            {
+                                path: "password",
+                                element: <PasswordSettings />,
+                            },
+                            {
+                                path: "verify-email",
+                                element: <VerifyEmailSettings />,
+                            }
+                        ],
+
+                    },
+                ]
+            },
+            {
+                path: "verify-email",
+                element: <VerifyEmail />
+            },
+            {
+                path: "*",
+                element: <NotFound />
             }
         ]
-    },
-    {
-        path: "verify-email",
-        element: <VerifyEmail />
-    },
-    {
-        path: "*",
-        element: <NotFound />
-    }
-
-]);
+    }]);
 
 
 export default Router;

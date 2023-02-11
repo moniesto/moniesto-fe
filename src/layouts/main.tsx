@@ -1,11 +1,20 @@
 import { AppBar, Box, Container, Grid, Stack, Toolbar } from "@mui/material";
 import { useTheme } from "@mui/system";
-import { Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 import Header from "../components/layout/header";
-import SideBar from "../components/layout/sideBar/sideBar";
+import { SettingsSideBar } from "../components/layout/main/settingsSideBar";
+import SideBar from "../components/layout/main/sideBar";
 
 const MainLayout = () => {
   const theme = useTheme();
+  const [sideBar, setSideBar] = useState<any>();
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname.startsWith("/settings")) {
+      setSideBar(<SettingsSideBar />);
+    } else setSideBar(<SideBar />);
+  }, [location.pathname]);
 
   return (
     <Stack sx={{ background: theme.palette.background.primary }}>
@@ -31,7 +40,7 @@ const MainLayout = () => {
         <Grid container item md={12}>
           <Grid sx={{ display: { xs: "none", md: "block" } }} item md={3}>
             <Box sx={{ position: "fixed", width: "100%", maxWidth: "282px" }}>
-              <SideBar></SideBar>
+              {sideBar}
             </Box>
           </Grid>
           <Grid

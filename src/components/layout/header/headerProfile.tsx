@@ -32,7 +32,7 @@ const HeaderProfile = () => {
     {
       icon: <SettingsOutlinedIcon />,
       title: "Settings",
-      path: "/settings",
+      path: "/settings/account",
     },
   ];
   const open = Boolean(anchorEl);
