@@ -12,13 +12,15 @@ import { useAppDispatch, useAppSelector } from "./store/hooks";
 import httpService from "./services/httpService";
 import { useEffect, useState } from "react";
 import Toast from "./components/shared/common/toast";
-import localStorageService from "./services/localStorageService";
+import localStorageService, {
+  DecodeToken,
+} from "./services/localStorageService";
 import { setUser } from "./store/slices/userSlice";
 import toastService from "./services/toastService";
-import { User } from "./interfaces/user";
 import { openToast } from "./store/slices/toastSlice";
 import { setToken } from "./store/slices/localStorageSlice";
 import configService from "./services/configService";
+import api from "./services/api";
 
 function App() {
   const mode = useAppSelector((state) => state.storage.theme_mode);
@@ -35,7 +37,14 @@ function App() {
       return;
     }
 
-    const decoded = localStorageService.getDecodedToken();
+    getUserByUserName();
+  }, []);
+
+  const getUserByUserName = async () => {
+    const decoded = (await localStorageService
+      .getDecodedToken()
+      .catch(console.error)) as DecodeToken;
+
     if (!decoded.user.id) {
       dispatch(openToast({ message: "Need authorization", severity: "error" }));
       dispatch(setToken(""));
@@ -43,13 +52,13 @@ function App() {
       return;
     }
 
-    httpService
-      .get<User>("/users/" + decoded.user.username)
+    api.user
+      .user_by_username(decoded.user.username)
       .then((res) => {
         dispatch(setUser(res));
       })
       .finally(() => setLoading(false));
-  }, []);
+  };
 
   return (
     <ThemeProvider theme={themes(mode)}>

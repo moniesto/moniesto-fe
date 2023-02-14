@@ -8,7 +8,6 @@ const initialState: StorageState = localStorageService.getStorage()
 
 
 const setStorage = (key: string, value: any) => {
-  console.log("key :", key, "value :", value)
   localStorageService.setStorage({ ...localStorageService.getStorage(), [key]: value })
 }
 

@@ -35,22 +35,26 @@ class localStorageService {
     setStorage(_storage: StorageState) {
         localStorage.setItem("moniesto-local", JSON.stringify(_storage))
     }
-    getDecodedToken(): DecodeToken {
-        let decoded: DecodeToken = {
-            id: "",
-            user: {
-                username: "",
-                id: ""
-            },
-            issued_at: "",
-            expired_at: ""
-        };
-        try {
-            decoded = jwt_decode(this.getStorage().token) as DecodeToken
-        } catch (error) {
-            console.log(error)
-        }
-        return decoded
+    async getDecodedToken(): Promise<DecodeToken> {
+        return new Promise(async (resolve, reject) => {
+            let decoded: DecodeToken = {
+                id: "",
+                user: {
+                    username: "",
+                    id: ""
+                },
+                issued_at: "",
+                expired_at: ""
+            };
+            try {
+                decoded = await jwt_decode(this.getStorage().token) as DecodeToken
+            } catch (error) {
+                console.error(error)
+            }
+            resolve(decoded)
+
+        })
+
     }
 }
 

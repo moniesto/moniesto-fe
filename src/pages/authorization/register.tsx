@@ -1,34 +1,20 @@
-import {
-  CircularProgress,
-  InputAdornment,
-  TextField,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { InputAdornment, TextField, Typography, useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import KeyOutlinedIcon from "@mui/icons-material/KeyOutlined";
 import Navigator from "../../components/shared/common/navigatior";
-import { PermIdentity } from "@mui/icons-material";
 import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
-import httpService from "../../services/httpService";
 import { LoadingButton } from "@mui/lab";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
-import {
-  LoginResponse,
-  Requests,
-  UsernameCheck,
-} from "../../interfaces/requests";
 import { setToken } from "../../store/slices/localStorageSlice";
-import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
-import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
 import api from "../../services/api";
 import toastService from "../../services/toastService";
+import { UsernameInput } from "../../components/layout/auth/usernameInput";
 
 type RegisterForm = {
   username: string;
@@ -37,6 +23,7 @@ type RegisterForm = {
   email: string;
   password: string;
 };
+
 const validationSchema = yup.object({
   username: yup
     .string()
@@ -65,9 +52,6 @@ const Register = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
-  const [checkLoading, setCheckLoading] = useState<boolean>(false);
-  const [isCorrectName, setIsCorrectName] = useState<boolean>(false);
-  const [displayCheckIcon, setDisplayCheckIcon] = useState<boolean>(false);
 
   const handleSubmit = (values: RegisterForm) => {
     setLoading(true);
@@ -99,25 +83,6 @@ const Register = () => {
     },
   });
 
-  useEffect(() => {
-    if (!formik.values.username || formik.values.username.length < 5) {
-      setIsCorrectName(false);
-      setDisplayCheckIcon(false);
-      return;
-    }
-    setDisplayCheckIcon(true);
-    setCheckLoading(true);
-
-    httpService
-      .get<UsernameCheck>(`account/usernames/${formik.values.username}/check`)
-      .then((res) => setIsCorrectName(res.validity))
-      .finally(() =>
-        setTimeout(() => {
-          setCheckLoading(false);
-        }, 1000)
-      );
-  }, [formik.values.username]);
-
   return (
     <Stack width={"100%"} maxWidth={500} spacing={8}>
       <Stack spacing={1.8}>
@@ -133,53 +98,7 @@ const Register = () => {
       <form onSubmit={formik.handleSubmit}>
         <Stack spacing={4}>
           <Stack spacing={2}>
-            <TextField
-              fullWidth
-              id="username"
-              name="username"
-              placeholder="Username"
-              value={formik.values.username}
-              onChange={formik.handleChange}
-              error={formik.touched.username && Boolean(formik.errors.username)}
-              helperText={formik.touched.username && formik.errors.username}
-              sx={{
-                ".MuiInputAdornment-positionEnd": {
-                  "*>": { animation: "fade 0.2s ease" },
-                },
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PermIdentity />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment className="notFly" position="end">
-                    {checkLoading ? (
-                      <CircularProgress
-                        className="notFly"
-                        size={25}
-                        color="inherit"
-                      />
-                    ) : displayCheckIcon ? (
-                      isCorrectName ? (
-                        <DoneOutlinedIcon
-                          className="notFly"
-                          sx={{ color: theme.palette.secondary.main }}
-                        />
-                      ) : (
-                        <HighlightOffOutlinedIcon
-                          className="notFly"
-                          sx={{ color: theme.palette.error.light }}
-                        />
-                      )
-                    ) : (
-                      ""
-                    )}
-                  </InputAdornment>
-                ),
-              }}
-            />
+            <UsernameInput formik={formik}></UsernameInput>
             <TextField
               fullWidth
               id="name"
@@ -252,15 +171,6 @@ const Register = () => {
               }}
             />
           </Stack>
-          {/* <Button
-            size="large"
-            color="secondary"
-            variant="contained"
-            fullWidth
-            type="submit"
-          >
-            Register
-          </Button> */}
           <LoadingButton
             type="submit"
             size="large"

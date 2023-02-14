@@ -12,37 +12,36 @@ import {
   ListItemIcon,
   ListItemText,
   Stack,
-  useTheme,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export const SettingsSideBar = () => {
-  const [selectedLink, setSelectedLink] = useState("timeline");
+  const [selectedLink, setSelectedLink] = useState("/settings/account");
   const { pathname } = useLocation();
   const links = [
     {
-      path: "settings/account",
+      path: "/settings/account",
       icon: <PersonOutline />,
       title: "Account",
     },
     {
-      path: "settings/moniest",
+      path: "/settings/moniest",
       icon: <RocketLaunchOutlined />,
       title: "Moniest",
     },
     {
-      path: "settings/card",
+      path: "/settings/card",
       icon: <CreditCardOutlined />,
       title: "Card",
     },
     {
-      path: "settings/password",
+      path: "/settings/password",
       icon: <KeyOutlined />,
       title: "Password",
     },
     {
-      path: "settings/verify-email",
+      path: "/settings/verify-email",
       icon: <EmailOutlined />,
       title: "Verify Email",
     },

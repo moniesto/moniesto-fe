@@ -1,5 +1,5 @@
 import { Post } from "../interfaces/post"
-import { BeMoniestReq, ChangePasswordReq, CreatePostReq, LoginReq, LoginResponse, RegisterReq, Requests, SendMailReq, SendVerificationMailReq, VerifyTokenReq } from "../interfaces/requests"
+import { BeMoniestReq, ChangePasswordReq, CreatePostReq, LoginReq, LoginResponse, RegisterReq, Requests, SendMailReq, SendVerificationMailReq, UsernameCheck, VerifyTokenReq } from "../interfaces/requests"
 import { User } from "../interfaces/user"
 import httpService from "./httpService"
 
@@ -35,7 +35,7 @@ class api {
             return httpService.post(Requests.account.send_verification_email, params)
         },
         verify_email: (params: VerifyTokenReq) => httpService.post(Requests.account.verify_email, params),
-        check_username: (username: string) => httpService.get(Requests.account.check_username(username)),
+        check_username: (username: string) => httpService.get<UsernameCheck>(Requests.account.check_username(username)),
     }
     asset = {
         error_codes: () => httpService.get(Requests.asset.error_codes),
@@ -51,7 +51,7 @@ class api {
     }
     user = {
         be_moniest: (params: BeMoniestReq) => httpService.post<User>(Requests.moniest.be_moniest, params),
-        user_by_username: (username: string) => httpService.get<User>(Requests.moniest.be_moniest, { username })
+        user_by_username: (username: string) => httpService.get<User>(Requests.user.user_by_username(username))
     }
 
 
