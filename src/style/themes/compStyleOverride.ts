@@ -145,7 +145,6 @@ export default function componentStyleOverrides(theme: any) {
                 input: {
                     fontSize: "0.9rem",
                     fontWeight: 500,
-                    // background: theme.backgroundSecondary,
                     padding: '15.5px 14px',
                     '&.MuiInputBase-inputSizeSmall': {
                         padding: '10px 14px',

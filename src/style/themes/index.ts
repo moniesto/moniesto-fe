@@ -12,20 +12,22 @@ import colors from './_themes-vars.module.scss';
 
 export const theme = (mode: string) => {
   const color = colors;
-  console.log("color :", color)
   const themeOption = {
     mode: mode,
     colors: color,
     textMain: mode === 'light' ? color.lightTextMain : color.darkTextMain,
     appBar: mode === 'light' ? color.darkTextMain : color.primaryMain,
-    backgroundPrimary: mode === 'light' ? color.backgroundLightPrimary : color.backgroundDarkPrimary,
-    backgroundSecondary: mode === 'light' ? color.backgroundLightSecondary : color.backgroundDarkSecondary,
-    sectionPrimary: mode === 'light' ? color.darkTextMain : color.lightTextMain,
     borderRadius: {
       small: "6px",
       main: "10px",
       large: "16px"
     },
+    card: {
+      border: `1px solid ${mode === "light" ? color.background800 : color.darkBackground800} !important`,
+      borderRadius: 10,
+      background: mode === "light" ? color.background500 : color.darkBackground500 + " !important",
+    }
+
   };
 
   const themeOptions: any = {
@@ -35,6 +37,11 @@ export const theme = (mode: string) => {
     shape: {
       borderRadius: 10,
     },
+    mixins: {
+      card: {
+        ...themeOption.card
+      }
+    }
   };
 
   const themes = createTheme(themeOptions);
