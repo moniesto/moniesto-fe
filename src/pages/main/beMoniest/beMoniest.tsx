@@ -1,5 +1,6 @@
 import {
   Box,
+  Card,
   Divider,
   Paper,
   Step,
@@ -129,7 +130,7 @@ const BeMoniest = () => {
   }, [activeStep]);
 
   return (
-    <Paper sx={{ minHeight: "calc(100vh - 150px)", padding: "1.8rem 2rem" }}>
+    <Card sx={{ minHeight: "calc(100vh - 150px)", padding: "1.8rem 2rem" }}>
       <Stack pb={6}>
         <Typography variant="h2" pb={1.4}>
           Be Moniest
@@ -183,7 +184,7 @@ const BeMoniest = () => {
       >
         {stepContent}
       </Box>
-    </Paper>
+    </Card>
   );
 };
 export default BeMoniest;

@@ -51,18 +51,18 @@ const HeaderProfile = () => {
     <>
       <Stack flexDirection="row" alignItems="center">
         <ThemeModeButton />
-        <Stack alignItems="end" sx={{ display: { xs: "none", md: "block" } }}>
+        {/* <Stack alignItems="end" sx={{ display: { xs: "none", md: "block" } }}>
           <Typography variant="h4">Davut Turug</Typography>
           <Typography fontSize="0.76rem" lineHeight="17px" variant="h6">
             davuttrg
           </Typography>
-        </Stack>
+        </Stack> */}
 
         <IconButton
           disableRipple
           onClick={handleClick}
           size="small"
-          sx={{ ml: 2 }}
+          // sx={{ ml: 2 }}
           aria-controls={open ? "account-menu" : undefined}
           aria-expanded={open ? "true" : undefined}
         >
@@ -111,9 +111,10 @@ const HeaderProfile = () => {
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: "background.paper",
               transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
+              borderTop: "1px solid",
+              borderLeft: "1px solid",
             },
           },
         }}

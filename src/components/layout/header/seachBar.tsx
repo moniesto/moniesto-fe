@@ -3,19 +3,35 @@ import {
   DeleteOutline,
   SearchOutlined,
 } from "@mui/icons-material";
-import { InputAdornment, TextField } from "@mui/material";
+import { IconButton, InputAdornment, TextField, useTheme } from "@mui/material";
 import { useState } from "react";
 
 const SearchBar = () => {
+  const theme = useTheme();
   const [text, setText] = useState<string>("");
+  const [focused, setFocused] = useState<boolean>(false);
+
+  const handleClickDelete = () => {
+    setFocused(false);
+    setText("");
+  };
+
   return (
     <TextField
+      sx={{
+        minWidth: "278px",
+        width: focused || text ? "350px" : "278px",
+        transition: theme.transitions.create("width"),
+      }}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
       fullWidth
       name="Search"
+      value={text}
       placeholder="Search for Moniests ..."
       onChange={(e) => setText(e.target.value)}
       InputProps={{
-        color: "secondary",
+        
         startAdornment: (
           <InputAdornment position="start">
             <SearchOutlined />
@@ -23,7 +39,9 @@ const SearchBar = () => {
         ),
         endAdornment: (
           <InputAdornment position="end">
-            <ClearOutlined sx={{ opacity: text ? 1 : 0 }} />
+            <IconButton onClick={handleClickDelete}>
+              <ClearOutlined sx={{ opacity: text ? 1 : 0 }} />
+            </IconButton>
           </InputAdornment>
         ),
       }}
