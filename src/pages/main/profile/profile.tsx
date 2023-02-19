@@ -2,6 +2,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import {
   Avatar,
   Button,
+  Card,
   Paper,
   Stack,
   Typography,
@@ -25,7 +26,7 @@ const Profile = () => {
 
   return (
     <Box>
-      <Paper sx={{ width: "100%", paddingBottom: "45px" }} elevation={0}>
+      <Card sx={{ width: "100%", paddingBottom: "45px" }} elevation={0}>
         <Box
           height={{ xs: "8.2rem", md: "9.4rem" }}
           sx={{
@@ -109,7 +110,7 @@ const Profile = () => {
             </Stack>
           </Box>
         </Box>
-      </Paper>
+      </Card>
       <ProfileTabs></ProfileTabs>
     </Box>
   );

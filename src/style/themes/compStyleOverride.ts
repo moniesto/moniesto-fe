@@ -187,7 +187,7 @@ export default function componentStyleOverrides(theme: any) {
         MuiDivider: {
             styleOverrides: {
                 root: {
-                    borderColor: theme.divider,
+                    borderColor: theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800,
                     opacity: 1
                 }
             }

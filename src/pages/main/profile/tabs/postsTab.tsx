@@ -1,4 +1,4 @@
-import { useTheme } from "@mui/material";
+import { Card, useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import StreamIcon from "@mui/icons-material/Stream";
@@ -38,44 +38,46 @@ const PostsTab = () => {
 
   return (
     <Stack spacing={2}>
-      <Stack
-        sx={{
-          background: theme.palette.background.paper,
-          borderRadius: "10px",
-          padding: "15px 20px",
-          fontWeight: "bold",
-        }}
-        flexDirection="row"
-        columnGap={2}
-      >
-        {filters.map((filter) => (
-          <Stack
-            key={filter.value}
-            onClick={() => handleChangeFilter(filter.value)}
-            sx={{
-              cursor: "pointer",
-              transition: "all 0.2s ease",
-              color: getColorByActive(filter.value),
-            }}
-            flexDirection="row"
-            alignItems="center"
-            columnGap={0.3}
-          >
+      <Card>
+        <Stack
+          sx={{
+            // background: theme.palette.background.paper,
+            borderRadius: "10px",
+            padding: "15px 20px",
+            fontWeight: "bold",
+          }}
+          flexDirection="row"
+          columnGap={2}
+        >
+          {filters.map((filter) => (
             <Stack
+              key={filter.value}
+              onClick={() => handleChangeFilter(filter.value)}
               sx={{
-                ".MuiSvgIcon-root": {
-                  fontSize: "1rem",
-                  transition: "all 0.2s ease",
-                  color: getColorByActive(filter.value),
-                },
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+                color: getColorByActive(filter.value),
               }}
+              flexDirection="row"
+              alignItems="center"
+              columnGap={0.3}
             >
-              {filter.icon}
+              <Stack
+                sx={{
+                  ".MuiSvgIcon-root": {
+                    fontSize: "1rem",
+                    transition: "all 0.2s ease",
+                    color: getColorByActive(filter.value),
+                  },
+                }}
+              >
+                {filter.icon}
+              </Stack>
+              {filter.title}
             </Stack>
-            {filter.title}
-          </Stack>
-        ))}
-      </Stack>
+          ))}
+        </Stack>
+      </Card>
 
       <Stack rowGap={2}>
         {posts.map((post, i) => (
