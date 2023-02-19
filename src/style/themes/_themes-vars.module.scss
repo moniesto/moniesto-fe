@@ -51,11 +51,6 @@ $grey900: #212121;
 $textHint: #25283d8a;
 $lightTextMain: $primaryMain;
 
-$background200: #f5f3f5;
-$background500: #fdfdfd;
-$background600: #f9f9f9;
-$background800: #eeeeee;
-
 // ==============================|| DARK THEME VARIANTS ||============================== //
 
 // paper & background
@@ -149,11 +144,6 @@ $darkTextMain: #fff;
   textHint: $textHint;
   lightTextMain: $lightTextMain;
 
-  background200: $background200;
-  background500: $background500;
-  background600: $background600;
-  background800: $background800;
-
   // ==============================|| DARK THEME VARIANTS ||============================== //
 
   // paper & background
@@ -187,9 +177,4 @@ $darkTextMain: #fff;
 
   backgroundDarkPrimary: $backgroundDarkPrimary;
   backgroundDarkSecondary: $backgroundDarkSecondary;
-
-  darkBackground800: #414458;
-  darkBackground500: #15192f;
-  darkBackground600: #181d32;
-  darkBackground200: #121423;
 }

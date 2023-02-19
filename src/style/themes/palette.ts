@@ -42,7 +42,11 @@ export default function themePalette(theme: any) {
             800: theme.colors?.darkBackground,
             900: theme.colors?.darkPaper
         },
-        borderRadius: theme?.borderRadius,
+        borderRadius: {
+            small: "10px",
+            main: "15px",
+            large: "20px"
+        },
         ...(theme?.mode === 'light'
             ? {
                 primary: {
@@ -67,11 +71,10 @@ export default function themePalette(theme: any) {
                     contrast: theme.colors?.primary800
                 },
                 background: {
-                    default: theme.colors?.background500,
                     paper: theme.colors.white,
-                    200: theme.colors?.background200,
-                    500: theme.colors?.background500,
-                    800: theme.colors?.background800
+                    primary: theme.colors?.backgroundLightPrimary,
+                    secondary: theme.colors?.backgroundLightSecondary,
+                    input: theme.colors?.backgroundLightSecondary
                 },
             }
             : {
@@ -82,11 +85,10 @@ export default function themePalette(theme: any) {
                     contrast: theme.colors?.primary200
                 },
                 background: {
-                    default: theme.colors?.darkBackground500,
                     paper: theme.colors?.backgroundDarkSecondary,
-                    200: theme.colors?.darkBackground200,
-                    500: theme.colors?.darkBackground500,
-                    800: theme.colors?.darkBackground800
+                    primary: theme.colors?.backgroundDarkPrimary,
+                    secondary: theme.colors?.backgroundDarkSecondary,
+                    input: theme.colors?.backgroundDarkPrimary
                 },
                 primary: {
                     light: theme.colors?.primaryDark,

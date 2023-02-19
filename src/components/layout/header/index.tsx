@@ -13,22 +13,18 @@ const Header = () => {
         justifyContent="space-between"
         sx={{
           "> * ": {
-            // flex: 1,
-            "&:last-of-type": {
-              justifyContent: "flex-end",
-            },
+            flex: 1,
+            "&:last-of-type":{
+              justifyContent:"flex-end"
+            }
           },
         }}
       >
         <Logo />
-        <Stack direction="row" alignItems="center">
-          <Box
-            sx={{ display: { xs: "none", md: "block", marginRight: "10px" } }}
-          >
-            <SearchBar></SearchBar>
-          </Box>
-          <HeaderProfile></HeaderProfile>
-        </Stack>
+        <Box sx={{ display: { xs: "none", md: "block" } }}>
+          <SearchBar></SearchBar>
+        </Box>
+        <HeaderProfile></HeaderProfile>
       </Stack>
     </Container>
   );

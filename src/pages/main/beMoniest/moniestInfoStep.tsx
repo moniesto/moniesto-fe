@@ -55,7 +55,7 @@ const MoniestInfoStep = ({ handleNext, handleBack }: propType) => {
               error={formik.touched.fee && Boolean(formik.errors.fee)}
               helperText={formik.touched.fee && formik.errors.fee}
               InputProps={{
-                
+                color: "secondary",
                 startAdornment: (
                   <InputAdornment position="start">
                     <AttachMoneyOutlinedIcon />
@@ -80,7 +80,7 @@ const MoniestInfoStep = ({ handleNext, handleBack }: propType) => {
               error={formik.touched.bio && Boolean(formik.errors.bio)}
               helperText={formik.touched.bio && formik.errors.bio}
               InputProps={{
-                
+                color: "secondary",
                 startAdornment: (
                   <InputAdornment position="start">
                     <AccountBoxOutlinedIcon />
@@ -109,7 +109,7 @@ const MoniestInfoStep = ({ handleNext, handleBack }: propType) => {
                 formik.touched.description && formik.errors.description
               }
               InputProps={{
-                
+                color: "secondary",
                 startAdornment: (
                   <InputAdornment position="start">
                     <ArticleOutlinedIcon />

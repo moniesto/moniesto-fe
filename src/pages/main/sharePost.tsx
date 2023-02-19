@@ -1,6 +1,7 @@
 import {
   Autocomplete,
   Button,
+  Card,
   CircularProgress,
   Divider,
   FormControl,
@@ -159,7 +160,13 @@ export const SharePost = () => {
     value ? fixedTo(((value - selectedOption) * 100) / selectedOption) : 0;
 
   return (
-    <Paper sx={{ minHeight: "calc(100vh - 150px)", padding: "1.8rem 2rem" }}>
+    <Card
+      sx={{
+        minHeight: "calc(100vh - 150px)",
+        padding: "1.8rem 2rem",
+        background: theme.palette.background[500],
+      }}
+    >
       <Stack pb={6}>
         <Stack justifyContent="space-between" direction="row">
           <Typography variant="h2" pb={1.4}>
@@ -220,7 +227,7 @@ export const SharePost = () => {
                     }
                     InputProps={{
                       ...params.InputProps,
-                      color: "secondary",
+
                       startAdornment: (
                         <InputAdornment position="start">
                           <CurrencyBitcoinOutlinedIcon />
@@ -271,7 +278,6 @@ export const SharePost = () => {
                         formik.touched.duration && formik.errors.duration
                       }
                       InputProps={{
-                        color: "secondary",
                         startAdornment: (
                           <InputAdornment position="start">
                             <CalendarMonthOutlinedIcon />
@@ -344,7 +350,6 @@ export const SharePost = () => {
                     }
                     helperText={formik.touched.target1 && formik.errors.target1}
                     InputProps={{
-                      color: "secondary",
                       startAdornment: (
                         <InputAdornment position="start">
                           <FlagOutlinedIcon />
@@ -363,7 +368,6 @@ export const SharePost = () => {
                     placeholder="0"
                     value={calculatedRound(formik.values.target1)}
                     InputProps={{
-                      color: "secondary",
                       endAdornment: (
                         <InputAdornment position="end">
                           <Typography sx={{ opacity: 0.7 }} variant="h4">
@@ -388,7 +392,6 @@ export const SharePost = () => {
                     }
                     helperText={formik.touched.target2 && formik.errors.target2}
                     InputProps={{
-                      color: "secondary",
                       startAdornment: (
                         <InputAdornment position="start">
                           <FlagOutlinedIcon />
@@ -407,7 +410,6 @@ export const SharePost = () => {
                     placeholder="0"
                     value={calculatedRound(formik.values.target2)}
                     InputProps={{
-                      color: "secondary",
                       endAdornment: (
                         <InputAdornment position="end">
                           <Typography sx={{ opacity: 0.7 }} variant="h4">
@@ -431,7 +433,6 @@ export const SharePost = () => {
                     }
                     helperText={formik.touched.target3 && formik.errors.target3}
                     InputProps={{
-                      color: "secondary",
                       startAdornment: (
                         <InputAdornment position="start">
                           <FlagOutlinedIcon />
@@ -450,7 +451,6 @@ export const SharePost = () => {
                     placeholder="0"
                     value={calculatedRound(formik.values.target3)}
                     InputProps={{
-                      color: "secondary",
                       endAdornment: (
                         <InputAdornment position="end">
                           <Typography sx={{ opacity: 0.7 }} variant="h4">
@@ -472,7 +472,6 @@ export const SharePost = () => {
                     error={formik.touched.stop && Boolean(formik.errors.stop)}
                     helperText={formik.touched.stop && formik.errors.stop}
                     InputProps={{
-                      color: "secondary",
                       startAdornment: (
                         <InputAdornment position="start">
                           <DoNotDisturbAltOutlinedIcon />
@@ -493,7 +492,6 @@ export const SharePost = () => {
                       100 - (formik.values.stop / selectedOption) * 100
                     )}
                     InputProps={{
-                      color: "secondary",
                       endAdornment: (
                         <InputAdornment position="end">
                           <Typography sx={{ opacity: 0.7 }} variant="h4">
@@ -513,19 +511,18 @@ export const SharePost = () => {
                 editorJs={editorJs}
               ></Editor>
             ) : (
-              <Stack
+              <Card
                 sx={{
                   height: "80px",
-                  backgroundColor: theme.palette.background.input,
-                  borderRadius: theme.palette.borderRadius.large,
+                  cursor: "pointer",
+                  display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  cursor: "pointer",
                 }}
                 onClick={() => setShowDescription(true)}
               >
-                + Add Description (Optional)
-              </Stack>
+                <Stack>+ Add Description (Optional)</Stack>
+              </Card>
             )}
 
             <Stack alignItems="end">
@@ -542,6 +539,6 @@ export const SharePost = () => {
           </Stack>
         </form>
       </Stack>
-    </Paper>
+    </Card>
   );
 };

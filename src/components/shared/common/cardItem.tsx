@@ -32,6 +32,7 @@ const CardItem = ({
       sx={{
         width: "100%",
         border: "1px solid " + theme.palette.primary[200] + "!important",
+        borderRadius: theme.palette.borderRadius.main,
       }}
       key={card.id}
       secondaryAction={<Typography variant="h5">{card.brand}</Typography>}

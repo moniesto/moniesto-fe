@@ -16,13 +16,12 @@ const MainLayout = () => {
     } else setSideBar(<SideBar />);
   }, [location.pathname]);
 
-  console.log(theme);
   return (
-    <Stack sx={{ background: theme.palette.background[500] }}>
+    <Stack sx={{ background: theme.palette.background.primary }}>
       <AppBar
         elevation={0}
         sx={{
-          boxShadow: "0px 0px 16px 1px " + theme.palette.background[200],
+          boxShadow: "0px 4px 6px -1px " + theme.palette.background.primary,
         }}
         position="fixed"
       >
