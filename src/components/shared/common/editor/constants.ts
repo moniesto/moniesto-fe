@@ -10,6 +10,7 @@ const NestedList = require('@editorjs/nested-list');
 const AnyButton = require('editorjs-button');
 
 export const EDITOR_JS_TOOLS: any = {
+  holder: 'editorjs',
   table: Table,
   marker: Marker,
   list: NestedList,

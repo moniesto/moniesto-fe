@@ -1,11 +1,11 @@
 export default function componentStyleOverrides(theme: any) {
+    console.log("theme :", theme)
     return {
         MuiButton: {
             styleOverrides: {
                 root: {
                     padding: "0 24px",
                     fontWeight: 700,
-                    borderRadius: theme?.borderRadius,
                     height: '51px',
                     fontSize: '1.05rem',
                     boxShadow: "unset !important",
@@ -15,10 +15,10 @@ export default function componentStyleOverrides(theme: any) {
                         color: theme.colors.primaryMain
                     },
                     '&.MuiButton-containedSecondary': {
-                        color: theme?.colors?.white,
+                        color: theme.mode === "light" ? theme?.colors?.white : theme.colors.primaryMain,
                         // backgroundColor: theme?.colors.secondaryMain + "!important",
                         ".MuiSvgIcon-root": {
-                            color: theme.colors.darkTextMain
+                            color: theme.mode === "light" ? theme?.colors?.white : theme.colors.primaryMain,
                         },
                         '&:hover': {
                             backgroundColor: theme?.colors.secondary800
@@ -34,31 +34,21 @@ export default function componentStyleOverrides(theme: any) {
                 }
             }
         },
-        MuiTextField: {
-            styleOverrides: {
-                root: {
-                    fontWeight: 500,
-                    borderRadius: theme?.borderRadius
-                }
-            }
-        },
         MuiPaper: {
             defaultProps: {
                 elevation: 0
             },
             styleOverrides: {
                 root: {
-                    background: theme.sectionPrimary,
+                    background: theme.mode === "light" ? theme.colors.background600 : theme.colors.darkBackground600,
                 },
-                rounded: {
-                    borderRadius: `${theme?.borderRadius}`
-                }
             }
         },
         MuiCard: {
             styleOverrides: {
                 root: {
-                    background: theme.sectionPrimary,
+                    background: theme.mode === "light" ? theme.colors.background600 : theme.colors.darkBackground600,
+                    border: `1px solid ${theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800}`,
                 },
             }
         },
@@ -94,10 +84,9 @@ export default function componentStyleOverrides(theme: any) {
         MuiListItemButton: {
             styleOverrides: {
                 root: {
-                    color: theme.darkTextPrimary,
                     paddingTop: '10px',
                     paddingBottom: '10px',
-                    borderRadius: `${theme?.borderRadius}`,
+                    borderRadius: `${theme?.borderRadius.main} `,
                     transition: "all 0.3s ease",
                     '.MuiTypography-root': {
                         fontWeight: 600,
@@ -141,28 +130,14 @@ export default function componentStyleOverrides(theme: any) {
         MuiOutlinedInput: {
             styleOverrides: {
                 root: {
-                    "&.MuiInputBase-colorSecondary": {
-                        background: theme.mode === "light" ? theme.backgroundSecondary : theme.colors.backgroundDarkPrimary,
-                        input: {
-                            background: theme.mode === "light" ? theme.backgroundSecondary : theme.colors.backgroundDarkPrimary,
-                        },
-                        textarea: {
-                            background: theme.mode === "light" ? theme.backgroundSecondary : theme.colors.backgroundDarkPrimary,
-                        }
-                        ,
-                        ".MuiSelect-select": {
-                            background: theme.mode === "light" ? theme.backgroundSecondary : theme.colors.backgroundDarkPrimary,
-                        }
-                    },
-                    background: theme.backgroundSecondary,
-                    border: 0,
-                    borderRadius: `${theme?.borderRadius}`,
-                    '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: theme.colors?.grey400
-                    },
-                    '&:hover $notchedOutline': {
-                        borderColor: theme.colors?.primaryLight
-                    },
+                    border: `1px solid ${theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800} `,
+                    background: theme.mode === "light" ? theme.colors.background600 : theme.colors.darkBackground600,
+                    // '& .MuiOutlinedInput-notchedOutline': {
+                    //     borderColor: theme.colors?.grey400
+                    // },
+                    // '&:hover $notchedOutline': {
+                    //     borderColor: theme.colors?.primaryLight
+                    // },
                     '&.MuiInputBase-multiline': {
                         padding: 1
                     }
@@ -170,9 +145,8 @@ export default function componentStyleOverrides(theme: any) {
                 input: {
                     fontSize: "0.9rem",
                     fontWeight: 500,
-                    background: theme.backgroundSecondary,
+                    // background: theme.backgroundSecondary,
                     padding: '15.5px 14px',
-                    borderRadius: `${theme?.borderRadius}`,
                     '&.MuiInputBase-inputSizeSmall': {
                         padding: '10px 14px',
                         '&.MuiInputBase-inputAdornedStart': {
@@ -183,21 +157,16 @@ export default function componentStyleOverrides(theme: any) {
                         color: theme.textMain
                     },
                     '&:-webkit-autofill': {
-                        WebkitBoxShadow: '0 0 0 100px ' + theme.backgroundSecondary + ' inset',
+                        WebkitBoxShadow: `0 0 0 100px ${theme.mode === "light" ? theme.colors.background600 : theme.colors.darkBackground600} inset`,
                         background: "content-box"
                     },
-                    color: theme.textMain
                 },
                 inputAdornedStart: {
                     paddingLeft: 4
                 },
                 notchedOutline: {
                     border: 0,
-                    borderRadius: `${theme?.borderRadius}`
                 },
-                // fieldset: {
-                //     border: 0
-                // }
             }
         },
         MuiSlider: {
@@ -251,7 +220,7 @@ export default function componentStyleOverrides(theme: any) {
         MuiAppBar: {
             styleOverrides: {
                 root: {
-                    background: theme.appBar
+                    background: theme.mode === "light" ? theme.colors.background500 : theme.colors.darkBackground500
                 }
             }
         },
@@ -265,9 +234,16 @@ export default function componentStyleOverrides(theme: any) {
         MuiMenu: {
             styleOverrides: {
                 paper: {
-                    backgroundColor: theme.sectionPrimary + " !important",
+                    background: theme.mode === "light" ? theme.colors.background600 : theme.colors.darkBackground600,
+                    border: `1px solid ${theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800}`,
                     '&::before': {
-                        backgroundColor: theme.sectionPrimary + " !important",
+                        background: theme.mode === "light" ? theme.colors.background600 : theme.colors.darkBackground600,
+                        borderColor: theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800 + "!important",
+                    },
+                    ".MuiMenuItem-root": {
+                        margin: " 0 6px",
+                        borderRadius: theme?.borderRadius.small,
+                        padding: "10px 16px"
                     }
                 }
             }
@@ -286,6 +262,24 @@ export default function componentStyleOverrides(theme: any) {
                 root: {
                     ".MuiClock-clock": {
                         backgroundColor: theme.colors?.primaryLight + " !important",
+                    }
+                }
+            }
+        },
+        MuiAutocomplete: {
+            styleOverrides: {
+                popper: {
+                    border: `1px solid ${theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800} !important`,
+                    borderRadius: theme?.borderRadius.main,
+                    ".MuiAutocomplete-listbox": {
+                        ".MuiAutocomplete-option": {
+                            margin: " 0 6px",
+                            borderRadius: theme?.borderRadius.small,
+                            padding: "10px 16px"
+                        }
+                    },
+                    ".MuiPaper-root": {
+                        background: theme.mode === "light" ? theme.colors.background500 : theme.colors.darkBackground500 + " !important",
                     }
                 }
             }

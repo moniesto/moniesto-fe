@@ -74,9 +74,6 @@ const ChangePassword = () => {
       .finally(() => setLoading(false));
   };
 
-  useEffect(() => {
-    console.log("validationTokenState :", validationTokenState);
-  }, [validationTokenState]);
 
   const formik = useFormik<ChangePasswordForm>({
     initialValues: {
