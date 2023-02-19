@@ -71,6 +71,7 @@ export default function themePalette(theme: any) {
                     paper: theme.colors.white,
                     200: theme.colors?.background200,
                     500: theme.colors?.background500,
+                    600: theme.colors?.background600,
                     800: theme.colors?.background800
                 },
             }
@@ -86,6 +87,7 @@ export default function themePalette(theme: any) {
                     paper: theme.colors?.backgroundDarkSecondary,
                     200: theme.colors?.darkBackground200,
                     500: theme.colors?.darkBackground500,
+                    600: theme.colors?.darkBackground600,
                     800: theme.colors?.darkBackground800
                 },
                 primary: {

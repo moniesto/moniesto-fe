@@ -160,7 +160,7 @@ export const SharePost = () => {
     value ? fixedTo(((value - selectedOption) * 100) / selectedOption) : 0;
 
   return (
-    <Paper
+    <Card
       sx={{
         minHeight: "calc(100vh - 150px)",
         padding: "1.8rem 2rem",
@@ -539,6 +539,6 @@ export const SharePost = () => {
           </Stack>
         </form>
       </Stack>
-    </Paper>
+    </Card>
   );
 };

@@ -282,7 +282,6 @@ export default function componentStyleOverrides(theme: any) {
                     }
                 }
             }
-        }
-
+        },
     }
 } 

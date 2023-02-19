@@ -6,6 +6,7 @@ import {
 import {
   Avatar,
   Box,
+  Card,
   IconButton,
   InputAdornment,
   Paper,
@@ -40,21 +41,48 @@ export const AccountSettings = () => {
   });
 
   return (
-    <Paper sx={{ width: "100%", paddingBottom: "45px" }} elevation={0}>
+    <Card
+      sx={{
+        width: "100%",
+        paddingBottom: "45px",
+        background: theme.palette.background[500],
+      }}
+    >
       <Box
         height={{ xs: "8.2rem", md: "9.4rem" }}
         sx={{
+          background: theme.palette.background[600],
           backgroundImage: `url(${user?.background_photo})`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "cover",
-          borderTopLeftRadius: "15px",
-          borderTopRightRadius: "15px",
+          borderTopLeftRadius: theme.palette.borderRadius.main,
+          borderTopRightRadius: theme.palette.borderRadius.main,
           position: "relative",
-          borderBottom: `1px solid ${theme.palette.background.input}`,
-          // background: theme.palette.background.input,
         }}
       >
+        <IconButton
+          color="primary"
+          sx={{
+            position: "absolute",
+            bottom: "10px",
+            right: "10px",
+            border: `2px solid ${theme.palette.background[800]}`,
+            backgroundColor: theme.palette.background[600],
+            width: "35px",
+            height: "35px",
+            zIndex: 2,
+            ">svg": {
+              fontSize: "1rem",
+            },
+            "&:hover": {
+              backgroundColor: theme.palette.background[800],
+            },
+          }}
+        >
+          <input hidden accept="image/*" type="file" />
+          <AddPhotoAlternateOutlined />
+        </IconButton>
         <Box sx={{ position: "relative", height: "100%" }}>
           <Avatar
             sx={{
@@ -63,8 +91,8 @@ export const AccountSettings = () => {
               position: "absolute",
               bottom: "-3rem",
               left: "30px",
-              border: `3px solid ${theme.palette.background.input}`,
-              background: theme.palette.background.secondary,
+              border: `3px solid ${theme.palette.background[800]}`,
+              background: theme.palette.background[600],
               ".MuiAvatar-fallback": {
                 width: "50%",
                 height: "50%",
@@ -74,21 +102,21 @@ export const AccountSettings = () => {
           ></Avatar>
           <IconButton
             color="primary"
-            aria-label="upload picture"
-            component="label"
             sx={{
               position: "absolute",
               bottom: "-50px",
               left: "100px",
-              background: theme.palette.background.secondary,
-              border: `2px solid ${theme.palette.background.input}`,
+              border: `2px solid ${theme.palette.background[800]}`,
+              backgroundColor: theme.palette.background[600],
               width: "35px",
               height: "35px",
               ">svg": {
                 fontSize: "1rem",
               },
+              "&:hover": {
+                backgroundColor: theme.palette.background[800],
+              },
             }}
-            // sx={{  background: theme.palette.background.input}}
           >
             <input hidden accept="image/*" type="file" />
             <AddPhotoAlternateOutlined />
@@ -113,6 +141,6 @@ export const AccountSettings = () => {
           </LoadingButton>
         </Stack>
       </form>
-    </Paper>
+    </Card>
   );
 };
