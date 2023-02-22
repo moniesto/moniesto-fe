@@ -1,6 +1,6 @@
 import { Post } from "../interfaces/post"
 import { BeMoniestReq, ChangePasswordReq, CreatePostReq, LoginReq, LoginResponse, RegisterReq, Requests, SendMailReq, SendVerificationMailReq, UsernameCheck, VerifyTokenReq } from "../interfaces/requests"
-import { User } from "../interfaces/user"
+import { Moniest, User } from "../interfaces/user"
 import httpService from "./httpService"
 
 
@@ -45,6 +45,7 @@ class api {
     }
     moniest = {
         be_moniest: (params: BeMoniestReq) => httpService.post<User>(Requests.moniest.be_moniest, params),
+        update_profile: (params: Partial<Moniest>) => httpService.patch<User>(Requests.moniest.update_profile, params),
     }
     post = {
         create_post: (params: CreatePostReq) => httpService.post<Post>(Requests.post.create_post, params),

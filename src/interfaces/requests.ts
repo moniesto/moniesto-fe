@@ -80,6 +80,7 @@ export const Requests: {
     },
     moniest: {
         be_moniest: string
+        update_profile: string
     },
     post: {
         create_post: string
@@ -112,7 +113,8 @@ export const Requests: {
         search_currencies: (name: string) => `crypto/currencies?name=${name}`
     },
     moniest: {
-        be_moniest: "moniests"
+        be_moniest: "moniests",
+        update_profile: "moniests/profile"
     },
     post: {
         create_post: "moniests/posts"

@@ -14,12 +14,10 @@ const validationSchema = yup.object({
     .required("Fee is required"),
   bio: yup
     .string()
-    .min(5, "Bio should be of minimum 5 characters length")
+    .min(3, "Bio should be of minimum 3 characters length")
     .required("Bio is required"),
   description: yup
     .string()
-    .min(5, "Description should be of minimum 5 characters length")
-    .required("Description is required"),
 });
 
 type propType = {
@@ -37,7 +35,6 @@ const MoniestInfoStep = ({ handleNext, handleBack }: propType) => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       handleNext(values)
-      // alert(JSON.stringify(values, null, 2));
     },
   });
 
@@ -99,7 +96,7 @@ const MoniestInfoStep = ({ handleNext, handleBack }: propType) => {
               rows={7}
               fullWidth
               name="description"
-              placeholder="Description"
+              placeholder="Description (optional)"
               value={formik.values.description}
               onChange={formik.handleChange}
               error={

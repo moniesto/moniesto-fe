@@ -25,13 +25,13 @@ export interface User {
 export interface Moniest {
     id: string
     bio: string
-    description: string
-    score: number
+    description?: string
+    score?: number
     subscription_info: SubscriptionInfo
 }
 export interface SubscriptionInfo {
     fee: number
-    message: string
-    updated_at: Date
+    message?: string
+    updated_at?: Date
 }
 
