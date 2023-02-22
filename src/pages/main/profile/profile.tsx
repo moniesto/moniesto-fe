@@ -3,7 +3,6 @@ import {
   Avatar,
   Button,
   Card,
-  Paper,
   Stack,
   Typography,
   useTheme,

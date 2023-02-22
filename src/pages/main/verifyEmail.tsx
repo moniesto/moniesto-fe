@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
 
 const VerifyEmail = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

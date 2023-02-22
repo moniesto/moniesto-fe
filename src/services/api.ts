@@ -6,8 +6,6 @@ import httpService from "./httpService"
 
 class api {
 
-    constructor() { }
-
     auth = {
         login(params: LoginReq) {
             return httpService.post<LoginResponse>(Requests.auth.login, params)

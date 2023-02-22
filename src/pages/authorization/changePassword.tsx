@@ -33,7 +33,7 @@ const validationSchema = yup.object({
 const ChangePassword = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  let [searchParams, setSearchParams] = useSearchParams();
+  let [searchParams] = useSearchParams();
   const [token, setToken] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [validationTokenState, setValidationTokenState] = useState<0 | 1 | 2>(
@@ -87,11 +87,11 @@ const ChangePassword = () => {
 
   return (
     <>
-      {validationTokenState == 0 ? (
+      {validationTokenState === 0 ? (
         <Box sx={{ display: "flex" }}>
           <CircularProgress />
         </Box>
-      ) : validationTokenState == 1 ? (
+      ) : validationTokenState === 1 ? (
         <Stack width={"100%"} maxWidth={500} spacing={8}>
           <Stack spacing={1.8}>
             <Typography fontSize={"2.2rem"}>Change Password</Typography>

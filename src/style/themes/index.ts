@@ -1,7 +1,4 @@
 import { createTheme } from "@mui/material/styles";
-import { Theme } from "@mui/system";
-
-// assets
 
 // project imports
 import componentStyleOverrides from "./compStyleOverride";
