@@ -70,7 +70,8 @@ export const Requests: {
     account: {
         send_verification_email: string,
         verify_email: string,
-        check_username: (username: string) => string
+        check_username: (username: string) => string,
+        update_password: string
     },
     asset: {
         error_codes: string
@@ -105,6 +106,7 @@ export const Requests: {
         send_verification_email: "account/email/send_verification_email",
         verify_email: "account/email/verify_email",
         check_username: (username: string) => `account/usernames/${username}/check`,
+        update_password: "account/password",
     },
     asset: {
         error_codes: "assets/error-codes"

@@ -36,6 +36,7 @@ class api {
         },
         verify_email: (params: VerifyTokenReq) => httpService.post(Requests.account.verify_email, params),
         check_username: (username: string) => httpService.get<UsernameCheck>(Requests.account.check_username(username)),
+        update_password: (params: { new: string, old: string }) => httpService.put(Requests.account.update_password, params),
     }
     asset = {
         error_codes: () => httpService.get(Requests.asset.error_codes),
