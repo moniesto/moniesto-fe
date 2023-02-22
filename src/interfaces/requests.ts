@@ -29,7 +29,7 @@ export interface VerifyTokenReq {
 }
 
 export interface SendMailReq {
-    token: string
+    email: string
 }
 
 export interface SendVerificationMailReq {

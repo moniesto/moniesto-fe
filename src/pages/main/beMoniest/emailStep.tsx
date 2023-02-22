@@ -1,13 +1,16 @@
 import { Button, Stack, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 import DoneAllOutlinedIcon from "@mui/icons-material/DoneAllOutlined";
-import httpService from "../../../services/httpService";
-import { BeMoniestReq, Requests } from "../../../interfaces/requests";
+import { BeMoniestReq } from "../../../interfaces/requests";
 import toastService from "../../../services/toastService";
-import {  User } from "../../../interfaces/user";
+import { User } from "../../../interfaces/user";
 import { LoadingButton } from "@mui/lab";
+import api from "../../../services/api";
 
-type propType = { handleNext: (data: Partial<BeMoniestReq>) => void; user: User };
+type propType = {
+  handleNext: (data: Partial<BeMoniestReq>) => void;
+  user: User;
+};
 
 const EmailStep = ({ handleNext, user }: propType) => {
   const [isSendVerifyMail, setIsSendVerifyMail] = useState<boolean>(false);
@@ -16,8 +19,8 @@ const EmailStep = ({ handleNext, user }: propType) => {
 
   const handleSendVerifyEmail = () => {
     setLoading(true);
-    httpService
-      .post(Requests.account.send_verification_email, {
+    api.account
+      .send_verification_email({
         redirect_url: "http://localhost:3000/bemoniest",
       })
       .then(() => {

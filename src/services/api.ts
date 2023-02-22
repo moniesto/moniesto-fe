@@ -39,7 +39,7 @@ class api {
         update_password: (params: { new: string, old: string }) => httpService.put(Requests.account.update_password, params),
     }
     asset = {
-        error_codes: () => httpService.get(Requests.asset.error_codes),
+        error_codes: () => httpService.get<string[]>(Requests.asset.error_codes),
     }
     crypto = {
         search_currencies: (name: string) => httpService.get<{ currency: string, price: number }[]>(Requests.crypto.search_currencies(name)),

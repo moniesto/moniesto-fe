@@ -10,12 +10,11 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import Navigator from "../../components/shared/common/navigatior";
-import httpService from "../../services/httpService";
 import toastService from "../../services/toastService";
 import { useNavigate } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
-import { Requests } from "../../interfaces/requests";
+import api from "../../services/api";
 
 type ForgetPasswordForm = {
   email: string;
@@ -35,8 +34,8 @@ const ForgetPassword = () => {
 
   const handleForgetPassword = (values: ForgetPasswordForm) => {
     setLoading(true);
-    httpService
-      .post(Requests.password.send_email, { email: values.email })
+    api.password
+      .send_email({ email: values.email })
       .then(() => {
         toastService.open({
           message: "We send an mail to you. Please check your email address.",

@@ -1,12 +1,10 @@
-import httpService from "./httpService"
-
-
+import api from "./api";
 class config {
 
     errors: string[] = [];
     constructor() { }
     initialize() {
-        httpService.get<string[]>("/assets/error-codes").then((res) => this.errors = res)
+        api.asset.error_codes().then((res) => this.errors = res)
     }
 
 }

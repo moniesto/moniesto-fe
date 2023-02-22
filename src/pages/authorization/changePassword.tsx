@@ -13,10 +13,9 @@ import KeyOutlinedIcon from "@mui/icons-material/KeyOutlined";
 import Navigator from "../../components/shared/common/navigatior";
 import { LoadingButton } from "@mui/lab";
 import { useEffect, useState } from "react";
-import httpService from "../../services/httpService";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import toastService from "../../services/toastService";
-import { Requests } from "../../interfaces/requests";
+import api from "../../services/api";
 
 type ChangePasswordForm = {
   password: string;
@@ -35,7 +34,7 @@ const ChangePassword = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   let [searchParams, setSearchParams] = useSearchParams();
-  const [token, setToken] = useState<string>();
+  const [token, setToken] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [validationTokenState, setValidationTokenState] = useState<0 | 1 | 2>(
     0
@@ -49,16 +48,17 @@ const ChangePassword = () => {
       return;
     }
     setToken(token);
-    httpService
-      .post(Requests.password.verify_token, { token })
+    api.password
+      .verify_token({ token })
       .then(() => setValidationTokenState(1))
       .catch(() => setValidationTokenState(2));
   }, []);
 
   const handleChangePassword = (values: ChangePasswordForm) => {
     setLoading(true);
-    httpService
-      .post(Requests.password.change_password_with_token, {
+
+    api.password
+      .change_password_with_token({
         new: values.password,
         token,
       })
@@ -73,7 +73,6 @@ const ChangePassword = () => {
       .catch(() => setValidationTokenState(2))
       .finally(() => setLoading(false));
   };
-
 
   const formik = useFormik<ChangePasswordForm>({
     initialValues: {

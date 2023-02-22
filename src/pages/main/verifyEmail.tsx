@@ -3,8 +3,7 @@ import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Navigator from "../../components/shared/common/navigatior";
-import { Requests } from "../../interfaces/requests";
-import httpService from "../../services/httpService";
+import api from "../../services/api";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
 
@@ -22,8 +21,8 @@ const VerifyEmail = () => {
       return;
     }
     setLoading(false);
-    httpService
-      .post(Requests.account.verify_email, { token })
+    api.password
+      .verify_token({ token })
       .then(() => {
         dispatch(setUser({ ...user, email_verified: true }));
         navigate("/bemoniest");
