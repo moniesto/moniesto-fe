@@ -18,6 +18,9 @@ class http {
     post<Type>(url: string, params?: {}): Promise<Type> {
         return this.instance.post(url, params)
     }
+    patch<Type>(url: string, params?: {}): Promise<Type> {
+        return this.instance.patch(url, params)
+    }
     put<Type>(url: string, params?: {}): Promise<Type> {
         return this.instance.put(url, params)
     }

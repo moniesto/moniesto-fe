@@ -22,7 +22,7 @@ const SubsPersonCard = ({ user }: propTypes) => {
       <ListItemAvatar>
         <IconButton disableRipple size="small" sx={{ mr: 1 }}>
           <Avatar
-            src={user.profile_photo_thumbnail}
+            src={user.profile_photo_link}
             sx={{ width: 50, height: 50 }}
           ></Avatar>
         </IconButton>

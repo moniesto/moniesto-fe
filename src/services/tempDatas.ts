@@ -10,7 +10,7 @@ export const TestSubscriptionInfo: SubscriptionInfo = {
 }
 
 export const TestMoniest: Moniest = {
-    id:"1",
+    id: "1",
     bio: "test bio",
     description: "test description",
     score: 20,
@@ -25,10 +25,9 @@ export const TestUser: User = {
     email: "davutturug@gmail.com",
     email_verified: false,
     location: "Antalya",
-    profile_photo: "/images/user/Avatar.png",
-    profile_photo_thumbnail: "/images/user/Avatar_thumbnail.png",
-    background_photo: "/images/user/profil_bg.webp",
-    background_photo_thumbnail: "",
+    profile_photo_link: "/images/user/Avatar.png",
+    background_photo_link: "/images/user/Avatar_thumbnail.png",
+    background_photo_thumbnail_link: "/images/user/profil_bg.webp",
     created_at: new Date(),
     updated_at: new Date(),
     moniest: TestMoniest
@@ -43,7 +42,7 @@ export const TestPost: Post = {
     target1: 18.542,
     target3: 18.73,
     stop: 18.30,
-    score:20,
+    score: 20,
     direction: "long",
     created_at: new Date(),
     description: "test Description",

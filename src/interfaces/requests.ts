@@ -85,7 +85,8 @@ export const Requests: {
         create_post: string
     },
     user: {
-        user_by_username: (username: string) => string
+        user_by_username: (username: string) => string,
+        update_profile: string
     }
 } =
 {
@@ -117,7 +118,8 @@ export const Requests: {
         create_post: "moniests/posts"
     },
     user: {
-        user_by_username: (username: string) => `users/${username}`
+        user_by_username: (username: string) => `users/${username}`,
+        update_profile: "users/profile"
     }
 }
 

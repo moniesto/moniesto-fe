@@ -50,8 +50,9 @@ class api {
         create_post: (params: CreatePostReq) => httpService.post<Post>(Requests.post.create_post, params),
     }
     user = {
-        be_moniest: (params: BeMoniestReq) => httpService.post<User>(Requests.moniest.be_moniest, params),
-        user_by_username: (username: string) => httpService.get<User>(Requests.user.user_by_username(username))
+        update_profile: (params: Partial<User>) => httpService.patch<User>(Requests.user.update_profile, params),
+        user_by_username: (username: string) => httpService.get<User>(Requests.user.user_by_username(username)),
+
     }
 
 

@@ -40,6 +40,12 @@ export const theme = (mode: string) => {
     mixins: {
       card: {
         ...themeOption.card
+      },
+      center: {
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
       }
     }
   };

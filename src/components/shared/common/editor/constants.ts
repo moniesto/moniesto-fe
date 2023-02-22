@@ -1,3 +1,5 @@
+import imageService from "../../../../services/imageService";
+
 const Table = require('@editorjs/table');
 const Warning = require('@editorjs/warning');
 const Image = require('@editorjs/image');
@@ -19,7 +21,7 @@ export const EDITOR_JS_TOOLS: any = {
     config: {
       uploader: {
         uploadByFile(file: File) {
-          return _getBase64(file).then((data) => {
+          return imageService.getBase64(file).then((data) => {
             return {
               success: 1,
               file: {
@@ -52,13 +54,3 @@ export const EDITOR_JS_TOOLS: any = {
   checklist: CheckList,
   delimiter: Delimiter,
 };
-
-
-export const _getBase64 = (file: File) => {
-  return new Promise((resolve, reject) => {
-    var reader = new FileReader();
-    reader.onload = function () { return resolve(reader.result); };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}

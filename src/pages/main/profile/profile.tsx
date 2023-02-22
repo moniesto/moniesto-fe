@@ -30,7 +30,7 @@ const Profile = () => {
         <Box
           height={{ xs: "8.2rem", md: "9.4rem" }}
           sx={{
-            backgroundImage: `url(${user?.background_photo})`,
+            backgroundImage: `url(${user?.background_photo_link})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: "cover",
@@ -48,7 +48,7 @@ const Profile = () => {
               left: "30px",
               border: `3px solid ${theme.palette.common.white}`,
             }}
-            src={user?.profile_photo}
+            src={user?.profile_photo_link}
           ></Avatar>
         </Box>
         <Box padding={"0 30px"}>

@@ -41,7 +41,7 @@ const MoniestCard = ({ user }: propTypes) => {
             sx={{ ml: 2 }}
           >
             <Avatar
-              src={user.profile_photo_thumbnail}
+              src={user.profile_photo_link}
               sx={{ width: 50, height: 50 }}
             ></Avatar>
           </IconButton>
