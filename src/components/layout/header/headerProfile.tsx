@@ -67,7 +67,7 @@ const HeaderProfile = () => {
           aria-expanded={open ? "true" : undefined}
         >
           <Avatar
-            src="/images/user/Avatar.png"
+            src={user.profile_photo_thumbnail_link}
             sx={{ width: 50, height: 50 }}
           ></Avatar>
         </IconButton>
@@ -129,7 +129,7 @@ const HeaderProfile = () => {
           }}
         >
           <Stack flexDirection="row" alignItems="center">
-            <Avatar src="/images/user/Avatar.png"></Avatar>
+            <Avatar src={user.profile_photo_thumbnail_link}></Avatar>
             <Stack>
               <Typography variant="h4">
                 {user.name + " " + user.surname}

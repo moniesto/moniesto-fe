@@ -1,5 +1,4 @@
 export default function componentStyleOverrides(theme: any) {
-    console.log("theme :", theme)
     return {
         MuiButton: {
             styleOverrides: {
@@ -195,7 +194,7 @@ export default function componentStyleOverrides(theme: any) {
         MuiAvatar: {
             styleOverrides: {
                 root: {
-                    background: theme.colors?.secondaryLight
+                    background: theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800,
                 }
             }
         },

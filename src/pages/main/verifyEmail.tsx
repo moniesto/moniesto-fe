@@ -21,18 +21,18 @@ const VerifyEmail = () => {
       return;
     }
     setLoading(false);
-    api.password
-      .verify_token({ token })
-      .then(() => {
+    api.account
+      .verify_email({ token })
+      .then((res) => {
         dispatch(setUser({ ...user, email_verified: true }));
-        navigate("/bemoniest");
+        navigate(res.redirect_url);
       })
       .finally(() => setLoading(false));
   }, []);
 
   return (
     <Box
-    p={3}
+      p={3}
       sx={{
         width: "100%",
         height: "100vh",

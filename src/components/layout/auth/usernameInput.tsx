@@ -28,20 +28,23 @@ export const UsernameInput = ({ formik, currentValue }: any) => {
     }
     setDisplayCheckIcon(true);
     setCheckLoading(true);
+    const timeOutId = setTimeout(() => {
+      api.account
+        .check_username(formik.values.username)
+        .then((res) => {
+          if (!res.validity) {
+            formik.setFieldError("username", "username already exist");
+          }
+          setIsCorrectName(res.validity);
+        })
+        .finally(() =>
+          setTimeout(() => {
+            setCheckLoading(false);
+          }, 200)
+        );
+    }, 500);
 
-    api.account
-      .check_username(formik.values.username)
-      .then((res) => {
-        if (!res.validity) {
-          formik.setFieldError("username", "username already exist");
-        }
-        setIsCorrectName(res.validity);
-      })
-      .finally(() =>
-        setTimeout(() => {
-          setCheckLoading(false);
-        }, 200)
-      );
+    return () => clearTimeout(timeOutId);
   }, [formik?.values?.username]);
 
   return (

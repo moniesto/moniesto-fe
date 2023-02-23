@@ -16,7 +16,6 @@ const MainLayout = () => {
     } else setSideBar(<SideBar />);
   }, [location.pathname]);
 
-  console.log(theme);
   return (
     <Stack sx={{ background: theme.palette.background[500] }}>
       <AppBar

@@ -17,7 +17,7 @@ export const VerifyEmailSettings = () => {
     setLoading(true);
     api.account
       .send_verification_email({
-        redirect_url: "http://localhost:3000/settings/verify-email",
+        redirect_url: "/settings/verify-email",
       })
       .then(() => {
         toastService.open({
@@ -62,15 +62,15 @@ export const VerifyEmailSettings = () => {
               }}
             />
             <Stack alignItems="center" rowGap={1}>
-              <Typography variant="h3">
+              <Typography variant="h4">
                 We sent the mail to {user.email}
               </Typography>
-              <Typography variant="h3">Please check your email</Typography>
+              <Typography pt={2} variant="h4">Please check your email</Typography>
             </Stack>
           </>
         ) : (
           <>
-            <Typography sx={{ paddingTop: "2rem" }} variant="h3">
+            <Typography pb={2} sx={{ paddingTop: "2rem", fontSize:"1rem"}}>
               After pressing the button, follow the instructions in the link
               that we will send to your e-mail.
             </Typography>

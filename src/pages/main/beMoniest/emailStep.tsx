@@ -21,7 +21,7 @@ const EmailStep = ({ handleNext, user }: propType) => {
     setLoading(true);
     api.account
       .send_verification_email({
-        redirect_url: "http://localhost:3000/bemoniest",
+        redirect_url: "/bemoniest",
       })
       .then(() => {
         toastService.open({

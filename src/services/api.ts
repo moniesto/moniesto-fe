@@ -32,7 +32,7 @@ class api {
         send_verification_email(params: SendVerificationMailReq) {
             return httpService.post(Requests.account.send_verification_email, params)
         },
-        verify_email: (params: VerifyTokenReq) => httpService.post(Requests.account.verify_email, params),
+        verify_email: (params: VerifyTokenReq) => httpService.post<{ redirect_url: string }>(Requests.account.verify_email, params),
         check_username: (username: string) => httpService.get<UsernameCheck>(Requests.account.check_username(username)),
         update_password: (params: { new: string, old: string }) => httpService.put(Requests.account.update_password, params),
     }

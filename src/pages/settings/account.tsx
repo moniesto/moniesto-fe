@@ -57,14 +57,14 @@ export const AccountSettings = () => {
       .finally(() => setLoading(false));
   };
 
-  const formik = useFormik<Partial<User>>({
+  const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
       name: user.name,
       surname: user.surname,
       username: user.username,
-      background_photo_link: user.background_photo_link,
-      profile_photo_link: user.profile_photo_link,
+      background_photo: user.background_photo_link,
+      profile_photo: user.profile_photo_link,
       location: user.location,
     },
     validationSchema: validationSchema,
@@ -84,7 +84,7 @@ export const AccountSettings = () => {
         height={{ xs: "8.2rem", md: "9.4rem" }}
         sx={{
           background: theme.palette.background[600],
-          backgroundImage: `url(${formik.values?.background_photo_link})`,
+          backgroundImage: `url(${formik.values?.background_photo})`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "cover",
@@ -134,7 +134,7 @@ export const AccountSettings = () => {
                   height: "50%",
                 },
               }}
-              src={formik.values?.profile_photo_link}
+              src={formik.values?.profile_photo}
             ></Avatar>
 
             <Box sx={{ position: "absolute", top: "4rem", right: "-4px" }}>
