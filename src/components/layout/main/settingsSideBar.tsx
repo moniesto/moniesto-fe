@@ -13,7 +13,7 @@ import {
   ListItemText,
   Stack,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../store/hooks";
 
@@ -21,7 +21,9 @@ export const SettingsSideBar = () => {
   const [selectedLink, setSelectedLink] = useState("/settings/account");
   const user = useAppSelector((state) => state.user.user);
   const { pathname } = useLocation();
-  const links = [
+  const [links, setLinks] = useState<
+    { path: string; icon: ReactNode; title: string }[]
+  >([
     {
       path: "/settings/account",
       icon: <PersonOutline />,
@@ -42,20 +44,26 @@ export const SettingsSideBar = () => {
       icon: <EmailOutlined />,
       title: "Verify Email",
     },
-  ];
+  ]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     setSelectedLink(pathname);
-    if (user.moniest) {
-      links.splice(1, 0, {
+    if (
+      user.moniest &&
+      links.some((item) => item.path != "/settings/moniest")
+    ) {
+      const newLinks = links.slice();
+
+      newLinks.splice(1, 0, {
         path: "/settings/moniest",
         icon: <RocketLaunchOutlined />,
         title: "Moniest",
       });
+      setLinks(newLinks);
     }
-  }, []);
+  }, [user]);
 
   const handleListItemClick = (link: string) => {
     setSelectedLink(link);
