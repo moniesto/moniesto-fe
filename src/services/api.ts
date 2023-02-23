@@ -45,6 +45,8 @@ class api {
     moniest = {
         be_moniest: (params: BeMoniestReq) => httpService.post<User>(Requests.moniest.be_moniest, params),
         update_profile: (params: Partial<Moniest>) => httpService.patch<User>(Requests.moniest.update_profile, params),
+        subscribe: (username: string) => httpService.post(Requests.moniest.subscribe(username)),
+        unsubscribe: (username: string) => httpService.post(Requests.moniest.unsubscribe(username)),
     }
     post = {
         create_post: (params: CreatePostReq) => httpService.post<Post>(Requests.post.create_post, params),

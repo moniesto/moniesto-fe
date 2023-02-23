@@ -28,7 +28,7 @@ const HeaderProfile = () => {
     {
       icon: <PersonOutlineOutlinedIcon />,
       title: "Profile",
-      path: "/asd",
+      path: "/" + user.username,
     },
     {
       icon: <SettingsOutlinedIcon />,

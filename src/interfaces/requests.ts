@@ -80,8 +80,10 @@ export const Requests: {
         search_currencies: (name: string) => string
     },
     moniest: {
-        be_moniest: string
-        update_profile: string
+        be_moniest: string,
+        update_profile: string,
+        subscribe: (username: string) => string,
+        unsubscribe: (username: string) => string,
     },
     post: {
         create_post: string
@@ -116,7 +118,9 @@ export const Requests: {
     },
     moniest: {
         be_moniest: "moniests",
-        update_profile: "moniests/profile"
+        update_profile: "moniests/profile",
+        subscribe: (username: string) => `/moniests/${username}/subscribe`,
+        unsubscribe: (username: string) => `/moniests/${username}/unsubscribe`,
     },
     post: {
         create_post: "moniests/posts"

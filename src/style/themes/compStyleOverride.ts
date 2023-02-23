@@ -23,6 +23,13 @@ export default function componentStyleOverrides(theme: any) {
                             backgroundColor: theme?.colors.secondary800
                         },
                     },
+                    '&.MuiButton-outlinedSecondary': {
+                        backgroundColor: theme?.colors.secondaryLight + "!important",
+                        color: theme.colors.primaryMain,
+                        ".MuiSvgIcon-root": {
+                            color: theme.colors.primaryMain
+                        },
+                    },
                     '&.MuiButton-sizeMedium': {
                         height: '35px',
                         fontSize: '0.9rem',
@@ -39,7 +46,8 @@ export default function componentStyleOverrides(theme: any) {
             },
             styleOverrides: {
                 root: {
-                    background: theme.mode === "light" ? theme.colors.background600 : theme.colors.darkBackground600,
+                    background: theme.mode === "light" ? theme.colors.paper : theme.colors.darkPaper,
+                    border: `1px solid ${theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800}`,
                 },
             }
         },
@@ -289,6 +297,6 @@ export default function componentStyleOverrides(theme: any) {
                     boxShadow: `0px 4px 27px -9px ${theme.colors.primaryMain}`
                 }
             }
-        }
+        },
     }
 } 

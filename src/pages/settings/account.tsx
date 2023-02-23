@@ -17,9 +17,9 @@ import { UsernameInput } from "../../components/layout/auth/usernameInput";
 import { UploadPhotoButton } from "../../components/shared/user/uploadPhotoButton";
 import { Spinner } from "../../components/shared/common/spinner";
 import api from "../../services/api";
-import { User } from "../../interfaces/user";
 import toastService from "../../services/toastService";
 import { setUser } from "../../store/slices/userSlice";
+import { CoverImageBox } from "../../components/shared/user/coverImageBox";
 
 export const AccountSettings = () => {
   const user = useAppSelector((state) => state.user.user);
@@ -80,19 +80,7 @@ export const AccountSettings = () => {
         background: theme.palette.background[500],
       }}
     >
-      <Box
-        height={{ xs: "8.2rem", md: "9.4rem" }}
-        sx={{
-          background: theme.palette.background[600],
-          backgroundImage: `url(${formik.values?.background_photo})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          borderTopLeftRadius: theme.palette.borderRadius.main,
-          borderTopRightRadius: theme.palette.borderRadius.main,
-          position: "relative",
-        }}
-      >
+      <CoverImageBox image={formik.values?.background_photo as string}>
         {imageLoadings.cover && <Spinner size={40} center={true} />}
         <Box
           sx={{
@@ -152,7 +140,7 @@ export const AccountSettings = () => {
             {imageLoadings.pp && <Spinner center={true} />}
           </Box>
         </Box>
-      </Box>
+      </CoverImageBox>
 
       <form onSubmit={formik.handleSubmit}>
         <Stack mt={10} p={3} spacing={4}>

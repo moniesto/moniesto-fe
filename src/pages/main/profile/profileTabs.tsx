@@ -3,6 +3,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { Box, Tab, useTheme } from "@mui/material";
 import { ReactNode, useState } from "react";
+import { User } from "../../../interfaces/user";
 import AboutTab from "./tabs/aboutTab";
 import PostsTab from "./tabs/postsTab";
 import SubscribersTab from "./tabs/subscribersTab";
@@ -10,7 +11,7 @@ import SubscribtionsTab from "./tabs/subscribtionsTab";
 
 type Tab = { title: string; value: string; content: ReactNode };
 
-const ProfileTabs = () => {
+const ProfileTabs = ({ account }: { account: User }) => {
   const theme = useTheme();
   const [tabValue, setTabValue] = useState("posts");
   const [tabs, setTabs] = useState<Tab[]>([
@@ -32,7 +33,7 @@ const ProfileTabs = () => {
     {
       title: "About",
       value: "about",
-      content: <AboutTab />,
+      content: <AboutTab aboutText={account.moniest?.description as string} />,
     },
   ]);
 

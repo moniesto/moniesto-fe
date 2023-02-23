@@ -122,7 +122,7 @@ const MoniestInfoStep = ({ handleNext, handleBack }: propType) => {
               mt={4}
               justifyContent="space-between"
             >
-              <Button onClick={handleBack} variant="contained" color="inherit">
+              <Button onClick={handleBack} variant="outlined" color="secondary">
                 Back
               </Button>
               <Button
