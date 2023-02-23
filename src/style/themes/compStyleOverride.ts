@@ -283,5 +283,13 @@ export default function componentStyleOverrides(theme: any) {
                 }
             }
         },
+        MuiSnackbar: {
+            styleOverrides: {
+                root: {
+                    borderRadius: theme?.borderRadius.small,
+                    boxShadow: `0px 4px 27px -9px ${theme.colors.primaryMain}`
+                }
+            }
+        }
     }
 } 

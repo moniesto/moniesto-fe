@@ -32,6 +32,7 @@ const VerifyEmail = () => {
 
   return (
     <Box
+    p={3}
       sx={{
         width: "100%",
         height: "100vh",
@@ -55,7 +56,7 @@ const VerifyEmail = () => {
                 component="span"
                 color="secondary"
               >
-                home
+                <b>Home Page</b>
               </Typography>
             </Navigator>
           </Typography>

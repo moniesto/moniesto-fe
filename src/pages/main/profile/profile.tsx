@@ -1,35 +1,31 @@
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import {
-  Avatar,
-  Button,
-  Card,
-  Stack,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Avatar, Button, Card, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
-import { User } from "../../../interfaces/user";
-import { TestUser } from "../../../services/tempDatas";
 import StarIcon from "@mui/icons-material/Star";
 import LocationText from "../../../components/shared/common/locationText";
 import ProfileTabs from "./profileTabs";
+import { useAppSelector } from "../../../store/hooks";
+import { useTheme } from "@mui/system";
 
 const Profile = () => {
   const theme = useTheme();
-  const [user, setUser] = useState<User>();
-
-  useEffect(() => {
-    setUser(TestUser);
-  }, []);
+  const user = useAppSelector((state) => state.user.user);
 
   return (
     <Box>
-      <Card sx={{ width: "100%", paddingBottom: "45px" }} elevation={0}>
+      <Card
+        sx={{
+          width: "100%",
+          paddingBottom: "45px",
+          background: theme.palette.background[500],
+        }}
+        elevation={0}
+      >
         <Box
           height={{ xs: "8.2rem", md: "9.4rem" }}
           sx={{
             backgroundImage: `url(${user?.background_photo_link})`,
+            background: theme.palette.background[600],
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: "cover",
@@ -45,7 +41,8 @@ const Profile = () => {
               position: "absolute",
               bottom: "-3rem",
               left: "30px",
-              border: `3px solid ${theme.palette.common.white}`,
+              border: `3px solid ${theme.palette.background[800]}`,
+              background: theme.palette.background[600],
             }}
             src={user?.profile_photo_link}
           ></Avatar>
@@ -77,7 +74,9 @@ const Profile = () => {
               <Stack flexDirection="row">
                 <Stack spacing={0.3}>
                   <Stack flexDirection="row" alignItems="end">
-                    <Typography variant="h3">Davut Turug</Typography>
+                    <Typography variant="h3">
+                      {user.name + " " + user.surname}
+                    </Typography>
                     <Typography
                       ml={1.5}
                       display="flex"
@@ -91,20 +90,21 @@ const Profile = () => {
                           color: "#FED839 !important",
                         }}
                       />
-                      34 Score
+                      {user.moniest?.score || 0}
                     </Typography>
                   </Stack>
 
                   <Typography sx={{ opacity: 0.8 }} variant="h5">
-                    davuttrg
+                    {user.username}
                   </Typography>
                 </Stack>
               </Stack>
               <LocationText />
               <Typography variant="body1">
-                BTC Lover | Trader Specialist at TradeOptions | Professionals
+                {user.moniest?.bio ||
+                  `BTC Lover | Trader Specialist at TradeOptions | Professionals
                 think about how much money they could lose.BTC Lover | Trader
-                Marketing.
+                Marketing.`}
               </Typography>
             </Stack>
           </Box>

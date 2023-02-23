@@ -14,13 +14,14 @@ import { Stack } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { emptyUser } from "../../../interfaces/user";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setToken } from "../../../store/slices/localStorageSlice";
 import { setUser } from "../../../store/slices/userSlice";
 import ThemeModeButton from "./themeModeButton";
 
 const HeaderProfile = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const user = useAppSelector((state) => state.user.user);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const menuItems = [
@@ -62,7 +63,6 @@ const HeaderProfile = () => {
           disableRipple
           onClick={handleClick}
           size="small"
-          // sx={{ ml: 2 }}
           aria-controls={open ? "account-menu" : undefined}
           aria-expanded={open ? "true" : undefined}
         >
@@ -131,9 +131,11 @@ const HeaderProfile = () => {
           <Stack flexDirection="row" alignItems="center">
             <Avatar src="/images/user/Avatar.png"></Avatar>
             <Stack>
-              <Typography variant="h4">Davut Turug</Typography>
+              <Typography variant="h4">
+                {user.name + " " + user.surname}
+              </Typography>
               <Typography fontSize="0.76rem" lineHeight="17px" variant="h6">
-                davutturug@gmail.com
+                {user.email}
               </Typography>
             </Stack>
           </Stack>
