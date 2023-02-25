@@ -226,7 +226,8 @@ export default function componentStyleOverrides(theme: any) {
         MuiAppBar: {
             styleOverrides: {
                 root: {
-                    background: theme.mode === "light" ? theme.colors.background500 : theme.colors.darkBackground500
+                    background: theme.mode === "light" ? theme.colors.background500 : theme.colors.darkBackground500,
+                    border:"none"
                 }
             }
         },
