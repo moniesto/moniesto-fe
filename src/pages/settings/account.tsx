@@ -77,7 +77,6 @@ export const AccountSettings = () => {
     <Card
       sx={{
         paddingBottom: "20px",
-        background: theme.palette.background[500],
       }}
     >
       <CoverImageBox image={formik.values?.background_photo as string}>

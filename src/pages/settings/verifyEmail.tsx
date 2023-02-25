@@ -33,7 +33,6 @@ export const VerifyEmailSettings = () => {
     <Card
       sx={{
         paddingBottom: 2,
-        background: theme.palette.background[500],
       }}
     >
       <Stack

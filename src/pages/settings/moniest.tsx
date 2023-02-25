@@ -69,7 +69,6 @@ export const MoniestSettings = () => {
     <Card
       sx={{
         paddingBottom: 2,
-        background: theme.palette.background[500],
       }}
     >
       <form onSubmit={formik.handleSubmit}>

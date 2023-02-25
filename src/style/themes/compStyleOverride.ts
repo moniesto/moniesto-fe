@@ -54,7 +54,7 @@ export default function componentStyleOverrides(theme: any) {
         MuiCard: {
             styleOverrides: {
                 root: {
-                    background: theme.mode === "light" ? theme.colors.background600 : theme.colors.darkBackground600,
+                    background: theme.mode === "light" ? theme.colors.white : theme.colors.darkBackground600,
                     border: `1px solid ${theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800}`,
                 },
             }
