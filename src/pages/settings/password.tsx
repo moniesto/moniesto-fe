@@ -13,8 +13,8 @@ export const PasswordSettings = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const validationSchema = yup.object({
-    old: yup.number().required("Fee is required"),
-    new: yup.string().required("Bio is required"),
+    old: yup.string().required("Old password is required"),
+    new: yup.string().required("New password is required"),
   });
 
   const handleSaveAccount = () => {
