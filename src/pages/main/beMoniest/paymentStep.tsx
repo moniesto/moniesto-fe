@@ -108,7 +108,7 @@ const PaymentStep = ({ handleNext, handleBack }: propType) => {
           mt={4}
           justifyContent="space-between"
         >
-          <Button onClick={handleBack} variant="contained" color="inherit">
+          <Button onClick={handleBack} color="secondary" variant="outlined">
             Back
           </Button>
           <Button

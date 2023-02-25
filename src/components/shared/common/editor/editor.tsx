@@ -25,9 +25,10 @@ export const Editor = ({ editorJs, label, defaultValue }: EditorJsType) => {
   return (
     <Card
       className={theme.palette.mode == "dark" ? "dark-editor" : ""}
-      style={{
-        padding: 16,
+      sx={{
+        padding: 2,
         overflow: "unset",
+        background: theme.palette.background[600],
       }}
     >
       <Typography

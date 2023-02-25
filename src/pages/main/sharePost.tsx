@@ -165,6 +165,7 @@ export const SharePost = () => {
         minHeight: "calc(100vh - 150px)",
         padding: "1.8rem 2rem",
         background: theme.palette.background[500],
+        overflow: "unset",
       }}
     >
       <Stack pb={6}>

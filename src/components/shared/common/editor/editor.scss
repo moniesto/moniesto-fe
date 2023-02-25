@@ -1,7 +1,11 @@
+.codex-editor__redactor {
+  padding-bottom: 150px !important;
+}
 .dark-editor {
   .tc-wrap {
     --color-background: #454858;
   }
+
   .ce-block--selected .ce-block__content,
   .ce-inline-toolbar,
   .codex-editor--narrow .ce-toolbox,
