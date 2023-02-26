@@ -1,5 +1,5 @@
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import { Avatar, Button, Card, Modal, Stack, Typography } from "@mui/material";
+import { Avatar, Button, Card, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import StarIcon from "@mui/icons-material/Star";
 import LocationText from "../../../components/shared/common/locationText";
@@ -12,12 +12,13 @@ import { User } from "../../../interfaces/user";
 import api from "../../../services/api";
 import { Spinner } from "../../../components/shared/common/spinner";
 import { CoverImageBox } from "../../../components/shared/user/coverImageBox";
-import { EditOutlined } from "@mui/icons-material";
+import { DoneOutline, EditOutlined } from "@mui/icons-material";
 import Navigator from "../../../components/shared/common/navigatior";
 import { SubscribeToMoniest } from "./subscribeToMoniest";
 
 const Profile = () => {
   const theme = useTheme();
+  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
   const user = useAppSelector((state) => state.user.user);
   const [account, setAccount] = useState<User>();
   const [loading, setLoading] = useState<boolean>(true);
@@ -36,9 +37,13 @@ const Profile = () => {
     }, 100);
   }, [account]);
 
-  const getAccount = (username: string) => {
+  const getAccount = async (username: string) => {
     if (user.username == username) setAccount(user);
-    else api.user.user_by_username(username).then((res) => setAccount(res));
+    else {
+      const check_subscribe = await api.moniest.subscribe_check(username);
+      setIsSubscribed(check_subscribe.subscribed);
+      api.user.user_by_username(username).then((res) => setAccount(res));
+    }
   };
 
   const isMyAccount: boolean = username == user.username;
@@ -95,14 +100,19 @@ const Profile = () => {
                         onClick={() => setIsSubscribeModalOpen(true)}
                         sx={{
                           ".MuiButton-endIcon": {
-                            marginLeft: "-4px",
+                            marginLeft: isSubscribed ? "" : "-4px",
                           },
                         }}
-                        endIcon={<AttachMoneyIcon />}
+                        endIcon={
+                          isSubscribed ? <DoneOutline /> : <AttachMoneyIcon />
+                        }
                         color="secondary"
                         variant="contained"
                       >
-                        Subscribe {account.moniest?.subscription_info.fee}
+                        {isSubscribed
+                          ? " Subscribed "
+                          : ` Subscribe ${account.moniest?.subscription_info.fee}`}
+                        {}
                       </Button>
                     ) : (
                       ""
@@ -159,8 +169,12 @@ const Profile = () => {
       )}
       {isSubscribeModalOpen && (
         <SubscribeToMoniest
+          alreadySubscribed={isSubscribed}
           account={account as User}
-          handleClose={() => setIsSubscribeModalOpen(false)}
+          handleClose={(resSubscribe) => {
+            setIsSubscribeModalOpen(false);
+            setIsSubscribed(resSubscribe);
+          }}
         />
       )}
     </Box>

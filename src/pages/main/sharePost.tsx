@@ -104,8 +104,7 @@ export const SharePost = () => {
     onSubmit: async (values) => {
       setSubmitLoading(true);
       const savedData = await editorJs.current?.save();
-
-      values.description = JSON.stringify(savedData || {});
+      if (savedData) values.description = JSON.stringify(savedData);
       api.post
         .create_post(values)
         .then(() => {

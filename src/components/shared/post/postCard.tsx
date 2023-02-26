@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Box,
   Card,
   CardActions,
   CardContent,
@@ -18,6 +19,9 @@ import { useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PredictionDataTable from "./predictionDataTable";
 import { Post } from "../../../interfaces/post";
+import Navigator from "../common/navigatior";
+import ReactTimeAgo from "react-time-ago";
+import { Editor } from "../common/editor/editor";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -34,14 +38,12 @@ const ExpandMore: any = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-type propTypes = {
+type PostCardProps = {
   post: Post;
 };
-const PostCard = ({ post }: propTypes) => {
+const PostCard = ({ post }: PostCardProps) => {
   const [expanded, setExpanded] = useState<boolean>(false);
-
   const theme = useTheme();
-  const handleUserClick = () => {};
 
   return (
     <Card sx={{ position: "relative", paddingBottom: "50px" }}>
@@ -52,28 +54,29 @@ const PostCard = ({ post }: propTypes) => {
           },
         }}
         avatar={
-          <IconButton
-            disableRipple
-            onClick={handleUserClick}
-            size="small"
-            sx={{ ml: 2 }}
-          >
-            <Avatar
-              src="/images/user/Avatar.png"
-              sx={{ width: 50, height: 50 }}
-            ></Avatar>
-          </IconButton>
+          <Navigator path={"/" + post.user.username}>
+            <IconButton disableRipple size="small" sx={{ ml: 2 }}>
+              <Avatar
+                src={post.user.profile_photo_thumbnail_link}
+                sx={{ width: 50, height: 50 }}
+              ></Avatar>
+            </IconButton>
+          </Navigator>
         }
         action={
           <Stack flexDirection="row" gap="42px">
             <Stack alignItems="center">
-              <Typography variant="h5">BTCUSDT</Typography>
-              <Typography variant="h5">18.910</Typography>
+              <Typography variant="h5">{post.currency}</Typography>
+              <Typography variant="h5">{post.start_price}</Typography>
             </Stack>
             <StatusDot status={1}></StatusDot>
           </Stack>
         }
-        title={<Typography variant="h4">Davut Turug</Typography>}
+        title={
+          <Typography variant="h4">
+            {post.user.name + " " + post.user.surname}
+          </Typography>
+        }
         subheader={
           <Stack flexDirection="row" columnGap={1} alignItems="baseline">
             <Typography
@@ -81,14 +84,11 @@ const PostCard = ({ post }: propTypes) => {
               lineHeight="17px"
               variant="h5"
             >
-              davuttrg
+              {post.user.username}
             </Typography>
             <Typography color={theme.palette.grey[500]}>•</Typography>
-            <Typography
-              variant="h6"
-              color={theme.palette.grey[500]}
-            >
-              2 days ago
+            <Typography variant="h6" color={theme.palette.grey[500]}>
+              <ReactTimeAgo date={new Date(post.created_at)} />
             </Typography>
           </Stack>
         }
@@ -120,11 +120,11 @@ const PostCard = ({ post }: propTypes) => {
           ]}
           rows={[
             {
-              direction: "Long",
-              start: "18.900",
-              target: "18.950",
-              percetage: "2.12%",
-              time_left: "3 hour",
+              direction: post.direction,
+              start: post.start_price,
+              target: post.target3,
+              percetage: (post.start_price / post.target3).toFixed(3),
+              time_left: <ReactTimeAgo date={new Date(post.duration)} />,
             },
           ]}
         ></PredictionDataTable>
@@ -169,17 +169,26 @@ const PostCard = ({ post }: propTypes) => {
             ]}
             rows={[
               {
-                tp_1: "18.930",
-                tp_2: "-",
-                tp_3: "18.950",
-                stop: "18.880",
+                tp_1: post.target1,
+                tp_2: post.target2,
+                tp_3: post.target3,
+                stop: post.stop,
                 "": "",
               },
             ]}
           ></PredictionDataTable>
 
           <Stack sx={{ padding: "0 10px" }}>
-            <Typography sx={{ paddingTop: 3 }} paragraph>
+            {post.description && (
+              <Box>
+                <Divider sx={{ margin: "16px 0" }}></Divider>
+                <Editor
+                  readOnly={true}
+                  defaultValue={JSON.parse(post?.description || "") as any}
+                ></Editor>
+              </Box>
+            )}
+            {/* <Typography sx={{ paddingTop: 3 }} paragraph>
               Heat 1/2 cup of the broth in a pot until simmering, add saffron
               and set aside for 10 minutes.
             </Typography>
@@ -205,7 +214,7 @@ const PostCard = ({ post }: propTypes) => {
             <Typography>
               Set aside off of the heat to let rest for 10 minutes, and then
               serve.
-            </Typography>
+            </Typography> */}
           </Stack>
         </CardContent>
       </Collapse>

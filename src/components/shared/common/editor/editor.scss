@@ -1,3 +1,13 @@
+.__editorjs__ {
+  &.readOnly {
+    border: 0;
+    .codex-editor__redactor {
+      margin: 0;
+      padding-bottom: 0 !important;
+    }
+  }
+}
+
 .codex-editor__redactor {
   padding-bottom: 150px !important;
 }

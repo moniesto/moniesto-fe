@@ -35,18 +35,21 @@ export const TestUser: User = {
 
 export const TestPost: Post = {
     id: "1",
-    moniest: TestUser,
+    user: TestUser,
     currency: "BTCUSDT",
     start_price: 18.50,
     duration: new Date(),
     target1: 18.542,
+    target2: 18.560,
     target3: 18.73,
     stop: 18.30,
     score: 20,
     direction: "long",
     created_at: new Date(),
     description: "test Description",
-    updated_at: new Date()
+    updated_at: new Date(),
+    finished: false,
+    status: "pending"
 }
 export const TestCard: Card = {
     id: "1",

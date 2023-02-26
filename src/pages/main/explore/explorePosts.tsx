@@ -1,11 +1,11 @@
-import { Stack } from "@mui/system";
+import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
-import { InfiniteScroll } from "../../components/shared/common/infiniteScroll";
-import PostCard from "../../components/shared/post/postCard";
-import { Post } from "../../interfaces/post";
-import api from "../../services/api";
+import { InfiniteScroll } from "../../../components/shared/common/infiniteScroll";
+import PostCard from "../../../components/shared/post/postCard";
+import { Post } from "../../../interfaces/post";
+import api from "../../../services/api";
 
-const TimeLine = () => {
+const ExplorePosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [queryParams, setQueryParams] = useState<{
@@ -19,7 +19,7 @@ const TimeLine = () => {
     subscribed: true,
     limit: 10,
     offset: 0,
-    sortBy: "created_at",
+    sortBy: "score",
   });
 
   const getPosts = () => {
@@ -63,4 +63,4 @@ const TimeLine = () => {
     </InfiniteScroll>
   );
 };
-export default TimeLine;
+export default ExplorePosts;

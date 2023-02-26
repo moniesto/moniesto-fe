@@ -13,7 +13,7 @@ class http {
     private instance!: AxiosInstance;
     constructor() { this.createInstance(localStorageService.getStorage().token) }
     get<Type>(url: string, params?: {}): Promise<Type> {
-        return this.instance.get(url, params)
+        return this.instance.get(url, { params })
     }
     post<Type>(url: string, params?: {}): Promise<Type> {
         return this.instance.post(url, params)
@@ -44,7 +44,7 @@ class http {
         this.instance.interceptors.response.use((response) => {
             return Promise.resolve(response.data);
         }, (error) => {
-            
+
             const code = error.response.data.error_code;
 
             toastService.open({ severity: "error", message: configService.errors[code] })

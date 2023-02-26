@@ -1,4 +1,7 @@
 export default function componentStyleOverrides(theme: any) {
+    const background800 = theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800;
+    const background600 = theme.mode === "light" ? theme.colors.background600 : theme.colors.darkBackground600;
+    const cardBackground = theme.mode === "light" ? theme.colors.white : theme.colors.darkBackground600
     return {
         MuiButton: {
             styleOverrides: {
@@ -47,15 +50,15 @@ export default function componentStyleOverrides(theme: any) {
             styleOverrides: {
                 root: {
                     background: theme.mode === "light" ? theme.colors.paper : theme.colors.darkPaper,
-                    border: `1px solid ${theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800}`,
+                    border: `1px solid ${background800}`,
                 },
             }
         },
         MuiCard: {
             styleOverrides: {
                 root: {
-                    background: theme.mode === "light" ? theme.colors.white : theme.colors.darkBackground600,
-                    border: `1px solid ${theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800}`,
+                    background: cardBackground,
+                    border: `1px solid ${background800}`,
                 },
             }
         },
@@ -137,8 +140,8 @@ export default function componentStyleOverrides(theme: any) {
         MuiOutlinedInput: {
             styleOverrides: {
                 root: {
-                    border: `1px solid ${theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800} `,
-                    background: theme.mode === "light" ? theme.colors.background600 : theme.colors.darkBackground600,
+                    border: `1px solid ${background800} `,
+                    background: background600,
                     // '& .MuiOutlinedInput-notchedOutline': {
                     //     borderColor: theme.colors?.grey400
                     // },
@@ -163,7 +166,7 @@ export default function componentStyleOverrides(theme: any) {
                         color: theme.textMain
                     },
                     '&:-webkit-autofill': {
-                        WebkitBoxShadow: `0 0 0 100px ${theme.mode === "light" ? theme.colors.background600 : theme.colors.darkBackground600} inset`,
+                        WebkitBoxShadow: `0 0 0 100px ${background600} inset`,
                         background: "content-box"
                     },
                 },
@@ -194,7 +197,7 @@ export default function componentStyleOverrides(theme: any) {
         MuiDivider: {
             styleOverrides: {
                 root: {
-                    borderColor: theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800,
+                    borderColor: background800,
                     opacity: 1
                 }
             }
@@ -202,7 +205,7 @@ export default function componentStyleOverrides(theme: any) {
         MuiAvatar: {
             styleOverrides: {
                 root: {
-                    background: theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800,
+                    background: background800,
                 }
             }
         },
@@ -227,7 +230,7 @@ export default function componentStyleOverrides(theme: any) {
             styleOverrides: {
                 root: {
                     background: theme.mode === "light" ? theme.colors.background500 : theme.colors.darkBackground500,
-                    border:"none"
+                    border: "none"
                 }
             }
         },
@@ -241,11 +244,11 @@ export default function componentStyleOverrides(theme: any) {
         MuiMenu: {
             styleOverrides: {
                 paper: {
-                    background: theme.mode === "light" ? theme.colors.background600 : theme.colors.darkBackground600,
-                    border: `1px solid ${theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800}`,
+                    background: background600,
+                    border: `1px solid ${background800}`,
                     '&::before': {
-                        background: theme.mode === "light" ? theme.colors.background600 : theme.colors.darkBackground600,
-                        borderColor: theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800 + "!important",
+                        background: cardBackground,
+                        borderColor: background800 + " !important",
                     },
                     ".MuiMenuItem-root": {
                         margin: " 0 6px",
@@ -276,7 +279,7 @@ export default function componentStyleOverrides(theme: any) {
         MuiAutocomplete: {
             styleOverrides: {
                 popper: {
-                    border: `1px solid ${theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800} !important`,
+                    border: `1px solid ${background800} !important`,
                     borderRadius: theme?.borderRadius.main,
                     ".MuiAutocomplete-listbox": {
                         ".MuiAutocomplete-option": {

@@ -6,6 +6,9 @@ import PostCard from "../../../../components/shared/post/postCard";
 import { TestPost } from "../../../../services/tempDatas";
 import { useEffect, useState } from "react";
 import { Post } from "../../../../interfaces/post";
+import { InfiniteScroll } from "../../../../components/shared/common/infiniteScroll";
+import api from "../../../../services/api";
+import { PaginateRequest } from "../../../../interfaces/requests";
 
 type FilterType = "all" | "live";
 type Filter = {
@@ -16,14 +19,20 @@ type Filter = {
 
 const PostsTab = () => {
   const theme = useTheme();
+  const [paginate, setPaginate] = useState<PaginateRequest>({
+    limit: 1,
+    offset: 0,
+  });
   const [posts, setPosts] = useState<Post[]>([]);
   const [activePostFilter, setActivePostFilter] = useState<FilterType>("all");
+
   const filters: Filter[] = [
     { title: "All", value: "all", icon: <FilterListIcon /> },
     { title: "Live", value: "live", icon: <StreamIcon /> },
   ];
 
   useEffect(() => {
+    getPosts();
     setPosts([TestPost, TestPost, TestPost]);
   }, []);
 
@@ -35,6 +44,23 @@ const PostsTab = () => {
     activePostFilter == filter
       ? theme.palette.secondary.main
       : theme.palette.text.primary;
+
+  const handleFetchPosts = () => {
+    getPosts();
+  };
+
+  const getPosts = () => {
+    // api.content
+    //   .posts({
+    //     limit: paginate.offset * paginate.limit,
+    //     offset: paginate.offset,
+    //
+    //   })
+    //   .then((res) => {
+    //     setPosts(res);
+    //     setPaginate({ ...paginate, offset: paginate.offset + 1 });
+    //   });
+  };
 
   return (
     <Stack spacing={2}>
@@ -79,11 +105,13 @@ const PostsTab = () => {
         </Stack>
       </Card>
 
-      <Stack rowGap={2}>
-        {posts.map((post, i) => (
-          <PostCard key={i} post={post} />
-        ))}
-      </Stack>
+      {/* <InfiniteScroll fetchData={handleFetchPosts} dataLength={2}> */}
+        <Stack rowGap={2}>
+          {/* {posts.map((post, i) => (
+            <PostCard key={i} post={post} />
+          ))} */}
+        </Stack>
+      {/* </InfiniteScroll> */}
     </Stack>
   );
 };

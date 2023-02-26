@@ -53,6 +53,16 @@ export interface CreatePostReq {
     target3: number
 }
 
+export interface PaginateRequest {
+    limit: number,
+    offset: number
+}
+export interface ExplorePostsRequest extends PaginateRequest {
+    active: boolean,
+    subscribed: boolean,
+    sortBy: "score" | "created_at"
+}
+
 
 
 export const Requests: {
@@ -76,6 +86,10 @@ export const Requests: {
     asset: {
         error_codes: string
     },
+    content: {
+        moniests: string,
+        posts: string
+    },
     crypto: {
         search_currencies: (name: string) => string
     },
@@ -84,6 +98,7 @@ export const Requests: {
         update_profile: string,
         subscribe: (username: string) => string,
         unsubscribe: (username: string) => string,
+        subscribe_check: (username: string) => string,
     },
     post: {
         create_post: string
@@ -113,14 +128,19 @@ export const Requests: {
     asset: {
         error_codes: "assets/error-codes"
     },
+    content: {
+        moniests: "content/moniests",
+        posts: "content/posts"
+    },
     crypto: {
         search_currencies: (name: string) => `crypto/currencies?name=${name}`
     },
     moniest: {
         be_moniest: "moniests",
         update_profile: "moniests/profile",
-        subscribe: (username: string) => `/moniests/${username}/subscribe`,
-        unsubscribe: (username: string) => `/moniests/${username}/unsubscribe`,
+        subscribe: (username: string) => `moniests/${username}/subscribe`,
+        unsubscribe: (username: string) => `moniests/${username}/unsubscribe`,
+        subscribe_check: (username: string) => `moniests/${username}/subscribe/check`,
     },
     post: {
         create_post: "moniests/posts"

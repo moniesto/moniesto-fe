@@ -24,7 +24,7 @@ const MoniestCard = ({ user }: propTypes) => {
   const handleUserClick = () => {};
 
   return (
-    <Card>
+    <Card sx={{ height: "240px" }}>
       <CardHeader
         onClick={handleUserClick}
         sx={{

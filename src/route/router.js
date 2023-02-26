@@ -8,7 +8,7 @@ import NotFound from "../pages/notFound";
 import Register from "../pages/authorization/register";
 import MainLayout from "../layouts/main";
 import TimeLine from "../pages/main/timeLine";
-import Explore from "../pages/main/explore";
+import Explore from "../pages/main/explore/explore";
 import Profile from "../pages/main/profile/profile";
 import BeMoniest from "../pages/main/beMoniest/beMoniest";
 import ProtectedRoutes from "../components/layout/protectedRoutes";

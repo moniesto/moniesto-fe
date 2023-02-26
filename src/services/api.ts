@@ -1,5 +1,5 @@
 import { Post } from "../interfaces/post"
-import { BeMoniestReq, ChangePasswordReq, CreatePostReq, LoginReq, LoginResponse, RegisterReq, Requests, SendMailReq, SendVerificationMailReq, UsernameCheck, VerifyTokenReq } from "../interfaces/requests"
+import { BeMoniestReq, ChangePasswordReq, CreatePostReq, ExplorePostsRequest, LoginReq, LoginResponse, PaginateRequest, RegisterReq, Requests, SendMailReq, SendVerificationMailReq, UsernameCheck, VerifyTokenReq } from "../interfaces/requests"
 import { Moniest, User } from "../interfaces/user"
 import httpService from "./httpService"
 
@@ -39,6 +39,10 @@ class api {
     asset = {
         error_codes: () => httpService.get<string[]>(Requests.asset.error_codes),
     }
+    content = {
+        moniests: (params: PaginateRequest) => httpService.get<User[]>(Requests.content.moniests, params),
+        posts: (params: ExplorePostsRequest) => httpService.get<Post[]>(Requests.content.posts, params),
+    }
     crypto = {
         search_currencies: (name: string) => httpService.get<{ currency: string, price: number }[]>(Requests.crypto.search_currencies(name)),
     }
@@ -47,6 +51,7 @@ class api {
         update_profile: (params: Partial<Moniest>) => httpService.patch<User>(Requests.moniest.update_profile, params),
         subscribe: (username: string) => httpService.post(Requests.moniest.subscribe(username)),
         unsubscribe: (username: string) => httpService.post(Requests.moniest.unsubscribe(username)),
+        subscribe_check: (username: string) => httpService.get<{ subscribed: boolean }>(Requests.moniest.subscribe_check(username))
     }
     post = {
         create_post: (params: CreatePostReq) => httpService.post<Post>(Requests.post.create_post, params),
