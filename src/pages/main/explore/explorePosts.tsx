@@ -9,14 +9,12 @@ const ExplorePosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [queryParams, setQueryParams] = useState<{
-    active: boolean;
-    sortBy: "created_at" | "score";
+    sortBy: "score";
     subscribed: boolean;
     limit: number;
     offset: number;
   }>({
-    active: true,
-    subscribed: true,
+    subscribed: false,
     limit: 10,
     offset: 0,
     sortBy: "score",
@@ -26,15 +24,7 @@ const ExplorePosts = () => {
     api.content.posts(queryParams).then((response) => {
       setPosts([...posts, ...response]);
       if (response.length < queryParams.limit) {
-        if (!queryParams.active && !queryParams.subscribed) {
-          setHasMore(false);
-          return;
-        }
-        if (queryParams.subscribed) {
-          queryParams.subscribed = false;
-        } else if (queryParams.active) {
-          queryParams.active = false;
-        }
+        setHasMore(false);
         queryParams.offset = 0;
         setQueryParams(JSON.parse(JSON.stringify(queryParams)));
       }
@@ -46,7 +36,7 @@ const ExplorePosts = () => {
   };
 
   useEffect(() => {
-    getPosts();
+    if (hasMore) getPosts();
   }, [queryParams]);
 
   return (

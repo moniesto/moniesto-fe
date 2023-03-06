@@ -2,7 +2,6 @@ import {
   Box,
   Card,
   Divider,
-  Paper,
   Step,
   StepLabel,
   Stepper,
@@ -91,15 +90,27 @@ const BeMoniest = () => {
         });
     } else setActiveStep(activeStep + 1);
   };
+  
   const handleBack = () => {
     setActiveStep(activeStep - 1);
+  };
+
+  const handleChangeVerifyEmailState = () => {
+    dispatch(setUser({ ...user, email_verified: true }));
   };
 
   const stepContent = useMemo(() => {
     let content: ReactNode;
     switch (activeStep) {
       case 1:
-        content = <EmailStep user={user} handleNext={handleNext}></EmailStep>;
+        content = (
+          <EmailStep
+            email={user.email}
+            handleVerifyEmail={handleChangeVerifyEmailState}
+            emailVerified={user.email_verified as boolean}
+            handleNext={handleNext}
+          ></EmailStep>
+        );
         break;
       case 2:
         content = (
@@ -127,7 +138,7 @@ const BeMoniest = () => {
         break;
     }
     return content;
-  }, [activeStep]);
+  }, [activeStep, user]);
 
   return (
     <Card sx={{ minHeight: "calc(100vh - 150px)", padding: "1.8rem 2rem" }}>

@@ -11,6 +11,9 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
 table {
   td,
@@ -40,7 +43,7 @@ table {
 }
 .fly {
   @for $i from 1 through 1000 {
-    *>:not(input,.notFly):nth-child(#{$i}) {
+    * > :not(input, .notFly):nth-child(#{$i}) {
       animation-delay: #{$i * 80} + "ms";
     }
   }

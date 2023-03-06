@@ -214,7 +214,9 @@ export default function componentStyleOverrides(theme: any) {
                 root: {
                     '&.MuiChip-deletable .MuiChip-deleteIcon': {
                         color: 'inherit'
-                    }
+                    },
+                    background: background800,
+                    height: "28px"
                 }
             }
         },
@@ -230,7 +232,10 @@ export default function componentStyleOverrides(theme: any) {
             styleOverrides: {
                 root: {
                     background: theme.mode === "light" ? theme.colors.background500 : theme.colors.darkBackground500,
-                    border: "none"
+                    border: "none",
+                    ".MuiChip-icon": {
+                        marginLeft: "10px"
+                    }
                 }
             }
         },

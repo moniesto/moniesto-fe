@@ -19,11 +19,13 @@ export const storageSlice = createSlice({
     setThemeMode: (state, action: PayloadAction<ThemeMode>) => {
       state.theme_mode = action.payload;
       setStorage("theme_mode", action.payload)
+      return state
     },
     setToken: (state, action: PayloadAction<string>) => {
       setStorage("token", action.payload)
       httpService.createInstance(action.payload);
       state.token = action.payload;
+      return state
 
     },
   },

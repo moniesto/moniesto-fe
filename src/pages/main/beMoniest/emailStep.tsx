@@ -3,16 +3,22 @@ import { useState } from "react";
 import DoneAllOutlinedIcon from "@mui/icons-material/DoneAllOutlined";
 import { BeMoniestReq } from "../../../interfaces/requests";
 import toastService from "../../../services/toastService";
-import { User } from "../../../interfaces/user";
 import { LoadingButton } from "@mui/lab";
 import api from "../../../services/api";
 
 type propType = {
   handleNext: (data: Partial<BeMoniestReq>) => void;
-  user: User;
+  handleVerifyEmail: () => void;
+  emailVerified: boolean;
+  email: string;
 };
 
-const EmailStep = ({ handleNext, user }: propType) => {
+const EmailStep = ({
+  handleNext,
+  emailVerified,
+  email,
+  handleVerifyEmail,
+}: propType) => {
   const [isSendVerifyMail, setIsSendVerifyMail] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const theme = useTheme();
@@ -30,12 +36,17 @@ const EmailStep = ({ handleNext, user }: propType) => {
         });
         setIsSendVerifyMail(true);
       })
+      .catch((e) => {
+        if (e.error_code == "Account_EmailVerification_AlreadyVerified") {
+          handleVerifyEmail();
+        }
+      })
       .finally(() => setLoading(false));
   };
 
   return (
     <Stack rowGap={2} justifyContent="center" alignItems="center">
-      {user.email_verified ? (
+      {emailVerified ? (
         <>
           <DoneAllOutlinedIcon
             sx={{
@@ -43,7 +54,7 @@ const EmailStep = ({ handleNext, user }: propType) => {
               color: theme.palette.secondary.main,
             }}
           />
-          <Typography variant="h3">Your email is verified</Typography>
+          <Typography variant="h3">Your email is already verified</Typography>
           <Stack mt={4} width="80%" alignItems="end">
             <Button
               onClick={() => handleNext({})}
@@ -63,9 +74,7 @@ const EmailStep = ({ handleNext, user }: propType) => {
             }}
           />
           <Stack alignItems="center" rowGap={1}>
-            <Typography variant="h3">
-              We sent the mail to {user.email}
-            </Typography>
+            <Typography variant="h3">We sent the mail to {email}</Typography>
             <Typography variant="h3">Please check your email</Typography>
           </Stack>
         </>

@@ -25,15 +25,15 @@ const TimeLine = () => {
   const getPosts = () => {
     api.content.posts(queryParams).then((response) => {
       setPosts([...posts, ...response]);
-      if (response.length < queryParams.limit) {
+      if (response.length < queryParams.limit) { 
         if (!queryParams.active && !queryParams.subscribed) {
           setHasMore(false);
           return;
         }
-        if (queryParams.subscribed) {
+        if (queryParams.active) {
+          queryParams.active = false; 
+        } else if (queryParams.subscribed) {
           queryParams.subscribed = false;
-        } else if (queryParams.active) {
-          queryParams.active = false;
         }
         queryParams.offset = 0;
         setQueryParams(JSON.parse(JSON.stringify(queryParams)));

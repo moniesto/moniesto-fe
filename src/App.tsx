@@ -21,6 +21,7 @@ import { openToast } from "./store/slices/toastSlice";
 import { setToken } from "./store/slices/localStorageSlice";
 import configService from "./services/configService";
 import api from "./services/api";
+import { emptyUser } from "./interfaces/user";
 
 function App() {
   const mode = useAppSelector((state) => state.storage.theme_mode);
@@ -56,6 +57,9 @@ function App() {
       .user_by_username(decoded.user.username)
       .then((res) => {
         dispatch(setUser(res));
+      })
+      .catch((_) => {
+        dispatch(setToken(""));
       })
       .finally(() => setLoading(false));
   };

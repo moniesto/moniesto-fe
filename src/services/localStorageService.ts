@@ -22,18 +22,19 @@ export type ThemeMode = "light" | "dark"
 
 class localStorageService {
 
+    private storage_key: string = "moniesto-local"
     private storage: StorageState = emptyStorage;
 
     constructor() {
-        const data = localStorage.getItem("moniesto-local");
-        if (!data) localStorage.setItem("moniesto-local", JSON.stringify(emptyStorage))
+        const data = localStorage.getItem(this.storage_key);
+        if (!data) localStorage.setItem(this.storage_key, JSON.stringify(emptyStorage))
         else this.storage = JSON.parse(data)
     }
     getStorage() {
         return this.storage;
     }
     setStorage(_storage: StorageState) {
-        localStorage.setItem("moniesto-local", JSON.stringify(_storage))
+        localStorage.setItem(this.storage_key, JSON.stringify(_storage))
     }
     async getDecodedToken(): Promise<DecodeToken> {
         return new Promise(async (resolve, reject) => {
@@ -49,7 +50,7 @@ class localStorageService {
             try {
                 decoded = await jwt_decode(this.getStorage().token) as DecodeToken
             } catch (error) {
-                console.error(error)
+                reject(error)
             }
             resolve(decoded)
 

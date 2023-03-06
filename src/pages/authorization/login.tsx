@@ -10,7 +10,6 @@ import { useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
 import { setToken } from "../../store/slices/localStorageSlice";
-import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import toastService from "../../services/toastService";
 
@@ -31,7 +30,6 @@ const validationSchema = yup.object({
 
 const Login = () => {
   const theme = useTheme();
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -46,10 +44,10 @@ const Login = () => {
         });
         dispatch(setUser(res.user));
         dispatch(setToken(res.token));
-        navigate("/timeline");
       })
       .finally(() => setLoading(false));
   };
+
 
   const formik = useFormik<LoginForm>({
     initialValues: {

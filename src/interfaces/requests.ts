@@ -58,7 +58,7 @@ export interface PaginateRequest {
     offset: number
 }
 export interface ExplorePostsRequest extends PaginateRequest {
-    active: boolean,
+    active?: boolean,
     subscribed: boolean,
     sortBy: "score" | "created_at"
 }
