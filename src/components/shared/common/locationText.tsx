@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { LocationOnOutlined } from "@mui/icons-material";
 
 type propTypes = {
   state: string;
@@ -8,9 +8,9 @@ type propTypes = {
 
 const LocationText = ({ state, country }: propTypes) => {
   return (
-    <Stack sx={{ opacity: 0.8, }} flexDirection="row" columnGap={1}>
-      <LocationOnIcon sx={{opacity: 0.8, fontSize: "1rem" }} />
-      <Typography fontWeight="500 !important"  variant="h5">
+    <Stack sx={{ opacity: 0.8 }} flexDirection="row" columnGap={1}>
+      <LocationOnOutlined sx={{ opacity: 0.8, fontSize: "1rem" }} />
+      <Typography fontWeight="500 !important" variant="h5">
         {state} / {country}
       </Typography>
     </Stack>

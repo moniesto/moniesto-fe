@@ -2,44 +2,72 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { Box, Tab, useTheme } from "@mui/material";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { User } from "../../../interfaces/user";
 import AboutTab from "./tabs/aboutTab";
 import PostsTab from "./tabs/postsTab";
 import SubscribersTab from "./tabs/subscribersTab";
 import SubscribtionsTab from "./tabs/subscribtionsTab";
 
-type Tab = { title: string; value: string; content: ReactNode };
+type Tab = {
+  title: string;
+  value: string;
+  content: ReactNode;
+  only_moniest: boolean;
+};
 
-const ProfileTabs = ({ account }: { account: User }) => {
+const ProfileTabs = ({
+  account,
+  isSubscribed,
+  isMyAccount
+}: {
+  account: User;
+  isSubscribed: boolean;
+  isMyAccount:boolean
+}) => {
   const theme = useTheme();
   const [tabValue, setTabValue] = useState("posts");
-  const [tabs, setTabs] = useState<Tab[]>([
+  const [counts, setCounts] = useState({
+    posts: 0,
+    subscribtions: 0,
+    subscribers: 0,
+  });
+  const [tabs] = useState<Tab[]>([
     {
-      title: "Posts (0)",
+      title: `Posts (${counts.posts})`,
       value: "posts",
-      content: <PostsTab account={account} />,
+      content: <PostsTab isMyAccount={isMyAccount} account={account} isSubscribed={isSubscribed} />,
+      only_moniest: true,
     },
     {
-      title: "Subscribers (0)",
+      title: `Subscribers (${counts.subscribers})`,
       value: "subscribers",
-      content: <SubscribersTab />,
+      content: <SubscribersTab account={account} />,
+      only_moniest: true,
     },
     {
-      title: "Subscribtions (0)",
-      value: "subscribtions",
+      title: `Subscriptions (${counts.subscribers})`,
+      value: "subscriptions",
       content: <SubscribtionsTab />,
+      only_moniest: false,
     },
     {
       title: "About",
       value: "about",
       content: <AboutTab aboutText={account.moniest?.description as string} />,
+      only_moniest: true,
     },
   ]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
+
+  useEffect(() => {
+    if (!account) return;
+    if (!account.moniest) setTabValue("subscriptions");
+  }, [account]);
+
   return (
     <Box
       sx={{
@@ -78,21 +106,25 @@ const ProfileTabs = ({ account }: { account: User }) => {
             }}
             onChange={handleChange}
           >
-            {tabs.map((tab) => (
-              <Tab key={tab.value} label={tab.title} value={tab.value} />
-            ))}
+            {tabs
+              .filter((tab) => (account.moniest ? true : !tab.only_moniest))
+              .map((tab) => (
+                <Tab key={tab.value} label={tab.title} value={tab.value} />
+              ))}
           </TabList>
         </Box>
 
-        {tabs.map((tab) => (
-          <TabPanel
-            key={tab.value}
-            className={tabValue == tab.value ? "selected" : ""}
-            value={tab.value}
-          >
-            {tab.content}
-          </TabPanel>
-        ))}
+        {tabs
+          .filter((tab) => (account.moniest ? true : !tab.only_moniest))
+          .map((tab) => (
+            <TabPanel
+              key={tab.value}
+              className={tabValue == tab.value ? "selected" : ""}
+              value={tab.value}
+            >
+              {tab.content}
+            </TabPanel>
+          ))}
       </TabContext>
     </Box>
   );

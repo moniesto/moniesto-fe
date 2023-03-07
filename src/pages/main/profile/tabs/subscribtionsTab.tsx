@@ -5,7 +5,13 @@ import { TestUser } from "../../../../services/tempDatas";
 import SubsPersonCard from "../../../../components/shared/user/subsPersonCard";
 
 const SubscribtionsTab = () => {
-  const [users, setUsers] = useState<User[]>([TestUser, TestUser, TestUser,TestUser,TestUser]);
+  const [users, setUsers] = useState<User[]>([
+    TestUser,
+    TestUser,
+    TestUser,
+    TestUser,
+    TestUser,
+  ]);
 
   return (
     <Paper>

@@ -9,6 +9,7 @@ import { InfiniteScroll } from "../../../../components/shared/common/infiniteScr
 import api from "../../../../services/api";
 import { User } from "../../../../interfaces/user";
 import { Spinner } from "../../../../components/shared/common/spinner";
+import { TestPost } from "../../../../services/tempDatas";
 
 type FilterType = "all" | "live";
 type Filter = {
@@ -22,7 +23,15 @@ const filters: Filter[] = [
   { title: "Live", value: "live", boolValue: true, icon: <StreamIcon /> },
 ];
 
-const PostsTab = ({ account }: { account: User }) => {
+const PostsTab = ({
+  account,
+  isSubscribed,
+  isMyAccount,
+}: {
+  account: User;
+  isSubscribed: boolean;
+  isMyAccount: boolean;
+}) => {
   const theme = useTheme();
   const [queryParams, setQueryParams] = useState<{
     active: boolean;
@@ -60,10 +69,13 @@ const PostsTab = ({ account }: { account: User }) => {
   };
 
   const handleChangeFilter = (filterItem: Filter) => {
-    setLoading(true);
     setActivePostFilter(filterItem);
     setPosts([]);
+    setLoading(true);
     setHasMore(true);
+    if (!isMyAccount && filterItem.boolValue == true && !isSubscribed) {
+      return;
+    }
     setQueryParams({ ...queryParams, active: filterItem.boolValue });
   };
 
@@ -113,8 +125,13 @@ const PostsTab = ({ account }: { account: User }) => {
           ))}
         </Stack>
       </Card>
-
-      {loading ? (
+      {!isMyAccount && activePostFilter.boolValue == true && !isSubscribed ? (
+        <Stack sx={{ filter: "blur(3px)" }} rowGap={2}>
+          {[TestPost, TestPost].map((post, i) => (
+            <PostCard key={i} post={post} />
+          ))}
+        </Stack>
+      ) : loading ? (
         <Box sx={{ position: "relative" }}>
           <Spinner sx={{ mt: "15px" }} center={true}></Spinner>
         </Box>

@@ -104,6 +104,7 @@ export const Requests: {
         subscribe: (username: string) => string,
         unsubscribe: (username: string) => string,
         subscribe_check: (username: string) => string,
+        subscribers: (username: string) => string,
     },
     post: {
         create_post: string,
@@ -111,7 +112,8 @@ export const Requests: {
     },
     user: {
         user_by_username: (username: string) => string,
-        update_profile: string
+        update_profile: string,
+        subscriptions: (username: string) => string,
     }
 } =
 {
@@ -148,6 +150,7 @@ export const Requests: {
         subscribe: (username: string) => `moniests/${username}/subscribe`,
         unsubscribe: (username: string) => `moniests/${username}/unsubscribe`,
         subscribe_check: (username: string) => `moniests/${username}/subscribe/check`,
+        subscribers: (username: string) => `moniests/${username}/subscribers`,
     },
     post: {
         create_post: "moniests/posts",
@@ -155,7 +158,8 @@ export const Requests: {
     },
     user: {
         user_by_username: (username: string) => `users/${username}`,
-        update_profile: "users/profile"
+        update_profile: "users/profile",
+        subscriptions: (username: string) => `users/${username}/subscriptions`,
     }
 }
 

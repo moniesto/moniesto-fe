@@ -32,16 +32,16 @@ const Profile = () => {
   }, [username]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 100);
+    setLoading(false);
+    if (user.username == username || !account?.moniest) return;
+    api.moniest
+      .subscribe_check(username as string)
+      .then((res) => setIsSubscribed(res?.subscribed as boolean));
   }, [account]);
 
   const getAccount = async (username: string) => {
     if (user.username == username) setAccount(user);
     else {
-      const check_subscribe = await api.moniest.subscribe_check(username);
-      setIsSubscribed(check_subscribe.subscribed);
       api.user.user_by_username(username).then((res) => setAccount(res));
     }
   };
@@ -158,7 +158,11 @@ const Profile = () => {
               </Box>
             </>
           </Card>
-          <ProfileTabs account={account}></ProfileTabs>
+          <ProfileTabs
+            isSubscribed={isSubscribed}
+            account={account}
+            isMyAccount={isMyAccount}
+          ></ProfileTabs>
         </>
       ) : (
         <Card sx={{ padding: 3 }}>

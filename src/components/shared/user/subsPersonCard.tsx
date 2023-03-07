@@ -3,33 +3,55 @@ import {
   IconButton,
   ListItemAvatar,
   ListItemButton,
+  ListItemButtonProps,
   ListItemText,
   Typography,
-  useTheme,
 } from "@mui/material";
+import { Box, useTheme } from "@mui/system";
 import { User } from "../../../interfaces/user";
 import LocationText from "../common/locationText";
 
-type propTypes = {
+type propTypes = ListItemButtonProps & {
   user: User;
 };
 
-const SubsPersonCard = ({ user }: propTypes) => {
+const SubsPersonCard = (props: propTypes) => {
   const theme = useTheme();
 
   return (
-    <ListItemButton sx={{ margin: "0 5px" }}>
+    <ListItemButton {...props} sx={{ ...props.sx, margin: "0 5px" }}>
       <ListItemAvatar>
         <IconButton disableRipple size="small" sx={{ mr: 1 }}>
           <Avatar
-            src={user.profile_photo_link}
+            src={props.user.profile_photo_thumbnail_link}
             sx={{ width: 50, height: 50 }}
           ></Avatar>
+          {props.user.moniest && (
+            <Box
+              sx={{
+                borderRadius: "100%",
+                width: 22,
+                height: 22,
+                position: "absolute",
+                border: `1px solid ${theme.palette.secondary.main}`,
+                background: theme.palette.background[500],
+                textShadow: "0px 0.4px, 0.4px 0px, 0.4px 0.4px",
+                fontSize: "0.8rem",
+                fontWeight: "bold",
+                right: "2px",
+                bottom: "5px",
+              }}
+            >
+              m
+            </Box>
+          )}
         </IconButton>
       </ListItemAvatar>
       <ListItemText
         primary={
-          <Typography variant="h4">{user.name + " " + user.surname}</Typography>
+          <Typography variant="h4">
+            {props.user.name + " " + props.user.surname}
+          </Typography>
         }
         secondary={
           <Typography
@@ -38,7 +60,7 @@ const SubsPersonCard = ({ user }: propTypes) => {
             variant="h5"
             mt="2px"
           >
-            {user.username}
+            {props.user.username}
           </Typography>
         }
       />

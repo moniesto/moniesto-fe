@@ -46,7 +46,7 @@ export const TestPost: Post = {
     score: 20,
     direction: "long",
     created_at: new Date(),
-    description: "test Description",
+    description: "",
     updated_at: new Date(),
     finished: false,
     status: "pending"

@@ -52,7 +52,8 @@ class api {
         update_profile: (params: Partial<Moniest>) => httpService.patch<User>(Requests.moniest.update_profile, params),
         subscribe: (username: string) => httpService.post(Requests.moniest.subscribe(username)),
         unsubscribe: (username: string) => httpService.post(Requests.moniest.unsubscribe(username)),
-        subscribe_check: (username: string) => httpService.get<{ subscribed: boolean }>(Requests.moniest.subscribe_check(username))
+        subscribe_check: (username: string) => httpService.get<{ subscribed: boolean }>(Requests.moniest.subscribe_check(username)),
+      /* TODO */  subscribers: (username: string, params: PaginateRequest) => httpService.get<User[]>(Requests.moniest.subscribers(username), params)
     }
     post = {
         create_post: (params: CreatePostReq) => httpService.post<Post>(Requests.post.create_post, params),
@@ -61,6 +62,7 @@ class api {
     user = {
         update_profile: (params: Partial<User>) => httpService.patch<User>(Requests.user.update_profile, params),
         user_by_username: (username: string) => httpService.get<User>(Requests.user.user_by_username(username)),
+      /* TODO */   subscriptions: (username: string, params: PaginateRequest) => httpService.get<User[]>(Requests.user.subscriptions(username), params)
 
     }
 
