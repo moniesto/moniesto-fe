@@ -216,8 +216,11 @@ export default function componentStyleOverrides(theme: any) {
                         color: 'inherit'
                     },
                     background: background800,
-                    height: "28px"
-                }
+                    height: "28px",
+                    ".MuiChip-label": {
+                        height: "18px",
+                    },
+                },
             }
         },
         MuiTooltip: {

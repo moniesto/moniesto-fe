@@ -12,7 +12,7 @@ export const ExploreMoniests = () => {
   const theme = useTheme();
   const [moniests, setMoniests] = useState<User[]>([]);
   const [paginage, setPaginage] = useState({
-    limit: 4,
+    limit: 1,
     offset: 0,
   });
   useEffect(() => {
@@ -20,7 +20,12 @@ export const ExploreMoniests = () => {
   }, [paginage]);
 
   const getMoniests = () => {
-    api.content.moniests(paginage).then((response) => setMoniests(response));
+    api.content
+      .moniests(paginage)
+      .then((response) => setMoniests([...moniests, ...response]));
+  };
+  const handleClickMore = () => {
+    setPaginage({ ...paginage, offset: paginage.offset + 1 });
   };
 
   return (
@@ -41,6 +46,7 @@ export const ExploreMoniests = () => {
           }}
           color="inherit"
           endIcon={<ArrowDownward></ArrowDownward>}
+          onClick={handleClickMore}
         >
           Show More
         </LoadingButton>

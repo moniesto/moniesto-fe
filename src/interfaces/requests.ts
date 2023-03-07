@@ -63,6 +63,10 @@ export interface ExplorePostsRequest extends PaginateRequest {
     sortBy: "score" | "created_at"
 }
 
+export interface UserPostsRequest extends PaginateRequest {
+    active?: boolean,
+}
+
 
 
 export const Requests: {
@@ -102,7 +106,8 @@ export const Requests: {
         subscribe_check: (username: string) => string,
     },
     post: {
-        create_post: string
+        create_post: string,
+        user_posts: (username: string) => string,
     },
     user: {
         user_by_username: (username: string) => string,
@@ -145,7 +150,8 @@ export const Requests: {
         subscribe_check: (username: string) => `moniests/${username}/subscribe/check`,
     },
     post: {
-        create_post: "moniests/posts"
+        create_post: "moniests/posts",
+        user_posts: (username: string) => `moniests/${username}/posts`,
     },
     user: {
         user_by_username: (username: string) => `users/${username}`,

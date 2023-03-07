@@ -1,73 +1,82 @@
-import { Card, useTheme } from "@mui/material";
+import { Box, Card, useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import StreamIcon from "@mui/icons-material/Stream";
 import PostCard from "../../../../components/shared/post/postCard";
-import { TestPost } from "../../../../services/tempDatas";
 import { useEffect, useState } from "react";
 import { Post } from "../../../../interfaces/post";
 import { InfiniteScroll } from "../../../../components/shared/common/infiniteScroll";
 import api from "../../../../services/api";
-import { PaginateRequest } from "../../../../interfaces/requests";
+import { User } from "../../../../interfaces/user";
+import { Spinner } from "../../../../components/shared/common/spinner";
 
 type FilterType = "all" | "live";
 type Filter = {
   title: string;
   value: FilterType;
   icon: React.ReactNode;
+  boolValue: boolean;
 };
+const filters: Filter[] = [
+  { title: "All", value: "all", boolValue: false, icon: <FilterListIcon /> },
+  { title: "Live", value: "live", boolValue: true, icon: <StreamIcon /> },
+];
 
-const PostsTab = () => {
+const PostsTab = ({ account }: { account: User }) => {
   const theme = useTheme();
-  const [paginate, setPaginate] = useState<PaginateRequest>({
-    limit: 1,
+  const [queryParams, setQueryParams] = useState<{
+    active: boolean;
+    limit: number;
+    offset: number;
+  }>({
+    active: false,
+    limit: 10,
     offset: 0,
   });
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [activePostFilter, setActivePostFilter] = useState<FilterType>("all");
 
-  const filters: Filter[] = [
-    { title: "All", value: "all", icon: <FilterListIcon /> },
-    { title: "Live", value: "live", icon: <StreamIcon /> },
-  ];
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [activePostFilter, setActivePostFilter] = useState<Filter>(filters[0]);
+
+  const handleFetchData = () => {
+    setQueryParams({ ...queryParams, offset: queryParams.offset + 1 });
+  };
 
   useEffect(() => {
-    getPosts();
-    setPosts([TestPost, TestPost, TestPost]);
-  }, []);
-
-  const handleChangeFilter = (value: FilterType) => {
-    setActivePostFilter(value);
-  };
-
-  const getColorByActive = (filter: string) =>
-    activePostFilter == filter
-      ? theme.palette.secondary.main
-      : theme.palette.text.primary;
-
-  const handleFetchPosts = () => {
-    getPosts();
-  };
+    if (hasMore) getPosts();
+  }, [queryParams]);
 
   const getPosts = () => {
-    // api.content
-    //   .posts({
-    //     limit: paginate.offset * paginate.limit,
-    //     offset: paginate.offset,
-    //
-    //   })
-    //   .then((res) => {
-    //     setPosts(res);
-    //     setPaginate({ ...paginate, offset: paginate.offset + 1 });
-    //   });
+    api.post.user_posts(account.username, queryParams).then((response) => {
+      setPosts([...posts, ...response]);
+      if (response.length < queryParams.limit) {
+        setHasMore(false);
+        queryParams.offset = 0;
+        setQueryParams(JSON.parse(JSON.stringify(queryParams)));
+      }
+      setLoading(false);
+    });
   };
+
+  const handleChangeFilter = (filterItem: Filter) => {
+    setLoading(true);
+    setActivePostFilter(filterItem);
+    setPosts([]);
+    setHasMore(true);
+    setQueryParams({ ...queryParams, active: filterItem.boolValue });
+  };
+
+  const getColorByActive = (filter: Filter) =>
+    activePostFilter.value == filter.value
+      ? theme.palette.secondary.main
+      : theme.palette.text.primary;
 
   return (
     <Stack spacing={2}>
       <Card>
         <Stack
           sx={{
-            // background: theme.palette.background.paper,
             borderRadius: "10px",
             padding: "15px 20px",
             fontWeight: "bold",
@@ -78,11 +87,11 @@ const PostsTab = () => {
           {filters.map((filter) => (
             <Stack
               key={filter.value}
-              onClick={() => handleChangeFilter(filter.value)}
+              onClick={() => handleChangeFilter(filter)}
               sx={{
                 cursor: "pointer",
                 transition: "all 0.2s ease",
-                color: getColorByActive(filter.value),
+                color: getColorByActive(filter),
               }}
               flexDirection="row"
               alignItems="center"
@@ -93,7 +102,7 @@ const PostsTab = () => {
                   ".MuiSvgIcon-root": {
                     fontSize: "1rem",
                     transition: "all 0.2s ease",
-                    color: getColorByActive(filter.value),
+                    color: getColorByActive(filter),
                   },
                 }}
               >
@@ -105,13 +114,23 @@ const PostsTab = () => {
         </Stack>
       </Card>
 
-      {/* <InfiniteScroll fetchData={handleFetchPosts} dataLength={2}> */}
-        <Stack rowGap={2}>
-          {/* {posts.map((post, i) => (
-            <PostCard key={i} post={post} />
-          ))} */}
-        </Stack>
-      {/* </InfiniteScroll> */}
+      {loading ? (
+        <Box sx={{ position: "relative" }}>
+          <Spinner sx={{ mt: "15px" }} center={true}></Spinner>
+        </Box>
+      ) : (
+        <InfiniteScroll
+          hasMore={hasMore}
+          fetchData={handleFetchData}
+          dataLength={posts.length}
+        >
+          <Stack rowGap={2}>
+            {posts.map((post, i) => (
+              <PostCard key={i} post={post} />
+            ))}
+          </Stack>
+        </InfiniteScroll>
+      )}
     </Stack>
   );
 };

@@ -89,7 +89,7 @@ export const SubscribeToMoniest = ({
               justifyContent="space-between"
             >
               <Typography variant="h4" fontWeight={500}>
-                {alreadySubscribed ? "Unsubscribe from " : "Subscribe to"}
+                {alreadySubscribed ? "Unsubscribe from " : "Subscribe to "}
                 <b>{account.username}</b>
               </Typography>
               {!alreadySubscribed && (
@@ -118,7 +118,6 @@ export const SubscribeToMoniest = ({
               >
                 <Stack spacing={1} direction="row" alignItems="center">
                   <Typography variant="h4">
-                    {" "}
                     Subscription start date :
                   </Typography>
                   <Typography variant="h5" fontWeight={500}>
@@ -140,7 +139,7 @@ export const SubscribeToMoniest = ({
               <Stack mb={3} spacing={1} direction="row" alignItems="center">
                 <ErrorOutline></ErrorOutline>
                 <Typography variant="h4">
-                  You are paying 5$/Month currently
+                  You are paying {account.moniest?.subscription_info.fee}$/Month currently
                 </Typography>
               </Stack>
               <Typography variant="h5" letterSpacing={0.5}>

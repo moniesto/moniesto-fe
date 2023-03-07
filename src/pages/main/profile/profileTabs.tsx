@@ -18,7 +18,7 @@ const ProfileTabs = ({ account }: { account: User }) => {
     {
       title: "Posts (0)",
       value: "posts",
-      content: <PostsTab />,
+      content: <PostsTab account={account} />,
     },
     {
       title: "Subscribers (0)",

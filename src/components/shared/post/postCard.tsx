@@ -5,6 +5,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Chip,
   Collapse,
   Divider,
   IconButton,
@@ -22,6 +23,8 @@ import { Post } from "../../../interfaces/post";
 import Navigator from "../common/navigatior";
 import ReactTimeAgo from "react-time-ago";
 import { Editor } from "../common/editor/editor";
+import StarIcon from "@mui/icons-material/Star";
+import { StarChip } from "../common/starChip";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -74,7 +77,22 @@ const PostCard = ({ post }: PostCardProps) => {
         }
         title={
           <Typography variant="h4">
-            {post.user.name + " " + post.user.surname}
+            {`${post.user.name} ${post.user.surname}`}
+            {post.score && (
+              <StarChip
+                sx={{
+                  marginLeft: "10px",
+                  height: "20px",
+                  ".MuiChip-icon": { fontSize: "0.9rem" },
+                  ".MuiChip-label": {
+                    height: "12px",
+                    fontSize: "0.6rem",
+                    paddingLeft: 1,
+                  },
+                }}
+                count={post.score.toFixed(2)}
+              />
+            )}
           </Typography>
         }
         subheader={
