@@ -20,6 +20,7 @@ import api from "../../services/api";
 import toastService from "../../services/toastService";
 import { setUser } from "../../store/slices/userSlice";
 import { CoverImageBox } from "../../components/shared/user/coverImageBox";
+import { setToken } from "../../store/slices/localStorageSlice";
 
 export const AccountSettings = () => {
   const user = useAppSelector((state) => state.user.user);
@@ -43,8 +44,21 @@ export const AccountSettings = () => {
       .required("Surname is required"),
   });
 
-  const handleSaveAccount = () => {
+  const handleSaveAccount = async () => {
     setLoading(true);
+
+    if (formik.values.username != user.username) {
+      const updatedAccout = await api.account.change_username({
+        new: formik.values.username,
+      });
+
+      if (!updatedAccout) {
+        setLoading(false);
+        return;
+      }
+      dispatch(setToken(updatedAccout.token));
+    }
+
     api.user
       .update_profile(formik.values)
       .then((response) => {

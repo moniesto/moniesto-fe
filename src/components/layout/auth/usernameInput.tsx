@@ -12,7 +12,13 @@ import {
 import { useEffect, useState } from "react";
 import api from "../../../services/api";
 
-export const UsernameInput = ({ formik, currentValue }: any) => {
+export const UsernameInput = ({
+  formik,
+  currentValue,
+}: {
+  formik: any;
+  currentValue?: string;
+}) => {
   const [checkLoading, setCheckLoading] = useState<boolean>(false);
   const [displayCheckIcon, setDisplayCheckIcon] = useState<boolean>(false);
   const [isCorrectName, setIsCorrectName] = useState<boolean>(false);
@@ -37,15 +43,16 @@ export const UsernameInput = ({ formik, currentValue }: any) => {
           }
           setIsCorrectName(res.validity);
         })
-        .finally(() =>
-          setTimeout(() => {
-            setCheckLoading(false);
-          }, 200)
-        );
+        .catch((e) => setIsCorrectName(false))
+        .finally(() => setCheckLoading(false));
     }, 500);
 
     return () => clearTimeout(timeOutId);
   }, [formik?.values?.username]);
+
+  const handleUsernameChange = (value: string) => {
+    formik.setFieldValue("username", value.toLowerCase());
+  };
 
   return (
     formik && (
@@ -55,12 +62,15 @@ export const UsernameInput = ({ formik, currentValue }: any) => {
         name="username"
         placeholder="Username"
         value={formik.values.username}
-        onChange={formik.handleChange}
+        onChange={(e) => handleUsernameChange(e.target.value)}
         error={formik.touched.username && Boolean(formik.errors.username)}
         helperText={formik.touched.username && formik.errors.username}
         sx={{
           ".MuiInputAdornment-positionEnd": {
             "*>": { animation: "fade 0.2s ease" },
+          },
+          input: {
+            textTransform: "lowercase",
           },
         }}
         InputProps={{
