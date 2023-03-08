@@ -23,7 +23,6 @@ import { Post } from "../../../interfaces/post";
 import Navigator from "../common/navigatior";
 import ReactTimeAgo from "react-time-ago";
 import { Editor } from "../common/editor/editor";
-import StarIcon from "@mui/icons-material/Star";
 import { StarChip } from "../common/starChip";
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -90,7 +89,7 @@ const PostCard = ({ post }: PostCardProps) => {
                     paddingLeft: 1,
                   },
                 }}
-                count={post.score.toFixed(2)}
+                count={post.score}
               />
             )}
           </Typography>

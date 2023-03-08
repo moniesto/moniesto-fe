@@ -2,7 +2,7 @@ import { Chip, ChipProps } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 
 type TypeStarChipProps = ChipProps & {
-  count: string;
+  count: number;
 };
 export const StarChip = (props: TypeStarChipProps) => {
   return (
@@ -22,7 +22,7 @@ export const StarChip = (props: TypeStarChipProps) => {
           }}
         />
       }
-      label={props.count + " Score"}
+      label={Number(props.count?.toFixed(2)).toString() + " Score"}
     />
   );
 };

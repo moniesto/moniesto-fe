@@ -40,6 +40,7 @@ const Profile = () => {
   }, [account]);
 
   const getAccount = async (username: string) => {
+    setLoading(true)
     if (user.username == username) setAccount(user);
     else {
       api.user.user_by_username(username).then((res) => setAccount(res));

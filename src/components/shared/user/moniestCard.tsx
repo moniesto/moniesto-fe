@@ -12,7 +12,6 @@ import {
 import { User } from "../../../interfaces/user";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import StarIcon from "@mui/icons-material/Star";
 import Navigator from "../common/navigatior";
 import { StarChip } from "../common/starChip";
 
@@ -88,7 +87,9 @@ const MoniestCard = ({ user }: propTypes) => {
           }
           label={12 + " Subscribers"}
         />
-        <StarChip count={"36"}></StarChip>
+        <StarChip
+          count={user.moniest?.score as number}
+        ></StarChip>
       </Stack>
       <CardContent sx={{ paddingBottom: 0 }}>
         <Typography

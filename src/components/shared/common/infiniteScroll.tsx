@@ -19,11 +19,11 @@ export const InfiniteScroll = (props: InfiniteScrollProps) => {
       next={props.fetchData}
       hasMore={props.hasMore}
       loader={<Spinner></Spinner>}
-      endMessage={
-        <p style={{ textAlign: "center" }}>
-          <b>No more content to show.</b>
-        </p>
-      }
+      // endMessage={
+      //   <p style={{ textAlign: "center" }}>
+      //     <b>No more content to show.</b>
+      //   </p>
+      // }
       // // below props only if you need pull down functionality
       // refreshFunction={props.refresh}
       // pullDownToRefresh={props.pullDownToRefresh}

@@ -1,12 +1,13 @@
-import { List, Paper, Stack, Typography } from "@mui/material";
+import { List, Paper, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { User } from "../../../../interfaces/user";
 import SubsPersonCard from "../../../../components/shared/user/subsPersonCard";
 import { InfiniteScroll } from "../../../../components/shared/common/infiniteScroll";
 import api from "../../../../services/api";
 import Navigator from "../../../../components/shared/common/navigatior";
+import { Stack } from "@mui/system";
 
-const SubscribersTab = ({
+const SubscriptionsTab = ({
   account,
   isMyAccount,
 }: {
@@ -29,11 +30,11 @@ const SubscribersTab = ({
   };
 
   useEffect(() => {
-    if (hasMore) getSubscribers();
+    if (hasMore) getSubscriptions();
   }, [queryParams]);
 
-  const getSubscribers = () => {
-    api.moniest.subscribers(account.username, queryParams).then((response) => {
+  const getSubscriptions = () => {
+    api.user.subscriptions(account.username, queryParams).then((response) => {
       setUsers([...users, ...response]);
       if (response.length < queryParams.limit) {
         setHasMore(false);
@@ -52,7 +53,7 @@ const SubscribersTab = ({
           fetchData={handleFetchData}
           dataLength={users.length}
         >
-          {users.map((user) => (
+          {users.map((user, i) => (
             <Navigator key={user.id} path={"/" + user.username}>
               <SubsPersonCard user={user}></SubsPersonCard>
             </Navigator>
@@ -61,10 +62,10 @@ const SubscribersTab = ({
             <Stack p={2} alignItems="center">
               <Typography variant="h5">
                 {isMyAccount ? (
-                  "You don't have any subscribers yet"
+                  "You don't have any subscriptions yet"
                 ) : (
                   <>
-                    <b>{account.username}</b> doesn't have any subscribers yet
+                    <b>{account.username}</b> doesn't have any subscriptions yet
                   </>
                 )}
               </Typography>
@@ -75,4 +76,4 @@ const SubscribersTab = ({
     </Paper>
   );
 };
-export default SubscribersTab;
+export default SubscriptionsTab;

@@ -7,7 +7,7 @@ import { User } from "../../../interfaces/user";
 import AboutTab from "./tabs/aboutTab";
 import PostsTab from "./tabs/postsTab";
 import SubscribersTab from "./tabs/subscribersTab";
-import SubscribtionsTab from "./tabs/subscribtionsTab";
+import SubscriptionsTab from "./tabs/subscriptionsTab";
 
 type Tab = {
   title: string;
@@ -19,11 +19,11 @@ type Tab = {
 const ProfileTabs = ({
   account,
   isSubscribed,
-  isMyAccount
+  isMyAccount,
 }: {
   account: User;
   isSubscribed: boolean;
-  isMyAccount:boolean
+  isMyAccount: boolean;
 }) => {
   const theme = useTheme();
   const [tabValue, setTabValue] = useState("posts");
@@ -36,19 +36,25 @@ const ProfileTabs = ({
     {
       title: `Posts (${counts.posts})`,
       value: "posts",
-      content: <PostsTab isMyAccount={isMyAccount} account={account} isSubscribed={isSubscribed} />,
+      content: (
+        <PostsTab
+          isMyAccount={isMyAccount}
+          account={account}
+          isSubscribed={isSubscribed}
+        />
+      ),
       only_moniest: true,
     },
     {
       title: `Subscribers (${counts.subscribers})`,
       value: "subscribers",
-      content: <SubscribersTab account={account} />,
+      content: <SubscribersTab isMyAccount={isMyAccount} account={account} />,
       only_moniest: true,
     },
     {
       title: `Subscriptions (${counts.subscribers})`,
       value: "subscriptions",
-      content: <SubscribtionsTab />,
+      content: <SubscriptionsTab isMyAccount={isMyAccount} account={account} />,
       only_moniest: false,
     },
     {
@@ -109,7 +115,11 @@ const ProfileTabs = ({
             {tabs
               .filter((tab) => (account.moniest ? true : !tab.only_moniest))
               .map((tab) => (
-                <Tab key={tab.value} label={tab.title} value={tab.value} />
+                <Tab
+                  key={"tab_" + tab.value}
+                  label={tab.title}
+                  value={tab.value}
+                />
               ))}
           </TabList>
         </Box>
@@ -118,7 +128,7 @@ const ProfileTabs = ({
           .filter((tab) => (account.moniest ? true : !tab.only_moniest))
           .map((tab) => (
             <TabPanel
-              key={tab.value}
+              key={"panel_" + tab.value}
               className={tabValue == tab.value ? "selected" : ""}
               value={tab.value}
             >

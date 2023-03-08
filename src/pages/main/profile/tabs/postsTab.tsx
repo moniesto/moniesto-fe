@@ -1,4 +1,4 @@
-import { Box, Card, useTheme } from "@mui/material";
+import { Box, Card, Typography, useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import StreamIcon from "@mui/icons-material/Stream";
@@ -69,6 +69,7 @@ const PostsTab = ({
   };
 
   const handleChangeFilter = (filterItem: Filter) => {
+    if (filterItem.value == activePostFilter.value) return;
     setActivePostFilter(filterItem);
     setPosts([]);
     setLoading(true);
@@ -146,6 +147,13 @@ const PostsTab = ({
               <PostCard key={i} post={post} />
             ))}
           </Stack>
+          {!posts.length && (
+            <Card>
+              <Stack p={3} alignItems="center">
+                <Typography variant="h5">There are no posts yet</Typography>
+              </Stack>
+            </Card>
+          )}
         </InfiniteScroll>
       )}
     </Stack>
