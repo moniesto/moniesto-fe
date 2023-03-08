@@ -12,7 +12,7 @@ export const ExploreMoniests = () => {
   const theme = useTheme();
   const [moniests, setMoniests] = useState<User[]>([]);
   const [paginage, setPaginage] = useState({
-    limit: 1,
+    limit: 4,
     offset: 0,
   });
   useEffect(() => {
