@@ -69,19 +69,19 @@ const PostsTab = ({
   };
 
   const handleChangeFilter = (filterItem: Filter) => {
-    if (filterItem.value == activePostFilter.value) return;
+    if (filterItem.value === activePostFilter.value) return;
     setActivePostFilter(filterItem);
     setPosts([]);
     setLoading(true);
     setHasMore(true);
-    if (!isMyAccount && filterItem.boolValue == true && !isSubscribed) {
+    if (!isMyAccount && filterItem.boolValue === true && !isSubscribed) {
       return;
     }
     setQueryParams({ ...queryParams, active: filterItem.boolValue });
   };
 
   const getColorByActive = (filter: Filter) =>
-    activePostFilter.value == filter.value
+    activePostFilter.value === filter.value
       ? theme.palette.secondary.main
       : theme.palette.text.primary;
 
@@ -126,7 +126,7 @@ const PostsTab = ({
           ))}
         </Stack>
       </Card>
-      {!isMyAccount && activePostFilter.boolValue == true && !isSubscribed ? (
+      {!isMyAccount && activePostFilter.boolValue === true && !isSubscribed ? (
         <Stack sx={{ filter: "blur(3px)" }} rowGap={2}>
           {[TestPost, TestPost].map((post, i) => (
             <PostCard key={i} post={post} />

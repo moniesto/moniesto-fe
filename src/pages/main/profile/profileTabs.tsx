@@ -9,7 +9,7 @@ import PostsTab from "./tabs/postsTab";
 import SubscribersTab from "./tabs/subscribersTab";
 import SubscriptionsTab from "./tabs/subscriptionsTab";
 
-type Tab = {
+type TypeTab = {
   title: string;
   value: string;
   content: ReactNode;
@@ -32,7 +32,7 @@ const ProfileTabs = ({
     subscribtions: 0,
     subscribers: 0,
   });
-  const [tabs] = useState<Tab[]>([
+  const [tabs] = useState<TypeTab[]>([
     {
       title: `Posts (${counts.posts})`,
       value: "posts",
@@ -129,7 +129,7 @@ const ProfileTabs = ({
           .map((tab) => (
             <TabPanel
               key={"panel_" + tab.value}
-              className={tabValue == tab.value ? "selected" : ""}
+              className={tabValue === tab.value ? "selected" : ""}
               value={tab.value}
             >
               {tab.content}

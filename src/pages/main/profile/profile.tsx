@@ -33,21 +33,21 @@ const Profile = () => {
 
   useEffect(() => {
     setLoading(false);
-    if (user.username == username || !account?.moniest) return;
+    if (user.username === username || !account?.moniest) return;
     api.moniest
       .subscribe_check(username as string)
       .then((res) => setIsSubscribed(res?.subscribed as boolean));
   }, [account]);
 
-  const getAccount = async (username: string) => {
+  const getAccount = (username: string) => {
     setLoading(true)
-    if (user.username == username) setAccount(user);
+    if (user.username === username) setAccount(user);
     else {
       api.user.user_by_username(username).then((res) => setAccount(res));
     }
   };
 
-  const isMyAccount: boolean = username == user.username;
+  const isMyAccount: boolean = username === user.username;
 
   return (
     <Box sx={{ position: "relative", minHeight: "20vh" }}>

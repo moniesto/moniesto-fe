@@ -16,7 +16,7 @@ const SubscriptionsTab = ({
 }) => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState<boolean>(true);
   const [queryParams, setQueryParams] = useState<{
     limit: number;
     offset: number;

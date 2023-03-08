@@ -5,7 +5,6 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  Chip,
   Collapse,
   Divider,
   IconButton,
