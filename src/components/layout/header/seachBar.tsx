@@ -90,7 +90,9 @@ const SearchBar = () => {
             minHeight: "50px",
           }}
         >
-          {moniests.length ? (
+          {loading ? (
+            <Spinner center={true}></Spinner>
+          ) : moniests.length ? (
             <Stack columnGap={1}>
               {moniests.map((moniest) => (
                 <Navigator
@@ -104,14 +106,9 @@ const SearchBar = () => {
             </Stack>
           ) : (
             <Box sx={{ wordBreak: "break-word" }} px={2}>
-              {!loading && (
-                <>
-                  No user found with <b>{text}</b>
-                </>
-              )}
+              No user found with <b>{text}</b>
             </Box>
           )}
-          {loading && <Spinner center={true}></Spinner>}
         </Card>
       )}
     </Box>
