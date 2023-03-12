@@ -25,13 +25,13 @@ const TimeLine = () => {
   const getPosts = () => {
     api.content.posts(queryParams).then((response) => {
       setPosts([...posts, ...response]);
-      if (response.length < queryParams.limit) { 
+      if (response.length < queryParams.limit) {
         if (!queryParams.active && !queryParams.subscribed) {
           setHasMore(false);
           return;
         }
         if (queryParams.active) {
-          queryParams.active = false; 
+          queryParams.active = false;
         } else if (queryParams.subscribed) {
           queryParams.subscribed = false;
         }
@@ -42,7 +42,10 @@ const TimeLine = () => {
   };
 
   const handleFetchData = () => {
-    setQueryParams({ ...queryParams, offset: (queryParams.offset += 1) });
+    setQueryParams({
+      ...queryParams,
+      offset: queryParams.offset + queryParams.limit,
+    });
   };
 
   useEffect(() => {

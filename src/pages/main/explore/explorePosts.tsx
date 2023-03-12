@@ -32,7 +32,10 @@ const ExplorePosts = () => {
   };
 
   const handleFetchData = () => {
-    setQueryParams({ ...queryParams, offset: (queryParams.offset += 1) });
+    setQueryParams({
+      ...queryParams,
+      offset: queryParams.offset + queryParams.limit,
+    });
   };
 
   useEffect(() => {

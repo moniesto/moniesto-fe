@@ -1,4 +1,7 @@
 .__editorjs__ {
+  .tc-table {
+    border-left: 1px solid var(--color-border);
+  }
   &.readOnly {
     border: 0;
     .codex-editor__redactor {

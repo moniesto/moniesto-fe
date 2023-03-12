@@ -69,9 +69,6 @@ export const UsernameInput = ({
           ".MuiInputAdornment-positionEnd": {
             "*>": { animation: "fade 0.2s ease" },
           },
-          input: {
-            textTransform: "lowercase",
-          },
         }}
         InputProps={{
           startAdornment: (

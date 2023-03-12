@@ -11,21 +11,21 @@ import api from "../../../services/api";
 export const ExploreMoniests = () => {
   const theme = useTheme();
   const [moniests, setMoniests] = useState<User[]>([]);
-  const [paginage, setPaginage] = useState({
+  const [paginate, setPaginate] = useState({
     limit: 4,
     offset: 0,
   });
   useEffect(() => {
     getMoniests();
-  }, [paginage]);
+  }, [paginate]);
 
   const getMoniests = () => {
     api.content
-      .moniests(paginage)
+      .moniests(paginate)
       .then((response) => setMoniests([...moniests, ...response]));
   };
   const handleClickMore = () => {
-    setPaginage({ ...paginage, offset: paginage.offset + 1 });
+    setPaginate({ ...paginate, offset: paginate.offset + paginate.limit });
   };
 
   return (
