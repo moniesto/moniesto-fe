@@ -2,8 +2,9 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { Box, Tab, useTheme } from "@mui/material";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import { User } from "../../../interfaces/user";
+import api from "../../../services/api";
 import AboutTab from "./tabs/aboutTab";
 import PostsTab from "./tabs/postsTab";
 import SubscribersTab from "./tabs/subscribersTab";
@@ -26,44 +27,13 @@ const ProfileTabs = ({
   isMyAccount: boolean;
 }) => {
   const theme = useTheme();
-  const [tabValue, setTabValue] = useState("posts");
+  const [tabValue, setTabValue] = useState<string>("");
   const [counts, setCounts] = useState({
     posts: 0,
-    subscribtions: 0,
+    subscriptions: 0,
     subscribers: 0,
   });
-  const [tabs] = useState<TypeTab[]>([
-    {
-      title: `Posts (${counts.posts})`,
-      value: "posts",
-      content: (
-        <PostsTab
-          isMyAccount={isMyAccount}
-          account={account}
-          isSubscribed={isSubscribed}
-        />
-      ),
-      only_moniest: true,
-    },
-    {
-      title: `Subscribers (${counts.subscribers})`,
-      value: "subscribers",
-      content: <SubscribersTab isMyAccount={isMyAccount} account={account} />,
-      only_moniest: true,
-    },
-    {
-      title: `Subscriptions (${counts.subscribers})`,
-      value: "subscriptions",
-      content: <SubscriptionsTab isMyAccount={isMyAccount} account={account} />,
-      only_moniest: false,
-    },
-    {
-      title: "About",
-      value: "about",
-      content: <AboutTab aboutText={account.moniest?.description as string} />,
-      only_moniest: true,
-    },
-  ]);
+  const [tabs, setTabs] = useState<TypeTab[]>([]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
@@ -72,20 +42,58 @@ const ProfileTabs = ({
   useEffect(() => {
     if (!account) return;
     if (!account.moniest) setTabValue("subscriptions");
+    else setTabValue("posts");
+
+    api.user.summary_stats(account.username).then((response) => {
+      setCounts({
+        posts: response.post_count || 0,
+        subscriptions: response.subscription_count,
+        subscribers: response.subscriber_count || 0,
+      });
+    });
   }, [account]);
 
-  return (
-    <Box
-      sx={{
-        transform: "translateY(-65px)",
-        ".MuiTabPanel-root": {
-          padding: 0,
-          "&.selected": {
-            animation: "fadeIn 0.3s ease",
-          },
-        },
-      }}
-    >
+  useEffect(() => {
+    setTabs([
+      {
+        title: `Posts (${counts.posts})`,
+        value: "posts",
+        content: (
+          <PostsTab
+            isMyAccount={isMyAccount}
+            account={account}
+            isSubscribed={isSubscribed}
+          />
+        ),
+        only_moniest: true,
+      },
+      {
+        title: `Subscribers (${counts.subscribers})`,
+        value: "subscribers",
+        content: <SubscribersTab isMyAccount={isMyAccount} account={account} />,
+        only_moniest: true,
+      },
+      {
+        title: `Subscriptions (${counts.subscriptions})`,
+        value: "subscriptions",
+        content: (
+          <SubscriptionsTab isMyAccount={isMyAccount} account={account} />
+        ),
+        only_moniest: false,
+      },
+      {
+        title: "About",
+        value: "about",
+        content: (
+          <AboutTab aboutText={account.moniest?.description as string} />
+        ),
+        only_moniest: true,
+      },
+    ]);
+  }, [counts, tabValue]);
+
+  const renderTabs = useMemo(
+    () => (
       <TabContext value={tabValue}>
         <Box
           mb={4}
@@ -136,6 +144,23 @@ const ProfileTabs = ({
             </TabPanel>
           ))}
       </TabContext>
+    ),
+    [tabs]
+  );
+
+  return (
+    <Box
+      sx={{
+        transform: "translateY(-65px)",
+        ".MuiTabPanel-root": {
+          padding: 0,
+          "&.selected": {
+            animation: "fadeIn 0.3s ease",
+          },
+        },
+      }}
+    >
+      {renderTabs}
     </Box>
   );
 };

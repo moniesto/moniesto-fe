@@ -2,23 +2,25 @@ import { Stack, Typography } from "@mui/material";
 import { LocationOnOutlined } from "@mui/icons-material";
 
 type propTypes = {
-  state: string;
-  country: string;
+  location: string;
 };
 
-const LocationText = ({ state, country }: propTypes) => {
+const LocationText = ({ location }: propTypes) => {
   return (
     <Stack sx={{ opacity: 0.8 }} flexDirection="row" columnGap={1}>
-      <LocationOnOutlined sx={{ opacity: 0.8, fontSize: "1rem" }} />
-      <Typography fontWeight="500 !important" variant="h5">
-        {state} / {country}
-      </Typography>
+      {location && (
+        <>
+          <LocationOnOutlined sx={{ opacity: 0.8, fontSize: "1rem" }} />
+          <Typography fontWeight="500 !important" variant="h5">
+            {location}
+          </Typography>
+        </>
+      )}
     </Stack>
   );
 };
 
 LocationText.defaultProps = {
-  state: "San Francisco",
-  country: "US",
+  location: "",
 };
 export default LocationText;

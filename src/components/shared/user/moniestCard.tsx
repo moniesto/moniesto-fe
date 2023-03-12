@@ -85,11 +85,11 @@ const MoniestCard = ({ user }: propTypes) => {
               sx={{ marginLeft: "10px", fontSize: "1.15rem" }}
             />
           }
-          label={12 + " Subscribers"}
+          label={
+            ((user.moniest as any)["subscriber_count"] || 0) + " Subscribers"
+          }
         />
-        <StarChip
-          count={user.moniest?.score as number}
-        ></StarChip>
+        <StarChip count={user.moniest?.score as number}></StarChip>
       </Stack>
       <CardContent sx={{ paddingBottom: 0 }}>
         <Typography

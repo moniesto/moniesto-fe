@@ -64,7 +64,7 @@ const SubsPersonCard = (props: propTypes) => {
           </Typography>
         }
       />
-      <LocationText />
+      <LocationText location={props.user.location}  />
     </ListItemButton>
   );
 };

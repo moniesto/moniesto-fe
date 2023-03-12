@@ -40,7 +40,7 @@ const Profile = () => {
   }, [account]);
 
   const getAccount = (username: string) => {
-    setLoading(true)
+    setLoading(true);
     if (user.username === username) setAccount(user);
     else {
       api.user.user_by_username(username).then((res) => setAccount(res));
@@ -150,7 +150,7 @@ const Profile = () => {
                         </Typography>
                       </Stack>
                     </Stack>
-                    <LocationText />
+                    <LocationText location={account.location} />
                     <Typography variant="body1">
                       {account.moniest?.bio}
                     </Typography>

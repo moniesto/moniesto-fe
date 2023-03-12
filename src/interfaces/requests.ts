@@ -67,6 +67,9 @@ export interface UserPostsRequest extends PaginateRequest {
     active?: boolean,
 }
 
+export interface SummaryStatsResponse {
+    post_count: number, subscriber_count: number, subscription_count: number
+}
 
 
 export const Requests: {
@@ -114,6 +117,7 @@ export const Requests: {
         user_by_username: (username: string) => string,
         update_profile: string,
         subscriptions: (username: string) => string,
+        summary_stats: (username: string) => string
     }
 } =
 {
@@ -160,6 +164,7 @@ export const Requests: {
         user_by_username: (username: string) => `users/${username}`,
         update_profile: "users/profile",
         subscriptions: (username: string) => `users/${username}/subscriptions`,
+        summary_stats: (username) => `users/${username}/summary-stats`,
     }
 }
 

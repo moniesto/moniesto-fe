@@ -1,5 +1,5 @@
 import { Post } from "../interfaces/post"
-import { BeMoniestReq, ChangePasswordReq, CreatePostReq, ExplorePostsRequest, LoginReq, LoginResponse, PaginateRequest, RegisterReq, Requests, SendMailReq, SendVerificationMailReq, UsernameCheck, UserPostsRequest, VerifyTokenReq } from "../interfaces/requests"
+import { BeMoniestReq, ChangePasswordReq, CreatePostReq, ExplorePostsRequest, LoginReq, LoginResponse, PaginateRequest, RegisterReq, Requests, SendMailReq, SendVerificationMailReq, SummaryStatsResponse, UsernameCheck, UserPostsRequest, VerifyTokenReq } from "../interfaces/requests"
 import { Moniest, User } from "../interfaces/user"
 import httpService from "./httpService"
 
@@ -62,7 +62,8 @@ class api {
     user = {
         update_profile: (params: Partial<User>) => httpService.patch<User>(Requests.user.update_profile, params),
         user_by_username: (username: string) => httpService.get<User>(Requests.user.user_by_username(username)),
-      /* TODO */   subscriptions: (username: string, params: PaginateRequest) => httpService.get<User[]>(Requests.user.subscriptions(username), params)
+      /* TODO */   subscriptions: (username: string, params: PaginateRequest) => httpService.get<User[]>(Requests.user.subscriptions(username), params),
+        summary_stats: (username: string) => httpService.get<SummaryStatsResponse>(Requests.user.summary_stats(username))
 
     }
 
