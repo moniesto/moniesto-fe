@@ -51,7 +51,7 @@ const ProfileTabs = ({
         subscribers: response.subscriber_count || 0,
       });
     });
-  }, [account]);
+  }, [account,isSubscribed]);
 
   useEffect(() => {
     setTabs([
@@ -90,7 +90,7 @@ const ProfileTabs = ({
         only_moniest: true,
       },
     ]);
-  }, [counts, tabValue]);
+  }, [counts, tabValue,isSubscribed]);
 
   const renderTabs = useMemo(
     () => (

@@ -70,7 +70,7 @@ const PostCard = ({ post }: PostCardProps) => {
               <Typography variant="h5">{post.currency}</Typography>
               <Typography variant="h5">{post.start_price}</Typography>
             </Stack>
-            <StatusDot status={1}></StatusDot>
+            <StatusDot date={post.duration as string}></StatusDot>
           </Stack>
         }
         title={
