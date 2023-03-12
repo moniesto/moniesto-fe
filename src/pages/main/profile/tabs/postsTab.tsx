@@ -53,6 +53,11 @@ const PostsTab = ({
   };
 
   useEffect(() => {
+    queryParams.offset = 0;
+    setQueryParams(JSON.parse(JSON.stringify(queryParams)));
+  }, [isSubscribed]);
+
+  useEffect(() => {
     if (hasMore) getPosts();
   }, [queryParams]);
 
