@@ -79,6 +79,7 @@ const SearchBar = () => {
       {text && (
         <Card
           sx={{
+            background: theme.palette.background[600],
             padding: "10px 0",
             position: "absolute",
             width: "100%",
