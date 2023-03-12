@@ -43,6 +43,7 @@ class api {
     content = {
         moniests: (params: PaginateRequest) => httpService.get<User[]>(Requests.content.moniests, params),
         posts: (params: ExplorePostsRequest) => httpService.get<Post[]>(Requests.content.posts, params),
+        moniest_search: (params: PaginateRequest & { searchText: string }) => httpService.get<User[]>(Requests.content.moniest_search, params),
     }
     crypto = {
         search_currencies: (name: string) => httpService.get<{ currency: string, price: number }[]>(Requests.crypto.search_currencies(name)),
@@ -53,7 +54,7 @@ class api {
         subscribe: (username: string) => httpService.post(Requests.moniest.subscribe(username)),
         unsubscribe: (username: string) => httpService.post(Requests.moniest.unsubscribe(username)),
         subscribe_check: (username: string) => httpService.get<{ subscribed: boolean }>(Requests.moniest.subscribe_check(username)),
-      /* TODO */  subscribers: (username: string, params: PaginateRequest) => httpService.get<User[]>(Requests.moniest.subscribers(username), params)
+        subscribers: (username: string, params: PaginateRequest) => httpService.get<User[]>(Requests.moniest.subscribers(username), params)
     }
     post = {
         create_post: (params: CreatePostReq) => httpService.post<Post>(Requests.post.create_post, params),
@@ -62,7 +63,7 @@ class api {
     user = {
         update_profile: (params: Partial<User>) => httpService.patch<User>(Requests.user.update_profile, params),
         user_by_username: (username: string) => httpService.get<User>(Requests.user.user_by_username(username)),
-      /* TODO */   subscriptions: (username: string, params: PaginateRequest) => httpService.get<User[]>(Requests.user.subscriptions(username), params),
+        subscriptions: (username: string, params: PaginateRequest) => httpService.get<User[]>(Requests.user.subscriptions(username), params),
         summary_stats: (username: string) => httpService.get<SummaryStatsResponse>(Requests.user.summary_stats(username))
 
     }

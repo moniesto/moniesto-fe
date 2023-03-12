@@ -96,7 +96,8 @@ export const Requests: {
     },
     content: {
         moniests: string,
-        posts: string
+        posts: string,
+        moniest_search: string
     },
     crypto: {
         search_currencies: (name: string) => string
@@ -143,7 +144,8 @@ export const Requests: {
     },
     content: {
         moniests: "content/moniests",
-        posts: "content/posts"
+        posts: "content/posts",
+        moniest_search: "content/moniests/search"
     },
     crypto: {
         search_currencies: (name: string) => `crypto/currencies?name=${name}`
