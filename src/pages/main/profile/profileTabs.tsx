@@ -21,10 +21,12 @@ const ProfileTabs = ({
   account,
   isSubscribed,
   isMyAccount,
+  handleClickSubscribe,
 }: {
   account: User;
   isSubscribed: boolean;
   isMyAccount: boolean;
+  handleClickSubscribe: () => void;
 }) => {
   const theme = useTheme();
   const [tabValue, setTabValue] = useState<string>("");
@@ -51,7 +53,7 @@ const ProfileTabs = ({
         subscribers: response.subscriber_count || 0,
       });
     });
-  }, [account,isSubscribed]);
+  }, [account, isSubscribed]);
 
   useEffect(() => {
     setTabs([
@@ -60,6 +62,7 @@ const ProfileTabs = ({
         value: "posts",
         content: (
           <PostsTab
+            handleClickSubscribe={handleClickSubscribe}
             isMyAccount={isMyAccount}
             account={account}
             isSubscribed={isSubscribed}
@@ -90,7 +93,7 @@ const ProfileTabs = ({
         only_moniest: true,
       },
     ]);
-  }, [counts, tabValue,isSubscribed]);
+  }, [counts, tabValue, isSubscribed]);
 
   const renderTabs = useMemo(
     () => (

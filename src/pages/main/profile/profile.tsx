@@ -15,6 +15,7 @@ import { CoverImageBox } from "../../../components/shared/user/coverImageBox";
 import { DoneOutline, EditOutlined } from "@mui/icons-material";
 import Navigator from "../../../components/shared/common/navigatior";
 import { SubscribeToMoniest } from "./subscribeToMoniest";
+import { SubscribeButton } from "../../../components/shared/user/subscribeButton";
 
 const Profile = () => {
   const theme = useTheme();
@@ -97,24 +98,11 @@ const Profile = () => {
                         </Button>
                       </Navigator>
                     ) : account.moniest ? (
-                      <Button
+                      <SubscribeButton
+                        isSubscribed={isSubscribed}
+                        fee={account.moniest?.subscription_info.fee}
                         onClick={() => setIsSubscribeModalOpen(true)}
-                        sx={{
-                          ".MuiButton-endIcon": {
-                            marginLeft: isSubscribed ? "" : "-4px",
-                          },
-                        }}
-                        endIcon={
-                          isSubscribed ? <DoneOutline /> : <AttachMoneyIcon />
-                        }
-                        color="secondary"
-                        variant="contained"
-                      >
-                        {isSubscribed
-                          ? " Subscribed "
-                          : ` Subscribe ${account.moniest?.subscription_info.fee}`}
-                        {}
-                      </Button>
+                      />
                     ) : (
                       ""
                     )}
@@ -160,6 +148,7 @@ const Profile = () => {
             </>
           </Card>
           <ProfileTabs
+            handleClickSubscribe={() => setIsSubscribeModalOpen(true)}
             isSubscribed={isSubscribed}
             account={account}
             isMyAccount={isMyAccount}

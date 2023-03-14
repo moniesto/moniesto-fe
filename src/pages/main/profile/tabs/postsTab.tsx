@@ -9,7 +9,7 @@ import { InfiniteScroll } from "../../../../components/shared/common/infiniteScr
 import api from "../../../../services/api";
 import { User } from "../../../../interfaces/user";
 import { Spinner } from "../../../../components/shared/common/spinner";
-import { TestPost } from "../../../../services/tempDatas";
+import { SubscribeButton } from "../../../../components/shared/user/subscribeButton";
 
 type FilterType = "all" | "live";
 type Filter = {
@@ -27,10 +27,12 @@ const PostsTab = ({
   account,
   isSubscribed,
   isMyAccount,
+  handleClickSubscribe,
 }: {
   account: User;
   isSubscribed: boolean;
   isMyAccount: boolean;
+  handleClickSubscribe: () => void;
 }) => {
   const theme = useTheme();
   const [queryParams, setQueryParams] = useState<{
@@ -85,6 +87,31 @@ const PostsTab = ({
     setQueryParams({ ...queryParams, active: filterItem.boolValue });
   };
 
+  const oneDayAfter = () => {
+    const now = new Date();
+    now.setDate(now.getDate() + 1);
+    return now;
+  };
+
+  const testPost: Post = {
+    currency: "BTCUSDT",
+    direction: "long",
+    duration: oneDayAfter().toISOString(),
+    created_at: new Date(),
+    id: "1",
+    score: 32,
+    start_price: 2103.99,
+    stop: 2103.99,
+    target1: 1,
+    target2: 1,
+    target3: 2203.99,
+    updated_at: new Date(),
+    user: account,
+    status: "",
+    finished: false,
+    description: "",
+  };
+
   const getColorByActive = (filter: Filter) =>
     activePostFilter.value === filter.value
       ? theme.palette.secondary.main
@@ -132,11 +159,33 @@ const PostsTab = ({
         </Stack>
       </Card>
       {!isMyAccount && activePostFilter.boolValue === true && !isSubscribed ? (
-        <Stack sx={{ filter: "blur(3px)" }} rowGap={2}>
-          {[TestPost, TestPost].map((post, i) => (
-            <PostCard key={i} post={post} />
-          ))}
-        </Stack>
+        <Box position="relative">
+          <Box
+            sx={{
+              position: "absolute",
+              zIndex: 2,
+              height: "100%",
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Stack spacing={2} alignItems="center">
+              <Typography variant="h2"> Subscribe to see live posts</Typography>
+              <SubscribeButton
+                fee={account.moniest?.subscription_info.fee as number}
+                isSubscribed={isSubscribed}
+                onClick={() => handleClickSubscribe()}
+              />
+            </Stack>
+          </Box>
+          <Stack sx={{ filter: "blur(3px)" }} rowGap={2}>
+            {[testPost, testPost].map((post, i) => (
+              <PostCard key={i} post={post} />
+            ))}
+          </Stack>
+        </Box>
       ) : loading ? (
         <Box sx={{ position: "relative" }}>
           <Spinner sx={{ mt: "15px" }} center={true}></Spinner>
