@@ -1,6 +1,5 @@
 import {
   Autocomplete,
-  Button,
   Card,
   CircularProgress,
   Divider,
@@ -9,7 +8,6 @@ import {
   InputAdornment,
   InputLabel,
   MenuItem,
-  Paper,
   Select,
   Stack,
   TextField,
@@ -24,7 +22,6 @@ import DoNotDisturbAltOutlinedIcon from "@mui/icons-material/DoNotDisturbAltOutl
 import api from "../../services/api";
 import CurrencyBitcoinOutlinedIcon from "@mui/icons-material/CurrencyBitcoinOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
 import { useEffect, useRef, useState } from "react";
@@ -39,6 +36,7 @@ import toastService from "../../services/toastService";
 import { useNavigate } from "react-router-dom";
 import { Editor } from "../../components/shared/common/editor/editor";
 import { LoadingButton } from "@mui/lab";
+import helper from "../../services/helper";
 
 export const SharePost = () => {
   const [open, setOpen] = React.useState(false);
@@ -58,9 +56,14 @@ export const SharePost = () => {
     { currency: string; price: number }[]
   >([]);
 
-  const [selectedOption, setSelectedOption] = useState<number>(0);
+  const [selectedCurrencyPrice, setSelectedCurrencyPrice] = useState<number>(0);
 
-  const formik: FormikValues = useFormik({
+  const oneMinLater = () => {
+    const now = new Date();
+    now.setMinutes(now.getMinutes() + 1);
+    return now;
+  };
+  const formik = useFormik({
     initialValues: {
       currency: "",
       description: "",
@@ -73,32 +76,99 @@ export const SharePost = () => {
     },
     validationSchema: () =>
       yup.object({
-        duration: yup.string().required("duration is required"),
-        direction: yup.string().required("Direction is required"),
+        duration: yup
+          .date()
+          .required("Duration is required")
+          .min(oneMinLater(), "Duration must be greater than a minute"),
         currency: yup.string().required("Currency is required"),
-        description: yup.string(),
         stop: yup
           .number()
-          .max(selectedOption, `Stop should be lower than ${selectedOption}`)
-          .max(selectedOption, `Stop should be lower than ${selectedOption}`)
+
+          .when("direction", {
+            is: "long",
+            then: yup
+              .number()
+              .lessThan(
+                selectedCurrencyPrice,
+                `Stop should be lower than ${selectedCurrencyPrice}`
+              ),
+          })
+          .when("direction", {
+            is: "short",
+            then: yup
+              .number()
+              .moreThan(
+                selectedCurrencyPrice,
+                `Stop should be more than ${selectedCurrencyPrice}`
+              ),
+          })
+
           .required("Stop is required"),
         target1: yup
           .number()
-          .min(selectedOption, `TP1 should be greater than ${selectedOption}`)
+          .when("direction", {
+            is: "long",
+            then: yup
+              .number()
+              .moreThan(
+                selectedCurrencyPrice,
+                `TP1 should be greater than ${selectedCurrencyPrice}`
+              ),
+          })
+          .when("direction", {
+            is: "short",
+            then: yup
+              .number()
+              .lessThan(
+                selectedCurrencyPrice,
+                `TP1 should be lower than ${selectedCurrencyPrice}`
+              ),
+          })
           .required("TP1 is required"),
+
         target2: yup
           .number()
-          .moreThan(
-            formik.values.target1 || 0,
-            `TP2 should be greater than ${formik.values.target1 || 0}`
-          )
+          .when("direction", {
+            is: "long",
+            then: yup
+              .number()
+              .moreThan(
+                formik.values.target1 || 0,
+                `TP2 should be greater than ${formik.values.target1 || 0}`
+              ),
+          })
+          .when("direction", {
+            is: "short",
+            then: yup
+              .number()
+              .lessThan(
+                formik.values.target1 || 0,
+                `TP2 should be lower than ${formik.values.target1 || 0}`
+              ),
+          })
           .required("TP2 is required"),
+
         target3: yup
           .number()
-          .moreThan(
-            formik.values.target2 || 0,
-            `TP3 should be greater than ${formik.values.target2 || 0}`
-          )
+
+          .when("direction", {
+            is: "long",
+            then: yup
+              .number()
+              .moreThan(
+                formik.values.target2 || 0,
+                `TP3 should be greater than ${formik.values.target2 || 0}`
+              ),
+          })
+          .when("direction", {
+            is: "short",
+            then: yup
+              .number()
+              .lessThan(
+                formik.values.target2 || 0,
+                `TP3 should be lower than ${formik.values.target2 || 0}`
+              ),
+          })
           .required("TP3 is required"),
       }),
     onSubmit: async (values) => {
@@ -119,12 +189,16 @@ export const SharePost = () => {
   });
 
   const handleShare = async () => {
+    if (!formik.values.currency) return formik.submitForm();
+
+    setSubmitLoading(true);
     const [coin] = await api.crypto.search_currencies(formik.values.currency);
-    setSelectedOption(Number(coin.price));
+    setSelectedCurrencyPrice(Number(coin.price));
+    setSubmitLoading(false);
     formik.submitForm();
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!open) {
       setOptions([]);
     }
@@ -142,6 +216,13 @@ export const SharePost = () => {
   useEffect(() => {
     if (!formik.values.currency) {
       setOpen(false);
+      formik.setValues({
+        ...formik.values,
+        stop: 0,
+        target1: 0,
+        target2: 0,
+        target3: 0,
+      });
       return;
     }
 
@@ -152,11 +233,15 @@ export const SharePost = () => {
       .finally(() => setLoading(false));
   }, [formik.values.currency]);
 
-  const fixedTo = (value: number) =>
-    value ? value.toFixed(3).replace(/\.?0+$/, "") : "";
+  const operatonByDirection = formik.values.direction === "long" ? 1 : -1;
 
   const calculatedRound = (value: number = 0) =>
-    value ? fixedTo(((value - selectedOption) * 100) / selectedOption) : 0;
+    value
+      ? helper.parseCurrency(
+          (operatonByDirection * (value - selectedCurrencyPrice) * 100) /
+            selectedCurrencyPrice
+        )
+      : 0;
 
   return (
     <Card
@@ -191,7 +276,7 @@ export const SharePost = () => {
         </Stack>
         <Divider></Divider>
       </Stack>
-      <Stack width={"100%"} spacing={8}>
+      <Stack width="100%" spacing={8}>
         <form onSubmit={formik.handleSubmit}>
           <Stack spacing={4}>
             <Stack spacing={2}>
@@ -211,7 +296,7 @@ export const SharePost = () => {
                 loading={loading}
                 onChange={(_, event) => {
                   formik.setFieldValue("currency", event?.currency, true);
-                  setSelectedOption(Number(event?.price) || 0);
+                  setSelectedCurrencyPrice(Number(event?.price) || 0);
                 }}
                 renderInput={(params) => (
                   <TextField
@@ -243,7 +328,7 @@ export const SharePost = () => {
                             />
                           ) : null}
                           <Typography variant="h4">
-                            {fixedTo(selectedOption as number)}
+                            {helper.parseCurrency(selectedCurrencyPrice)}
                           </Typography>
 
                           {params.InputProps.endAdornment}
@@ -339,11 +424,16 @@ export const SharePost = () => {
               >
                 <Stack direction="row" spacing={1}>
                   <TextField
+                    disabled={!selectedCurrencyPrice}
                     fullWidth
                     name="target1"
                     placeholder="TP1"
                     type="number"
-                    // value={formik.values.target1}
+                    onFocus={() =>
+                      formik.values.target1 == 0 &&
+                      formik.setFieldValue("target1", "")
+                    }
+                    value={selectedCurrencyPrice ? formik.values.target1 : 0}
                     onChange={formik.handleChange}
                     error={
                       formik.touched.target1 && Boolean(formik.errors.target1)
@@ -381,11 +471,16 @@ export const SharePost = () => {
 
                 <Stack direction="row" spacing={1}>
                   <TextField
+                    disabled={!selectedCurrencyPrice}
                     fullWidth
                     name="target2"
                     placeholder="TP2"
                     type="number"
-                    // value={formik.values.target2}
+                    onFocus={() =>
+                      formik.values.target2 == 0 &&
+                      formik.setFieldValue("target2", "")
+                    }
+                    value={selectedCurrencyPrice ? formik.values.target2 : 0}
                     onChange={formik.handleChange}
                     error={
                       formik.touched.target2 && Boolean(formik.errors.target2)
@@ -422,11 +517,16 @@ export const SharePost = () => {
                 </Stack>
                 <Stack direction="row" spacing={1}>
                   <TextField
+                    disabled={!selectedCurrencyPrice}
                     fullWidth
                     name="target3"
                     placeholder="TP3"
                     type="number"
-                    // value={formik.values.target3}
+                    onFocus={() =>
+                      formik.values.target3 == 0 &&
+                      formik.setFieldValue("target3", "")
+                    }
+                    value={selectedCurrencyPrice ? formik.values.target3 : 0}
                     onChange={formik.handleChange}
                     error={
                       formik.touched.target3 && Boolean(formik.errors.target3)
@@ -463,11 +563,16 @@ export const SharePost = () => {
                 </Stack>
                 <Stack direction="row" spacing={1}>
                   <TextField
+                    disabled={!selectedCurrencyPrice}
                     fullWidth
                     name="stop"
                     placeholder="Stop"
                     type="number"
-                    value={formik.values.stop}
+                    onFocus={() =>
+                      formik.values.stop == 0 &&
+                      formik.setFieldValue("stop", "")
+                    }
+                    value={selectedCurrencyPrice ? formik.values.stop : 0}
                     onChange={formik.handleChange}
                     error={formik.touched.stop && Boolean(formik.errors.stop)}
                     helperText={formik.touched.stop && formik.errors.stop}
@@ -488,9 +593,17 @@ export const SharePost = () => {
                   />
                   <TextField
                     placeholder="0"
-                    value={fixedTo(
-                      100 - (formik.values.stop / selectedOption) * 100
-                    )}
+                    value={
+                      !formik.values.stop
+                        ? 0
+                        : operatonByDirection *
+                          helper.parseCurrency(
+                            100 -
+                              ((formik.values.stop || 1) /
+                                (selectedCurrencyPrice || 1)) *
+                                100
+                          )
+                    }
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
