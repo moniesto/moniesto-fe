@@ -1,4 +1,10 @@
-import { Card, InputAdornment, Stack, TextField } from "@mui/material";
+import {
+  Card,
+  InputAdornment,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useTheme } from "@mui/system";
 import { useState } from "react";
 import * as yup from "yup";
@@ -50,6 +56,7 @@ export const PasswordSettings = () => {
     >
       <form onSubmit={formik.handleSubmit}>
         <Stack mt={2} p={3} spacing={4}>
+          <Typography variant="h2"> Change Password</Typography>
           <Stack spacing={2}>
             <TextField
               fullWidth

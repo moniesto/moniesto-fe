@@ -42,6 +42,7 @@ export const VerifyEmailSettings = () => {
         justifyContent="center"
         alignItems="center"
       >
+        <Typography width="100%" variant="h2"> Email Verification</Typography>
         {user.email_verified ? (
           <>
             <DoneAllOutlinedIcon
@@ -64,17 +65,19 @@ export const VerifyEmailSettings = () => {
               <Typography variant="h4">
                 We sent the mail to {user.email}
               </Typography>
-              <Typography pt={2} variant="h4">Please check your email</Typography>
+              <Typography pt={2} variant="h4">
+                Please check your email
+              </Typography>
             </Stack>
           </>
         ) : (
           <>
-            <Typography pb={2} sx={{ paddingTop: "2rem", fontSize:"1rem"}}>
+            <Typography pb={2} sx={{ paddingTop: "2rem", fontSize: "1rem" }}>
               After pressing the button, follow the instructions in the link
               that we will send to your e-mail.
             </Typography>
             <LoadingButton
-            fullWidth
+              fullWidth
               size="large"
               sx={{ marginTop: "1rem" }}
               onClick={handleSendVerifyEmail}
