@@ -11,7 +11,6 @@ import {
   IconButtonProps,
   styled,
   Typography,
-  useTheme,
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import StatusDot from "./statusDot";
@@ -22,7 +21,10 @@ import { Post } from "../../../interfaces/post";
 import Navigator from "../common/navigatior";
 import ReactTimeAgo from "react-time-ago";
 import { Editor } from "../common/editor/editor";
-import { StarChip } from "../common/starChip";
+import helper from "../../../services/helper";
+import { useTheme } from "@mui/system";
+import { InfoChip } from "./infoChip";
+import { PercentOutlined, StarOutline } from "@mui/icons-material";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -42,9 +44,16 @@ const ExpandMore: any = styled((props: ExpandMoreProps) => {
 type PostCardProps = {
   post: Post;
 };
+
 const PostCard = ({ post }: PostCardProps) => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const theme = useTheme();
+
+  const calculatePercentage = (
+    helper.operatonByDirection(post.direction) *
+    ((post.target3 - post.start_price) / post.start_price) *
+    100
+  ).toFixed(3);
 
   return (
     <Card sx={{ position: "relative", paddingBottom: "50px" }}>
@@ -52,6 +61,10 @@ const PostCard = ({ post }: PostCardProps) => {
         sx={{
           ".MuiCardHeader-action": {
             alignSelf: "unset",
+          },
+          padding: {
+            xs: 2,
+            md: 2.5,
           },
         }}
         avatar={
@@ -65,7 +78,7 @@ const PostCard = ({ post }: PostCardProps) => {
           </Navigator>
         }
         action={
-          <Stack flexDirection="row" gap="42px">
+          <Stack flexDirection="row" gap={{ md: 5, xs: 3 }}>
             <Stack alignItems="center">
               <Typography variant="h5">{post.currency}</Typography>
               <Typography variant="h5">{post.start_price}</Typography>
@@ -76,21 +89,6 @@ const PostCard = ({ post }: PostCardProps) => {
         title={
           <Typography variant="h4">
             {`${post.user.name} ${post.user.surname}`}
-            {post.score && (
-              <StarChip
-                sx={{
-                  marginLeft: "10px",
-                  height: "20px",
-                  ".MuiChip-icon": { fontSize: "0.9rem" },
-                  ".MuiChip-label": {
-                    height: "12px",
-                    fontSize: "0.6rem",
-                    paddingLeft: 1,
-                  },
-                }}
-                count={post.score}
-              />
-            )}
           </Typography>
         }
         subheader={
@@ -109,8 +107,48 @@ const PostCard = ({ post }: PostCardProps) => {
           </Stack>
         }
       />
-      <Divider sx={{ width: "calc(100% - 40px)", margin: "auto" }}></Divider>
-      <CardContent sx={{ paddingBottom: 0 }}>
+      <Stack
+        spacing={2}
+        pb={1}
+        pr={{ xs: "10px", md: "20px" }}
+        direction="row"
+        justifyContent="flex-end"
+      >
+        {post.score && (
+          <InfoChip
+            title="Score"
+            value={post.score}
+            startAdornment={
+              <StarOutline
+                sx={{ fontSize: "1.1rem", opacity: "0.7" }}
+              ></StarOutline>
+            }
+          ></InfoChip>
+        )}
+
+        <InfoChip
+          title="Rate"
+          startAdornment={
+            <PercentOutlined
+              sx={{ fontSize: "1.1rem", opacity: "0.7" }}
+            ></PercentOutlined>
+          }
+          value={calculatePercentage}
+        ></InfoChip>
+      </Stack>
+      <Divider
+        sx={{
+          width: { xs: "calc(100% - 20px)", md: "calc(100% - 40px)" },
+          margin: "auto",
+        }}
+      ></Divider>
+      <CardContent
+        sx={{
+          paddingBottom: 0,
+          padding: { xs: "4px", md: 2 },
+          overflowX: "auto",
+        }}
+      >
         <PredictionDataTable
           columns={[
             {
@@ -126,20 +164,15 @@ const PostCard = ({ post }: PostCardProps) => {
               title: "Target",
             },
             {
-              field: "percetage",
-              title: "Percetage",
-            },
-            {
               field: "time_left",
               title: "Time Left",
             },
           ]}
           rows={[
             {
-              direction: post.direction,
+              direction: post.direction.toUpperCase(),
               start: post.start_price,
               target: post.target3,
-              percetage: (post.start_price / post.target3).toFixed(3),
               time_left: <ReactTimeAgo date={new Date(post.duration)} />,
             },
           ]}
@@ -159,7 +192,7 @@ const PostCard = ({ post }: PostCardProps) => {
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent sx={{ paddingTop: 0 }}>
+        <CardContent sx={{ paddingTop: 0, padding: { xs: "4px", md: 2 } }}>
           <PredictionDataTable
             columns={[
               {
@@ -178,10 +211,6 @@ const PostCard = ({ post }: PostCardProps) => {
                 field: "stop",
                 title: "Stop",
               },
-              {
-                field: "",
-                title: "",
-              },
             ]}
             rows={[
               {
@@ -189,7 +218,6 @@ const PostCard = ({ post }: PostCardProps) => {
                 tp_2: post.target2,
                 tp_3: post.target3,
                 stop: post.stop,
-                "": "",
               },
             ]}
           ></PredictionDataTable>
@@ -204,33 +232,6 @@ const PostCard = ({ post }: PostCardProps) => {
                 ></Editor>
               </Box>
             )}
-            {/* <Typography sx={{ paddingTop: 3 }} paragraph>
-              Heat 1/2 cup of the broth in a pot until simmering, add saffron
-              and set aside for 10 minutes.
-            </Typography>
-            <Typography paragraph>
-              Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet
-              over medium-high heat. Add chicken, shrimp and chorizo, and cook,
-              stirring occasionally until lightly browned, 6 to 8 minutes.
-              Transfer shrimp to a large plate and set aside, leaving chicken
-              and chorizo in the pan. Add pimentón, bay leaves, garlic,
-              tomatoes, onion, salt and pepper, and cook, stirring often until
-              thickened and fragrant, about 10 minutes. Add saffron broth and
-              remaining 4 1/2 cups chicken broth; bring to a boil.
-            </Typography>
-            <Typography paragraph>
-              Add rice and stir very gently to distribute. Top with artichokes
-              and peppers, and cook without stirring, until most of the liquid
-              is absorbed, 15 to 18 minutes. Reduce heat to medium-low, add
-              reserved shrimp and mussels, tucking them down into the rice, and
-              cook again without stirring, until mussels have opened and rice is
-              just tender, 5 to 7 minutes more. (Discard any mussels that
-              don&apos;t open.)
-            </Typography>
-            <Typography>
-              Set aside off of the heat to let rest for 10 minutes, and then
-              serve.
-            </Typography> */}
           </Stack>
         </CardContent>
       </Collapse>

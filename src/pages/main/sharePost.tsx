@@ -233,12 +233,12 @@ export const SharePost = () => {
       .finally(() => setLoading(false));
   }, [formik.values.currency]);
 
-  const operatonByDirection = formik.values.direction === "long" ? 1 : -1;
-
   const calculatedRound = (value: number = 0) =>
     value
       ? helper.parseCurrency(
-          (operatonByDirection * (value - selectedCurrencyPrice) * 100) /
+          (helper.operatonByDirection(formik.values.direction) *
+            (value - selectedCurrencyPrice) *
+            100) /
             selectedCurrencyPrice
         )
       : 0;
@@ -596,7 +596,7 @@ export const SharePost = () => {
                     value={
                       !formik.values.stop
                         ? 0
-                        : operatonByDirection *
+                        : helper.operatonByDirection(formik.values.direction) *
                           helper.parseCurrency(
                             100 -
                               ((formik.values.stop || 1) /

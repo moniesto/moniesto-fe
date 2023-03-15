@@ -30,7 +30,7 @@ const PredictionDataTable = ({ columns, rows }: propTypes) => {
           }}
         >
           {columns.map((column) => (
-            <TableCell key={column.field} align="left">
+            <TableCell key={column.field} align="center">
               {column.title}
             </TableCell>
           ))}
@@ -48,7 +48,7 @@ const PredictionDataTable = ({ columns, rows }: propTypes) => {
         {rows.map((row, i) => (
           <TableRow key={i}>
             {columns.map((column) => (
-              <TableCell key={column.field} align="left">
+              <TableCell key={column.field} align="center">
                 {row[column.field]}
               </TableCell>
             ))}
