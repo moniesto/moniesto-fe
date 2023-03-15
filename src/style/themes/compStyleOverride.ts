@@ -1,6 +1,7 @@
 export default function componentStyleOverrides(theme: any) {
     const background800 = theme.mode === "light" ? theme.colors.background800 : theme.colors.darkBackground800;
     const background600 = theme.mode === "light" ? theme.colors.background600 : theme.colors.darkBackground600;
+    const background200 = theme.mode === "light" ? theme.colors.background200 : theme.colors.darkBackground200;
     const cardBackground = theme.mode === "light" ? theme.colors.white : theme.colors.darkBackground600
     return {
         MuiButton: {
@@ -240,6 +241,30 @@ export default function componentStyleOverrides(theme: any) {
                         marginLeft: "10px"
                     }
                 }
+            }
+        },
+        MuiBottomNavigation: {
+            styleOverrides: {
+                root: {
+                    boxShadow: "1px -5px 16px 1px " + background200,
+                    ".MuiBottomNavigationAction-root": {
+                        "&.Mui-selected": {
+                            color: theme.textMain,
+                            ".MuiSvgIcon-root": {
+                                color: theme.colors.secondaryMain,
+                                fontSize: "1.6rem",
+                            },
+                            ".MuiBottomNavigationAction-label": {
+                                color: theme.colors.secondaryMain,
+                                fontWeight: "600",
+                                fontSize: "0.8rem",
+                                paddingTop: "1px",
+                            }
+
+                        }
+                    }
+                },
+
             }
         },
         MuiSvgIcon: {

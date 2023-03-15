@@ -3,6 +3,7 @@ import { useTheme } from "@mui/system";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation, useParams } from "react-router-dom";
 import Header from "../components/layout/header";
+import { BottomNavBar } from "../components/layout/main/bottomNavBar";
 import { SettingsSideBar } from "../components/layout/main/settingsSideBar";
 import SideBar from "../components/layout/main/sideBar";
 
@@ -10,6 +11,7 @@ const MainLayout = () => {
   const theme = useTheme();
   const [sideBar, setSideBar] = useState<any>();
   const location = useLocation();
+
   useEffect(() => {
     if (location.pathname.startsWith("/settings")) {
       setSideBar(<SettingsSideBar />);
@@ -33,7 +35,7 @@ const MainLayout = () => {
         sx={{
           marginTop: "80px",
           minHeight: "calc(100vh - 80px)",
-          padding: { xs: "35px 15px", md: "35px" },
+          padding: { xs: "10px 12px 66px", md: "35px" },
         }}
         maxWidth="lg"
       >
@@ -59,6 +61,8 @@ const MainLayout = () => {
           </Grid>
         </Grid>
       </Container>
+
+      <BottomNavBar />
     </Stack>
   );
 };
