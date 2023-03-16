@@ -10,7 +10,11 @@ import Navigator from "../../shared/common/navigatior";
 import { Spinner } from "../../shared/common/spinner";
 import SearchMoniestItem from "../../shared/user/searchMoniestItem";
 
-const SearchBar = () => {
+const SearchBar = ({
+  onTypeSearch,
+}: {
+  onTypeSearch?: (searchText: string) => void;
+}) => {
   const theme = useTheme();
   const [text, setText] = useState<string>("");
   const [moniests, setMoniests] = useState<User[]>([]);
@@ -23,6 +27,7 @@ const SearchBar = () => {
   };
 
   useEffect(() => {
+    if (onTypeSearch) onTypeSearch(text);
     if (!text) {
       setMoniests([]);
       return;
@@ -51,7 +56,7 @@ const SearchBar = () => {
       <TextField
         sx={{
           minWidth: "278px",
-          width: focused || text ? "350px" : "278px",
+          width: { md: focused || text ? "350px" : "278px", sm: "100%" },
           transition: (theme.transitions as any).create("width"),
         }}
         onFocus={() => setFocused(true)}
@@ -83,11 +88,12 @@ const SearchBar = () => {
             padding: "10px 0",
             position: "absolute",
             width: "100%",
-            top: "47px",
+            top: "45px",
             borderTop: 0,
             borderTopRightRadius: 0,
             borderTopLeftRadius: 0,
             minHeight: "50px",
+            zIndex: 2,
           }}
         >
           {loading ? (
@@ -98,7 +104,7 @@ const SearchBar = () => {
                 <Navigator
                   key={moniest.id}
                   handleOnClick={handleClose}
-                  path={moniest.username}
+                  path={"/" + moniest.username}
                 >
                   <SearchMoniestItem user={moniest}></SearchMoniestItem>
                 </Navigator>

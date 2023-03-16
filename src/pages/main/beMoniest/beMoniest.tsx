@@ -143,7 +143,7 @@ const BeMoniest = () => {
   return (
     <Card
       sx={{
-        minHeight: { md: "calc(100vh - 150px)", xs: "calc(100vh - 160px)" },
+        minHeight: { md: "calc(100vh - 150px)", xs: "calc(100vh - 134px)" },
         padding: { md: "1.8rem 2rem", xs: "1rem 1.2rem" },
       }}
     >

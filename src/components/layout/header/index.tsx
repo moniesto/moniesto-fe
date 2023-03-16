@@ -3,6 +3,7 @@ import { Stack } from "@mui/system";
 import HeaderProfile from "./headerProfile";
 import Logo from "./logo";
 import SearchBar from "./seachBar";
+import ThemeModeButton from "./themeModeButton";
 
 const Header = () => {
   return (
@@ -27,7 +28,12 @@ const Header = () => {
           >
             <SearchBar></SearchBar>
           </Box>
-          <HeaderProfile></HeaderProfile>
+          <Box sx={{ display: { xs: "block", md: "none" } }}>
+            <ThemeModeButton />
+          </Box>
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <HeaderProfile></HeaderProfile>
+          </Box>
         </Stack>
       </Stack>
     </Container>
