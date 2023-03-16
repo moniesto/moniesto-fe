@@ -30,9 +30,9 @@ export const ExploreMoniests = () => {
 
   return (
     <Box>
-      <Grid container spacing={{ xs: 1, md: 2 }}>
+      <Grid container spacing={2}>
         {moniests.map((moniest, i) => (
-          <Grid key={i} item xs={6}>
+          <Grid key={i} item xs={12} md={6}>
             <MoniestCard user={moniest} />
           </Grid>
         ))}

@@ -90,7 +90,7 @@ const BeMoniest = () => {
         });
     } else setActiveStep(activeStep + 1);
   };
-  
+
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
@@ -141,8 +141,13 @@ const BeMoniest = () => {
   }, [activeStep, user]);
 
   return (
-    <Card sx={{ minHeight: "calc(100vh - 150px)", padding: "1.8rem 2rem" }}>
-      <Stack pb={6}>
+    <Card
+      sx={{
+        minHeight: { md: "calc(100vh - 150px)", xs: "calc(100vh - 160px)" },
+        padding: { md: "1.8rem 2rem", xs: "1rem 1.2rem" },
+      }}
+    >
+      <Stack pb={{ md: 6, xs: 3 }}>
         <Typography variant="h2" pb={1.4}>
           Be Moniest
         </Typography>
@@ -179,7 +184,11 @@ const BeMoniest = () => {
         activeStep={activeStep}
       >
         {steps.map((step) => (
-          <Step key={step.title} completed={step.order <= activeStep}>
+          <Step
+            sx={{ px: "2px" }}
+            key={step.title}
+            completed={step.order <= activeStep}
+          >
             <StepLabel icon={step.icon}>{step.title}</StepLabel>
           </Step>
         ))}

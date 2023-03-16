@@ -2,6 +2,7 @@ import {
   ControlPointOutlined,
   ExploreOutlined,
   HomeOutlined,
+  RocketLaunchOutlined,
   SettingsOutlined,
 } from "@mui/icons-material";
 import {
@@ -10,12 +11,40 @@ import {
   BottomNavigationAction,
   Box,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "@mui/system";
+import { useAppSelector } from "../../../store/hooks";
+import Navigator from "../../shared/common/navigatior";
+import { useNavigate } from "react-router-dom";
 
 export const BottomNavBar = () => {
   const [value, setValue] = useState(0);
+  const user = useAppSelector((state) => state.user.user);
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const handleChangePath = (value: number) => {
+    let path = "/";
+    switch (value) {
+      case 0:
+        path = "/timeline";
+        break;
+      case 1:
+        path = "/explore";
+        break;
+      case 2:
+        path = user.moniest ? "/share" : "/bemoniest";
+        break;
+      case 3:
+        path = "/settings/account";
+        break;
+      case 4:
+        path = "/" + user.username;
+        break;
+    }
+    console.log("path :", path, value);
+    navigate(path);
+  };
 
   return (
     <Box
@@ -32,14 +61,18 @@ export const BottomNavBar = () => {
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
+          handleChangePath(newValue);
         }}
       >
-        <BottomNavigationAction label="Timeline" icon={<HomeOutlined />} />
-        <BottomNavigationAction label="Explore" icon={<ExploreOutlined />} />
-        <BottomNavigationAction label="Share" icon={<ControlPointOutlined />} />
-        <BottomNavigationAction label="Settings" icon={<SettingsOutlined />} />
+        <BottomNavigationAction icon={<HomeOutlined />} />
+        <BottomNavigationAction icon={<ExploreOutlined />} />
         <BottomNavigationAction
-          label="Profile"
+          icon={
+            user.moniest ? <ControlPointOutlined /> : <RocketLaunchOutlined />
+          }
+        />
+        <BottomNavigationAction icon={<SettingsOutlined />} />
+        <BottomNavigationAction
           icon={
             <Avatar
               src="https://res.cloudinary.com/dniupzza6/image/upload/v1678648873/Photo/ProfilePhotosThumbnail/8cae1897-f8b1-4470-a617-8087d2748bd5_thumbnail.jpg"

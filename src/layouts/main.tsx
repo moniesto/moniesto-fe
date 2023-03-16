@@ -27,14 +27,14 @@ const MainLayout = () => {
         }}
         position="fixed"
       >
-        <Toolbar sx={{ height: "80px" }}>
+        <Toolbar sx={{ height: { xs: 56, md: 80 } }}>
           <Header></Header>
         </Toolbar>
       </AppBar>
       <Container
         sx={{
-          marginTop: "80px",
-          minHeight: "calc(100vh - 80px)",
+          marginTop: { xs: 7, md: 10 },
+          minHeight: { xs: "calc(100vh - 56px)", md: "calc(100vh - 80px)" },
           padding: { xs: "10px 12px 66px", md: "35px" },
         }}
         maxWidth="lg"

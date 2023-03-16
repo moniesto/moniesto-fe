@@ -248,11 +248,14 @@ export default function componentStyleOverrides(theme: any) {
                 root: {
                     boxShadow: "1px -5px 16px 1px " + background200,
                     ".MuiBottomNavigationAction-root": {
+                        ".MuiSvgIcon-root": {
+                            fontSize: "1.8rem",
+                        },
                         "&.Mui-selected": {
                             color: theme.textMain,
                             ".MuiSvgIcon-root": {
                                 color: theme.colors.secondaryMain,
-                                fontSize: "1.6rem",
+                                fontSize: "2rem",
                             },
                             ".MuiBottomNavigationAction-label": {
                                 color: theme.colors.secondaryMain,

@@ -90,7 +90,7 @@ export const AccountSettings = () => {
   return (
     <Card
       sx={{
-        paddingBottom: "20px",
+        paddingBottom: { xs: 1, md: 2.5 },
       }}
     >
       <CoverImageBox image={formik.values?.background_photo as string}>
