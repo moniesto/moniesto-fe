@@ -1,4 +1,10 @@
-import { Card, InputAdornment, Stack, TextField } from "@mui/material";
+import {
+  Card,
+  InputAdornment,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useTheme } from "@mui/system";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -73,6 +79,9 @@ export const MoniestSettings = () => {
     >
       <form onSubmit={formik.handleSubmit}>
         <Stack mt={2} p={3} spacing={4}>
+          <Typography variant="h2" sx={{ opacity: 0.9 }}>
+            Moniest Information
+          </Typography>
           <Stack spacing={2}>
             <TextField
               fullWidth

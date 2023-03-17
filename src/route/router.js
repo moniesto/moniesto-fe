@@ -20,6 +20,7 @@ import { MoniestSettings } from "../pages/settings/moniest";
 import { CardSettings } from "../pages/settings/card";
 import { PasswordSettings } from "../pages/settings/password";
 import { VerifyEmailSettings } from "../pages/settings/verifyEmail";
+import { SettingsList } from "../pages/settings/list";
 
 const Router = createBrowserRouter([
     {
@@ -86,6 +87,10 @@ const Router = createBrowserRouter([
                     {
                         path: "settings",
                         children: [
+                            {
+                                path: "",
+                                element: <SettingsList />,
+                            },
                             {
                                 path: "account",
                                 element: <AccountSettings />,

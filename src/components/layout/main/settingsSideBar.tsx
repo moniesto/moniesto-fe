@@ -1,4 +1,5 @@
 import {
+  ChevronRightOutlined,
   CreditCardOutlined,
   EmailOutlined,
   KeyOutlined,
@@ -7,20 +8,27 @@ import {
 } from "@mui/icons-material";
 import {
   Card,
+  CardHeader,
   List,
+  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   Stack,
+  Typography,
 } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../store/hooks";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export const SettingsSideBar = () => {
   const [selectedLink, setSelectedLink] = useState("/settings/account");
   const user = useAppSelector((state) => state.user.user);
   const { pathname } = useLocation();
+
+  const matches = useMediaQuery((theme: any) => theme.breakpoints.down("md"));
+
   const [links, setLinks] = useState<
     { path: string; icon: ReactNode; title: string }[]
   >([
@@ -71,26 +79,36 @@ export const SettingsSideBar = () => {
   };
   return (
     <Card>
+      {matches && (
+        <Typography sx={{ opacity: 0.8 }} p={3} pb={0} variant="h2">
+          Settings
+        </Typography>
+      )}
       <Stack minHeight={"400px"} justifyContent="space-between" padding={2}>
         <Stack>
           <List component="nav">
             {links.map((link) => (
-              <ListItemButton
+              <ListItem
                 key={link.path}
-                sx={{
-                  margin: "3px 0",
-                  opacity: 0.6,
-                  "&.Mui-selected": {
-                    opacity: 1,
-                    backgroundColor: "transparent",
-                  },
-                }}
-                selected={selectedLink == link.path}
-                onClick={() => handleListItemClick(link.path)}
+                disablePadding
+                secondaryAction={matches ? <ChevronRightOutlined /> : ""}
               >
-                <ListItemIcon>{link.icon}</ListItemIcon>
-                <ListItemText primary={link.title} />
-              </ListItemButton>
+                <ListItemButton
+                  sx={{
+                    margin: "3px 0",
+                    opacity: !matches ? 0.6 : 1,
+                    "&.Mui-selected": {
+                      opacity: 1,
+                      backgroundColor: "transparent",
+                    },
+                  }}
+                  selected={selectedLink == link.path}
+                  onClick={() => handleListItemClick(link.path)}
+                >
+                  <ListItemIcon>{link.icon}</ListItemIcon>
+                  <ListItemText primary={link.title} />
+                </ListItemButton>
+              </ListItem>
             ))}
           </List>
         </Stack>

@@ -263,8 +263,10 @@ export default function componentStyleOverrides(theme: any) {
                                 fontWeight: "600",
                                 fontSize: "0.8rem",
                                 paddingTop: "1px",
+                            },
+                            ".MuiAvatar-root": {
+                                outline: "1px solid " + theme.colors.secondaryMain
                             }
-
                         }
                     }
                 },

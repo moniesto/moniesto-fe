@@ -56,7 +56,7 @@ export const PasswordSettings = () => {
     >
       <form onSubmit={formik.handleSubmit}>
         <Stack mt={2} p={3} spacing={4}>
-          <Typography variant="h2"> Change Password</Typography>
+        <Typography variant="h2" sx={{ opacity: 0.9 }}>Change Password</Typography>
           <Stack spacing={2}>
             <TextField
               fullWidth

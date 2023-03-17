@@ -42,7 +42,9 @@ export const VerifyEmailSettings = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Typography width="100%" variant="h2"> Email Verification</Typography>
+        <Typography width="100%" variant="h2" sx={{ opacity: 0.9 }}>
+          Email Verification
+        </Typography>
         {user.email_verified ? (
           <>
             <DoneAllOutlinedIcon
