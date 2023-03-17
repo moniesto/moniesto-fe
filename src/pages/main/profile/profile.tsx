@@ -1,4 +1,3 @@
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { Avatar, Button, Card, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import StarIcon from "@mui/icons-material/Star";
@@ -12,7 +11,7 @@ import { User } from "../../../interfaces/user";
 import api from "../../../services/api";
 import { Spinner } from "../../../components/shared/common/spinner";
 import { CoverImageBox } from "../../../components/shared/user/coverImageBox";
-import { DoneOutline, EditOutlined } from "@mui/icons-material";
+import { EditOutlined } from "@mui/icons-material";
 import Navigator from "../../../components/shared/common/navigatior";
 import { SubscribeToMoniest } from "./subscribeToMoniest";
 import { SubscribeButton } from "../../../components/shared/user/subscribeButton";
@@ -72,14 +71,14 @@ const Profile = () => {
                     height: "6rem",
                     position: "absolute",
                     bottom: "-3rem",
-                    left: "30px",
+                    left: { md: "30px", xs: "16px" },
                     border: `3px solid ${theme.palette.background[800]}`,
                     background: theme.palette.background[600],
                   }}
                   src={account?.profile_photo_link}
                 ></Avatar>
               </CoverImageBox>
-              <Box padding={"0 30px"}>
+              <Box padding={{ md: "0 30px", xs: "0 16px" }}>
                 <Box>
                   <Stack
                     flexDirection="row"

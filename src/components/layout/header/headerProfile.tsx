@@ -43,6 +43,7 @@ const HeaderProfile = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
   const handleLogout = () => {
     dispatch(setUser(emptyUser));
     dispatch(setToken(""));
@@ -52,13 +53,6 @@ const HeaderProfile = () => {
     <>
       <Stack flexDirection="row" alignItems="center">
         <ThemeModeButton />
-        {/* <Stack alignItems="end" sx={{ display: { xs: "none", md: "block" } }}>
-          <Typography variant="h4">Davut Turug</Typography>
-          <Typography fontSize="0.76rem" lineHeight="17px" variant="h6">
-            davuttrg
-          </Typography>
-        </Stack> */}
-
         <IconButton
           disableRipple
           onClick={handleClick}

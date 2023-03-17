@@ -11,10 +11,9 @@ import {
   BottomNavigationAction,
   Box,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTheme } from "@mui/system";
 import { useAppSelector } from "../../../store/hooks";
-import Navigator from "../../shared/common/navigatior";
 import { useNavigate } from "react-router-dom";
 
 export const BottomNavBar = () => {
@@ -42,7 +41,6 @@ export const BottomNavBar = () => {
         path = "/" + user.username;
         break;
     }
-    console.log("path :", path, value);
     navigate(path);
   };
 
@@ -75,7 +73,7 @@ export const BottomNavBar = () => {
         <BottomNavigationAction
           icon={
             <Avatar
-              src="https://res.cloudinary.com/dniupzza6/image/upload/v1678648873/Photo/ProfilePhotosThumbnail/8cae1897-f8b1-4470-a617-8087d2748bd5_thumbnail.jpg"
+              src={user.profile_photo_thumbnail_link}
               sx={{ width: 34, height: 34 }}
             ></Avatar>
           }

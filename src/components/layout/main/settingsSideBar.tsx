@@ -3,6 +3,7 @@ import {
   CreditCardOutlined,
   EmailOutlined,
   KeyOutlined,
+  LogoutOutlined,
   PersonOutline,
   RocketLaunchOutlined,
 } from "@mui/icons-material";
@@ -21,11 +22,16 @@ import { ReactNode, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../store/hooks";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { setUser } from "../../../store/slices/userSlice";
+import { useDispatch } from "react-redux";
+import { emptyUser } from "../../../interfaces/user";
+import { setToken } from "../../../store/slices/localStorageSlice";
 
 export const SettingsSideBar = () => {
   const [selectedLink, setSelectedLink] = useState("/settings/account");
   const user = useAppSelector((state) => state.user.user);
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   const matches = useMediaQuery((theme: any) => theme.breakpoints.down("md"));
 
@@ -77,6 +83,12 @@ export const SettingsSideBar = () => {
     setSelectedLink(link);
     navigate(link);
   };
+
+  const handleLogout = () => {
+    dispatch(setUser(emptyUser));
+    dispatch(setToken(""));
+  };
+
   return (
     <Card>
       {matches && (
@@ -110,6 +122,20 @@ export const SettingsSideBar = () => {
                 </ListItemButton>
               </ListItem>
             ))}
+
+            {matches && (
+              <ListItemButton
+                sx={{
+                  margin: "3px 0",
+                }}
+                onClick={() => handleLogout()}
+              >
+                <ListItemIcon>
+                  <LogoutOutlined />
+                </ListItemIcon>
+                <ListItemText primary="Logout" />
+              </ListItemButton>
+            )}
           </List>
         </Stack>
       </Stack>

@@ -54,7 +54,7 @@ export const SubscribeToMoniest = ({
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 500,
+          width: { md: 500, xs: "90%" },
           minHeight: 500,
           background: theme.palette.background[600],
         }}
@@ -139,7 +139,8 @@ export const SubscribeToMoniest = ({
               <Stack mb={3} spacing={1} direction="row" alignItems="center">
                 <ErrorOutline></ErrorOutline>
                 <Typography variant="h4">
-                  You are paying {account.moniest?.subscription_info.fee}$/Month currently
+                  You are paying {account.moniest?.subscription_info.fee}$/Month
+                  currently
                 </Typography>
               </Stack>
               <Typography variant="h5" letterSpacing={0.5}>
