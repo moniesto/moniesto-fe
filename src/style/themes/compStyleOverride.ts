@@ -297,20 +297,36 @@ export default function componentStyleOverrides(theme: any) {
                 }
             }
         },
-        // MuiCalendarPicker: {
-        //     styleOverrides: {
-        //         root: {
-        //             ".MuiClock-clock": {
-        //                 backgroundColor: theme.colors?.primaryLight + " !important",
-        //             }
-        //         }
-        //     }
-        // },
+        MuiCalendarPicker: {
+            styleOverrides: {
+                root: {
+                    ".MuiPickersDay-root": {
+                        "&.Mui-selected": {
+                            color: theme.textSecondary
+                        }
+                    }
+                }
+            }
+        },
+        MuiCalendarOrClockPicker: {
+            styleOverrides: {
+                root: {
+                    ".MuiDateTimePickerToolbar-timeContainer": {
+                        ">button": {
+                            height: "20px"
+                        }
+                    }
+                }
+            }
+        },
         MuiClockPicker: {
             styleOverrides: {
                 root: {
                     ".MuiClock-clock": {
-                        backgroundColor: theme.colors?.primaryLight + " !important",
+                        backgroundColor: background800 + " !important",
+                    },
+                    ".MuiClockNumber-root": {
+                        "&.Mui-selected": { color: theme.textSecondary + " !important" }
                     }
                 }
             }

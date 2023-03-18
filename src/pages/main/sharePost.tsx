@@ -353,7 +353,9 @@ export const SharePost = () => {
                   renderInput={(params: any) => (
                     <TextField
                       onKeyDown={(e) => e.preventDefault()}
-                      onClick={() => setCalendarOpen(!calendarOpen)}
+                      onClick={() => {
+                        setCalendarOpen(!calendarOpen);
+                      }}
                       {...params}
                       error={
                         formik.touched.duration &&
@@ -365,7 +367,11 @@ export const SharePost = () => {
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
-                            <CalendarMonthOutlinedIcon />
+                            <CalendarMonthOutlinedIcon
+                              onClick={() => {
+                                setCalendarOpen(!calendarOpen);
+                              }}
+                            />
                           </InputAdornment>
                         ),
                         endAdornment: (

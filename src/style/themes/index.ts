@@ -13,6 +13,7 @@ export const theme = (mode: string) => {
     mode: mode,
     colors: color,
     textMain: mode === 'light' ? color.lightTextMain : color.darkTextMain,
+    textSecondary: mode === 'light' ? color.darkTextMain : color.lightTextMain,
     appBar: mode === 'light' ? color.darkTextMain : color.primaryMain,
     borderRadius: {
       small: "6px",
