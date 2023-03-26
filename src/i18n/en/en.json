@@ -1,0 +1,9 @@
+{
+  "form_field": {
+    "duration": "Duration"
+  },
+  "navigation": {
+    "timeline": "Timeline",
+    "explore": "Explore"
+  }
+}

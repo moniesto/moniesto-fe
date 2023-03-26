@@ -27,7 +27,9 @@ const MainLayout = () => {
         }}
         position="fixed"
       >
-        <Toolbar sx={{ height: { xs: 56, md: 80 } }}>
+        <Toolbar
+          sx={{ height: { xs: 56, md: 80 }, minHeight: { xs: 56, md: 80 } }}
+        >
           <Header></Header>
         </Toolbar>
       </AppBar>

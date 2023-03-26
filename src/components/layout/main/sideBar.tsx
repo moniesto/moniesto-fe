@@ -18,22 +18,24 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Navigator from "../../shared/common/navigatior";
 import { useAppSelector } from "../../../store/hooks";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import { useTranslation } from "react-i18next";
 
 const SideBar = () => {
   const [selectedLink, setSelectedLink] = useState("timeline");
   const theme = useTheme();
   const user = useAppSelector((state) => state.user.user);
   const { pathname } = useLocation();
+  const { t } = useTranslation();
   const links = [
     {
       path: "/timeline",
       icon: <HomeOutlinedIcon />,
-      title: "Timeline",
+      title: t("navigation.timeline"),
     },
     {
       path: "/explore",
       icon: <ExploreOutlinedIcon />,
-      title: "Explore",
+      title: t("navigation.explore"),
     },
   ];
 

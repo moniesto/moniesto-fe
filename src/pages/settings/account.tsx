@@ -1,9 +1,16 @@
-import { BadgeOutlined, LocationOnOutlined } from "@mui/icons-material";
+import {
+  BadgeOutlined,
+  LanguageOutlined,
+  LocationOnOutlined,
+  SwapVertOutlined,
+} from "@mui/icons-material";
 import {
   Avatar,
   Box,
   Card,
   InputAdornment,
+  MenuItem,
+  Select,
   Stack,
   TextField,
 } from "@mui/material";
@@ -12,7 +19,7 @@ import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import * as yup from "yup";
 import { LoadingButton } from "@mui/lab";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UsernameInput } from "../../components/layout/auth/usernameInput";
 import { UploadPhotoButton } from "../../components/shared/user/uploadPhotoButton";
 import { Spinner } from "../../components/shared/common/spinner";
@@ -20,10 +27,11 @@ import api from "../../services/api";
 import toastService from "../../services/toastService";
 import { setUser } from "../../store/slices/userSlice";
 import { CoverImageBox } from "../../components/shared/user/coverImageBox";
-import { setToken } from "../../store/slices/localStorageSlice";
+import { changeLanguage, setToken } from "../../store/slices/localStorageSlice";
 
 export const AccountSettings = () => {
   const user = useAppSelector((state) => state.user.user);
+  const language = useAppSelector((state) => state.storage.language);
   const theme = useTheme();
   const [imageLoadings, setImageLoadings] = useState({
     pp: false,
@@ -80,12 +88,18 @@ export const AccountSettings = () => {
       background_photo: user.background_photo_link,
       profile_photo: user.profile_photo_link,
       location: user.location,
+      language: language,
     },
     validationSchema: validationSchema,
     onSubmit: () => {
       handleSaveAccount();
     },
   });
+
+  useEffect(() => {
+    if (!formik.values.language) return;
+    dispatch(changeLanguage(formik.values.language));
+  }, [formik.values.language]);
 
   return (
     <Card
@@ -195,21 +209,35 @@ export const AccountSettings = () => {
                 }}
               />
             </Stack>
-            <TextField
-              fullWidth
-              id="location"
-              name="location"
-              placeholder="Location"
-              value={formik.values.location}
-              onChange={formik.handleChange}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LocationOnOutlined />
-                  </InputAdornment>
-                ),
-              }}
-            />
+            <Stack direction="row" spacing={2}>
+              <TextField
+                fullWidth
+                id="location"
+                name="location"
+                placeholder="Location"
+                value={formik.values.location}
+                onChange={formik.handleChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <LocationOnOutlined />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <Select
+                fullWidth
+                id="language"
+                name="language"
+                placeholder="Language"
+                value={formik.values.language}
+                onChange={formik.handleChange}
+                startAdornment={<LanguageOutlined />}
+              >
+                <MenuItem value={"en"}>En</MenuItem>
+                <MenuItem value={"tr"}>Tr</MenuItem>
+              </Select>
+            </Stack>
           </Stack>
 
           <LoadingButton

@@ -4,21 +4,16 @@ import reportWebVitals from "./reportWebVitals";
 import "./style/index.scss";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
-import TimeAgo from 'javascript-time-ago'
-
-import en from 'javascript-time-ago/locale/en.json'
-TimeAgo.addDefaultLocale(en)
-
+import "./i18n/i18n.ts";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
-
-    <Provider store={store}>
-      <App />
-    </Provider>
-
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

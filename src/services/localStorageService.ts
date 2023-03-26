@@ -3,11 +3,13 @@ import jwt_decode from "jwt-decode";
 export type StorageState = {
     theme_mode: ThemeMode,
     token: string,
+    language:string
 }
 
 export const emptyStorage: StorageState = {
     theme_mode: "light",
-    token: ""
+    token: "",
+    language:"en"
 }
 export type DecodeToken = {
     id: string

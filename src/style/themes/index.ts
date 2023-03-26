@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material/styles";
+import { mergeDeep } from "../../services/mergeDeep";
 
 // project imports
 import componentStyleOverrides from "./compStyleOverride";
@@ -7,7 +8,8 @@ import themeTypography from "./typography";
 import colors from './_themes-vars.module.scss';
 
 
-export const theme = (mode: string) => {
+export const theme = (mode: string, lang?: any, dateLang?: any) => {
+
   const color = colors;
   const themeOption = {
     mode: mode,
@@ -45,12 +47,12 @@ export const theme = (mode: string) => {
         top: "50%",
         transform: "translate(-50%, -50%)",
       }
-    }
+    },
+
   };
 
   const themes = createTheme(themeOptions);
-  themes.components = componentStyleOverrides(themeOption);
-
+  themes.components = mergeDeep({ ...lang.components, ...dateLang.components }, componentStyleOverrides(themeOption));
   return themes;
 };
 

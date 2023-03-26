@@ -18,13 +18,12 @@ import localStorageService, {
 import { setUser } from "./store/slices/userSlice";
 import toastService from "./services/toastService";
 import { openToast } from "./store/slices/toastSlice";
-import { setToken } from "./store/slices/localStorageSlice";
+import { changeLanguage, setToken } from "./store/slices/localStorageSlice";
 import configService from "./services/configService";
 import api from "./services/api";
-import { emptyUser } from "./interfaces/user";
 
 function App() {
-  const mode = useAppSelector((state) => state.storage.theme_mode);
+  const storage = useAppSelector((state) => state.storage);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -32,6 +31,8 @@ function App() {
     httpService.setDispatch(dispatch);
     toastService.setDispatch(dispatch);
     configService.initialize();
+    dispatch(changeLanguage(navigator.language));
+    // dispatch(changeLanguage("de"));
 
     if (!localStorageService.getStorage().token) {
       setLoading(false);
@@ -65,7 +66,7 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={themes(mode)}>
+    <ThemeProvider theme={configService.getTheme(storage.theme_mode,storage.language)}>
       <CssBaseline />
       {loading ? (
         <Box

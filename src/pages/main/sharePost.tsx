@@ -16,7 +16,7 @@ import {
 import { useTheme } from "@mui/system";
 
 import StarIcon from "@mui/icons-material/Star";
-import { FormikValues, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as yup from "yup";
 import DoNotDisturbAltOutlinedIcon from "@mui/icons-material/DoNotDisturbAltOutlined";
 import api from "../../services/api";
@@ -27,22 +27,24 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import { useEffect, useRef, useState } from "react";
 import React from "react";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import ReactTimeAgo from "react-time-ago";
 import dayjs from "dayjs";
+import ReactTimeAgo from "react-time-ago";
+
 import { SwapVertOutlined } from "@mui/icons-material";
 import toastService from "../../services/toastService";
 import { useNavigate } from "react-router-dom";
 import { Editor } from "../../components/shared/common/editor/editor";
 import { LoadingButton } from "@mui/lab";
 import helper from "../../services/helper";
+import { useTranslation } from "react-i18next";
+import { DateTimeProvider } from "../../components/shared/common/dateTimeProvider";
 
 export const SharePost = () => {
   const [open, setOpen] = React.useState(false);
   const [calendarOpen, setCalendarOpen] = React.useState(false);
   const [showDescription, setShowDescription] = useState<boolean>(false);
 
+  const { t } = useTranslation();
   const theme = useTheme();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -339,13 +341,13 @@ export const SharePost = () => {
                 )}
               />
 
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimeProvider>
                 <DateTimePicker
                   minDateTime={dayjs(new Date().toString())}
                   ampm={false}
                   open={calendarOpen}
                   onClose={() => setCalendarOpen(false)}
-                  label="Duration"
+                  label={t("form_field.duration")}
                   value={formik.values.duration}
                   onChange={(value) =>
                     formik.setFieldValue("duration", value, true)
@@ -387,7 +389,7 @@ export const SharePost = () => {
                     />
                   )}
                 />
-              </LocalizationProvider>
+              </DateTimeProvider>
 
               <FormControl
                 error={
