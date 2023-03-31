@@ -11,6 +11,7 @@ import { setToken } from "../store/slices/localStorageSlice";
 class http {
     private dispatch!: Dispatch<AnyAction>;
     private instance!: AxiosInstance;
+    private BASE_URL = 'https://moniesto-test-be-1.onrender.com/'
     constructor() { this.createInstance(localStorageService.getStorage().token) }
     get<Type>(url: string, params?: {}): Promise<Type> {
         return this.instance.get(url, { params })
@@ -33,7 +34,7 @@ class http {
     createInstance(token: string) {
 
         this.instance = axios.create({
-            baseURL: 'http://localhost:8080/',
+            baseURL: this.BASE_URL,
             validateStatus: (status) => {
                 return status >= 200 && status < 400;
             }
