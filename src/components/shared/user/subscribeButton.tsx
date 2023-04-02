@@ -1,5 +1,6 @@
 import { AttachMoneyOutlined, DoneOutline } from "@mui/icons-material";
 import { Button } from "@mui/material";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 export const SubscribeButton = ({
   isSubscribed,
@@ -10,6 +11,7 @@ export const SubscribeButton = ({
   onClick: () => void;
   fee: number;
 }) => {
+  const translate = useTranslate();
   return (
     <Button
       onClick={onClick}
@@ -22,7 +24,9 @@ export const SubscribeButton = ({
       color="secondary"
       variant="contained"
     >
-      {isSubscribed ? " Subscribed " : ` Subscribe ${fee}`}
+      {isSubscribed
+        ? translate("moniest.subscribed")
+        : `${translate("moniest.subscribe")} ${fee}`}
     </Button>
   );
 };

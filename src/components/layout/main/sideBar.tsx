@@ -18,24 +18,25 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Navigator from "../../shared/common/navigatior";
 import { useAppSelector } from "../../../store/hooks";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { useTranslation } from "react-i18next";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 const SideBar = () => {
   const [selectedLink, setSelectedLink] = useState("timeline");
   const theme = useTheme();
   const user = useAppSelector((state) => state.user.user);
   const { pathname } = useLocation();
-  const { t } = useTranslation();
+  const translate = useTranslate();
+
   const links = [
     {
       path: "/timeline",
       icon: <HomeOutlinedIcon />,
-      title: t("navigation.timeline"),
+      title: translate("navigation.timeline"),
     },
     {
       path: "/explore",
       icon: <ExploreOutlinedIcon />,
-      title: t("navigation.explore"),
+      title: translate("navigation.explore"),
     },
   ];
 
@@ -87,7 +88,9 @@ const SideBar = () => {
               fullWidth
               type="submit"
             >
-              {user.moniest ? "Share post" : "Be moniest"}
+              {translate(
+                `navigation.${user.moniest ? "share_post" : "be_moniest"}`
+              )}
             </Button>
           </Navigator>
 

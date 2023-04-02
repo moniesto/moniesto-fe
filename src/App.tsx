@@ -7,7 +7,6 @@ import {
 import { RouterProvider } from "react-router-dom";
 import "./App.scss";
 import Router from "./route/router";
-import themes from "./style/themes";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import httpService from "./services/httpService";
 import { useEffect, useState } from "react";
@@ -32,7 +31,6 @@ function App() {
     toastService.setDispatch(dispatch);
     configService.initialize();
     dispatch(changeLanguage(navigator.language));
-    // dispatch(changeLanguage("de"));
 
     if (!localStorageService.getStorage().token) {
       setLoading(false);

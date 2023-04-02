@@ -14,6 +14,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import Navigator from "../common/navigatior";
 import { StarChip } from "../common/starChip";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 type propTypes = {
   user: User;
@@ -21,6 +22,7 @@ type propTypes = {
 
 const MoniestCard = ({ user }: propTypes) => {
   const theme = useTheme();
+  const translate = useTranslate();
 
   const handleUserClick = () => {};
 
@@ -53,7 +55,9 @@ const MoniestCard = ({ user }: propTypes) => {
               <Typography variant="h4">
                 {user.moniest?.subscription_info.fee} $
               </Typography>
-              <Typography variant="h5">per month</Typography>
+              <Typography variant="h5">
+                {translate("moniest.per_month")}
+              </Typography>
             </Stack>
           }
           title={
@@ -86,7 +90,8 @@ const MoniestCard = ({ user }: propTypes) => {
             />
           }
           label={
-            ((user.moniest as any)["subscriber_count"] || 0) + " Subscribers"
+            ((user.moniest as any)["subscriber_count"] || 0) +
+            ` ${translate("moniest.subscribers")}`
           }
         />
         <StarChip count={user.moniest?.score as number}></StarChip>

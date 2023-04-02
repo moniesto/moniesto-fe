@@ -83,7 +83,7 @@ const PostCard = ({ post }: PostCardProps) => {
               <Typography variant="h5">{post.currency}</Typography>
               <Typography variant="h5">{post.start_price}</Typography>
             </Stack>
-            <StatusDot date={post.duration as string}></StatusDot>
+            <StatusDot status={post.status}></StatusDot>
           </Stack>
         }
         title={
@@ -153,19 +153,19 @@ const PostCard = ({ post }: PostCardProps) => {
           columns={[
             {
               field: "direction",
-              title: "Direction",
+              title: "component.post_card.table.direction",
             },
             {
               field: "start",
-              title: "Start",
+              title: "component.post_card.table.start",
             },
             {
               field: "target",
-              title: "Target",
+              title: "component.post_card.table.target",
             },
             {
               field: "time_left",
-              title: "Time Left",
+              title: "component.post_card.table.time_left",
             },
           ]}
           rows={[
@@ -197,19 +197,19 @@ const PostCard = ({ post }: PostCardProps) => {
             columns={[
               {
                 field: "tp_1",
-                title: "TP 1",
+                title: "component.post_card.table.tp_1",
               },
               {
                 field: "tp_2",
-                title: "TP 2",
+                title: "component.post_card.table.tp_2",
               },
               {
                 field: "tp_3",
-                title: "TP 3",
+                title: "component.post_card.table.tp_3",
               },
               {
                 field: "stop",
-                title: "Stop",
+                title: "component.post_card.table.stop",
               },
             ]}
             rows={[

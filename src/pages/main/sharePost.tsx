@@ -4,7 +4,6 @@ import {
   CircularProgress,
   Divider,
   FormControl,
-  FormHelperText,
   InputAdornment,
   InputLabel,
   MenuItem,
@@ -36,15 +35,15 @@ import { useNavigate } from "react-router-dom";
 import { Editor } from "../../components/shared/common/editor/editor";
 import { LoadingButton } from "@mui/lab";
 import helper from "../../services/helper";
-import { useTranslation } from "react-i18next";
 import { DateTimeProvider } from "../../components/shared/common/dateTimeProvider";
+import { useTranslate } from "../../hooks/useTranslate";
 
 export const SharePost = () => {
   const [open, setOpen] = React.useState(false);
   const [calendarOpen, setCalendarOpen] = React.useState(false);
   const [showDescription, setShowDescription] = useState<boolean>(false);
 
-  const { t } = useTranslation();
+  const translate = useTranslate();
   const theme = useTheme();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -257,11 +256,11 @@ export const SharePost = () => {
       <Stack pb={6}>
         <Stack justifyContent="space-between" direction="row">
           <Typography variant="h2" pb={1.4}>
-            Share Post
+            {translate("page.share_post.share_post")}
           </Typography>
           <Stack spacing={1} direction="row" alignItems="center">
             <Typography variant="h5" sx={{ opacity: "0.8" }}>
-              Max Score
+              {translate("page.share_post.max_score")}
             </Typography>
             <Typography variant="h5" fontWeight={700}>
               21.3
@@ -304,7 +303,7 @@ export const SharePost = () => {
                   <TextField
                     {...params}
                     name="currency"
-                    placeholder="Currency"
+                    placeholder={translate("form.field.currency")}
                     onChange={formik.handleChange}
                     error={
                       formik.touched.currency && Boolean(formik.errors.currency)
@@ -347,7 +346,7 @@ export const SharePost = () => {
                   ampm={false}
                   open={calendarOpen}
                   onClose={() => setCalendarOpen(false)}
-                  label={t("form_field.duration")}
+                  label={translate("form.field.duration")}
                   value={formik.values.duration}
                   onChange={(value) =>
                     formik.setFieldValue("duration", value, true)
@@ -397,7 +396,7 @@ export const SharePost = () => {
                 }
                 fullWidth
               >
-                <InputLabel>Direction</InputLabel>
+                <InputLabel>{translate("form.field.direction")} </InputLabel>
                 <Select
                   color="secondary"
                   onChange={formik.handleChange}
@@ -406,19 +405,14 @@ export const SharePost = () => {
                   value={formik.values.direction}
                   startAdornment={<SwapVertOutlined></SwapVertOutlined>}
                 >
-                  <MenuItem value="long">Long</MenuItem>
-                  <MenuItem value="short">Short</MenuItem>
+                  <MenuItem value="long">{translate("common.long")} </MenuItem>
+                  <MenuItem value="short">{translate("common.short")}</MenuItem>
                 </Select>
-                {formik.touched.direction && formik.errors.direction ? (
-                  <FormHelperText>Without label</FormHelperText>
-                ) : (
-                  ""
-                )}
               </FormControl>
 
               <Divider></Divider>
               <Typography sx={{ opacity: 0.6 }} variant="h3">
-                Targets
+                {translate("form.field.targets")}
               </Typography>
               <Stack
                 spacing={2}
@@ -435,7 +429,7 @@ export const SharePost = () => {
                     disabled={!selectedCurrencyPrice}
                     fullWidth
                     name="target1"
-                    placeholder="TP1"
+                    placeholder={translate("form.field.tp_1")}
                     type="number"
                     onFocus={() =>
                       formik.values.target1 == 0 &&
@@ -456,7 +450,7 @@ export const SharePost = () => {
                       endAdornment: (
                         <InputAdornment position="end">
                           <Typography sx={{ opacity: 0.7 }} variant="h4">
-                            TP1
+                            {translate("form.field.tp_1")}
                           </Typography>
                         </InputAdornment>
                       ),
@@ -482,7 +476,7 @@ export const SharePost = () => {
                     disabled={!selectedCurrencyPrice}
                     fullWidth
                     name="target2"
-                    placeholder="TP2"
+                    placeholder={translate("form.field.tp_2")}
                     type="number"
                     onFocus={() =>
                       formik.values.target2 == 0 &&
@@ -503,7 +497,7 @@ export const SharePost = () => {
                       endAdornment: (
                         <InputAdornment position="end">
                           <Typography sx={{ opacity: 0.7 }} variant="h4">
-                            TP2
+                            {translate("form.field.tp_2")}
                           </Typography>
                         </InputAdornment>
                       ),
@@ -528,7 +522,7 @@ export const SharePost = () => {
                     disabled={!selectedCurrencyPrice}
                     fullWidth
                     name="target3"
-                    placeholder="TP3"
+                    placeholder={translate("form.field.tp_3")}
                     type="number"
                     onFocus={() =>
                       formik.values.target3 == 0 &&
@@ -549,7 +543,7 @@ export const SharePost = () => {
                       endAdornment: (
                         <InputAdornment position="end">
                           <Typography sx={{ opacity: 0.7 }} variant="h4">
-                            TP3
+                            {translate("form.field.tp_3")}
                           </Typography>
                         </InputAdornment>
                       ),
@@ -574,7 +568,7 @@ export const SharePost = () => {
                     disabled={!selectedCurrencyPrice}
                     fullWidth
                     name="stop"
-                    placeholder="Stop"
+                    placeholder={translate("form.field.stop")}
                     type="number"
                     onFocus={() =>
                       formik.values.stop == 0 &&
@@ -593,7 +587,7 @@ export const SharePost = () => {
                       endAdornment: (
                         <InputAdornment position="end">
                           <Typography sx={{ opacity: 0.7 }} variant="h4">
-                            Stop
+                            {translate("form.field.stop")}
                           </Typography>
                         </InputAdornment>
                       ),
@@ -642,7 +636,7 @@ export const SharePost = () => {
                 }}
                 onClick={() => setShowDescription(true)}
               >
-                <Stack>+ Add Description (Optional)</Stack>
+                <Stack>+ {translate("form.field.add_desc")}</Stack>
               </Card>
             )}
 
@@ -654,7 +648,7 @@ export const SharePost = () => {
                 onClick={handleShare}
                 loading={submitLoading}
               >
-                Share
+                {translate("form.field.share")}
               </LoadingButton>
             </Stack>
           </Stack>

@@ -3,13 +3,13 @@ import jwt_decode from "jwt-decode";
 export type StorageState = {
     theme_mode: ThemeMode,
     token: string,
-    language:string
+    language: string
 }
 
 export const emptyStorage: StorageState = {
     theme_mode: "light",
     token: "",
-    language:"en"
+    language: "en"
 }
 export type DecodeToken = {
     id: string
@@ -27,12 +27,14 @@ class localStorageService {
     private storage_key: string = "moniesto-local"
     private storage: StorageState = emptyStorage;
 
-    constructor() {
-        const data = localStorage.getItem(this.storage_key);
-        if (!data) localStorage.setItem(this.storage_key, JSON.stringify(emptyStorage))
-        else this.storage = JSON.parse(data)
-    }
+    constructor() { }
     getStorage() {
+        const data = localStorage.getItem(this.storage_key);
+        if (!data) {
+            localStorage.setItem(this.storage_key, JSON.stringify(emptyStorage))
+            this.storage = emptyStorage;
+        }
+        else this.storage = JSON.parse(data)
         return this.storage;
     }
     setStorage(_storage: StorageState) {

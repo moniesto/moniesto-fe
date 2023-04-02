@@ -1,9 +1,4 @@
-import {
-  InputAdornment,
-  TextField,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { InputAdornment, TextField, Typography, useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -14,22 +9,24 @@ import { useNavigate } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import api from "../../services/api";
+import { useTranslate } from "../../hooks/useTranslate";
 
 type ForgetPasswordForm = {
   email: string;
 };
 
-const validationSchema = yup.object({
-  email: yup
-    .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
-});
-
 const ForgetPassword = () => {
   const navigate = useNavigate();
   const theme = useTheme();
+  const translate = useTranslate();
   const [loading, setLoading] = useState<boolean>(false);
+
+  const validationSchema = yup.object({
+    email: yup
+      .string()
+      .email(translate("form.validation.email_valid"))
+      .required(translate("form.validation.email_req")),
+  });
 
   const handleForgetPassword = (values: ForgetPasswordForm) => {
     setLoading(true);
@@ -37,7 +34,7 @@ const ForgetPassword = () => {
       .send_email({ email: values.email })
       .then(() => {
         toastService.open({
-          message: "We send an mail to you. Please check your email address.",
+          message: "page.forget_pass.toast.mail_sent",
           severity: "success",
         });
         navigate("/login");
@@ -57,13 +54,15 @@ const ForgetPassword = () => {
   return (
     <Stack width={"100%"} maxWidth={500} spacing={8}>
       <Stack spacing={1.8}>
-        <Typography fontSize={"2.2rem"}>Forget Password</Typography>
+        <Typography fontSize={"2.2rem"}>
+          {translate("page.forget_pass.title")}
+        </Typography>
         <Typography fontSize={"2.6rem"} variant="h1">
-          Welcome
+          {translate("common.welcome")}
         </Typography>
 
         <Typography fontSize={"1rem"} color={theme.palette.grey[400]}>
-          Please enter your email
+          {translate("page.forget_pass.enter_email")}
         </Typography>
       </Stack>
       <form onSubmit={formik.handleSubmit}>
@@ -73,7 +72,7 @@ const ForgetPassword = () => {
               fullWidth
               id="email"
               name="email"
-              placeholder="Email or username"
+              placeholder={translate("form.field.email")}
               value={formik.values.email}
               onChange={formik.handleChange}
               error={formik.touched.email && Boolean(formik.errors.email)}
@@ -96,7 +95,7 @@ const ForgetPassword = () => {
             loading={loading}
             variant="contained"
           >
-            Continue
+            {translate("page.forget_pass.action.continue")}
           </LoadingButton>
 
           <Stack
@@ -106,14 +105,14 @@ const ForgetPassword = () => {
             justifyContent="center"
             color={theme.palette.text.secondary}
           >
-            Back to
+            {translate("page.forget_pass.action.back_to")}
             <Navigator path="/login">
               <Typography
                 sx={{ cursor: "pointer" }}
                 variant="h4"
                 color="secondary"
               >
-                Login
+                {translate("page.forget_pass.action.login")}
               </Typography>
             </Navigator>
           </Stack>

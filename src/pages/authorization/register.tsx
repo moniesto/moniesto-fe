@@ -7,7 +7,7 @@ import KeyOutlinedIcon from "@mui/icons-material/KeyOutlined";
 import Navigator from "../../components/shared/common/navigatior";
 import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import { LoadingButton } from "@mui/lab";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
@@ -15,6 +15,7 @@ import { setToken } from "../../store/slices/localStorageSlice";
 import api from "../../services/api";
 import toastService from "../../services/toastService";
 import { UsernameInput } from "../../components/layout/auth/usernameInput";
+import { useTranslate } from "../../hooks/useTranslate";
 
 type RegisterForm = {
   username: string;
@@ -24,31 +25,9 @@ type RegisterForm = {
   password: string;
 };
 
-const validationSchema = yup.object({
-  username: yup
-    .string()
-    .min(5, "Username should be of minimum 5 characters length")
-    .required("Username is required"),
-  name: yup
-    .string()
-    .min(2, "Name should be of minimum 2 characters length")
-    .required("Name is required"),
-  surname: yup
-    .string()
-    .min(2, "Surname should be of minimum 2 characters length")
-    .required("Surname is required"),
-  email: yup
-    .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
-  password: yup
-    .string()
-    .min(6, "Password should be of minimum 6 characters length")
-    .required("Password is required"),
-});
-
 const Register = () => {
   const theme = useTheme();
+  const translate = useTranslate();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
@@ -64,11 +43,34 @@ const Register = () => {
         navigate("/timeline");
         toastService.open({
           severity: "success",
-          message: "Registiration success",
+          message: "page.register.toast.register_success",
         });
       })
       .finally(() => setLoading(false));
   };
+
+  const validationSchema = yup.object({
+    username: yup
+      .string()
+      .min(5, translate("form.validation.username_min"))
+      .required(translate("form.validation.username_req")),
+    name: yup
+      .string()
+      .min(2, translate("form.validation.name_min"))
+      .required(translate("form.validation.name_req")),
+    surname: yup
+      .string()
+      .min(2, translate("form.validation.surname_min"))
+      .required(translate("form.validation.surname_req")),
+    email: yup
+      .string()
+      .email(translate("form.validation.email_valid"))
+      .required(translate("form.validation.email_req")),
+    password: yup
+      .string()
+      .min(6, translate("form.validation.password_min"))
+      .required(translate("form.validation.password_req")),
+  });
   const formik = useFormik<RegisterForm>({
     initialValues: {
       username: "",

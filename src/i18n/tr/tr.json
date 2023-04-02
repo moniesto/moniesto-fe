@@ -1,9 +1,14 @@
 {
-  "form_field": {
-    "duration": "Süre"
-  },
-  "navigation": {
-    "timeline": "Anasayfa",
-    "explore": "Keşfet"
+  "page": {
+    "login": {
+      "title": "Giriş yap",
+      "enter_detail": "Lütfen hesap bilgilerini gir",
+      "action": {
+        "forget_pass": "Şifremi unuttum?",
+        "login": "Giriş yap",
+        "no_account": "Hesabın yok mu?",
+        "register": "Kayıt ol"
+      }
+    }
   }
 }

@@ -6,6 +6,7 @@ import {
   TableRow,
   useTheme,
 } from "@mui/material";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 type propTypes = {
   columns: { field: string; title: string }[];
@@ -13,7 +14,7 @@ type propTypes = {
 };
 
 const PredictionDataTable = ({ columns, rows }: propTypes) => {
-  const theme = useTheme();
+  const translate = useTranslate();
 
   return (
     <Table>
@@ -25,13 +26,12 @@ const PredictionDataTable = ({ columns, rows }: propTypes) => {
               padding: 1.1,
               fontWeight: 600,
               border: 0,
-             
             },
           }}
         >
           {columns.map((column) => (
             <TableCell key={column.field} align="center">
-              {column.title}
+              {translate(column.title)}
             </TableCell>
           ))}
         </TableRow>
@@ -41,7 +41,6 @@ const PredictionDataTable = ({ columns, rows }: propTypes) => {
           td: {
             padding: "10px",
             border: 0,
-           
           },
         }}
       >

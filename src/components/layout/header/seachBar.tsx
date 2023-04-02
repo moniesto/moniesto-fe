@@ -4,6 +4,7 @@ import { useTheme } from "@mui/system";
 
 import { Box, Stack } from "@mui/system";
 import { useEffect, useState } from "react";
+import { useTranslate } from "../../../hooks/useTranslate";
 import { User } from "../../../interfaces/user";
 import api from "../../../services/api";
 import Navigator from "../../shared/common/navigatior";
@@ -20,6 +21,7 @@ const SearchBar = ({
   const [moniests, setMoniests] = useState<User[]>([]);
   const [focused, setFocused] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const translate = useTranslate();
 
   const handleClickDelete = () => {
     setFocused(false);
@@ -64,7 +66,7 @@ const SearchBar = ({
         fullWidth
         name="Search"
         value={text}
-        placeholder="Search for Moniests ..."
+        placeholder= {translate("form.field.search_moniest")}
         onChange={(e) => setText(e.target.value)}
         InputProps={{
           startAdornment: (
@@ -112,7 +114,7 @@ const SearchBar = ({
             </Stack>
           ) : (
             <Box sx={{ wordBreak: "break-word" }} px={2}>
-              No user found with <b>{text}</b>
+              {translate("component.search.no_user_found",{text:text})}
             </Box>
           )}
         </Card>

@@ -25,6 +25,7 @@ import { BeMoniestReq } from "../../../interfaces/requests";
 import toastService from "../../../services/toastService";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "../../../store/slices/userSlice";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 type Step = {
   order: number;
@@ -56,6 +57,7 @@ const steps: Step[] = [
 const BeMoniest = () => {
   const [activeStep, setActiveStep] = useState<number>(1);
   const theme = useTheme();
+  const translate = useTranslate();
   const user = useAppSelector((state) => state.user.user);
   const [moniest, setMoniest] = useState<Partial<BeMoniestReq>>();
   const navigate = useNavigate();
@@ -82,7 +84,7 @@ const BeMoniest = () => {
           dispatch(setUser(res));
           toastService.open({
             severity: "success",
-            message: "Congratulations... You are moniest now",
+            message: translate("page.be_moniest.cong_moniest") ,
           });
           setTimeout(() => {
             navigate("/timeline");
@@ -149,7 +151,8 @@ const BeMoniest = () => {
     >
       <Stack pb={{ md: 6, xs: 3 }}>
         <Typography variant="h2" pb={1.4}>
-          Be Moniest
+          
+          {translate("page.be_moniest.be_moniest")}
         </Typography>
         <Divider></Divider>
       </Stack>

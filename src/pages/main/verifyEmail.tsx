@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Navigator from "../../components/shared/common/navigatior";
+import { useTranslate } from "../../hooks/useTranslate";
 import api from "../../services/api";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
@@ -11,6 +12,7 @@ const VerifyEmail = () => {
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
+  const translate = useTranslate();
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.user);
 
@@ -45,10 +47,12 @@ const VerifyEmail = () => {
         <CircularProgress />
       ) : (
         <Stack rowGap={3}>
-          <Typography variant="h2">Sorry, this page is unavailable.</Typography>
+          <Typography variant="h2">
+            {translate("page.change_pass.unavailable.title")}
+          </Typography>
           <Typography variant="h4">
-            The link you clicked may be broken or the page may have been
-            removed. Back to
+            {translate("page.change_pass.unavailable.body")}
+
             <Navigator path="/">
               <Typography
                 pl={0.5}
@@ -56,7 +60,7 @@ const VerifyEmail = () => {
                 component="span"
                 color="secondary"
               >
-                <b>Home Page</b>
+                <b>{translate("navigation.home")} </b>
               </Typography>
             </Navigator>
           </Typography>

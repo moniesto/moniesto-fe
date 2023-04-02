@@ -18,6 +18,6 @@ export interface Post {
     updated_at: Date,
     score: number,
     finished: boolean,
-    status: string
+    status: "pending" | "fail" | "success"
 
 }

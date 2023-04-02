@@ -3,8 +3,12 @@ import { useTheme } from "@mui/system";
 import { Outlet } from "react-router-dom";
 import BrandText from "../components/shared/common/brandText";
 import Fly from "../components/shared/common/fly";
+import { useTranslate } from "../hooks/useTranslate";
+
 const AuthorizationLayout = () => {
   const theme = useTheme();
+  const translate = useTranslate();
+  
   return (
     <Grid
       item
@@ -72,7 +76,7 @@ const AuthorizationLayout = () => {
                 variant="h1"
                 color={theme.palette.common.white}
               >
-                Invest Wisely
+                {translate("landing.invest_wisely")}
               </Typography>
               <img
                 style={{ width: "16rem" }}

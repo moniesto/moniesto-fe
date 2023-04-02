@@ -5,6 +5,7 @@ import { BeMoniestReq } from "../../../interfaces/requests";
 import toastService from "../../../services/toastService";
 import { LoadingButton } from "@mui/lab";
 import api from "../../../services/api";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 type propType = {
   handleNext: (data: Partial<BeMoniestReq>) => void;
@@ -22,6 +23,7 @@ const EmailStep = ({
   const [isSendVerifyMail, setIsSendVerifyMail] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const theme = useTheme();
+  const translate = useTranslate();
 
   const handleSendVerifyEmail = () => {
     setLoading(true);
@@ -31,7 +33,7 @@ const EmailStep = ({
       })
       .then(() => {
         toastService.open({
-          message: "We send an email to your email address.",
+          message: translate("page.be_moniest.toast.mail_sent"),
           severity: "success",
         });
         setIsSendVerifyMail(true);
@@ -54,14 +56,16 @@ const EmailStep = ({
               color: theme.palette.secondary.main,
             }}
           />
-          <Typography variant="h3">Your email is already verified</Typography>
+          <Typography variant="h3">
+            {translate("page.be_moniest.already_verified_email")}
+          </Typography>
           <Stack mt={4} width="80%" alignItems="end">
             <Button
               onClick={() => handleNext({})}
               variant="contained"
               color="secondary"
             >
-              Next
+              {translate("page.common.next")}
             </Button>
           </Stack>
         </>
@@ -74,14 +78,19 @@ const EmailStep = ({
             }}
           />
           <Stack alignItems="center" rowGap={1}>
-            <Typography variant="h3">We sent the mail to {email}</Typography>
-            <Typography variant="h3">Please check your email</Typography>
+            <Typography variant="h3">
+              {translate("page.be_moniest.send_mailto", { email: email })}
+            </Typography>
+            <Typography variant="h3">
+              {translate("page.be_moniest.check_mail")}
+            </Typography>
           </Stack>
         </>
       ) : (
         <>
           <Typography sx={{ paddingTop: "2rem" }} variant="h3">
-            You need to verify your email address to become a Moniest
+          {translate("page.be_moniest.need_verify")}
+            
           </Typography>
           <LoadingButton
             sx={{ marginTop: "1rem" }}
@@ -91,7 +100,8 @@ const EmailStep = ({
             loading={loading}
             variant="contained"
           >
-            Verify Email
+             {translate("page.be_moniest.verify_email")}
+            
           </LoadingButton>
         </>
       )}

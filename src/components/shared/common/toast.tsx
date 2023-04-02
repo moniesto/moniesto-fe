@@ -1,9 +1,11 @@
 import { Alert, Snackbar } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
+import { useTranslate } from "../../../hooks/useTranslate";
 import { useAppSelector } from "../../../store/hooks";
 
 const Toast = () => {
   const [open, setOpen] = useState(false);
+  const translate = useTranslate();
   const messageProps = useAppSelector((state) => state.toast);
 
   const handleClose = (
@@ -28,7 +30,7 @@ const Toast = () => {
           severity={messageProps.severity}
           sx={{ width: "100%" }}
         >
-          {messageProps.message}
+          {translate(messageProps.message)}
         </Alert>
       </Snackbar>
     ),

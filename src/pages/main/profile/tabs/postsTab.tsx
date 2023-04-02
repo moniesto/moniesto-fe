@@ -107,7 +107,7 @@ const PostsTab = ({
     target3: 2203.99,
     updated_at: new Date(),
     user: account,
-    status: "",
+    status: "fail",
     finished: false,
     description: "",
   };

@@ -10,6 +10,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useTranslate } from "../../../hooks/useTranslate";
 import api from "../../../services/api";
 
 export const UsernameInput = ({
@@ -23,6 +24,7 @@ export const UsernameInput = ({
   const [displayCheckIcon, setDisplayCheckIcon] = useState<boolean>(false);
   const [isCorrectName, setIsCorrectName] = useState<boolean>(false);
   const theme = useTheme();
+  const translate = useTranslate();
 
   useEffect(() => {
     if (currentValue == formik?.values?.username) return;
@@ -39,7 +41,10 @@ export const UsernameInput = ({
         .check_username(formik.values.username)
         .then((res) => {
           if (!res.validity) {
-            formik.setFieldError("username", "username already exist");
+            formik.setFieldError(
+              "username",
+              translate("form.validation.username_exist")
+            );
           }
           setIsCorrectName(res.validity);
         })
@@ -60,7 +65,7 @@ export const UsernameInput = ({
         fullWidth
         id="username"
         name="username"
-        placeholder="Username"
+        placeholder={translate("form.field.username")}
         value={formik.values.username}
         onChange={(e) => handleUsernameChange(e.target.value)}
         error={formik.touched.username && Boolean(formik.errors.username)}

@@ -1,32 +1,29 @@
 import { Box, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 type propTypes = {
-  date: string;
+  status: "pending" | "fail" | "success";
 };
 
-const StatusDot = ({ date }: propTypes) => {
+const StatusDot = ({ status }: propTypes) => {
   const [color, setColor] = useState<string>("");
   const theme = useTheme();
 
   useEffect(() => {
     let newColor: string = "";
-    let status = 0;
-    if (new Date(date) < new Date()) {
-      status = 2;
-    } else {
-      status = 1;
-    }
 
     switch (status) {
-      case 1:
+      case "success":
         newColor = theme.palette.success.main;
         break;
-      case 2:
+      case "fail":
         newColor = theme.palette.error.main;
+        break;
+      case "pending":
+        newColor = theme.palette.warning.main;
         break;
     }
     setColor(newColor);
-  }, [date]);
+  }, [status]);
 
   return (
     <Box

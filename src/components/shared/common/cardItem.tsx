@@ -1,10 +1,7 @@
 import {
   ListItem,
-  ListItemAvatar,
-  ListItemAvatarProps,
   ListItemButton,
   ListItemText,
-  Radio,
   Stack,
   Typography,
 } from "@mui/material";

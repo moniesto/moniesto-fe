@@ -1,7 +1,7 @@
 import { AppBar, Box, Container, Grid, Stack, Toolbar } from "@mui/material";
 import { useTheme } from "@mui/system";
 import { useEffect, useState } from "react";
-import { Outlet, useLocation, useParams } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "../components/layout/header";
 import { BottomNavBar } from "../components/layout/main/bottomNavBar";
 import { SettingsSideBar } from "../components/layout/main/settingsSideBar";

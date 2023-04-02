@@ -13,6 +13,7 @@ import {
 import { Stack } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslate } from "../../../hooks/useTranslate";
 import { emptyUser } from "../../../interfaces/user";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setToken } from "../../../store/slices/localStorageSlice";
@@ -24,15 +25,17 @@ const HeaderProfile = () => {
   const user = useAppSelector((state) => state.user.user);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const translate = useTranslate();
+
   const menuItems = [
     {
       icon: <PersonOutlineOutlinedIcon />,
-      title: "Profile",
+      title: translate("navigation.profile"),
       path: "/" + user.username,
     },
     {
       icon: <SettingsOutlinedIcon />,
-      title: "Settings",
+      title: translate("navigation.settings"),
       path: "/settings/account",
     },
   ];
@@ -43,7 +46,7 @@ const HeaderProfile = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
+
   const handleLogout = () => {
     dispatch(setUser(emptyUser));
     dispatch(setToken(""));
@@ -146,7 +149,7 @@ const HeaderProfile = () => {
           <ListItemIcon>
             <Logout />
           </ListItemIcon>
-          Logut
+          {translate("navigation.logout")}
         </MenuItem>
       </Menu>
     </>

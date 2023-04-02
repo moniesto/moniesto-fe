@@ -1,9 +1,158 @@
 {
-  "form_field": {
-    "duration": "Duration"
+  "page": {
+    "login": {
+      "title": "Login",
+      "enter_detail": "Please enter your account details",
+      "action": {
+        "forget_pass": "Forget Password?",
+        "login": "Login",
+        "no_account": "No account?",
+        "register": "Register"
+      },
+      "toast": {
+        "login_success": "Login successful"
+      }
+    },
+    "register": {
+      "title": "Register",
+      "enter_detail": "Please enter your account informations",
+      "action": {
+        "login": "Login",
+        "have_account": "Have an account? ",
+        "register": "Register"
+      },
+      "toast": {
+        "register_success": "Registiration successful"
+      }
+    },
+    "forget_pass": {
+      "title": "Forget Password",
+      "enter_email": "Please enter your email",
+      "action": {
+        "back_to": "Back to",
+        "login": "Login",
+        "continue": "Continue"
+      },
+      "toast": {
+        "mail_sent": "We send an mail to you. Please check your email address."
+      }
+    },
+    "change_pass": {
+      "title": "Change Password",
+      "enter_pass": "Please enter your password",
+      "action": {
+        "back_to": "Back to",
+        "login": "Login"
+      },
+      "toast": {
+        "password_changed": "You changed your password successfully. You can login with your new credentials."
+      },
+      "unavailable": {
+        "title": "Sorry, this page is unavailable. ",
+        "body": "The link you clicked may be broken or the page may have been removed. Back to"
+      }
+    },
+    "landing": {
+      "invest_wisely": "Invest Wisely"
+    },
+    "share_post": {
+      "share_post": "Share Post",
+      "max_score": "Max Score"
+    },
+    "be_moniest": {
+      "be_moniest": "Be Moniest",
+      "cong_moniest": "Congratulations... You are moniest now",
+      "toast": {
+        "mail_sent": "We send an email to your email address."
+      },
+      "already_verified_email": "Your email is already verified",
+      "send_mailto": "We sent the mail to {{email}}",
+      "check_mail": "Please check your email",
+      "need_verify": "You need to verify your email address to become a Moniest",
+      "verify_email": "Verify Email"
+    }
+  },
+  "component": {
+    "search": {
+      "no_user_found": "No user found with {{text}}"
+    },
+    "post_card": {
+      "table": {
+        "direction": "Direction",
+        "start": "Start",
+        "target": "Target",
+        "time_left": "Time Left",
+        "tp_1": "TP 1",
+        "tp_2": "TP 2",
+        "tp_3": "TP 3",
+        "stop": "Stop"
+      }
+    }
+  },
+  "form": {
+    "field": {
+      "email_or_username": "Email or username",
+      "password": "Password",
+      "confirm_password": "Confirm Password",
+      "email": "Email",
+      "search_moniest": "Search for Moniests ...",
+      "username": "Username",
+      "currency": "Currency",
+      "duration": "Duration",
+      "direction": "Direction",
+      "targets": "Targets",
+      "tp_1": "TP 1",
+      "tp_2": "TP 2",
+      "tp_3": "TP 3",
+      "stop": "Stop",
+      "add_desc": "Add Description (Optional)",
+      "share": "Share"
+    },
+    "validation": {
+      "identifier_req": "Email or username is required",
+      "password_min": "Password must be at least 6 characters long",
+      "password_req": "Password is required",
+      "email_valid": "Enter a valid email address",
+      "email_req": "Email is required",
+      "username_req": "Username is required",
+      "name_req": "Name is required",
+      "surname_req": "Surname is required",
+      "username_min": "Username must be at least 5 characters long",
+      "name_min": "Name must be at least 2 characters long",
+      "surname_min": "Surname must be at least 2 characters long",
+      "confirm_password_req": "Confirm Password is required",
+      "username_exist": "Username already exist!"
+    }
+  },
+  "moniest": {
+    "per_month": "per month",
+    "subscribers": "Subscribers",
+    "subscribed": "Subscribed",
+    "subscribe": "Subscribe",
+    "show_more": "Show More"
+  },
+  "common": {
+    "welcome": "Welcome",
+    "save": "Save",
+    "moniesto": "Moniesto",
+    "long": "Long",
+    "short": "Short",
+    "next": "Next",
+    "back": "Back"
   },
   "navigation": {
     "timeline": "Timeline",
-    "explore": "Explore"
+    "explore": "Explore",
+    "share_post": "Share Post",
+    "be_moniest": "Be Moniest",
+    "account": "Account",
+    "card": "Card",
+    "password": "Password",
+    "verify_email": "Verify Email",
+    "moniest": "Moniest",
+    "settings": "Settings",
+    "profile": "Profile",
+    "logout": "Logut",
+    "home": "Home"
   }
 }

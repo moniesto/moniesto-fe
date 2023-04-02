@@ -12,27 +12,28 @@ import { setUser } from "../../store/slices/userSlice";
 import { setToken } from "../../store/slices/localStorageSlice";
 import api from "../../services/api";
 import toastService from "../../services/toastService";
+import { useTranslate } from "../../hooks/useTranslate";
 
 type LoginForm = {
   identifier: string;
   password: string;
 };
-const validationSchema = yup.object({
-  identifier: yup
-    .string()
-    // .email("Enter a valid email")
-    .required("Email or username is required"),
-  password: yup
-    .string()
-    .min(6, "Password should be of minimum 6 characters length")
-    .required("Password is required"),
-});
 
 const Login = () => {
   const theme = useTheme();
+  const translate = useTranslate();
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
 
+  const validationSchema = yup.object({
+    identifier: yup
+      .string()
+      .required(translate("form.validation.identifier_req")),
+    password: yup
+      .string()
+      .min(6, translate("form.validation.password_min"))
+      .required(translate("form.validation.password_req")),
+  });
   const handleSubmit = (values: LoginForm) => {
     setLoading(true);
     api.auth
@@ -40,14 +41,13 @@ const Login = () => {
       .then((res) => {
         toastService.open({
           severity: "success",
-          message: "Login success",
+          message: "page.login.toast.login_success",
         });
         dispatch(setUser(res.user));
         dispatch(setToken(res.token));
       })
       .finally(() => setLoading(false));
   };
-
 
   const formik = useFormik<LoginForm>({
     initialValues: {
@@ -63,13 +63,15 @@ const Login = () => {
   return (
     <Stack width={"100%"} maxWidth={500} spacing={8}>
       <Stack spacing={1.8}>
-        <Typography fontSize={"2.2rem"}>Login</Typography>
+        <Typography fontSize={"2.2rem"}>
+          {translate("page.login.title")}
+        </Typography>
         <Typography fontSize={"2.6rem"} variant="h1">
-          Welcome
+          {translate("common.welcome")}
         </Typography>
 
         <Typography fontSize={"1rem"} color={theme.palette.grey[400]}>
-          Please enter your account details
+          {translate("page.login.enter_detail")}
         </Typography>
       </Stack>
       <form onSubmit={formik.handleSubmit}>
@@ -78,7 +80,7 @@ const Login = () => {
             <TextField
               fullWidth
               name="identifier"
-              placeholder="Email or username"
+              placeholder={translate("form.field.email_or_username")}
               value={formik.values.identifier}
               onChange={formik.handleChange}
               error={
@@ -97,7 +99,7 @@ const Login = () => {
             <TextField
               fullWidth
               name="password"
-              placeholder="Password"
+              placeholder={translate("form.field.password")}
               type="password"
               value={formik.values.password}
               onChange={formik.handleChange}
@@ -118,7 +120,7 @@ const Login = () => {
                 color={theme.palette.grey[500]}
                 sx={{ cursor: "pointer" }}
               >
-                Forget Password?
+                {translate("page.login.action.forget_pass")}
               </Stack>
             </Navigator>
           </Stack>
@@ -129,7 +131,7 @@ const Login = () => {
             loading={loading}
             variant="contained"
           >
-            Login
+            {translate("page.login.action.login")}
           </LoadingButton>
 
           <Stack
@@ -139,14 +141,14 @@ const Login = () => {
             justifyContent="center"
             color={theme.palette.text.secondary}
           >
-            No account?
+            {translate("page.login.action.no_account")}
             <Navigator path="/register">
               <Typography
                 sx={{ cursor: "pointer" }}
                 variant="h4"
                 color="secondary"
               >
-                Register
+                {translate("page.login.action.register")}
               </Typography>
             </Navigator>
           </Stack>

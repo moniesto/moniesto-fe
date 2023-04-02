@@ -16,22 +16,16 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import toastService from "../../services/toastService";
 import api from "../../services/api";
+import { useTranslate } from "../../hooks/useTranslate";
 
 type ChangePasswordForm = {
   password: string;
   repassword: string;
 };
 
-const validationSchema = yup.object({
-  password: yup
-    .string()
-    .min(6, "Password should be of minimum 6 characters length")
-    .required("Password is required"),
-  repassword: yup.string().required("Repassword is required"),
-});
-
 const ChangePassword = () => {
   const theme = useTheme();
+  const translate = useTranslate();
   const navigate = useNavigate();
   let [searchParams] = useSearchParams();
   const [token, setToken] = useState<string>("");
@@ -64,8 +58,7 @@ const ChangePassword = () => {
       })
       .then(() => {
         toastService.open({
-          message:
-            "You changed your password successfully. You can login with your new credentials.",
+          message: "page.change_pass.toast.password_changed",
           severity: "success",
         });
         navigate("/login");
@@ -73,6 +66,16 @@ const ChangePassword = () => {
       .catch(() => setValidationTokenState(2))
       .finally(() => setLoading(false));
   };
+
+  const validationSchema = yup.object({
+    password: yup
+      .string()
+      .min(6, translate("form.validation.password_min"))
+      .required(translate("form.validation.password_req")),
+    repassword: yup
+      .string()
+      .required(translate("form.validation.confirm_password_req")),
+  });
 
   const formik = useFormik<ChangePasswordForm>({
     initialValues: {
@@ -94,13 +97,15 @@ const ChangePassword = () => {
       ) : validationTokenState === 1 ? (
         <Stack width={"100%"} maxWidth={500} spacing={8}>
           <Stack spacing={1.8}>
-            <Typography fontSize={"2.2rem"}>Change Password</Typography>
+            <Typography fontSize={"2.2rem"}>
+              {translate("page.change_pass.title")}
+            </Typography>
             <Typography fontSize={"2.6rem"} variant="h1">
-              Welcome
+              {translate("common.welcome")}
             </Typography>
 
             <Typography fontSize={"1rem"} color={theme.palette.grey[400]}>
-              Please enter your password
+              {translate("page.change_pass.enter_pass")}
             </Typography>
           </Stack>
           <form onSubmit={formik.handleSubmit}>
@@ -110,7 +115,7 @@ const ChangePassword = () => {
                   fullWidth
                   id="password"
                   name="password"
-                  placeholder="Password"
+                  placeholder={translate("form.field.password")}
                   type="password"
                   value={formik.values.password}
                   onChange={formik.handleChange}
@@ -130,7 +135,7 @@ const ChangePassword = () => {
                   fullWidth
                   id="repassword"
                   name="repassword"
-                  placeholder="Confirm password"
+                  placeholder={translate("form.field.confirm_password")}
                   type="password"
                   value={formik.values.repassword}
                   onChange={formik.handleChange}
@@ -158,7 +163,7 @@ const ChangePassword = () => {
                 loading={loading}
                 variant="contained"
               >
-                Save
+                {translate("common.save")}
               </LoadingButton>
 
               <Stack
@@ -168,14 +173,14 @@ const ChangePassword = () => {
                 justifyContent="center"
                 color={theme.palette.text.secondary}
               >
-                Back to
+                {translate("page.change_pass.action.back_to")}
                 <Navigator path="/login">
                   <Typography
                     sx={{ cursor: "pointer" }}
                     variant="h4"
                     color="secondary"
                   >
-                    Login
+                    {translate("page.change_pass.action.login")}
                   </Typography>
                 </Navigator>
               </Stack>
@@ -184,15 +189,15 @@ const ChangePassword = () => {
         </Stack>
       ) : (
         <Stack rowGap={3}>
-          <Typography variant="h2">Sorry, this page is unavailable.</Typography>
+          <Typography variant="h2">
+            {translate("page.change_pass.unavailable.title")}
+          </Typography>
           <Typography variant="h4">
-            The link you clicked may be broken or the page may have been
-            removed. Back to
+            {translate("page.change_pass.unavailable.body")}
             <Navigator path="/">
               <Typography fontWeight="bold" component="span" color="secondary">
-                moniesto
+                &nbsp;{translate("common.moniesto")}
               </Typography>
-              .
             </Navigator>
           </Typography>
         </Stack>

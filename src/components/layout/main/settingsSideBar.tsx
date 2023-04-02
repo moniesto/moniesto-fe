@@ -9,7 +9,6 @@ import {
 } from "@mui/icons-material";
 import {
   Card,
-  CardHeader,
   List,
   ListItem,
   ListItemButton,
@@ -26,12 +25,14 @@ import { setUser } from "../../../store/slices/userSlice";
 import { useDispatch } from "react-redux";
 import { emptyUser } from "../../../interfaces/user";
 import { setToken } from "../../../store/slices/localStorageSlice";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 export const SettingsSideBar = () => {
   const [selectedLink, setSelectedLink] = useState("/settings/account");
   const user = useAppSelector((state) => state.user.user);
   const { pathname } = useLocation();
   const dispatch = useDispatch();
+  const translate = useTranslate();
 
   const matches = useMediaQuery((theme: any) => theme.breakpoints.down("md"));
 
@@ -41,22 +42,22 @@ export const SettingsSideBar = () => {
     {
       path: "/settings/account",
       icon: <PersonOutline />,
-      title: "Account",
+      title: translate("navigation.account"),
     },
     {
       path: "/settings/card",
       icon: <CreditCardOutlined />,
-      title: "Card",
+      title: translate("navigation.card"),
     },
     {
       path: "/settings/password",
       icon: <KeyOutlined />,
-      title: "Password",
+      title: translate("navigation.password"),
     },
     {
       path: "/settings/verify-email",
       icon: <EmailOutlined />,
-      title: "Verify Email",
+      title: translate("navigation.verify_email"),
     },
   ]);
 
@@ -73,7 +74,7 @@ export const SettingsSideBar = () => {
       newLinks.splice(1, 0, {
         path: "/settings/moniest",
         icon: <RocketLaunchOutlined />,
-        title: "Moniest",
+        title: translate("navigation.moniest"),
       });
       setLinks(newLinks);
     }
@@ -93,7 +94,7 @@ export const SettingsSideBar = () => {
     <Card>
       {matches && (
         <Typography sx={{ opacity: 0.8 }} p={3} pb={0} variant="h2">
-          Settings
+           {translate("navigation.settings")}
         </Typography>
       )}
       <Stack minHeight={"400px"} justifyContent="space-between" padding={2}>
