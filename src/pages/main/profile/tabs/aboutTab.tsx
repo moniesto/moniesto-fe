@@ -8,7 +8,7 @@ const AboutTab = ({ aboutText }: { aboutText: string }) => {
         <Typography letterSpacing="1px">{aboutText}</Typography>
       ) : (
         <Stack justifyContent="center" direction="row">
-          User didn't add any bio
+          Moniest didn't add any description
         </Stack>
       )}
     </Card>
