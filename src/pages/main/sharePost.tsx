@@ -79,98 +79,98 @@ export const SharePost = () => {
       yup.object({
         duration: yup
           .date()
-          .required("Duration is required")
-          .min(oneMinLater(), "Duration must be greater than a minute"),
-        currency: yup.string().required("Currency is required"),
+          .required(translate("form.validation.duration_req"))
+          .min(oneMinLater(), translate("form.validation.duration_min")),
+        currency: yup
+          .string()
+          .required(translate("form.validation.currency_req")),
         stop: yup
           .number()
-
           .when("direction", {
             is: "long",
-            then: yup
-              .number()
-              .lessThan(
-                selectedCurrencyPrice,
-                `Stop should be lower than ${selectedCurrencyPrice}`
-              ),
+            then: yup.number().lessThan(
+              selectedCurrencyPrice,
+              translate("form.validation.stop_lower", {
+                price: selectedCurrencyPrice,
+              })
+            ),
           })
           .when("direction", {
             is: "short",
-            then: yup
-              .number()
-              .moreThan(
-                selectedCurrencyPrice,
-                `Stop should be more than ${selectedCurrencyPrice}`
-              ),
+            then: yup.number().moreThan(
+              selectedCurrencyPrice,
+              translate("form.validation.stop_more", {
+                price: selectedCurrencyPrice,
+              })
+            ),
           })
 
-          .required("Stop is required"),
+          .required("form.validation.stop_req"),
         target1: yup
           .number()
           .when("direction", {
             is: "long",
-            then: yup
-              .number()
-              .moreThan(
-                selectedCurrencyPrice,
-                `TP1 should be greater than ${selectedCurrencyPrice}`
-              ),
+            then: yup.number().moreThan(
+              selectedCurrencyPrice,
+              translate("form.validation.tp1_more", {
+                price: selectedCurrencyPrice,
+              })
+            ),
           })
           .when("direction", {
             is: "short",
-            then: yup
-              .number()
-              .lessThan(
-                selectedCurrencyPrice,
-                `TP1 should be lower than ${selectedCurrencyPrice}`
-              ),
+            then: yup.number().lessThan(
+              selectedCurrencyPrice,
+              translate("form.validation.tp1_lower", {
+                price: selectedCurrencyPrice,
+              })
+            ),
           })
-          .required("TP1 is required"),
+          .required("form.validation.tp1_req"),
 
         target2: yup
           .number()
           .when("direction", {
             is: "long",
-            then: yup
-              .number()
-              .moreThan(
-                formik.values.target1 || 0,
-                `TP2 should be greater than ${formik.values.target1 || 0}`
-              ),
+            then: yup.number().moreThan(
+              formik.values.target1 || 0,
+              translate("form.validation.tp2_more", {
+                price: formik.values.target1 || 0,
+              })
+            ),
           })
           .when("direction", {
             is: "short",
-            then: yup
-              .number()
-              .lessThan(
-                formik.values.target1 || 0,
-                `TP2 should be lower than ${formik.values.target1 || 0}`
-              ),
+            then: yup.number().lessThan(
+              formik.values.target1 || 0,
+              translate("form.validation.tp2_lower", {
+                price: formik.values.target1 || 0,
+              })
+            ),
           })
-          .required("TP2 is required"),
+          .required("form.validation.tp2_req"),
 
         target3: yup
           .number()
-
           .when("direction", {
             is: "long",
-            then: yup
-              .number()
-              .moreThan(
-                formik.values.target2 || 0,
-                `TP3 should be greater than ${formik.values.target2 || 0}`
-              ),
-          })
+            then: yup.number().moreThan(
+              formik.values.target2 || 0,
+              translate("form.validation.tp3_more", {
+                price: formik.values.target2 || 0,
+              })
+            ),
+          })  
           .when("direction", {
             is: "short",
-            then: yup
-              .number()
-              .lessThan(
-                formik.values.target2 || 0,
-                `TP3 should be lower than ${formik.values.target2 || 0}`
-              ),
+            then: yup.number().lessThan(
+              formik.values.target2 || 0,
+              translate("form.validation.tp3_lower", {
+                price: formik.values.target2 || 0,
+              })
+            ),
           })
-          .required("TP3 is required"),
+          .required("form.validation.tp3_req"),
       }),
     onSubmit: async (values) => {
       setSubmitLoading(true);
@@ -180,7 +180,7 @@ export const SharePost = () => {
         .create_post(values)
         .then(() => {
           toastService.open({
-            message: "Your post successfully created",
+            message: translate("page.share_post.toast.post_created"),
             severity: "success",
           });
           navigate("/timeline");

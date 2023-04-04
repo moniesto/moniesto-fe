@@ -3,6 +3,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { Box, Tab, useTheme } from "@mui/material";
 import { ReactNode, useEffect, useMemo, useState } from "react";
+import { useTranslate } from "../../../hooks/useTranslate";
 import { User } from "../../../interfaces/user";
 import api from "../../../services/api";
 import AboutTab from "./tabs/aboutTab";
@@ -36,6 +37,7 @@ const ProfileTabs = ({
     subscribers: 0,
   });
   const [tabs, setTabs] = useState<TypeTab[]>([]);
+  const translate = useTranslate();
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
@@ -58,7 +60,7 @@ const ProfileTabs = ({
   useEffect(() => {
     setTabs([
       {
-        title: `Posts (${counts.posts})`,
+        title: translate("page.profile.tab.posts", { count: counts.posts }),
         value: "posts",
         content: (
           <PostsTab
@@ -71,13 +73,17 @@ const ProfileTabs = ({
         only_moniest: true,
       },
       {
-        title: `Subscribers (${counts.subscribers})`,
+        title: translate("page.profile.tab.subscribers", {
+          count: counts.subscribers,
+        }),
         value: "subscribers",
         content: <SubscribersTab isMyAccount={isMyAccount} account={account} />,
         only_moniest: true,
       },
       {
-        title: `Subscriptions (${counts.subscriptions})`,
+        title: translate("page.profile.tab.subscriptions", {
+          count: counts.subscriptions,
+        }),
         value: "subscriptions",
         content: (
           <SubscriptionsTab isMyAccount={isMyAccount} account={account} />
@@ -85,7 +91,7 @@ const ProfileTabs = ({
         only_moniest: false,
       },
       {
-        title: "About",
+        title: translate("page.profile.tab.about"),
         value: "about",
         content: (
           <AboutTab aboutText={account.moniest?.description as string} />

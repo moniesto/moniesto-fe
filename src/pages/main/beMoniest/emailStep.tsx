@@ -65,7 +65,7 @@ const EmailStep = ({
               variant="contained"
               color="secondary"
             >
-              {translate("page.common.next")}
+              {translate("common.next")}
             </Button>
           </Stack>
         </>

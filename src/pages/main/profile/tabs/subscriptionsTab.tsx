@@ -6,6 +6,7 @@ import { InfiniteScroll } from "../../../../components/shared/common/infiniteScr
 import api from "../../../../services/api";
 import Navigator from "../../../../components/shared/common/navigatior";
 import { Stack } from "@mui/system";
+import { useTranslate } from "../../../../hooks/useTranslate";
 
 const SubscriptionsTab = ({
   account,
@@ -17,6 +18,7 @@ const SubscriptionsTab = ({
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [hasMore, setHasMore] = useState<boolean>(true);
+  const translate = useTranslate();
   const [queryParams, setQueryParams] = useState<{
     limit: number;
     offset: number;
@@ -61,13 +63,11 @@ const SubscriptionsTab = ({
           {!loading && !users.length && (
             <Stack p={2} alignItems="center">
               <Typography variant="h5">
-                {isMyAccount ? (
-                  "You don't have any subscriptions yet"
-                ) : (
-                  <>
-                    <b>{account.username}</b> doesn't have any subscriptions yet
-                  </>
-                )}
+                {isMyAccount
+                  ? translate("page.profile.no_subscription")
+                  : translate("page.profile.no_subscription_account", {
+                      username: account.username,
+                    })}
               </Typography>
             </Stack>
           )}

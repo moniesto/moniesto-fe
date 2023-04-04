@@ -15,6 +15,7 @@ import { ClearOutlined, ErrorOutline } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import api from "../../../services/api";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 export const SubscribeToMoniest = ({
   account,
@@ -26,6 +27,7 @@ export const SubscribeToMoniest = ({
   alreadySubscribed: boolean;
 }) => {
   const theme = useTheme();
+  const translate = useTranslate();
   const [loading, setLoading] = useState<boolean>(false);
   const handleSubscribe = () => {
     setLoading(true);
@@ -89,14 +91,17 @@ export const SubscribeToMoniest = ({
               justifyContent="space-between"
             >
               <Typography variant="h4" fontWeight={500}>
-                {alreadySubscribed ? "Unsubscribe from " : "Subscribe to "}
-                <b>{account.username}</b>
+                {translate(
+                  `page.profile.subs_modal.${alreadySubscribed ? "from" : "to"}`
+                )}
+
+                <b>{" " + account.username}</b>
               </Typography>
               {!alreadySubscribed && (
                 <Typography variant="h4">
                   {account.moniest?.subscription_info.fee}$
                   <Typography pl={1} component="span">
-                    / Monthly
+                    / {translate("page.profile.subs_modal.monthly")}
                   </Typography>
                 </Typography>
               )}
@@ -106,7 +111,7 @@ export const SubscribeToMoniest = ({
         <Box p={3} pt={6}>
           {!alreadySubscribed && (
             <Typography variant="h4" mb={2}>
-              Monthly payment
+              {translate("page.profile.subs_modal.monthly_payment")}
             </Typography>
           )}
           {!alreadySubscribed && (
@@ -118,14 +123,16 @@ export const SubscribeToMoniest = ({
               >
                 <Stack spacing={1} direction="row" alignItems="center">
                   <Typography variant="h4">
-                    Subscription start date :
+                    {translate("page.profile.subs_modal.subs_start_date")} :
                   </Typography>
                   <Typography variant="h5" fontWeight={500}>
                     {new Date().toDateString()}
                   </Typography>
                 </Stack>
                 <Stack spacing={1} direction="row" alignItems="center">
-                  <Typography variant="h4"> Total :</Typography>
+                  <Typography variant="h4">
+                    {translate("page.profile.subs_modal.total")} :
+                  </Typography>
                   <Typography variant="h4">
                     {account.moniest?.subscription_info.fee}$
                   </Typography>
@@ -139,18 +146,20 @@ export const SubscribeToMoniest = ({
               <Stack mb={3} spacing={1} direction="row" alignItems="center">
                 <ErrorOutline></ErrorOutline>
                 <Typography variant="h4">
-                  You are paying {account.moniest?.subscription_info.fee}$/Month
-                  currently
+                  {translate("page.profile.subs_modal.paying_currently", {
+                    fee: account.moniest?.subscription_info.fee,
+                  })}
                 </Typography>
               </Stack>
               <Typography variant="h5" letterSpacing={0.5}>
-                If you are unsubscribe from Jane Done, you will no longer be
-                able to access content shared by this account for subscribers.
+                {translate("page.profile.subs_modal.if_unsubscribe", {
+                  username: account.username,
+                })}
               </Typography>
             </Box>
           ) : (
             <Box>
-              <Typography variant="h5" letterSpacing={0.5}>
+              {/* <Typography variant="h5" letterSpacing={0.5}>
                 Faturalandırma her ay otomatik olarak yenilenir. Kısmi fatura
                 dönemlerine ait ödemeler iade edilmez. Dilediğiniz zaman
                 Ayarlar'dan iptal edebilirsiniz. Daha fazla bilgi edinin.
@@ -161,7 +170,7 @@ export const SubscribeToMoniest = ({
                 Devam ederek Google Payments Hizmet Şartları hükümlerini kabul
                 edersiniz. Gizlilik Bildirimi hükümlerinde verilerinizin nasıl
                 kullanıldığı açıklanır.
-              </Typography>
+              </Typography> */}
             </Box>
           )}
           <Stack mt={3}>
@@ -173,7 +182,11 @@ export const SubscribeToMoniest = ({
               loading={loading}
               variant="contained"
             >
-              {alreadySubscribed ? "Unsubscribe" : "Subscribe"}
+              {translate(
+                `page.profile.${
+                  alreadySubscribed ? "unsubscribe" : "subscribe"
+                }`
+              )}
             </LoadingButton>
           </Stack>
         </Box>

@@ -57,7 +57,10 @@
     },
     "share_post": {
       "share_post": "Share Post",
-      "max_score": "Max Score"
+      "max_score": "Max Score",
+      "toast": {
+        "post_created": "Your post successfully created "
+      }
     },
     "be_moniest": {
       "be_moniest": "Be Moniest",
@@ -69,7 +72,44 @@
       "send_mailto": "We sent the mail to {{email}}",
       "check_mail": "Please check your email",
       "need_verify": "You need to verify your email address to become a Moniest",
-      "verify_email": "Verify Email"
+      "verify_email": "Verify Email",
+      "submit": {
+        "becoming_moniest": " You are becoming a Moniest. You can share your predictions now with the world. Users can subsribe you by paying",
+        "by_price": "{{price}} $/month.",
+        "operation_fee": "operation fee is",
+        "payment_below": "You will recieve your payments to account below",
+        "by_taking_agree": "By taking this step, you agree to our",
+        "terms_policy": "terms and policies",
+        "information": "Information"
+      }
+    },
+    "profile": {
+      "user_not_found": "User not found",
+      "no_bio": "Moniest didn't add any bio",
+      "subscribe": "Subscribe",
+      "unsubscribe": "Unsubscribe",
+      "sub_for_live": "Subscribe to see live posts",
+      "no_post": "There are no posts yet",
+      "no_subscriber": "You don't have any subscribers yet",
+      "no_subscriber_account": "{{username}} doesn't have any subscribers yet",
+      "no_subscription": "You don't have any subscriptions yet",
+      "no_subscription_account": "{{username}} doesn't have any subscriptions yet",
+      "tab": {
+        "posts": "Posts {{count}}",
+        "subscribers": "Subscribers {{count}}",
+        "subscriptions": "Subscriptions {{count}}",
+        "about": "About"
+      },
+      "subs_modal": {
+        "to": "Subscribe to ",
+        "from": "Unsubscribe from",
+        "monthly": "Monthly",
+        "monthly_payment": "Monthly payment",
+        "subs_start_date": "Subscription start date",
+        "total": "Total",
+        "paying_currently": "You are paying {{fee}}$/Month currently",
+        "if_unsubscribe": "If you are unsubscribe from {{username}}, you will no longer be able to access content shared by this account for subscribers."
+      }
     }
   },
   "component": {
@@ -106,7 +146,10 @@
       "tp_3": "TP 3",
       "stop": "Stop",
       "add_desc": "Add Description (Optional)",
-      "share": "Share"
+      "share": "Share",
+      "fee": "Monthly fee (USDT)",
+      "bio": "Bio",
+      "desc": "Description (optional)"
     },
     "validation": {
       "identifier_req": "Email or username is required",
@@ -121,7 +164,26 @@
       "name_min": "Name must be at least 2 characters long",
       "surname_min": "Surname must be at least 2 characters long",
       "confirm_password_req": "Confirm Password is required",
-      "username_exist": "Username already exist!"
+      "username_exist": "Username already exist!",
+      "duration_req": "Duration is required",
+      "duration_min": "Duration must be greater than a minute",
+      "currency_req": "Currency is required",
+      "stop_req": "Stop is required",
+      "stop_lower": "Stop should be lower than {{price}}",
+      "stop_more": "Stop should be more than {{price}}",
+      "tp1_req": "TP1 is required",
+      "tp1_lower": "TP1 should be lower than {{price}}",
+      "tp1_more": "TP1 should be more than {{price}}",
+      "tp2_req": "TP2 is required",
+      "tp2_lower": "TP2 should be lower than {{price}}",
+      "tp2_more": "TP2 should be more than {{price}}",
+      "tp3_req": "TP3 is required",
+      "tp3_lower": "TP3 should be lower than {{price}}",
+      "tp3_more": "TP3 should be more than {{price}}",
+      "fee_min": "Fee should be greater then {{value}}",
+      "fee_req": "Fee is required",
+      "bio_min": "Bio should be of minimum {{value}} characters length",
+      "bio_req": "Bio is required"
     }
   },
   "moniest": {
@@ -138,7 +200,8 @@
     "long": "Long",
     "short": "Short",
     "next": "Next",
-    "back": "Back"
+    "back": "Back",
+    "edit": "Edit"
   },
   "navigation": {
     "timeline": "Timeline",

@@ -10,6 +10,7 @@ import api from "../../../../services/api";
 import { User } from "../../../../interfaces/user";
 import { Spinner } from "../../../../components/shared/common/spinner";
 import { SubscribeButton } from "../../../../components/shared/user/subscribeButton";
+import { useTranslate } from "../../../../hooks/useTranslate";
 
 type FilterType = "all" | "live";
 type Filter = {
@@ -49,6 +50,7 @@ const PostsTab = ({
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(true);
   const [activePostFilter, setActivePostFilter] = useState<Filter>(filters[0]);
+  const translate = useTranslate();
 
   const handleFetchData = () => {
     setQueryParams({ ...queryParams, offset: queryParams.offset + 1 });
@@ -123,7 +125,7 @@ const PostsTab = ({
         <Stack
           sx={{
             borderRadius: "10px",
-            padding: "15px 20px",
+            padding: "14px 20px",
             fontWeight: "bold",
           }}
           flexDirection="row"
@@ -172,7 +174,7 @@ const PostsTab = ({
             }}
           >
             <Stack spacing={2} alignItems="center">
-              <Typography variant="h2"> Subscribe to see live posts</Typography>
+              <Typography variant="h2"> {translate("page.profile.sub_for_live")} </Typography>
               <SubscribeButton
                 fee={account.moniest?.subscription_info.fee as number}
                 isSubscribed={isSubscribed}
@@ -204,7 +206,7 @@ const PostsTab = ({
           {!posts.length && (
             <Card>
               <Stack p={3} alignItems="center">
-                <Typography variant="h5">There are no posts yet</Typography>
+                <Typography variant="h5">{translate("page.profile.no_post")} </Typography>
               </Stack>
             </Card>
           )}

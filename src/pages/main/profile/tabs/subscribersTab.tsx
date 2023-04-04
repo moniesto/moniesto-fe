@@ -5,6 +5,7 @@ import SubsPersonCard from "../../../../components/shared/user/subsPersonCard";
 import { InfiniteScroll } from "../../../../components/shared/common/infiniteScroll";
 import api from "../../../../services/api";
 import Navigator from "../../../../components/shared/common/navigatior";
+import { useTranslate } from "../../../../hooks/useTranslate";
 
 const SubscribersTab = ({
   account,
@@ -16,6 +17,7 @@ const SubscribersTab = ({
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [hasMore, setHasMore] = useState(true);
+  const translate = useTranslate();
   const [queryParams, setQueryParams] = useState<{
     limit: number;
     offset: number;
@@ -60,13 +62,11 @@ const SubscribersTab = ({
           {!loading && !users.length && (
             <Stack p={2} alignItems="center">
               <Typography variant="h5">
-                {isMyAccount ? (
-                  "You don't have any subscribers yet"
-                ) : (
-                  <>
-                    <b>{account.username}</b> doesn't have any subscribers yet
-                  </>
-                )}
+                {isMyAccount
+                  ? translate("page.profile.no_subscriber")
+                  : translate("page.profile.no_subscriber_account", {
+                      username: account.username,
+                    })}
               </Typography>
             </Stack>
           )}

@@ -15,6 +15,7 @@ import { EditOutlined } from "@mui/icons-material";
 import Navigator from "../../../components/shared/common/navigatior";
 import { SubscribeToMoniest } from "./subscribeToMoniest";
 import { SubscribeButton } from "../../../components/shared/user/subscribeButton";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 const Profile = () => {
   const theme = useTheme();
@@ -25,6 +26,7 @@ const Profile = () => {
   const [isSubscribeModalOpen, setIsSubscribeModalOpen] =
     useState<boolean>(false);
   const { username } = useParams();
+  const translate = useTranslate();
 
   useEffect(() => {
     if (!username) return;
@@ -93,7 +95,7 @@ const Profile = () => {
                           color="secondary"
                           variant="outlined"
                         >
-                          Edit
+                          {translate("common.edit")}
                         </Button>
                       </Navigator>
                     ) : account.moniest ? (
@@ -156,7 +158,9 @@ const Profile = () => {
       ) : (
         <Card sx={{ padding: 3 }}>
           <Stack direction="row" justifyContent="center">
-            <Typography variant="h4">User not found </Typography>
+            <Typography variant="h4">
+              {translate("page.profile.user_not_found")}
+            </Typography>
           </Stack>
         </Card>
       )}
