@@ -22,7 +22,7 @@
         "register": "Register"
       },
       "toast": {
-        "register_success": "Registiration successful"
+        "register_success": "Registration successful"
       }
     },
     "settings": {
@@ -64,7 +64,7 @@
         "continue": "Continue"
       },
       "toast": {
-        "mail_sent": "We send an mail to you. Please check your email address."
+        "mail_sent": "We sent an mail to you. Please check your email address."
       }
     },
     "change_pass": {
@@ -96,7 +96,7 @@
       "be_moniest": "Be Moniest",
       "cong_moniest": "Congratulations... You are moniest now",
       "toast": {
-        "mail_sent": "We send an email to your email address."
+        "mail_sent": "We sent an email to your email address."
       },
       "already_verified_email": "Your email is already verified",
       "send_mailto": "We sent the mail to {{email}}",
@@ -104,7 +104,7 @@
       "need_verify": "You need to verify your email address to become a Moniest",
       "verify_email": "Verify Email",
       "submit": {
-        "becoming_moniest": " You are becoming a Moniest. You can share your predictions now with the world. Users can subsribe you by paying",
+        "becoming_moniest": " You are becoming a Moniest. You can share your predictions now with the world. Users can subscribe you by paying",
         "by_price": "{{price}} $/month.",
         "operation_fee": "operation fee is",
         "payment_below": "You will recieve your payments to account below",
@@ -138,7 +138,7 @@
         "subs_start_date": "Subscription start date",
         "total": "Total",
         "paying_currently": "You are paying {{fee}}$/Month currently",
-        "if_unsubscribe": "If you are unsubscribe from {{username}}, you will no longer be able to access content shared by this account for subscribers."
+        "if_unsubscribe": "If you unsubscribe from {{username}}, you will no longer be able to access content shared by this account for subscribers."
       }
     }
   },
@@ -181,7 +181,7 @@
       "stop": "Stop",
       "add_desc": "Add Description (Optional)",
       "share": "Share",
-      "fee": "Monthly fee (USDT)",
+      "fee": "Monthly fee (USD)",
       "bio": "Bio",
       "desc": "Description (optional)",
       "old_pass": "Old password",
@@ -200,7 +200,7 @@
       "name_min": "Name must be at least 2 characters long",
       "surname_min": "Surname must be at least 2 characters long",
       "confirm_password_req": "Confirm Password is required",
-      "username_exist": "Username already exist!",
+      "username_exist": "Username already exists!",
       "duration_req": "Duration is required",
       "duration_min": "Duration must be greater than a minute",
       "currency_req": "Currency is required",
@@ -253,7 +253,7 @@
     "moniest": "Moniest",
     "settings": "Settings",
     "profile": "Profile",
-    "logout": "Logut",
+    "logout": "Logout",
     "home": "Home"
   }
 }
