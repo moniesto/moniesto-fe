@@ -2547,13 +2547,6 @@
   dependencies:
     "@types/jest" "*"
 
-"@types/three@^0.148.0":
-  version "0.148.0"
-  resolved "https://registry.npmjs.org/@types/three/-/three-0.148.0.tgz"
-  integrity sha512-1GiErjt1pJMadO8EhaxNrtULzdn+f3BbM3YTukiiXBVeRvvx4CXc2rpYdEuEBU/ouCX7Rc95j1HoVG9kFQXQJw==
-  dependencies:
-    "@types/webxr" "*"
-
 "@types/trusted-types@^2.0.2":
   version "2.0.2"
   resolved "https://registry.npmjs.org/@types/trusted-types/-/trusted-types-2.0.2.tgz"
@@ -2563,11 +2556,6 @@
   version "0.0.3"
   resolved "https://registry.npmjs.org/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz"
   integrity sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==
-
-"@types/webxr@*":
-  version "0.5.0"
-  resolved "https://registry.npmjs.org/@types/webxr/-/webxr-0.5.0.tgz"
-  integrity sha512-IUMDPSXnYIbEO2IereEFcgcqfDREOgmbGqtrMpVPpACTU6pltYLwHgVkrnYv0XhWEcjio9sYEfIEzgn3c7nDqA==
 
 "@types/ws@^8.5.1":
   version "8.5.3"
@@ -9038,16 +9026,6 @@ text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz"
   integrity sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==
-
-three@^0.148.0:
-  version "0.148.0"
-  resolved "https://registry.npmjs.org/three/-/three-0.148.0.tgz"
-  integrity sha512-8uzVV+qhTPi0bOFs/3te3RW6hb3urL8jYEl6irjCWo/l6sr8MPNMcClFev/MMYeIxr0gmDcoXTy/8LXh/LXkfw==
-
-threejs-toys@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.npmjs.org/threejs-toys/-/threejs-toys-0.0.8.tgz"
-  integrity sha512-FTlSVbNJQA4KhMTvDrcsSrfUH5hQzzzyZ9HQk76p6V4kY5O7zoH1zb0tAnir4kDaMupANNW5Ra7ur98+Fjg4bQ==
 
 throat@^6.0.1:
   version "6.0.1"

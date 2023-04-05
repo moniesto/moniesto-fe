@@ -56,15 +56,15 @@ const PostCard = ({ post }: PostCardProps) => {
   ).toFixed(3);
 
   return (
-    <Card sx={{ position: "relative", paddingBottom: "50px" }}>
+    <Card sx={{ position: "relative", paddingBottom: "44px" }}>
       <CardHeader
         sx={{
           ".MuiCardHeader-action": {
             alignSelf: "unset",
           },
           padding: {
-            xs: 2,
-            md: 2.5,
+            xs: "0.8rem 0.8rem 0.2rem",
+            md: "1.2rem 1.2rem 0.5rem",
           },
         }}
         avatar={

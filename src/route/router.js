@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Authorization from "../layouts/authorization";
 import ChangePassword from "../pages/authorization/changePassword";
 import ForgetPassword from "../pages/authorization/forgetPassword";
-import Landing from "../pages/landing";
+import { Landing } from "../pages/landing/landing";
 import Login from "../pages/authorization/login";
 import NotFound from "../pages/notFound";
 import Register from "../pages/authorization/register";
