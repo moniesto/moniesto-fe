@@ -1,14 +1,240 @@
 {
   "page": {
     "login": {
-      "title": "Giriş yap",
-      "enter_detail": "Lütfen hesap bilgilerini gir",
+      "title": "Giriş yapmak",
+      "enter_detail": "Lütfen hesap bilgilerinizi girin",
       "action": {
-        "forget_pass": "Şifremi unuttum?",
-        "login": "Giriş yap",
-        "no_account": "Hesabın yok mu?",
-        "register": "Kayıt ol"
+        "forget_pass": "Şifreyi mi unuttun?",
+        "login": "Giriş yapmak",
+        "no_account": "Hesap mı yok?",
+        "register": "Kayıt olmak"
+      },
+      "toast": { "login_success": "Giriş başarılı" }
+    },
+    "register": {
+      "title": "Kayıt olmak",
+      "enter_detail": "Lütfen hesap bilgilerinizi girin",
+      "action": {
+        "login": "Giriş yapmak",
+        "have_account": "Bir hesabınız var mı?",
+        "register": "Kayıt olmak"
+      },
+      "toast": { "register_success": "Kayıt başarılı" }
+    },
+    "settings": {
+      "account": {
+        "toast": { "updated_success": "Hesabınız başarıyla güncellendi" }
+      },
+      "moniest": {
+        "title": "Moniest Bilgileri",
+        "toast": { "updated_success": "Hesabınız başarıyla güncellendi" }
+      },
+      "verify_email": {
+        "toast": {
+          "email_sent": "E-posta adresinize bir e-posta gönderdik."
+        },
+        "title": "E-posta Doğrulama",
+        "already_verified": "E-postanız zaten doğrulandı",
+        "send_mail_to": "{{email}} 'a e-posta gönderdik",
+        "check_mail": "Lütfen e-posta hesabınızı kontrol edin",
+        "instructions_send": "Düğmeye bastıktan sonra, e-postanıza göndereceğimiz bağlantıdaki talimatları izleyin.",
+        "verify": "E-mail'ini doğrula"
+      },
+      "password": {
+        "toast": { "updated_success": "Şifreniz başarıyla güncellendi" },
+        "title": "Şifre değiştir"
+      }
+    },
+    "forget_pass": {
+      "title": "Şifreyi unut",
+      "enter_email": "Lütfen E-postanızı girin",
+      "action": {
+        "back_to": "Geri dönmek",
+        "login": "Giriş yapmak",
+        "continue": "Devam etmek"
+      },
+      "toast": {
+        "mail_sent": "Size bir e-posta gönderdik. Lütfen e-posta adresinizi kontrol edin."
+      }
+    },
+    "change_pass": {
+      "title": "Şifre değiştir",
+      "enter_pass": "Şifrenizi giriniz lütfen",
+      "action": { "back_to": "Geri dönmek", "login": "Giriş yapmak" },
+      "toast": {
+        "password_changed": "Parolanızı başarıyla değiştirdiniz. Yeni kimlik bilgilerinizle giriş yapabilirsiniz."
+      },
+      "unavailable": {
+        "title": "Üzgünüm, bu sayfa mevcut değil.",
+        "body": "Tıkladığınız bağlantı bozuk olabilir veya sayfa kaldırılmış olabilir. Geri dön"
+      }
+    },
+    "landing": { "invest_wisely": "Akıllıca yatırım yap" },
+    "share_post": {
+      "share_post": "Gönderiyi paylaş",
+      "max_score": "Maksimum skor",
+      "toast": { "post_created": "Gönderiniz başarıyla oluşturuldu" }
+    },
+    "be_moniest": {
+      "be_moniest": "Moniest Ol",
+      "cong_moniest": "Tebrikler ... sen artık Moniest'sın",
+      "toast": {
+        "mail_sent": "E-posta adresinize bir e-posta gönderdik."
+      },
+      "already_verified_email": "E-postanız zaten doğrulandı",
+      "send_mailto": "{{email}} 'a e-posta gönderdik",
+      "check_mail": "Lütfen emailinizi kontrol edin",
+      "need_verify": "Monest olmak için e-posta adresinizi doğrulamanız gerekir",
+      "verify_email": "E-posta'ı doğrula",
+      "submit": {
+        "becoming_moniest": "Moniest oluyorsun. Tahminlerinizi şimdi dünyayla paylaşabilirsiniz. Kullanıcılar ödeme yaparak size abone ola bilir",
+        "by_price": "{{price}} $/ay.",
+        "operation_fee": "operasyon ücreti",
+        "payment_below": "Ödemelerinizi aşağıdaki hesaba alacaksınız",
+        "by_taking_agree": "Bu adımı atarak, kabul ediyorsun",
+        "terms_policy": "şartlar ve politikalar",
+        "information": "Bilgi"
+      }
+    },
+    "profile": {
+      "user_not_found": "Kullanıcı bulunamadı",
+      "no_bio": "Moniest bio eklemedi",
+      "subscribe": "Abone",
+      "unsubscribe": "Aboneliği bitir",
+      "sub_for_live": "Canlı gönderileri görmek için abone olun",
+      "no_post": "Henüz gönderi yok",
+      "no_subscriber": "Henüz aboneniz yok",
+      "no_subscriber_account": "{{username}} henüz abonesi yok",
+      "no_subscription": "Henüz aboneliğiniz yok",
+      "no_subscription_account": "{{username}} henüz aboneliği yok",
+      "tab": {
+        "posts": "Gönderiler {{count}}",
+        "subscribers": "Aboneler {{count}}",
+        "subscriptions": "Abonelikler {{count}}",
+        "about": "Hakkında"
+      },
+      "subs_modal": {
+        "to": "Abone ol",
+        "from": "Abonelikten çık",
+        "monthly": "Aylık",
+        "monthly_payment": "Aylık ödeme",
+        "subs_start_date": "Abonelik Başlangıç Tarihi",
+        "total": "Toplam",
+        "paying_currently": "Şu anda {{fee}} $/ay ödüyorsunuz",
+        "if_unsubscribe": "{{username}} 'dan abonelikten çıkıyorsanız, artık hesab tarafından paylaşılan içeriğe erişemeyeceksiniz."
       }
     }
+  },
+  "component": {
+    "search": { "no_user_found": "{{text}} diye bir kullanıcı bulunamadı" },
+    "post_card": {
+      "table": {
+        "direction": "Yön",
+        "start": "Başlangıç",
+        "target": "Hedef",
+        "time_left": "Kalan zaman",
+        "tp_1": "TP 1",
+        "tp_2": "TP 2",
+        "tp_3": "TP 3",
+        "stop": "Stop"
+      }
+    }
+  },
+  "form": {
+    "field": {
+      "email_or_username": "E-posta ya da kullanıcı adı",
+      "password": "Şifre",
+      "confirm_password": "Şifreyi Onayla",
+      "email": "E-posta",
+      "name": "İsim",
+      "surname": "Soyadı",
+      "location": "Konum",
+      "language": "Dil",
+      "search_moniest": "Moniestleri arayın ...",
+      "username": "Kullanıcı adı",
+      "currency": "Para birimi",
+      "duration": "Süre",
+      "direction": "Yön",
+      "targets": "Hedefler",
+      "tp_1": "TP 1",
+      "tp_2": "TP 2",
+      "tp_3": "TP 3",
+      "stop": "Stop",
+      "add_desc": "Açıklama ekle (isteğe bağlı)",
+      "share": "Paylaşmak",
+      "fee": "Aylık Ücret (USD)",
+      "bio": "Bio",
+      "desc": "Açıklama (isteğe bağlı)",
+      "old_pass": "Eski Şifre",
+      "new_pass": "Yeni Şifre"
+    },
+    "validation": {
+      "identifier_req": "E-posta veya kullanıcı adı gerekli",
+      "password_min": "Şifre en az 6 karakter uzunluğunda olmalı",
+      "password_req": "Şifre gereklidir",
+      "email_valid": "Geçerli bir e-posta adresi girin",
+      "email_req": "Email gereklidir",
+      "username_req": "Kullanıcı adı gerekli",
+      "name_req": "İsim gerekli",
+      "surname_req": "Soyadı gerekli",
+      "username_min": "Kullanıcı adı en az 5 karakter uzunluğunda olmalıdır",
+      "name_min": "İsim en az 2 karakter uzunluğunda olmalı",
+      "surname_min": "Soyadı en az 2 karakter uzunluğunda olmalı",
+      "confirm_password_req": "Şifreyi Onayla gereklidir",
+      "username_exist": "Kullanıcı adı zaten var!",
+      "duration_req": "Süre gerekli",
+      "duration_min": "Süre bir dakikadan fazla olmalı",
+      "currency_req": "Para birimi gerekli",
+      "stop_req": "Stop gerekli",
+      "stop_lower": "Stop {{price}} 'dan daha düşük olmalıdır",
+      "stop_more": "Stop {{price}} 'dan fazla olmalıdır",
+      "tp1_req": "TP1 gerekli",
+      "tp1_lower": "TP1 {{price}} 'dan daha düşük olmalıdır",
+      "tp1_more": "TP1 {{price}} 'dan fazla olmalıdır",
+      "tp2_req": "TP2 gerekli",
+      "tp2_lower": "TP2 {{price}} 'dan daha düşük olmalıdır",
+      "tp2_more": "TP2 {{price}} 'dan fazla olmalıdır",
+      "tp3_req": "TP3 gerekli",
+      "tp3_lower": "TP3 {{price}} 'dan daha düşük olmalıdır",
+      "tp3_more": "TP3 {{price}} 'dan fazla olmalıdır",
+      "fee_min": "Ücret {{value}} 'dan daha büyük olmalıdır",
+      "fee_req": "Ücret gerekli",
+      "bio_min": "Bio minimum {{value}} karakter uzunluğunda olmalıdır",
+      "bio_req": "Bio gerekli",
+      "old_pass_req": "Eski şifre gerekli",
+      "new_pass_req": "Yeni şifre gerekli"
+    }
+  },
+  "moniest": {
+    "per_month": "her ay",
+    "subscribers": "Aboneler",
+    "subscribed": "Abone olundu",
+    "subscribe": "Abone ol",
+    "show_more": "Daha fazla göster"
+  },
+  "common": {
+    "welcome": "Hoş geldin",
+    "save": "Kaydet",
+    "moniesto": "Moniesto",
+    "long": "Long",
+    "short": "Short",
+    "next": "Sonraki",
+    "back": "Geri",
+    "edit": "Düzenlemek"
+  },
+  "navigation": {
+    "timeline": "Zaman çizelgesi",
+    "explore": "Keşfetmek",
+    "share_post": "Gönderi paylaş",
+    "be_moniest": "Moniest Ol",
+    "account": "Hesap",
+    "card": "Kart",
+    "password": "Şifre",
+    "verify_email": "E-posta'nı doğrula",
+    "moniest": "Moniest",
+    "settings": "Ayarlar",
+    "profile": "Profil",
+    "logout": "Çıkış Yap",
+    "home": "Ev"
   }
 }
