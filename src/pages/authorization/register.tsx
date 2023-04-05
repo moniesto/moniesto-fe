@@ -105,7 +105,7 @@ const Register = () => {
               fullWidth
               id="name"
               name="name"
-              placeholder="Name"
+              placeholder={translate("form.field.name")}
               value={formik.values.name}
               onChange={formik.handleChange}
               error={formik.touched.name && Boolean(formik.errors.name)}
@@ -122,7 +122,7 @@ const Register = () => {
               fullWidth
               id="surname"
               name="surname"
-              placeholder="Surname"
+              placeholder={translate("form.field.surname")}
               value={formik.values.surname}
               onChange={formik.handleChange}
               error={formik.touched.surname && Boolean(formik.errors.surname)}
@@ -140,7 +140,7 @@ const Register = () => {
               fullWidth
               id="email"
               name="email"
-              placeholder="Email"
+              placeholder={translate("form.field.email")}
               value={formik.values.email}
               onChange={formik.handleChange}
               error={formik.touched.email && Boolean(formik.errors.email)}
@@ -157,7 +157,7 @@ const Register = () => {
               fullWidth
               id="password"
               name="password"
-              placeholder="Password"
+              placeholder={translate("form.field.password")}
               type="password"
               value={formik.values.password}
               onChange={formik.handleChange}
@@ -180,7 +180,7 @@ const Register = () => {
             loading={loading}
             variant="contained"
           >
-            Register
+            {translate("page.register.action.register")}
           </LoadingButton>
           <Stack
             columnGap={1}
@@ -189,14 +189,14 @@ const Register = () => {
             justifyContent="center"
             color={theme.palette.text.secondary}
           >
-            Have an account?
+            {translate("page.register.action.have_account")}
             <Navigator path="/login">
               <Typography
                 sx={{ cursor: "pointer" }}
                 variant="h4"
                 color="secondary"
               >
-                Login
+                {translate("page.register.action.login")}
               </Typography>
             </Navigator>
           </Stack>

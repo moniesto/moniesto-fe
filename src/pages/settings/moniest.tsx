@@ -19,22 +19,24 @@ import {
   AttachMoneyOutlined,
 } from "@mui/icons-material";
 import { setUser } from "../../store/slices/userSlice";
+import { useTranslate } from "../../hooks/useTranslate";
 
 export const MoniestSettings = () => {
   const theme = useTheme();
   const user = useAppSelector((state) => state.user.user);
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const translate = useTranslate();
 
   const validationSchema = yup.object({
     fee: yup
       .number()
-      .min(1, "Fee should be greater then 0")
-      .required("Fee is required"),
+      .min(1, translate("form.validation.fee_min", { value: 0 }))
+      .required("form.validation.fee_req"),
     bio: yup
       .string()
-      .min(3, "Bio should be of minimum 3 characters length")
-      .required("Bio is required"),
+      .min(3, translate("form.validation.bio_min", { value: 3 }))
+      .required(translate("form.validation.bio_req")),
     description: yup.string(),
   });
 
@@ -51,7 +53,7 @@ export const MoniestSettings = () => {
       .then((response) => {
         dispatch(setUser(response));
         toastService.open({
-          message: "Your account successfully updated",
+          message: translate("page.settings.moniest.toast.updated_success"),
           severity: "success",
         });
       })
@@ -80,7 +82,7 @@ export const MoniestSettings = () => {
       <form onSubmit={formik.handleSubmit}>
         <Stack mt={2} p={3} spacing={4}>
           <Typography variant="h2" sx={{ opacity: 0.9 }}>
-            Moniest Information
+            {translate("page.settings.moniest.title")}
           </Typography>
           <Stack spacing={2}>
             <TextField
@@ -88,7 +90,7 @@ export const MoniestSettings = () => {
               name="fee"
               type="number"
               value={formik.values.fee}
-              placeholder="Monthly fee (USDT)"
+              placeholder={translate("form.field.fee")}
               onChange={formik.handleChange}
               error={formik.touched.fee && Boolean(formik.errors.fee)}
               helperText={formik.touched.fee && formik.errors.fee}
@@ -111,7 +113,7 @@ export const MoniestSettings = () => {
               rows={4}
               fullWidth
               name="bio"
-              placeholder="Bio"
+              placeholder={translate("form.field.bio")}
               value={formik.values.bio}
               onChange={formik.handleChange}
               error={formik.touched.bio && Boolean(formik.errors.bio)}
@@ -135,7 +137,7 @@ export const MoniestSettings = () => {
               rows={7}
               fullWidth
               name="description"
-              placeholder="Description (optional)"
+              placeholder={translate("form.field.desc")}
               value={formik.values.description}
               onChange={formik.handleChange}
               error={
@@ -160,7 +162,7 @@ export const MoniestSettings = () => {
             loading={loading}
             variant="contained"
           >
-            Save
+            {translate("common.save")}
           </LoadingButton>
         </Stack>
       </form>

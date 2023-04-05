@@ -13,14 +13,16 @@ import toastService from "../../services/toastService";
 import { useFormik } from "formik";
 import { LoadingButton } from "@mui/lab";
 import { KeyOutlined } from "@mui/icons-material";
+import { useTranslate } from "../../hooks/useTranslate";
 
 export const PasswordSettings = () => {
   const theme = useTheme();
   const [loading, setLoading] = useState<boolean>(false);
+  const translate = useTranslate();
 
   const validationSchema = yup.object({
-    old: yup.string().required("Old password is required"),
-    new: yup.string().required("New password is required"),
+    old: yup.string().required(translate("form.validation.old_pass_req")),
+    new: yup.string().required(translate("form.validation.new_pass_req")),
   });
 
   const handleSaveAccount = () => {
@@ -29,7 +31,7 @@ export const PasswordSettings = () => {
       .update_password(formik.values)
       .then((_) => {
         toastService.open({
-          message: "Your password successfully updated",
+          message: translate("page.settings.password.toast.updated_success"),
           severity: "success",
         });
       })
@@ -56,14 +58,16 @@ export const PasswordSettings = () => {
     >
       <form onSubmit={formik.handleSubmit}>
         <Stack mt={2} p={3} spacing={4}>
-        <Typography variant="h2" sx={{ opacity: 0.9 }}>Change Password</Typography>
+          <Typography variant="h2" sx={{ opacity: 0.9 }}>
+            {translate("page.settings.password.title")}
+          </Typography>
           <Stack spacing={2}>
             <TextField
               fullWidth
               name="old"
               type="password"
               value={formik.values.old}
-              placeholder="Old password"
+              placeholder={translate("form.field.old_pass")}
               onChange={formik.handleChange}
               error={formik.touched.old && Boolean(formik.errors.old)}
               helperText={formik.touched.old && formik.errors.old}
@@ -80,7 +84,7 @@ export const PasswordSettings = () => {
               name="new"
               type="password"
               value={formik.values.new}
-              placeholder="New password"
+              placeholder={translate("form.field.new_pass")}
               onChange={formik.handleChange}
               error={formik.touched.new && Boolean(formik.errors.new)}
               helperText={formik.touched.new && formik.errors.new}
@@ -100,7 +104,7 @@ export const PasswordSettings = () => {
             loading={loading}
             variant="contained"
           >
-            Save
+            {translate("common.save")}
           </LoadingButton>
         </Stack>
       </form>

@@ -28,11 +28,13 @@ import toastService from "../../services/toastService";
 import { setUser } from "../../store/slices/userSlice";
 import { CoverImageBox } from "../../components/shared/user/coverImageBox";
 import { changeLanguage, setToken } from "../../store/slices/localStorageSlice";
+import { useTranslate } from "../../hooks/useTranslate";
 
 export const AccountSettings = () => {
   const user = useAppSelector((state) => state.user.user);
   const language = useAppSelector((state) => state.storage.language);
   const theme = useTheme();
+  const translate = useTranslate();
   const [imageLoadings, setImageLoadings] = useState({
     pp: false,
     cover: false,
@@ -41,15 +43,15 @@ export const AccountSettings = () => {
   const dispatch = useAppDispatch();
 
   const validationSchema = yup.object({
-    username: yup.string().required("Username is required"),
+    username: yup.string().required(translate("form.validation.usename")),
     name: yup
       .string()
-      .min(2, "Name should be of minimum 2 characters length")
-      .required("Name is required"),
+      .min(2, translate("form.validation.name_min"))
+      .required(translate("form.validation.name_req")),
     surname: yup
       .string()
-      .min(2, "Surname should be of minimum 2 characters length")
-      .required("Surname is required"),
+      .min(2, translate("form.validation.surname_min"))
+      .required(translate("form.validation.surname_req")),
   });
 
   const handleSaveAccount = async () => {
@@ -72,7 +74,7 @@ export const AccountSettings = () => {
       .then((response) => {
         dispatch(setUser(response));
         toastService.open({
-          message: "Your account successfully updated",
+          message: translate("page.settings.account.toast.updated_success"),
           severity: "success",
         });
       })
@@ -178,7 +180,7 @@ export const AccountSettings = () => {
                 fullWidth
                 id="name"
                 name="name"
-                placeholder="Name"
+                placeholder={translate("form.field.name")}
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 error={formik.touched.name && Boolean(formik.errors.name)}
@@ -195,7 +197,7 @@ export const AccountSettings = () => {
                 fullWidth
                 id="surname"
                 name="surname"
-                placeholder="Surname"
+                placeholder={translate("form.field.surname")}
                 value={formik.values.surname}
                 onChange={formik.handleChange}
                 error={formik.touched.surname && Boolean(formik.errors.surname)}
@@ -214,7 +216,7 @@ export const AccountSettings = () => {
                 fullWidth
                 id="location"
                 name="location"
-                placeholder="Location"
+                placeholder={translate("form.field.location")}
                 value={formik.values.location}
                 onChange={formik.handleChange}
                 InputProps={{
@@ -229,7 +231,7 @@ export const AccountSettings = () => {
                 fullWidth
                 id="language"
                 name="language"
-                placeholder="Language"
+                placeholder={translate("form.field.language")}
                 value={formik.values.language}
                 onChange={formik.handleChange}
                 startAdornment={<LanguageOutlined />}
@@ -247,7 +249,7 @@ export const AccountSettings = () => {
             loading={loading}
             variant="contained"
           >
-            Save
+            {translate("common.save")}
           </LoadingButton>
         </Stack>
       </form>

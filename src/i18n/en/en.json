@@ -25,6 +25,36 @@
         "register_success": "Registiration successful"
       }
     },
+    "settings": {
+      "account": {
+        "toast": {
+          "updated_success": "Your account successfully updated"
+        }
+      },
+      "moniest": {
+        "title": "Moniest Information",
+        "toast": {
+          "updated_success": "Your account successfully updated"
+        }
+      },
+      "verify_email": {
+        "toast": {
+          "email_sent": "We send an email to your email address."
+        },
+        "title": "Email Verification",
+        "already_verified": "Your email is already verified",
+        "send_mail_to": "We sent the mail to {{email}}",
+        "check_mail": "Please check your email",
+        "instructions_send": "After pressing the button, follow the instructions in the link that we will send to your e-mail.",
+        "verify": "Verify Email"
+      },
+      "password": {
+        "toast": {
+          "updated_success": "Your password successfully updated"
+        },
+        "title": "Change Password"
+      }
+    },
     "forget_pass": {
       "title": "Forget Password",
       "enter_email": "Please enter your email",
@@ -135,6 +165,10 @@
       "password": "Password",
       "confirm_password": "Confirm Password",
       "email": "Email",
+      "name": "Name",
+      "surname": "Surname",
+      "location": "Location",
+      "language": "Language",
       "search_moniest": "Search for Moniests ...",
       "username": "Username",
       "currency": "Currency",
@@ -149,7 +183,9 @@
       "share": "Share",
       "fee": "Monthly fee (USDT)",
       "bio": "Bio",
-      "desc": "Description (optional)"
+      "desc": "Description (optional)",
+      "old_pass": "Old password",
+      "new_pass": "New password"
     },
     "validation": {
       "identifier_req": "Email or username is required",
@@ -183,7 +219,9 @@
       "fee_min": "Fee should be greater then {{value}}",
       "fee_req": "Fee is required",
       "bio_min": "Bio should be of minimum {{value}} characters length",
-      "bio_req": "Bio is required"
+      "bio_req": "Bio is required",
+      "old_pass_req": "Old password is required",
+      "new_pass_req": "New password is required"
     }
   },
   "moniest": {
