@@ -1,43 +1,74 @@
 import { Box, Button, Container, Stack } from "@mui/material";
-import "./landing.scss";
 import BrandText from "../../components/shared/common/brandText";
 import { useTheme } from "@mui/system";
 import Navigator from "../../components/shared/common/navigatior";
 import { SectionBadge } from "../../components/ui/landing/sectionBadge";
-import { ArchitectureOutlined, VisibilityOutlined } from "@mui/icons-material";
+import {
+  ArchitectureOutlined,
+  ArrowCircleDown,
+  ArrowCircleUp,
+  CopyrightOutlined,
+  Facebook,
+  Instagram,
+  LinkedIn,
+  Twitter,
+  VisibilityOutlined,
+} from "@mui/icons-material";
+import { FAQ } from "../../components/ui/landing/faq";
+
+type ScrollPosition = "center" | "end" | "nearest" | "start";
 
 export const Landing = () => {
-  const links = [
+  const theme = useTheme();
+  const softBgColor: string = "#ebf6f4";
+
+  const links: { id: string; name: string; position: ScrollPosition }[] = [
     {
       id: "about",
       name: "About",
+      position: "start",
     },
     {
       id: "pricing",
       name: "Pricing",
+      position: "center",
     },
     {
       id: "faq",
       name: "FAQ",
+      position: "center",
     },
     {
       id: "contact",
       name: "Contact",
+      position: "center",
     },
   ];
-  const theme = useTheme();
 
-  const handleClickScroll = (id: string) => {
+  const handleClickScroll = (
+    id: string,
+    position: ScrollPosition = "center"
+  ) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: position,
+        inline: position,
+      });
     }
   };
 
   return (
     <Box
       className="landing-page"
-      sx={{ background: "white", color: theme.palette.primary.main }}
+      sx={{
+        background: "white",
+        color: theme.palette.primary.main,
+        display: "flex",
+        flexDirection: "column",
+        gap: "5rem",
+      }}
     >
       <Box
         sx={{
@@ -71,7 +102,7 @@ export const Landing = () => {
                 <Stack
                   key={link.id}
                   component="li"
-                  onClick={() => handleClickScroll(link.id)}
+                  onClick={() => handleClickScroll(link.id, link.position)}
                 >
                   {link.name}
                 </Stack>
@@ -83,7 +114,7 @@ export const Landing = () => {
                     sx={{
                       width: "10rem",
                       color: theme.palette.secondary.main + " !important",
-                      background: "white",
+                      backgroundColor: "white !important",
                     }}
                     variant="outlined"
                     color="secondary"
@@ -116,18 +147,20 @@ export const Landing = () => {
                 investment decisions.
               </Box>
               <Stack mt="5rem" direction="row" alignItems="center" spacing={2}>
-                <Button
-                  size="large"
-                  sx={{
-                    width: "12rem",
-                    color: theme.palette.secondary.main + " !important",
-                    background: "white",
-                  }}
-                  variant="outlined"
-                  color="secondary"
-                >
-                  Get Started
-                </Button>
+                <Navigator path="login">
+                  <Button
+                    size="large"
+                    sx={{
+                      width: "12rem",
+                      color: theme.palette.secondary.main + " !important",
+                      backgroundColor: "white !important",
+                    }}
+                    variant="outlined"
+                    color="secondary"
+                  >
+                    Get Started
+                  </Button>
+                </Navigator>
                 <Button
                   size="large"
                   sx={{
@@ -137,6 +170,7 @@ export const Landing = () => {
                   }}
                   variant="outlined"
                   color="inherit"
+                  onClick={() => handleClickScroll("about", "start")}
                 >
                   Learn More
                 </Button>
@@ -254,14 +288,19 @@ export const Landing = () => {
           </Stack>
         </Container>
       </Box>
-      <Box sx={{ background: "#ebf6f4" }} id="pricing" component="section">
+      <Box sx={{ background: softBgColor }} id="pricing" component="section">
         <Container maxWidth="lg">
           <Stack padding="2rem">
-            <Box component="h1" sx={{ color: theme.palette.secondary.main }}>
+            <Box
+              component="h1"
+              sx={{ color: theme.palette.secondary.main, marginY: 1 }}
+            >
               Pricing
             </Box>
-            <Box component="h3">Pricing is up to the moniests.</Box>
-            <Box component="h4" sx={{ opacity: 0.7 }}>
+            <Box component="h3" marginY={1}>
+              Pricing is up to the moniests.
+            </Box>
+            <Box component="h4" marginY={1} sx={{ opacity: 0.7 }}>
               Moniests set their own subscription fees for users to access their
               crypto advice. We believe in a fair pricing strategy that benefits
               both moniests and users. <br />
@@ -271,6 +310,220 @@ export const Landing = () => {
               insights with users.
             </Box>
           </Stack>
+        </Container>
+      </Box>
+      <Box id="who_we_are" component="section">
+        <Container maxWidth="lg">
+          <Stack direction="row" spacing={2} justifyContent="space-evenly">
+            <Box flex={1} maxWidth={400}>
+              <Stack spacing={3}>
+                <Box
+                  p={2}
+                  sx={{
+                    width: "50px",
+                    height: "50px",
+                    borderRadius: "8px",
+                    display: "grid",
+                    placeContent: "center",
+                    background: softBgColor,
+                  }}
+                >
+                  <ArrowCircleUp
+                    sx={{
+                      fontSize: "2rem",
+                      color: theme.palette.secondary.main,
+                    }}
+                  ></ArrowCircleUp>
+                </Box>
+                <Box component="h1" lineHeight={1.4}>
+                  Who we are?
+                </Box>
+                <Box component="h4" sx={{ opacity: 0.7 }}>
+                  We connect people who are interested in cryptocurrencies with
+                  experts called Moniests. Our aim is to simplify crypto
+                  education and help people make informed decisions about
+                  investments.
+                  <br />
+                  <br />
+                  Our aim is to simplify crypto education and help people make
+                  informed decisions about investments.
+                </Box>
+              </Stack>
+            </Box>
+            <Box flex={1} maxWidth={400} pt={6}>
+              <Stack spacing={3}>
+                <Box
+                  p={2}
+                  sx={{
+                    width: "50px",
+                    height: "50px",
+                    borderRadius: "8px",
+                    display: "grid",
+                    placeContent: "center",
+                    background: theme.palette.warning.light,
+                  }}
+                >
+                  <ArrowCircleDown
+                    sx={{
+                      fontSize: "2rem",
+                      color: theme.palette.warning.dark,
+                    }}
+                  ></ArrowCircleDown>
+                </Box>
+                <Box component="h1" lineHeight={1.4}>
+                  Who we are not?
+                </Box>
+                <Box component="h4" sx={{ opacity: 0.7 }}>
+                  Moniesto is not a financial advisory firm or investment app.
+                  <br />
+                  <br />
+                  We do not provide investment advice ourselves or make
+                  investment decisions on behalf of our users.
+                  <br />
+                  <br />
+                  We are not responsible for the accuracy or reliability of the
+                  advice provided by Moniests.
+                </Box>
+              </Stack>
+            </Box>
+          </Stack>
+        </Container>
+      </Box>
+      <Box>
+        <img width="100%" src="images/landing/divider_bg.png" alt="" />
+      </Box>
+
+      <Box id="faq" component="section">
+        <Container maxWidth="lg">
+          <Stack spacing={2} alignItems="center">
+            <Box component="h1" fontSize="2rem">
+              Frequently asked questions
+            </Box>
+            <Box component="h4" sx={{ opacity: 0.7, mt: "0 !important" }}>
+              Everything you need to know about Moniesto.
+            </Box>
+            <FAQ></FAQ>
+          </Stack>
+        </Container>
+      </Box>
+
+      <Box sx={{ background: softBgColor }} id="contact" component="section">
+        <Container maxWidth="lg">
+          <Stack padding="2rem" alignItems="center">
+            <Box component="h1">Still have questions</Box>
+            <Box component="h3" sx={{ opacity: 0.7 }}>
+              Can't find the answer you're looking for? Please chat to our
+              friendly team.
+            </Box>
+            <Button
+              sx={{
+                color: "white !important",
+              }}
+              size="large"
+              variant="contained"
+              color="secondary"
+            >
+              Get in touch
+            </Button>
+          </Stack>
+        </Container>
+      </Box>
+
+      <Box component="footer">
+        <Container maxWidth="xl">
+          <Box paddingX={{ md: 5, xs: 2 }}>
+            <Stack direction="row" justifyContent="space-between">
+              <Stack>
+                <BrandText
+                  sx={{ color: theme.palette.primary.main }}
+                ></BrandText>
+                <Box
+                  component="h4"
+                  sx={{ opacity: 0.6, maxWidth: 300, paddingBottom: 2 }}
+                >
+                  Discover the power of moniest insights to make better
+                  investment decisions.
+                </Box>
+                <Stack
+                  spacing={3}
+                  sx={{
+                    ">div": {
+                      fontWeight: 600,
+                      cursor: "pointer",
+                      opacity: 0.9,
+                    },
+                  }}
+                  direction="row"
+                  alignItems="center"
+                >
+                  {links.map((link) => (
+                    <Box
+                      onClick={() => handleClickScroll(link.id, link.position)}
+                      key={link.id}
+                    >
+                      {link.name}
+                    </Box>
+                  ))}
+
+                  <Box>Terms</Box>
+                  <Box>Privacy Policy</Box>
+                </Stack>
+              </Stack>
+              <Navigator path="login">
+                <Navigator path="login">
+                  <Button
+                    size="large"
+                    sx={{
+                      width: "12rem",
+                      color: theme.palette.secondary.main + " !important",
+                      backgroundColor: "white !important",
+                    }}
+                    variant="outlined"
+                    color="secondary"
+                  >
+                    Get Started
+                  </Button>
+                </Navigator>
+              </Navigator>
+            </Stack>
+            <Stack
+              sx={{
+                paddingBottom: "3rem",
+                paddingTop: "2rem",
+                marginTop: "2rem",
+                borderTop: "1px solid rgba(0,0,0,0.2)",
+                opacity: 0.7,
+              }}
+              direction="row"
+              justifyContent="space-between"
+            >
+              <Stack direction="row" alignItems="center" spacing={0.5}>
+                <CopyrightOutlined
+                  sx={{ color: theme.palette.primary.main }}
+                  fontSize="small"
+                />
+                <Box>{new Date().getFullYear()} </Box>
+                <Box> Moniesto.</Box>
+                <Box> All rights reserved.</Box>
+              </Stack>
+              <Stack
+                sx={{
+                  ">.MuiSvgIcon-root": {
+                    cursor: "pointer",
+                    color: theme.palette.primary.main,
+                  },
+                }}
+                direction="row"
+                alignItems="center"
+                spacing={1}
+              >
+                <Twitter />
+                <LinkedIn />
+                <Facebook />
+                <Instagram />
+              </Stack>
+            </Stack>
+          </Box>
         </Container>
       </Box>
     </Box>

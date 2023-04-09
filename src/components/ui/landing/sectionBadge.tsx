@@ -6,7 +6,7 @@ export const SectionBadge = ({
   children,
   title,
 }: {
-  children: ReactNode;
+  children?: ReactNode;
   title: string;
 }) => {
   const theme = useTheme();
@@ -31,7 +31,7 @@ export const SectionBadge = ({
           fontSize="1rem"
           sx={{ textShadow: `0.4px 0px ${theme.palette.secondary.main}` }}
         >
-          {title}{" "}
+          {title}
         </Box>
       </Stack>
     </Box>

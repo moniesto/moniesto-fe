@@ -28,7 +28,7 @@ export default function componentStyleOverrides(theme: any) {
                         },
                     },
                     '&.MuiButton-outlinedSecondary': {
-                        backgroundColor: theme?.colors.secondaryLight + "!important",
+                        backgroundColor: theme?.colors.secondaryLight,
                         color: theme.colors.primaryMain,
                         ".MuiSvgIcon-root": {
                             color: theme.colors.primaryMain
