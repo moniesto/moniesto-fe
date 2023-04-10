@@ -133,7 +133,7 @@ export const Landing = () => {
           minHeight: "100vh",
           backgroundRepeat: { xs: "no-repeat", md: "round" },
           backgroundSize: "cover",
-          backgroundPosition: { xs: "right",md:"unset" },
+          backgroundPosition: { xs: "right", md: "unset" },
         }}
         component="section"
       >
@@ -246,7 +246,10 @@ export const Landing = () => {
                 </Button>
               </Stack>
             </Stack>
-            <Stack sx={{ width: "100%" }} flex={1}>
+            <Stack
+              sx={{ width: "100%", maxWidth: { xs: "330px", md: "500px" } }}
+              flex={1}
+            >
               <img src="images/landing/header_hero.png" alt="" />
             </Stack>
           </Stack>
