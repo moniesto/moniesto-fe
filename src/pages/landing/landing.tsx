@@ -247,7 +247,14 @@ export const Landing = () => {
               </Stack>
             </Stack>
             <Stack
-              sx={{ width: "100%", maxWidth: { xs: "330px", md: "500px" } }}
+              sx={{
+                width: "100%",
+                maxWidth: { xs: "330px", md: "500px" },
+                img: {
+                  width: "100%",
+                  objectFit: "cover",
+                },
+              }}
               flex={1}
             >
               <img src="images/landing/header_hero.png" alt="" />
