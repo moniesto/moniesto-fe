@@ -13,7 +13,7 @@ export default function componentStyleOverrides(theme: any) {
                     fontSize: '1.05rem',
                     boxShadow: "unset !important",
                     minWidth: "90px",
-
+                    whiteSpace: "nowrap",
                     "&.MuiButton-containedInherit": {
                         color: theme.colors.primaryMain
                     },

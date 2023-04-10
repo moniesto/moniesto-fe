@@ -7,33 +7,25 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useTheme } from "@mui/system";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 export const FAQ = () => {
   const [expanded, setExpanded] = useState<number>(-1);
   const theme = useTheme();
+  const translate = useTranslate();
 
   const handleChange = (panel: number) => {
     setExpanded(expanded == panel ? -1 : panel);
   };
 
-  const faqs: { question: string; answer: string }[] = [
-    {
-      question: "faq 1",
-      answer: "Answer 1",
-    },
-    {
-      question: "faq 2",
-      answer: "Answer 2",
-    },
-    {
-      question: "faq 3",
-      answer: "Answer 3",
-    },
-    {
-      question: "faq 4",
-      answer: "Answer 4",
-    },
-  ];
+  const faqs: { question: string; answer: string }[] = [...Array(6)].map(
+    (x, i) => {
+      return {
+        question: "question" + (i + 1),
+        answer: "answer" + (i + 1),
+      };
+    }
+  );
 
   return (
     <Box
@@ -75,13 +67,17 @@ export const FAQ = () => {
               )
             }
           >
-            <Box fontWeight={600}>{faq.question}</Box>
+            <Box fontWeight={600}>
+              {translate("page.landing.faq.questions." + faq.question)}
+            </Box>
           </AccordionSummary>
-          <AccordionDetails sx={{
-            background:"white",
-            color: theme.palette.primary.main
-          }}>
-            <Box>{faq.answer}</Box>
+          <AccordionDetails
+            sx={{
+              background: "white",
+              color: theme.palette.primary.main,
+            }}
+          >
+            <Box> {translate("page.landing.faq.questions." + faq.answer)}</Box>
           </AccordionDetails>
         </Accordion>
       ))}

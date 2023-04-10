@@ -1,4 +1,4 @@
-import { Box, Button, Container, Stack } from "@mui/material";
+import { Box, Button, Container, Drawer, Stack } from "@mui/material";
 import BrandText from "../../components/shared/common/brandText";
 import { useTheme } from "@mui/system";
 import Navigator from "../../components/shared/common/navigatior";
@@ -7,40 +7,47 @@ import {
   ArchitectureOutlined,
   ArrowCircleDown,
   ArrowCircleUp,
+  CloseOutlined,
   CopyrightOutlined,
   Facebook,
   Instagram,
   LinkedIn,
+  MenuOutlined,
   Twitter,
   VisibilityOutlined,
 } from "@mui/icons-material";
 import { FAQ } from "../../components/ui/landing/faq";
+import { useMemo, useState } from "react";
+import { useTranslate } from "../../hooks/useTranslate";
+import { Trans } from "react-i18next";
 
 type ScrollPosition = "center" | "end" | "nearest" | "start";
 
 export const Landing = () => {
   const theme = useTheme();
   const softBgColor: string = "#ebf6f4";
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const translate = useTranslate();
 
   const links: { id: string; name: string; position: ScrollPosition }[] = [
     {
       id: "about",
-      name: "About",
+      name: translate("page.landing.links.about"),
       position: "start",
     },
     {
       id: "pricing",
-      name: "Pricing",
+      name: translate("page.landing.links.pricing"),
       position: "center",
     },
     {
       id: "faq",
-      name: "FAQ",
+      name: translate("page.landing.links.faq"),
       position: "center",
     },
     {
       id: "contact",
-      name: "Contact",
+      name: translate("page.landing.links.contact"),
       position: "center",
     },
   ];
@@ -59,6 +66,56 @@ export const Landing = () => {
     }
   };
 
+  const data = {
+    __html: `lorem ipsum <img src="" onerror="alert('message');" />`,
+  };
+
+  const renderHeaderLinks = useMemo(
+    () => (
+      <Stack
+        sx={{
+          li: {
+            cursor: "pointer",
+            fontWeight: { xs: 600 },
+          },
+        }}
+        direction={{ xs: "column", md: "row" }}
+        alignItems={{ xs: "flex-start", md: "center" }}
+        spacing={{ xs: 4, md: 6 }}
+      >
+        {links.map((link) => (
+          <Stack
+            key={link.id}
+            component="li"
+            onClick={() => {
+              handleClickScroll(link.id, link.position);
+              setOpenMenu(false);
+            }}
+          >
+            {link.name}
+          </Stack>
+        ))}
+
+        <Stack component="li">
+          <Navigator path="login">
+            <Button
+              sx={{
+                width: "10rem",
+                color: theme.palette.secondary.main + " !important",
+                backgroundColor: "white !important",
+              }}
+              variant="outlined"
+              color="secondary"
+            >
+              {translate("page.landing.actions.login")}
+            </Button>
+          </Navigator>
+        </Stack>
+      </Stack>
+    ),
+    []
+  );
+
   return (
     <Box
       className="landing-page"
@@ -73,9 +130,10 @@ export const Landing = () => {
       <Box
         sx={{
           background: "url(images/landing/header_bg.png)",
-          height: "100vh",
-          backgroundRepeat: { sm: "no-repeat", md: "round" },
+          minHeight: "100vh",
+          backgroundRepeat: { xs: "no-repeat", md: "round" },
           backgroundSize: "cover",
+          backgroundPosition: { xs: "right",md:"unset" },
         }}
         component="section"
       >
@@ -88,95 +146,107 @@ export const Landing = () => {
             justifyContent="space-between"
           >
             <BrandText sx={{ color: theme.palette.primary.main }}></BrandText>
-            <Stack
+            <MenuOutlined
               sx={{
-                li: {
-                  cursor: "pointer",
+                fontSize: "2rem",
+                color: theme.palette.primary.main,
+                display: {
+                  xs: "block",
+                  md: "none",
                 },
               }}
-              direction="row"
-              alignItems="center"
-              spacing={6}
+              onClick={() => setOpenMenu(true)}
+            ></MenuOutlined>
+            <Drawer
+              PaperProps={{
+                sx: {
+                  background: "white",
+                  color: theme.palette.primary.main,
+                },
+              }}
+              anchor="right"
+              open={openMenu}
+              onClose={() => setOpenMenu(false)}
             >
-              {links.map((link) => (
-                <Stack
-                  key={link.id}
-                  component="li"
-                  onClick={() => handleClickScroll(link.id, link.position)}
-                >
-                  {link.name}
-                </Stack>
-              ))}
-
-              <Stack component="li">
-                <Navigator path="login">
-                  <Button
-                    sx={{
-                      width: "10rem",
-                      color: theme.palette.secondary.main + " !important",
-                      backgroundColor: "white !important",
-                    }}
-                    variant="outlined"
-                    color="secondary"
-                  >
-                    Login
-                  </Button>
-                </Navigator>
-              </Stack>
-            </Stack>
+              <Box padding={3} pt={5}>
+                <CloseOutlined
+                  onClick={() => setOpenMenu(false)}
+                  sx={{
+                    color: theme.palette.primary.main,
+                    position: "absolute",
+                    right: 16,
+                    top: 16,
+                  }}
+                ></CloseOutlined>
+                {renderHeaderLinks}
+              </Box>
+            </Drawer>
+            <Box
+              sx={{
+                display: {
+                  xs: "none",
+                  md: "flex",
+                },
+              }}
+            >
+              {renderHeaderLinks}
+            </Box>
           </Stack>
 
           <Stack
-            height={"calc(100vh - 120px)"}
-            direction="row"
+            minHeight={"calc(100vh - 120px)"}
+            direction={{ xs: "column", md: "row" }}
             alignItems="center"
             spacing={2}
           >
             <Stack flex={1}>
               <Box
                 component="h1"
-                sx={{ fontSize: "80px", lineHeight: "80px", margin: "10px 0" }}
+                sx={{
+                  fontSize: { xs: 70, md: 80 },
+                  lineHeight: { xs: "70px", md: "80px" },
+                  margin: "10px 0",
+                }}
               >
-                Invest wisely
+                <Trans i18nKey="page.landing.invest_wisely"></Trans>
               </Box>
               <Box
                 component="h3"
                 sx={{ letterSpacing: "1px", lineHeight: "24px" }}
               >
-                Discover the power of moniest insights to <br /> make better
-                investment decisions.
+                <Trans i18nKey="page.landing.discover_power"></Trans>
               </Box>
               <Stack mt="5rem" direction="row" alignItems="center" spacing={2}>
                 <Navigator path="login">
                   <Button
                     size="large"
                     sx={{
-                      width: "12rem",
+                      width: { xs: "10rem", md: "12rem" },
                       color: theme.palette.secondary.main + " !important",
                       backgroundColor: "white !important",
                     }}
                     variant="outlined"
                     color="secondary"
                   >
-                    Get Started
+                    {translate("page.landing.actions.get_start")}
                   </Button>
                 </Navigator>
                 <Button
                   size="large"
                   sx={{
-                    width: "12rem",
-                    borderColor: "white",
-                    color: "white !important",
+                    width: { xs: "10rem", md: "12rem" },
+                    borderColor: { md: "white" },
+                    color: { md: "white !important" },
                   }}
                   variant="outlined"
                   color="inherit"
                   onClick={() => handleClickScroll("about", "start")}
                 >
-                  Learn More
+                  {translate("page.landing.actions.learn_more")}
                 </Button>
               </Stack>
             </Stack>
-            <Stack flex={1}>
+            <Stack sx={{ width: "100%" }} flex={1}>
               <img src="images/landing/header_hero.png" alt="" />
             </Stack>
           </Stack>
@@ -184,45 +254,50 @@ export const Landing = () => {
       </Box>
       <Box minHeight="100vh" id="about" component="section" padding="3rem 0">
         <Container maxWidth="lg">
-          <Stack rowGap={20}>
+          <Stack rowGap={{ xs: 14, md: 20 }}>
             <Box>
               <Box maxWidth="600px" margin="auto">
                 <Stack spacing={3} alignItems="center" textAlign="center">
-                  <SectionBadge title="Why moniesto">
+                  <SectionBadge
+                    title={translate("page.landing.why_moniesto.title")}
+                  >
                     <VisibilityOutlined></VisibilityOutlined>
                   </SectionBadge>
-                  <Box component="h1">
-                    Get actionable insights from the cryptocurrency market
+                  <Box component="h1" lineHeight={1.3}>
+                    {translate("page.landing.why_moniesto.header")}
                   </Box>
                   <Box component="h5" sx={{ opacity: 0.7 }}>
-                    Moniesto provides expert advice from experienced advisors
-                    who specialize in the cryptocurrency market, ensuring that
-                    investors receive reliable and up-to-date information.
+                    {translate("page.landing.why_moniesto.message")}
                   </Box>
                 </Stack>
               </Box>
             </Box>
             <Box>
               <Stack
-                direction="row"
+                direction={{ xs: "column", md: "row" }}
                 alignItems="center"
                 justifyContent="space-evenly"
-                columnGap={4}
+                spacing={4}
               >
-                <img src="images/landing/invest_hero.png" alt="" />
+                <Box width={{ xs: 240 }}>
+                  <img
+                    width="100%"
+                    src="images/landing/invest_hero.png"
+                    alt=""
+                  />
+                </Box>
                 <Box maxWidth="340px">
                   <Stack spacing={3}>
-                    <SectionBadge title="For Investors">
+                    <SectionBadge
+                      title={translate("page.landing.for_investors.title")}
+                    >
                       <VisibilityOutlined></VisibilityOutlined>
                     </SectionBadge>
                     <Box component="h1" lineHeight={1.4}>
-                      Invest like a Pro
+                      {translate("page.landing.for_investors.header")}
                     </Box>
                     <Box component="h5" sx={{ opacity: 0.7 }}>
-                      Take your cryptocurrency investments to the next level and
-                      earn money with moniesto. Our app connects users with
-                      moniests, who provide predictions and insights on the
-                      future price of crypto coins.
+                      {translate("page.landing.for_investors.message")}
                     </Box>
                   </Stack>
                 </Box>
@@ -230,56 +305,61 @@ export const Landing = () => {
             </Box>
             <Box>
               <Stack
-                direction="row"
+                direction={{ xs: "column-reverse", md: "row" }}
                 alignItems="center"
                 justifyContent="space-evenly"
                 columnGap={4}
               >
                 <Box maxWidth="340px">
                   <Stack spacing={3}>
-                    <SectionBadge title="For Moniest">
+                    <SectionBadge
+                      title={translate("page.landing.for_moniest.title")}
+                    >
                       <ArchitectureOutlined></ArchitectureOutlined>
                     </SectionBadge>
                     <Box component="h1" lineHeight={1.4}>
-                      Crypto Expert? Become Moniest
+                      {translate("page.landing.for_moniest.header")}
                     </Box>
                     <Box component="h5" sx={{ opacity: 0.7 }}>
-                      Join the moniesto community as an expert. As a moniest on
-                      moniesto, you'll have the opportunity to share your
-                      insights with your subscribers and earn money doing what
-                      you love.
+                      {translate("page.landing.for_moniest.message")}
                     </Box>
                   </Stack>
                 </Box>
-                <img src="images/landing/become_moniest_hero.png" alt="" />
+                <Box width={{ xs: 240 }}>
+                  <img
+                    width="100%"
+                    src="images/landing/become_moniest_hero.png"
+                    alt=""
+                  />
+                </Box>
               </Stack>
             </Box>
             <Box>
               <Stack
-                direction="row"
+                direction={{ xs: "column", md: "row" }}
                 alignItems="center"
                 justifyContent="space-evenly"
                 columnGap={4}
               >
-                <img src="images/landing/algorithm_hero.png" alt="" />
+                <Box width={{ xs: 240 }}>
+                  <img
+                    width="100%"
+                    src="images/landing/algorithm_hero.png"
+                    alt=""
+                  />
+                </Box>
                 <Box maxWidth="340px">
                   <Stack spacing={3}>
-                    <SectionBadge title="Scoring Algorithm">
+                    <SectionBadge
+                      title={translate("page.landing.scoring_algorithm.title")}
+                    >
                       <VisibilityOutlined></VisibilityOutlined>
                     </SectionBadge>
                     <Box component="h1" lineHeight={1.4}>
-                      Algorithm: What It Means for Your Investments
+                      {translate("page.landing.scoring_algorithm.header")}
                     </Box>
                     <Box component="h5" sx={{ opacity: 0.7 }}>
-                      Our scoring algorithm is designed to help users evaluate
-                      the accuracy of our moniests' predictions. After a
-                      prediction has timed out, our algorithm assigns a score to
-                      each moniest based on the success of their prediction.
-                      <br />
-                      <br />
-                      This information helps users identify moniests who
-                      consistently provide accurate predictions and make
-                      informed decisions about who to follow.
+                      <Trans i18nKey="page.landing.scoring_algorithm.message"></Trans>
                     </Box>
                   </Stack>
                 </Box>
@@ -295,26 +375,24 @@ export const Landing = () => {
               component="h1"
               sx={{ color: theme.palette.secondary.main, marginY: 1 }}
             >
-              Pricing
+              {translate("page.landing.pricing.title")}
             </Box>
             <Box component="h3" marginY={1}>
-              Pricing is up to the moniests.
+              {translate("page.landing.pricing.header")}
             </Box>
             <Box component="h4" marginY={1} sx={{ opacity: 0.7 }}>
-              Moniests set their own subscription fees for users to access their
-              crypto advice. We believe in a fair pricing strategy that benefits
-              both moniests and users. <br />
-              <br /> This allows users to access high-quality advice from
-              moniests at prices that reflect their expertise and track record.
-              Moniests, in turn, can earn money for sharing their valuable
-              insights with users.
+              <Trans i18nKey="page.landing.pricing.message"></Trans>
             </Box>
           </Stack>
         </Container>
       </Box>
       <Box id="who_we_are" component="section">
         <Container maxWidth="lg">
-          <Stack direction="row" spacing={2} justifyContent="space-evenly">
+          <Stack
+            direction={{ xs: "column", md: "row" }}
+            spacing={2}
+            justifyContent="space-evenly"
+          >
             <Box flex={1} maxWidth={400}>
               <Stack spacing={3}>
                 <Box
@@ -336,17 +414,10 @@ export const Landing = () => {
                   ></ArrowCircleUp>
                 </Box>
                 <Box component="h1" lineHeight={1.4}>
-                  Who we are?
+                  {translate("page.landing.who_we_are.title")}
                 </Box>
                 <Box component="h4" sx={{ opacity: 0.7 }}>
-                  We connect people who are interested in cryptocurrencies with
-                  experts called Moniests. Our aim is to simplify crypto
-                  education and help people make informed decisions about
-                  investments.
-                  <br />
-                  <br />
-                  Our aim is to simplify crypto education and help people make
-                  informed decisions about investments.
+                  <Trans i18nKey="page.landing.who_we_are.message"></Trans>
                 </Box>
               </Stack>
             </Box>
@@ -371,18 +442,10 @@ export const Landing = () => {
                   ></ArrowCircleDown>
                 </Box>
                 <Box component="h1" lineHeight={1.4}>
-                  Who we are not?
+                  {translate("page.landing.who_we_are_not.title")}
                 </Box>
                 <Box component="h4" sx={{ opacity: 0.7 }}>
-                  Moniesto is not a financial advisory firm or investment app.
-                  <br />
-                  <br />
-                  We do not provide investment advice ourselves or make
-                  investment decisions on behalf of our users.
-                  <br />
-                  <br />
-                  We are not responsible for the accuracy or reliability of the
-                  advice provided by Moniests.
+                  <Trans i18nKey="page.landing.who_we_are_not.message"></Trans>
                 </Box>
               </Stack>
             </Box>
@@ -396,11 +459,15 @@ export const Landing = () => {
       <Box id="faq" component="section">
         <Container maxWidth="lg">
           <Stack spacing={2} alignItems="center">
-            <Box component="h1" fontSize="2rem">
-              Frequently asked questions
+            <Box
+              component="h1"
+              fontSize={{ xs: "1.7rem", md: "2rem" }}
+              lineHeight={1}
+            >
+              {translate("page.landing.faq.title")}
             </Box>
             <Box component="h4" sx={{ opacity: 0.7, mt: "0 !important" }}>
-              Everything you need to know about Moniesto.
+              {translate("page.landing.faq.header")}
             </Box>
             <FAQ></FAQ>
           </Stack>
@@ -410,20 +477,23 @@ export const Landing = () => {
       <Box sx={{ background: softBgColor }} id="contact" component="section">
         <Container maxWidth="lg">
           <Stack padding="2rem" alignItems="center">
-            <Box component="h1">Still have questions</Box>
+            <Box component="h1">
+              {translate("page.landing.still_question.title")}
+            </Box>
             <Box component="h3" sx={{ opacity: 0.7 }}>
-              Can't find the answer you're looking for? Please chat to our
-              friendly team.
+              {translate("page.landing.still_question.header")}
             </Box>
             <Button
+              href="mailto:noreply@moniesto.com?subject=From moniesto.com contact"
               sx={{
                 color: "white !important",
+                marginTop: 2,
               }}
               size="large"
               variant="contained"
               color="secondary"
             >
-              Get in touch
+              {translate("page.landing.still_question.action")}
             </Button>
           </Stack>
         </Container>
@@ -432,7 +502,11 @@ export const Landing = () => {
       <Box component="footer">
         <Container maxWidth="xl">
           <Box paddingX={{ md: 5, xs: 2 }}>
-            <Stack direction="row" justifyContent="space-between">
+            <Stack
+              flexWrap="wrap"
+              direction="row"
+              justifyContent="space-between"
+            >
               <Stack>
                 <BrandText
                   sx={{ color: theme.palette.primary.main }}
@@ -441,8 +515,7 @@ export const Landing = () => {
                   component="h4"
                   sx={{ opacity: 0.6, maxWidth: 300, paddingBottom: 2 }}
                 >
-                  Discover the power of moniest insights to make better
-                  investment decisions.
+                  <Trans i18nKey="page.landing.discover_power"></Trans>
                 </Box>
                 <Stack
                   spacing={3}
@@ -450,11 +523,15 @@ export const Landing = () => {
                     ">div": {
                       fontWeight: 600,
                       cursor: "pointer",
-                      opacity: 0.9,
+                      opacity: 0.8,
+                      whiteSpace: "nowrap",
                     },
                   }}
                   direction="row"
-                  alignItems="center"
+                  flexWrap="wrap"
+                  justifyContent={{ xs: "center" }}
+                  gap={{ xs: 2 }}
+                  margin={{ xs: "20px 0 50px", md: 0 }}
                 >
                   {links.map((link) => (
                     <Box
@@ -465,25 +542,24 @@ export const Landing = () => {
                     </Box>
                   ))}
 
-                  <Box>Terms</Box>
-                  <Box>Privacy Policy</Box>
+                  <Box>{translate("page.landing.links.terms")} </Box>
+                  <Box>{translate("page.landing.links.privacy_policy")} </Box>
                 </Stack>
               </Stack>
+
               <Navigator path="login">
-                <Navigator path="login">
-                  <Button
-                    size="large"
-                    sx={{
-                      width: "12rem",
-                      color: theme.palette.secondary.main + " !important",
-                      backgroundColor: "white !important",
-                    }}
-                    variant="outlined"
-                    color="secondary"
-                  >
-                    Get Started
-                  </Button>
-                </Navigator>
+                <Button
+                  size="large"
+                  sx={{
+                    width: "12rem",
+                    color: theme.palette.secondary.main + " !important",
+                    backgroundColor: "white !important",
+                  }}
+                  variant="outlined"
+                  color="secondary"
+                >
+                  {translate("page.landing.actions.get_start")}
+                </Button>
               </Navigator>
             </Stack>
             <Stack
@@ -494,7 +570,8 @@ export const Landing = () => {
                 borderTop: "1px solid rgba(0,0,0,0.2)",
                 opacity: 0.7,
               }}
-              direction="row"
+              direction={{ xs: "column", md: "row" }}
+              spacing={{ xs: 3, md: 0 }}
               justifyContent="space-between"
             >
               <Stack direction="row" alignItems="center" spacing={0.5}>
@@ -504,7 +581,9 @@ export const Landing = () => {
                 />
                 <Box>{new Date().getFullYear()} </Box>
                 <Box> Moniesto.</Box>
-                <Box> All rights reserved.</Box>
+                <Box whiteSpace="nowrap">
+                  {translate("page.landing.all_rights_reserved")}
+                </Box>
               </Stack>
               <Stack
                 sx={{
@@ -513,6 +592,7 @@ export const Landing = () => {
                     color: theme.palette.primary.main,
                   },
                 }}
+                justifyContent={{ xs: "center" }}
                 direction="row"
                 alignItems="center"
                 spacing={1}

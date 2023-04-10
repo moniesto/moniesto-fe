@@ -83,7 +83,78 @@
       }
     },
     "landing": {
-      "invest_wisely": "Invest Wisely"
+      "invest_wisely": "Invest Wisely",
+      "discover_power": "Discover the power of moniest insights to <br /> make better investment decisions.",
+      "actions": {
+        "login": "Login",
+        "get_start": "Get Started",
+        "learn_more": "Learn More"
+      },
+      "links": {
+        "about": "About",
+        "pricing": "Pricing",
+        "faq": "FAQ",
+        "contact": "Contact",
+        "terms": "Terms",
+        "privacy_policy": "Privacy Policy"
+      },
+      "why_moniesto": {
+        "title": "Why moniesto",
+        "header": "Get actionable insights from the cryptocurrency market",
+        "message": "Moniesto provides expert advice from experienced advisors who specialize in the cryptocurrency market, ensuring that investors receive reliable and up-to-date information."
+      },
+      "for_investors": {
+        "title": "For Investors",
+        "header": "Invest like a Pro",
+        "message": "Take your cryptocurrency investments to the next level and earn money with moniesto. Our app connects users with moniests, who provide predictions and insights on the future price of crypto coins."
+      },
+      "for_moniest": {
+        "title": "For Moniest",
+        "header": "Crypto Expert? Become Moniest",
+        "message": "Join the moniesto community as an expert. As a moniest on moniesto, you'll have the opportunity to share your insights with your subscribers and earn money doing what you love."
+      },
+      "scoring_algorithm": {
+        "title": "Scoring Algorithm",
+        "header": "Algorithm: What It Means for Your Investments",
+        "message": "Our scoring algorithm is designed to help users evaluate the accuracy of our moniests' predictions. After a prediction has timed out, our algorithm assigns a score to each moniest based on the success of their prediction. <br /> <br /> This information helps users identify moniests who consistently provide accurate predictions and make informed decisions about who to follow."
+      },
+      "pricing": {
+        "title": "Pricing",
+        "header": "Pricing is up to the moniests.",
+        "message": "Moniests set their own subscription fees for users to access their crypto advice. We believe in a fair pricing strategy that benefits both moniests and users. <br /> <br /> This allows users to access high-quality advice from moniests at prices that reflect their expertise and track record. Moniests, in turn, can earn money for sharing their valuable insights with users."
+      },
+      "who_we_are": {
+        "title": "Who we are?",
+        "message": "We connect people who are interested in cryptocurrencies with experts called Moniests. Our aim is to simplify crypto education and help people make informed decisions about investments. <br /> <br /> Our aim is to simplify crypto education and help people make informed decisions about investments."
+      },
+      "who_we_are_not": {
+        "title": "Who we are not?",
+        "message": " Moniesto is not a financial advisory firm or investment app. <br /> <br /> We do not provide investment advice ourselves or make investment decisions on behalf of our users. <br /> <br /> We are not responsible for the accuracy or reliability of the advice provided by Moniests."
+      },
+      "faq": {
+        "title": "Frequently asked questions",
+        "header": "Everything you need to know about Moniesto.",
+        "questions": {
+          "question1": "What is Moniesto and how does it work?",
+          "answer1": "Moniesto is a platform that connects users with experts who provide financial advice (Moniest) on cryptocurrencies. Moniest creates predictions and users subscribe to Moniest to see these predictions. Our AI algorithm controls the accuracy of prediction constantly and informs the user.",
+          "question2": "How do I become a Moniest on Moniesto?",
+          "answer2": "You can submit a form to become a Moniest on our platform by filling it out. Afterward, you are ready to share your predictions with users.",
+          "question3": "Our scoring algorithm's brain? AI",
+          "answer3": "Our AI algorithm is designed to analyze the accuracy of predictions made by Moniests and provide a score based on their success rate. This helps us identify the most reliable and accurate Moniests, so our users can make informed decisions about their investments.",
+          "question4": "Can I see a Moniest's score before subscribing?",
+          "answer4": "Yes, you can see a Moniest's score on their profile page before subscribing to them. This can help you make an informed decision about which Moniest to subscribe to. You can even see their outdated predictions and their results before subscribing.",
+          "question5": "How do I subscribe to a Moniest?",
+          "answer5": "You can subscribe to a Moniest by visiting their profile page and clicking on the subscribe button. You will be charged the Moniest's subscription fee for access to their prediction.",
+          "question6": "How do I cancel my subscription?",
+          "answer6": "You can cancel your subscription anytime by going to Moniest profile and clicking on the 'Subscribed' button, and the 'Unsubscribe' button from the modal. Please note that canceling your subscription will stop future payments and you will lose access to this Moniest's prediction."
+        }
+      },
+      "still_question": {
+        "title": "Still have questions?",
+        "header": "Can't find the answer you're looking for? Please chat to our friendly team.",
+        "action": "Get in touch"
+      },
+      "all_rights_reserved": "All rights reserved."
     },
     "share_post": {
       "share_post": "Share Post",
