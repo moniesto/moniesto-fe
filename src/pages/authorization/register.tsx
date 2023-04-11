@@ -88,13 +88,15 @@ const Register = () => {
   return (
     <Stack width={"100%"} maxWidth={500} spacing={8}>
       <Stack spacing={1.8}>
-        <Typography fontSize={"2.2rem"}>Register</Typography>
+        <Typography fontSize={"2.2rem"}>
+          {translate("page.register.title")}
+        </Typography>
         <Typography fontSize={"2.6rem"} variant="h1">
-          Welcome
+          {translate("common.welcome")}
         </Typography>
 
         <Typography fontSize={"1rem"} color={theme.palette.grey[400]}>
-          Please enter your account information
+          {translate("page.register.enter_detail")}
         </Typography>
       </Stack>
       <form onSubmit={formik.handleSubmit}>

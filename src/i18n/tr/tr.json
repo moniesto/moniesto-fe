@@ -1,23 +1,23 @@
 {
   "page": {
     "login": {
-      "title": "Giriş yapmak",
+      "title": "Giriş yap",
       "enter_detail": "Lütfen hesap bilgilerinizi girin",
       "action": {
         "forget_pass": "Şifreyi mi unuttun?",
-        "login": "Giriş yapmak",
-        "no_account": "Hesap mı yok?",
-        "register": "Kayıt olmak"
+        "login": "Giriş yap",
+        "no_account": "Hesabın yok mu?",
+        "register": "Kayıt ol"
       },
       "toast": { "login_success": "Giriş başarılı" }
     },
     "register": {
-      "title": "Kayıt olmak",
+      "title": "Kayıt ol",
       "enter_detail": "Lütfen hesap bilgilerinizi girin",
       "action": {
-        "login": "Giriş yapmak",
-        "have_account": "Bir hesabınız var mı?",
-        "register": "Kayıt olmak"
+        "login": "Giriş yap",
+        "have_account": "Hesabın var mı?",
+        "register": "Kayıt ol"
       },
       "toast": { "register_success": "Kayıt başarılı" }
     },
@@ -46,12 +46,12 @@
       }
     },
     "forget_pass": {
-      "title": "Şifreyi unut",
+      "title": "Şifreyi unuttum",
       "enter_email": "Lütfen E-postanızı girin",
       "action": {
-        "back_to": "Geri dönmek",
-        "login": "Giriş yapmak",
-        "continue": "Devam etmek"
+        "back_to": "Geri dön",
+        "login": "Giriş yap",
+        "continue": "Devam et"
       },
       "toast": {
         "mail_sent": "Size bir e-posta gönderdik. Lütfen e-posta adresinizi kontrol edin."
@@ -60,7 +60,7 @@
     "change_pass": {
       "title": "Şifre değiştir",
       "enter_pass": "Şifrenizi giriniz lütfen",
-      "action": { "back_to": "Geri dönmek", "login": "Giriş yapmak" },
+      "action": { "back_to": "Geri dön", "login": "Giriş yap" },
       "toast": {
         "password_changed": "Parolanızı başarıyla değiştirdiniz. Yeni kimlik bilgilerinizle giriş yapabilirsiniz."
       },
@@ -172,7 +172,7 @@
     "profile": {
       "user_not_found": "Kullanıcı bulunamadı",
       "no_bio": "Moniest bio eklemedi",
-      "subscribe": "Abone",
+      "subscribe": "Abone ol",
       "unsubscribe": "Aboneliği bitir",
       "sub_for_live": "Canlı gönderileri görmek için abone olun",
       "no_post": "Henüz gönderi yok",
@@ -194,7 +194,7 @@
         "subs_start_date": "Abonelik Başlangıç Tarihi",
         "total": "Toplam",
         "paying_currently": "Şu anda {{fee}} $/ay ödüyorsunuz",
-        "if_unsubscribe": "{{username}} 'dan abonelikten çıkıyorsanız, artık hesab tarafından paylaşılan içeriğe erişemeyeceksiniz."
+        "if_unsubscribe": "{{username}} 'dan abonelikten çıkıyorsanız, artık hesap tarafından paylaşılan içeriğe erişemeyeceksiniz."
       }
     }
   },
@@ -220,10 +220,10 @@
       "confirm_password": "Şifreyi Onayla",
       "email": "E-posta",
       "name": "İsim",
-      "surname": "Soyadı",
+      "surname": "Soyisim",
       "location": "Konum",
       "language": "Dil",
-      "search_moniest": "Moniestleri arayın ...",
+      "search_moniest": "Moniest'larda arayın ...",
       "username": "Kullanıcı adı",
       "currency": "Para birimi",
       "duration": "Süre",
@@ -234,7 +234,7 @@
       "tp_3": "TP 3",
       "stop": "Stop",
       "add_desc": "Açıklama ekle (isteğe bağlı)",
-      "share": "Paylaşmak",
+      "share": "Paylaş",
       "fee": "Aylık Ücret (USD)",
       "bio": "Bio",
       "desc": "Açıklama (isteğe bağlı)",
@@ -296,8 +296,8 @@
     "edit": "Düzenlemek"
   },
   "navigation": {
-    "timeline": "Zaman çizelgesi",
-    "explore": "Keşfetmek",
+    "timeline": "Ana sayfa",
+    "explore": "Keşfet",
     "share_post": "Gönderi paylaş",
     "be_moniest": "Moniest Ol",
     "account": "Hesap",
@@ -308,6 +308,6 @@
     "settings": "Ayarlar",
     "profile": "Profil",
     "logout": "Çıkış Yap",
-    "home": "Ev"
+    "home": "Ana Sayfa"
   }
 }

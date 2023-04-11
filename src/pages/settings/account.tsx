@@ -2,7 +2,6 @@ import {
   BadgeOutlined,
   LanguageOutlined,
   LocationOnOutlined,
-  SwapVertOutlined,
 } from "@mui/icons-material";
 import {
   Avatar,
@@ -19,7 +18,7 @@ import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import * as yup from "yup";
 import { LoadingButton } from "@mui/lab";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { UsernameInput } from "../../components/layout/auth/usernameInput";
 import { UploadPhotoButton } from "../../components/shared/user/uploadPhotoButton";
 import { Spinner } from "../../components/shared/common/spinner";
@@ -72,6 +71,9 @@ export const AccountSettings = () => {
     api.user
       .update_profile(formik.values)
       .then((response) => {
+        if (language != formik.values.language) {
+          dispatch(changeLanguage(formik.values.language));
+        }
         dispatch(setUser(response));
         toastService.open({
           message: translate("page.settings.account.toast.updated_success"),
@@ -97,11 +99,6 @@ export const AccountSettings = () => {
       handleSaveAccount();
     },
   });
-
-  useEffect(() => {
-    if (!formik.values.language) return;
-    dispatch(changeLanguage(formik.values.language));
-  }, [formik.values.language]);
 
   return (
     <Card

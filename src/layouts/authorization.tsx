@@ -4,11 +4,12 @@ import { Outlet } from "react-router-dom";
 import BrandText from "../components/shared/common/brandText";
 import Fly from "../components/shared/common/fly";
 import { useTranslate } from "../hooks/useTranslate";
+import { Trans } from "react-i18next";
 
 const AuthorizationLayout = () => {
   const theme = useTheme();
   const translate = useTranslate();
-  
+
   return (
     <Grid
       item
@@ -76,7 +77,7 @@ const AuthorizationLayout = () => {
                 variant="h1"
                 color={theme.palette.common.white}
               >
-                {translate("landing.invest_wisely")}
+                <Trans i18nKey="page.landing.invest_wisely"></Trans>
               </Typography>
               <img
                 style={{ width: "16rem" }}
