@@ -211,6 +211,10 @@
         "paying_currently": "You are paying {{fee}}$/Month currently",
         "if_unsubscribe": "If you unsubscribe from {{username}}, you will no longer be able to access content shared by this account for subscribers."
       }
+    },
+    "404": {
+      "page_not_found": "Page Not Found",
+      "go_home": "Go home"
     }
   },
   "component": {
@@ -293,7 +297,7 @@
       "bio_req": "Bio is required",
       "old_pass_req": "Old password is required",
       "new_pass_req": "New password is required",
-      "confirm_password_match":"Passwords must match"
+      "confirm_password_match": "Passwords must match"
     }
   },
   "moniest": {

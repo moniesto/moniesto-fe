@@ -1,11 +1,13 @@
 import { ArrowBackOutlined } from "@mui/icons-material";
-import { Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Stack, useTheme } from "@mui/system";
 import BrandText from "../components/shared/common/brandText";
 import Navigator from "../components/shared/common/navigatior";
+import { useTranslate } from "../hooks/useTranslate";
 
 const NotFound = () => {
   const theme = useTheme();
+  const translate = useTranslate();
   return (
     <Stack
       rowGap={3}
@@ -13,38 +15,33 @@ const NotFound = () => {
       alignItems={"center"}
       justifyContent={"center"}
       height={"100vh"}
-      sx={{ background: theme.palette.primary.main }}
     >
-      <Typography
-        fontSize={"7rem"}
-        color={theme.palette.text.secondary}
-        variant="h1"
-        letterSpacing={20}
-      >
+      <Typography fontSize={"7rem"} variant="h1" letterSpacing={20}>
         404
       </Typography>
       <Typography
         fontSize={"1.5rem"}
-        color={theme.palette.text.secondary}
+        color={theme.palette.secondary.main}
         variant="h4"
       >
-        Page Not Found
+        {translate("page.404.page_not_found")}
       </Typography>
       <Navigator path="/">
-        <Typography
-          sx={{ cursor: "pointer" }}
-          variant="h4"
+        <Stack
           pt={10}
-          color="secondary"
+          flexDirection={"row"}
+          columnGap={1}
+          alignItems={"center"}
         >
-          <Stack flexDirection={'row'} columnGap={1} alignItems={'center'}>
-            <ArrowBackOutlined></ArrowBackOutlined> Go Home
-          </Stack>
-        </Typography>
+          <ArrowBackOutlined></ArrowBackOutlined>
+          <Typography sx={{ cursor: "pointer" }} variant="h4">
+            {translate("page.404.go_home")}
+          </Typography>
+        </Stack>
       </Navigator>
-      <Typography sx={{ position: "absolute", bottom: "40px" }}>
-        <BrandText></BrandText>
-      </Typography>
+      <Box sx={{ position: "absolute", bottom: "40px" }}>
+        <BrandText color={theme.palette.text.primary}></BrandText>
+      </Box>
     </Stack>
   );
 };

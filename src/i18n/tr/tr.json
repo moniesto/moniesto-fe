@@ -144,7 +144,7 @@
       "all_rights_reserved": "Bütün hakları saklıdır."
     },
     "share_post": {
-      "share_post": "Gönderiyi paylaş",
+      "share_post": "Gönderi paylaş",
       "max_score": "Maksimum skor",
       "toast": { "post_created": "Gönderiniz başarıyla oluşturuldu" }
     },
@@ -196,6 +196,10 @@
         "paying_currently": "Şu anda {{fee}} $/ay ödüyorsunuz",
         "if_unsubscribe": "{{username}} 'dan abonelikten çıkıyorsanız, artık hesap tarafından paylaşılan içeriğe erişemeyeceksiniz."
       }
+    },
+    "404": {
+      "page_not_found": "Sayfa bulunamadı",
+      "go_home": "Anasayfaya git"
     }
   },
   "component": {
