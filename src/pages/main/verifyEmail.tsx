@@ -22,7 +22,6 @@ const VerifyEmail = () => {
       setLoading(false);
       return;
     }
-    setLoading(false);
     api.account
       .verify_email({ token })
       .then((res) => {

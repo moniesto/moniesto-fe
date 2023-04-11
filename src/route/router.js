@@ -116,16 +116,17 @@ const Router = createBrowserRouter([
                     },
                 ]
             },
-            {
-                path: "verify-email",
-                element: <VerifyEmail />
-            },
-            {
-                path: "*",
-                element: <NotFound />
-            }
         ]
-    }]);
+    },
+    {
+        path: "verify-email",
+        element: <VerifyEmail />
+    },
+    {
+        path: "*",
+        element: <NotFound />
+    }
+]);
 
 
 export default Router;
