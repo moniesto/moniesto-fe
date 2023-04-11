@@ -292,7 +292,8 @@
       "bio_min": "Bio should be of minimum {{value}} characters length",
       "bio_req": "Bio is required",
       "old_pass_req": "Old password is required",
-      "new_pass_req": "New password is required"
+      "new_pass_req": "New password is required",
+      "confirm_password_match":"Passwords must match"
     }
   },
   "moniest": {

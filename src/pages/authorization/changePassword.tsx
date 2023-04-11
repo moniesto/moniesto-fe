@@ -74,7 +74,11 @@ const ChangePassword = () => {
       .required(translate("form.validation.password_req")),
     repassword: yup
       .string()
-      .required(translate("form.validation.confirm_password_req")),
+      .required(translate("form.validation.confirm_password_req"))
+      .oneOf(
+        [yup.ref("password"), null],
+        translate("form.validation.confirm_password_match")
+      ),
   });
 
   const formik = useFormik<ChangePasswordForm>({

@@ -253,7 +253,7 @@
       "username_min": "Kullanıcı adı en az 5 karakter uzunluğunda olmalıdır",
       "name_min": "İsim en az 2 karakter uzunluğunda olmalı",
       "surname_min": "Soyadı en az 2 karakter uzunluğunda olmalı",
-      "confirm_password_req": "Şifreyi Onayla gereklidir",
+      "confirm_password_req": "Şifreyi onayla gereklidir",
       "username_exist": "Kullanıcı adı zaten var!",
       "duration_req": "Süre gerekli",
       "duration_min": "Süre bir dakikadan fazla olmalı",
@@ -275,7 +275,8 @@
       "bio_min": "Bio minimum {{value}} karakter uzunluğunda olmalıdır",
       "bio_req": "Bio gerekli",
       "old_pass_req": "Eski şifre gerekli",
-      "new_pass_req": "Yeni şifre gerekli"
+      "new_pass_req": "Yeni şifre gerekli",
+      "confirm_password_match": "Şifreler eşleşmiyor"
     }
   },
   "moniest": {
