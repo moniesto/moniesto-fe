@@ -20,6 +20,7 @@ import {
 } from "@mui/icons-material";
 import { setUser } from "../../store/slices/userSlice";
 import { useTranslate } from "../../hooks/useTranslate";
+import configService from "../../services/configService";
 
 export const MoniestSettings = () => {
   const theme = useTheme();
@@ -31,13 +32,28 @@ export const MoniestSettings = () => {
   const validationSchema = yup.object({
     fee: yup
       .number()
-      .min(1, translate("form.validation.fee_min", { value: 0 }))
+      .min(
+        configService?.validations?.min_fee,
+        translate("form.validation.fee_min", {
+          value: configService?.validations?.min_fee,
+        })
+      )
       .required("form.validation.fee_req"),
     bio: yup
       .string()
-      .min(3, translate("form.validation.bio_min", { value: 3 }))
+      .max(
+        configService?.validations?.max_bio_lenght,
+        translate("form.validation.bio_max", {
+          value: configService?.validations?.max_bio_lenght,
+        })
+      )
       .required(translate("form.validation.bio_req")),
-    description: yup.string(),
+    description: yup.string().max(
+      configService?.validations?.max_description_length,
+      translate("form.validation.desc_max", {
+        value: configService?.validations?.max_description_length,
+      })
+    ),
   });
 
   const handleSaveAccount = () => {

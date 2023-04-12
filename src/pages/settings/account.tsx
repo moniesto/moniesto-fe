@@ -28,6 +28,7 @@ import { setUser } from "../../store/slices/userSlice";
 import { CoverImageBox } from "../../components/shared/user/coverImageBox";
 import { changeLanguage, setToken } from "../../store/slices/localStorageSlice";
 import { useTranslate } from "../../hooks/useTranslate";
+import configService from "../../services/configService";
 
 export const AccountSettings = () => {
   const user = useAppSelector((state) => state.user.user);
@@ -42,15 +43,37 @@ export const AccountSettings = () => {
   const dispatch = useAppDispatch();
 
   const validationSchema = yup.object({
-    username: yup.string().required(translate("form.validation.usename")),
+    username: yup
+      .string()
+      .required(translate("form.validation.usename"))
+      .matches(
+        configService?.validations?.username_regex,
+        translate("form.validation.username_valid")
+      ),
     name: yup
       .string()
-      .min(2, translate("form.validation.name_min"))
+      .max(
+        configService?.validations?.max_name_length,
+        translate("form.validation.name_max", {
+          value: configService?.validations?.max_name_length,
+        })
+      )
       .required(translate("form.validation.name_req")),
     surname: yup
       .string()
-      .min(2, translate("form.validation.surname_min"))
+      .max(
+        configService?.validations?.max_surname_length,
+        translate("form.validation.surname_max", {
+          value: configService?.validations?.max_surname_length,
+        })
+      )
       .required(translate("form.validation.surname_req")),
+    location: yup.string().max(
+      configService?.validations?.max_location_length,
+      translate("form.validation.location_max", {
+        value: configService?.validations?.max_location_length,
+      })
+    ),
   });
 
   const handleSaveAccount = async () => {

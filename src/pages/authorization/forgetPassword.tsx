@@ -10,6 +10,7 @@ import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import api from "../../services/api";
 import { useTranslate } from "../../hooks/useTranslate";
+import configService from "../../services/configService";
 
 type ForgetPasswordForm = {
   email: string;
@@ -25,7 +26,11 @@ const ForgetPassword = () => {
     email: yup
       .string()
       .email(translate("form.validation.email_valid"))
-      .required(translate("form.validation.email_req")),
+      .required(translate("form.validation.email_req"))
+      .matches(
+        configService?.validations?.email_regex,
+        translate("form.validation.email_valid")
+      ),
   });
 
   const handleForgetPassword = (values: ForgetPasswordForm) => {

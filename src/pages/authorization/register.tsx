@@ -16,6 +16,7 @@ import api from "../../services/api";
 import toastService from "../../services/toastService";
 import { UsernameInput } from "../../components/layout/auth/usernameInput";
 import { useTranslate } from "../../hooks/useTranslate";
+import configService from "../../services/configService";
 
 type RegisterForm = {
   username: string;
@@ -52,23 +53,45 @@ const Register = () => {
   const validationSchema = yup.object({
     username: yup
       .string()
-      .min(5, translate("form.validation.username_min"))
-      .required(translate("form.validation.username_req")),
+      .required(translate("form.validation.username_req"))
+      .matches(
+        configService?.validations?.username_regex,
+        translate("form.validation.username_valid")
+      ),
     name: yup
       .string()
-      .min(2, translate("form.validation.name_min"))
+      .max(
+        configService?.validations?.max_name_length,
+        translate("form.validation.name_max", {
+          value: configService?.validations?.max_name_length,
+        })
+      )
       .required(translate("form.validation.name_req")),
     surname: yup
       .string()
-      .min(2, translate("form.validation.surname_min"))
+      .max(
+        configService?.validations?.max_surname_length,
+        translate("form.validation.surname_max", {
+          value: configService?.validations?.max_surname_length,
+        })
+      )
       .required(translate("form.validation.surname_req")),
     email: yup
       .string()
       .email(translate("form.validation.email_valid"))
-      .required(translate("form.validation.email_req")),
+      .required(translate("form.validation.email_req"))
+      .matches(
+        configService?.validations?.email_regex,
+        translate("form.validation.email_valid")
+      ),
     password: yup
       .string()
-      .min(6, translate("form.validation.password_min"))
+      .min(
+        configService?.validations?.password_length,
+        translate("form.validation.password_min", {
+          value: configService?.validations?.password_length,
+        })
+      )
       .required(translate("form.validation.password_req")),
   });
   const formik = useFormik<RegisterForm>({

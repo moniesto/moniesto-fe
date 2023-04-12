@@ -92,7 +92,7 @@ export const Requests: {
         change_username: string
     },
     asset: {
-        error_codes: string
+        configs: string
     },
     content: {
         moniests: string,
@@ -143,7 +143,7 @@ export const Requests: {
         change_username: "account/username"
     },
     asset: {
-        error_codes: "assets/error-codes"
+        configs: "assets/configs"
     },
     content: {
         moniests: "content/moniests",

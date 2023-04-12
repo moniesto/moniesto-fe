@@ -7,13 +7,22 @@ import themes from "../style/themes";
 
 import * as locales from "@mui/material/locale";
 import * as dateLocales from "@mui/x-date-pickers";
+
 class config {
 
     private languages = ['en', 'tr']
     private languagesLocale: string[] = ['enUS', 'trTR']
-    errors: string[] = [];
+    errors!: {
+        [key: string]: string
+    };
+    validations!: {
+        [key: string]: any
+    };
     initialize() {
-        api.asset.error_codes().then((res) => this.errors = res)
+        api.asset.configs().then((res) => {
+            this.errors = res.error_codes;
+            this.validations = res.validation
+        })
         TimeAgo.addDefaultLocale(en);
         TimeAgo.addLocale(tr);
     }

@@ -38,7 +38,13 @@ class api {
         change_username: (params: { new: string }) => httpService.patch<{ token: string }>(Requests.account.change_username, params)
     }
     asset = {
-        error_codes: () => httpService.get<string[]>(Requests.asset.error_codes),
+        configs: () => httpService.get<{
+            error_codes: {
+                [key: string]: string
+            }, validation: {
+                [key: string]: string
+            }
+        }>(Requests.asset.configs),
     }
     content = {
         moniests: (params: PaginateRequest) => httpService.get<User[]>(Requests.content.moniests, params),
@@ -66,7 +72,7 @@ class api {
         subscriptions: (username: string, params: PaginateRequest) => httpService.get<User[]>(Requests.user.subscriptions(username), params),
         summary_stats: (username: string) => httpService.get<SummaryStatsResponse>(Requests.user.summary_stats(username))
     }
-    feedback={
+    feedback = {
         feedback: (params: { type: string, message: string }) => httpService.post(Requests.feedback.feedback, params),
     }
 

@@ -7,6 +7,7 @@ import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import { BeMoniestReq } from "../../../interfaces/requests";
 import { useTranslate } from "../../../hooks/useTranslate";
+import configService from "../../../services/configService";
 
 type propType = {
   handleNext: (data: Partial<BeMoniestReq>) => void;
@@ -19,13 +20,28 @@ const MoniestInfoStep = ({ handleNext, handleBack }: propType) => {
   const validationSchema = yup.object({
     fee: yup
       .number()
-      .min(1, translate("form.validation.fee_min", { value: 0 }))
+      .min(
+        configService?.validations?.min_fee,
+        translate("form.validation.fee_min", {
+          value: configService?.validations?.min_fee,
+        })
+      )
       .required("form.validation.fee_req"),
     bio: yup
       .string()
-      .min(3, translate("form.validation.bio_min", { value: 3 }))
+      .max(
+        configService?.validations?.max_bio_lenght,
+        translate("form.validation.bio_max", {
+          value: configService?.validations?.max_bio_lenght,
+        })
+      )
       .required(translate("form.validation.bio_req")),
-    description: yup.string(),
+    description: yup.string().max(
+      configService?.validations?.max_description_length,
+      translate("form.validation.desc_max", {
+        value: configService?.validations?.max_description_length,
+      })
+    ),
   });
   const formik = useFormik({
     initialValues: {

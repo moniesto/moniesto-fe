@@ -44,7 +44,7 @@ const SideBar = () => {
 
   useEffect(() => {
     setSelectedLink(pathname);
-  }, []);
+  }, [pathname]);
 
   const handleListItemClick = (link: string) => {
     setSelectedLink(link);
