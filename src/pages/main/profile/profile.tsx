@@ -16,6 +16,7 @@ import Navigator from "../../../components/shared/common/navigatior";
 import { SubscribeToMoniest } from "./subscribeToMoniest";
 import { SubscribeButton } from "../../../components/shared/user/subscribeButton";
 import { useTranslate } from "../../../hooks/useTranslate";
+import { MoniestBadge } from "../../../components/shared/user/moniestBadge";
 
 const Profile = () => {
   const theme = useTheme();
@@ -34,7 +35,9 @@ const Profile = () => {
   }, [username]);
 
   useEffect(() => {
+    if (!account) return;
     setLoading(false);
+
     if (user.username === username || !account?.moniest) return;
     api.moniest
       .subscribe_check(username as string)
@@ -67,18 +70,26 @@ const Profile = () => {
           >
             <>
               <CoverImageBox image={account?.background_photo_link as string}>
-                <Avatar
+                <Box
                   sx={{
                     width: "6rem",
                     height: "6rem",
                     position: "absolute",
                     bottom: "-3rem",
                     left: { md: "30px", xs: "16px" },
-                    border: `3px solid ${theme.palette.background[800]}`,
-                    background: theme.palette.background[600],
                   }}
-                  src={account?.profile_photo_link}
-                ></Avatar>
+                >
+                  <Avatar
+                    sx={{
+                      width: "6rem",
+                      height: "6rem",
+                      border: `3px solid ${theme.palette.background[800]}`,
+                      background: theme.palette.background[600],
+                    }}
+                    src={account?.profile_photo_link}
+                  ></Avatar>
+                  {account.moniest && <MoniestBadge size={26} />}
+                </Box>
               </CoverImageBox>
               <Box padding={{ md: "0 30px", xs: "0 16px" }}>
                 <Box>
