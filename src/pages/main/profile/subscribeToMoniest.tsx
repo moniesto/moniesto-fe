@@ -3,7 +3,6 @@ import {
   Box,
   Card,
   Divider,
-  Icon,
   IconButton,
   Modal,
   Typography,
@@ -26,6 +25,7 @@ export const SubscribeToMoniest = ({
   account: User;
   alreadySubscribed: boolean;
 }) => {
+
   const theme = useTheme();
   const translate = useTranslate();
   const [loading, setLoading] = useState<boolean>(false);

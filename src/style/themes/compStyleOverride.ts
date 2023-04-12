@@ -6,6 +6,10 @@ export default function componentStyleOverrides(theme: any) {
     return {
         MuiButton: {
             styleOverrides: {
+                sizeMedium: {
+                    height: '38px',
+                    fontSize: '0.85rem',
+                },
                 root: {
                     padding: "0 24px",
                     fontWeight: 700,
@@ -33,10 +37,6 @@ export default function componentStyleOverrides(theme: any) {
                         ".MuiSvgIcon-root": {
                             color: theme.colors.primaryMain
                         },
-                    },
-                    '&.MuiButton-sizeMedium': {
-                        height: '35px',
-                        fontSize: '0.9rem',
                     },
                     ".MuiButton-textPrimary": {
                         color: theme.textMain

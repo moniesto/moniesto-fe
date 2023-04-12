@@ -21,7 +21,7 @@ export default function themeTypography(theme: any) {
             fontSize: '1em',
             color: theme.textMain,
             fontWeight: 600,
-            marginTop: "0 !important"
+            marginTop: "0"
         },
         h3: {
             fontSize: '1.25em',

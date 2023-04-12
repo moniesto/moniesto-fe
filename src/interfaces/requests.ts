@@ -119,6 +119,9 @@ export const Requests: {
         update_profile: string,
         subscriptions: (username: string) => string,
         summary_stats: (username: string) => string
+    },
+    feedback: {
+        feedback: string
     }
 } =
 {
@@ -167,6 +170,9 @@ export const Requests: {
         update_profile: "users/profile",
         subscriptions: (username: string) => `users/${username}/subscriptions`,
         summary_stats: (username) => `users/${username}/summary-stats`,
+    },
+    feedback: {
+        feedback: "feedback",
     }
 }
 

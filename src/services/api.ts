@@ -65,7 +65,9 @@ class api {
         user_by_username: (username: string) => httpService.get<User>(Requests.user.user_by_username(username)),
         subscriptions: (username: string, params: PaginateRequest) => httpService.get<User[]>(Requests.user.subscriptions(username), params),
         summary_stats: (username: string) => httpService.get<SummaryStatsResponse>(Requests.user.summary_stats(username))
-
+    }
+    feedback={
+        feedback: (params: { type: string, message: string }) => httpService.put(Requests.feedback.feedback, params),
     }
 
 
