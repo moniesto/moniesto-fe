@@ -79,6 +79,17 @@ const Register = () => {
       email: "",
       password: "",
     },
+    validateOnChange: false,
+    validateOnBlur: false,
+    validate: (values) => {
+      const errors: any = {};
+      return api.account.check_username(values.username).then((res) => {
+        if (!res.validity) {
+          errors.username = translate("form.validation.username_exist");
+        }
+        return errors;
+      });
+    },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       handleSubmit(values);

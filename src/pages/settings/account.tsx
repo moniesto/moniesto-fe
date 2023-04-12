@@ -18,7 +18,7 @@ import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import * as yup from "yup";
 import { LoadingButton } from "@mui/lab";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UsernameInput } from "../../components/layout/auth/usernameInput";
 import { UploadPhotoButton } from "../../components/shared/user/uploadPhotoButton";
 import { Spinner } from "../../components/shared/common/spinner";
@@ -99,12 +99,22 @@ export const AccountSettings = () => {
       location: user.location,
       language: language,
     },
+    validateOnChange: false,
+    validateOnBlur: false,
+    validate: (values) => {
+      const errors: any = {};
+      return api.account.check_username(values.username).then((res) => {
+        if (!res.validity) {
+          errors.username = translate("form.validation.username_exist");
+        }
+        return errors;
+      });
+    },
     validationSchema: validationSchema,
     onSubmit: () => {
       handleSaveAccount();
     },
   });
-
   return (
     <Card
       sx={{
