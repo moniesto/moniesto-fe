@@ -67,7 +67,7 @@ class api {
         summary_stats: (username: string) => httpService.get<SummaryStatsResponse>(Requests.user.summary_stats(username))
     }
     feedback={
-        feedback: (params: { type: string, message: string }) => httpService.put(Requests.feedback.feedback, params),
+        feedback: (params: { type: string, message: string }) => httpService.post(Requests.feedback.feedback, params),
     }
 
 

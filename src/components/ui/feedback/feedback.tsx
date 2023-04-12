@@ -23,6 +23,7 @@ import { useTranslate } from "../../../hooks/useTranslate";
 import { LoadingButton } from "@mui/lab";
 import api from "../../../services/api";
 import toastService from "../../../services/toastService";
+import { Trans } from "react-i18next";
 
 export const Feedback = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -32,7 +33,7 @@ export const Feedback = () => {
 
   const validationSchema = yup.object({
     type: yup.string(),
-    message: yup.string().required(),
+    message: yup.string().required(translate("form.field.message_req")),
   });
 
   const formik = useFormik({
@@ -46,12 +47,13 @@ export const Feedback = () => {
 
       api.feedback
         .feedback(values)
-        .then(() =>
+        .then(() => {
+          formik.resetForm();
           toastService.open({
-            message: "Your feedback has been sent successfully",
+            message: "component.feedback.toast.feedback_sent",
             severity: "success",
-          })
-        )
+          });
+        })
         .finally(() => {
           setLoading(false);
           setOpen(false);
@@ -73,7 +75,7 @@ export const Feedback = () => {
           borderRadius: "100px",
         }}
       >
-        Feedback
+        {translate("component.feedback.title")}
       </Button>
       <Modal open={open} onClose={() => setOpen(false)}>
         <Card
@@ -111,11 +113,10 @@ export const Feedback = () => {
                 />
               </Box>
               <Typography variant="h3">
-                Help us improve your experience!
+                {translate("component.feedback.header")}
               </Typography>
               <Typography variant="h4" textAlign="center" sx={{ opacity: 0.5 }}>
-                Share your thoughts and suggestions with us to make <br />
-                moniesto better for you.
+                <Trans i18nKey="component.feedback.message"></Trans>
               </Typography>
             </Stack>
             <Box mt={5}>
@@ -131,7 +132,7 @@ export const Feedback = () => {
                   rows={7}
                   fullWidth
                   name="message"
-                  placeholder={translate("form.field.desc")}
+                  placeholder={translate("form.field.message")}
                   value={formik.values.message}
                   onChange={formik.handleChange}
                   error={
@@ -154,7 +155,7 @@ export const Feedback = () => {
                     variant="outlined"
                     color="inherit"
                   >
-                    Cancel
+                    {translate("common.cancel")}
                   </Button>
                   <LoadingButton
                     sx={{ flex: 1 }}

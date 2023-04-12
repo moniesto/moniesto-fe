@@ -215,6 +215,14 @@
         "tp_3": "TP 3",
         "stop": "Stop"
       }
+    },
+    "feedback": {
+      "title": "Geri bildirim",
+      "header": "Deneyiminizi iyileştirmemize yardımcı olun!",
+      "message": "Moniesto'yu size daha iyi hale getirmek için düşünce ve önerilerinizi bizimle paylaşın..",
+      "toast": {
+        "feedback_sent": "Your feedback has been sent successfully"
+      }
     }
   },
   "form": {
@@ -243,7 +251,8 @@
       "bio": "Bio",
       "desc": "Açıklama (isteğe bağlı)",
       "old_pass": "Eski Şifre",
-      "new_pass": "Yeni Şifre"
+      "new_pass": "Yeni Şifre",
+      "message": "Mesaj"
     },
     "validation": {
       "identifier_req": "E-posta veya kullanıcı adı gerekli",
@@ -280,7 +289,8 @@
       "bio_req": "Bio gerekli",
       "old_pass_req": "Eski şifre gerekli",
       "new_pass_req": "Yeni şifre gerekli",
-      "confirm_password_match": "Şifreler eşleşmiyor"
+      "confirm_password_match": "Şifreler eşleşmiyor",
+      "message_req": "Mesaj gerekli"
     }
   },
   "moniest": {
@@ -298,7 +308,8 @@
     "short": "Short",
     "next": "Sonraki",
     "back": "Geri",
-    "edit": "Düzenlemek"
+    "edit": "Düzenle",
+    "cancel": "İptal"
   },
   "navigation": {
     "timeline": "Ana sayfa",

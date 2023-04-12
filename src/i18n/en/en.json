@@ -232,6 +232,14 @@
         "tp_3": "TP 3",
         "stop": "Stop"
       }
+    },
+    "feedback": {
+      "title": "Feedback",
+      "header": "Help us improve your experience!",
+      "message": "Share your thoughts and suggestions with us to make <br />  moniesto better for you.",
+      "toast": {
+        "feedback_sent": "Your feedback has been sent successfully"
+      }
     }
   },
   "form": {
@@ -260,7 +268,8 @@
       "bio": "Bio",
       "desc": "Description (optional)",
       "old_pass": "Old password",
-      "new_pass": "New password"
+      "new_pass": "New password",
+      "message": "Message"
     },
     "validation": {
       "identifier_req": "Email or username is required",
@@ -297,7 +306,8 @@
       "bio_req": "Bio is required",
       "old_pass_req": "Old password is required",
       "new_pass_req": "New password is required",
-      "confirm_password_match": "Passwords must match"
+      "confirm_password_match": "Passwords must match",
+      "message_req": "Message is required"
     }
   },
   "moniest": {
@@ -315,7 +325,8 @@
     "short": "Short",
     "next": "Next",
     "back": "Back",
-    "edit": "Edit"
+    "edit": "Edit",
+    "cancel": "Cancel"
   },
   "navigation": {
     "timeline": "Timeline",
