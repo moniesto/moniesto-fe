@@ -68,6 +68,11 @@ export const AccountSettings = () => {
       dispatch(setToken(updatedAccout.token));
     }
 
+    if (user.background_photo_link == formik.values.background_photo)
+      delete formik.values.background_photo;
+    if (user.profile_photo_link == formik.values.profile_photo)
+      delete formik.values.profile_photo;
+
     api.user
       .update_profile(formik.values)
       .then((response) => {
@@ -76,7 +81,7 @@ export const AccountSettings = () => {
         }
         dispatch(setUser(response));
         toastService.open({
-          message: translate("page.settings.account.toast.updated_success"),
+          message: "page.settings.account.toast.updated_success",
           severity: "success",
         });
       })
