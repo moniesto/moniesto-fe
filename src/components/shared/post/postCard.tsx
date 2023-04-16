@@ -25,6 +25,7 @@ import helper from "../../../services/helper";
 import { useTheme } from "@mui/system";
 import { InfoChip } from "./infoChip";
 import { PercentOutlined, StarOutline } from "@mui/icons-material";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -48,6 +49,7 @@ type PostCardProps = {
 const PostCard = ({ post }: PostCardProps) => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const theme = useTheme();
+  const translate = useTranslate();
 
   const calculatePercentage = (
     helper.operatonByDirection(post.direction) *
@@ -57,6 +59,20 @@ const PostCard = ({ post }: PostCardProps) => {
 
   return (
     <Card sx={{ position: "relative", paddingBottom: "44px" }}>
+      <Box
+        sx={{
+          position: "absolute",
+          left: "14px",
+          bottom: "16px",
+          opacity: 0.4,
+          fontSize: "0.75rem",
+          fontStyle: "italic",
+          cursor: "pointer",
+        }}
+      >
+        {translate("component.post_card.not_advice")}
+       
+      </Box>
       <CardHeader
         sx={{
           ".MuiCardHeader-action": {

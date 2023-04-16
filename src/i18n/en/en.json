@@ -222,6 +222,7 @@
       "no_user_found": "No user found with {{text}}"
     },
     "post_card": {
+      "not_advice": "Not Investment Advice!",
       "table": {
         "direction": "Direction",
         "start": "Start",
@@ -239,6 +240,12 @@
       "message": "Share your thoughts and suggestions with us to make <br />  moniesto better for you.",
       "toast": {
         "feedback_sent": "Your feedback has been sent successfully"
+      },
+      "type": {
+        "feature_request": "Feature request",
+        "bug_report": "Bug report",
+        "improvement": "Improvement",
+        "other": "Other"
       }
     }
   },
@@ -269,7 +276,9 @@
       "desc": "Description (optional)",
       "old_pass": "Old password",
       "new_pass": "New password",
-      "message": "Message"
+      "message": "Message",
+      "enter_message": "Enter a message",
+      "feedback_type": "Feedback type"
     },
     "validation": {
       "identifier_req": "Email or username is required",
@@ -309,7 +318,8 @@
       "new_pass_req": "New password is required",
       "confirm_password_match": "Passwords must match",
       "message_req": "Message is required",
-      "location_max": "Location should be of maximum {{value}} characters length"
+      "location_max": "Location should be of maximum {{value}} characters length",
+      "type_req": "Type is requiredƒ"
     }
   },
   "moniest": {

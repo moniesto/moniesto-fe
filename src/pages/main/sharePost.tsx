@@ -400,7 +400,6 @@ export const SharePost = () => {
                 <Select
                   color="secondary"
                   onChange={formik.handleChange}
-                  placeholder="Direction"
                   name="direction"
                   value={formik.values.direction}
                   startAdornment={<SwapVertOutlined></SwapVertOutlined>}

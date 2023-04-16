@@ -2,19 +2,26 @@ import {
   ArticleOutlined,
   ClearOutlined,
   ForumOutlined,
+  RateReviewOutlined,
   TaskAltOutlined,
 } from "@mui/icons-material";
 import {
   Box,
   Button,
   Card,
+  FormControl,
+  FormHelperText,
   IconButton,
   InputAdornment,
+  InputLabel,
+  MenuItem,
   Modal,
+  Select,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
+
 import { useState } from "react";
 import { useTheme } from "@mui/system";
 import { useFormik } from "formik";
@@ -30,10 +37,16 @@ export const Feedback = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const theme = useTheme();
   const translate = useTranslate();
+  const types: string[] = [
+    "feature_request",
+    "bug_report",
+    "improvement",
+    "other",
+  ];
 
   const validationSchema = yup.object({
-    type: yup.string(),
-    message: yup.string().required(translate("form.field.message_req")),
+    type: yup.string().required(translate("form.validation.type_req")),
+    message: yup.string().required(translate("form.validation.message_req")),
   });
 
   const formik = useFormik({
@@ -121,32 +134,62 @@ export const Feedback = () => {
             </Stack>
             <Box mt={5}>
               <form onSubmit={formik.handleSubmit}>
-                <TextField
-                  sx={{
-                    ".MuiInputBase-root": {
-                      alignItems: "baseline",
-                      paddingLeft: "14px !important",
-                    },
-                  }}
-                  multiline
-                  rows={7}
-                  fullWidth
-                  name="message"
-                  placeholder={translate("form.field.message")}
-                  value={formik.values.message}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.message && Boolean(formik.errors.message)
-                  }
-                  helperText={formik.touched.message && formik.errors.message}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <ArticleOutlined />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
+                <Box mb={1}>
+                  <Typography pb={0.5} sx={{ opacity: 0.6 }}>
+                    {translate("form.field.feedback_type")}
+                  </Typography>
+                  <FormControl
+                    error={formik.touched.type && Boolean(formik.errors.type)}
+                    fullWidth
+                  >
+                    <Select
+                      color="secondary"
+                      onChange={formik.handleChange}
+                      name="type"
+                      value={formik.values.type}
+                      startAdornment={<RateReviewOutlined />}
+                    >
+                      {types.map((type) => (
+                        <MenuItem key={type} value={type}>
+                          {translate("component.feedback.type." + type)}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    <FormHelperText>{formik.errors.type}</FormHelperText>
+                  </FormControl>
+                </Box>
+
+                <Box mb={1}>
+                  <Typography pb={0.5} sx={{ opacity: 0.6 }}>
+                    {translate("form.field.message")}
+                  </Typography>
+                  <TextField
+                    sx={{
+                      ".MuiInputBase-root": {
+                        alignItems: "baseline",
+                        paddingLeft: "14px !important",
+                      },
+                    }}
+                    multiline
+                    rows={7}
+                    fullWidth
+                    name="message"
+                    placeholder={translate("form.field.enter_message")}
+                    value={formik.values.message}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.message && Boolean(formik.errors.message)
+                    }
+                    helperText={formik.touched.message && formik.errors.message}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <ArticleOutlined />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Box>
                 <Stack direction="row" mt={2} spacing={4}>
                   <Button
                     onClick={() => setOpen(false)}

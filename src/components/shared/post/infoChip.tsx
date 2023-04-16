@@ -22,13 +22,12 @@ export const InfoChip = ({ title, startAdornment, value }: InfoChipProps) => {
       direction="row"
       alignItems="center"
     >
-     
-      <Typography sx={{ opacity: 0.7 }} variant="h4">
+      <Typography sx={{ opacity: 0.7 }} variant="h5">
         {title}
       </Typography>
-    
-      <Typography variant="h4">{value}</Typography>
-      {startAdornment}
+
+      <Typography variant="h5">{value}</Typography>
+      <Box fontSize={12}>{startAdornment}</Box>
     </Stack>
   );
 };

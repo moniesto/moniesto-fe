@@ -15,7 +15,8 @@ export default function themeTypography(theme: any) {
         h5: {
             fontSize: '0.895em',
             color: theme.textMain,
-            fontWeight: 500
+            fontWeight: 500,
+            lineHeight: 0.73
         },
         h4: {
             fontSize: '1em',
