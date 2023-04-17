@@ -78,11 +78,27 @@ export const Feedback = () => {
     <Box>
       <Button
         onClick={() => setOpen(true)}
+        variant="contained"
+        color="secondary"
+        sx={{
+          display: { xs: "block", md: "none" },
+          position: "fixed",
+          right: "-36px",
+          transform: "rotate(270deg)",
+          bottom: "110px",
+          padding: "0 12px",
+        }}
+      >
+        {translate("component.feedback.title")}
+      </Button>
+      <Button
+        onClick={() => setOpen(true)}
         endIcon={<ForumOutlined />}
         variant="contained"
         color="secondary"
         sx={{
           position: "fixed",
+          display: { xs: "none", md: "flex" },
           right: "30px",
           bottom: "30px",
           borderRadius: "100px",

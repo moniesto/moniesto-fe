@@ -126,6 +126,7 @@ export const AccountSettings = () => {
     validateOnBlur: false,
     validate: (values) => {
       const errors: any = {};
+      if (user.username == values.username) return;
       return api.account.check_username(values.username).then((res) => {
         if (!res.validity) {
           errors.username = translate("form.validation.username_exist");

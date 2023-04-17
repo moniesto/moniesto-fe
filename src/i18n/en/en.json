@@ -247,6 +247,11 @@
         "improvement": "Improvement",
         "other": "Other"
       }
+    },
+    "not_advice": {
+      "understood": "Understood",
+      "header": "Legal Warning",
+      "message": "The information, opinions and recommendations about investing that you find here are not the same as getting advice from an investment advisor. The opinions and recommendations here are just personal opinions of the people who wrote them. Those opinions might not be right for you and your situation. So, if you only use the information you find here to make an investment, you might not get the results you want."
     }
   },
   "form": {

@@ -222,7 +222,7 @@
       "header": "Deneyiminizi iyileştirmemize yardımcı olun!",
       "message": "Moniesto'yu size daha iyi hale getirmek için düşünce ve önerilerinizi bizimle paylaşın..",
       "toast": {
-        "feedback_sent": "Your feedback has been sent successfully"
+        "feedback_sent": "Geri bildiriminiz başarıyla gönderildi."
       },
       "type": {
         "feature_request": "Özellik isteği",
@@ -230,6 +230,11 @@
         "improvement": "İyileştirme",
         "other": "Diğer"
       }
+    },
+    "not_advice": {
+      "understood": "Anladım",
+      "header": "Yasal Uyarı",
+      "message": "Burada bulduğunuz yatırımla ilgili bilgiler, görüşler ve tavsiyeler, bir yatırım danışmanından tavsiye almakla aynı şey değildir. Buradaki görüşler ve tavsiyeler, onları yazan kişilerin kişisel görüşleridir. Bu görüşler sizin ve durumunuz için doğru olmayabilir. Dolayısıyla, burada bulduğunuz bilgileri yalnızca yatırım yapmak için kullanırsanız, istediğiniz sonuçları alamayabilirsiniz."
     }
   },
   "form": {
