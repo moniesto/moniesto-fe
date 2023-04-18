@@ -18,6 +18,11 @@ class config {
     validations!: {
         [key: string]: any
     };
+
+    translatedErrors = [
+        "Account_CheckUsername_InvalidUsername"
+    ]
+
     initialize() {
         api.asset.configs().then((res) => {
             this.errors = res.error_codes;

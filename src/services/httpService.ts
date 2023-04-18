@@ -47,8 +47,9 @@ class http {
         }, (error) => {
 
             const code = error.response.data.error_code;
+            const message = configService.translatedErrors.includes(code) ? "server.error." + code : configService.errors[code]
 
-            toastService.open({ severity: "error", message: configService.errors[code] })
+            toastService.open({ severity: "error", message })
             if (error.response.status === 401) { this.dispatch(setUser(emptyUser)); this.dispatch(setToken("")) }
 
             return Promise.reject(error.response.data);

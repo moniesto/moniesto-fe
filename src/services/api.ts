@@ -65,6 +65,7 @@ class api {
     post = {
         create_post: (params: CreatePostReq) => httpService.post<Post>(Requests.post.create_post, params),
         user_posts: (username: string, params: UserPostsRequest) => httpService.get<Post[]>(Requests.post.user_posts(username), params),
+        approximate_score: (params: Partial<Post>) => httpService.post<{ score: number }>(Requests.post.approximate_score, params),
     }
     user = {
         update_profile: (params: Partial<User>) => httpService.patch<User>(Requests.user.update_profile, params),

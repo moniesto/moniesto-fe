@@ -14,7 +14,7 @@ import BeMoniest from "../pages/main/beMoniest/beMoniest";
 import ProtectedRoutes from "../components/layout/protectedRoutes";
 import UnprotectedRoutes from "../components/layout/unprotectedRoutes";
 import VerifyEmail from "../pages/main/verifyEmail";
-import { SharePost } from "../pages/main/sharePost";
+import { SharePost } from "../pages/main/sharePost/sharePost";
 import { AccountSettings } from "../pages/settings/account";
 import { MoniestSettings } from "../pages/settings/moniest";
 import { CardSettings } from "../pages/settings/card";

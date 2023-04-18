@@ -14,11 +14,10 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/system";
 
-import StarIcon from "@mui/icons-material/Star";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import DoNotDisturbAltOutlinedIcon from "@mui/icons-material/DoNotDisturbAltOutlined";
-import api from "../../services/api";
+import api from "../../../services/api";
 import CurrencyBitcoinOutlinedIcon from "@mui/icons-material/CurrencyBitcoinOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
@@ -30,13 +29,15 @@ import dayjs from "dayjs";
 import ReactTimeAgo from "react-time-ago";
 
 import { SwapVertOutlined } from "@mui/icons-material";
-import toastService from "../../services/toastService";
+import toastService from "../../../services/toastService";
 import { useNavigate } from "react-router-dom";
-import { Editor } from "../../components/shared/common/editor/editor";
+import { Editor } from "../../../components/shared/common/editor/editor";
 import { LoadingButton } from "@mui/lab";
-import helper from "../../services/helper";
-import { DateTimeProvider } from "../../components/shared/common/dateTimeProvider";
-import { useTranslate } from "../../hooks/useTranslate";
+import helper from "../../../services/helper";
+import { DateTimeProvider } from "../../../components/shared/common/dateTimeProvider";
+import { useTranslate } from "../../../hooks/useTranslate";
+import { ApproximateScor } from "./approximateScore";
+import { Post } from "../../../interfaces/post";
 
 export const SharePost = () => {
   const [open, setOpen] = React.useState(false);
@@ -86,6 +87,8 @@ export const SharePost = () => {
           .required(translate("form.validation.currency_req")),
         stop: yup
           .number()
+          .moreThan(0, translate("form.validation.stop_min"))
+          .required(translate("form.validation.stop_req"))
           .when("direction", {
             is: "long",
             then: yup.number().lessThan(
@@ -103,9 +106,8 @@ export const SharePost = () => {
                 price: selectedCurrencyPrice,
               })
             ),
-          })
+          }),
 
-          .required("form.validation.stop_req"),
         target1: yup
           .number()
           .when("direction", {
@@ -126,7 +128,7 @@ export const SharePost = () => {
               })
             ),
           })
-          .required("form.validation.tp1_req"),
+          .required(translate("form.validation.tp1_req")),
 
         target2: yup
           .number()
@@ -148,7 +150,7 @@ export const SharePost = () => {
               })
             ),
           })
-          .required("form.validation.tp2_req"),
+          .required(translate("form.validation.tp2_req")),
 
         target3: yup
           .number()
@@ -160,7 +162,7 @@ export const SharePost = () => {
                 price: formik.values.target2 || 0,
               })
             ),
-          })  
+          })
           .when("direction", {
             is: "short",
             then: yup.number().lessThan(
@@ -170,7 +172,7 @@ export const SharePost = () => {
               })
             ),
           })
-          .required("form.validation.tp3_req"),
+          .required(translate("form.validation.tp3_req")),
       }),
     onSubmit: async (values) => {
       setSubmitLoading(true);
@@ -258,22 +260,10 @@ export const SharePost = () => {
           <Typography variant="h2" pb={1.4}>
             {translate("page.share_post.share_post")}
           </Typography>
-          <Stack spacing={1} direction="row" alignItems="center">
-            <Typography variant="h5" sx={{ opacity: "0.8" }}>
-              {translate("page.share_post.max_score")}
-            </Typography>
-            <Typography variant="h5" fontWeight={700}>
-              21.3
-            </Typography>
-            <StarIcon
-              sx={{
-                marginLeft: "0 !important",
-                paddingBottom: "2px",
-                fontSize: "1.1rem",
-                color: "#FED839 !important",
-              }}
-            />
-          </Stack>
+          <ApproximateScor
+            isValid={formik.isValid}
+            post={formik.values as Post}
+          ></ApproximateScor>
         </Stack>
         <Divider></Divider>
       </Stack>

@@ -45,7 +45,7 @@ export const AccountSettings = () => {
   const validationSchema = yup.object({
     username: yup
       .string()
-      .required(translate("form.validation.usename"))
+      .required(translate("form.validation.username_req"))
       .matches(
         configService?.validations?.username_regex,
         translate("form.validation.username_valid")
@@ -124,17 +124,19 @@ export const AccountSettings = () => {
     },
     validateOnChange: false,
     validateOnBlur: false,
-    validate: (values) => {
-      const errors: any = {};
-      if (user.username == values.username) return;
-      return api.account.check_username(values.username).then((res) => {
-        if (!res.validity) {
-          errors.username = translate("form.validation.username_exist");
-        }
-        return errors;
-      });
-    },
     validationSchema: validationSchema,
+    validate: async (values) => {
+      if (!formik.values.username || user.username == values.username) return;
+      const errors: any = {};
+
+      const result = await api.account.check_username(values.username);
+      if (!result.validity) {
+        errors.username = translate("form.validation.username_exist");
+      }
+
+      return errors;
+    },
+
     onSubmit: () => {
       handleSaveAccount();
     },

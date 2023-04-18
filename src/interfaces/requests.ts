@@ -113,6 +113,7 @@ export const Requests: {
     post: {
         create_post: string,
         user_posts: (username: string) => string,
+        approximate_score: string
     },
     user: {
         user_by_username: (username: string) => string,
@@ -164,6 +165,7 @@ export const Requests: {
     post: {
         create_post: "moniests/posts",
         user_posts: (username: string) => `moniests/${username}/posts`,
+        approximate_score: "moniests/posts/approximateScore"
     },
     user: {
         user_by_username: (username: string) => `users/${username}`,

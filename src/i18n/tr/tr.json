@@ -145,7 +145,7 @@
     },
     "share_post": {
       "share_post": "Gönderi paylaş",
-      "max_score": "Maksimum skor",
+      "approximate_score": "Yaklaşık skor",
       "toast": { "post_created": "Gönderiniz başarıyla oluşturuldu" }
     },
     "be_moniest": {
@@ -286,6 +286,7 @@
       "duration_min": "Süre bir dakikadan fazla olmalı",
       "currency_req": "Para birimi gerekli",
       "stop_req": "Stop gerekli",
+      "stop_min": "Stop 0'dan büyük olmalıdır",
       "stop_lower": "Stop {{price}} 'dan daha düşük olmalıdır",
       "stop_more": "Stop {{price}} 'dan fazla olmalıdır",
       "tp1_req": "TP1 gerekli",
@@ -321,8 +322,8 @@
     "welcome": "Hoş geldin",
     "save": "Kaydet",
     "moniesto": "Moniesto",
-    "long": "Long",
-    "short": "Short",
+    "long": "Yukarı",
+    "short": "Aşağı",
     "next": "Sonraki",
     "back": "Geri",
     "edit": "Düzenle",
@@ -342,5 +343,10 @@
     "profile": "Profil",
     "logout": "Çıkış Yap",
     "home": "Ana Sayfa"
+  },
+  "server": {
+    "error": {
+      "Account_CheckUsername_InvalidUsername": "Kullanıcı adı geçerli değil"
+    }
   }
 }

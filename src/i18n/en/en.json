@@ -158,7 +158,7 @@
     },
     "share_post": {
       "share_post": "Share Post",
-      "max_score": "Max Score",
+      "approximate_score": "Approximate score",
       "toast": {
         "post_created": "Your post successfully created "
       }
@@ -303,6 +303,7 @@
       "duration_min": "Duration must be greater than a minute",
       "currency_req": "Currency is required",
       "stop_req": "Stop is required",
+      "stop_min": "Stop should be more than 0",
       "stop_lower": "Stop should be lower than {{price}}",
       "stop_more": "Stop should be more than {{price}}",
       "tp1_req": "TP1 is required",
@@ -359,5 +360,10 @@
     "profile": "Profile",
     "logout": "Logout",
     "home": "Home"
+  },
+  "server": {
+    "error": {
+      "Account_CheckUsername_InvalidUsername": "Username is invalid"
+    }
   }
 }

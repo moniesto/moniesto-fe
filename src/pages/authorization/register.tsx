@@ -106,7 +106,7 @@ const Register = () => {
     validateOnBlur: false,
     validationSchema: validationSchema,
     validate: async (values) => {
-      console.log("formik :", formik);
+
       if (!formik.values.username) return;
       const errors: any = {};
 
