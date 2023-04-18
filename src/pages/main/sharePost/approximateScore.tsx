@@ -40,7 +40,7 @@ export const ApproximateScor = ({
       <Typography variant="h5" sx={{ opacity: "0.8" }}>
         {translate("page.share_post.approximate_score")}
       </Typography>
-      <Typography variant="h5" sx={{ paddingRight: "4px" }} fontWeight={700}>
+      <Typography display="flex" variant="h5" sx={{ paddingRight: "4px" }} fontWeight={700}>
         {loading ? <Spinner size={15}></Spinner> : isValid ? score : 0}
       </Typography>
       <ScoreStar></ScoreStar>

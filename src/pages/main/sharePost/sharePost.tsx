@@ -47,6 +47,9 @@ export const SharePost = () => {
   const translate = useTranslate();
   const theme = useTheme();
 
+  const maxDuration = new Date();
+  maxDuration.setDate(maxDuration.getDate() + 90);
+
   const [loading, setLoading] = useState<boolean>(false);
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -81,7 +84,14 @@ export const SharePost = () => {
         duration: yup
           .date()
           .required(translate("form.validation.duration_req"))
+          .max(
+            maxDuration,
+            translate("form.validation.duration_max", {
+              date: maxDuration.toLocaleDateString(),
+            })
+          )
           .min(oneMinLater(), translate("form.validation.duration_min")),
+
         currency: yup
           .string()
           .required(translate("form.validation.currency_req")),
@@ -100,12 +110,20 @@ export const SharePost = () => {
           })
           .when("direction", {
             is: "short",
-            then: yup.number().moreThan(
-              selectedCurrencyPrice,
-              translate("form.validation.stop_more", {
-                price: selectedCurrencyPrice,
-              })
-            ),
+            then: yup
+              .number()
+              .moreThan(
+                selectedCurrencyPrice,
+                translate("form.validation.stop_more", {
+                  price: selectedCurrencyPrice,
+                })
+              )
+              .lessThan(
+                selectedCurrencyPrice * 2,
+                translate("form.validation.stop_max", {
+                  price: selectedCurrencyPrice * 2,
+                })
+              ),
           }),
 
         target1: yup
@@ -154,14 +172,23 @@ export const SharePost = () => {
 
         target3: yup
           .number()
+          .moreThan(0, "o dan büyük olmalı")
           .when("direction", {
             is: "long",
-            then: yup.number().moreThan(
-              formik.values.target2 || 0,
-              translate("form.validation.tp3_more", {
-                price: formik.values.target2 || 0,
-              })
-            ),
+            then: yup
+              .number()
+              .moreThan(
+                formik.values.target2 || 0,
+                translate("form.validation.tp3_more", {
+                  price: formik.values.target2 || 0,
+                })
+              )
+              .lessThan(
+                selectedCurrencyPrice * 100,
+                translate("form.validation.tp3_max", {
+                  price: selectedCurrencyPrice * 100,
+                })
+              ),
           })
           .when("direction", {
             is: "short",
