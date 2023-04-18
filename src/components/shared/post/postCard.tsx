@@ -120,21 +120,21 @@ const PostCard = ({ post }: PostCardProps) => {
           <InfoChip
             title="Score"
             value={post.score}
-            startAdornment={
-              <StarOutline
-                sx={{ fontSize: "1.1rem", opacity: "0.7" }}
-              ></StarOutline>
-            }
+            // startAdornment={
+            //   <StarOutline
+            //     sx={{ fontSize: "1rem", opacity: "0.7" }}
+            //   ></StarOutline>
+            // }
           ></InfoChip>
         )}
 
         <InfoChip
           title="Rate"
-          startAdornment={
-            <PercentOutlined
-              sx={{ fontSize: "1.1rem", opacity: "0.7" }}
-            ></PercentOutlined>
-          }
+          // startAdornment={
+          //   <PercentOutlined
+          //     sx={{ fontSize: "1rem", opacity: "0.7" }}
+          //   ></PercentOutlined>
+          // }
           value={calculatePercentage}
         ></InfoChip>
       </Stack>

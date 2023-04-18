@@ -36,12 +36,15 @@ const Profile = () => {
 
   useEffect(() => {
     if (!account) return;
-    setLoading(false);
 
-    if (user.username === username || !account?.moniest) return;
+    if (user.username === username || !account?.moniest) {
+      setLoading(false)
+      return;
+    }
     api.moniest
       .subscribe_check(username as string)
-      .then((res) => setIsSubscribed(res?.subscribed as boolean));
+      .then((res) => setIsSubscribed(res?.subscribed as boolean))
+      .finally(() => setLoading(false));
   }, [account]);
 
   const getAccount = (username: string) => {

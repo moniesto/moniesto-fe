@@ -2,7 +2,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { Box, Tab, useTheme } from "@mui/material";
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { ReactNode, memo, useEffect, useMemo, useState } from "react";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { User } from "../../../interfaces/user";
 import api from "../../../services/api";
@@ -38,6 +38,10 @@ const ProfileTabs = ({
   });
   const [tabs, setTabs] = useState<TypeTab[]>([]);
   const translate = useTranslate();
+
+  useEffect(() => {
+    console.log("Profile Tabs");
+  }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
@@ -173,4 +177,4 @@ const ProfileTabs = ({
     </Box>
   );
 };
-export default ProfileTabs;
+export default memo(ProfileTabs);

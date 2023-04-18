@@ -57,35 +57,42 @@ const PostsTab = ({
   };
 
   useEffect(() => {
+    console.log("isSubscribed :", isSubscribed, loading);
+    if (loading || !isSubscribed) return;
     queryParams.offset = 0;
     setQueryParams(JSON.parse(JSON.stringify(queryParams)));
   }, [isSubscribed]);
 
   useEffect(() => {
+    console.log("hasMore :", hasMore, queryParams);
     if (hasMore) getPosts();
   }, [queryParams]);
 
   const getPosts = () => {
-    api.post.user_posts(account.username, queryParams).then((response) => {
-      setPosts([...posts, ...response]);
-      if (response.length < queryParams.limit) {
-        setHasMore(false);
-        queryParams.offset = 0;
-        setQueryParams(JSON.parse(JSON.stringify(queryParams)));
-      }
-      setLoading(false);
-    });
+    queryParams.active = activePostFilter.boolValue;
+
+    api.post
+      .user_posts(account.username, queryParams)
+      .then((response) => {
+        setPosts([...posts, ...response]);
+        if (response.length < queryParams.limit) {
+          setHasMore(false);
+          queryParams.offset = 0;
+          setQueryParams(JSON.parse(JSON.stringify(queryParams)));
+        }
+      })
+      .finally(() => setLoading(false));
   };
 
   const handleChangeFilter = (filterItem: Filter) => {
     if (filterItem.value === activePostFilter.value) return;
     setActivePostFilter(filterItem);
     setPosts([]);
-    setLoading(true);
     setHasMore(true);
-    if (!isMyAccount && filterItem.boolValue === true && !isSubscribed) {
-      return;
-    }
+
+    if (!isMyAccount && filterItem.boolValue === true && !isSubscribed) return;
+    
+    setLoading(true);
     setQueryParams({ ...queryParams, active: filterItem.boolValue });
   };
 
@@ -174,7 +181,10 @@ const PostsTab = ({
             }}
           >
             <Stack spacing={2} alignItems="center">
-              <Typography variant="h2"> {translate("page.profile.sub_for_live")} </Typography>
+              <Typography variant="h2">
+                {" "}
+                {translate("page.profile.sub_for_live")}{" "}
+              </Typography>
               <SubscribeButton
                 fee={account.moniest?.subscription_info.fee as number}
                 isSubscribed={isSubscribed}
@@ -206,7 +216,9 @@ const PostsTab = ({
           {!posts.length && (
             <Card>
               <Stack p={3} alignItems="center">
-                <Typography variant="h5">{translate("page.profile.no_post")} </Typography>
+                <Typography variant="h5">
+                  {translate("page.profile.no_post")}{" "}
+                </Typography>
               </Stack>
             </Card>
           )}

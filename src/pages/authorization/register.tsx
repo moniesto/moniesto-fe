@@ -104,16 +104,19 @@ const Register = () => {
     },
     validateOnChange: false,
     validateOnBlur: false,
-    validate: (values) => {
-      const errors: any = {};
-      return api.account.check_username(values.username).then((res) => {
-        if (!res.validity) {
-          errors.username = translate("form.validation.username_exist");
-        }
-        return errors;
-      });
-    },
     validationSchema: validationSchema,
+    validate: async (values) => {
+      console.log("formik :", formik);
+      if (!formik.values.username) return;
+      const errors: any = {};
+
+      const result = await api.account.check_username(values.username);
+      if (!result.validity) {
+        errors.username = translate("form.validation.username_exist");
+      }
+
+      return errors;
+    },
     onSubmit: (values) => {
       handleSubmit(values);
     },

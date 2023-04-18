@@ -34,23 +34,26 @@ export const UsernameInput = ({
       setDisplayCheckIcon(false);
       return;
     }
-    setDisplayCheckIcon(true);
-    setCheckLoading(true);
+
     const timeOutId = setTimeout(() => {
-      api.account
-        .check_username(formik.values.username)
-        .then((res) => {
-          if (!res.validity) {
-            formik.setFieldError(
-              "username",
-              translate("form.validation.username_exist")
-            );
-          }
-          setIsCorrectName(res.validity);
-        })
-        .catch((e) => setIsCorrectName(false))
-        .finally(() => setCheckLoading(false));
-    }, 500);
+      setDisplayCheckIcon(true);
+      setCheckLoading(true);
+      setTimeout(() => {
+        api.account
+          .check_username(formik.values.username)
+          .then((res) => {
+            if (!res.validity) {
+              formik.setFieldError(
+                "username",
+                translate("form.validation.username_exist")
+              );
+            }
+            setIsCorrectName(res.validity);
+          })
+          .catch((_) => setIsCorrectName(false))
+          .finally(() => setCheckLoading(false));
+      }, 300);
+    }, 100);
 
     return () => clearTimeout(timeOutId);
   }, [formik?.values?.username]);

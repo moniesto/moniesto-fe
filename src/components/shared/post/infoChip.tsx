@@ -18,7 +18,7 @@ export const InfoChip = ({ title, startAdornment, value }: InfoChipProps) => {
         padding: "6px 12px",
         borderRadius: "100px",
       }}
-      spacing={1}
+      spacing={0.5}
       direction="row"
       alignItems="center"
     >
@@ -27,7 +27,7 @@ export const InfoChip = ({ title, startAdornment, value }: InfoChipProps) => {
       </Typography>
 
       <Typography variant="h5">{value}</Typography>
-      <Box fontSize={12}>{startAdornment}</Box>
+      {/* <Box sx={{ width: "1rem", height: "1rem" }}>{startAdornment}</Box> */}
     </Stack>
   );
 };
