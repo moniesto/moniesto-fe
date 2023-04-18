@@ -27,13 +27,14 @@ const MoniestCard = ({ user }: propTypes) => {
   const handleUserClick = () => {};
 
   return (
-    <Card sx={{ height: "240px" }}>
+    <Card sx={{ height: "184px" }}>
       <Navigator path={`/${user.username}`}>
         <CardHeader
           onClick={handleUserClick}
           sx={{
             ".MuiCardHeader-action": {
               alignSelf: "unset",
+              marginRight:0
             },
             cursor: "pointer",
           }}
@@ -46,7 +47,7 @@ const MoniestCard = ({ user }: propTypes) => {
             >
               <Avatar
                 src={user.profile_photo_link}
-                sx={{ width: 50, height: 50 }}
+                sx={{ width: 42, height: 42 }}
               ></Avatar>
             </IconButton>
           }
@@ -96,13 +97,13 @@ const MoniestCard = ({ user }: propTypes) => {
         />
         <StarChip count={user.moniest?.score as number}></StarChip>
       </Stack>
-      <CardContent sx={{ paddingBottom: 0 }}>
+      <CardContent sx={{ paddingBottom: "1rem !important" }}>
         <Typography
           sx={{
             overflow: "hidden",
             textOverflow: "ellipsis",
             display: "-webkit-box",
-            WebkitLineClamp: "4",
+            WebkitLineClamp: "2",
             WebkitBoxOrient: "vertical",
           }}
           variant="body1"
