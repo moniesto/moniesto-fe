@@ -26,10 +26,13 @@ import { useTheme } from "@mui/system";
 import { InfoChip } from "./infoChip";
 import { PercentOutlined, StarOutline } from "@mui/icons-material";
 import { NotAdvice } from "../../ui/post/notAdvice";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
+
+type PostSatus = "pending" | "fail" | "success";
 
 const ExpandMore: any = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
@@ -49,12 +52,30 @@ type PostCardProps = {
 const PostCard = ({ post }: PostCardProps) => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const theme = useTheme();
+  const translate = useTranslate();
 
-  const calculatePercentage = (
+  const calculatePercentage = helper.parseCurrency(
     helper.operatonByDirection(post.direction) *
-    ((post.target3 - post.start_price) / post.start_price) *
-    100
-  ).toFixed(3);
+      ((post.target3 - post.start_price) / post.start_price) *
+      100,
+    3
+  );
+
+  const getColorByStatus = (status: PostSatus) => {
+    let color = "";
+    switch (status) {
+      case "pending":
+        color = theme.palette.grey[600];
+        break;
+      case "fail":
+        color = theme.palette.orange.dark;
+        break;
+      case "success":
+        color = theme.palette.success.dark;
+        break;
+    }
+    return color;
+  };
 
   return (
     <Card sx={{ position: "relative", paddingBottom: "44px" }}>
@@ -63,6 +84,7 @@ const PostCard = ({ post }: PostCardProps) => {
         sx={{
           ".MuiCardHeader-action": {
             alignSelf: "unset",
+            marginRight: "unset",
           },
           padding: {
             xs: "0.8rem 0.8rem 0.2rem",
@@ -82,10 +104,12 @@ const PostCard = ({ post }: PostCardProps) => {
         action={
           <Stack flexDirection="row" gap={{ md: 5, xs: 3 }}>
             <Stack alignItems="center">
-              <Typography variant="h5">{post.currency}</Typography>
-              <Typography variant="h5">{post.start_price}</Typography>
+              <Typography variant="h4" color={theme.palette.warning.dark}>
+                {post.currency}
+              </Typography>
+              {/* <Typography variant="h5">{post.start_price}</Typography> */}
             </Stack>
-            <StatusDot status={post.status}></StatusDot>
+            {/* <StatusDot status={post.status}></StatusDot> */}
           </Stack>
         }
         title={
@@ -129,13 +153,23 @@ const PostCard = ({ post }: PostCardProps) => {
         )}
 
         <InfoChip
-          title="Rate"
+          title={translate("component.post_card.rate")}
           // startAdornment={
           //   <PercentOutlined
           //     sx={{ fontSize: "1rem", opacity: "0.7" }}
           //   ></PercentOutlined>
           // }
-          value={calculatePercentage}
+          value={"% " + calculatePercentage}
+        ></InfoChip>
+        <InfoChip
+          title=""
+          sx={{
+            ".infochip--value": {
+              color: getColorByStatus(post.status),
+              textShadow: "0.5px 0 " + getColorByStatus(post.status),
+            },
+          }}
+          value={translate("component.post_card.status." + post.status)}
         ></InfoChip>
       </Stack>
       <Divider
@@ -147,7 +181,7 @@ const PostCard = ({ post }: PostCardProps) => {
       <CardContent
         sx={{
           paddingBottom: 0,
-          padding: { xs: "4px", md: 2 },
+          padding: { xs: "4px", md: 1 },
           overflowX: "auto",
         }}
       >

@@ -1,5 +1,6 @@
 import {
   Autocomplete,
+  Box,
   Card,
   CircularProgress,
   Divider,
@@ -269,7 +270,8 @@ export const SharePost = () => {
           (helper.operatonByDirection(formik.values.direction) *
             (value - selectedCurrencyPrice) *
             100) /
-            selectedCurrencyPrice
+            selectedCurrencyPrice,
+          2
         )
       : 0;
 
@@ -316,6 +318,20 @@ export const SharePost = () => {
                   formik.setFieldValue("currency", event?.currency, true);
                   setSelectedCurrencyPrice(Number(event?.price) || 0);
                 }}
+                renderOption={(props, option) => (
+                  <Box component="li" {...props}>
+                    <Stack
+                      sx={{
+                        width: "100%",
+                      }}
+                      justifyContent="space-between"
+                      direction="row"
+                    >
+                      <Box>{option.currency}</Box>
+                      <Box>{helper.parseCurrency(option.price)}</Box>
+                    </Stack>
+                  </Box>
+                )}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -619,7 +635,8 @@ export const SharePost = () => {
                             100 -
                               ((formik.values.stop || 1) /
                                 (selectedCurrencyPrice || 1)) *
-                                100
+                                100,
+                            2
                           )
                     }
                     InputProps={{

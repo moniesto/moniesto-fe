@@ -215,7 +215,13 @@
         "tp_2": "TP 2",
         "tp_3": "TP 3",
         "stop": "Stop"
-      }
+      },
+      "status": {
+        "pending": "Devam ediyor",
+        "fail": "Başarısız",
+        "success": "Başarılı"
+      },
+      "rate": "Oran"
     },
     "feedback": {
       "title": "Geri bildirim",

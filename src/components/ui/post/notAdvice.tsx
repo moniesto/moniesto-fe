@@ -28,6 +28,10 @@ export const NotAdvice = () => {
           fontSize: "0.75rem",
           fontStyle: "italic",
           cursor: "pointer",
+          transition: "opacity 0.2s ease",
+          "&:hover": {
+            opacity: 0.8,
+          },
         }}
         onClick={() => setOpen(true)}
       >

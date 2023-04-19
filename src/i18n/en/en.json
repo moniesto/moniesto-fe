@@ -232,7 +232,13 @@
         "tp_2": "TP 2",
         "tp_3": "TP 3",
         "stop": "Stop"
-      }
+      },
+      "status": {
+        "pending": "Pending",
+        "fail": "Fail",
+        "success": "Success"
+      },
+      "rate": "Rate"
     },
     "feedback": {
       "title": "Feedback",
@@ -317,7 +323,7 @@
       "tp3_req": "TP3 is required",
       "tp3_lower": "TP3 should be lower than {{price}}",
       "tp3_more": "TP3 should be more than {{price}}",
-       "tp3_max": "TP3 should be lower than {{price}}",
+      "tp3_max": "TP3 should be lower than {{price}}",
       "fee_min": "Fee should be greater then {{value}}",
       "fee_req": "Fee is required",
       "bio_max": "Bio should be of maximum {{value}} characters length",

@@ -334,7 +334,8 @@ export default function componentStyleOverrides(theme: any) {
         MuiAutocomplete: {
             styleOverrides: {
                 popper: {
-                    border: `1px solid ${background800} !important`,
+                    border: "unset",
+                    // border: `1px solid ${background800} !important`,
                     borderRadius: theme?.borderRadius.main,
                     ".MuiAutocomplete-listbox": {
                         ".MuiAutocomplete-option": {
