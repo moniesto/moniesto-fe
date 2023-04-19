@@ -31,6 +31,7 @@ import { LoadingButton } from "@mui/lab";
 import api from "../../../services/api";
 import toastService from "../../../services/toastService";
 import { Trans } from "react-i18next";
+import { FormItem } from "../../shared/common/formItem";
 
 export const Feedback = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -148,12 +149,10 @@ export const Feedback = () => {
                 <Trans i18nKey="component.feedback.message"></Trans>
               </Typography>
             </Stack>
+
             <Box mt={5}>
               <form onSubmit={formik.handleSubmit}>
-                <Box mb={1}>
-                  <Typography pb={0.5} sx={{ opacity: 0.6 }}>
-                    {translate("form.field.feedback_type")}
-                  </Typography>
+                <FormItem title={translate("form.field.feedback_type")}>
                   <FormControl
                     error={formik.touched.type && Boolean(formik.errors.type)}
                     fullWidth
@@ -173,12 +172,9 @@ export const Feedback = () => {
                     </Select>
                     <FormHelperText>{formik.errors.type}</FormHelperText>
                   </FormControl>
-                </Box>
+                </FormItem>
 
-                <Box mb={1}>
-                  <Typography pb={0.5} sx={{ opacity: 0.6 }}>
-                    {translate("form.field.message")}
-                  </Typography>
+                <FormItem title={translate("form.field.message")}>
                   <TextField
                     sx={{
                       ".MuiInputBase-root": {
@@ -205,7 +201,7 @@ export const Feedback = () => {
                       ),
                     }}
                   />
-                </Box>
+                </FormItem>
                 <Stack direction="row" mt={2} spacing={4}>
                   <Button
                     onClick={() => setOpen(false)}

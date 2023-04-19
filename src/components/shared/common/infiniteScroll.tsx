@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import InfiniteScrollComponent from "react-infinite-scroll-component";
 import { Spinner } from "./spinner";
+import { Stack } from "@mui/material";
 
 type InfiniteScrollProps = {
   fetchData: () => void;
@@ -18,7 +19,11 @@ export const InfiniteScroll = (props: InfiniteScrollProps) => {
       dataLength={props.dataLength} //This is important field to render the next data
       next={props.fetchData}
       hasMore={props.hasMore}
-      loader={<Spinner></Spinner>}
+      loader={
+        <Stack alignItems="center">
+          <Spinner></Spinner>
+        </Stack>
+      }
       // endMessage={
       //   <p style={{ textAlign: "center" }}>
       //     <b>No more content to show.</b>

@@ -315,7 +315,17 @@ export default function componentStyleOverrides(theme: any) {
                         ">button": {
                             height: "20px"
                         }
-                    }
+                    },
+                    ".MuiClockPointer-root": {
+                        height: "74px !important",
+                        ".MuiClockPointer-thumb": {
+                            background: "unset !important",
+                            top: "-34px !important",
+                            border: `2px solid ${theme.colors.primaryMain} !important`,
+                            width: "32px !important",
+                            height: "32px !important"
+                        }
+                    },
                 }
             }
         },
@@ -326,7 +336,7 @@ export default function componentStyleOverrides(theme: any) {
                         backgroundColor: background800 + " !important",
                     },
                     ".MuiClockNumber-root": {
-                        "&.Mui-selected": { color: theme.textSecondary + " !important" }
+                        "&.Mui-selected": { color: theme.textMain + " !important" }
                     }
                 }
             }

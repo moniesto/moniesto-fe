@@ -39,6 +39,7 @@ import { DateTimeProvider } from "../../../components/shared/common/dateTimeProv
 import { useTranslate } from "../../../hooks/useTranslate";
 import { ApproximateScor } from "./approximateScore";
 import { Post } from "../../../interfaces/post";
+import { FormItem } from "../../../components/shared/common/formItem";
 
 export const SharePost = () => {
   const [open, setOpen] = React.useState(false);
@@ -284,7 +285,7 @@ export const SharePost = () => {
         overflow: "unset",
       }}
     >
-      <Stack pb={6}>
+      <Stack pb={2}>
         <Stack justifyContent="space-between" direction="row">
           <Typography variant="h2" pb={1.4}>
             {translate("page.share_post.share_post")}
@@ -300,307 +301,331 @@ export const SharePost = () => {
         <form onSubmit={formik.handleSubmit}>
           <Stack spacing={4}>
             <Stack spacing={2}>
-              <Autocomplete
-                open={open}
-                onOpen={() => {
-                  setDefaultOptions();
-                }}
-                onClose={() => {
-                  setOpen(false);
-                }}
-                isOptionEqualToValue={(option, value) =>
-                  option.currency === value.currency
-                }
-                getOptionLabel={(option) => option.currency}
-                options={options}
-                loading={loading}
-                onChange={(_, event) => {
-                  formik.setFieldValue("currency", event?.currency, true);
-                  setSelectedCurrencyPrice(Number(event?.price) || 0);
-                }}
-                renderOption={(props, option) => (
-                  <Box component="li" {...props}>
-                    <Stack
-                      sx={{
-                        width: "100%",
-                      }}
-                      justifyContent="space-between"
-                      direction="row"
-                    >
-                      <Box>{option.currency}</Box>
-                      <Box>{helper.parseCurrency(option.price)}</Box>
-                    </Stack>
-                  </Box>
-                )}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    name="currency"
-                    placeholder={translate("form.field.currency")}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.currency && Boolean(formik.errors.currency)
-                    }
-                    helperText={
-                      formik.touched.currency && formik.errors.currency
-                    }
-                    InputProps={{
-                      ...params.InputProps,
-
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <CurrencyBitcoinOutlinedIcon />
-                        </InputAdornment>
-                      ),
-                      endAdornment: (
-                        <React.Fragment>
-                          {loading ? (
-                            <CircularProgress
-                              sx={{ mr: 1 }}
-                              color="inherit"
-                              size={20}
-                            />
-                          ) : null}
-                          <Typography variant="h4">
-                            {helper.parseCurrency(selectedCurrencyPrice)}
-                          </Typography>
-
-                          {params.InputProps.endAdornment}
-                        </React.Fragment>
-                      ),
-                    }}
-                  />
-                )}
-              />
-
-              <DateTimeProvider>
-                <DateTimePicker
-                  minDateTime={dayjs(new Date().toString())}
-                  ampm={false}
-                  open={calendarOpen}
-                  onClose={() => setCalendarOpen(false)}
-                  label={translate("form.field.duration")}
-                  value={formik.values.duration}
-                  onChange={(value) =>
-                    formik.setFieldValue("duration", value, true)
+              <FormItem title={translate("form.field.currency")}>
+                <Autocomplete
+                  open={open}
+                  onOpen={() => {
+                    setDefaultOptions();
+                  }}
+                  onClose={() => {
+                    setOpen(false);
+                  }}
+                  isOptionEqualToValue={(option, value) =>
+                    option.currency === value.currency
                   }
-                  renderInput={(params: any) => (
+                  getOptionLabel={(option) => option.currency}
+                  options={options}
+                  loading={loading}
+                  onChange={(_, event) => {
+                    formik.setFieldValue("currency", event?.currency, true);
+                    setSelectedCurrencyPrice(Number(event?.price) || 0);
+                  }}
+                  renderOption={(props, option) => (
+                    <Box component="li" {...props}>
+                      <Stack
+                        sx={{
+                          width: "100%",
+                        }}
+                        justifyContent="space-between"
+                        direction="row"
+                      >
+                        <Box>{option.currency}</Box>
+                        <Box>{helper.parseCurrency(option.price)}</Box>
+                      </Stack>
+                    </Box>
+                  )}
+                  renderInput={(params) => (
                     <TextField
-                      onKeyDown={(e) => e.preventDefault()}
-                      onClick={() => {
-                        setCalendarOpen(!calendarOpen);
-                      }}
                       {...params}
+                      name="currency"
+                      onChange={formik.handleChange}
                       error={
-                        formik.touched.duration &&
-                        Boolean(formik.errors.duration)
+                        formik.touched.currency &&
+                        Boolean(formik.errors.currency)
                       }
                       helperText={
-                        formik.touched.duration && formik.errors.duration
+                        formik.touched.currency && formik.errors.currency
                       }
                       InputProps={{
+                        ...params.InputProps,
+
                         startAdornment: (
                           <InputAdornment position="start">
-                            <CalendarMonthOutlinedIcon
-                              onClick={() => {
-                                setCalendarOpen(!calendarOpen);
-                              }}
-                            />
+                            <CurrencyBitcoinOutlinedIcon />
                           </InputAdornment>
                         ),
                         endAdornment: (
-                          <InputAdornment position="end">
-                            <Typography variant="h4">
-                              <ReactTimeAgo
-                                date={new Date(formik.values.duration)}
+                          <React.Fragment>
+                            {loading ? (
+                              <CircularProgress
+                                sx={{ mr: 1 }}
+                                color="inherit"
+                                size={20}
                               />
+                            ) : null}
+                            <Typography variant="h4">
+                              {helper.parseCurrency(selectedCurrencyPrice)}
                             </Typography>
-                          </InputAdornment>
+
+                            {params.InputProps.endAdornment}
+                          </React.Fragment>
                         ),
                       }}
                     />
                   )}
                 />
-              </DateTimeProvider>
+              </FormItem>
+              <FormItem title={translate("form.field.duration")}>
+                <DateTimeProvider>
+                  <DateTimePicker
+                    minDateTime={dayjs(new Date().toString())}
+                    ampm={false}
+                    open={calendarOpen}
+                    onClose={() => setCalendarOpen(false)}
+                    value={formik.values.duration}
+                    onChange={(value) =>
+                      formik.setFieldValue("duration", value, true)
+                    }
+                    renderInput={(params: any) => (
+                      <TextField
+                        fullWidth
+                        onKeyDown={(e) => e.preventDefault()}
+                        onClick={() => {
+                          setCalendarOpen(!calendarOpen);
+                        }}
+                        {...params}
+                        error={
+                          formik.touched.duration &&
+                          Boolean(formik.errors.duration)
+                        }
+                        helperText={
+                          formik.touched.duration && formik.errors.duration
+                        }
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <CalendarMonthOutlinedIcon
+                                onClick={() => {
+                                  setCalendarOpen(!calendarOpen);
+                                }}
+                              />
+                            </InputAdornment>
+                          ),
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <Typography variant="h4">
+                                <ReactTimeAgo
+                                  date={new Date(formik.values.duration)}
+                                />
+                              </Typography>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    )}
+                  />
+                </DateTimeProvider>
+              </FormItem>
 
-              <FormControl
-                error={
-                  formik.touched.direction && Boolean(formik.errors.direction)
-                }
-                fullWidth
-              >
-                <InputLabel>{translate("form.field.direction")} </InputLabel>
-                <Select
-                  color="secondary"
-                  onChange={formik.handleChange}
-                  name="direction"
-                  value={formik.values.direction}
-                  startAdornment={<SwapVertOutlined></SwapVertOutlined>}
+              <FormItem title={translate("form.field.direction")}>
+                <FormControl
+                  error={
+                    formik.touched.direction && Boolean(formik.errors.direction)
+                  }
+                  fullWidth
                 >
-                  <MenuItem value="long">{translate("common.long")} </MenuItem>
-                  <MenuItem value="short">{translate("common.short")}</MenuItem>
-                </Select>
-              </FormControl>
+                  <Select
+                    color="secondary"
+                    onChange={formik.handleChange}
+                    name="direction"
+                    value={formik.values.direction}
+                    startAdornment={<SwapVertOutlined></SwapVertOutlined>}
+                  >
+                    <MenuItem value="long">{translate("common.long")}</MenuItem>
+                    <MenuItem value="short">
+                      {translate("common.short")}
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </FormItem>
 
               <Divider></Divider>
-              <Typography sx={{ opacity: 0.6 }} variant="h3">
+              {/* <Typography sx={{ opacity: 0.6 }} variant="h3">
                 {translate("form.field.targets")}
-              </Typography>
-              <Stack
-                spacing={2}
-                sx={{
-                  ">div": {
+              </Typography> */}
+              <FormItem title={translate("form.field.targets")}>
+                <Stack
+                  spacing={2}
+                  sx={{
+                    ">div": {
+                      ".MuiFormControl-root:last-of-type": {
+                        maxWidth: "125px",
+                      },
+                    },
+                  }}
+                >
+                  <Stack direction="row" spacing={1}>
+                    <TextField
+                      disabled={!selectedCurrencyPrice}
+                      fullWidth
+                      name="target1"
+                      placeholder={translate("form.field.tp_1")}
+                      type="number"
+                      onFocus={() =>
+                        formik.values.target1 == 0 &&
+                        formik.setFieldValue("target1", "")
+                      }
+                      value={selectedCurrencyPrice ? formik.values.target1 : 0}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.target1 && Boolean(formik.errors.target1)
+                      }
+                      helperText={
+                        formik.touched.target1 && formik.errors.target1
+                      }
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <FlagOutlinedIcon />
+                          </InputAdornment>
+                        ),
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Typography sx={{ opacity: 0.7 }} variant="h4">
+                              {translate("form.field.tp_1")}
+                            </Typography>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    <TextField
+                      placeholder="0"
+                      value={calculatedRound(formik.values.target1)}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Typography sx={{ opacity: 0.7 }} variant="h4">
+                              %
+                            </Typography>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Stack>
+
+                  <Stack direction="row" spacing={1}>
+                    <TextField
+                      disabled={!selectedCurrencyPrice}
+                      fullWidth
+                      name="target2"
+                      placeholder={translate("form.field.tp_2")}
+                      type="number"
+                      onFocus={() =>
+                        formik.values.target2 == 0 &&
+                        formik.setFieldValue("target2", "")
+                      }
+                      value={selectedCurrencyPrice ? formik.values.target2 : 0}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.target2 && Boolean(formik.errors.target2)
+                      }
+                      helperText={
+                        formik.touched.target2 && formik.errors.target2
+                      }
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <FlagOutlinedIcon />
+                          </InputAdornment>
+                        ),
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Typography sx={{ opacity: 0.7 }} variant="h4">
+                              {translate("form.field.tp_2")}
+                            </Typography>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    <TextField
+                      placeholder="0"
+                      value={calculatedRound(formik.values.target2)}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Typography sx={{ opacity: 0.7 }} variant="h4">
+                              %
+                            </Typography>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Stack>
+                  <Stack direction="row" spacing={1}>
+                    <TextField
+                      disabled={!selectedCurrencyPrice}
+                      fullWidth
+                      name="target3"
+                      placeholder={translate("form.field.tp_3")}
+                      type="number"
+                      onFocus={() =>
+                        formik.values.target3 == 0 &&
+                        formik.setFieldValue("target3", "")
+                      }
+                      value={selectedCurrencyPrice ? formik.values.target3 : 0}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.target3 && Boolean(formik.errors.target3)
+                      }
+                      helperText={
+                        formik.touched.target3 && formik.errors.target3
+                      }
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <FlagOutlinedIcon />
+                          </InputAdornment>
+                        ),
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Typography sx={{ opacity: 0.7 }} variant="h4">
+                              {translate("form.field.tp_3")}
+                            </Typography>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    <TextField
+                      placeholder="0"
+                      value={calculatedRound(formik.values.target3)}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Typography sx={{ opacity: 0.7 }} variant="h4">
+                              %
+                            </Typography>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Stack>
+                </Stack>
+              </FormItem>
+              <Divider></Divider>
+              <FormItem title={translate("form.field.stop_point")}>
+                <Stack
+                  sx={{
                     ".MuiFormControl-root:last-of-type": {
                       maxWidth: "125px",
                     },
-                  },
-                }}
-              >
-                <Stack direction="row" spacing={1}>
-                  <TextField
-                    disabled={!selectedCurrencyPrice}
-                    fullWidth
-                    name="target1"
-                    placeholder={translate("form.field.tp_1")}
-                    type="number"
-                    onFocus={() =>
-                      formik.values.target1 == 0 &&
-                      formik.setFieldValue("target1", "")
-                    }
-                    value={selectedCurrencyPrice ? formik.values.target1 : 0}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.target1 && Boolean(formik.errors.target1)
-                    }
-                    helperText={formik.touched.target1 && formik.errors.target1}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <FlagOutlinedIcon />
-                        </InputAdornment>
-                      ),
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Typography sx={{ opacity: 0.7 }} variant="h4">
-                            {translate("form.field.tp_1")}
-                          </Typography>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                  <TextField
-                    placeholder="0"
-                    value={calculatedRound(formik.values.target1)}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Typography sx={{ opacity: 0.7 }} variant="h4">
-                            %
-                          </Typography>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Stack>
-
-                <Stack direction="row" spacing={1}>
-                  <TextField
-                    disabled={!selectedCurrencyPrice}
-                    fullWidth
-                    name="target2"
-                    placeholder={translate("form.field.tp_2")}
-                    type="number"
-                    onFocus={() =>
-                      formik.values.target2 == 0 &&
-                      formik.setFieldValue("target2", "")
-                    }
-                    value={selectedCurrencyPrice ? formik.values.target2 : 0}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.target2 && Boolean(formik.errors.target2)
-                    }
-                    helperText={formik.touched.target2 && formik.errors.target2}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <FlagOutlinedIcon />
-                        </InputAdornment>
-                      ),
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Typography sx={{ opacity: 0.7 }} variant="h4">
-                            {translate("form.field.tp_2")}
-                          </Typography>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                  <TextField
-                    placeholder="0"
-                    value={calculatedRound(formik.values.target2)}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Typography sx={{ opacity: 0.7 }} variant="h4">
-                            %
-                          </Typography>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Stack>
-                <Stack direction="row" spacing={1}>
-                  <TextField
-                    disabled={!selectedCurrencyPrice}
-                    fullWidth
-                    name="target3"
-                    placeholder={translate("form.field.tp_3")}
-                    type="number"
-                    onFocus={() =>
-                      formik.values.target3 == 0 &&
-                      formik.setFieldValue("target3", "")
-                    }
-                    value={selectedCurrencyPrice ? formik.values.target3 : 0}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.target3 && Boolean(formik.errors.target3)
-                    }
-                    helperText={formik.touched.target3 && formik.errors.target3}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <FlagOutlinedIcon />
-                        </InputAdornment>
-                      ),
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Typography sx={{ opacity: 0.7 }} variant="h4">
-                            {translate("form.field.tp_3")}
-                          </Typography>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                  <TextField
-                    placeholder="0"
-                    value={calculatedRound(formik.values.target3)}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Typography sx={{ opacity: 0.7 }} variant="h4">
-                            %
-                          </Typography>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Stack>
-                <Stack direction="row" spacing={1}>
+                  }}
+                  direction="row"
+                  spacing={1}
+                >
                   <TextField
                     disabled={!selectedCurrencyPrice}
                     fullWidth
                     name="stop"
-                    placeholder={translate("form.field.stop")}
                     type="number"
                     onFocus={() =>
                       formik.values.stop == 0 &&
@@ -650,7 +675,7 @@ export const SharePost = () => {
                     }}
                   />
                 </Stack>
-              </Stack>
+              </FormItem>
             </Stack>
             <Divider></Divider>
             {showDescription ? (
