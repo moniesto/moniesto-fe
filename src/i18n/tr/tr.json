@@ -167,6 +167,12 @@
         "by_taking_agree": "Bu adımı atarak, kabul ediyorsun",
         "terms_policy": "şartlar ve politikalar",
         "information": "Bilgi"
+      },
+      "step": {
+        "email_verify": "Email doğrulama",
+        "moniest_info": "Moniest bilgileri",
+        "payment_metod": "Ödeme yöntemi",
+        "submit": "Gönder"
       }
     },
     "profile": {
@@ -195,6 +201,10 @@
         "total": "Toplam",
         "paying_currently": "Şu anda {{fee}} $/ay ödüyorsunuz",
         "if_unsubscribe": "{{username}} 'dan abonelikten çıkıyorsanız, artık hesap tarafından paylaşılan içeriğe erişemeyeceksiniz."
+      },
+      "post_filter": {
+        "all": "Hepsi",
+        "live": "Canlı"
       }
     },
     "404": {

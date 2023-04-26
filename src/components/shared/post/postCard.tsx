@@ -159,7 +159,7 @@ const PostCard = ({ post }: PostCardProps) => {
           //     sx={{ fontSize: "1rem", opacity: "0.7" }}
           //   ></PercentOutlined>
           // }
-          value={"% " + calculatePercentage}
+          value={"%" + calculatePercentage}
         ></InfoChip>
         <InfoChip
           title=""
@@ -206,7 +206,7 @@ const PostCard = ({ post }: PostCardProps) => {
           ]}
           rows={[
             {
-              direction: post.direction.toUpperCase(),
+              direction: translate("common." + post.direction).toUpperCase(),
               start: post.start_price,
               target: post.target3,
               time_left: <ReactTimeAgo date={new Date(post.duration)} />,

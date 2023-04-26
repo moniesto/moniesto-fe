@@ -20,8 +20,8 @@ type Filter = {
   boolValue: boolean;
 };
 const filters: Filter[] = [
-  { title: "All", value: "all", boolValue: false, icon: <FilterListIcon /> },
-  { title: "Live", value: "live", boolValue: true, icon: <StreamIcon /> },
+  { title: "all", value: "all", boolValue: false, icon: <FilterListIcon /> },
+  { title: "live", value: "live", boolValue: true, icon: <StreamIcon /> },
 ];
 
 const PostsTab = ({
@@ -57,14 +57,12 @@ const PostsTab = ({
   };
 
   useEffect(() => {
-    console.log("isSubscribed :", isSubscribed, loading);
     if (loading || !isSubscribed) return;
     queryParams.offset = 0;
     setQueryParams(JSON.parse(JSON.stringify(queryParams)));
   }, [isSubscribed]);
 
   useEffect(() => {
-    console.log("hasMore :", hasMore, queryParams);
     if (hasMore) getPosts();
   }, [queryParams]);
 
@@ -116,7 +114,7 @@ const PostsTab = ({
     target3: 2203.99,
     updated_at: new Date(),
     user: account,
-    status: "fail",
+    status: "pending",
     finished: false,
     description: "",
   };
@@ -162,7 +160,7 @@ const PostsTab = ({
               >
                 {filter.icon}
               </Stack>
-              {filter.title}
+              {translate("page.profile.post_filter."+ filter.title)}
             </Stack>
           ))}
         </Stack>
@@ -182,7 +180,6 @@ const PostsTab = ({
           >
             <Stack spacing={2} alignItems="center">
               <Typography variant="h2">
-                {" "}
                 {translate("page.profile.sub_for_live")}{" "}
               </Typography>
               <SubscribeButton

@@ -35,22 +35,22 @@ type Step = {
 const steps: Step[] = [
   {
     order: 1,
-    title: "Email verify",
+    title: "email_verify",
     icon: <MailOutlineIcon />,
   },
   {
     order: 2,
-    title: "Moniest information",
+    title: "moniest_info",
     icon: <ArticleOutlinedIcon />,
   },
   {
     order: 3,
-    title: "Payment Method",
+    title: "payment_metod",
     icon: <CreditCardOutlinedIcon />,
   },
   {
     order: 4,
-    title: "Submit",
+    title: "submit",
     icon: <SendOutlinedIcon />,
   },
 ];
@@ -192,7 +192,7 @@ const BeMoniest = () => {
             key={step.title}
             completed={step.order <= activeStep}
           >
-            <StepLabel icon={step.icon}>{step.title}</StepLabel>
+            <StepLabel icon={step.icon}>{translate("page.be_moniest.step."+step.title)}</StepLabel>
           </Step>
         ))}
       </Stepper>
