@@ -161,12 +161,12 @@ const BeMoniest = () => {
         {activeStep == 1 && (
           <Stack spacing={1.5} mt={2}>
             <Typography sx={{ opacity: 0.7 }} variant="h3">
-              Start your moniest journey
+              {translate("page.be_moniest.start_journey")}
             </Typography>
 
             <Typography sx={{ opacity: 0.6 }} variant="h4">
-              You will find all the information you need to get started. Follow
-              our simple steps to become a Moniest.
+            {translate("page.be_moniest.folow_steps")}
+              
             </Typography>
           </Stack>
         )}

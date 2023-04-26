@@ -183,12 +183,14 @@
         "terms_policy": "terms and policies",
         "information": "Information"
       },
-      "step":{
-        "email_verify":"Email verify",
-        "moniest_info":"Moniest information",
-        "payment_metod":"Payment Method",
-        "submit":"Submit"
-      }
+      "step": {
+        "email_verify": "Email verify",
+        "moniest_info": "Moniest information",
+        "payment_metod": "Payment Method",
+        "submit": "Submit"
+      },
+      "start_journey": "Start your moniest journey",
+      "folow_steps": "You will find all the information you need to get started. Follow our simple steps to become a Moniest."
     },
     "profile": {
       "user_not_found": "User not found",
@@ -217,9 +219,9 @@
         "paying_currently": "You are paying {{fee}}$/Month currently",
         "if_unsubscribe": "If you unsubscribe from {{username}}, you will no longer be able to access content shared by this account for subscribers."
       },
-      "post_filter":{
-        "all":"All",
-        "live":"Live"
+      "post_filter": {
+        "all": "All",
+        "live": "Live"
       }
     },
     "404": {

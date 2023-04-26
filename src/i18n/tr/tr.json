@@ -173,7 +173,9 @@
         "moniest_info": "Moniest bilgileri",
         "payment_metod": "Ödeme yöntemi",
         "submit": "Gönder"
-      }
+      },
+      "start_journey": "Moniest yolculuğunuza başlayın",
+      "folow_steps": "Başlamak için ihtiyacınız olan tüm bilgileri bulacaksınız. Moniest olmak için basit adımlarımızı izleyin."
     },
     "profile": {
       "user_not_found": "Kullanıcı bulunamadı",
