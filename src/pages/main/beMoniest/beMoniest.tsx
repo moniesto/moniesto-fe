@@ -26,6 +26,7 @@ import toastService from "../../../services/toastService";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "../../../store/slices/userSlice";
 import { useTranslate } from "../../../hooks/useTranslate";
+import { RocketLaunchOutlined } from "@mui/icons-material";
 
 type Step = {
   order: number;
@@ -74,17 +75,17 @@ const BeMoniest = () => {
     if (activeStep == steps.length) {
       api.moniest
         .be_moniest({
-          bio: moniest?.bio as string,
-          card_id: moniest?.card_id as string,
-          description: moniest?.description as string,
-          fee: moniest?.fee as number,
-          message: "test message",
+          bio: moniest?.bio!,
+          card_id: moniest?.card_id!,
+          description: moniest?.description!,
+          fee: moniest?.fee!,
+          message: "message",
         })
         .then((res) => {
           dispatch(setUser(res));
           toastService.open({
             severity: "success",
-            message: translate("page.be_moniest.cong_moniest") ,
+            message: translate("page.be_moniest.cong_moniest"),
           });
           setTimeout(() => {
             navigate("/timeline");
@@ -150,11 +151,25 @@ const BeMoniest = () => {
       }}
     >
       <Stack pb={{ md: 6, xs: 3 }}>
-        <Typography variant="h2" pb={1.4}>
-          
-          {translate("page.be_moniest.be_moniest")}
-        </Typography>
+        <Stack direction="row" spacing={2}>
+          <Typography variant="h2" pb={1.4}>
+            {translate("page.be_moniest.be_moniest")}
+          </Typography>
+          <RocketLaunchOutlined />
+        </Stack>
         <Divider></Divider>
+        {activeStep == 1 && (
+          <Stack spacing={1.5} mt={2}>
+            <Typography sx={{ opacity: 0.7 }} variant="h3">
+              Start your moniest journey
+            </Typography>
+
+            <Typography sx={{ opacity: 0.6 }} variant="h4">
+              You will find all the information you need to get started. Follow
+              our simple steps to become a Moniest.
+            </Typography>
+          </Stack>
+        )}
       </Stack>
       <Stepper
         alternativeLabel
@@ -192,7 +207,9 @@ const BeMoniest = () => {
             key={step.title}
             completed={step.order <= activeStep}
           >
-            <StepLabel icon={step.icon}>{translate("page.be_moniest.step."+step.title)}</StepLabel>
+            <StepLabel icon={step.icon}>
+              {translate("page.be_moniest.step." + step.title)}
+            </StepLabel>
           </Step>
         ))}
       </Stepper>
