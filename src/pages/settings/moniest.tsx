@@ -144,7 +144,6 @@ export const MoniestSettings = () => {
                 }}
               />
             </FormItem>
-
             <FormItem title={translate("form.field.desc")}>
               <TextField
                 sx={{
@@ -159,13 +158,8 @@ export const MoniestSettings = () => {
                 name="description"
                 value={formik.values.description}
                 onChange={formik.handleChange}
-                error={
-                  formik.touched.description &&
-                  Boolean(formik.errors.description)
-                }
-                helperText={
-                  formik.touched.description && formik.errors.description
-                }
+                error={formik.touched.description && Boolean(formik.errors.description)}
+                helperText={formik.touched.description && formik.errors.description}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -175,6 +169,7 @@ export const MoniestSettings = () => {
                 }}
               />
             </FormItem>
+
           </Stack>
           <LoadingButton
             type="submit"
