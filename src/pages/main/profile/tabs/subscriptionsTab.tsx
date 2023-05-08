@@ -7,6 +7,7 @@ import api from "../../../../services/api";
 import Navigator from "../../../../components/shared/common/navigatior";
 import { Stack } from "@mui/system";
 import { useTranslate } from "../../../../hooks/useTranslate";
+import { TestUser } from "../../../../services/tempDatas";
 
 const SubscriptionsTab = ({
   account,
@@ -35,9 +36,12 @@ const SubscriptionsTab = ({
     if (hasMore) getSubscriptions();
   }, [queryParams]);
 
+  const dummyUser = { ...TestUser, id: "-1" };
+
   const getSubscriptions = () => {
+    setUsers(users.concat(Array(queryParams.limit).fill(dummyUser)));
     api.user.subscriptions(account.username, queryParams).then((response) => {
-      setUsers([...users, ...response]);
+      setUsers([...users.filter((user) => user.id !== "-1"), ...response]);
       if (response.length < queryParams.limit) {
         setHasMore(false);
         queryParams.offset = 0;
@@ -56,8 +60,11 @@ const SubscriptionsTab = ({
           dataLength={users.length}
         >
           {users.map((user, i) => (
-            <Navigator key={user.id} path={"/" + user.username}>
-              <SubsPersonCard user={user}></SubsPersonCard>
+            <Navigator key={i + user.id} path={"/" + user.username}>
+              <SubsPersonCard
+                loading={user.id === "-1"}
+                user={user}
+              ></SubsPersonCard>
             </Navigator>
           ))}
           {!loading && !users.length && (

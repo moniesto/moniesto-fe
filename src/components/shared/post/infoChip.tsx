@@ -1,19 +1,18 @@
-import { Stack, SxProps, Typography } from "@mui/material";
+import { Skeleton, Stack, SxProps, Typography } from "@mui/material";
 import { useTheme } from "@mui/system";
-import { ReactNode } from "react";
 
 type InfoChipProps = {
-  title: string;
-  startAdornment?: ReactNode;
+  title?: string;
   value: string | number;
   sx?: SxProps;
+  loading:boolean
 };
 
 export const InfoChip = ({
   title,
-  startAdornment,
   value,
   sx,
+  loading
 }: InfoChipProps) => {
   const theme = useTheme();
   return (
@@ -28,14 +27,25 @@ export const InfoChip = ({
       direction="row"
       alignItems="center"
     >
-      <Typography sx={{ opacity: 0.7 }} variant="h5">
-        {title}
-      </Typography>
+      {
+        !loading ? <>
+          <Typography sx={{ opacity: 0.7 }} variant="h5">
+            {title}
+          </Typography>
 
-      <Typography className="infochip--value" variant="h5">
-        {value}
-      </Typography>
-      {/* <Box sx={{ width: "1rem", height: "1rem" }}>{startAdornment}</Box> */}
+          <Typography className="infochip--value" variant="h5">
+            {value}
+          </Typography>
+        </> :
+          <>
+            <Skeleton animation="wave" variant="text" width={50}></Skeleton>
+            <Skeleton animation="wave" variant="text" width={30}></Skeleton>
+          </>
+      }
+
     </Stack>
   );
 };
+
+
+

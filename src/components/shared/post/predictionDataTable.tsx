@@ -1,19 +1,20 @@
 import {
+  Skeleton,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
-  useTheme,
 } from "@mui/material";
 import { useTranslate } from "../../../hooks/useTranslate";
 
 type propTypes = {
   columns: { field: string; title: string }[];
   rows: any[];
+  loading?: boolean
 };
 
-const PredictionDataTable = ({ columns, rows }: propTypes) => {
+const PredictionDataTable = ({ columns, rows, loading }: propTypes) => {
   const translate = useTranslate();
 
   return (
@@ -31,7 +32,11 @@ const PredictionDataTable = ({ columns, rows }: propTypes) => {
         >
           {columns.map((column) => (
             <TableCell key={column.field} align="center">
-              {translate(column.title)}
+              {
+                !loading ? translate(column.title) :
+                  <Skeleton sx={{ margin: "auto" }} variant="text" width={50}></Skeleton>
+              }
+
             </TableCell>
           ))}
         </TableRow>
@@ -48,7 +53,11 @@ const PredictionDataTable = ({ columns, rows }: propTypes) => {
           <TableRow key={i}>
             {columns.map((column) => (
               <TableCell key={column.field} align="center">
-                {row[column.field]}
+                {
+                  !loading ? row[column.field] :
+                    <Skeleton sx={{ margin: "auto" }} variant="text" width={50}></Skeleton>
+                }
+
               </TableCell>
             ))}
           </TableRow>

@@ -4,6 +4,7 @@ import { InfiniteScroll } from "../../components/shared/common/infiniteScroll";
 import PostCard from "../../components/shared/post/postCard";
 import { Post } from "../../interfaces/post";
 import api from "../../services/api";
+import { TestPost } from "../../services/tempDatas";
 
 const TimeLine = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -22,9 +23,12 @@ const TimeLine = () => {
     sortBy: "created_at",
   });
 
+  const dummyPost = { ...TestPost, id: "-1" };
+
   const getPosts = () => {
+    setPosts(posts.concat(Array(queryParams.limit).fill(dummyPost)));
     api.content.posts(queryParams).then((response) => {
-      setPosts([...posts, ...response]);
+      setPosts([...posts.filter((post) => post.id !== "-1"), ...response]);
       if (response.length < queryParams.limit) {
         if (!queryParams.active && !queryParams.subscribed) {
           setHasMore(false);
@@ -60,7 +64,7 @@ const TimeLine = () => {
     >
       <Stack rowGap={2}>
         {posts.map((post, i) => (
-          <PostCard key={i} post={post} />
+          <PostCard loading={post.id === "-1"} key={i} post={post} />
         ))}
       </Stack>
     </InfiniteScroll>

@@ -18,7 +18,7 @@ import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import * as yup from "yup";
 import { LoadingButton } from "@mui/lab";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { UsernameInput } from "../../components/layout/auth/usernameInput";
 import { UploadPhotoButton } from "../../components/shared/user/uploadPhotoButton";
 import { Spinner } from "../../components/shared/common/spinner";
@@ -99,7 +99,7 @@ export const AccountSettings = () => {
     api.user
       .update_profile(formik.values)
       .then((response) => {
-        if (language != formik.values.language) {
+        if (language !== formik.values.language) {
           dispatch(changeLanguage(formik.values.language));
         }
         dispatch(setUser(response));
@@ -126,7 +126,7 @@ export const AccountSettings = () => {
     validateOnBlur: false,
     validationSchema: validationSchema,
     validate: async (values) => {
-      if (!formik.values.username || user.username == values.username) return;
+      if (!formik.values.username || user.username === values.username) return;
       const errors: any = {};
 
       const result = await api.account.check_username(values.username);

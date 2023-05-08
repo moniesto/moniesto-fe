@@ -6,6 +6,7 @@ import { InfiniteScroll } from "../../../../components/shared/common/infiniteScr
 import api from "../../../../services/api";
 import Navigator from "../../../../components/shared/common/navigatior";
 import { useTranslate } from "../../../../hooks/useTranslate";
+import { TestUser } from "../../../../services/tempDatas";
 
 const SubscribersTab = ({
   account,
@@ -34,9 +35,12 @@ const SubscribersTab = ({
     if (hasMore) getSubscribers();
   }, [queryParams]);
 
+  const dummyUser = { ...TestUser, id: "-1" };
+
   const getSubscribers = () => {
+    setUsers(users.concat(Array(queryParams.limit).fill(dummyUser)));
     api.moniest.subscribers(account.username, queryParams).then((response) => {
-      setUsers([...users, ...response]);
+      setUsers([...users.filter((user) => user.id !== "-1"), ...response]);
       if (response.length < queryParams.limit) {
         setHasMore(false);
         queryParams.offset = 0;
@@ -54,9 +58,12 @@ const SubscribersTab = ({
           fetchData={handleFetchData}
           dataLength={users.length}
         >
-          {users.map((user) => (
-            <Navigator key={user.id} path={"/" + user.username}>
-              <SubsPersonCard user={user}></SubsPersonCard>
+          {users.map((user, i) => (
+            <Navigator key={i + user.id} path={"/" + user.username}>
+              <SubsPersonCard
+                loading={user.id === "-1"}
+                user={user}
+              ></SubsPersonCard>
             </Navigator>
           ))}
           {!loading && !users.length && (

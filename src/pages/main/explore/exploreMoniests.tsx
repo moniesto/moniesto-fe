@@ -8,6 +8,7 @@ import MoniestCard from "../../../components/shared/user/moniestCard";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { User } from "../../../interfaces/user";
 import api from "../../../services/api";
+import { TestUser } from "../../../services/tempDatas";
 
 export const ExploreMoniests = () => {
   const theme = useTheme();
@@ -17,14 +18,18 @@ export const ExploreMoniests = () => {
     limit: 4,
     offset: 0,
   });
+
   useEffect(() => {
     getMoniests();
   }, [paginate]);
 
+  const dummyUser = { ...TestUser, id: "-1" };
+
   const getMoniests = () => {
-    api.content
-      .moniests(paginate)
-      .then((response) => setMoniests([...moniests, ...response]));
+    setMoniests(moniests.concat(Array(paginate.limit).fill(dummyUser)));
+    api.content.moniests(paginate).then((response) => {
+      setMoniests([...moniests.filter((user) => user.id !== "-1"), ...response]);
+    });
   };
   const handleClickMore = () => {
     setPaginate({ ...paginate, offset: paginate.offset + paginate.limit });
@@ -35,7 +40,7 @@ export const ExploreMoniests = () => {
       <Grid container spacing={2}>
         {moniests.map((moniest, i) => (
           <Grid key={i} item xs={12} md={6}>
-            <MoniestCard user={moniest} />
+            <MoniestCard loading={moniest.id === "-1"} user={moniest} />
           </Grid>
         ))}
       </Grid>

@@ -21,9 +21,9 @@ import {
 import { setUser } from "../../store/slices/userSlice";
 import { useTranslate } from "../../hooks/useTranslate";
 import configService from "../../services/configService";
+import { FormItem } from "../../components/shared/common/formItem";
 
 export const MoniestSettings = () => {
-  const theme = useTheme();
   const user = useAppSelector((state) => state.user.user);
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
@@ -101,75 +101,80 @@ export const MoniestSettings = () => {
             {translate("page.settings.moniest.title")}
           </Typography>
           <Stack spacing={2}>
-            <TextField
-              fullWidth
-              name="fee"
-              type="number"
-              value={formik.values.fee}
-              placeholder={translate("form.field.fee")}
-              onChange={formik.handleChange}
-              error={formik.touched.fee && Boolean(formik.errors.fee)}
-              helperText={formik.touched.fee && formik.errors.fee}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AttachMoneyOutlined />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
-              sx={{
-                ".MuiInputBase-root": {
-                  alignItems: "baseline",
-                  paddingLeft: "14px !important",
-                },
-              }}
-              multiline
-              rows={4}
-              fullWidth
-              name="bio"
-              placeholder={translate("form.field.bio")}
-              value={formik.values.bio}
-              onChange={formik.handleChange}
-              error={formik.touched.bio && Boolean(formik.errors.bio)}
-              helperText={formik.touched.bio && formik.errors.bio}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountBoxOutlined />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
-              sx={{
-                ".MuiInputBase-root": {
-                  alignItems: "baseline",
-                  paddingLeft: "14px !important",
-                },
-              }}
-              multiline
-              rows={7}
-              fullWidth
-              name="description"
-              placeholder={translate("form.field.desc")}
-              value={formik.values.description}
-              onChange={formik.handleChange}
-              error={
-                formik.touched.description && Boolean(formik.errors.description)
-              }
-              helperText={
-                formik.touched.description && formik.errors.description
-              }
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <ArticleOutlined />
-                  </InputAdornment>
-                ),
-              }}
-            />
+            <FormItem title={translate("form.field.fee")}>
+              <TextField
+                fullWidth
+                name="fee"
+                type="number"
+                value={formik.values.fee}
+                onChange={formik.handleChange}
+                error={formik.touched.fee && Boolean(formik.errors.fee)}
+                helperText={formik.touched.fee && formik.errors.fee}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <AttachMoneyOutlined />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </FormItem>
+            <FormItem title={translate("form.field.bio")}>
+              <TextField
+                sx={{
+                  ".MuiInputBase-root": {
+                    alignItems: "baseline",
+                    paddingLeft: "14px !important",
+                  },
+                }}
+                multiline
+                rows={4}
+                fullWidth
+                name="bio"
+                value={formik.values.bio}
+                onChange={formik.handleChange}
+                error={formik.touched.bio && Boolean(formik.errors.bio)}
+                helperText={formik.touched.bio && formik.errors.bio}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <AccountBoxOutlined />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </FormItem>
+
+            <FormItem title={translate("form.field.desc")}>
+              <TextField
+                sx={{
+                  ".MuiInputBase-root": {
+                    alignItems: "baseline",
+                    paddingLeft: "14px !important",
+                  },
+                }}
+                multiline
+                rows={7}
+                fullWidth
+                name="description"
+                value={formik.values.description}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.description &&
+                  Boolean(formik.errors.description)
+                }
+                helperText={
+                  formik.touched.description && formik.errors.description
+                }
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <ArticleOutlined />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </FormItem>
           </Stack>
           <LoadingButton
             type="submit"

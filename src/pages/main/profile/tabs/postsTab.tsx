@@ -11,6 +11,7 @@ import { User } from "../../../../interfaces/user";
 import { Spinner } from "../../../../components/shared/common/spinner";
 import { SubscribeButton } from "../../../../components/shared/user/subscribeButton";
 import { useTranslate } from "../../../../hooks/useTranslate";
+import { TestPost } from "../../../../services/tempDatas";
 
 type FilterType = "all" | "live";
 type Filter = {
@@ -53,7 +54,7 @@ const PostsTab = ({
   const translate = useTranslate();
 
   const handleFetchData = () => {
-    setQueryParams({ ...queryParams, offset: queryParams.offset + 1 });
+    setQueryParams({ ...queryParams, offset: queryParams.offset + queryParams.limit });
   };
 
   useEffect(() => {
@@ -67,12 +68,14 @@ const PostsTab = ({
   }, [queryParams]);
 
   const getPosts = () => {
+    setPosts(posts.concat(Array(queryParams.limit).fill(dummyPost)));
+
     queryParams.active = activePostFilter.boolValue;
 
     api.post
       .user_posts(account.username, queryParams)
       .then((response) => {
-        setPosts([...posts, ...response]);
+        setPosts([...posts.filter((post) => post.id !== "-1"), ...response]);
         if (response.length < queryParams.limit) {
           setHasMore(false);
           queryParams.offset = 0;
@@ -89,9 +92,9 @@ const PostsTab = ({
     setHasMore(true);
 
     if (!isMyAccount && filterItem.boolValue === true && !isSubscribed) return;
-    
+
     setLoading(true);
-    setQueryParams({ ...queryParams, active: filterItem.boolValue });
+    setQueryParams({ ...queryParams, active: filterItem.boolValue ,offset:0});
   };
 
   const oneDayAfter = () => {
@@ -101,23 +104,14 @@ const PostsTab = ({
   };
 
   const testPost: Post = {
-    currency: "BTCUSDT",
-    direction: "long",
+    ...TestPost,
     duration: oneDayAfter().toISOString(),
-    created_at: new Date(),
-    id: "1",
-    score: 32,
-    start_price: 2103.99,
-    stop: 2103.99,
-    target1: 1,
-    target2: 1,
-    target3: 2203.99,
-    updated_at: new Date(),
     user: account,
     status: "pending",
     finished: false,
-    description: "",
   };
+
+  const dummyPost = { ...TestPost, id: "-1" };
 
   const getColorByActive = (filter: Filter) =>
     activePostFilter.value === filter.value
@@ -160,7 +154,7 @@ const PostsTab = ({
               >
                 {filter.icon}
               </Stack>
-              {translate("page.profile.post_filter."+ filter.title)}
+              {translate("page.profile.post_filter." + filter.title)}
             </Stack>
           ))}
         </Stack>
@@ -180,7 +174,7 @@ const PostsTab = ({
           >
             <Stack spacing={2} alignItems="center">
               <Typography variant="h2">
-                {translate("page.profile.sub_for_live")}{" "}
+                {translate("page.profile.sub_for_live")}
               </Typography>
               <SubscribeButton
                 fee={account.moniest?.subscription_info.fee as number}
@@ -195,10 +189,6 @@ const PostsTab = ({
             ))}
           </Stack>
         </Box>
-      ) : loading ? (
-        <Box sx={{ position: "relative" }}>
-          <Spinner sx={{ mt: "15px" }} center={true}></Spinner>
-        </Box>
       ) : (
         <InfiniteScroll
           hasMore={hasMore}
@@ -207,14 +197,14 @@ const PostsTab = ({
         >
           <Stack rowGap={2}>
             {posts.map((post, i) => (
-              <PostCard key={i} post={post} />
+              <PostCard loading={post.id === "-1"} key={i} post={post} />
             ))}
           </Stack>
           {!posts.length && (
             <Card>
               <Stack p={3} alignItems="center">
                 <Typography variant="h5">
-                  {translate("page.profile.no_post")}{" "}
+                  {translate("page.profile.no_post")}
                 </Typography>
               </Stack>
             </Card>

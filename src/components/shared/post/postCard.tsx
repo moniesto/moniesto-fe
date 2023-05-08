@@ -9,11 +9,11 @@ import {
   Divider,
   IconButton,
   IconButtonProps,
+  Skeleton,
   styled,
   Typography,
 } from "@mui/material";
 import { Stack } from "@mui/system";
-import StatusDot from "./statusDot";
 import { useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PredictionDataTable from "./predictionDataTable";
@@ -24,7 +24,6 @@ import { Editor } from "../common/editor/editor";
 import helper from "../../../services/helper";
 import { useTheme } from "@mui/system";
 import { InfoChip } from "./infoChip";
-import { PercentOutlined, StarOutline } from "@mui/icons-material";
 import { NotAdvice } from "../../ui/post/notAdvice";
 import { useTranslate } from "../../../hooks/useTranslate";
 
@@ -47,17 +46,18 @@ const ExpandMore: any = styled((props: ExpandMoreProps) => {
 
 type PostCardProps = {
   post: Post;
+  loading: boolean
 };
 
-const PostCard = ({ post }: PostCardProps) => {
+const PostCard = ({ post, loading }: PostCardProps) => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const theme = useTheme();
   const translate = useTranslate();
 
   const calculatePercentage = helper.parseCurrency(
     helper.operatonByDirection(post.direction) *
-      ((post.target3 - post.start_price) / post.start_price) *
-      100,
+    ((post.target3 - post.start_price) / post.start_price) *
+    100,
     3
   );
 
@@ -79,7 +79,7 @@ const PostCard = ({ post }: PostCardProps) => {
 
   return (
     <Card sx={{ position: "relative", paddingBottom: "44px" }}>
-      <NotAdvice />
+      {!loading && <NotAdvice />}
       <CardHeader
         sx={{
           ".MuiCardHeader-action": {
@@ -92,43 +92,56 @@ const PostCard = ({ post }: PostCardProps) => {
           },
         }}
         avatar={
-          <Navigator path={"/" + post.user.username}>
+          !loading ? <Navigator path={"/" + post.user.username}>
             <IconButton disableRipple size="small" sx={{ ml: 2 }}>
               <Avatar
                 src={post.user.profile_photo_thumbnail_link}
                 sx={{ width: 50, height: 50 }}
               ></Avatar>
             </IconButton>
-          </Navigator>
+          </Navigator> :
+            <Skeleton animation="wave" sx={{ width: 50, height: 50 }} variant="circular"></Skeleton>
         }
         action={
           <Stack flexDirection="row" gap={{ md: 5, xs: 3 }}>
             <Stack alignItems="center">
-              <Typography variant="h4" color={theme.palette.warning.dark}>
-                {post.currency}
-              </Typography>
-              {/* <Typography variant="h5">{post.start_price}</Typography> */}
+              {
+                !loading ? <Typography variant="h4" color={theme.palette.warning.dark}>
+                  {post.currency}
+                </Typography> :
+                  <Skeleton animation="wave" sx={{ width: 80 }} variant="text"></Skeleton>
+              }
+
             </Stack>
-            {/* <StatusDot status={post.status}></StatusDot> */}
           </Stack>
         }
         title={
-          <Typography variant="h4">
-            {`${post.user.name} ${post.user.surname}`}
-          </Typography>
+          !loading ?
+            <Typography variant="h4">
+              {`${post.user.name} ${post.user.surname}`}
+            </Typography>
+            :
+            <Skeleton animation="wave" sx={{ width: 120 }} variant="text"></Skeleton>
         }
         subheader={
           <Stack flexDirection="row" columnGap={1} alignItems="baseline">
-            <Typography
-              color={theme.palette.grey[500]}
-              lineHeight="17px"
-              variant="h5"
-            >
-              {post.user.username}
-            </Typography>
-            <Typography color={theme.palette.grey[500]}>•</Typography>
+            {
+              !loading ? <Typography
+                color={theme.palette.grey[500]}
+                lineHeight="17px"
+                variant="h5"
+              >
+                {post.user.username}
+              </Typography> :
+                <Skeleton animation="wave" sx={{ width: 80, maxHeight: 20 }} variant="text"></Skeleton>
+            }
+            {!loading && <Typography color={theme.palette.grey[500]}>•</Typography>}
             <Typography variant="h6" color={theme.palette.grey[500]}>
-              <ReactTimeAgo date={new Date(post.created_at)} />
+              {
+                !loading ? <ReactTimeAgo date={new Date(post.created_at)} /> :
+                  <Skeleton animation="wave" sx={{ width: 60, maxHeight: 17 }} variant="text"></Skeleton>
+              }
+
             </Typography>
           </Stack>
         }
@@ -140,35 +153,27 @@ const PostCard = ({ post }: PostCardProps) => {
         direction="row"
         justifyContent="flex-end"
       >
-        {post.score && (
+        {post.score && !loading && (
           <InfoChip
+            loading={loading}
             title="Score"
             value={post.score}
-            // startAdornment={
-            //   <StarOutline
-            //     sx={{ fontSize: "1rem", opacity: "0.7" }}
-            //   ></StarOutline>
-            // }
           ></InfoChip>
         )}
 
         <InfoChip
           title={translate("component.post_card.rate")}
-          // startAdornment={
-          //   <PercentOutlined
-          //     sx={{ fontSize: "1rem", opacity: "0.7" }}
-          //   ></PercentOutlined>
-          // }
           value={"%" + calculatePercentage}
+          loading={loading}
         ></InfoChip>
         <InfoChip
-          title=""
           sx={{
             ".infochip--value": {
               color: getColorByStatus(post.status),
               textShadow: "0.5px 0 " + getColorByStatus(post.status),
             },
           }}
+          loading={loading}
           value={translate("component.post_card.status." + post.status)}
         ></InfoChip>
       </Stack>
@@ -186,6 +191,7 @@ const PostCard = ({ post }: PostCardProps) => {
         }}
       >
         <PredictionDataTable
+          loading={loading}
           columns={[
             {
               field: "direction",
@@ -213,6 +219,8 @@ const PostCard = ({ post }: PostCardProps) => {
             },
           ]}
         ></PredictionDataTable>
+
+
       </CardContent>
       <CardActions
         sx={{
@@ -223,9 +231,11 @@ const PostCard = ({ post }: PostCardProps) => {
           transform: "translateX(-50%)",
         }}
       >
-        <ExpandMore expand={expanded} onClick={() => setExpanded(!expanded)}>
-          <ExpandMoreIcon />
-        </ExpandMore>
+        {
+          !loading && <ExpandMore expand={expanded} onClick={() => setExpanded(!expanded)}>
+            <ExpandMoreIcon />
+          </ExpandMore>
+        }
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent sx={{ paddingTop: 0, padding: { xs: "4px", md: 2 } }}>
@@ -274,4 +284,10 @@ const PostCard = ({ post }: PostCardProps) => {
     </Card>
   );
 };
+
+
+PostCard.defaultProps = {
+  loading: false
+}
+
 export default PostCard;
