@@ -85,23 +85,20 @@ export const UsernameInput = ({
             </InputAdornment>
           ),
           endAdornment: (
-            <InputAdornment className="notFly" position="end">
+            <InputAdornment position="end">
               {currentValue != formik?.values?.username ? (
                 checkLoading ? (
                   <CircularProgress
-                    className="notFly"
                     size={25}
                     color="inherit"
                   />
                 ) : displayCheckIcon ? (
                   isCorrectName ? (
                     <DoneOutlined
-                      className="notFly"
                       sx={{ color: theme.palette.secondary.main }}
                     />
                   ) : (
                     <HighlightOffOutlined
-                      className="notFly"
                       sx={{ color: theme.palette.error.light }}
                     />
                   )

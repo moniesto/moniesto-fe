@@ -13,6 +13,7 @@ import { setToken } from "../../store/slices/localStorageSlice";
 import api from "../../services/api";
 import toastService from "../../services/toastService";
 import { useTranslate } from "../../hooks/useTranslate";
+import Fly from "../../components/shared/common/fly/fly";
 
 type LoginForm = {
   identifier: string;
@@ -61,100 +62,123 @@ const Login = () => {
   });
 
   return (
-    <Stack width={"100%"} maxWidth={500} spacing={8}>
-      <Stack spacing={1.8}>
-        <Typography fontSize={"2.2rem"}>
-          {translate("page.login.title")}
-        </Typography>
-        <Typography fontSize={"2.6rem"} variant="h1">
-          {translate("common.welcome")}
-        </Typography>
+    <Fly>
+      <Stack width={"100%"} maxWidth={500} spacing={8}>
+        <Stack spacing={1.8}>
+          <Fly.Item>
+            <Typography fontSize={"2.2rem"}>
+              {translate("page.login.title")}
+            </Typography>
+          </Fly.Item>
 
-        <Typography fontSize={"1rem"} color={theme.palette.grey[400]}>
-          {translate("page.login.enter_detail")}
-        </Typography>
-      </Stack>
-      <form onSubmit={formik.handleSubmit}>
-        <Stack spacing={4}>
-          <Stack spacing={2}>
-            <TextField
-              fullWidth
-              name="identifier"
-              placeholder={translate("form.field.email_or_username")}
-              value={formik.values.identifier}
-              onChange={formik.handleChange}
-              error={
-                formik.touched.identifier && Boolean(formik.errors.identifier)
-              }
-              helperText={formik.touched.identifier && formik.errors.identifier}
-              InputProps={{
-                autoComplete: "new-email",
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <EmailOutlinedIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
-              fullWidth
-              name="password"
-              placeholder={translate("form.field.password")}
-              type="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-              InputProps={{
-                autoComplete: "new-password",
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <KeyOutlinedIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <Navigator path="/forget-password">
-              <Stack
-                alignItems="end"
-                color={theme.palette.grey[500]}
-                sx={{ cursor: "pointer" }}
-              >
-                {translate("page.login.action.forget_pass")}
-              </Stack>
-            </Navigator>
-          </Stack>
-          <LoadingButton
-            type="submit"
-            size="large"
-            color="secondary"
-            loading={loading}
-            variant="contained"
-          >
-            {translate("page.login.action.login")}
-          </LoadingButton>
-
-          <Stack
-            columnGap={1}
-            alignItems="center"
-            flexDirection="row"
-            justifyContent="center"
-            color={theme.palette.text.secondary}
-          >
-            {translate("page.login.action.no_account")}
-            <Navigator path="/register">
-              <Typography
-                sx={{ cursor: "pointer" }}
-                variant="h4"
-                color="secondary"
-              >
-                {translate("page.login.action.register")}
-              </Typography>
-            </Navigator>
-          </Stack>
+          <Fly.Item>
+            <Typography fontSize={"2.6rem"} variant="h1">
+              {translate("common.welcome")}
+            </Typography>
+          </Fly.Item>
+          <Fly.Item>
+            <Typography fontSize={"1rem"} color={theme.palette.grey[400]}>
+              {translate("page.login.enter_detail")}
+            </Typography>
+          </Fly.Item>
         </Stack>
-      </form>
-    </Stack>
+        <form onSubmit={formik.handleSubmit}>
+          <Stack spacing={4}>
+            <Stack spacing={2}>
+              <Fly.Item>
+                <TextField
+                  fullWidth
+                  name="identifier"
+                  placeholder={translate("form.field.email_or_username")}
+                  value={formik.values.identifier}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.identifier &&
+                    Boolean(formik.errors.identifier)
+                  }
+                  helperText={
+                    formik.touched.identifier && formik.errors.identifier
+                  }
+                  InputProps={{
+                    autoComplete: "new-email",
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <EmailOutlinedIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Fly.Item>
+              <Fly.Item>
+                <TextField
+                  fullWidth
+                  name="password"
+                  placeholder={translate("form.field.password")}
+                  type="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.password && Boolean(formik.errors.password)
+                  }
+                  helperText={formik.touched.password && formik.errors.password}
+                  InputProps={{
+                    autoComplete: "new-password",
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <KeyOutlinedIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Fly.Item>
+              <Fly.Item>
+                <Navigator path="/forget-password">
+                  <Stack
+                    alignItems="end"
+                    color={theme.palette.grey[500]}
+                    sx={{ cursor: "pointer" }}
+                  >
+                    {translate("page.login.action.forget_pass")}
+                  </Stack>
+                </Navigator>
+              </Fly.Item>
+            </Stack>
+            <Fly.Item>
+              <LoadingButton
+                fullWidth
+                type="submit"
+                size="large"
+                color="secondary"
+                loading={loading}
+                variant="contained"
+              >
+                {translate("page.login.action.login")}
+              </LoadingButton>
+            </Fly.Item>
+            <Fly.Item>
+              <Stack
+                columnGap={1}
+                alignItems="center"
+                flexDirection="row"
+                justifyContent="center"
+                color={theme.palette.text.secondary}
+              >
+                {translate("page.login.action.no_account")}
+                <Navigator path="/register">
+                  <Typography
+                    sx={{ cursor: "pointer" }}
+                    variant="h4"
+                    color="secondary"
+                  >
+                    {translate("page.login.action.register")}
+                  </Typography>
+                </Navigator>
+              </Stack>
+            </Fly.Item>
+          </Stack>
+        </form>
+      </Stack>
+    </Fly>
   );
 };
 

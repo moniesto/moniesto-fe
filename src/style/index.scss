@@ -31,23 +31,6 @@ table {
   }
 }
 
-@keyframes fly {
-  0% {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-.fly {
-  @for $i from 1 through 1000 {
-    * > :not(input, .notFly):nth-child(#{$i}) {
-      animation-delay: #{$i * 80} + "ms";
-    }
-  }
-}
 
 @keyframes fadeIn {
   0% {

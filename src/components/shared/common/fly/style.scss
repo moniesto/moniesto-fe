@@ -1,0 +1,17 @@
+@keyframes fly {
+  0% {
+    transform: translateY(20px) scale(0.97);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0 scale(1));
+    opacity: 1;
+  }
+}
+.fly {
+  &__item {
+    opacity: 0;
+    animation: fly 0.15s cubic-bezier(0.56, 0.87, 0.58, 1.38);
+    animation-fill-mode: forwards;
+  }
+}

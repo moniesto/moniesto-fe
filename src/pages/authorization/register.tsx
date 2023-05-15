@@ -1,4 +1,10 @@
-import { InputAdornment, TextField, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  InputAdornment,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { Stack } from "@mui/system";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -17,6 +23,7 @@ import toastService from "../../services/toastService";
 import { UsernameInput } from "../../components/layout/auth/usernameInput";
 import { useTranslate } from "../../hooks/useTranslate";
 import configService from "../../services/configService";
+import Fly from "../../components/shared/common/fly/fly";
 
 type RegisterForm = {
   username: string;
@@ -106,7 +113,6 @@ const Register = () => {
     validateOnBlur: false,
     validationSchema: validationSchema,
     validate: async (values) => {
-
       if (!formik.values.username) return;
       const errors: any = {};
 
@@ -123,125 +129,150 @@ const Register = () => {
   });
 
   return (
-    <Stack width={"100%"} maxWidth={500} spacing={8}>
-      <Stack spacing={1.8}>
-        <Typography fontSize={"2.2rem"}>
-          {translate("page.register.title")}
-        </Typography>
-        <Typography fontSize={"2.6rem"} variant="h1">
-          {translate("common.welcome")}
-        </Typography>
-
-        <Typography fontSize={"1rem"} color={theme.palette.grey[400]}>
-          {translate("page.register.enter_detail")}
-        </Typography>
-      </Stack>
-      <form onSubmit={formik.handleSubmit}>
-        <Stack spacing={4}>
-          <Stack spacing={2}>
-            <UsernameInput formik={formik}></UsernameInput>
-            <TextField
-              fullWidth
-              id="name"
-              name="name"
-              placeholder={translate("form.field.name")}
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              error={formik.touched.name && Boolean(formik.errors.name)}
-              helperText={formik.touched.name && formik.errors.name}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <BadgeOutlinedIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
-              fullWidth
-              id="surname"
-              name="surname"
-              placeholder={translate("form.field.surname")}
-              value={formik.values.surname}
-              onChange={formik.handleChange}
-              error={formik.touched.surname && Boolean(formik.errors.surname)}
-              helperText={formik.touched.surname && formik.errors.surname}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <BadgeOutlinedIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-
-            <TextField
-              fullWidth
-              id="email"
-              name="email"
-              placeholder={translate("form.field.email")}
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <EmailOutlinedIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
-              fullWidth
-              id="password"
-              name="password"
-              placeholder={translate("form.field.password")}
-              type="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-              InputProps={{
-                autoComplete: "new-password",
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <KeyOutlinedIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Stack>
-          <LoadingButton
-            type="submit"
-            size="large"
-            color="secondary"
-            loading={loading}
-            variant="contained"
-          >
-            {translate("page.register.action.register")}
-          </LoadingButton>
-          <Stack
-            columnGap={1}
-            alignItems="center"
-            flexDirection="row"
-            justifyContent="center"
-            color={theme.palette.text.secondary}
-          >
-            {translate("page.register.action.have_account")}
-            <Navigator path="/login">
-              <Typography
-                sx={{ cursor: "pointer" }}
-                variant="h4"
-                color="secondary"
-              >
-                {translate("page.register.action.login")}
-              </Typography>
-            </Navigator>
-          </Stack>
+    <Fly>
+      <Stack width={"100%"} maxWidth={500} spacing={8}>
+        <Stack spacing={1.8}>
+          <Fly.Item>
+            <Typography fontSize={"2.2rem"}>
+              {translate("page.register.title")}
+            </Typography>
+          </Fly.Item>
+          <Fly.Item>
+            <Typography fontSize={"2.6rem"} variant="h1">
+              {translate("common.welcome")}
+            </Typography>
+          </Fly.Item>
+          <Fly.Item>
+            <Typography fontSize={"1rem"} color={theme.palette.grey[400]}>
+              {translate("page.register.enter_detail")}
+            </Typography>
+          </Fly.Item>
         </Stack>
-      </form>
-    </Stack>
+        <form onSubmit={formik.handleSubmit}>
+          <Stack spacing={4}>
+            <Stack spacing={2}>
+              <Fly.Item>
+                <UsernameInput formik={formik}></UsernameInput>
+              </Fly.Item>
+              <Fly.Item>
+                <TextField
+                  fullWidth
+                  id="name"
+                  name="name"
+                  placeholder={translate("form.field.name")}
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  error={formik.touched.name && Boolean(formik.errors.name)}
+                  helperText={formik.touched.name && formik.errors.name}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <BadgeOutlinedIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Fly.Item>
+              <Fly.Item>
+                <TextField
+                  fullWidth
+                  id="surname"
+                  name="surname"
+                  placeholder={translate("form.field.surname")}
+                  value={formik.values.surname}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.surname && Boolean(formik.errors.surname)
+                  }
+                  helperText={formik.touched.surname && formik.errors.surname}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <BadgeOutlinedIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Fly.Item>
+              <Fly.Item>
+                <TextField
+                  fullWidth
+                  id="email"
+                  name="email"
+                  placeholder={translate("form.field.email")}
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <EmailOutlinedIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Fly.Item>
+              <Fly.Item>
+                <TextField
+                  fullWidth
+                  id="password"
+                  name="password"
+                  placeholder={translate("form.field.password")}
+                  type="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.password && Boolean(formik.errors.password)
+                  }
+                  helperText={formik.touched.password && formik.errors.password}
+                  InputProps={{
+                    autoComplete: "new-password",
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <KeyOutlinedIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Fly.Item>
+            </Stack>
+            <Fly.Item>
+              <LoadingButton
+                fullWidth
+                type="submit"
+                size="large"
+                color="secondary"
+                loading={loading}
+                variant="contained"
+              >
+                {translate("page.register.action.register")}
+              </LoadingButton>
+            </Fly.Item>
+            <Fly.Item>
+              <Stack
+                columnGap={1}
+                alignItems="center"
+                flexDirection="row"
+                justifyContent="center"
+                color={theme.palette.text.secondary}
+              >
+                {translate("page.register.action.have_account")}
+                <Navigator path="/login">
+                  <Typography
+                    sx={{ cursor: "pointer" }}
+                    variant="h4"
+                    color="secondary"
+                  >
+                    {translate("page.register.action.login")}
+                  </Typography>
+                </Navigator>
+              </Stack>
+            </Fly.Item>
+          </Stack>
+        </form>
+      </Stack>
+    </Fly>
   );
 };
 
