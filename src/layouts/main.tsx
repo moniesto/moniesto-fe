@@ -1,13 +1,4 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  Fab,
-  Grid,
-  Stack,
-  Toolbar,
-} from "@mui/material";
+import { AppBar, Box, Container, Grid, Stack, Toolbar } from "@mui/material";
 import { useTheme } from "@mui/system";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
@@ -15,8 +6,8 @@ import Header from "../components/layout/header";
 import { BottomNavBar } from "../components/layout/main/bottomNavBar";
 import { SettingsSideBar } from "../components/layout/main/settingsSideBar";
 import SideBar from "../components/layout/main/sideBar";
-import { FeedbackOutlined, ForumOutlined } from "@mui/icons-material";
 import { Feedback } from "../components/ui/feedback/feedback";
+import Fly from "../components/shared/common/fly/fly";
 
 const MainLayout = () => {
   const theme = useTheme();
@@ -58,6 +49,7 @@ const MainLayout = () => {
               {sideBar}
             </Box>
           </Grid>
+
           <Grid
             width={"100%"}
             sx={{
@@ -76,7 +68,7 @@ const MainLayout = () => {
       </Container>
 
       <BottomNavBar />
-     <Feedback></Feedback>
+      <Feedback></Feedback>
     </Stack>
   );
 };

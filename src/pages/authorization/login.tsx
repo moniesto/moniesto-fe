@@ -63,7 +63,7 @@ const Login = () => {
 
   return (
     <Fly>
-      <Stack width={"100%"} maxWidth={500} spacing={8}>
+      <Stack width={"100%"} maxWidth={500} spacing={6}>
         <Stack spacing={1.8}>
           <Fly.Item>
             <Typography fontSize={"2.2rem"}>
