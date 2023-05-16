@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 @import "react-perfect-scrollbar/dist/css/styles.css";
+
+:root {
+  --theme-secondary-bg: #ebf6f4;
+}
+
 * {
   box-sizing: border-box;
   font-family: "Nunito", sans-serif !important;
@@ -7,6 +12,7 @@
 html {
   font-size: 17px !important;
 }
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -15,6 +21,7 @@ body {
     width: 0;
   }
 }
+
 table {
   td,
   th {
@@ -30,7 +37,6 @@ table {
     opacity: 1;
   }
 }
-
 
 @keyframes fadeIn {
   0% {

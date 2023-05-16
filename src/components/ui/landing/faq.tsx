@@ -4,6 +4,8 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
+  Container,
+  Stack,
 } from "@mui/material";
 import { useState } from "react";
 import { useTheme } from "@mui/system";
@@ -28,59 +30,79 @@ export const FAQ = () => {
   );
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        maxWidth: 800,
-        paddingTop: 2,
-      }}
-    >
-      {faqs.map((faq, index) => (
-        <Accordion
-          sx={{
-            border: "unset",
-            borderBottom: "1px solid rgba(0,0,0,0.2)",
-            borderRadius: "0 !important",
-            background: "white",
-            "::before": {
-              content: "unset",
-            },
-            ".MuiButtonBase-root": {
-              background: "white",
-              color: theme.palette.primary.main,
-            },
-          }}
-          key={"faq_" + index}
-          expanded={expanded === index}
-          onChange={() => handleChange(index)}
-        >
-          <AccordionSummary
-            expandIcon={
-              expanded === index ? (
-                <RemoveCircleOutline
-                  sx={{ color: theme.palette.secondary.main }}
-                />
-              ) : (
-                <AddCircleOutline
-                  sx={{ color: theme.palette.secondary.main }}
-                />
-              )
-            }
+    <Box id="faq" component="section">
+      <Container maxWidth="lg">
+        <Stack spacing={2} alignItems="center">
+          <Box
+            component="h1"
+            fontSize={{ xs: "1.7rem", md: "2rem" }}
+            lineHeight={1}
           >
-            <Box fontWeight={600}>
-              {translate("page.landing.faq.questions." + faq.question)}
-            </Box>
-          </AccordionSummary>
-          <AccordionDetails
+            {translate("page.landing.faq.title")}
+          </Box>
+          <Box component="h4" sx={{ opacity: 0.7, mt: "0 !important" }}>
+            {translate("page.landing.faq.header")}
+          </Box>
+
+          <Box
             sx={{
-              background: "white",
-              color: theme.palette.primary.main,
+              width: "100%",
+              maxWidth: 800,
+              paddingTop: 2,
             }}
           >
-            <Box> {translate("page.landing.faq.questions." + faq.answer)}</Box>
-          </AccordionDetails>
-        </Accordion>
-      ))}
+            {faqs.map((faq, index) => (
+              <Accordion
+                sx={{
+                  border: "unset",
+                  borderBottom: "1px solid rgba(0,0,0,0.2)",
+                  borderRadius: "0 !important",
+                  background: "white",
+                  "::before": {
+                    content: "unset",
+                  },
+                  ".MuiButtonBase-root": {
+                    background: "white",
+                    color: theme.palette.primary.main,
+                  },
+                }}
+                key={"faq_" + index}
+                expanded={expanded === index}
+                onChange={() => handleChange(index)}
+              >
+                <AccordionSummary
+                  expandIcon={
+                    expanded === index ? (
+                      <RemoveCircleOutline
+                        sx={{ color: theme.palette.secondary.main }}
+                      />
+                    ) : (
+                      <AddCircleOutline
+                        sx={{ color: theme.palette.secondary.main }}
+                      />
+                    )
+                  }
+                >
+                  <Box fontWeight={600}>
+                    {translate("page.landing.faq.questions." + faq.question)}
+                  </Box>
+                </AccordionSummary>
+                <AccordionDetails
+                  sx={{
+                    background: "white",
+                    color: theme.palette.primary.main,
+                  }}
+                >
+                  <Box>
+                    {" "}
+                    {translate("page.landing.faq.questions." + faq.answer)}
+                  </Box>
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </Box>
+        </Stack>
+      </Container>
     </Box>
   );
 };

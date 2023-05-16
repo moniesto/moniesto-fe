@@ -1,0 +1,107 @@
+.heroImageContainer {
+  perspective: 200px;
+  position: relative;
+  animation: plane_fade 1.8s cubic-bezier(0.36, 0.63, 0.11, 1.07);
+  &__wind {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    perspective: 300px;
+    overflow: hidden;
+
+    > div {
+      height: 1.8px;
+      width: 100%;
+      opacity: 0;
+      border-radius: 100px;
+      background: linear-gradient(to right, rgb(193, 193, 193), transparent);
+      animation: wind 1.15s ease infinite forwards;
+
+      &:nth-child(1) {
+        animation-delay: 0.2s;
+        background: linear-gradient(to right, rgb(255, 255, 255), transparent);
+      }
+      &:nth-child(2) {
+        height: 1.3px;
+        animation-delay: 1.2s;
+      }
+      &:nth-child(3) {
+        animation-delay: 0.5s;
+        background: linear-gradient(to right, rgb(255, 255, 255), transparent);
+      }
+      &:nth-child(4) {
+        height: 2px;
+        animation-delay: 0.8s;
+      }
+      &:nth-child(5) {
+        animation-delay: 0.3s;
+        background: linear-gradient(to right, rgb(255, 255, 255), transparent);
+      }
+      &:nth-child(6) {
+        animation-delay: 0.9s;
+      }
+      &:nth-child(7) {
+        animation-delay: 0.2s;
+        background: linear-gradient(to right, rgb(255, 255, 255), transparent);
+      }
+      &:nth-child(8) {
+        animation-delay: 1.2s;
+      }
+      &:nth-child(9) {
+        animation-delay: 0.5s;
+        height: 2px;
+        background: linear-gradient(to right, rgb(255, 255, 255), transparent);
+      }
+    }
+  }
+  img {
+    animation: air_fly infinite 10s cubic-bezier(0.63, 0.47, 0.24, 0.63);
+  }
+}
+
+@keyframes wind {
+  0% {
+    opacity: 0;
+    transform: rotateY(230deg) translateX(-100vh);
+  }
+  30% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: rotateY(90deg) translateX(1000vh);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(230deg) translateX(-100vh);
+  }
+}
+
+@keyframes air_fly {
+  0% {
+    transform: translate(0px, 0px) rotateY(0deg);
+  }
+  40% {
+    transform: translate(-1px, 1px) rotateY(2deg) rotateZ(-1deg);
+  }
+  80% {
+    transform: translate(1px, 2px) rotateY(-1deg) rotateZ(-1deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotateY(0deg);
+  }
+}
+
+@keyframes plane_fade {
+  0% {
+    transform: translateX(40px) rotateZ(4deg) translateY(-20px) rotateY(-10deg);
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px) rotateZ(0deg) translateY(0px) rotateY(0deg);
+  }
+}
