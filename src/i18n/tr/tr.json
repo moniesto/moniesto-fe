@@ -93,7 +93,7 @@
       "for_investors": {
         "title": "Yatırımcılar için",
         "header": "Profesyoneller gibi yatırım yapın",
-        "message": "Kripto para yatırımlarınızı bir sonraki seviyeye taşıyın ve Moniesto ile para kazanın. Uygulamamız, kullanıcıları kripto paraların gelecekteki fiyatı hakkında tahminler ve analizler sağlayan paralarla buluşturuyor."
+        "message": "Kripto para yatırımlarınızı bir sonraki seviyeye taşıyın ve Moniesto ile para kazanın. Uygulamamız, kullanıcıları kripto paraların gelecekteki fiyatı hakkında tahminler ve analizler sağlayan Moniest'lar ile buluşturuyor."
       },
       "for_moniest": {
         "title": "Moniest için",
@@ -102,8 +102,8 @@
       },
       "scoring_algorithm": {
         "title": "Puanlama Algoritması",
-        "header": "Algoritma: Yatırımlarınız İçin Ne İfade Ediyor?",
-        "message": "Puanlama algoritmamız, kullanıcıların Moniest tahminlerinin doğruluğunu değerlendirmesine yardımcı olmak için tasarlanmıştır. Bir tahmin zaman aşımına uğradıktan sonra, algoritmamız tahminlerinin başarısına bağlı olarak her Moniest'a bir puan atar. <br /> <br /> Bu bilgi, kullanıcılara tutarlı bir şekilde doğru tahminler sağlar ve kimi takip edecekleri konusunda bilinçli kararlar vermeleri için en iyileri belirlemesine yardımcı olur."
+        "header": "AI Algoritması: Yatırımlarınız İçin Ne İfade Ediyor?",
+        "message": "Yapay zeka destekli puanlama algoritmamızın büyüleyici gücünü keşfedin. Gelişmiş teknolojimiz puanları doğruluğa dayalı olarak atadığından, Monest'lerin tahminlerini hassasiyetle değerlendirin. <br /> <br /> En iyi performans gösterenleri bulun, bilinçli kararlar verin ve harika AI inovasyonumuzla bir adım önde olun."
       },
       "pricing": {
         "title": "Fiyatlandırma",
