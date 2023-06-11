@@ -8,13 +8,14 @@ import { TestPost } from "../../../services/tempDatas";
 
 const ExplorePosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [hasMore, setHasMore] = useState(true);
   const [queryParams, setQueryParams] = useState<{
+    hasMore?: boolean;
     sortBy: "score";
     subscribed: boolean;
     limit: number;
     offset: number;
   }>({
+    hasMore: true,
     subscribed: false,
     limit: 10,
     offset: 0,
@@ -24,10 +25,12 @@ const ExplorePosts = () => {
   const dummyPost = { ...TestPost, id: "-1" };
   const getPosts = () => {
     setPosts(posts.concat(Array(queryParams.limit).fill(dummyPost)));
+
+    delete queryParams.hasMore;
     api.content.posts(queryParams).then((response) => {
       setPosts([...posts.filter((post) => post.id !== "-1"), ...response]);
       if (response.length < queryParams.limit) {
-        setHasMore(false);
+        queryParams.hasMore = false;
         queryParams.offset = 0;
         setQueryParams(JSON.parse(JSON.stringify(queryParams)));
       }
@@ -42,19 +45,19 @@ const ExplorePosts = () => {
   };
 
   useEffect(() => {
-    if (hasMore) getPosts();
+    if (queryParams.hasMore) getPosts();
   }, [queryParams]);
 
   return (
     <InfiniteScroll
-      hasMore={hasMore}
+      hasMore={queryParams.hasMore!}
       dataLength={posts.length}
       fetchData={handleFetchData}
       loader={<PostCard post={TestPost} loading={true} />}
     >
       <Stack rowGap={2}>
         {posts.map((post, i) => (
-          <PostCard key={i}  loading={post.id === "-1"} post={post} />
+          <PostCard key={i} loading={post.id === "-1"} post={post} />
         ))}
       </Stack>
     </InfiniteScroll>

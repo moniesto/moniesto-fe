@@ -3,11 +3,10 @@ import { Box } from "@mui/system";
 import StarIcon from "@mui/icons-material/Star";
 import LocationText from "../../../components/shared/common/locationText";
 import ProfileTabs from "./profileTabs";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { useTheme } from "@mui/system";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { User } from "../../../interfaces/user";
 import api from "../../../services/api";
 import { Spinner } from "../../../components/shared/common/spinner";
 import { CoverImageBox } from "../../../components/shared/user/coverImageBox";
@@ -17,51 +16,51 @@ import { SubscribeToMoniest } from "./subscribeToMoniest";
 import { SubscribeButton } from "../../../components/shared/user/subscribeButton";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { MoniestBadge } from "../../../components/shared/user/moniestBadge";
+import { setIsMyAccount, setProfile } from "../../../store/slices/profileSlice";
 
 const Profile = () => {
   const theme = useTheme();
-  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
-  const user = useAppSelector((state) => state.user.user);
-  const [account, setAccount] = useState<User>();
   const [loading, setLoading] = useState<boolean>(true);
+  const user = useAppSelector((state) => state.user.user);
+  const profileState = useAppSelector((state) => state.profile);
   const [isSubscribeModalOpen, setIsSubscribeModalOpen] =
     useState<boolean>(false);
   const { username } = useParams();
   const translate = useTranslate();
 
-  useEffect(() => {
-    if (!username) return;
-    getAccount(username);
-  }, [username]);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!account) return;
-
-    if (user.username === username || !account?.moniest) {
-      setLoading(false)
+    if (!username) {
+      setLoading(false);
+      dispatch(setProfile(null));
       return;
     }
-    api.moniest
-      .subscribe_check(username as string)
-      .then((res) => setIsSubscribed(res?.subscribed as boolean))
-      .finally(() => setLoading(false));
-  }, [account]);
+    const getAccount = (username: string) => {
+      setLoading(true);
+      if (user.username === username) {
+        dispatch(setProfile(user));
+        dispatch(setIsMyAccount(true));
+        setLoading(false);
+      } else {
+        api.user
+          .user_by_username(username)
+          .then((res) => {
+            dispatch(setProfile(res));
+            dispatch(setIsMyAccount(false));
+          })
+          .finally(() => setLoading(false));
+      }
+    };
 
-  const getAccount = (username: string) => {
-    setLoading(true);
-    if (user.username === username) setAccount(user);
-    else {
-      api.user.user_by_username(username).then((res) => setAccount(res));
-    }
-  };
-
-  const isMyAccount: boolean = username === user.username;
+    getAccount(username);
+  }, [username, dispatch, user]);
 
   return (
     <Box sx={{ position: "relative", minHeight: "20vh" }}>
       {loading ? (
         <Spinner center={true} />
-      ) : account ? (
+      ) : profileState.account ? (
         <>
           <Card
             sx={{
@@ -72,7 +71,9 @@ const Profile = () => {
             elevation={0}
           >
             <>
-              <CoverImageBox image={account?.background_photo_link as string}>
+              <CoverImageBox
+                image={profileState.account?.background_photo_link as string}
+              >
                 <Box
                   sx={{
                     width: "6rem",
@@ -89,9 +90,9 @@ const Profile = () => {
                       border: `3px solid ${theme.palette.background[800]}`,
                       background: theme.palette.background[600],
                     }}
-                    src={account?.profile_photo_link}
+                    src={profileState.account?.profile_photo_link}
                   ></Avatar>
-                  {account.moniest && <MoniestBadge size={26} />}
+                  {profileState.account.moniest && <MoniestBadge size={26} />}
                 </Box>
               </CoverImageBox>
               <Box padding={{ md: "0 30px", xs: "0 16px" }}>
@@ -102,7 +103,7 @@ const Profile = () => {
                     height={"3rem"}
                     justifyContent="end"
                   >
-                    {isMyAccount ? (
+                    {profileState.isMyAccount ? (
                       <Navigator path="/settings/account">
                         <Button
                           startIcon={<EditOutlined color="secondary" />}
@@ -112,10 +113,8 @@ const Profile = () => {
                           {translate("common.edit")}
                         </Button>
                       </Navigator>
-                    ) : account.moniest ? (
+                    ) : profileState.account.moniest ? (
                       <SubscribeButton
-                        isSubscribed={isSubscribed}
-                        fee={account.moniest?.subscription_info.fee}
                         onClick={() => setIsSubscribeModalOpen(true)}
                       />
                     ) : (
@@ -129,7 +128,9 @@ const Profile = () => {
                       <Stack spacing={0.3}>
                         <Stack flexDirection="row" alignItems="end">
                           <Typography variant="h3">
-                            {account.name + " " + account.surname}
+                            {profileState.account.name +
+                              " " +
+                              profileState.account.surname}
                           </Typography>
                           <Typography
                             ml={1.5}
@@ -144,18 +145,18 @@ const Profile = () => {
                                 color: "#FED839 !important",
                               }}
                             />
-                            {account.moniest?.score || 0}
+                            {profileState.account.moniest?.score || 0}
                           </Typography>
                         </Stack>
 
                         <Typography sx={{ opacity: 0.8 }} variant="h5">
-                          {account.username}
+                          {profileState.account.username}
                         </Typography>
                       </Stack>
                     </Stack>
-                    <LocationText location={account.location} />
+                    <LocationText location={profileState.account.location} />
                     <Typography variant="body1">
-                      {account.moniest?.bio}
+                      {profileState.account.moniest?.bio}
                     </Typography>
                   </Stack>
                 </Box>
@@ -164,9 +165,6 @@ const Profile = () => {
           </Card>
           <ProfileTabs
             handleClickSubscribe={() => setIsSubscribeModalOpen(true)}
-            isSubscribed={isSubscribed}
-            account={account}
-            isMyAccount={isMyAccount}
           ></ProfileTabs>
         </>
       ) : (
@@ -180,12 +178,7 @@ const Profile = () => {
       )}
       {isSubscribeModalOpen && (
         <SubscribeToMoniest
-          alreadySubscribed={isSubscribed}
-          account={account as User}
-          handleClose={(resSubscribe) => {
-            setIsSubscribeModalOpen(false);
-            setIsSubscribed(resSubscribe);
-          }}
+          handleClose={() => setIsSubscribeModalOpen(false)}
         />
       )}
     </Box>

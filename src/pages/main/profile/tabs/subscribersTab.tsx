@@ -1,4 +1,4 @@
-import { List, Paper, Stack, Typography } from "@mui/material";
+import { Box, List, Paper, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { User } from "../../../../interfaces/user";
 import SubsPersonCard from "../../../../components/shared/user/subsPersonCard";
@@ -7,22 +7,20 @@ import api from "../../../../services/api";
 import Navigator from "../../../../components/shared/common/navigatior";
 import { useTranslate } from "../../../../hooks/useTranslate";
 import { TestUser } from "../../../../services/tempDatas";
+import { useAppSelector } from "../../../../store/hooks";
+import { Spinner } from "../../../../components/shared/common/spinner";
 
-const SubscribersTab = ({
-  account,
-  isMyAccount,
-}: {
-  account: User;
-  isMyAccount: boolean;
-}) => {
+const SubscribersTab = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [hasMore, setHasMore] = useState(true);
   const translate = useTranslate();
+  const profileState = useAppSelector((state) => state.profile);
   const [queryParams, setQueryParams] = useState<{
+    hasMore?: boolean;
     limit: number;
     offset: number;
   }>({
+    hasMore: true,
     limit: 10,
     offset: 0,
   });
@@ -32,29 +30,36 @@ const SubscribersTab = ({
   };
 
   useEffect(() => {
-    if (hasMore) getSubscribers();
+    if (queryParams.hasMore) getSubscribers();
   }, [queryParams]);
 
   const dummyUser = { ...TestUser, id: "-1" };
 
   const getSubscribers = () => {
     setUsers(users.concat(Array(queryParams.limit).fill(dummyUser)));
-    api.moniest.subscribers(account.username, queryParams).then((response) => {
-      setUsers([...users.filter((user) => user.id !== "-1"), ...response]);
-      if (response.length < queryParams.limit) {
-        setHasMore(false);
-        queryParams.offset = 0;
-        setQueryParams(JSON.parse(JSON.stringify(queryParams)));
-      }
-      setLoading(false);
-    });
+
+    delete queryParams.hasMore;
+    api.moniest
+      .subscribers(profileState.account!.username, queryParams)
+      .then((response) => {
+        setUsers([...users.filter((user) => user.id !== "-1"), ...response]);
+        if (response.length < queryParams.limit) {
+          queryParams.offset = 0;
+          setQueryParams(JSON.parse(JSON.stringify(queryParams)));
+        }
+        setLoading(false);
+      });
   };
 
-  return (
+  return loading ? (
+    <Box sx={{ position: "relative", minHeight: 100, width: "100%" }}>
+      <Spinner center={true} />
+    </Box>
+  ) : (
     <Paper>
       <List>
         <InfiniteScroll
-          hasMore={hasMore}
+          hasMore={queryParams.hasMore!}
           fetchData={handleFetchData}
           dataLength={users.length}
         >
@@ -69,10 +74,10 @@ const SubscribersTab = ({
           {!loading && !users.length && (
             <Stack p={2} alignItems="center">
               <Typography variant="h5">
-                {isMyAccount
+                {profileState.isMyAccount
                   ? translate("page.profile.no_subscriber")
                   : translate("page.profile.no_subscriber_account", {
-                      username: account.username,
+                      username: profileState.account!.username,
                     })}
               </Typography>
             </Stack>

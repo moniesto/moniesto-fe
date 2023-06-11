@@ -8,14 +8,15 @@ import { TestPost } from "../../services/tempDatas";
 
 const TimeLine = () => {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [hasMore, setHasMore] = useState(true);
   const [queryParams, setQueryParams] = useState<{
+    hasMore?: boolean;
     active: boolean;
     sortBy: "created_at" | "score";
     subscribed: boolean;
     limit: number;
     offset: number;
   }>({
+    hasMore: true,
     active: true,
     subscribed: true,
     limit: 10,
@@ -27,11 +28,13 @@ const TimeLine = () => {
 
   const getPosts = () => {
     setPosts(posts.concat(Array(queryParams.limit).fill(dummyPost)));
+
+    delete queryParams.hasMore;
     api.content.posts(queryParams).then((response) => {
       setPosts([...posts.filter((post) => post.id !== "-1"), ...response]);
       if (response.length < queryParams.limit) {
         if (!queryParams.active && !queryParams.subscribed) {
-          setHasMore(false);
+          queryParams.hasMore = false;
           return;
         }
         if (queryParams.active) {
@@ -58,7 +61,7 @@ const TimeLine = () => {
 
   return (
     <InfiniteScroll
-      hasMore={hasMore}
+      hasMore={queryParams.hasMore!}
       dataLength={posts.length}
       fetchData={handleFetchData}
     >

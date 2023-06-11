@@ -7,11 +7,11 @@ import { useEffect, useState } from "react";
 import { Post } from "../../../../interfaces/post";
 import { InfiniteScroll } from "../../../../components/shared/common/infiniteScroll";
 import api from "../../../../services/api";
-import { User } from "../../../../interfaces/user";
-import { Spinner } from "../../../../components/shared/common/spinner";
 import { SubscribeButton } from "../../../../components/shared/user/subscribeButton";
 import { useTranslate } from "../../../../hooks/useTranslate";
 import { TestPost } from "../../../../services/tempDatas";
+import { useAppSelector } from "../../../../store/hooks";
+import { Spinner } from "../../../../components/shared/common/spinner";
 
 type FilterType = "all" | "live";
 type Filter = {
@@ -26,75 +26,85 @@ const filters: Filter[] = [
 ];
 
 const PostsTab = ({
-  account,
-  isSubscribed,
-  isMyAccount,
   handleClickSubscribe,
 }: {
-  account: User;
-  isSubscribed: boolean;
-  isMyAccount: boolean;
   handleClickSubscribe: () => void;
 }) => {
   const theme = useTheme();
   const [queryParams, setQueryParams] = useState<{
+    hasMore?: boolean;
     active: boolean;
     limit: number;
     offset: number;
   }>({
+    hasMore: true,
     active: false,
     limit: 10,
     offset: 0,
   });
 
   const [posts, setPosts] = useState<Post[]>([]);
-  const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(true);
   const [activePostFilter, setActivePostFilter] = useState<Filter>(filters[0]);
   const translate = useTranslate();
+  const profileState = useAppSelector((state) => state.profile);
 
   const handleFetchData = () => {
-    setQueryParams({ ...queryParams, offset: queryParams.offset + queryParams.limit });
+    setQueryParams({
+      ...queryParams,
+      offset: queryParams.offset + queryParams.limit,
+    });
   };
 
   useEffect(() => {
-    if (loading || !isSubscribed) return;
+    setPosts([]);
+    setActivePostFilter(filters[0]);
     queryParams.offset = 0;
+    queryParams.hasMore = true;
     setQueryParams(JSON.parse(JSON.stringify(queryParams)));
-  }, [isSubscribed]);
+  }, [profileState.isSubscribed, profileState.account]);
 
   useEffect(() => {
-    if (hasMore) getPosts();
+    const getPosts = () => {
+      setLoading(true);
+      setPosts(posts.concat(Array(queryParams.limit).fill(dummyPost)));
+      queryParams.active = activePostFilter.boolValue;
+      delete queryParams.hasMore;
+      api.post
+        .user_posts(profileState.account!.username, queryParams)
+        .then((response) => {
+          setPosts([...posts.filter((post) => post.id !== "-1"), ...response]);
+          if (response.length < queryParams.limit) {
+            queryParams.hasMore = false;
+            queryParams.offset = 0;
+            setQueryParams(JSON.parse(JSON.stringify(queryParams)));
+          }
+        })
+        .finally(() => setLoading(false));
+    };
+
+    if (queryParams && queryParams.hasMore) getPosts();
   }, [queryParams]);
-
-  const getPosts = () => {
-    setPosts(posts.concat(Array(queryParams.limit).fill(dummyPost)));
-
-    queryParams.active = activePostFilter.boolValue;
-
-    api.post
-      .user_posts(account.username, queryParams)
-      .then((response) => {
-        setPosts([...posts.filter((post) => post.id !== "-1"), ...response]);
-        if (response.length < queryParams.limit) {
-          setHasMore(false);
-          queryParams.offset = 0;
-          setQueryParams(JSON.parse(JSON.stringify(queryParams)));
-        }
-      })
-      .finally(() => setLoading(false));
-  };
 
   const handleChangeFilter = (filterItem: Filter) => {
     if (filterItem.value === activePostFilter.value) return;
     setActivePostFilter(filterItem);
     setPosts([]);
-    setHasMore(true);
 
-    if (!isMyAccount && filterItem.boolValue === true && !isSubscribed) return;
+    if (
+      !profileState.isMyAccount &&
+      filterItem.boolValue === true &&
+      !profileState.isSubscribed
+    )
+      return;
 
     setLoading(true);
-    setQueryParams({ ...queryParams, active: filterItem.boolValue ,offset:0});
+    setQueryParams({
+      ...queryParams,
+      active: filterItem.boolValue,
+      offset: 0,
+      hasMore: true,
+    });
   };
 
   const oneDayAfter = () => {
@@ -106,7 +116,7 @@ const PostsTab = ({
   const testPost: Post = {
     ...TestPost,
     duration: oneDayAfter().toISOString(),
-    user: account,
+    user: profileState.account!,
     status: "pending",
     finished: false,
   };
@@ -118,7 +128,11 @@ const PostsTab = ({
       ? theme.palette.secondary.main
       : theme.palette.text.primary;
 
-  return (
+  return loading ? (
+    <Box sx={{ position: "relative", minHeight: 100, width: "100%" }}>
+      <Spinner center={true} />
+    </Box>
+  ) : (
     <Stack spacing={2}>
       <Card>
         <Stack
@@ -159,7 +173,9 @@ const PostsTab = ({
           ))}
         </Stack>
       </Card>
-      {!isMyAccount && activePostFilter.boolValue === true && !isSubscribed ? (
+      {!profileState.isMyAccount &&
+      activePostFilter.boolValue === true &&
+      !profileState.isSubscribed ? (
         <Box position="relative">
           <Box
             sx={{
@@ -176,11 +192,7 @@ const PostsTab = ({
               <Typography variant="h2">
                 {translate("page.profile.sub_for_live")}
               </Typography>
-              <SubscribeButton
-                fee={account.moniest?.subscription_info.fee as number}
-                isSubscribed={isSubscribed}
-                onClick={() => handleClickSubscribe()}
-              />
+              <SubscribeButton onClick={() => handleClickSubscribe()} />
             </Stack>
           </Box>
           <Stack sx={{ filter: "blur(3px)" }} rowGap={2}>
@@ -191,7 +203,7 @@ const PostsTab = ({
         </Box>
       ) : (
         <InfiniteScroll
-          hasMore={hasMore}
+          hasMore={queryParams.hasMore!}
           fetchData={handleFetchData}
           dataLength={posts.length}
         >
