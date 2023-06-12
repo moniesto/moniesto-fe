@@ -46,6 +46,7 @@ const PostsTab = ({
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [activePostFilter, setActivePostFilter] = useState<Filter>(filters[0]);
+  const [isInitialRender, setIsInitialRender] = useState(true);
   const translate = useTranslate();
   const profileState = useAppSelector((state) => state.profile);
 
@@ -57,10 +58,18 @@ const PostsTab = ({
   };
 
   useEffect(() => {
+    if (isInitialRender) setIsInitialRender(false);
+  }, [isInitialRender]);
+
+  useEffect(() => {
+    if (isInitialRender) return;
+
     setPosts([]);
     setActivePostFilter(filters[0]);
+
     queryParams.offset = 0;
     queryParams.hasMore = true;
+
     setQueryParams(JSON.parse(JSON.stringify(queryParams)));
   }, [profileState.isSubscribed, profileState.account]);
 
@@ -68,8 +77,10 @@ const PostsTab = ({
     const getPosts = () => {
       setLoading(true);
       setPosts(posts.concat(Array(queryParams.limit).fill(dummyPost)));
+
       queryParams.active = activePostFilter.boolValue;
       delete queryParams.hasMore;
+
       api.post
         .user_posts(profileState.account!.username, queryParams)
         .then((response) => {
@@ -83,7 +94,7 @@ const PostsTab = ({
         .finally(() => setLoading(false));
     };
 
-    if (queryParams && queryParams.hasMore) getPosts();
+    queryParams.hasMore && getPosts();
   }, [queryParams]);
 
   const handleChangeFilter = (filterItem: Filter) => {
