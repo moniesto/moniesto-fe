@@ -64,9 +64,9 @@ export const SharePost = () => {
 
   const [selectedCurrencyPrice, setSelectedCurrencyPrice] = useState<number>(0);
 
-  const oneMinLater = () => {
+  const getMinute = (value: number) => {
     const now = new Date();
-    now.setMinutes(now.getMinutes() + 1);
+    now.setMinutes(now.getMinutes() + value || 1);
     return now;
   };
   const formik = useFormik({
@@ -74,7 +74,7 @@ export const SharePost = () => {
       currency: "",
       description: "",
       direction: "long",
-      duration: new Date().toString(),
+      duration: getMinute(5).toString(),
       stop: 0,
       target1: 0,
       target2: 0,
@@ -91,7 +91,7 @@ export const SharePost = () => {
               date: maxDuration.toLocaleDateString(),
             })
           )
-          .min(oneMinLater(), translate("form.validation.duration_min")),
+          .min(getMinute(1), translate("form.validation.duration_min")),
 
         currency: yup
           .string()
