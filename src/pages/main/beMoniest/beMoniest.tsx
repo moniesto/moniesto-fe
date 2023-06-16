@@ -8,7 +8,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined";
@@ -28,12 +28,12 @@ import { setUser } from "../../../store/slices/userSlice";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { RocketLaunchOutlined } from "@mui/icons-material";
 
-type Step = {
+type StepItem = {
   order: number;
   title: string;
   icon: ReactNode;
 };
-const steps: Step[] = [
+const steps: StepItem[] = [
   {
     order: 1,
     title: "email_verify",
@@ -68,39 +68,42 @@ const BeMoniest = () => {
     if (user && user.moniest) {
       navigate("/timeline");
     }
-  }, [user]);
+  }, [navigate, user]);
 
-  const handleNext = (data?: Partial<Moniest>) => {
-    setMoniest({ ...moniest, ...data });
-    if (activeStep == steps.length) {
-      api.moniest
-        .be_moniest({
-          bio: moniest?.bio!,
-          card_id: moniest?.card_id!,
-          description: moniest?.description!,
-          fee: moniest?.fee!,
-          message: "message",
-        })
-        .then((res) => {
-          dispatch(setUser(res));
-          toastService.open({
-            severity: "success",
-            message: translate("page.be_moniest.cong_moniest"),
+  const handleNext = useCallback(
+    (data?: Partial<Moniest>) => {
+      setMoniest({ ...moniest, ...data });
+      if (activeStep === steps.length) {
+        api.moniest
+          .be_moniest({
+            bio: moniest?.bio!,
+            card_id: moniest?.card_id!,
+            description: moniest?.description!,
+            fee: moniest?.fee!,
+            message: "message",
+          })
+          .then((res) => {
+            dispatch(setUser(res));
+            toastService.open({
+              severity: "success",
+              message: translate("page.be_moniest.cong_moniest"),
+            });
+            setTimeout(() => {
+              navigate("/timeline");
+            }, 1000);
           });
-          setTimeout(() => {
-            navigate("/timeline");
-          }, 1000);
-        });
-    } else setActiveStep(activeStep + 1);
-  };
+      } else setActiveStep(activeStep + 1);
+    },
+    [activeStep, dispatch, moniest, navigate, translate]
+  );
 
-  const handleBack = () => {
+  const handleBack = useCallback(() => {
     setActiveStep(activeStep - 1);
-  };
+  }, [activeStep]);
 
-  const handleChangeVerifyEmailState = () => {
+  const handleChangeVerifyEmailState = useCallback(() => {
     dispatch(setUser({ ...user, email_verified: true }));
-  };
+  }, [dispatch, user]);
 
   const stepContent = useMemo(() => {
     let content: ReactNode;
@@ -141,7 +144,14 @@ const BeMoniest = () => {
         break;
     }
     return content;
-  }, [activeStep, user]);
+  }, [
+    activeStep,
+    handleBack,
+    handleChangeVerifyEmailState,
+    handleNext,
+    user.email,
+    user.email_verified,
+  ]);
 
   return (
     <Card
@@ -158,15 +168,14 @@ const BeMoniest = () => {
           <RocketLaunchOutlined />
         </Stack>
         <Divider></Divider>
-        {activeStep == 1 && (
+        {activeStep === 1 && (
           <Stack spacing={1.5} mt={2}>
             <Typography sx={{ opacity: 0.7 }} variant="h3">
               {translate("page.be_moniest.start_journey")}
             </Typography>
 
             <Typography sx={{ opacity: 0.6 }} variant="h4">
-            {translate("page.be_moniest.folow_steps")}
-              
+              {translate("page.be_moniest.folow_steps")}
             </Typography>
           </Stack>
         )}

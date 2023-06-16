@@ -219,6 +219,7 @@
     "post_card": {
       "not_advice": "Yatırım Tavsiyesi Değildir!",
       "table": {
+        "finish":"Bitti",
         "direction": "Yön",
         "start": "Başlangıç",
         "target": "Hedef",
@@ -368,7 +369,8 @@
   },
   "server": {
     "error": {
-      "Account_CheckUsername_InvalidUsername": "Kullanıcı adı geçerli değil"
+      "Account_CheckUsername_InvalidUsername": "Kullanıcı adı geçerli değil",
+      "Post_CreatePost_InvalidTargets":"TP'ler geçerli değil"
     }
   }
 }

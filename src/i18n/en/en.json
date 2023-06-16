@@ -236,6 +236,7 @@
     "post_card": {
       "not_advice": "Not Investment Advice!",
       "table": {
+        "finish":"Finish",
         "direction": "Direction",
         "start": "Start",
         "target": "Target",
@@ -385,7 +386,8 @@
   },
   "server": {
     "error": {
-      "Account_CheckUsername_InvalidUsername": "Username is invalid"
+      "Account_CheckUsername_InvalidUsername": "Username is invalid",
+      "Post_CreatePost_InvalidTargets":"TP's are invalid"
     }
   }
 }

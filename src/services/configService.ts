@@ -9,38 +9,43 @@ import * as locales from "@mui/material/locale";
 import * as dateLocales from "@mui/x-date-pickers";
 
 class config {
+  private languages = ["en", "tr"];
+  private languagesLocale: string[] = ["enUS", "trTR"];
+  errors!: {
+    [key: string]: string;
+  };
+  validations!: {
+    [key: string]: any;
+  };
 
-    private languages = ['en', 'tr']
-    private languagesLocale: string[] = ['enUS', 'trTR']
-    errors!: {
-        [key: string]: string
-    };
-    validations!: {
-        [key: string]: any
-    };
+  translatedErrors = [
+    "Account_CheckUsername_InvalidUsername",
+    "Post_CreatePost_InvalidTargets",
+  ];
 
-    translatedErrors = [
-        "Account_CheckUsername_InvalidUsername"
-    ]
+  initialize() {
+    api.asset.configs().then((res) => {
+      this.errors = res.error_codes;
+      this.validations = res.validation;
+    });
+    TimeAgo.addDefaultLocale(en);
+    TimeAgo.addLocale(tr);
+  }
+  getAvailableLanguages = () => this.languages;
 
-    initialize() {
-        api.asset.configs().then((res) => {
-            this.errors = res.error_codes;
-            this.validations = res.validation
-        })
-        TimeAgo.addDefaultLocale(en);
-        TimeAgo.addLocale(tr);
-    }
-    getAvailableLanguages = () => this.languages;
-
-    changeLanguage(lang: string) {
-        TimeAgo.setDefaultLocale(lang);
-        i18n.changeLanguage(lang);
-    }
-    getTheme(theme_mode: string, lang: string) {
-        const languageLocale = this.languagesLocale.find((item) => item.startsWith(lang)) as string
-        return themes(theme_mode, (locales as any)[languageLocale], (dateLocales as any)[languageLocale])
-    }
-
+  changeLanguage(lang: string) {
+    TimeAgo.setDefaultLocale(lang);
+    i18n.changeLanguage(lang);
+  }
+  getTheme(theme_mode: string, lang: string) {
+    const languageLocale = this.languagesLocale.find((item) =>
+      item.startsWith(lang)
+    ) as string;
+    return themes(
+      theme_mode,
+      (locales as any)[languageLocale],
+      (dateLocales as any)[languageLocale]
+    );
+  }
 }
-export default new config()
+export default new config();

@@ -34,7 +34,7 @@ const Toast = () => {
         </Alert>
       </Snackbar>
     ),
-    [open]
+    [messageProps.message, messageProps.severity, open, translate]
   );
 
   return renderToast;

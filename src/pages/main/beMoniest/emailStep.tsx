@@ -39,7 +39,7 @@ const EmailStep = ({
         setIsSendVerifyMail(true);
       })
       .catch((e) => {
-        if (e.error_code == "Account_EmailVerification_AlreadyVerified") {
+        if (e.error_code === "Account_EmailVerification_AlreadyVerified") {
           handleVerifyEmail();
         }
       })
@@ -89,8 +89,7 @@ const EmailStep = ({
       ) : (
         <>
           <Typography sx={{ paddingTop: "2rem" }} variant="h3">
-          {translate("page.be_moniest.need_verify")}
-            
+            {translate("page.be_moniest.need_verify")}
           </Typography>
           <LoadingButton
             sx={{ marginTop: "1rem" }}
@@ -100,8 +99,7 @@ const EmailStep = ({
             loading={loading}
             variant="contained"
           >
-             {translate("page.be_moniest.verify_email")}
-            
+            {translate("page.be_moniest.verify_email")}
           </LoadingButton>
         </>
       )}

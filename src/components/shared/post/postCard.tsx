@@ -46,7 +46,7 @@ const ExpandMore: any = styled((props: ExpandMoreProps) => {
 
 type PostCardProps = {
   post: Post;
-  loading: boolean
+  loading: boolean;
 };
 
 const PostCard = ({ post, loading }: PostCardProps) => {
@@ -56,8 +56,8 @@ const PostCard = ({ post, loading }: PostCardProps) => {
 
   const calculatePercentage = helper.parseCurrency(
     helper.operatonByDirection(post.direction) *
-    ((post.target3 - post.start_price) / post.start_price) *
-    100,
+      ((post.target3 - post.start_price) / post.start_price) *
+      100,
     3
   );
 
@@ -92,56 +92,83 @@ const PostCard = ({ post, loading }: PostCardProps) => {
           },
         }}
         avatar={
-          !loading ? <Navigator path={"/" + post.user.username}>
-            <IconButton disableRipple size="small" sx={{ ml: 2 }}>
-              <Avatar
-                src={post.user.profile_photo_thumbnail_link}
-                sx={{ width: 50, height: 50 }}
-              ></Avatar>
-            </IconButton>
-          </Navigator> :
-            <Skeleton animation="wave" sx={{ width: 50, height: 50 }} variant="circular"></Skeleton>
+          !loading ? (
+            <Navigator path={"/" + post.user.username}>
+              <IconButton disableRipple size="small" sx={{ ml: 2 }}>
+                <Avatar
+                  src={post.user.profile_photo_thumbnail_link}
+                  sx={{ width: 50, height: 50 }}
+                ></Avatar>
+              </IconButton>
+            </Navigator>
+          ) : (
+            <Skeleton
+              animation="wave"
+              sx={{ width: 50, height: 50 }}
+              variant="circular"
+            ></Skeleton>
+          )
         }
         action={
           <Stack flexDirection="row" gap={{ md: 5, xs: 3 }}>
             <Stack alignItems="center">
-              {
-                !loading ? <Typography variant="h4" color={theme.palette.warning.dark}>
+              {!loading ? (
+                <Typography variant="h4" color={theme.palette.warning.dark}>
                   {post.currency}
-                </Typography> :
-                  <Skeleton animation="wave" sx={{ width: 80 }} variant="text"></Skeleton>
-              }
-
+                </Typography>
+              ) : (
+                <Skeleton
+                  animation="wave"
+                  sx={{ width: 80 }}
+                  variant="text"
+                ></Skeleton>
+              )}
             </Stack>
           </Stack>
         }
         title={
-          !loading ?
+          !loading ? (
             <Typography variant="h4">
               {`${post.user.name} ${post.user.surname}`}
             </Typography>
-            :
-            <Skeleton animation="wave" sx={{ width: 120 }} variant="text"></Skeleton>
+          ) : (
+            <Skeleton
+              animation="wave"
+              sx={{ width: 120 }}
+              variant="text"
+            ></Skeleton>
+          )
         }
         subheader={
           <Stack flexDirection="row" columnGap={1} alignItems="baseline">
-            {
-              !loading ? <Typography
+            {!loading ? (
+              <Typography
                 color={theme.palette.grey[500]}
                 lineHeight="17px"
                 variant="h5"
               >
                 {post.user.username}
-              </Typography> :
-                <Skeleton animation="wave" sx={{ width: 80, maxHeight: 20 }} variant="text"></Skeleton>
-            }
-            {!loading && <Typography color={theme.palette.grey[500]}>•</Typography>}
+              </Typography>
+            ) : (
+              <Skeleton
+                animation="wave"
+                sx={{ width: 80, maxHeight: 20 }}
+                variant="text"
+              ></Skeleton>
+            )}
+            {!loading && (
+              <Typography color={theme.palette.grey[500]}>•</Typography>
+            )}
             <Typography variant="h6" color={theme.palette.grey[500]}>
-              {
-                !loading ? <ReactTimeAgo date={new Date(post.created_at)} /> :
-                  <Skeleton animation="wave" sx={{ width: 60, maxHeight: 17 }} variant="text"></Skeleton>
-              }
-
+              {!loading ? (
+                <ReactTimeAgo date={new Date(post.created_at)} />
+              ) : (
+                <Skeleton
+                  animation="wave"
+                  sx={{ width: 60, maxHeight: 17 }}
+                  variant="text"
+                ></Skeleton>
+              )}
             </Typography>
           </Stack>
         }
@@ -215,12 +242,15 @@ const PostCard = ({ post, loading }: PostCardProps) => {
               direction: translate("common." + post.direction).toUpperCase(),
               start: post.start_price,
               target: post.target3,
-              time_left: <ReactTimeAgo date={new Date(post.duration)} />,
+              time_left:
+                new Date(post.duration) >= new Date() ? (
+                  <ReactTimeAgo date={new Date(post.duration)} />
+                ) : (
+                  translate("component.post_card.table.finish")
+                ),
             },
           ]}
         ></PredictionDataTable>
-
-
       </CardContent>
       <CardActions
         sx={{
@@ -231,11 +261,11 @@ const PostCard = ({ post, loading }: PostCardProps) => {
           transform: "translateX(-50%)",
         }}
       >
-        {
-          !loading && <ExpandMore expand={expanded} onClick={() => setExpanded(!expanded)}>
+        {!loading && (
+          <ExpandMore expand={expanded} onClick={() => setExpanded(!expanded)}>
             <ExpandMoreIcon />
           </ExpandMore>
-        }
+        )}
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent sx={{ paddingTop: 0, padding: { xs: "4px", md: 2 } }}>
@@ -285,9 +315,8 @@ const PostCard = ({ post, loading }: PostCardProps) => {
   );
 };
 
-
 PostCard.defaultProps = {
-  loading: false
-}
+  loading: false,
+};
 
 export default PostCard;

@@ -79,7 +79,7 @@ export const AccountSettings = () => {
   const handleSaveAccount = async () => {
     setLoading(true);
 
-    if (formik.values.username != user.username) {
+    if (formik.values.username !== user.username) {
       const updatedAccout = await api.account.change_username({
         new: formik.values.username,
       });
@@ -91,9 +91,9 @@ export const AccountSettings = () => {
       dispatch(setToken(updatedAccout.token));
     }
 
-    if (user.background_photo_link == formik.values.background_photo)
+    if (user.background_photo_link === formik.values.background_photo)
       delete formik.values.background_photo;
-    if (user.profile_photo_link == formik.values.profile_photo)
+    if (user.profile_photo_link === formik.values.profile_photo)
       delete formik.values.profile_photo;
 
     api.user

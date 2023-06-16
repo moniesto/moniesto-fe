@@ -14,6 +14,7 @@ import api from "../../services/api";
 import toastService from "../../services/toastService";
 import { useTranslate } from "../../hooks/useTranslate";
 import Fly from "../../components/shared/common/fly/fly";
+import configService from "../../services/configService";
 
 type LoginForm = {
   identifier: string;
@@ -32,9 +33,15 @@ const Login = () => {
       .required(translate("form.validation.identifier_req")),
     password: yup
       .string()
-      .min(6, translate("form.validation.password_min"))
+      .min(
+        configService?.validations?.password_length,
+        translate("form.validation.password_min", {
+          value: configService?.validations?.password_length,
+        })
+      )
       .required(translate("form.validation.password_req")),
   });
+
   const handleSubmit = (values: LoginForm) => {
     setLoading(true);
     api.auth

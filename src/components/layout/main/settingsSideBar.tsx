@@ -67,7 +67,7 @@ export const SettingsSideBar = () => {
     setSelectedLink(pathname);
     if (
       user.moniest &&
-      !links.some((item) => item.path == "/settings/moniest")
+      !links.some((item) => item.path === "/settings/moniest")
     ) {
       const newLinks = links.slice();
 
@@ -78,7 +78,7 @@ export const SettingsSideBar = () => {
       });
       setLinks(newLinks);
     }
-  }, [user]);
+  }, [links, pathname, translate, user]);
 
   const handleListItemClick = (link: string) => {
     setSelectedLink(link);
@@ -94,7 +94,7 @@ export const SettingsSideBar = () => {
     <Card>
       {matches && (
         <Typography sx={{ opacity: 0.8 }} p={3} pb={0} variant="h2">
-           {translate("navigation.settings")}
+          {translate("navigation.settings")}
         </Typography>
       )}
       <Stack minHeight={"400px"} justifyContent="space-between" padding={2}>
@@ -115,7 +115,7 @@ export const SettingsSideBar = () => {
                       backgroundColor: "transparent",
                     },
                   }}
-                  selected={selectedLink == link.path}
+                  selected={selectedLink === link.path}
                   onClick={() => handleListItemClick(link.path)}
                 >
                   <ListItemIcon>{link.icon}</ListItemIcon>

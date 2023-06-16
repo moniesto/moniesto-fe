@@ -67,7 +67,7 @@ const SideBar = () => {
                     backgroundColor: "transparent",
                   },
                 }}
-                selected={selectedLink == link.path}
+                selected={selectedLink === link.path}
                 onClick={() => handleListItemClick(link.path)}
               >
                 <ListItemIcon>{link.icon}</ListItemIcon>

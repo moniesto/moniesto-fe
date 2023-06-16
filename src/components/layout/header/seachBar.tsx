@@ -45,7 +45,7 @@ const SearchBar = ({
     }, 500);
 
     return () => clearTimeout(timeOutId);
-  }, [text]);
+  }, [onTypeSearch, text]);
 
   const handleClose = () => {
     setText("");
@@ -66,7 +66,7 @@ const SearchBar = ({
         fullWidth
         name="Search"
         value={text}
-        placeholder= {translate("form.field.search_moniest")}
+        placeholder={translate("form.field.search_moniest")}
         onChange={(e) => setText(e.target.value)}
         InputProps={{
           startAdornment: (
@@ -114,7 +114,7 @@ const SearchBar = ({
             </Stack>
           ) : (
             <Box sx={{ wordBreak: "break-word" }} px={2}>
-              {translate("component.search.no_user_found",{text:text})}
+              {translate("component.search.no_user_found", { text: text })}
             </Box>
           )}
         </Card>

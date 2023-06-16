@@ -3,7 +3,7 @@ import { LoadingButton } from "@mui/lab";
 import { Box, Grid } from "@mui/material";
 import { useTheme } from "@mui/system";
 import { Stack } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import MoniestCard from "../../../components/shared/user/moniestCard";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { User } from "../../../interfaces/user";
@@ -19,18 +19,22 @@ export const ExploreMoniests = () => {
     offset: 0,
   });
 
-  useEffect(() => {
-    getMoniests();
+  const getMoniests = useCallback(() => {
+    const dummyUser = { ...TestUser, id: "-1" };
+
+    setMoniests((prev) => prev.concat(Array(paginate.limit).fill(dummyUser)));
+    api.content.moniests(paginate).then((response) => {
+      setMoniests((prev) => [
+        ...prev.filter((user) => user.id !== "-1"),
+        ...response,
+      ]);
+    });
   }, [paginate]);
 
-  const dummyUser = { ...TestUser, id: "-1" };
+  useEffect(() => {
+    getMoniests();
+  }, [paginate, getMoniests]);
 
-  const getMoniests = () => {
-    setMoniests(moniests.concat(Array(paginate.limit).fill(dummyUser)));
-    api.content.moniests(paginate).then((response) => {
-      setMoniests([...moniests.filter((user) => user.id !== "-1"), ...response]);
-    });
-  };
   const handleClickMore = () => {
     setPaginate({ ...paginate, offset: paginate.offset + paginate.limit });
   };

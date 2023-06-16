@@ -9,7 +9,7 @@ const ThemeModeButton = () => {
   const dispatch = useAppDispatch();
 
   const handleChangeMode = () => {
-    dispatch(setThemeMode(mode == "dark" ? "light" : "dark"));
+    dispatch(setThemeMode(mode === "dark" ? "light" : "dark"));
   };
 
   return (
@@ -18,7 +18,7 @@ const ThemeModeButton = () => {
       disableRipple
       onClick={handleChangeMode}
     >
-      {mode == "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+      {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
     </IconButton>
   );
 };

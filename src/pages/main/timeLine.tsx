@@ -1,5 +1,5 @@
 import { Stack } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { InfiniteScroll } from "../../components/shared/common/infiniteScroll";
 import PostCard from "../../components/shared/post/postCard";
 import { Post } from "../../interfaces/post";
@@ -24,14 +24,16 @@ const TimeLine = () => {
     sortBy: "created_at",
   });
 
-  const dummyPost = { ...TestPost, id: "-1" };
-
-  const getPosts = () => {
-    setPosts(posts.concat(Array(queryParams.limit).fill(dummyPost)));
+  const getPosts = useCallback(() => {
+    const dummyPost = { ...TestPost, id: "-1" };
+    setPosts((prev) => prev.concat(Array(queryParams.limit).fill(dummyPost)));
 
     delete queryParams.hasMore;
     api.content.posts(queryParams).then((response) => {
-      setPosts([...posts.filter((post) => post.id !== "-1"), ...response]);
+      setPosts((prev) => [
+        ...prev.filter((post) => post.id !== "-1"),
+        ...response,
+      ]);
       if (response.length < queryParams.limit) {
         if (!queryParams.active && !queryParams.subscribed) {
           queryParams.hasMore = false;
@@ -46,7 +48,7 @@ const TimeLine = () => {
         setQueryParams(JSON.parse(JSON.stringify(queryParams)));
       }
     });
-  };
+  }, [queryParams]);
 
   const handleFetchData = () => {
     setQueryParams({
@@ -57,7 +59,7 @@ const TimeLine = () => {
 
   useEffect(() => {
     getPosts();
-  }, [queryParams]);
+  }, [queryParams, getPosts]);
 
   return (
     <InfiniteScroll

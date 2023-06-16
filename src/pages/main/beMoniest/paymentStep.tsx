@@ -25,7 +25,7 @@ type propType = {
 
 const PaymentStep = ({ handleNext, handleBack }: propType) => {
   const theme = useTheme();
-  const [cards, setCards] = useState<Card[]>([TestCard, TestCard2]);
+  const [cards] = useState<Card[]>([TestCard, TestCard2]);
   const [selectedCard, setSelectedCard] = useState<string>();
 
   return (

@@ -18,6 +18,7 @@ import toastService from "../../services/toastService";
 import api from "../../services/api";
 import { useTranslate } from "../../hooks/useTranslate";
 import Fly from "../../components/shared/common/fly/fly";
+import configService from "../../services/configService";
 
 type ChangePasswordForm = {
   password: string;
@@ -47,7 +48,7 @@ const ChangePassword = () => {
       .verify_token({ token })
       .then(() => setValidationTokenState(1))
       .catch(() => setValidationTokenState(2));
-  }, []);
+  }, [searchParams]);
 
   const handleChangePassword = (values: ChangePasswordForm) => {
     setLoading(true);
@@ -71,7 +72,12 @@ const ChangePassword = () => {
   const validationSchema = yup.object({
     password: yup
       .string()
-      .min(6, translate("form.validation.password_min"))
+      .min(
+        6,
+        translate("form.validation.password_min", {
+          value: configService?.validations?.password_length,
+        })
+      )
       .required(translate("form.validation.password_req")),
     repassword: yup
       .string()

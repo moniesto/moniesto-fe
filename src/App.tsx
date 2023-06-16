@@ -9,7 +9,7 @@ import "./App.scss";
 import Router from "./route/router";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import httpService from "./services/httpService";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Toast from "./components/shared/common/toast";
 import localStorageService, {
   DecodeToken,
@@ -26,21 +26,7 @@ function App() {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    httpService.setDispatch(dispatch);
-    toastService.setDispatch(dispatch);
-    configService.initialize();
-    dispatch(changeLanguage(navigator.language));
-
-    if (!localStorageService.getStorage().token) {
-      setLoading(false);
-      return;
-    }
-
-    getUserByUserName();
-  }, []);
-
-  const getUserByUserName = async () => {
+  const getUserByUserName = useCallback(async () => {
     const decoded = (await localStorageService
       .getDecodedToken()
       .catch(console.error)) as DecodeToken;
@@ -61,10 +47,27 @@ function App() {
         dispatch(setToken(""));
       })
       .finally(() => setLoading(false));
-  };
+  }, [dispatch]);
+
+  useEffect(() => {
+    httpService.setDispatch(dispatch);
+    toastService.setDispatch(dispatch);
+    configService.initialize();
+
+    dispatch(changeLanguage(navigator.language));
+
+    if (!localStorageService.getStorage().token) {
+      setLoading(false);
+      return;
+    }
+
+    getUserByUserName();
+  }, [dispatch, getUserByUserName]);
 
   return (
-    <ThemeProvider theme={configService.getTheme(storage.theme_mode,storage.language)}>
+    <ThemeProvider
+      theme={configService.getTheme(storage.theme_mode, storage.language)}
+    >
       <CssBaseline />
       {loading ? (
         <Box

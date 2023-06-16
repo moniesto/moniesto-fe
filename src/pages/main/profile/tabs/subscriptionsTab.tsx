@@ -1,5 +1,5 @@
 import { Box, List, Paper, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { User } from "../../../../interfaces/user";
 import SubsPersonCard from "../../../../components/shared/user/subsPersonCard";
 import { InfiniteScroll } from "../../../../components/shared/common/infiniteScroll";
@@ -31,13 +31,8 @@ const SubscriptionsTab = () => {
     setQueryParams({ ...queryParams, offset: queryParams.offset + 1 });
   };
 
-  useEffect(() => {
-    if (queryParams.hasMore) getSubscriptions();
-  }, [queryParams]);
-
-  const dummyUser = { ...TestUser, id: "-1" };
-
-  const getSubscriptions = () => {
+  const getSubscriptions = useCallback(() => {
+    const dummyUser = { ...TestUser, id: "-1" };
     setUsers(users.concat(Array(queryParams.limit).fill(dummyUser)));
 
     delete queryParams.hasMore;
@@ -52,7 +47,11 @@ const SubscriptionsTab = () => {
         }
         setLoading(false);
       });
-  };
+  }, [profileState.account, queryParams, users]);
+
+  useEffect(() => {
+    if (queryParams.hasMore) getSubscriptions();
+  }, [queryParams, getSubscriptions]);
 
   return loading ? (
     <Box sx={{ position: "relative", minHeight: 100, width: "100%" }}>

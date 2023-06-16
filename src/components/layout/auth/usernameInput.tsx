@@ -27,7 +27,7 @@ export const UsernameInput = ({
   const translate = useTranslate();
 
   useEffect(() => {
-    if (currentValue == formik?.values?.username) return;
+    if (currentValue === formik?.values?.username) return;
 
     if (!formik.values.username) {
       setIsCorrectName(false);
@@ -56,7 +56,7 @@ export const UsernameInput = ({
     }, 100);
 
     return () => clearTimeout(timeOutId);
-  }, [formik?.values?.username]);
+  }, [formik?.values?.username, currentValue, formik, translate]);
 
   const handleUsernameChange = (value: string) => {
     formik.setFieldValue("username", value.toLowerCase());
@@ -86,12 +86,9 @@ export const UsernameInput = ({
           ),
           endAdornment: (
             <InputAdornment position="end">
-              {currentValue != formik?.values?.username ? (
+              {currentValue !== formik?.values?.username ? (
                 checkLoading ? (
-                  <CircularProgress
-                    size={25}
-                    color="inherit"
-                  />
+                  <CircularProgress size={25} color="inherit" />
                 ) : displayCheckIcon ? (
                   isCorrectName ? (
                     <DoneOutlined

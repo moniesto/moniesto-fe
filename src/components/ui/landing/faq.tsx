@@ -17,7 +17,7 @@ export const FAQ = () => {
   const translate = useTranslate();
 
   const handleChange = (panel: number) => {
-    setExpanded(expanded == panel ? -1 : panel);
+    setExpanded(expanded === panel ? -1 : panel);
   };
 
   const faqs: { question: string; answer: string }[] = [...Array(6)].map(

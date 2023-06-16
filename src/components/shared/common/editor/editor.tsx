@@ -1,5 +1,5 @@
 import { useTheme } from "@mui/system";
-import { Box, Card, Typography } from "@mui/material";
+import { Card, Typography } from "@mui/material";
 import { useCallback, useEffect } from "react";
 import { createReactEditorJS } from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./constants";
@@ -24,14 +24,17 @@ export const Editor = ({
   const theme = useTheme();
 
   useEffect(() => {}, []);
-  const handleInitialize = useCallback((instance: any) => {
-    if (editorJs) editorJs.current = instance;
-  }, []);
+  const handleInitialize = useCallback(
+    (instance: any) => {
+      if (editorJs) editorJs.current = instance;
+    },
+    [editorJs]
+  );
 
   return (
     <Card
       className={`__editorjs__ ${readOnly && "readOnly"} ${
-        theme.palette.mode == "dark" && "dark-editor"
+        theme.palette.mode === "dark" && "dark-editor"
       }`}
       sx={{
         padding: readOnly ? 0 : 2,

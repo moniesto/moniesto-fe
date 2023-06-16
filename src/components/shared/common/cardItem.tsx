@@ -25,7 +25,7 @@ const CardItem = ({
   const theme = useTheme();
   return (
     <ListItem
-      className={selectedCardId == card.id ? "selected" : ""}
+      className={selectedCardId === card.id ? "selected" : ""}
       sx={{
         width: "100%",
         border: "1px solid " + theme.palette.primary[200] + "!important",
@@ -34,7 +34,11 @@ const CardItem = ({
       secondaryAction={<Typography variant="h5">{card.brand}</Typography>}
       disablePadding
     >
-      <ListItemButton selected={selectedCardId == card.id} onClick={onClickCard} alignItems="flex-start">
+      <ListItemButton
+        selected={selectedCardId === card.id}
+        onClick={onClickCard}
+        alignItems="flex-start"
+      >
         {listItemAvatar}
         <ListItemText
           primary={

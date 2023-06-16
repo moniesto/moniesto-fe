@@ -6,7 +6,7 @@ import ProfileTabs from "./profileTabs";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { useTheme } from "@mui/system";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import api from "../../../services/api";
 import { Spinner } from "../../../components/shared/common/spinner";
 import { CoverImageBox } from "../../../components/shared/user/coverImageBox";
@@ -30,13 +30,8 @@ const Profile = () => {
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (!username) {
-      setLoading(false);
-      dispatch(setProfile(null));
-      return;
-    }
-    const getAccount = (username: string) => {
+  const getAccount = useCallback(
+    (username: string) => {
       setLoading(true);
       if (user.username === username) {
         dispatch(setProfile(user));
@@ -51,10 +46,18 @@ const Profile = () => {
           })
           .finally(() => setLoading(false));
       }
-    };
+    },
+    [dispatch, user]
+  );
 
+  useEffect(() => {
+    if (!username) {
+      setLoading(false);
+      dispatch(setProfile(null));
+      return;
+    }
     getAccount(username);
-  }, [username, dispatch, user]);
+  }, [username, dispatch, getAccount]);
 
   return (
     <Box sx={{ position: "relative", minHeight: "20vh" }}>

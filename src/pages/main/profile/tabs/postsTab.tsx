@@ -3,7 +3,7 @@ import { Stack } from "@mui/system";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import StreamIcon from "@mui/icons-material/Stream";
 import PostCard from "../../../../components/shared/post/postCard";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Post } from "../../../../interfaces/post";
 import { InfiniteScroll } from "../../../../components/shared/common/infiniteScroll";
 import api from "../../../../services/api";
@@ -61,30 +61,36 @@ const PostsTab = ({
     if (isInitialRender) setIsInitialRender(false);
   }, [isInitialRender]);
 
-  useEffect(() => {
-    if (isInitialRender) return;
+  // useEffect(() => {
+  //   console.log("isInitialRender");
+  //   if (isInitialRender) return;
 
-    setPosts([]);
-    setActivePostFilter(filters[0]);
+  //   setPosts([]);
+  //   setActivePostFilter(filters[0]);
 
-    queryParams.offset = 0;
-    queryParams.hasMore = true;
+  //   queryParams.offset = 0;
+  //   queryParams.hasMore = true;
 
-    setQueryParams(JSON.parse(JSON.stringify(queryParams)));
-  }, [profileState.isSubscribed, profileState.account]);
+  //   setQueryParams(JSON.parse(JSON.stringify(queryParams)));
+  // }, [isInitialRender, queryParams]);
 
-  useEffect(() => {
-    const getPosts = () => {
+  const getPosts = useCallback(
+    (activeFilter: boolean) => {
+      const dummyPost = { ...TestPost, id: "-1" };
+
       setLoading(true);
-      setPosts(posts.concat(Array(queryParams.limit).fill(dummyPost)));
+      setPosts((prev) => prev.concat(Array(queryParams.limit).fill(dummyPost)));
 
-      queryParams.active = activePostFilter.boolValue;
+      queryParams.active = activeFilter;
       delete queryParams.hasMore;
 
       api.post
         .user_posts(profileState.account!.username, queryParams)
         .then((response) => {
-          setPosts([...posts.filter((post) => post.id !== "-1"), ...response]);
+          setPosts((prev) => [
+            ...prev.filter((post) => post.id !== "-1"),
+            ...response,
+          ]);
           if (response.length < queryParams.limit) {
             queryParams.hasMore = false;
             queryParams.offset = 0;
@@ -92,10 +98,13 @@ const PostsTab = ({
           }
         })
         .finally(() => setLoading(false));
-    };
+    },
+    [profileState.account, queryParams]
+  );
 
-    queryParams.hasMore && getPosts();
-  }, [queryParams]);
+  useEffect(() => {
+    queryParams.hasMore && getPosts(activePostFilter.boolValue);
+  }, [queryParams, getPosts, activePostFilter.boolValue]);
 
   const handleChangeFilter = (filterItem: Filter) => {
     if (filterItem.value === activePostFilter.value) return;
@@ -131,8 +140,6 @@ const PostsTab = ({
     status: "pending",
     finished: false,
   };
-
-  const dummyPost = { ...TestPost, id: "-1" };
 
   const getColorByActive = (filter: Filter) =>
     activePostFilter.value === filter.value

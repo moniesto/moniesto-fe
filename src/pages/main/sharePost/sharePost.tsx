@@ -6,7 +6,6 @@ import {
   Divider,
   FormControl,
   InputAdornment,
-  InputLabel,
   MenuItem,
   Select,
   Stack,
@@ -472,7 +471,7 @@ export const SharePost = () => {
                       placeholder={translate("form.field.tp_1")}
                       type="number"
                       onFocus={() =>
-                        formik.values.target1 == 0 &&
+                        formik.values.target1 === 0 &&
                         formik.setFieldValue("target1", "")
                       }
                       value={selectedCurrencyPrice ? formik.values.target1 : 0}
@@ -521,7 +520,7 @@ export const SharePost = () => {
                       placeholder={translate("form.field.tp_2")}
                       type="number"
                       onFocus={() =>
-                        formik.values.target2 == 0 &&
+                        formik.values.target2 === 0 &&
                         formik.setFieldValue("target2", "")
                       }
                       value={selectedCurrencyPrice ? formik.values.target2 : 0}
@@ -569,7 +568,7 @@ export const SharePost = () => {
                       placeholder={translate("form.field.tp_3")}
                       type="number"
                       onFocus={() =>
-                        formik.values.target3 == 0 &&
+                        formik.values.target3 === 0 &&
                         formik.setFieldValue("target3", "")
                       }
                       value={selectedCurrencyPrice ? formik.values.target3 : 0}
@@ -628,7 +627,7 @@ export const SharePost = () => {
                     name="stop"
                     type="number"
                     onFocus={() =>
-                      formik.values.stop == 0 &&
+                      formik.values.stop === 0 &&
                       formik.setFieldValue("stop", "")
                     }
                     value={selectedCurrencyPrice ? formik.values.stop : 0}
