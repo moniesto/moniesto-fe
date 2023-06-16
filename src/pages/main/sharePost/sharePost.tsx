@@ -36,7 +36,7 @@ import { LoadingButton } from "@mui/lab";
 import helper from "../../../services/helper";
 import { DateTimeProvider } from "../../../components/shared/common/dateTimeProvider";
 import { useTranslate } from "../../../hooks/useTranslate";
-import { ApproximateScor } from "./approximateScore";
+import { ApproximateScore } from "./approximateScore";
 import { Post } from "../../../interfaces/post";
 import { FormItem } from "../../../components/shared/common/formItem";
 
@@ -229,15 +229,11 @@ export const SharePost = () => {
     formik.submitForm();
   };
 
-  useEffect(() => {
-    if (!open) {
-      setOptions([]);
-    }
-  }, [open]);
-
   const setDefaultOptions = () => {
-    setLoading(true);
     setOpen(true);
+    if (options.length) return;
+
+    setLoading(true);
     api.crypto
       .search_currencies("usdt")
       .then((res) => setOptions(res))
@@ -275,6 +271,13 @@ export const SharePost = () => {
         )
       : 0;
 
+  const handleCurrencyChange = (event: { currency: string; price: number }) => {
+    const price = Number(event?.price) || 0;
+    formik.setFieldValue("currency", event?.currency, true);
+    setSelectedCurrencyPrice(price);
+    setOptions([{ currency: event?.currency, price }]);
+  };
+
   return (
     <Card
       sx={{
@@ -289,10 +292,10 @@ export const SharePost = () => {
           <Typography variant="h2" pb={1.4}>
             {translate("page.share_post.share_post")}
           </Typography>
-          <ApproximateScor
+          <ApproximateScore
             isValid={formik.isValid}
             post={formik.values as Post}
-          ></ApproximateScor>
+          ></ApproximateScore>
         </Stack>
         <Divider></Divider>
       </Stack>
@@ -303,21 +306,18 @@ export const SharePost = () => {
               <FormItem title={translate("form.field.currency")}>
                 <Autocomplete
                   open={open}
-                  onOpen={() => {
-                    setDefaultOptions();
-                  }}
+                  onOpen={setDefaultOptions}
                   onClose={() => {
                     setOpen(false);
                   }}
                   isOptionEqualToValue={(option, value) =>
                     option.currency === value.currency
                   }
-                  getOptionLabel={(option) => option.currency}
+                  getOptionLabel={(option) => option?.currency || ""}
                   options={options}
                   loading={loading}
                   onChange={(_, event) => {
-                    formik.setFieldValue("currency", event?.currency, true);
-                    setSelectedCurrencyPrice(Number(event?.price) || 0);
+                    handleCurrencyChange(event!);
                   }}
                   renderOption={(props, option) => (
                     <Box component="li" {...props}>
@@ -472,7 +472,7 @@ export const SharePost = () => {
                       type="number"
                       onFocus={() =>
                         formik.values.target1 === 0 &&
-                        formik.setFieldValue("target1", "")
+                        formik.setFieldValue("target1", "", true)
                       }
                       value={selectedCurrencyPrice ? formik.values.target1 : 0}
                       onChange={formik.handleChange}
@@ -521,7 +521,7 @@ export const SharePost = () => {
                       type="number"
                       onFocus={() =>
                         formik.values.target2 === 0 &&
-                        formik.setFieldValue("target2", "")
+                        formik.setFieldValue("target2", "", true)
                       }
                       value={selectedCurrencyPrice ? formik.values.target2 : 0}
                       onChange={formik.handleChange}
@@ -569,7 +569,7 @@ export const SharePost = () => {
                       type="number"
                       onFocus={() =>
                         formik.values.target3 === 0 &&
-                        formik.setFieldValue("target3", "")
+                        formik.setFieldValue("target3", "", true)
                       }
                       value={selectedCurrencyPrice ? formik.values.target3 : 0}
                       onChange={formik.handleChange}
@@ -628,7 +628,7 @@ export const SharePost = () => {
                     type="number"
                     onFocus={() =>
                       formik.values.stop === 0 &&
-                      formik.setFieldValue("stop", "")
+                      formik.setFieldValue("stop", "", true)
                     }
                     value={selectedCurrencyPrice ? formik.values.stop : 0}
                     onChange={formik.handleChange}
@@ -697,8 +697,10 @@ export const SharePost = () => {
               </Card>
             )}
 
-            <Stack alignItems="end">
+            <Stack>
               <LoadingButton
+                fullWidth
+                size="large"
                 variant="contained"
                 color="secondary"
                 type="button"
