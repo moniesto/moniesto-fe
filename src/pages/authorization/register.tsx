@@ -1,10 +1,4 @@
-import {
-  Box,
-  InputAdornment,
-  TextField,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { InputAdornment, TextField, Typography, useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -20,10 +14,10 @@ import { setUser } from "../../store/slices/userSlice";
 import { setToken } from "../../store/slices/localStorageSlice";
 import api from "../../services/api";
 import toastService from "../../services/toastService";
-import { UsernameInput } from "../../components/layout/auth/usernameInput";
 import { useTranslate } from "../../hooks/useTranslate";
 import configService from "../../services/configService";
 import Fly from "../../components/shared/common/fly/fly";
+import { useUsernameValidation } from "../../hooks/useUsernameValidation";
 
 type RegisterForm = {
   username: string;
@@ -38,6 +32,7 @@ const Register = () => {
   const translate = useTranslate();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { usernameValidation, usernameInput } = useUsernameValidation();
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = (values: RegisterForm) => {
@@ -58,13 +53,7 @@ const Register = () => {
   };
 
   const validationSchema = yup.object({
-    username: yup
-      .string()
-      .required(translate("form.validation.username_req"))
-      .matches(
-        configService?.validations?.username_regex,
-        translate("form.validation.username_valid")
-      ),
+    username: usernameValidation,
     name: yup
       .string()
       .max(
@@ -109,20 +98,10 @@ const Register = () => {
       email: "",
       password: "",
     },
-    validateOnChange: false,
-    validateOnBlur: false,
-    validationSchema: validationSchema,
-    validate: async (values) => {
-      if (!formik.values.username) return;
-      const errors: any = {};
-
-      const result = await api.account.check_username(values.username);
-      if (!result.validity) {
-        errors.username = translate("form.validation.username_exist");
-      }
-
-      return errors;
+    initialTouched: {
+      username: true,
     },
+    validationSchema: validationSchema,
     onSubmit: (values) => {
       handleSubmit(values);
     },
@@ -152,7 +131,13 @@ const Register = () => {
           <Stack spacing={4}>
             <Stack spacing={2}>
               <Fly.Item>
-                <UsernameInput formik={formik}></UsernameInput>
+                {usernameInput(
+                  formik.values.username,
+                  formik.handleChange,
+                  formik.touched.username,
+                  Boolean(formik.errors.username),
+                  formik.errors.username
+                )}
               </Fly.Item>
               <Fly.Item>
                 <TextField

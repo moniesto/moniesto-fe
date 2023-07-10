@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import {createBrowserRouter } from "react-router-dom";
 import Authorization from "../layouts/authorization";
 import ChangePassword from "../pages/authorization/changePassword";
 import ForgetPassword from "../pages/authorization/forgetPassword";
@@ -21,6 +21,9 @@ import { CardSettings } from "../pages/settings/card";
 import { PasswordSettings } from "../pages/settings/password";
 import { VerifyEmailSettings } from "../pages/settings/verifyEmail";
 import { SettingsList } from "../pages/settings/list";
+
+
+
 
 const Router = createBrowserRouter([
     {

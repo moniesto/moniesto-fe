@@ -1,18 +1,18 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { ReactNode } from "react";
 
 export const FormItem = ({
   title,
   children,
 }: {
-  title: string;
+  title: ReactNode;
   children: ReactNode;
 }) => {
   return (
     <Box mt={1}>
-      <Typography pb={0.5} sx={{ opacity: 0.6 }}>
+      <Box pb={0.5} sx={{ opacity: 0.6 }}>
         {title}
-      </Typography>
+      </Box>
       {children}
     </Box>
   );

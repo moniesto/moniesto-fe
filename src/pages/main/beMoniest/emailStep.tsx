@@ -1,29 +1,27 @@
-import { Button, Stack, Typography, useTheme } from "@mui/material";
+import { Stack, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 import DoneAllOutlinedIcon from "@mui/icons-material/DoneAllOutlined";
-import { BeMoniestReq } from "../../../interfaces/requests";
 import toastService from "../../../services/toastService";
 import { LoadingButton } from "@mui/lab";
 import api from "../../../services/api";
 import { useTranslate } from "../../../hooks/useTranslate";
+import Fly from "../../../components/shared/common/fly/fly";
+import { useAppDispatch } from "../../../store/hooks";
+import { nextStep } from "../../../store/slices/beMoniestSlice";
+import { BeMoniestStepperFooter } from "./beMoniestStepperFooter";
 
 type propType = {
-  handleNext: (data: Partial<BeMoniestReq>) => void;
   handleVerifyEmail: () => void;
   emailVerified: boolean;
   email: string;
 };
 
-const EmailStep = ({
-  handleNext,
-  emailVerified,
-  email,
-  handleVerifyEmail,
-}: propType) => {
+const EmailStep = ({ emailVerified, email, handleVerifyEmail }: propType) => {
   const [isSendVerifyMail, setIsSendVerifyMail] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const theme = useTheme();
   const translate = useTranslate();
+  const dispatch = useAppDispatch();
 
   const handleSendVerifyEmail = () => {
     setLoading(true);
@@ -47,63 +45,74 @@ const EmailStep = ({
   };
 
   return (
-    <Stack rowGap={2} justifyContent="center" alignItems="center">
-      {emailVerified ? (
-        <>
-          <DoneAllOutlinedIcon
-            sx={{
-              fontSize: "4.6rem",
-              color: theme.palette.secondary.main,
-            }}
-          />
-          <Typography variant="h3">
-            {translate("page.be_moniest.already_verified_email")}
-          </Typography>
-          <Stack mt={4} width="80%" alignItems="end">
-            <Button
-              onClick={() => handleNext({})}
-              variant="contained"
-              color="secondary"
-            >
-              {translate("common.next")}
-            </Button>
-          </Stack>
-        </>
-      ) : isSendVerifyMail ? (
-        <>
-          <DoneAllOutlinedIcon
-            sx={{
-              fontSize: "4.6rem",
-              color: theme.palette.secondary.main,
-            }}
-          />
-          <Stack alignItems="center" rowGap={1}>
-            <Typography variant="h3">
-              {translate("page.be_moniest.send_mailto", { email: email })}
-            </Typography>
-            <Typography variant="h3">
-              {translate("page.be_moniest.check_mail")}
-            </Typography>
-          </Stack>
-        </>
-      ) : (
-        <>
-          <Typography sx={{ paddingTop: "2rem" }} variant="h3">
-            {translate("page.be_moniest.need_verify")}
-          </Typography>
-          <LoadingButton
-            sx={{ marginTop: "1rem" }}
-            onClick={handleSendVerifyEmail}
-            type="submit"
-            color="secondary"
-            loading={loading}
-            variant="contained"
-          >
-            {translate("page.be_moniest.verify_email")}
-          </LoadingButton>
-        </>
-      )}
-    </Stack>
+    <Fly>
+      <Stack rowGap={2} justifyContent="center" alignItems="center">
+        {emailVerified ? (
+          <>
+            <Fly.Item>
+              <DoneAllOutlinedIcon
+                sx={{
+                  fontSize: "4.6rem",
+                  color: theme.palette.secondary.main,
+                }}
+              />
+            </Fly.Item>
+            <Fly.Item>
+              <Typography variant="h3">
+                {translate("page.be_moniest.already_verified_email")}
+              </Typography>
+            </Fly.Item>
+            <Fly.Item sx={{ width: "100%" }}>
+              <BeMoniestStepperFooter
+                handleNext={() => dispatch(nextStep(null))}
+              />
+            </Fly.Item>
+          </>
+        ) : isSendVerifyMail ? (
+          <>
+            <Fly.Item>
+              <DoneAllOutlinedIcon
+                sx={{
+                  fontSize: "4.6rem",
+                  color: theme.palette.secondary.main,
+                }}
+              />
+            </Fly.Item>
+
+            <Stack alignItems="center" rowGap={1}>
+              <Fly.Item>
+                <Typography variant="h3">
+                  {translate("page.be_moniest.send_mailto", { email: email })}
+                </Typography>
+              </Fly.Item>
+              <Fly.Item>
+                <Typography variant="h3">
+                  {translate("page.be_moniest.check_mail")}
+                </Typography>
+              </Fly.Item>
+            </Stack>
+          </>
+        ) : (
+          <Fly.Item>
+            <>
+              <Typography sx={{ paddingTop: "2rem" }} variant="h3">
+                {translate("page.be_moniest.need_verify")}
+              </Typography>
+              <LoadingButton
+                sx={{ marginTop: "1rem" }}
+                onClick={handleSendVerifyEmail}
+                type="submit"
+                color="secondary"
+                loading={loading}
+                variant="contained"
+              >
+                {translate("page.be_moniest.verify_email")}
+              </LoadingButton>
+            </>
+          </Fly.Item>
+        )}
+      </Stack>
+    </Fly>
   );
 };
 export default EmailStep;

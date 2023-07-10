@@ -1,12 +1,8 @@
-import { Box } from "@mui/material";
+import { Box, SxProps } from "@mui/material";
 import { useEffect } from "react";
 import "./style.scss";
 
-type PageProp = {
-  children: JSX.Element;
-};
-
-const Fly = ({ children }: PageProp) => {
+const Fly = ({ children }: { children: JSX.Element }) => {
   useEffect(() => {
     const nodeList = document.querySelectorAll(".fly__item");
     let elements = Array.from(nodeList) as HTMLElement[];
@@ -19,9 +15,14 @@ const Fly = ({ children }: PageProp) => {
   return children || <></>;
 };
 
-const FlyItem = ({ children }: PageProp) => {
+type FlyItemProp = {
+  children: JSX.Element;
+  sx?: SxProps;
+};
+
+const FlyItem = ({ children, sx }: FlyItemProp) => {
   return (
-    <Box component="span" className="fly__item">
+    <Box sx={sx} component="span" className="fly__item">
       {children}
     </Box>
   );

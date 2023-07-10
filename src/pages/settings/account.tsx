@@ -19,7 +19,6 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import * as yup from "yup";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
-import { UsernameInput } from "../../components/layout/auth/usernameInput";
 import { UploadPhotoButton } from "../../components/shared/user/uploadPhotoButton";
 import { Spinner } from "../../components/shared/common/spinner";
 import api from "../../services/api";
@@ -29,12 +28,14 @@ import { CoverImageBox } from "../../components/shared/user/coverImageBox";
 import { changeLanguage, setToken } from "../../store/slices/localStorageSlice";
 import { useTranslate } from "../../hooks/useTranslate";
 import configService from "../../services/configService";
+import { useUsernameValidation } from "../../hooks/useUsernameValidation";
 
 export const AccountSettings = () => {
   const user = useAppSelector((state) => state.user.user);
   const language = useAppSelector((state) => state.storage.language);
   const theme = useTheme();
   const translate = useTranslate();
+  const { usernameValidation, usernameInput } = useUsernameValidation();
   const [imageLoadings, setImageLoadings] = useState({
     pp: false,
     cover: false,
@@ -42,14 +43,8 @@ export const AccountSettings = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
-  const validationSchema = yup.object({
-    username: yup
-      .string()
-      .required(translate("form.validation.username_req"))
-      .matches(
-        configService?.validations?.username_regex,
-        translate("form.validation.username_valid")
-      ),
+  let validationSchema = yup.object({
+    username: usernameValidation,
     name: yup
       .string()
       .max(
@@ -80,12 +75,13 @@ export const AccountSettings = () => {
     setLoading(true);
 
     if (formik.values.username !== user.username) {
-      const updatedAccout = await api.account.change_username({
-        new: formik.values.username,
-      });
+      const updatedAccout = await api.account
+        .change_username({
+          new: formik.values.username,
+        })
+        .finally(() => setLoading(false));
 
       if (!updatedAccout) {
-        setLoading(false);
         return;
       }
       dispatch(setToken(updatedAccout.token));
@@ -112,7 +108,6 @@ export const AccountSettings = () => {
   };
 
   const formik = useFormik({
-    enableReinitialize: true,
     initialValues: {
       name: user.name,
       surname: user.surname,
@@ -122,25 +117,17 @@ export const AccountSettings = () => {
       location: user.location,
       language: language,
     },
-    validateOnChange: false,
-    validateOnBlur: false,
-    validationSchema: validationSchema,
-    validate: async (values) => {
-      if (!formik.values.username || user.username === values.username) return;
-      const errors: any = {};
-
-      const result = await api.account.check_username(values.username);
-      if (!result.validity) {
-        errors.username = translate("form.validation.username_exist");
-      }
-
-      return errors;
+    initialTouched: {
+      username: true,
     },
-
+    validationSchema: validationSchema,
     onSubmit: () => {
       handleSaveAccount();
     },
   });
+
+  console.log("formik", formik);
+
   return (
     <Card
       sx={{
@@ -212,15 +199,23 @@ export const AccountSettings = () => {
       <form onSubmit={formik.handleSubmit}>
         <Stack mt={10} p={3} spacing={4}>
           <Stack spacing={2}>
-            <UsernameInput currentValue={user.username} formik={formik} />
+            {usernameInput(
+              formik.values.username,
+              formik.handleChange,
+              formik.touched.username,
+              Boolean(formik.errors.username),
+              formik.errors.username
+            )}
             <Stack direction="row" spacing={2}>
               <TextField
                 fullWidth
                 id="name"
                 name="name"
                 placeholder={translate("form.field.name")}
+                label={translate("form.field.name")}
                 value={formik.values.name}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={formik.touched.name && Boolean(formik.errors.name)}
                 helperText={formik.touched.name && formik.errors.name}
                 InputProps={{
@@ -238,6 +233,7 @@ export const AccountSettings = () => {
                 placeholder={translate("form.field.surname")}
                 value={formik.values.surname}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={formik.touched.surname && Boolean(formik.errors.surname)}
                 helperText={formik.touched.surname && formik.errors.surname}
                 InputProps={{
@@ -257,6 +253,7 @@ export const AccountSettings = () => {
                 placeholder={translate("form.field.location")}
                 value={formik.values.location}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -272,6 +269,7 @@ export const AccountSettings = () => {
                 placeholder={translate("form.field.language")}
                 value={formik.values.language}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 startAdornment={<LanguageOutlined />}
               >
                 <MenuItem value={"en"}>En</MenuItem>

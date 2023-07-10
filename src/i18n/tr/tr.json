@@ -159,6 +159,23 @@
       "check_mail": "Lütfen emailinizi kontrol edin",
       "need_verify": "Monest olmak için e-posta adresinizi doğrulamanız gerekir",
       "verify_email": "E-posta'ı doğrula",
+      "select_payout_method":"Abonelerinizin size hangi ödeme aracı ile ödeme yapacağını belirleyin.",
+      "payout_method":{
+        "binance":"Binance",
+        "bank":"Banka(Yakında)"
+      },
+      "get_binance_id":{
+        "title":"Binance.com'da Kullanıcı Numaramı (BUID) Nasıl Bulabilirim?",
+        "description":"Binance kimliği veya kullanıcı numarası her hesaba tahsis edilmiş benzersiz bir tanımlayıcıdır. Binance web sitesinde veya Binance uygulamasında Kullanıcı Numaranızı bulmak için aşağıdaki adımları takip edin. ",
+        "on_app":{
+          "title":"Binance Uygulamasında:",
+          "desc": "Sol üst köşedeki [Profil] simgesine dokunun. Bunun ardından, Kullanıcı Numaranızı e-posta adresinizin altında göreceksiniz."
+        },
+        "on_website":{
+          "title":"Binance web sitesinde:",
+          "desc": "Hesabınıza giriş yapın ve [Profil] - [Pano] bölümüne gidin. Kullanıcı Numaranızı sayfanın üst kısmında e-posta adresinizin yanında göreceksiniz."
+        }
+      },
       "submit": {
         "becoming_moniest": "Moniest oluyorsun. Tahminlerinizi şimdi dünyayla paylaşabilirsiniz. Kullanıcılar ödeme yaparak size abone ola bilir",
         "by_price": "{{price}} $/ay.",
@@ -286,7 +303,9 @@
       "new_pass": "Yeni Şifre",
       "message": "Mesaj",
       "enter_message": "Bir mesaj girin",
-      "feedback_type": "Geri bildirim tipi"
+      "feedback_type": "Geri bildirim tipi",
+      "binance_id":"Lütfen Binance Kullancı ID'nizi giriniz.",
+      "how_can_find":"Nasıl bulabilirim"
     },
     "validation": {
       "identifier_req": "E-posta veya kullanıcı adı gerekli",
@@ -300,8 +319,8 @@
       "name_max": "İsim en fazla {{value}} karakter uzunluğunda olmalı",
       "surname_max": "Soyadı en fazla {{value}} karakter uzunluğunda olmalı",
       "confirm_password_req": "Şifreyi onayla gereklidir",
-      "username_exist": "Kullanıcı adı zaten var!",
-      "username_valid": "Kullanıcı adı geçerli değil",
+      "username_exist": "Bu kullanıcı adı alınmış. Başka bir tane deneyin.",
+      "username_valid": "Kullanıcı adı küçük harfle başlamalı ve yalnızca küçük harf, rakam ve alt çizgi içerebilir.",
       "duration_req": "Süre gerekli",
       "duration_min": "Süre bir dakikadan fazla olmalı",
       "duration_max": "Süre {{date}} tarihinden önce olmalı",
@@ -331,7 +350,9 @@
       "confirm_password_match": "Şifreler eşleşmiyor",
       "message_req": "Mesaj gerekli",
       "location_max": "Lokasyon maximum {{value}} karakter uzunluğunda olmalıdır",
-      "type_req": "Tip gerekli"
+      "type_req": "Tip gerekli",
+      "binance_id_valid": "Geçersiz Binance Kullanıcı ID",
+      "binance_id_req":"Binance Kullanıcı ID zorunlu"
     }
   },
   "moniest": {
@@ -370,7 +391,8 @@
   "server": {
     "error": {
       "Account_CheckUsername_InvalidUsername": "Kullanıcı adı geçerli değil",
-      "Post_CreatePost_InvalidTargets":"TP'ler geçerli değil"
+      "Post_CreatePost_InvalidTargets":"TP'ler geçerli değil",
+      "Moniest_CreateMoniest_InvalidBody":"Bu bilgiler moniest olmak için geçersiz"
     }
   }
 }

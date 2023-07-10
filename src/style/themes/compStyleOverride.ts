@@ -287,18 +287,18 @@ export default function componentStyleOverrides(theme: any) {
                 fontSize: "0.8rem",
                 paddingTop: "1px",
               },
-                ".MuiAvatar-root": {
-                  "&::before": {
-                    content: "''",
-                    position: "absolute",
-                    top: "0", // border: 2px + offset: 1px
-                    right: "0", // border: 2px + offset: 1px
-                    bottom: "0", // border: 2px + offset: 1px
-                    left: "0", // border: 2px + offset: 1px
-                    border: "1px solid " + theme.colors.secondaryMain,
-                    borderRadius: "100%",
-                  },
+              ".MuiAvatar-root": {
+                "&::before": {
+                  content: "''",
+                  position: "absolute",
+                  top: "0", // border: 2px + offset: 1px
+                  right: "0", // border: 2px + offset: 1px
+                  bottom: "0", // border: 2px + offset: 1px
+                  left: "0", // border: 2px + offset: 1px
+                  border: "1px solid " + theme.colors.secondaryMain,
+                  borderRadius: "100%",
                 },
+              },
             },
           },
         },
@@ -308,6 +308,18 @@ export default function componentStyleOverrides(theme: any) {
       styleOverrides: {
         root: {
           color: theme?.textMain,
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          "&.Mui-selected": {
+            color: theme?.textMain,
+          },
+          ".MuiSvgIcon-root": {
+            color: "unset",
+          },
         },
       },
     },

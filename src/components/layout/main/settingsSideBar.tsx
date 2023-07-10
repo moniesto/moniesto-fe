@@ -134,7 +134,7 @@ export const SettingsSideBar = () => {
                 <ListItemIcon>
                   <LogoutOutlined />
                 </ListItemIcon>
-                <ListItemText primary="Logout" />
+                <ListItemText primary={translate("navigation.logout")} />
               </ListItemButton>
             )}
           </List>

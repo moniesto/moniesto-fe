@@ -174,6 +174,23 @@
       "check_mail": "Please check your email",
       "need_verify": "You need to verify your email address to become a Moniest",
       "verify_email": "Verify Email",
+      "select_payout_method":"Determine which payment instrument your subscribers will pay you with.",
+      "payout_method":{
+        "binance":"Binance",
+        "bank":"Bank(Soon)"
+      },
+      "get_binance_id":{
+        "title":"How to Find My User ID (BUID) on Binance.com",
+        "description":"Binance ID or UID is a unique identifier allocated to each account. Follow the below steps to find it on the Binance website or App.",
+        "on_app":{
+          "title":"On Binance App:",
+          "desc": "Tap the [Profile] icon on the top left corner. You will then see your user ID under your email address."
+        },
+        "on_website":{
+          "title":"On Binance website:",
+          "desc": "Log in to your account and go to [Profile] - [Dashboard]. You'll see your User ID next to your email address at the top of the page."
+        }
+      },
       "submit": {
         "becoming_moniest": " You are becoming a Moniest. You can share your predictions now with the world. Users can subscribe you by paying",
         "by_price": "{{price}} $/month.",
@@ -303,7 +320,9 @@
       "new_pass": "New password",
       "message": "Message",
       "enter_message": "Enter a message",
-      "feedback_type": "Feedback type"
+      "feedback_type": "Feedback type",
+      "binance_id":"Please enter your Binance User ID",
+      "how_can_find":"How can I find"
     },
     "validation": {
       "identifier_req": "Email or username is required",
@@ -317,8 +336,8 @@
       "name_max": "Name should be of maximum {{value}} characters length",
       "surname_max": "Surname should be of maximum {{value}} characters length",
       "confirm_password_req": "Confirm Password is required",
-      "username_exist": "Username already exists!",
-      "username_valid": "Username is not valid",
+      "username_exist": "This username has been taken. Try another one.",
+      "username_valid": "Username must start with a lowercase letter and can contain only lowercase letters, numbers, and underscores.",
       "duration_req": "Duration is required",
       "duration_min": "Duration must be greater than a minute",
       "duration_max": "Duration should be before {{date}}",
@@ -348,7 +367,9 @@
       "confirm_password_match": "Passwords must match",
       "message_req": "Message is required",
       "location_max": "Location should be of maximum {{value}} characters length",
-      "type_req": "Type is requiredƒ"
+      "type_req": "Type is required",
+      "binance_id_valid": "Invalid Binance User ID",
+      "binance_id_req":"Binance User ID is required"
     }
   },
   "moniest": {
@@ -387,7 +408,8 @@
   "server": {
     "error": {
       "Account_CheckUsername_InvalidUsername": "Username is invalid",
-      "Post_CreatePost_InvalidTargets":"TP's are invalid"
+      "Post_CreatePost_InvalidTargets":"TP's are invalid",
+      "Moniest_CreateMoniest_InvalidBody":"These information is invalid to be moniest"
     }
   }
 }

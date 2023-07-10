@@ -3,6 +3,7 @@ import storageSlice from "./slices/localStorageSlice";
 import toastSlice from "./slices/toastSlice";
 import userSlice from "./slices/userSlice";
 import profileSlice from "./slices/profileSlice";
+import beMoniestSlice from "./slices/beMoniestSlice";
 // ...
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
     user: userSlice,
     toast: toastSlice,
     profile: profileSlice,
+    beMoniest: beMoniestSlice,
   },
 });
 

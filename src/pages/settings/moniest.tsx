@@ -5,7 +5,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/system";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import * as yup from "yup";
@@ -38,7 +37,7 @@ export const MoniestSettings = () => {
           value: configService?.validations?.min_fee,
         })
       )
-      .required("form.validation.fee_req"),
+      .required(translate("form.validation.fee_req")),
     bio: yup
       .string()
       .max(
@@ -158,8 +157,13 @@ export const MoniestSettings = () => {
                 name="description"
                 value={formik.values.description}
                 onChange={formik.handleChange}
-                error={formik.touched.description && Boolean(formik.errors.description)}
-                helperText={formik.touched.description && formik.errors.description}
+                error={
+                  formik.touched.description &&
+                  Boolean(formik.errors.description)
+                }
+                helperText={
+                  formik.touched.description && formik.errors.description
+                }
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -169,7 +173,6 @@ export const MoniestSettings = () => {
                 }}
               />
             </FormItem>
-
           </Stack>
           <LoadingButton
             type="submit"

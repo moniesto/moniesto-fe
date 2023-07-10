@@ -4,17 +4,16 @@ import { useState } from "react";
 import CardItem from "../../../components/shared/common/cardItem";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { Card } from "../../../interfaces/card";
-import { BeMoniestReq } from "../../../interfaces/requests";
+
 import { TestCard } from "../../../services/tempDatas";
+import { BeMoniestStepperFooter } from "./beMoniestStepperFooter";
+import { useAppDispatch } from "../../../store/hooks";
+import { nextStep } from "../../../store/slices/beMoniestSlice";
 
-type propType = {
-  handleNext: (data: Partial<BeMoniestReq>) => void;
-  handleBack: () => void;
-};
-
-const SubmitStep = ({ handleNext, handleBack }: propType) => {
+const SubmitStep = () => {
   const [card, setCard] = useState<Card>(TestCard);
   const translate = useTranslate();
+  const dispatch = useAppDispatch();
 
   return (
     <Box>
@@ -47,25 +46,7 @@ const SubmitStep = ({ handleNext, handleBack }: propType) => {
           {" " + translate("page.be_moniest.submit.terms_policy")}
         </Typography>
       </Typography>
-      <Stack alignItems="center">
-        <Stack
-          width="80%"
-          flexDirection="row"
-          mt={4}
-          justifyContent="space-between"
-        >
-          <Button onClick={handleBack} variant="outlined" color="secondary">
-            {translate("common.back")}
-          </Button>
-          <Button
-            onClick={() => handleNext({})}
-            variant="contained"
-            color="secondary"
-          >
-            {translate("common.next")}
-          </Button>
-        </Stack>
-      </Stack>
+      <BeMoniestStepperFooter handleNext={() => dispatch(nextStep(null))} />
     </Box>
   );
 };

@@ -15,7 +15,7 @@ const initialState: initialStateType = {
   isMyAccount: false,
 };
 
-export const userSlice = createSlice({
+export const profileSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
@@ -35,9 +35,9 @@ export const userSlice = createSlice({
 });
 
 export const { setProfile, setIsSubscribed, setIsMyAccount } =
-  userSlice.actions;
+  profileSlice.actions;
 
 // // Other code such as selectors can use the imported `RootState` type
 // export const getMogetModede = (state: RootState) => state.counter.value
 
-export default userSlice.reducer;
+export default profileSlice.reducer;
