@@ -127,7 +127,7 @@ export const Feedback = () => {
 
         <Box mt={5}>
           <form onSubmit={formik.handleSubmit}>
-            <FormItem title={"+" + translate("form.field.feedback_type")}>
+            <FormItem title={"* " + translate("form.field.feedback_type")}>
               <FormControl
                 error={formik.touched.type && Boolean(formik.errors.type)}
                 fullWidth
@@ -149,7 +149,7 @@ export const Feedback = () => {
               </FormControl>
             </FormItem>
 
-            <FormItem title={translate("form.field.message")}>
+            <FormItem title={"* " + translate("form.field.message")}>
               <TextField
                 sx={{
                   ".MuiInputBase-root": {
@@ -161,7 +161,7 @@ export const Feedback = () => {
                 rows={7}
                 fullWidth
                 name="message"
-                placeholder={"+" + translate("form.field.enter_message")}
+                placeholder={translate("form.field.enter_message")}
                 value={formik.values.message}
                 onChange={formik.handleChange}
                 error={formik.touched.message && Boolean(formik.errors.message)}

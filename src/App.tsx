@@ -54,7 +54,7 @@ function App() {
     toastService.setDispatch(dispatch);
     configService.initialize();
 
-    dispatch(changeLanguage(navigator.language));
+    dispatch(changeLanguage(storage.language || navigator.language));
 
     if (!localStorageService.getStorage().token) {
       setLoading(false);
@@ -62,11 +62,14 @@ function App() {
     }
 
     getUserByUserName();
-  }, [dispatch, getUserByUserName]);
+  }, [dispatch, getUserByUserName, storage.language]);
 
   return (
     <ThemeProvider
-      theme={configService.getTheme(storage.theme_mode, storage.language)}
+      theme={configService.getTheme(
+        storage.theme_mode,
+        storage.language || navigator.language
+      )}
     >
       <CssBaseline />
       {loading ? (

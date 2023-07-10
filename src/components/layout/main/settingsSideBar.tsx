@@ -17,7 +17,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../store/hooks";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -36,48 +36,46 @@ export const SettingsSideBar = () => {
 
   const matches = useMediaQuery((theme: any) => theme.breakpoints.down("md"));
 
-  const [links, setLinks] = useState<
-    { path: string; icon: ReactNode; title: string }[]
-  >([
-    {
-      path: "/settings/account",
-      icon: <PersonOutline />,
-      title: translate("navigation.account"),
-    },
-    {
-      path: "/settings/card",
-      icon: <CreditCardOutlined />,
-      title: translate("navigation.card"),
-    },
-    {
-      path: "/settings/password",
-      icon: <KeyOutlined />,
-      title: translate("navigation.password"),
-    },
-    {
-      path: "/settings/verify-email",
-      icon: <EmailOutlined />,
-      title: translate("navigation.verify_email"),
-    },
-  ]);
+  const links = useMemo(() => {
+    const items = [
+      {
+        path: "/settings/account",
+        icon: <PersonOutline />,
+        title: translate("navigation.account"),
+      },
+      {
+        path: "/settings/card",
+        icon: <CreditCardOutlined />,
+        title: translate("navigation.card"),
+      },
+      {
+        path: "/settings/password",
+        icon: <KeyOutlined />,
+        title: translate("navigation.password"),
+      },
+      {
+        path: "/settings/verify-email",
+        icon: <EmailOutlined />,
+        title: translate("navigation.verify_email"),
+      },
+    ];
+    if (
+      user.moniest &&
+      !links.some((item) => item.path === "/settings/moniest")
+    ) {
+      items.splice(1, 0, {
+        path: "/settings/moniest",
+        icon: <RocketLaunchOutlined />,
+        title: translate("navigation.moniest"),
+      });
+    }
+    return items;
+  }, [translate, user.moniest]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     setSelectedLink(pathname);
-    if (
-      user.moniest &&
-      !links.some((item) => item.path === "/settings/moniest")
-    ) {
-      const newLinks = links.slice();
-
-      newLinks.splice(1, 0, {
-        path: "/settings/moniest",
-        icon: <RocketLaunchOutlined />,
-        title: translate("navigation.moniest"),
-      });
-      setLinks(newLinks);
-    }
   }, [links, pathname, translate, user]);
 
   const handleListItemClick = (link: string) => {

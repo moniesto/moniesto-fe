@@ -7,7 +7,7 @@ import {
   ListItemText,
   useTheme,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { Stack } from "@mui/system";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
@@ -27,18 +27,21 @@ const SideBar = () => {
   const { pathname } = useLocation();
   const translate = useTranslate();
 
-  const links = [
-    {
-      path: "/timeline",
-      icon: <HomeOutlinedIcon />,
-      title: translate("navigation.timeline"),
-    },
-    {
-      path: "/explore",
-      icon: <ExploreOutlinedIcon />,
-      title: translate("navigation.explore"),
-    },
-  ];
+  const links = useMemo(
+    () => [
+      {
+        path: "/timeline",
+        icon: <HomeOutlinedIcon />,
+        title: translate("navigation.timeline"),
+      },
+      {
+        path: "/explore",
+        icon: <ExploreOutlinedIcon />,
+        title: translate("navigation.explore"),
+      },
+    ],
+    [translate]
+  );
 
   const navigate = useNavigate();
 
