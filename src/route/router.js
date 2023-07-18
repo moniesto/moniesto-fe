@@ -23,13 +23,12 @@ import { VerifyEmailSettings } from "../pages/settings/verifyEmail";
 import { SettingsList } from "../pages/settings/list";
 
 
-
-
 const Router = createBrowserRouter([
     {
         element: <UnprotectedRoutes />, children: [
             {
                 path: "/",
+                // element: <Landing />
                 element: <Landing />
 
             },

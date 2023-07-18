@@ -4,8 +4,8 @@ import { useTranslate } from "../../../../hooks/useTranslate";
 import { useTheme } from "@mui/system";
 import Navigator from "../../../shared/common/navigatior";
 import { useNavigateScroll } from "../../../../hooks/useNavigateScroll";
-import { HeroNavbar } from "../heroNavbar";
-import styles from "./hero.module.scss";
+import { HeroNavbar } from "./heroNavbar";
+import { StarCanvas } from "./starCanvas";
 
 export const Hero = () => {
   const translate = useTranslate();
@@ -13,44 +13,50 @@ export const Hero = () => {
   const navigateScroll = useNavigateScroll();
 
   return (
-    <Box
-      sx={{
-        background: "url(images/landing/header_bg.png)",
-        minHeight: "100vh",
-        backgroundRepeat: { xs: "no-repeat", md: "round" },
-        backgroundSize: "cover",
-        backgroundPosition: { xs: "right", md: "unset" },
-      }}
-      component="section"
-    >
-      <Container maxWidth="lg">
-        <HeroNavbar></HeroNavbar>
-
+    <Box id="navbar" component="section">
+      <Box position="absolute" top={0} height="100vh">
+        <StarCanvas />
+      </Box>
+      <HeroNavbar></HeroNavbar>
+      <Container sx={{ marginTop: "200px" }} maxWidth="lg">
         <Stack
-          minHeight={"calc(100vh - 120px)"}
+          position="relative"
+          // minHeight={"calc(100vh - 180px)"}
           direction={{ xs: "column", md: "row" }}
           alignItems="center"
           spacing={2}
-          sx={{ perspective: "300px" }}
         >
-          <Stack flex={1}>
+          <Stack
+            sx={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            flex={1}
+          >
             <Box
               component="h1"
               sx={{
-                fontSize: { xs: 70, md: 80 },
-                lineHeight: { xs: "70px", md: "80px" },
-                margin: "10px 0",
+                fontSize: { xs: 70, md: 100 },
+                lineHeight: { xs: "80px", md: "110px" },
+                backgroundImage: "linear-gradient(to left, #26283d, #22d4b3)",
+                color: "transparent",
+                backgroundClip: "text",
+                margin: "0",
               }}
             >
               <Trans i18nKey="page.landing.invest_wisely"></Trans>
             </Box>
             <Box
               component="h3"
-              sx={{ letterSpacing: "1px", lineHeight: "24px" }}
+              textAlign="center"
+              sx={{ letterSpacing: "1px", lineHeight: "24px", opacity: 0.8 }}
             >
               <Trans i18nKey="page.landing.discover_power"></Trans>
             </Box>
-            <Stack mt="5rem" direction="row" alignItems="center" spacing={2}>
+
+            <Stack mt="3rem" direction="row" alignItems="center" spacing={2}>
               <Navigator path="login">
                 <Button
                   size="large"
@@ -69,8 +75,6 @@ export const Hero = () => {
                 size="large"
                 sx={{
                   width: { xs: "10rem", md: "12rem" },
-                  borderColor: { md: "white" },
-                  color: { md: "white !important" },
                 }}
                 variant="outlined"
                 color="inherit"
@@ -80,31 +84,27 @@ export const Hero = () => {
               </Button>
             </Stack>
           </Stack>
-          <Stack
-            sx={{
-              width: "100%",
-              maxWidth: { xs: "330px", md: "500px" },
-              img: {
-                width: "100%",
-                objectFit: "cover",
-              },
-            }}
-            flex={1}
-            className={styles.heroImageContainer}
-          >
-            <Box className={styles.heroImageContainer__wind}>
-              <Box></Box>
-              <Box></Box>
-              <Box></Box>
-              <Box></Box>
-              <Box></Box>
-              <Box></Box>
-              <Box></Box>
-              <Box></Box>
-              <Box></Box>
-            </Box>
-            <img src="images/landing/header_hero.png" alt="" />
-          </Stack>
+        </Stack>
+        <Stack
+          mt={10}
+          height="100%"
+          justifyContent="center"
+          flexDirection="row"
+        >
+          <Box zIndex={2}>
+            <img
+              style={{
+                boxShadow:
+                  "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+                maxHeight: 400,
+                borderRadius: "10px",
+              }}
+              height="100%"
+              width="100%"
+              src="./images/landing/new/desktop.png"
+              alt="desktop"
+            />
+          </Box>
         </Stack>
       </Container>
     </Box>
