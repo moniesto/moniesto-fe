@@ -1,11 +1,12 @@
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/system";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import BrandText from "../components/shared/common/brandText";
 import { Trans } from "react-i18next";
 
 const AuthorizationLayout = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   return (
     <Grid
       item
@@ -58,7 +59,9 @@ const AuthorizationLayout = () => {
             height="100%"
           >
             <img
+              onClick={() => navigate("/")}
               style={{
+                cursor: "pointer",
                 width: "4rem",
                 borderRadius: theme.palette.borderRadius.small,
               }}

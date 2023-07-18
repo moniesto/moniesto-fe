@@ -61,7 +61,7 @@ export const SettingsSideBar = () => {
     ];
     if (
       user.moniest &&
-      !links.some((item) => item.path === "/settings/moniest")
+      !items.some((item) => item.path === "/settings/moniest")
     ) {
       items.splice(1, 0, {
         path: "/settings/moniest",

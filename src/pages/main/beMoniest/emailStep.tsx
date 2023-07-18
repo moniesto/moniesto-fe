@@ -98,16 +98,18 @@ const EmailStep = ({ emailVerified, email, handleVerifyEmail }: propType) => {
               <Typography sx={{ paddingTop: "2rem" }} variant="h3">
                 {translate("page.be_moniest.need_verify")}
               </Typography>
-              <LoadingButton
-                sx={{ marginTop: "1rem" }}
-                onClick={handleSendVerifyEmail}
-                type="submit"
-                color="secondary"
-                loading={loading}
-                variant="contained"
-              >
-                {translate("page.be_moniest.verify_email")}
-              </LoadingButton>
+              <Stack alignItems="center">
+                <LoadingButton
+                  sx={{ marginTop: "1rem" }}
+                  onClick={handleSendVerifyEmail}
+                  type="submit"
+                  color="secondary"
+                  loading={loading}
+                  variant="contained"
+                >
+                  {translate("page.be_moniest.verify_email")}
+                </LoadingButton>
+              </Stack>
             </>
           </Fly.Item>
         )}

@@ -202,7 +202,6 @@ export const AccountSettings = () => {
                 id="fullname"
                 name="fullname"
                 placeholder={translate("form.field.fullname")}
-                label={translate("form.field.fullname")}
                 value={formik.values.fullname}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -218,8 +217,6 @@ export const AccountSettings = () => {
                   ),
                 }}
               />
-            </Stack>
-            <Stack direction="row" spacing={2}>
               <TextField
                 fullWidth
                 id="location"
@@ -235,7 +232,13 @@ export const AccountSettings = () => {
                     </InputAdornment>
                   ),
                 }}
+                error={
+                  formik.touched.location && Boolean(formik.errors.location)
+                }
+                helperText={formik.touched.location && formik.errors.location}
               />
+            </Stack>
+            <Stack direction="row" spacing={2}>
               <Select
                 fullWidth
                 id="language"
