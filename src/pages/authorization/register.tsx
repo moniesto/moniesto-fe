@@ -21,8 +21,7 @@ import { useUsernameValidation } from "../../hooks/useUsernameValidation";
 
 type RegisterForm = {
   username: string;
-  name: string;
-  surname: string;
+  fullname: string;
   email: string;
   password: string;
 };
@@ -54,24 +53,15 @@ const Register = () => {
 
   const validationSchema = yup.object({
     username: usernameValidation,
-    name: yup
+    fullname: yup
       .string()
       .max(
-        configService?.validations?.max_name_length,
-        translate("form.validation.name_max", {
-          value: configService?.validations?.max_name_length,
+        configService?.validations?.max_fullname_length,
+        translate("form.validation.fullname_max", {
+          value: configService?.validations?.max_fullname_length,
         })
       )
-      .required(translate("form.validation.name_req")),
-    surname: yup
-      .string()
-      .max(
-        configService?.validations?.max_surname_length,
-        translate("form.validation.surname_max", {
-          value: configService?.validations?.max_surname_length,
-        })
-      )
-      .required(translate("form.validation.surname_req")),
+      .required(translate("form.validation.fullname_req")),
     email: yup
       .string()
       .email(translate("form.validation.email_valid"))
@@ -93,8 +83,7 @@ const Register = () => {
   const formik = useFormik<RegisterForm>({
     initialValues: {
       username: "",
-      name: "",
-      surname: "",
+      fullname: "",
       email: "",
       password: "",
     },
@@ -142,34 +131,15 @@ const Register = () => {
               <Fly.Item>
                 <TextField
                   fullWidth
-                  id="name"
-                  name="name"
-                  placeholder={translate("form.field.name")}
-                  value={formik.values.name}
-                  onChange={formik.handleChange}
-                  error={formik.touched.name && Boolean(formik.errors.name)}
-                  helperText={formik.touched.name && formik.errors.name}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <BadgeOutlinedIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Fly.Item>
-              <Fly.Item>
-                <TextField
-                  fullWidth
-                  id="surname"
-                  name="surname"
-                  placeholder={translate("form.field.surname")}
-                  value={formik.values.surname}
+                  id="fullname"
+                  name="fullname"
+                  placeholder={translate("form.field.fullname")}
+                  value={formik.values.fullname}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.surname && Boolean(formik.errors.surname)
+                    formik.touched.fullname && Boolean(formik.errors.fullname)
                   }
-                  helperText={formik.touched.surname && formik.errors.surname}
+                  helperText={formik.touched.fullname && formik.errors.fullname}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">

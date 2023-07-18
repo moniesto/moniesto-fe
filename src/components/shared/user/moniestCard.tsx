@@ -91,7 +91,7 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
           title={
             !loading ? (
               <Typography variant="h4" display="flex" alignItems="center">
-                {`${user.name} ${user.surname}`}
+                {`${user.fullname}`}
                 <ArrowForwardIosIcon
                   sx={{ fontSize: "0.8rem", marginLeft: 1 }}
                 ></ArrowForwardIosIcon>

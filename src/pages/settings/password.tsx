@@ -5,7 +5,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/system";
 import { useState } from "react";
 import * as yup from "yup";
 import api from "../../services/api";
@@ -16,7 +15,6 @@ import { KeyOutlined } from "@mui/icons-material";
 import { useTranslate } from "../../hooks/useTranslate";
 
 export const PasswordSettings = () => {
-  const theme = useTheme();
   const [loading, setLoading] = useState<boolean>(false);
   const translate = useTranslate();
 

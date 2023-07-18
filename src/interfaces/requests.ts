@@ -10,8 +10,7 @@ export interface LoginReq {
 
 export interface RegisterReq {
   username: string;
-  name: string;
-  surname: string;
+  fullname: string;
   email: string;
   password: string;
 }

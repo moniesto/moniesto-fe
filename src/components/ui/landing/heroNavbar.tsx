@@ -58,7 +58,7 @@ export const HeroNavbar = () => {
         </Stack>
       </Stack>
     ),
-    []
+    [links, navigateScroll, theme.palette.secondary.main, translate]
   );
   return (
     <Stack

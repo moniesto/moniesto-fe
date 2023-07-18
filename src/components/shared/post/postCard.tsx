@@ -128,9 +128,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
         }
         title={
           !loading ? (
-            <Typography variant="h4">
-              {`${post.user.name} ${post.user.surname}`}
-            </Typography>
+            <Typography variant="h4">{`${post.user.fullname}`}</Typography>
           ) : (
             <Skeleton
               animation="wave"

@@ -7,7 +7,6 @@ import { BottomNavBar } from "../components/layout/main/bottomNavBar";
 import { SettingsSideBar } from "../components/layout/main/settingsSideBar";
 import SideBar from "../components/layout/main/sideBar";
 import { Feedback } from "../components/ui/feedback/feedback";
-import Fly from "../components/shared/common/fly/fly";
 
 const MainLayout = () => {
   const theme = useTheme();

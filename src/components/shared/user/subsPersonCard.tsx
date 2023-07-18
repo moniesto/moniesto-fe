@@ -45,9 +45,7 @@ const SubsPersonCard = (props: propTypes) => {
       <ListItemText
         primary={
           !props.loading ? (
-            <Typography variant="h4">
-              {`${props.user.name} ${props.user.surname}`}
-            </Typography>
+            <Typography variant="h4">{`${props.user.fullname}`}</Typography>
           ) : (
             <Skeleton
               animation="wave"

@@ -51,7 +51,7 @@ export const UploadPhotoButton = ({
           handleLoading(false);
         }, 2000)
       );
-  }, [file]);
+  }, [file, handleBase64Image, handleLoading]);
 
   return (
     <IconButton

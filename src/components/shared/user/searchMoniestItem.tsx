@@ -28,11 +28,7 @@ const SearchMoniestItem = (props: propTypes) => {
         </IconButton>
       </ListItemAvatar>
       <ListItemText
-        primary={
-          <Typography variant="h4">
-            {props.user.name + " " + props.user.surname}
-          </Typography>
-        }
+        primary={<Typography variant="h4">{props.user.fullname}</Typography>}
         secondary={
           <Typography
             color={theme.palette.grey[500]}

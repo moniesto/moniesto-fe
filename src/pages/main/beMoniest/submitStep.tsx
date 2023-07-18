@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState } from "react";
 import CardItem from "../../../components/shared/common/cardItem";
@@ -11,7 +11,7 @@ import { useAppDispatch } from "../../../store/hooks";
 import { nextStep } from "../../../store/slices/beMoniestSlice";
 
 const SubmitStep = () => {
-  const [card, setCard] = useState<Card>(TestCard);
+  const [card] = useState<Card>(TestCard);
   const translate = useTranslate();
   const dispatch = useAppDispatch();
 

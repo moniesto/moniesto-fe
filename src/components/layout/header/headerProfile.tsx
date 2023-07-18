@@ -128,9 +128,7 @@ const HeaderProfile = () => {
           <Stack flexDirection="row" alignItems="center">
             <Avatar src={user.profile_photo_thumbnail_link}></Avatar>
             <Stack>
-              <Typography variant="h4">
-                {user.name + " " + user.surname}
-              </Typography>
+              <Typography variant="h4">{user.fullname}</Typography>
               <Typography fontSize="0.76rem" lineHeight="17px" variant="h6">
                 {user.email}
               </Typography>
