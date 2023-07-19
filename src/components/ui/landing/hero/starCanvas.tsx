@@ -6,7 +6,11 @@ export const StarCanvas = () => {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
     let screen: any, stars: Star[];
-    let params = { speed: 2, number: 300, extinction: 4 };
+    let params = {
+      speed: 2,
+      number: window.innerWidth < 720 ? 120 : 250,
+      extinction: 4,
+    };
 
     window.onscroll = function () {
       params.speed = Math.max(window.scrollY / 12, 2);

@@ -33,7 +33,12 @@ export const About = () => {
               boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
             >
               <Box>
-                <Box fontSize={30} component="h1">
+                <Box
+                  fontSize={30}
+                  component="h1"
+                  lineHeight="35px"
+                  whiteSpace="nowrap"
+                >
                   Moniest'ları Keşfet
                 </Box>
               </Box>
@@ -41,7 +46,7 @@ export const About = () => {
                 <img
                   width="100%"
                   height="100%"
-                  src="./images/landing/new/vector-explore.svg"
+                  src="./images/landing/new/vector-hire.svg"
                   alt="vector-explore"
                 />
               </Box>
@@ -64,7 +69,12 @@ export const About = () => {
               boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
             >
               <Box>
-                <Box fontSize={30} component="h1">
+                <Box
+                  fontSize={30}
+                  lineHeight="35px"
+                  whiteSpace="nowrap"
+                  component="h1"
+                >
                   Analizleri Gör
                 </Box>
               </Box>
@@ -72,7 +82,7 @@ export const About = () => {
                 <img
                   width="100%"
                   height="100%"
-                  src="./images/landing/new/vector-crypto-invest.svg"
+                  src="./images/landing/new/vector-analysis.svg"
                   alt="vector-crypto-invest"
                 />
               </Box>
@@ -115,7 +125,7 @@ export const About = () => {
               maxWidth={320}
               minWidth={90}
               position="absolute"
-              bottom={{ xs: -120, md: -50 }}
+              bottom={{ xs: -80, md: -50 }}
               right={{ md: 0, xs: -10 }}
             >
               <img
