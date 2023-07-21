@@ -57,7 +57,7 @@ export const About = () => {
                 <Stack
                   minWidth={300}
                   flex={1}
-                  padding={2.3}
+                  padding="5rem 2rem"
                   borderRadius={1}
                   sx={{ background: "white" }}
                   boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
@@ -97,7 +97,7 @@ export const About = () => {
                 <Stack
                   minWidth={300}
                   flex={1}
-                  padding={2.3}
+                  padding="5rem 2rem"
                   borderRadius={1}
                   sx={{ background: "white" }}
                   boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"

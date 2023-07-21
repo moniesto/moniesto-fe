@@ -21,7 +21,6 @@ export const Hero = () => {
       <Container sx={{ marginTop: "200px" }} maxWidth="lg">
         <Stack
           position="relative"
-          // minHeight={"calc(100vh - 180px)"}
           direction={{ xs: "column", md: "row" }}
           alignItems="center"
           spacing={2}
@@ -37,6 +36,7 @@ export const Hero = () => {
           >
             <Box
               component="h1"
+              textAlign="center"
               sx={{
                 fontSize: { xs: 70, md: 100 },
                 lineHeight: { xs: "80px", md: "110px" },
