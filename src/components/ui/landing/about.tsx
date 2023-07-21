@@ -1,6 +1,14 @@
 import { Box, Card, Container, Stack } from "@mui/material";
 import { SectionBadge } from "./sectionBadge";
-import { ArchitectureOutlined, VisibilityOutlined } from "@mui/icons-material";
+import {
+  ArchitectureOutlined,
+  DoneAllOutlined,
+  GroupOutlined,
+  HowToRegOutlined,
+  PriceCheckOutlined,
+  RocketLaunchOutlined,
+  VisibilityOutlined,
+} from "@mui/icons-material";
 import { Trans } from "react-i18next";
 import { useTranslate } from "../../../hooks/useTranslate";
 
@@ -8,244 +16,238 @@ export const About = () => {
   const translate = useTranslate();
 
   return (
-    <Box minHeight="100vh" id="about" component="section" padding="0 0 3rem">
-      <Box
-        sx={{
-          background: "#22d4b326",
-        }}
-      >
-        <Container maxWidth="lg">
-          <Stack
-            padding="80px 0 "
-            flexDirection="row"
-            gap={4}
-            flexWrap="wrap"
-            justifyContent="center"
-          >
+    <Box mt={-6} minHeight="100vh" id="about" component="section">
+      <Box sx={{ background: "#26283d" }}>
+        <Box padding="6rem 0 3rem">
+          <Container maxWidth="lg">
             <Stack
-              sx={{ background: "white" }}
-              flex={1}
-              borderRadius="10px"
-              gap={3}
+              width="100%"
+              color="white"
+              textAlign="center"
               alignItems="center"
-              minWidth={320}
-              padding={4}
-              boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
             >
-              <Box>
-                <Box
-                  fontSize={30}
-                  component="h1"
-                  lineHeight="35px"
-                  whiteSpace="nowrap"
-                >
-                  Moniest'ları Keşfet
-                </Box>
+              <Box
+                letterSpacing={2}
+                fontSize={40}
+                lineHeight="50px"
+                mb={0}
+                component="h1"
+                sx={{
+                  backgroundImage: "linear-gradient(to left, white, #22d4b3)",
+                  color: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Moniesto'yu Keşfet
               </Box>
-              <Box height={260}>
-                <img
-                  width="100%"
-                  height="100%"
-                  src="./images/landing/new/vector-hire.svg"
-                  alt="vector-explore"
-                />
-              </Box>
-
-              <Box>
-                <Box component="h3" textAlign="center" lineHeight={1.6}>
-                  Keşfet sayfasından puanlarına göre sıralanmış Moniest'ları
-                  bul, kendine yakın hissettiğine abone ol
-                </Box>
+              <Box
+                fontSize={24}
+                sx={{ opacity: 0.9, maxWidth: 820 }}
+                lineHeight="42px"
+                component="h2"
+                letterSpacing={1}
+              >
+                Kriptopara analizlerini paylaşan moniest'lar ile kriptopara
+                borsasına ilgi duyan insanların bir araya geldiği platform
               </Box>
             </Stack>
-            <Stack
-              sx={{ background: "white" }}
-              flex={1}
-              borderRadius="10px"
-              gap={3}
-              alignItems="center"
-              minWidth={320}
-              padding={4}
-              boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-            >
-              <Box>
-                <Box
-                  fontSize={30}
-                  lineHeight="35px"
-                  whiteSpace="nowrap"
-                  component="h1"
-                >
-                  Analizleri Gör
-                </Box>
-              </Box>
-              <Box height={260}>
-                <img
-                  width="100%"
-                  height="100%"
-                  src="./images/landing/new/vector-analysis.svg"
-                  alt="vector-crypto-invest"
-                />
-              </Box>
 
-              <Box>
-                <Box component="h3" textAlign="center" lineHeight={1.6}>
-                  Abone olduğun Moniest'lerin analizinden geçen kripto
-                  paralardan, hangisine yatırım yapacağın hakkında bilgi sahibi
-                  ol
-                </Box>
-              </Box>
+            <Stack mt={10} gap={5} direction="row" flexWrap="wrap">
+              <Stack flexWrap="wrap" flex={1} gap={3} flexDirection="row">
+                <Stack
+                  minWidth={300}
+                  flex={1}
+                  padding={2.3}
+                  borderRadius={1}
+                  sx={{ background: "white" }}
+                  boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
+                >
+                  <Stack alignItems="center" gap={3}>
+                    <Box maxWidth={320} minWidth={90}>
+                      <img
+                        width="100%"
+                        height="100%"
+                        src="./images/landing/new/vector-grades.svg"
+                        alt="vector-crypto-invest"
+                      />
+                    </Box>
+                    <Stack alignItems="center">
+                      <Box
+                        fontSize={30}
+                        lineHeight="40px"
+                        margin={0}
+                        component="h1"
+                      >
+                        Abone ol
+                      </Box>
+                      <Box
+                        textAlign="center"
+                        maxWidth={360}
+                        mb={0}
+                        component="h3"
+                        lineHeight="24px"
+                        letterSpacing="1px"
+                        sx={{ opacity: 0.6 }}
+                      >
+                        Senin için en uygun puan ve ücreti olan moniest'ı bul
+                      </Box>
+                    </Stack>
+                  </Stack>
+                </Stack>
+                <Stack
+                  minWidth={300}
+                  flex={1}
+                  padding={2.3}
+                  borderRadius={1}
+                  sx={{ background: "white" }}
+                  boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
+                >
+                  <Stack alignItems="center" gap={3}>
+                    <Box maxWidth={320} minWidth={90}>
+                      <img
+                        width="100%"
+                        height="100%"
+                        src="./images/landing/new/vector-invest.svg"
+                        alt="vector-crypto-invest"
+                      />
+                    </Box>
+                    <Stack alignItems="center">
+                      <Box
+                        fontSize={30}
+                        lineHeight="40px"
+                        margin={0}
+                        component="h1"
+                      >
+                        Analizlerini gör
+                      </Box>
+                      <Box
+                        textAlign="center"
+                        maxWidth={360}
+                        mb={0}
+                        component="h3"
+                        lineHeight="24px"
+                        letterSpacing="1px"
+                        sx={{ opacity: 0.6 }}
+                      >
+                        Abone olduğun moniest'ın analizlerine gör ve
+                        yatırımlarına yön ver
+                      </Box>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
             </Stack>
-          </Stack>
-        </Container>
+          </Container>
+        </Box>
       </Box>
       <Container maxWidth="lg">
-        <Stack
-          overflow="hidden"
-          mt={10}
-          borderRadius="10px"
-          gap={3}
-          alignItems="center"
-          padding={4}
-          flexDirection="row"
-          boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-        >
-          <Box flex={2}>
-            <Box fontSize={35} lineHeight="42px" component="h1">
-              Analizlerine Güveniyor Musun?
-            </Box>
-            <Box fontSize={26} lineHeight="30px" component="h2">
-              Kendi ücretini belirle ve para kazanmaya başla
-            </Box>
-            <Box component="h3" lineHeight={1.6}>
-              Kayıt olduktan sonra birkaç adımda Moniest olabilirsin. <br />
-            </Box>
-          </Box>
-          <Box position="relative" flex={1} height={300}>
-            <Box
-              maxWidth={320}
-              minWidth={90}
-              position="absolute"
-              bottom={{ xs: -80, md: -50 }}
-              right={{ md: 0, xs: -10 }}
-            >
-              <img
-                width="100%"
-                height="100%"
-                src="./images/landing/new/vector-earn-money.svg"
-                alt="vector-crypto-invest"
-              />
-            </Box>
-          </Box>
-        </Stack>
-
-        {/* <Stack rowGap={{ xs: 14, md: 20 }}>
-          <Box>
-            <Box maxWidth="600px" margin="auto">
-              <Stack spacing={3} alignItems="center" textAlign="center">
-                <SectionBadge
-                  title={translate("page.landing.why_moniesto.title")}
+        <Box minHeight="100vh" my={20}>
+          <Stack
+            gap={15}
+            alignItems="center"
+            flexWrap="wrap"
+            flexDirection="row"
+          >
+            <Box flex={1}>
+              <Box
+                margin="auto"
+                position="relative"
+                maxWidth={320}
+                minWidth={200}
+              >
+                <img
+                  width="100%"
+                  height="100%"
+                  src="./images/landing/new/mobile.png"
+                  alt="vector-crypto-invest"
+                />
+                <Box
+                  right={{ xs: "-6%", md: "-21%" }}
+                  top="22%"
+                  position="absolute"
+                  maxWidth={200}
+                  minWidth={70}
+                  sx={{ background: "white" }}
                 >
-                  <VisibilityOutlined></VisibilityOutlined>
-                </SectionBadge>
-                <Box component="h1" lineHeight={1.3}>
-                  {translate("page.landing.why_moniesto.header")}
+                  <img
+                    style={{
+                      padding: "6px",
+                      borderRadius: "10px",
+                      boxShadow:
+                        "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
+                    }}
+                    width="100%"
+                    height="100%"
+                    src="./images/landing/new/mobile-moniest.png"
+                    alt="vector-crypto-invest"
+                  />
                 </Box>
-                <Box component="h5" sx={{ opacity: 0.7 }}>
-                  {translate("page.landing.why_moniesto.message")}
-                </Box>
-              </Stack>
+              </Box>
             </Box>
-          </Box>
-          <Box>
-            <Stack
-              direction={{ xs: "column", md: "row" }}
-              alignItems="center"
-              justifyContent="space-evenly"
-              spacing={4}
-            >
-              <Box width={{ xs: 240 }}>
-                <img width="100%" src="images/landing/invest_hero.png" alt="" />
+
+            <Stack flex={2}>
+              <Box
+                sx={{
+                  backgroundImage: "linear-gradient(to left, #26283d, #22d4b3)",
+                  color: "transparent",
+                  backgroundClip: "text",
+                }}
+                fontSize={70}
+                lineHeight="80px"
+                marginTop={0}
+                marginBottom={2}
+                component="h1"
+              >
+                Moniest Ol
               </Box>
-              <Box maxWidth="340px">
-                <Stack spacing={3}>
-                  <SectionBadge
-                    title={translate("page.landing.for_investors.title")}
-                  >
-                    <VisibilityOutlined></VisibilityOutlined>
-                  </SectionBadge>
-                  <Box component="h1" lineHeight={1.4}>
-                    {translate("page.landing.for_investors.header")}
-                  </Box>
-                  <Box component="h5" sx={{ opacity: 0.7 }}>
-                    {translate("page.landing.for_investors.message")}
-                  </Box>
+              <Box
+                sx={{ opacity: 0.8 }}
+                fontSize={30}
+                lineHeight="40px"
+                marginTop={1}
+                component="h1"
+              >
+                Kriptopara borsasında bilgi sahibiysen ve para kazanmak
+                istiyorsan
+              </Box>
+              <Stack mt={3} gap={2}>
+                <Stack
+                  padding={2}
+                  border="1px solid #22d4b3"
+                  borderRadius="10px"
+                  gap={2}
+                  direction="row"
+                  alignItems="center"
+                >
+                  <PriceCheckOutlined sx={{ fontSize: 30 }} />
+                  <Box component="h2">Ücretini belirle</Box>
                 </Stack>
-              </Box>
-            </Stack>
-          </Box>
-          <Box>
-            <Stack
-              direction={{ xs: "column-reverse", md: "row" }}
-              alignItems="center"
-              justifyContent="space-evenly"
-              columnGap={4}
-            >
-              <Box maxWidth="340px">
-                <Stack spacing={3}>
-                  <SectionBadge
-                    title={translate("page.landing.for_moniest.title")}
-                  >
-                    <ArchitectureOutlined></ArchitectureOutlined>
-                  </SectionBadge>
-                  <Box component="h1" lineHeight={1.4}>
-                    {translate("page.landing.for_moniest.header")}
-                  </Box>
-                  <Box component="h5" sx={{ opacity: 0.7 }}>
-                    {translate("page.landing.for_moniest.message")}
-                  </Box>
+                <Stack
+                  padding={2}
+                  border="1px solid #22d4b3"
+                  borderRadius="10px"
+                  gap={2}
+                  direction="row"
+                  alignItems="center"
+                >
+                  <HowToRegOutlined sx={{ fontSize: 30 }} />
+                  <Box component="h2">Binance ID'ni gir</Box>
                 </Stack>
-              </Box>
-              <Box width={{ xs: 240 }}>
-                <img
-                  width="100%"
-                  src="images/landing/become_moniest_hero.png"
-                  alt=""
-                />
-              </Box>
-            </Stack>
-          </Box>
-          <Box>
-            <Stack
-              direction={{ xs: "column", md: "row" }}
-              alignItems="center"
-              justifyContent="space-evenly"
-              columnGap={4}
-            >
-              <Box width={{ xs: 240 }}>
-                <img
-                  width="100%"
-                  src="images/landing/algorithm_hero.png"
-                  alt=""
-                />
-              </Box>
-              <Box maxWidth="340px">
-                <Stack spacing={3}>
-                  <SectionBadge
-                    title={translate("page.landing.scoring_algorithm.title")}
-                  >
-                    <VisibilityOutlined></VisibilityOutlined>
-                  </SectionBadge>
-                  <Box component="h1" lineHeight={1.4}>
-                    {translate("page.landing.scoring_algorithm.header")}
-                  </Box>
-                  <Box component="h5" sx={{ opacity: 0.7 }}>
-                    <Trans i18nKey="page.landing.scoring_algorithm.message"></Trans>
-                  </Box>
+                <Stack
+                  padding={2}
+                  border="1px solid #22d4b3"
+                  borderRadius="10px"
+                  gap={2}
+                  direction="row"
+                  alignItems="center"
+                >
+                  <DoneAllOutlined color="secondary" sx={{ fontSize: 30 }} />
+                  <Box component="h2">Analizlerini dünyaya göster</Box>
                 </Stack>
-              </Box>
+              </Stack>
             </Stack>
-          </Box>
-        </Stack> */}
+          </Stack>
+        </Box>
       </Container>
     </Box>
   );

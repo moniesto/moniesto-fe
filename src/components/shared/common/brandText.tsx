@@ -14,7 +14,7 @@ const BrandText = ({ color, first_letter, sx, onClick }: propTypes) => {
       letterSpacing={6}
       color={color || theme.palette.common.white}
       sx={{
-        textShadow: "0px 1px, 1px 0px, 1px 1px",
+        WebkitTextStroke: "thin",
         "&::first-letter": {
           color: first_letter || theme.palette.secondary.main,
         },

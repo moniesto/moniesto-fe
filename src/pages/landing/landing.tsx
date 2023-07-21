@@ -19,7 +19,7 @@ export const Landing = () => {
         color: theme.palette.primary.main,
         display: "flex",
         flexDirection: "column",
-        gap: "5rem",
+        // gap: "5rem",
       }}
     >
       <Hero></Hero>

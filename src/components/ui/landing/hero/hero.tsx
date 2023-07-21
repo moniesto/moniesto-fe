@@ -51,9 +51,11 @@ export const Hero = () => {
             <Box
               component="h3"
               textAlign="center"
-              sx={{ letterSpacing: "1px", lineHeight: "24px", opacity: 0.8 }}
+              fontSize={26}
+              sx={{ letterSpacing: "1px", lineHeight: "35px", opacity: 0.8 }}
             >
-              <Trans i18nKey="page.landing.discover_power"></Trans>
+              Kriptopara Borsasındaki Yatırımlarına Yön Ver
+              {/* <Trans i18nKey="page.landing.discover_power"></Trans> */}
             </Box>
 
             <Stack mt="3rem" direction="row" alignItems="center" spacing={2}>
@@ -96,7 +98,7 @@ export const Hero = () => {
               style={{
                 boxShadow:
                   "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-                maxHeight: 400,
+                maxHeight: 430,
                 borderRadius: "10px",
               }}
               height="100%"
