@@ -1,5 +1,4 @@
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
+import Tabs from "@mui/material/Tabs";
 import TabPanel from "@mui/lab/TabPanel";
 import { Box, Tab, useTheme } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
@@ -98,52 +97,42 @@ const ProfileTabs = ({
         },
       }}
     >
-      <TabContext value={tabValue}>
-        <Box
-          mb={4}
-          sx={{
-            overflowX: "auto",
-          }}
-        >
-          <TabList
-            sx={{
-              minWidth: "600px",
-              padding: "0 30px",
-              ".Mui-selected": {
-                fontWeight: 600,
-                color: theme.palette.text.secondary + " !important",
-              },
-              ".MuiTabs-indicator": {
-                backgroundColor: theme.palette.secondary.main,
-              },
-              ".MuiTab-root": {
-                flex: 1,
-                whiteSpace: "nowrap",
-                fontSize: "0.8rem",
-              },
-            }}
-            onChange={handleChange}
-          >
-            {getTabs.map((tab) => (
-              <Tab
-                key={"tab_" + tab.value}
-                label={tab.title}
-                value={tab.value}
-              />
-            ))}
-          </TabList>
-        </Box>
-
+      <Tabs
+        variant="scrollable"
+        // scrollButtons
+        allowScrollButtonsMobile
+        sx={{
+          background: theme.palette.secondary.light,
+          marginX: { xs: "6px", md: 2 },
+          borderRadius: "10px",
+          paddingX: "6px",
+          ".Mui-selected": {
+            fontWeight: 600,
+            color: theme.palette.text.secondary + " !important",
+          },
+          ".MuiTabs-indicator": {
+            backgroundColor: theme.palette.secondary.main,
+          },
+          ".MuiTab-root": {
+            flex: getTabs.length > 1 ? 1 : "unset",
+            whiteSpace: "nowrap",
+            fontSize: "0.8rem",
+          },
+        }}
+        onChange={handleChange}
+        value={tabValue}
+      >
         {getTabs.map((tab) => (
-          <TabPanel
-            key={"panel_" + tab.value}
-            className={tabValue === tab.value ? "selected" : ""}
+          <Tab
+            key={"tab_" + tab.value}
+            label={tab.title}
             value={tab.value}
-          >
-            {tab.content}
-          </TabPanel>
+          ></Tab>
         ))}
-      </TabContext>
+      </Tabs>
+      <Box mt={4}>
+        {getTabs.find((item) => item.value === tabValue)?.content}
+      </Box>
     </Box>
   );
 };

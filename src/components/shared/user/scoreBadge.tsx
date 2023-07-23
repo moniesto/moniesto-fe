@@ -1,13 +1,12 @@
-import { Stack, StackProps } from "@mui/material";
-import { ReactNode } from "react";
+import { Stack, StackProps, Typography } from "@mui/material";
 import { ScoreStar } from "./scoreStar";
 
 export const ScoreBadge = ({
   props,
-  children,
+  value,
 }: {
   props?: StackProps;
-  children?: ReactNode;
+  value: number;
 }) => {
   return (
     <Stack
@@ -21,7 +20,7 @@ export const ScoreBadge = ({
       {...props}
     >
       <ScoreStar />
-      {children}
+      <Typography variant="h5">{value} </Typography>
     </Stack>
   );
 };

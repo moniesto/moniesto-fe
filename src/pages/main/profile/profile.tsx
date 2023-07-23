@@ -84,7 +84,7 @@ const Profile = () => {
                     height: "6rem",
                     position: "absolute",
                     bottom: "-3rem",
-                    left: { md: "30px", xs: "16px" },
+                    left: { md: 24, xs: 16 },
                   }}
                 >
                   <Avatar
@@ -99,7 +99,7 @@ const Profile = () => {
                   {profileState.account.moniest && <MoniestBadge size={26} />}
                 </Box>
               </CoverImageBox>
-              <Box padding={{ md: "0 30px", xs: "0 16px" }}>
+              <Box paddingX={{ md: 3, xs: 2 }}>
                 <Box>
                   <Stack
                     flexDirection="row"
@@ -135,11 +135,9 @@ const Profile = () => {
                             {profileState.account.fullname}
                           </Typography>
                           {profileState.account.moniest && (
-                            <ScoreBadge>
-                              <Typography variant="h4">
-                                {profileState.account.moniest?.score || 0}
-                              </Typography>
-                            </ScoreBadge>
+                            <ScoreBadge
+                              value={profileState.account.moniest?.score || 0}
+                            />
                           )}
                         </Stack>
 

@@ -156,7 +156,7 @@ const PostsTab = ({
         <Stack
           sx={{
             borderRadius: "10px",
-            padding: "14px 20px",
+            padding: "16px 24px",
             fontWeight: "bold",
           }}
           flexDirection="row"
