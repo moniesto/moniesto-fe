@@ -283,6 +283,8 @@
       "stop_point": "Durma noktası",
       "stop": "Stop",
       "add_desc": "Açıklama ekle (isteğe bağlı)",
+      "description":"Açıklama",
+      "desc_placeholder":"Analizini destekleyecek açıklamalar ekle",
       "share": "Paylaş",
       "fee": "Kullanıcılar aboneliğiniz için aylık ne kadar ödeyecek? ( USD )",
       "bio": "Hakkınızda kısa bilgi",

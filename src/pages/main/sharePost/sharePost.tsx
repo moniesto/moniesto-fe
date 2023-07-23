@@ -679,7 +679,7 @@ export const SharePost = () => {
             <Divider></Divider>
             {showDescription ? (
               <Editor
-                label="Description (optional)"
+                label={translate("form.field.description")}
                 editorJs={editorJs}
               ></Editor>
             ) : (

@@ -301,6 +301,8 @@
       "stop_point": "Stop point",
       "stop": "Stop",
       "add_desc": "Add Description (Optional)",
+      "description":"Description",
+      "desc_placeholder":"Add comments to support your analysis",
       "share": "Share",
       "fee": "How much will users pay monthly for your subscription? ( USD )",
       "bio": "Short information about you",

@@ -5,6 +5,7 @@ import { createReactEditorJS } from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./constants";
 import { OutputData } from "@editorjs/editorjs";
 import "./editor.scss";
+import { useTranslate } from "../../../../hooks/useTranslate";
 
 const ReactEditorJS = createReactEditorJS();
 
@@ -22,6 +23,7 @@ export const Editor = ({
   readOnly = false,
 }: EditorJsType) => {
   const theme = useTheme();
+  const translate = useTranslate();
 
   useEffect(() => {}, []);
   const handleInitialize = useCallback(
@@ -56,6 +58,7 @@ export const Editor = ({
       )}
 
       <ReactEditorJS
+        placeholder={translate("form.field.desc_placeholder")}
         readOnly={readOnly}
         tools={EDITOR_JS_TOOLS}
         onInitialize={handleInitialize}
