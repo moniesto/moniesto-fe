@@ -17,6 +17,7 @@ import { SubscribeButton } from "../../../components/shared/user/subscribeButton
 import { useTranslate } from "../../../hooks/useTranslate";
 import { MoniestBadge } from "../../../components/shared/user/moniestBadge";
 import { setIsMyAccount, setProfile } from "../../../store/slices/profileSlice";
+import { ScoreBadge } from "../../../components/shared/user/scoreBadge";
 
 const Profile = () => {
   const theme = useTheme();
@@ -129,26 +130,16 @@ const Profile = () => {
                   <Stack spacing={2}>
                     <Stack flexDirection="row">
                       <Stack spacing={0.3}>
-                        <Stack flexDirection="row" alignItems="end">
+                        <Stack flexDirection="row" alignItems="center" gap={2}>
                           <Typography variant="h3">
                             {profileState.account.fullname}
                           </Typography>
                           {profileState.account.moniest && (
-                            <Typography
-                              ml={1.5}
-                              display="flex"
-                              alignItems="center"
-                              variant="h6"
-                            >
-                              <StarIcon
-                                sx={{
-                                  marginRight: "3px",
-                                  fontSize: "1rem",
-                                  color: "var(--binance-color) !important",
-                                }}
-                              />
-                              {profileState.account.moniest?.score || 0}
-                            </Typography>
+                            <ScoreBadge>
+                              <Typography variant="h4">
+                                {profileState.account.moniest?.score || 0}
+                              </Typography>
+                            </ScoreBadge>
                           )}
                         </Stack>
 

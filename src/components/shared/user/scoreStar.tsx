@@ -1,12 +1,12 @@
+import { SvgIconProps } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 
-export const ScoreStar = () => {
+export const ScoreStar = ({ props }: { props?: SvgIconProps }) => {
   return (
     <StarIcon
+      {...props}
       sx={{
-        marginLeft: "0 !important",
-        paddingBottom: "2px",
-        fontSize: "1.1rem",
+        fontSize: "1rem",
         color: "var(--color-yellow-primary) !important",
       }}
     />

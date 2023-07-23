@@ -41,7 +41,7 @@ export const PaymentMethod = () => {
             component="h1"
             sx={{
               backgroundImage:
-                "linear-gradient(90deg, white 0%, var(--binance-color)  100%)",
+                "linear-gradient(90deg, white 0%, var(--color-yellow-primary)  100%)",
               color: "transparent",
               backgroundClip: "text",
             }}

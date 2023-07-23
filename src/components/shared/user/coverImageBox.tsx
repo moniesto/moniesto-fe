@@ -13,6 +13,7 @@ export const CoverImageBox = ({
   return (
     <Box
       height={{ xs: "8.2rem", md: "9.4rem" }}
+      borderBottom={`1px solid ${theme.palette.background[800]}`}
       sx={{
         background: theme.palette.background[200],
         backgroundImage: `url(${image}) !important`,

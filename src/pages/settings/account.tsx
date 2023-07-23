@@ -64,11 +64,11 @@ export const AccountSettings = () => {
 
   const handleSaveAccount = async () => {
     setLoading(true);
-
-    if (formik.values.username !== user.username) {
+    const values = Object.assign({}, formik.values);
+    if (values.username !== user.username) {
       const updatedAccout = await api.account
         .change_username({
-          new: formik.values.username,
+          new: values.username,
         })
         .finally(() => setLoading(false));
 
@@ -78,16 +78,16 @@ export const AccountSettings = () => {
       dispatch(setToken(updatedAccout.token));
     }
 
-    if (user.background_photo_link === formik.values.background_photo)
-      delete formik.values.background_photo;
-    if (user.profile_photo_link === formik.values.profile_photo)
-      delete formik.values.profile_photo;
+    if (user.background_photo_link === values.background_photo)
+      delete values.background_photo;
+    if (user.profile_photo_link === values.profile_photo)
+      delete values.profile_photo;
 
     api.user
-      .update_profile(formik.values)
+      .update_profile(values)
       .then((response) => {
-        if (language !== formik.values.language) {
-          dispatch(changeLanguage(formik.values.language));
+        if (language !== values.language) {
+          dispatch(changeLanguage(values.language));
         }
         dispatch(setUser(response));
         toastService.open({
@@ -115,8 +115,6 @@ export const AccountSettings = () => {
       handleSaveAccount();
     },
   });
-
-  console.log("formik", formik);
 
   return (
     <Card
