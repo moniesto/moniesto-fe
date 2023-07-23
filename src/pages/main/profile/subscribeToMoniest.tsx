@@ -3,39 +3,48 @@ import {
   Box,
   Card,
   Divider,
+  FormControl,
   IconButton,
+  MenuItem,
   Modal,
+  Select,
   Typography,
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useTheme } from "@mui/system";
 import { ClearOutlined, ErrorOutline } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import api from "../../../services/api";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setIsSubscribed } from "../../../store/slices/profileSlice";
+import localStorageService from "../../../services/localStorageService";
 
 export const SubscribeToMoniest = ({
   handleClose,
 }: {
-  handleClose: () => void;
+  handleClose: (result: boolean) => void;
 }) => {
   const theme = useTheme();
   const translate = useTranslate();
   const [loading, setLoading] = useState<boolean>(false);
   const profileState = useAppSelector((state) => state.profile);
-
+  const [month, setMonth] = useState(1);
   const dispatch = useAppDispatch();
 
   const handleSubscribe = () => {
     setLoading(true);
     api.moniest
-      .subscribe(profileState.account!.username)
-      .then(() => {
-        dispatch(setIsSubscribed(true));
-        handleClose();
+      .subscribe(profileState.account!.username, {
+        returnURL: window.location.href + "/returnUrl",
+        cancelURL: window.location.href + "/cancelUrl",
+        number_of_months: month,
+      })
+      .then((res) => {
+        window.open(res.universal_link, "_blank");
+        // dispatch(setIsSubscribed(true));
+        handleClose(true);
       })
       .finally(() => setLoading(false));
   };
@@ -44,14 +53,20 @@ export const SubscribeToMoniest = ({
     api.moniest
       .unsubscribe(profileState.account!.username)
       .then(() => {
-        handleClose();
+        handleClose(true);
         dispatch(setIsSubscribed(false));
       })
       .finally(() => setLoading(false));
   };
 
+  const finalDate = useMemo(() => {
+    const date = new Date();
+    date.setMonth(date.getMonth() + month);
+    return date.toLocaleDateString(localStorageService.getStorage().language);
+  }, [month]);
+
   return (
-    <Modal open={true} onClose={handleClose}>
+    <Modal open={true} onClose={() => handleClose(false)}>
       <Card
         sx={{
           position: "absolute",
@@ -70,7 +85,7 @@ export const SubscribeToMoniest = ({
           sx={{ background: theme.palette.background[800] }}
         >
           <IconButton
-            onClick={handleClose}
+            onClick={() => handleClose(false)}
             sx={{ position: "absolute", right: 3, top: 3 }}
           >
             <ClearOutlined />
@@ -112,37 +127,80 @@ export const SubscribeToMoniest = ({
             </Stack>
           </Stack>
         </Box>
-        <Box p={3} pt={6}>
-          {!profileState.isSubscribed && (
-            <Typography variant="h4" mb={2}>
-              {translate("page.profile.subs_modal.monthly_payment")}
-            </Typography>
-          )}
+        <Box p={3} pt={8}>
           {!profileState.isSubscribed && (
             <Box>
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-              >
+              <Stack gap={2} justifyContent="space-between">
                 <Stack spacing={1} direction="row" alignItems="center">
-                  <Typography variant="h4">
-                    {translate("page.profile.subs_modal.subs_start_date")} :
+                  <Typography flex={1} variant="h4">
+                    Abonelik süresi (Aylık)
                   </Typography>
-                  <Typography variant="h5" fontWeight={500}>
-                    {new Date().toDateString()}
-                  </Typography>
+                  <FormControl>
+                    <Select
+                      onChange={(event) => setMonth(Number(event.target.value))}
+                      size="small"
+                      value={month}
+                      placeholder="Abonelik süresi"
+                      color="secondary"
+                      name="type"
+                    >
+                      {Array(12)
+                        .fill(0)
+                        .map((item, index) => (
+                          <MenuItem key={"month_" + item} value={index + 1}>
+                            {index + 1}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
                 </Stack>
                 <Stack spacing={1} direction="row" alignItems="center">
-                  <Typography variant="h4">
-                    {translate("page.profile.subs_modal.total")} :
+                  <Typography flex={1} variant="h4">
+                    {translate("page.profile.subs_modal.subs_start_date")}
                   </Typography>
-                  <Typography variant="h4">
-                    {profileState.account!.moniest?.subscription_info.fee}$
+                  <Typography variant="h4" fontWeight={500}>
+                    {new Date().toLocaleDateString(
+                      localStorageService.getStorage().language
+                    )}
+                  </Typography>
+                </Stack>
+
+                <Stack spacing={1} direction="row" alignItems="center">
+                  <Typography flex={1} variant="h4">
+                    Abonelik Bitiş Tarihi
+                  </Typography>
+                  <Typography variant="h4" fontWeight={500}>
+                    {finalDate}
                   </Typography>
                 </Stack>
               </Stack>
-              <Divider sx={{ margin: "16px 0" }}></Divider>
+              <Stack
+                mt={3}
+                spacing={1}
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="center"
+              >
+                <Typography variant="h4">
+                  {translate("page.profile.subs_modal.total")}
+                </Typography>
+                <Typography variant="h4">
+                  {month *
+                    profileState.account!.moniest?.subscription_info.fee!}
+                  $
+                </Typography>
+              </Stack>
+              <Divider sx={{ marginY: 2 }}></Divider>
+
+              <Box>
+                <Typography variant="h5" sx={{ opacity: 0.8 }}>
+                  Belirlediğiniz ayların toplamı hesabınızdan tek seferde
+                  çekilip aylık olarak moniest'a ödenecektir. İptal etmek
+                  istediğinizde, kalan aylarınız varsa hesabınıza geri
+                  aktarılacaktır. Abonelik, süresi bittikten sonra kendi kendine
+                  yenilenmez.
+                </Typography>
+              </Box>
             </Box>
           )}
           {profileState.isSubscribed ? (

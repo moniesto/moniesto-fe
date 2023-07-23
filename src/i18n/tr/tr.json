@@ -42,7 +42,7 @@
       },
       "password": {
         "toast": { "updated_success": "Şifreniz başarıyla güncellendi" },
-        "title": "Şifre değiştir"
+        "title": "Şifre Değiştir"
       }
     },
     "forget_pass": {
@@ -131,8 +131,10 @@
       "all_rights_reserved": "Bütün hakları saklıdır."
     },
     "share_post": {
-      "share_post": "Gönderi paylaş",
-      "approximate_score": "Yaklaşık skor",
+      "share_post": "Gönderi Paylaş",
+      "approximate_score": "Yaklaşık Skor",
+      "approximate_score_valid": "Alabileceğiniz en yüksek skor",
+      "approximate_score_invalid": "Gönderi geçerli olduğunda hesaplanır",
       "toast": { "post_created": "Gönderiniz başarıyla oluşturuldu" }
     },
     "be_moniest": {
@@ -360,7 +362,7 @@
   "navigation": {
     "timeline": "Ana sayfa",
     "explore": "Keşfet",
-    "share_post": "Gönderi paylaş",
+    "share_post": "Gönderi Paylaş",
     "be_moniest": "Moniest Ol",
     "account": "Hesap",
     "card": "Kart",

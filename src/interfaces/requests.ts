@@ -51,6 +51,18 @@ export interface CreatePostReq {
   target3: number;
 }
 
+export interface SubscribeRequest {
+  cancelURL: string;
+  number_of_months: number;
+  returnURL: string;
+}
+export interface SubscribeResponse {
+  checkout_link: string;
+  deep_link: string;
+  qrcode_link: string;
+  universal_link: string;
+}
+
 export interface PaginateRequest {
   limit: number;
   offset: number;

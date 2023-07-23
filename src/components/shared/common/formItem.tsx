@@ -10,7 +10,7 @@ export const FormItem = ({
 }) => {
   return (
     <Box mt={1}>
-      <Box pb={0.5} sx={{ opacity: 0.6 }}>
+      <Box pb={0.5} sx={{ opacity: 0.6, fontSize: "0.75rem" }}>
         {title}
       </Box>
       {children}

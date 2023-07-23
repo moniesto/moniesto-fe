@@ -1,10 +1,10 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, useTheme } from "@mui/material";
 import { useTranslate } from "../../../hooks/useTranslate";
-import { ScoreStar } from "../../../components/shared/common/scoreStar";
 import { Post } from "../../../interfaces/post";
 import { useEffect, useState } from "react";
 import api from "../../../services/api";
-import { Spinner } from "../../../components/shared/common/spinner";
+import { ScoreBadge } from "../../../components/shared/user/scoreBadge";
+import { ErrorOutline, HelpOutlineOutlined } from "@mui/icons-material";
 
 export const ApproximateScore = ({
   post,
@@ -14,6 +14,7 @@ export const ApproximateScore = ({
   isValid: boolean;
 }) => {
   const translate = useTranslate();
+  const theme = useTheme();
   const [score, setScore] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -36,19 +37,56 @@ export const ApproximateScore = ({
   }, [post, isValid]);
 
   return (
-    <Stack spacing={1} direction="row" alignItems="center">
-      <Typography variant="h5" sx={{ opacity: "0.8" }}>
-        {translate("page.share_post.approximate_score")}
-      </Typography>
-      <Typography
-        display="flex"
-        variant="h5"
-        sx={{ paddingRight: "4px" }}
-        fontWeight={700}
+    <Stack
+      gap={1}
+      direction="row"
+      justifyContent={{ xs: "center", md: "space-between" }}
+      flexWrap="wrap"
+      sx={{
+        background: theme.palette.secondary.light,
+        padding: "12px 16px",
+        borderRadius: "10px",
+      }}
+    >
+      <Stack
+        justifyContent="end"
+        spacing={1}
+        direction="row"
+        alignItems="center"
       >
-        {loading ? <Spinner size={15}></Spinner> : isValid ? score : 0}
-      </Typography>
-      <ScoreStar></ScoreStar>
+        <Typography variant="h4" sx={{ opacity: "0.8" }}>
+          {translate("page.share_post.approximate_score")}
+        </Typography>
+
+        <ScoreBadge isLoading={loading} value={score}></ScoreBadge>
+      </Stack>
+      {!isValid && !loading ? (
+        <Stack
+          direction="row"
+          spacing={0.5}
+          alignItems="center"
+          flexWrap="wrap"
+          whiteSpace="nowrap"
+        >
+          <ErrorOutline sx={{ fontSize: "0.9rem", opacity: 0.5 }} />
+          <Typography sx={{ opacity: 0.5 }} variant="h5">
+            {translate("page.share_post.approximate_score_invalid")}
+          </Typography>
+        </Stack>
+      ) : (
+        <Stack
+          direction="row"
+          spacing={0.5}
+          alignItems="center"
+          flexWrap="wrap"
+          whiteSpace="nowrap"
+        >
+          <HelpOutlineOutlined sx={{ fontSize: "0.9rem", opacity: 0.5 }} />
+          <Typography sx={{ opacity: 0.5 }} variant="h5">
+            {translate("page.share_post.approximate_score_valid")}
+          </Typography>
+        </Stack>
+      )}
     </Stack>
   );
 };

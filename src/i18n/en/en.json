@@ -146,7 +146,9 @@
     },
     "share_post": {
       "share_post": "Share Post",
-      "approximate_score": "Approximate score",
+      "approximate_score": "Approximate Score",
+      "approximate_score_valid": "The highest score you can get",
+      "approximate_score_invalid": "Calculated when the post is valid",
       "toast": {
         "post_created": "Your post successfully created "
       }

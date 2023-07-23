@@ -1,5 +1,4 @@
 import Tabs from "@mui/material/Tabs";
-import TabPanel from "@mui/lab/TabPanel";
 import { Box, Tab, useTheme } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslate } from "../../../hooks/useTranslate";
@@ -106,6 +105,9 @@ const ProfileTabs = ({
           marginX: { xs: "6px", md: 2 },
           borderRadius: "10px",
           paddingX: "6px",
+          ".MuiTabs-flexContainer": {
+            justifyContent: "space-between",
+          },
           ".Mui-selected": {
             fontWeight: 600,
             color: theme.palette.text.secondary + " !important",
@@ -114,9 +116,9 @@ const ProfileTabs = ({
             backgroundColor: theme.palette.secondary.main,
           },
           ".MuiTab-root": {
-            flex: getTabs.length > 1 ? 1 : "unset",
             whiteSpace: "nowrap",
             fontSize: "0.8rem",
+            width: "unset !important",
           },
         }}
         onChange={handleChange}

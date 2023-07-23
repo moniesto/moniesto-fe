@@ -1,6 +1,5 @@
 import { Avatar, Button, Card, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import StarIcon from "@mui/icons-material/Star";
 import LocationText from "../../../components/shared/common/locationText";
 import ProfileTabs from "./profileTabs";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
@@ -59,6 +58,13 @@ const Profile = () => {
     }
     getAccount(username);
   }, [username, dispatch, getAccount]);
+
+  const handleSubscribtionModalClose = (result: boolean) => {
+    setIsSubscribeModalOpen(false);
+    // if(result){
+    //   if(profileState.isSubscribed)
+    // }
+  };
 
   return (
     <Box sx={{ position: "relative", minHeight: "20vh" }}>
@@ -169,9 +175,7 @@ const Profile = () => {
         </Card>
       )}
       {isSubscribeModalOpen && (
-        <SubscribeToMoniest
-          handleClose={() => setIsSubscribeModalOpen(false)}
-        />
+        <SubscribeToMoniest handleClose={handleSubscribtionModalClose} />
       )}
     </Box>
   );

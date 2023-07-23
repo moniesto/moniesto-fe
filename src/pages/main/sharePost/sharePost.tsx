@@ -292,10 +292,10 @@ export const SharePost = () => {
           <Typography variant="h2" pb={1.4}>
             {translate("page.share_post.share_post")}
           </Typography>
-          <ApproximateScore
+          {/* <ApproximateScore
             isValid={formik.isValid}
             post={formik.values as Post}
-          ></ApproximateScore>
+          ></ApproximateScore> */}
         </Stack>
         <Divider></Divider>
       </Stack>
@@ -696,6 +696,13 @@ export const SharePost = () => {
                 <Stack>+ {translate("form.field.add_desc")}</Stack>
               </Card>
             )}
+
+            <Box>
+              <ApproximateScore
+                isValid={formik.isValid}
+                post={formik.values as Post}
+              ></ApproximateScore>
+            </Box>
 
             <Stack>
               <LoadingButton

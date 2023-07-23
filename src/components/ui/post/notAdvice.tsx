@@ -60,23 +60,28 @@ export const NotAdvice = () => {
               padding: "30px 20px 20px",
             }}
           >
-            <Stack alignItems="center" spacing={1.3}>
-              <Box>
+            <Stack alignItems="center" spacing={4}>
+              <Stack gap={2} alignItems="center">
                 <WarningOutlined
                   sx={{
                     padding: "6px",
                     borderRadius: "100%",
                     width: "40px",
                     height: "40px",
-                    background: theme.palette.warning.light,
-                    color: theme.palette.warning.main,
+                    background: "var(--color-yellow-light)",
+                    color: "var(--color-yellow-primary)",
                   }}
                 />
-              </Box>
-              <Typography variant="h3">
-                {translate("component.not_advice.header")}
-              </Typography>
-              <Typography variant="h4" textAlign="center" sx={{ opacity: 0.5 }}>
+                <Typography variant="h2">
+                  {translate("component.not_advice.header")}
+                </Typography>
+              </Stack>
+
+              <Typography
+                variant="h4"
+                sx={{ opacity: 0.6 }}
+                paddingX={{ xs: 0.5, md: 2 }}
+              >
                 {translate("component.not_advice.message")}
               </Typography>
               <Button
