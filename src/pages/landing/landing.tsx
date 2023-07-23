@@ -5,8 +5,7 @@ import { FAQ } from "../../components/ui/landing/faq";
 import { Hero } from "../../components/ui/landing/hero/hero";
 import { Footer } from "../../components/ui/landing/footer";
 import { About } from "../../components/ui/landing/about";
-import { Pricing } from "../../components/ui/landing/pricing";
-import { WhoWeAre } from "../../components/ui/landing/whoWeAre";
+import { PaymentMethod } from "../../components/ui/landing/paymentMethod";
 import { Contact } from "../../components/ui/landing/contact";
 
 export const Landing = () => {
@@ -19,16 +18,11 @@ export const Landing = () => {
         color: theme.palette.primary.main,
         display: "flex",
         flexDirection: "column",
-        // gap: "5rem",
       }}
     >
       <Hero></Hero>
       <About></About>
-      <Pricing></Pricing>
-      <WhoWeAre></WhoWeAre>
-      <Box>
-        <img width="100%" src="images/landing/divider_bg.png" alt="" />
-      </Box>
+      <PaymentMethod />
       <FAQ></FAQ>
       <Contact></Contact>
       <Footer></Footer>

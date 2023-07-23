@@ -8,7 +8,7 @@ export const StarCanvas = () => {
     let screen: any, stars: Star[];
     let params = {
       speed: 2,
-      number: window.innerWidth < 720 ? 80 : 120,
+      number: window.innerWidth < 720 ? 60 : 120,
       extinction: 4,
     };
 

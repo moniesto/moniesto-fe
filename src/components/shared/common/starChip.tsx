@@ -18,7 +18,7 @@ export const StarChip = (props: TypeStarChipProps) => {
           sx={{
             marginLeft: "10px",
             fontSize: "1.10rem",
-            color: "#FED839 !important",
+            color: "var(--binance-color) !important",
           }}
         />
       }

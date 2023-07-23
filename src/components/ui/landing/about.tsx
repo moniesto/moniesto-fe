@@ -1,23 +1,34 @@
-import { Box, Card, Container, Stack } from "@mui/material";
-import { SectionBadge } from "./sectionBadge";
+import { Box, Container, Stack } from "@mui/material";
 import {
-  ArchitectureOutlined,
   DoneAllOutlined,
-  GroupOutlined,
   HowToRegOutlined,
   PriceCheckOutlined,
-  RocketLaunchOutlined,
-  VisibilityOutlined,
 } from "@mui/icons-material";
-import { Trans } from "react-i18next";
 import { useTranslate } from "../../../hooks/useTranslate";
 
 export const About = () => {
   const translate = useTranslate();
 
+  const discoverSections = [
+    {
+      img_source: "vector-grades.svg",
+      sectionKey: "subscribe",
+    },
+    {
+      img_source: "vector-invest.svg",
+      sectionKey: "see_analysis",
+    },
+  ];
+
+  const becomeMoniestSteps = [
+    <PriceCheckOutlined />,
+    <HowToRegOutlined />,
+    <DoneAllOutlined />,
+  ];
+
   return (
     <Box mt={-6} minHeight="100vh" id="about" component="section">
-      <Box sx={{ background: "#26283d" }}>
+      <Box sx={{ background: "var(--theme-color-primary)" }}>
         <Box padding="6rem 0 3rem">
           <Container maxWidth="lg">
             <Stack
@@ -27,121 +38,87 @@ export const About = () => {
               alignItems="center"
             >
               <Box
-                letterSpacing={2}
-                fontSize={40}
-                lineHeight="50px"
+                letterSpacing={3}
+                lineHeight={{ md: "55px", xs: "46px" }}
+                fontSize={{ md: 44, xs: 38 }}
                 mb={0}
                 component="h1"
                 sx={{
-                  backgroundImage: "linear-gradient(to left, white, #22d4b3)",
+                  backgroundImage:
+                    "linear-gradient(to left, white, var(--theme-color-secondary))",
                   color: "transparent",
                   backgroundClip: "text",
                 }}
               >
-                Moniesto'yu Keşfet
+                {translate("page.landing.about.discover.title")}
               </Box>
               <Box
                 fontSize={24}
                 sx={{ opacity: 0.9, maxWidth: 820 }}
-                lineHeight="42px"
+                lineHeight="36px"
                 component="h2"
                 letterSpacing={1}
               >
-                Kriptopara analizlerini paylaşan moniest'lar ile kriptopara
-                borsasına ilgi duyan insanların bir araya geldiği platform
+                {translate("page.landing.about.discover.desc")}
               </Box>
             </Stack>
 
             <Stack mt={10} gap={5} direction="row" flexWrap="wrap">
               <Stack flexWrap="wrap" flex={1} gap={3} flexDirection="row">
-                <Stack
-                  minWidth={300}
-                  flex={1}
-                  padding="5rem 2rem"
-                  borderRadius={1}
-                  sx={{ background: "white" }}
-                  boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                >
-                  <Stack alignItems="center" gap={3}>
-                    <Box maxWidth={320} minWidth={90}>
-                      <img
-                        width="100%"
-                        height="100%"
-                        src="./images/landing/new/vector-grades.svg"
-                        alt="vector-crypto-invest"
-                      />
-                    </Box>
-                    <Stack alignItems="center">
-                      <Box
-                        fontSize={30}
-                        lineHeight="40px"
-                        margin={0}
-                        component="h1"
-                      >
-                        Abone ol
+                {discoverSections.map((item) => (
+                  <Stack
+                    key={item.sectionKey}
+                    minWidth={300}
+                    flex={1}
+                    padding="5rem 2rem"
+                    borderRadius={1}
+                    sx={{ background: "white" }}
+                    boxShadow="var(--theme-shadow-primary)"
+                  >
+                    <Stack alignItems="center" gap={3}>
+                      <Box maxWidth={320} minWidth={90}>
+                        <img
+                          width="100%"
+                          height="100%"
+                          src={`./images/landing/${item.img_source}`}
+                          alt="vector-crypto-invest"
+                        />
                       </Box>
-                      <Box
-                        textAlign="center"
-                        maxWidth={360}
-                        mb={0}
-                        component="h3"
-                        lineHeight="24px"
-                        letterSpacing="1px"
-                        sx={{ opacity: 0.6 }}
-                      >
-                        Senin için en uygun puan ve ücreti olan moniest'ı bul
-                      </Box>
+                      <Stack alignItems="center">
+                        <Box
+                          fontSize={30}
+                          lineHeight="40px"
+                          margin={0}
+                          component="h1"
+                        >
+                          {translate(
+                            `page.landing.about.discover.${item.sectionKey}.title`
+                          )}
+                        </Box>
+                        <Box
+                          textAlign="center"
+                          maxWidth={360}
+                          mb={0}
+                          component="h3"
+                          lineHeight="24px"
+                          letterSpacing="1px"
+                          sx={{ opacity: 0.6 }}
+                        >
+                          {translate(
+                            `page.landing.about.discover.${item.sectionKey}.desc`
+                          )}
+                        </Box>
+                      </Stack>
                     </Stack>
                   </Stack>
-                </Stack>
-                <Stack
-                  minWidth={300}
-                  flex={1}
-                  padding="5rem 2rem"
-                  borderRadius={1}
-                  sx={{ background: "white" }}
-                  boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                >
-                  <Stack alignItems="center" gap={3}>
-                    <Box maxWidth={320} minWidth={90}>
-                      <img
-                        width="100%"
-                        height="100%"
-                        src="./images/landing/new/vector-invest.svg"
-                        alt="vector-crypto-invest"
-                      />
-                    </Box>
-                    <Stack alignItems="center">
-                      <Box
-                        fontSize={30}
-                        lineHeight="40px"
-                        margin={0}
-                        component="h1"
-                      >
-                        Analizlerini gör
-                      </Box>
-                      <Box
-                        textAlign="center"
-                        maxWidth={360}
-                        mb={0}
-                        component="h3"
-                        lineHeight="24px"
-                        letterSpacing="1px"
-                        sx={{ opacity: 0.6 }}
-                      >
-                        Abone olduğun moniest'ın analizlerine gör ve
-                        yatırımlarına yön ver
-                      </Box>
-                    </Stack>
-                  </Stack>
-                </Stack>
+                ))}
               </Stack>
             </Stack>
           </Container>
         </Box>
       </Box>
       <Container maxWidth="lg">
-        <Box minHeight="100vh" my={20}>
+        <Box my={20}>
           <Stack
             gap={15}
             alignItems="center"
@@ -158,7 +135,7 @@ export const About = () => {
                 <img
                   width="100%"
                   height="100%"
-                  src="./images/landing/new/mobile.png"
+                  src="./images/landing/mobile.png"
                   alt="vector-crypto-invest"
                 />
                 <Box
@@ -178,7 +155,7 @@ export const About = () => {
                     }}
                     width="100%"
                     height="100%"
-                    src="./images/landing/new/mobile-moniest.png"
+                    src="./images/landing/mobile-moniest.png"
                     alt="vector-crypto-invest"
                   />
                 </Box>
@@ -188,62 +165,55 @@ export const About = () => {
             <Stack flex={2}>
               <Box
                 sx={{
-                  backgroundImage: "linear-gradient(to left, #26283d, #22d4b3)",
+                  backgroundImage:
+                    "linear-gradient(to left, var(--theme-color-primary), var(--theme-color-secondary))",
                   color: "transparent",
                   backgroundClip: "text",
                 }}
-                fontSize={70}
-                lineHeight="80px"
+                fontSize={{ md: 54, xs: 44 }}
+                lineHeight={{ md: "68px", xs: "56px" }}
                 marginTop={0}
                 marginBottom={2}
                 component="h1"
               >
-                Moniest Ol
+                {translate("page.landing.about.be_moniest.title")}
               </Box>
               <Box
                 sx={{ opacity: 0.8 }}
-                fontSize={30}
-                lineHeight="40px"
+                fontSize={{ md: 30, xs: 25 }}
+                lineHeight={{ md: "40px", xs: "34px" }}
                 marginTop={1}
                 component="h1"
               >
-                Kriptopara borsasında bilgi sahibiysen ve para kazanmak
-                istiyorsan
+                {translate("page.landing.about.be_moniest.desc")}
               </Box>
               <Stack mt={3} gap={2}>
-                <Stack
-                  padding={2}
-                  border="1px solid #22d4b3"
-                  borderRadius="10px"
-                  gap={2}
-                  direction="row"
-                  alignItems="center"
-                >
-                  <PriceCheckOutlined sx={{ fontSize: 30 }} />
-                  <Box component="h2">Ücretini belirle</Box>
-                </Stack>
-                <Stack
-                  padding={2}
-                  border="1px solid #22d4b3"
-                  borderRadius="10px"
-                  gap={2}
-                  direction="row"
-                  alignItems="center"
-                >
-                  <HowToRegOutlined sx={{ fontSize: 30 }} />
-                  <Box component="h2">Binance ID'ni gir</Box>
-                </Stack>
-                <Stack
-                  padding={2}
-                  border="1px solid #22d4b3"
-                  borderRadius="10px"
-                  gap={2}
-                  direction="row"
-                  alignItems="center"
-                >
-                  <DoneAllOutlined color="secondary" sx={{ fontSize: 30 }} />
-                  <Box component="h2">Analizlerini dünyaya göster</Box>
-                </Stack>
+                {becomeMoniestSteps.map((item, i) => (
+                  <Stack
+                    key={"step_" + i}
+                    padding={2}
+                    border="1px solid var(--theme-color-secondary)"
+                    borderRadius="10px"
+                    gap={2}
+                    direction="row"
+                    alignItems="center"
+                  >
+                    <Box
+                      sx={{
+                        ".MuiSvgIcon-root": {
+                          fontSize: 30,
+                          color: "var(--theme-primary-color)",
+                        },
+                      }}
+                    >
+                      {item}
+                    </Box>
+
+                    <Box component="h2">
+                      {translate(`page.landing.about.be_moniest.step${i + 1}`)}
+                    </Box>
+                  </Stack>
+                ))}
               </Stack>
             </Stack>
           </Stack>

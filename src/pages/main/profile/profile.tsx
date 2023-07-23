@@ -133,21 +133,23 @@ const Profile = () => {
                           <Typography variant="h3">
                             {profileState.account.fullname}
                           </Typography>
-                          <Typography
-                            ml={1.5}
-                            display="flex"
-                            alignItems="center"
-                            variant="h6"
-                          >
-                            <StarIcon
-                              sx={{
-                                marginRight: "3px",
-                                fontSize: "1rem",
-                                color: "#FED839 !important",
-                              }}
-                            />
-                            {profileState.account.moniest?.score || 0}
-                          </Typography>
+                          {profileState.account.moniest && (
+                            <Typography
+                              ml={1.5}
+                              display="flex"
+                              alignItems="center"
+                              variant="h6"
+                            >
+                              <StarIcon
+                                sx={{
+                                  marginRight: "3px",
+                                  fontSize: "1rem",
+                                  color: "var(--binance-color) !important",
+                                }}
+                              />
+                              {profileState.account.moniest?.score || 0}
+                            </Typography>
+                          )}
                         </Stack>
 
                         <Typography sx={{ opacity: 0.8 }} variant="h5">

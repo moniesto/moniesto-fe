@@ -71,74 +71,61 @@
     },
     "landing": {
       "invest_wisely": "Akıllıca Yatırım Yap",
-      "discover_power": "Daha iyi yatırım kararları almak için moniest analizlerinin gücünü keşfedin.",
+      "discover_power": "Kripto Para Yatırımlarına Yön Ver",
       "actions": {
         "login": "Giriş Yap",
         "get_start": "Şimdi Başla",
-        "learn_more": "Daha Fazla öğren"
+        "learn_more": "Daha Fazla Öğren"
       },
       "links": {
         "about": "Hakkımızda",
-        "pricing": "Fiyatlandırma",
+        "payment": "Ödeme Yöntemi",
         "faq": "SSS",
         "contact": "İletişim",
         "terms": "Şartlar",
         "privacy_policy": "Gizlilik Politikası"
+      }, 
+      "about":{
+        "discover":{
+          "title":"Moniesto'yu Keşfet",
+          "desc":"Kripto para analizlerini paylaşanlar ile kripto para borsasında yatırım yapan insanların bir araya geldiği platform",
+          "subscribe":{
+            "title":"Abone ol",
+            "desc":"Senin için en uygun puan ve ücreti olan moniest'ı bul"
+          },
+          "see_analysis":{
+            "title":"Analizleri gör",
+            "desc":"Abone olduğun moniest'ın analizlerini gör ve yatırımlarına yön ver"
+          }
+        },
+        "be_moniest":{
+          "title":"Moniest Ol, Analizlerin Paraya Dönüşsün",
+          "desc":"Kripto para borsasında bilgi sahibiysen ve para kazanmak istiyorsan",
+          "step1":"Ücretini belirle",
+          "step2":"Binance ID'ni gir",
+          "step3":"Analizlerini dünyaya göster"
+        }
       },
-      "why_moniesto": {
-        "title": "Neden Moniesto",
-        "header": "Kripto para piyasasından eyleme dönüştürülebilir analizler elde edin",
-        "message": "Moniesto, kripto para piyasasında uzmanlaşmış deneyimli danışmanlardan uzman tavsiyeleri sunarak yatırımcıların güvenilir ve güncel bilgiler almasını sağlar.."
-      },
-      "for_investors": {
-        "title": "Yatırımcılar için",
-        "header": "Profesyoneller gibi yatırım yapın",
-        "message": "Kripto para yatırımlarınızı bir sonraki seviyeye taşıyın ve Moniesto ile para kazanın. Uygulamamız, kullanıcıları kripto paraların gelecekteki fiyatı hakkında tahminler ve analizler sağlayan Moniest'lar ile buluşturuyor."
-      },
-      "for_moniest": {
-        "title": "Moniest için",
-        "header": "Kripto Uzmanı? Moniest Ol",
-        "message": "Bir uzman olarak Moniesto topluluğuna katılın. Moniesto'da bir Moniest olarak, analizlerinizi abonelerinizle paylaşma ve sevdiğiniz şeyi yaparak para kazanma fırsatına sahip olacaksınız.."
-      },
-      "scoring_algorithm": {
-        "title": "Puanlama Algoritması",
-        "header": "AI Algoritması: Yatırımlarınız İçin Ne İfade Ediyor?",
-        "message": "Yapay zeka destekli puanlama algoritmamızın büyüleyici gücünü keşfedin. Gelişmiş teknolojimiz puanları doğruluğa dayalı olarak atadığından, Monest'lerin tahminlerini hassasiyetle değerlendirin. <br /> <br /> En iyi performans gösterenleri bulun, bilinçli kararlar verin ve harika AI inovasyonumuzla bir adım önde olun."
-      },
-      "pricing": {
-        "title": "Fiyatlandırma",
-        "header": "Fiyatlandırma Monest'lara bağlıdır.",
-        "message": "Moniest'lar, kullanıcıların kripto tavsiyelerine erişmeleri için kendi abonelik ücretlerini belirlerler. Hem Moniest'lara hem de kullanıcılara fayda sağlayan adil bir fiyatlandırma stratejisine inanıyoruz. <br /> <br /> Bu, kullanıcıların uzmanlıklarını ve geçmiş performanslarını yansıtan fiyatlarla Moniest'lardan yüksek kaliteli tavsiyelere erişmelerini sağlar. Moniest'lar ise değerli analizlerini kullanıcılarla paylaşarak para kazanabilir."
-      },
-      "who_we_are": {
-        "title": "Biz kimiz?",
-        "message": "Kripto para birimleri ile ilgilenen kişileri Moniest adlı uzmanlarla buluşturuyoruz. Amacımız kripto eğitimini basitleştirmek ve insanların yatırımlar hakkında bilinçli kararlar almasına yardımcı olmaktır."
-      },
-      "who_we_are_not": {
-        "title": "Biz kim değiliz?",
-        "message": "Moniesto bir finansal danışmanlık firması veya yatırım uygulaması değildir. <br /> <br /> Kendimiz yatırım tavsiyesi vermiyoruz veya kullanıcılarımız adına yatırım kararları vermiyoruz. <br /> <br /> Moniest'lar tarafından sağlanan tavsiyelerin doğruluğundan veya güvenilirliğinden sorumlu değiliz."
+      "payment":{
+        "title":"Kripto ile Ödeme Yapın ve Ödeme Alın",
+        "sub_title":"Kripto ile abone olabilirsin!",
+        "desc":"Binance Pay, Binance tarafından tasarlanan temassız, sınırsız ve güvenli bir kripto para birimi ödeme teknolojisidir."
       },
       "faq": {
-        "title": "Sıkça Sorulan Sorular",
-        "header": "Moniesto hakkında bilmeniz gereken her şey.",
-        "questions": {
-          "question1": "Moniesto nedir ve nasıl çalışır?",
-          "answer1": "Moniesto, kullanıcıları kripto para birimleri hakkında finansal tavsiye sağlayan uzmanlarla (Moniest) buluşturan bir platformdur. Moniest tahminler oluşturur ve kullanıcılar bu tahminleri görmek için Moniest'e abone olur. AI algoritmamız, tahminin doğruluğunu sürekli olarak kontrol eder ve kullanıcıyı bilgilendirir.",
-          "question2": "Moniesto'da nasıl Moniest olurum?",
-          "answer2": "Platformumuzda Moniest olmak için kayıt olduktan sonra içeriden bir form doldurup gönderebilirsiniz. Ardından, tahminlerinizi kullanıcılarla paylaşmaya hazırsınız.",
-          "question3": "Puanlama algoritmamız nedir? Yapay Zeka",
-          "answer3": "Yapay Zeka algoritmamız, Moniest'lar tarafından yapılan tahminlerin doğruluğunu analiz etmek ve başarı oranlarına göre bir puan sağlamak için tasarlanmıştır. Bu, en güvenilir ve doğru Moniest'ları belirlememize yardımcı olur, böylece kullanıcılarımız yatırımları hakkında bilinçli kararlar alabilirler.",
-          "question4": "Abone olmadan önce Moniest puanını görebilir miyim?",
-          "answer4": "Evet, bir Moniest'a abone olmadan önce profil sayfalarında puanlarını görebilirsiniz. Bu, hangi Moniest'a abone olacağınız konusunda bilinçli bir karar vermenize yardımcı olabilir. Abone olmadan önce eski tahminlerini ve sonuçlarını bile görebilirsiniz.",
-          "question5": "Bir Moniest'a nasıl abone olurum?",
-          "answer5": "Bir Moniest'a, profil sayfasını ziyaret ederek ve abone ol düğmesine tıklayarak abone olabilirsiniz. Tahminlerine erişim için Moniest'in abonelik ücretini ödeyeceksiniz.",
-          "question6": "Aboneliğimi nasıl iptal ederim?",
-          "answer6": "Moniest profiline gidip 'Abone oldum' düğmesine ve diyalogdaki 'Aboneliği iptal et' düğmesine tıklayarak aboneliğinizi istediğiniz zaman iptal edebilirsiniz. Aboneliğinizi iptal etmenin gelecekteki ödemeleri durduracağını ve bu Moniest'in tahminine erişiminizi kaybedeceğinizi lütfen unutmayın."
-        }
+      "title": "Sıkça Sorulan Sorular",
+      "questions": {
+        "question1": "Moniesto'da nasıl Moniest olurum?",
+        "answer1": "Platformumuza kayıt olduktan sonra birkaç adımda moniest olabilirsin. Ardından, analizlerini kullanıcılarla paylaşmaya hazırsınız. Şimdilik ödemeleri sadece Binance üzerinden yaptığımızdan dolayı Binance kullanıcısı olmak zorunludur.",
+        "question2": "Puanlama sistemi nasıl işliyor?",
+        "answer2": "Yapay Zeka  destekli algoritmamız, Moniest'lar tarafından yapılan analizlerin doğruluğunu tespit etmek ve başarı oranlarına göre bir puan sağlamak için tasarlanmıştır. Bu, en güvenilir ve doğru Moniest'ları belirlememize yardımcı olur.",
+        "question3": "Abone olmadan önce Moniest puanını görebilir miyim?",
+        "answer3": "Evet, bir Moniest'a abone olmadan önce profil sayfalarında puanlarını görebilirsiniz. Bu, hangi Moniest'a abone olacağınız konusunda bilinçli bir karar vermenize yardımcı olabilir. Abone olmadan önce eski analizlerini ve sonuçlarını bile görebilirsiniz.",
+        "question4": "Bir Moniest'a nasıl abone olurum?",
+        "answer4": "Moniest'ın profilinden, ona kaç aylık abone olacağınızı belirleyin. Daha sonra abonelik ücretini, sizi otomatik olarak yönlendireceğimiz binance üzerinden ödedikten sonra analizlerine erişebilirsiniz."      }
       },
       "still_question": {
         "title": "Hala sorularınız mı var?",
-        "header": "Aradığınız cevabı bulamıyor musunuz? Lütfen güler yüzlü ekibimizle sohbet edin.",
+        "header": "Soruların ve taleplerin için bizimle her zaman iletişime geçebilirsin",
         "action": "Bize Ulaş"
       },
       "all_rights_reserved": "Bütün hakları saklıdır."

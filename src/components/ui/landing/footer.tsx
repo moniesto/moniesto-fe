@@ -1,6 +1,5 @@
 import { Box, Button, Container, Stack } from "@mui/material";
 import BrandText from "../../shared/common/brandText";
-import { Trans } from "react-i18next";
 import {
   CopyrightOutlined,
   Facebook,
@@ -24,29 +23,45 @@ export const Footer = () => {
   return (
     <Box component="footer">
       <Container maxWidth="xl">
-        <Box paddingX={{ md: 5, xs: 2 }}>
-          <Stack flexWrap="wrap" direction="row" justifyContent="space-between">
-            <Stack>
+        <Box paddingTop="5rem" paddingX={{ xs: 0, md: 6 }}>
+          <Stack
+            flexWrap="wrap"
+            direction="row"
+            justifyContent={{ xs: "center", md: "space-between" }}
+          >
+            <Stack
+              alignItems={{ xs: "center", md: "unset" }}
+              textAlign={{ xs: "center", md: "unset" }}
+            >
               <BrandText sx={{ color: theme.palette.primary.main }}></BrandText>
               <Box
-                component="h4"
-                sx={{ opacity: 0.6, maxWidth: 300, paddingBottom: 2 }}
+                component="h3"
+                lineHeight="24px"
+                marginTop="10px"
+                sx={{ opacity: 0.6, maxWidth: 350, paddingBottom: 2 }}
               >
-                <Trans i18nKey="page.landing.discover_power"></Trans>
+                {translate("page.landing.discover_power")}
               </Box>
               <Stack
                 spacing={3}
                 sx={{
                   ">div": {
+                    fontSize: 16,
                     fontWeight: 600,
                     cursor: "pointer",
                     opacity: 0.8,
                     whiteSpace: "nowrap",
                   },
+                  background: {
+                    xs: "var(--theme-background-secondary-light)",
+                    md: "unset",
+                  },
+                  padding: { xs: "10px", md: "unset" },
+                  borderRadius: { xs: "10px", md: "unset" },
                 }}
                 direction="row"
                 flexWrap="wrap"
-                justifyContent={{ xs: "center" }}
+                justifyContent={{ xs: "center", md: "unset" }}
                 gap={{ xs: 2 }}
                 margin={{ xs: "20px 0 50px", md: 0 }}
               >

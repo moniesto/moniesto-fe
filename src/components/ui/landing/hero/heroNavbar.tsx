@@ -23,7 +23,8 @@ export const HeroNavbar = () => {
         sx={{
           li: {
             cursor: "pointer",
-            fontWeight: { xs: 600 },
+            fontWeight: 600,
+            fontSize: 16,
           },
         }}
         direction={{ xs: "column", md: "row" }}
@@ -94,7 +95,6 @@ export const HeroNavbar = () => {
             alignItems="center"
             justifyContent="space-between"
           >
-            {/* <img alt="logo" height={80} src="./images/logo-no-background.svg"></img> */}
             <BrandText
               onClick={() => navigateScroll("navbar", "start")}
               sx={{ color: theme.palette.primary.main }}

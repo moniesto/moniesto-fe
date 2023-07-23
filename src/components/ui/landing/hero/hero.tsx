@@ -1,5 +1,4 @@
 import { Box, Button, Container, Stack } from "@mui/material";
-import { Trans } from "react-i18next";
 import { useTranslate } from "../../../../hooks/useTranslate";
 import { useTheme } from "@mui/system";
 import Navigator from "../../../shared/common/navigatior";
@@ -38,24 +37,25 @@ export const Hero = () => {
               component="h1"
               textAlign="center"
               sx={{
-                fontSize: { xs: 70, md: 100 },
-                lineHeight: { xs: "80px", md: "110px" },
-                backgroundImage: "linear-gradient(to left, #26283d, #22d4b3)",
+                fontSize: { xs: 60, md: 100 },
+                lineHeight: { xs: "70px", md: "110px" },
+                backgroundImage:
+                  "linear-gradient(to left, var(--theme-color-primary), var(--theme-color-secondary))",
                 color: "transparent",
                 backgroundClip: "text",
                 margin: "0",
               }}
             >
-              <Trans i18nKey="page.landing.invest_wisely"></Trans>
+              {translate("page.landing.invest_wisely")}
             </Box>
             <Box
               component="h3"
               textAlign="center"
-              fontSize={26}
-              sx={{ letterSpacing: "1px", lineHeight: "35px", opacity: 0.8 }}
+              fontSize={{ xs: 24, md: 26 }}
+              lineHeight={{ xs: "32px", md: "36px" }}
+              sx={{ letterSpacing: "1px", opacity: 0.8 }}
             >
-              Kriptopara Borsasındaki Yatırımlarına Yön Ver
-              {/* <Trans i18nKey="page.landing.discover_power"></Trans> */}
+              {translate("page.landing.discover_power")}
             </Box>
 
             <Stack mt="3rem" direction="row" alignItems="center" spacing={2}>
@@ -96,14 +96,13 @@ export const Hero = () => {
           <Box zIndex={2}>
             <img
               style={{
-                boxShadow:
-                  "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+                boxShadow: "var(--theme-shadow-primary)",
                 maxHeight: 430,
                 borderRadius: "10px",
               }}
               height="100%"
               width="100%"
-              src="./images/landing/new/desktop.png"
+              src="./images/landing/desktop.png"
               alt="desktop"
             />
           </Box>

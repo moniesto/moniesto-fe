@@ -68,6 +68,9 @@ export default function componentStyleOverrides(theme: any) {
       },
       styleOverrides: {
         root: {
+          "&::-webkit-scrollbar": {
+            width: 0,
+          },
           background:
             theme.mode === "light"
               ? theme.colors.paper

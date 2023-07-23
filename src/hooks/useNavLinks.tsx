@@ -16,7 +16,7 @@ export const useNavLinks = () => {
         },
         {
           id: "pricing",
-          name: translate("page.landing.links.pricing"),
+          name: translate("page.landing.links.payment"),
           position: "center",
         },
         {

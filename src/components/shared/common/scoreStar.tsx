@@ -7,7 +7,7 @@ export const ScoreStar = () => {
         marginLeft: "0 !important",
         paddingBottom: "2px",
         fontSize: "1.1rem",
-        color: "#FED839 !important",
+        color: "var(--binance-color) !important",
       }}
     />
   );
