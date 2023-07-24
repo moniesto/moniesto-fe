@@ -61,6 +61,7 @@ const Profile = () => {
 
   const handleSubscribtionModalClose = (result: boolean) => {
     setIsSubscribeModalOpen(false);
+    // TODO  polling
     // if(result){
     //   if(profileState.isSubscribed)
     // }

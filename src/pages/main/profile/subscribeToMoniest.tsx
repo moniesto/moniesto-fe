@@ -42,7 +42,10 @@ export const SubscribeToMoniest = ({
         number_of_months: month,
       })
       .then((res) => {
-        window.open(res.universal_link, "_blank");
+        setTimeout(() => {
+          window.open(res.universal_link, "_blank");
+        });
+
         // dispatch(setIsSubscribed(true));
         handleClose(true);
       })
