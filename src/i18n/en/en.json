@@ -220,8 +220,16 @@
         "to": "Subscribe to ",
         "from": "Unsubscribe from",
         "monthly": "Monthly",
+        "subscribtion_month":"Subscription time (Month)",
+        "payment_method":{
+          "desc":"Payment method",
+          "bank":"Bank",
+          "binance_pay":"Binance Pay"
+        },
         "monthly_payment": "Monthly payment",
         "subs_start_date": "Subscription start date",
+        "subs_end_date": "Subscription end date",
+        "subs_desc":"The total of the months you set will be withdrawn from your account in one go and will be paid monthly to moniest. When you want to cancel, it will be credited back to your account if you have any remaining months. Subscription does not automatically renew after it expires.",
         "total": "Total",
         "paying_currently": "You are paying {{fee}}$/Month currently",
         "if_unsubscribe": "If you unsubscribe from {{username}}, you will no longer be able to access content shared by this account for subscribers."

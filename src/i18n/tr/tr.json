@@ -204,8 +204,16 @@
         "to": "Abone ol",
         "from": "Abonelikten çık",
         "monthly": "Aylık",
+        "subscribtion_month":"Abonelik süresi (Ay)",
+        "payment_method":{
+          "desc":"Ödeme yöntemi",
+          "bank":"Banka",
+          "binance_pay":"Binance Ödeme"
+        },
         "monthly_payment": "Aylık ödeme",
         "subs_start_date": "Abonelik Başlangıç Tarihi",
+        "subs_end_date": "Abonelik Bitiş Tarihi",
+        "subs_desc":"Belirlediğiniz ayların toplamı hesabınızdan tek seferde çekilip aylık olarak moniest'a ödenecektir. İptal etmek istediğinizde, kalan aylarınız varsa hesabınıza geri aktarılacaktır. Abonelik, süresi bittikten sonra kendi kendine yenilenmez.",
         "total": "Toplam",
         "paying_currently": "Şu anda {{fee}} $/ay ödüyorsunuz",
         "if_unsubscribe": "{{username}} 'dan abonelikten çıkıyorsanız, artık hesap tarafından paylaşılan içeriğe erişemeyeceksiniz."

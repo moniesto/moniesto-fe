@@ -21,6 +21,23 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setIsSubscribed } from "../../../store/slices/profileSlice";
 import localStorageService from "../../../services/localStorageService";
 
+export const paymentMethods = [
+  {
+    value: "binance_pay",
+    image:
+      "https://res.cloudinary.com/dniupzza6/image/upload/v1690191200/Photo/BackgroundPhotos/d0ff38a6-6db5-4e3a-8de5-4a89cd42dec4.png",
+    text: "Binance Pay",
+    disabled: false,
+  },
+  {
+    value: "bank",
+    image:
+      "https://res.cloudinary.com/dniupzza6/image/upload/v1690218400/Photo/BackgroundPhotos/d9c786d2-4aa7-4e7e-a73a-cf421c3dd337.png",
+    text: "Bank",
+    disabled: true,
+  },
+];
+
 export const SubscribeToMoniest = ({
   handleClose,
 }: {
@@ -31,6 +48,7 @@ export const SubscribeToMoniest = ({
   const [loading, setLoading] = useState<boolean>(false);
   const profileState = useAppSelector((state) => state.profile);
   const [month, setMonth] = useState(1);
+  const [selectedMethod, setSelectedMethod] = useState(paymentMethods[0]);
   const dispatch = useAppDispatch();
 
   const handleSubscribe = () => {
@@ -134,16 +152,25 @@ export const SubscribeToMoniest = ({
           {!profileState.isSubscribed && (
             <Box>
               <Stack gap={2} justifyContent="space-between">
-                <Stack spacing={1} direction="row" alignItems="center">
+                <Stack
+                  sx={{
+                    background: "#eeeeee",
+                    padding: "4px 10px",
+                    borderRadius: "10px",
+                    minHeight: "50px",
+                  }}
+                  spacing={1}
+                  direction="row"
+                  alignItems="center"
+                >
                   <Typography flex={1} variant="h4">
-                    Abonelik süresi (Aylık)
+                    {translate("page.profile.subs_modal.subscribtion_month")}
                   </Typography>
                   <FormControl>
                     <Select
                       onChange={(event) => setMonth(Number(event.target.value))}
                       size="small"
                       value={month}
-                      placeholder="Abonelik süresi"
                       color="secondary"
                       name="type"
                     >
@@ -157,7 +184,93 @@ export const SubscribeToMoniest = ({
                     </Select>
                   </FormControl>
                 </Stack>
-                <Stack spacing={1} direction="row" alignItems="center">
+                <Stack
+                  sx={{
+                    background: "#eeeeee",
+                    padding: "4px 10px",
+                    borderRadius: "10px",
+                    minHeight: "50px",
+                  }}
+                  spacing={1}
+                  direction="row"
+                  alignItems="center"
+                >
+                  <Typography flex={1} variant="h4">
+                    {translate("page.profile.subs_modal.payment_method.desc")}
+                  </Typography>
+                  <FormControl>
+                    <Select
+                      value={selectedMethod.value}
+                      onChange={(event) =>
+                        setSelectedMethod(
+                          paymentMethods.find(
+                            (item) => item.value === event.target.value
+                          )!
+                        )
+                      }
+                      size="small"
+                      renderValue={() => {
+                        return (
+                          <Box
+                            alignItems="center"
+                            sx={{ display: "flex", gap: 1 }}
+                          >
+                            <Box
+                              justifyContent="center"
+                              width={60}
+                              display="flex"
+                              height={20}
+                            >
+                              <img
+                                src={selectedMethod.image}
+                                alt={selectedMethod.text}
+                              />
+                            </Box>
+                            {selectedMethod.text}
+                          </Box>
+                        );
+                      }}
+                    >
+                      {paymentMethods.map((item) => (
+                        <MenuItem
+                          disabled={item.disabled}
+                          key={item.value}
+                          value={item.value}
+                        >
+                          <Box
+                            alignItems="center"
+                            sx={{ display: "flex", gap: 1 }}
+                          >
+                            <Box
+                              justifyContent="center"
+                              width={60}
+                              display="flex"
+                              height={20}
+                            >
+                              <img src={item.image} alt={item.text} />
+                            </Box>
+
+                            {translate(
+                              `page.profile.subs_modal.payment_method.${item.value}`
+                            )}
+                          </Box>
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Stack>
+
+                <Stack
+                  sx={{
+                    background: "#eeeeee",
+                    padding: "4px 10px",
+                    borderRadius: "10px",
+                    minHeight: "50px",
+                  }}
+                  spacing={1}
+                  direction="row"
+                  alignItems="center"
+                >
                   <Typography flex={1} variant="h4">
                     {translate("page.profile.subs_modal.subs_start_date")}
                   </Typography>
@@ -168,9 +281,19 @@ export const SubscribeToMoniest = ({
                   </Typography>
                 </Stack>
 
-                <Stack spacing={1} direction="row" alignItems="center">
+                <Stack
+                  sx={{
+                    background: "#eeeeee",
+                    padding: "4px 10px",
+                    borderRadius: "10px",
+                    minHeight: "50px",
+                  }}
+                  spacing={1}
+                  direction="row"
+                  alignItems="center"
+                >
                   <Typography flex={1} variant="h4">
-                    Abonelik Bitiş Tarihi
+                    {translate("page.profile.subs_modal.subs_end_date")}
                   </Typography>
                   <Typography variant="h4" fontWeight={500}>
                     {finalDate}
@@ -197,11 +320,7 @@ export const SubscribeToMoniest = ({
 
               <Box>
                 <Typography variant="h5" sx={{ opacity: 0.8 }}>
-                  Belirlediğiniz ayların toplamı hesabınızdan tek seferde
-                  çekilip aylık olarak moniest'a ödenecektir. İptal etmek
-                  istediğinizde, kalan aylarınız varsa hesabınıza geri
-                  aktarılacaktır. Abonelik, süresi bittikten sonra kendi kendine
-                  yenilenmez.
+                  {translate("page.profile.subs_modal.subs_desc")}
                 </Typography>
               </Box>
             </Box>
@@ -223,20 +342,7 @@ export const SubscribeToMoniest = ({
               </Typography>
             </Box>
           ) : (
-            <Box>
-              {/* <Typography variant="h5" letterSpacing={0.5}>
-                Faturalandırma her ay otomatik olarak yenilenir. Kısmi fatura
-                dönemlerine ait ödemeler iade edilmez. Dilediğiniz zaman
-                Ayarlar'dan iptal edebilirsiniz. Daha fazla bilgi edinin.
-              </Typography>
-              <Typography variant="h5" letterSpacing={0.5} pt={1}>
-                Devam ederek 18 yaşından büyük olduğunuzu onaylar ve cayma
-                hakkınıza dair ayrıntıları içeren bu şartları kabul edersiniz.
-                Devam ederek Google Payments Hizmet Şartları hükümlerini kabul
-                edersiniz. Gizlilik Bildirimi hükümlerinde verilerinizin nasıl
-                kullanıldığı açıklanır.
-              </Typography> */}
-            </Box>
+            <Box>{/* test */}</Box>
           )}
           <Stack mt={3}>
             <LoadingButton

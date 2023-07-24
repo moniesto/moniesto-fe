@@ -27,8 +27,8 @@ export const PaymentMethod = () => {
             <img
               width="100%"
               height="100%"
-              src="https://n.alternativeairlines.com/_next/image?url=https%3A%2F%2Faltair.cdn.prismic.io%2Faltair%2F53c7b736-eb85-46bb-96ac-2aeae8a4956f_pay-wht-frame-h%25403x.svg&w=1920&q=80"
-              alt=""
+              src="https://res.cloudinary.com/dniupzza6/image/upload/v1690191200/Photo/BackgroundPhotos/d0ff38a6-6db5-4e3a-8de5-4a89cd42dec4.png"
+              alt="binance pay"
             />
           </Box>
           <Box
