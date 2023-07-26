@@ -74,28 +74,19 @@ const BeMoniest = () => {
       api.moniest
         .be_moniest(stepperState.data)
         .then((res) => {
-          dispatch(setUser(res));
           toastService.open({
             severity: "success",
-            message: translate("page.be_moniest.cong_moniest"),
+            message: "page.be_moniest.cong_moniest",
           });
           setIsConfettiVisible(true);
           setTimeout(() => {
-            navigate("/timeline");
-          }, 1000);
+            dispatch(setUser(res));
+            dispatch(resetMoniestStepper());
+          }, 1500);
         })
-        .catch(() => navigate("/timeline"))
-        .finally(() => {
-          dispatch(resetMoniestStepper());
-        });
+        .catch();
     }
-  }, [
-    dispatch,
-    navigate,
-    stepperState.activeStep,
-    stepperState.data,
-    translate,
-  ]);
+  }, [dispatch, stepperState.activeStep, stepperState.data]);
 
   const handleChangeVerifyEmailState = useCallback(() => {
     dispatch(setUser({ ...user, email_verified: true }));

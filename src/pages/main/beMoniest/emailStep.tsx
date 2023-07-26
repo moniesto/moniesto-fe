@@ -46,7 +46,12 @@ const EmailStep = ({ emailVerified, email, handleVerifyEmail }: propType) => {
 
   return (
     <Fly>
-      <Stack rowGap={2} justifyContent="center" alignItems="center">
+      <Stack
+        rowGap={2}
+        justifyContent="center"
+        textAlign="center"
+        alignItems="center"
+      >
         {emailVerified ? (
           <>
             <Fly.Item>

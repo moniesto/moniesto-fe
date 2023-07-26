@@ -145,7 +145,7 @@
       },
       "already_verified_email": "E-postanız zaten doğrulandı",
       "send_mailto": "{{email}} 'a e-posta gönderdik",
-      "check_mail": "Lütfen emailinizi kontrol edin",
+      "check_mail": "Lütfen email'inizi kontrol edin",
       "need_verify": "Monest olmak için e-posta adresinizi doğrulamanız gerekir",
       "verify_email": "E-posta'ı doğrula",
       "select_payout_method":"Abonelerinizin size hangi ödeme aracı ile ödeme yapacağını belirleyin.",
@@ -388,7 +388,8 @@
     "error": {
       "Account_CheckUsername_InvalidUsername": "Kullanıcı adı geçerli değil",
       "Post_CreatePost_InvalidTargets":"TP'ler geçerli değil",
-      "Moniest_CreateMoniest_InvalidBody":"Bu bilgiler moniest olmak için geçersiz"
+      "Moniest_CreateMoniest_InvalidBody":"Bu bilgiler moniest olmak için geçersiz",
+      "Account_EmailVerification_NotFoundToken":"E-posta doğrulama linki bozuk ya da geçersiz. Lütfen bir daha doğrulamayı deneyin."
     }
   }
 }

@@ -29,6 +29,7 @@ import { changeLanguage, setToken } from "../../store/slices/localStorageSlice";
 import { useTranslate } from "../../hooks/useTranslate";
 import configService from "../../services/configService";
 import { useUsernameValidation } from "../../hooks/useUsernameValidation";
+import { FormItem } from "../../components/shared/common/formItem";
 
 export const AccountSettings = () => {
   const user = useAppSelector((state) => state.user.user);
@@ -185,71 +186,89 @@ export const AccountSettings = () => {
       </CoverImageBox>
 
       <form onSubmit={formik.handleSubmit}>
-        <Stack mt={10} p={3} spacing={4}>
-          <Stack spacing={2}>
-            {usernameInput(
-              formik.values.username,
-              formik.handleChange,
-              formik.touched.username,
-              Boolean(formik.errors.username),
-              formik.errors.username
-            )}
-            <Stack direction="row" spacing={2}>
-              <TextField
-                fullWidth
-                id="fullname"
-                name="fullname"
-                placeholder={translate("form.field.fullname")}
-                value={formik.values.fullname}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={
-                  formik.touched.fullname && Boolean(formik.errors.fullname)
-                }
-                helperText={formik.touched.fullname && formik.errors.fullname}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <BadgeOutlined />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <TextField
-                fullWidth
-                id="location"
-                name="location"
-                placeholder={translate("form.field.location")}
-                value={formik.values.location}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <LocationOnOutlined />
-                    </InputAdornment>
-                  ),
-                }}
-                error={
-                  formik.touched.location && Boolean(formik.errors.location)
-                }
-                helperText={formik.touched.location && formik.errors.location}
-              />
-            </Stack>
-            <Stack direction="row" spacing={2}>
-              <Select
-                fullWidth
-                id="language"
-                name="language"
-                placeholder={translate("form.field.language")}
-                value={formik.values.language}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                startAdornment={<LanguageOutlined />}
+        <Stack mt={8} p={3} gap={4}>
+          <Stack>
+            <FormItem title={translate("form.field.username")}>
+              {usernameInput(
+                formik.values.username,
+                formik.handleChange,
+                formik.touched.username,
+                Boolean(formik.errors.username),
+                formik.errors.username
+              )}
+            </FormItem>
+
+            <Stack width="100%" direction="row" flexWrap="wrap" columnGap={2}>
+              <FormItem
+                sx={{ flex: 1, minWidth: 200 }}
+                title={translate("form.field.fullname")}
               >
-                <MenuItem value={"en"}>En</MenuItem>
-                <MenuItem value={"tr"}>Tr</MenuItem>
-              </Select>
+                <TextField
+                  fullWidth
+                  id="fullname"
+                  name="fullname"
+                  placeholder={translate("form.field.fullname")}
+                  value={formik.values.fullname}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.fullname && Boolean(formik.errors.fullname)
+                  }
+                  helperText={formik.touched.fullname && formik.errors.fullname}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <BadgeOutlined />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </FormItem>
+              <FormItem
+                sx={{ flex: 1, minWidth: 200 }}
+                title={translate("form.field.location")}
+              >
+                <TextField
+                  fullWidth
+                  id="location"
+                  name="location"
+                  placeholder={translate("form.field.location")}
+                  value={formik.values.location}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <LocationOnOutlined />
+                      </InputAdornment>
+                    ),
+                  }}
+                  error={
+                    formik.touched.location && Boolean(formik.errors.location)
+                  }
+                  helperText={formik.touched.location && formik.errors.location}
+                />
+              </FormItem>
+            </Stack>
+            <Stack direction="row" gap={2}>
+              <FormItem
+                sx={{ flex: 1 }}
+                title={translate("form.field.language")}
+              >
+                <Select
+                  fullWidth
+                  id="language"
+                  name="language"
+                  placeholder={translate("form.field.language")}
+                  value={formik.values.language}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  startAdornment={<LanguageOutlined />}
+                >
+                  <MenuItem value={"en"}>En</MenuItem>
+                  <MenuItem value={"tr"}>Tr</MenuItem>
+                </Select>
+              </FormItem>
             </Stack>
           </Stack>
 

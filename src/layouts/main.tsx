@@ -43,7 +43,12 @@ const MainLayout = () => {
         maxWidth="lg"
       >
         <Grid container item md={12}>
-          <Grid sx={{ display: { xs: "none", md: "block" } }} item md={3}>
+          <Grid
+            sx={{ display: { xs: "none", md: "block" } }}
+            item
+            md={3}
+            minWidth="282px"
+          >
             <Box sx={{ position: "fixed", width: "100%", maxWidth: "282px" }}>
               {sideBar}
             </Box>

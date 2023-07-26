@@ -406,7 +406,8 @@
     "error": {
       "Account_CheckUsername_InvalidUsername": "Username is invalid",
       "Post_CreatePost_InvalidTargets":"TP's are invalid",
-      "Moniest_CreateMoniest_InvalidBody":"These information is invalid to be moniest"
+      "Moniest_CreateMoniest_InvalidBody":"These information is invalid to be moniest",
+      "Account_EmailVerification_NotFoundToken":"The email verification link is broken or invalid. Please try to verify again."
     }
   }
 }

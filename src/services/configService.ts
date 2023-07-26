@@ -267,6 +267,7 @@ class config {
     "Account_CheckUsername_InvalidUsername",
     "Post_CreatePost_InvalidTargets",
     "Moniest_CreateMoniest_InvalidBody",
+    "Account_EmailVerification_NotFoundToken",
   ];
 
   initialize() {
