@@ -49,7 +49,7 @@ const AuthorizationLayout = () => {
             background: theme.palette.primary.main,
             borderRadius: theme.palette.borderRadius.large,
             color: theme.palette.text.secondary,
-            padding: "30px 0",
+            paddingY: 8,
           }}
         >
           <Stack
@@ -58,31 +58,44 @@ const AuthorizationLayout = () => {
             justifyContent="space-between"
             height="100%"
           >
-            <img
+            <Typography
+              fontSize={"3.1rem"}
+              variant="h1"
+              color={theme.palette.common.white}
+            >
+              <Trans i18nKey="page.landing.invest_wisely"></Trans>
+            </Typography>
+            {/* <img
               onClick={() => navigate("/")}
               style={{
                 cursor: "pointer",
                 width: "4rem",
                 borderRadius: theme.palette.borderRadius.small,
               }}
-              src="images/logo.png"
+              src="images/logo-light-small.png"
               alt="Logo"
-            />
+            /> */}
             <Stack direction="column" alignItems="center" spacing={3}>
-              <Typography
+              {/* <Typography
                 fontSize={"3.1rem"}
                 variant="h1"
                 color={theme.palette.common.white}
               >
                 <Trans i18nKey="page.landing.invest_wisely"></Trans>
-              </Typography>
+              </Typography> */}
+
               <img
                 style={{ width: "16rem" }}
                 src="images/auth/auth_bg.gif"
                 alt=""
               />
             </Stack>
-            <BrandText />
+            <img
+              style={{ width: "12rem" }}
+              src="./images/logo-light.png"
+              alt="logo"
+            ></img>
+            {/* <BrandText /> */}
           </Stack>
         </Box>
       </Grid>

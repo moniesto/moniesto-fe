@@ -95,10 +95,7 @@ export const HeroNavbar = () => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <BrandText
-              onClick={() => navigateScroll("navbar", "start")}
-              sx={{ color: theme.palette.primary.main }}
-            ></BrandText>
+            <img width={150} src="./images/logo-dark.png" alt="logo"></img>
             <MenuOutlined
               sx={{
                 fontSize: "2rem",
