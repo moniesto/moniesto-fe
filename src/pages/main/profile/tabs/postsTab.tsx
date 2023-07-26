@@ -37,7 +37,7 @@ const PostsTab = ({
     limit: number;
     offset: number;
   }>({
-    hasMore: true,
+    hasMore: false,
     active: false,
     limit: 10,
     offset: 0,
@@ -51,28 +51,17 @@ const PostsTab = ({
   const profileState = useAppSelector((state) => state.profile);
 
   const handleFetchData = () => {
-    setQueryParams({
-      ...queryParams,
-      offset: queryParams.offset + queryParams.limit,
+    setQueryParams((prev) => {
+      return {
+        ...prev,
+        offset: prev.offset + prev.limit,
+      };
     });
   };
 
   useEffect(() => {
     if (isInitialRender) setIsInitialRender(false);
   }, [isInitialRender]);
-
-  // useEffect(() => {
-  //   console.log("isInitialRender");
-  //   if (isInitialRender) return;
-
-  //   setPosts([]);
-  //   setActivePostFilter(filters[0]);
-
-  //   queryParams.offset = 0;
-  //   queryParams.hasMore = true;
-
-  //   setQueryParams(JSON.parse(JSON.stringify(queryParams)));
-  // }, [isInitialRender, queryParams]);
 
   const getPosts = useCallback(
     (activeFilter: boolean) => {
@@ -101,6 +90,14 @@ const PostsTab = ({
     },
     [profileState.account, queryParams]
   );
+
+  useEffect(() => {
+    setPosts([]);
+    setActivePostFilter(filters[0]);
+    setQueryParams((prev) =>
+      JSON.parse(JSON.stringify({ ...prev, ...{ hasMore: true, offset: 0 } }))
+    );
+  }, [profileState.account]);
 
   useEffect(() => {
     queryParams.hasMore && getPosts(activePostFilter.boolValue);
