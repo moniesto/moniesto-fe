@@ -266,7 +266,13 @@ const PostCard = ({ post, loading }: PostCardProps) => {
         )}
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent sx={{ paddingTop: 0, padding: { xs: "4px", md: 2 } }}>
+        <CardContent
+          sx={{
+            paddingTop: 0,
+            padding: { xs: "4px", md: 2 },
+            overflowX: "auto",
+          }}
+        >
           <PredictionDataTable
             columns={[
               {

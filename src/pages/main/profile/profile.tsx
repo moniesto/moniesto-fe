@@ -1,4 +1,11 @@
-import { Avatar, Button, Card, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Card,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import LocationText from "../../../components/shared/common/locationText";
 import ProfileTabs from "./profileTabs";
@@ -11,7 +18,7 @@ import { Spinner } from "../../../components/shared/common/spinner";
 import { CoverImageBox } from "../../../components/shared/user/coverImageBox";
 import { EditOutlined } from "@mui/icons-material";
 import Navigator from "../../../components/shared/common/navigatior";
-import { SubscribeToMoniest } from "./subscribeToMoniest";
+import { SubscribeToMoniest } from "./subscibtionModal/subscribeToMoniest";
 import { SubscribeButton } from "../../../components/shared/user/subscribeButton";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { MoniestBadge } from "../../../components/shared/user/moniestBadge";
@@ -23,6 +30,8 @@ const Profile = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const user = useAppSelector((state) => state.user.user);
   const profileState = useAppSelector((state) => state.profile);
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [isSubscribeModalOpen, setIsSubscribeModalOpen] =
     useState<boolean>(false);
   const { username } = useParams();
@@ -117,6 +126,7 @@ const Profile = () => {
                     {profileState.isMyAccount ? (
                       <Navigator path="/settings/account">
                         <Button
+                          size={matches ? "small" : "medium"}
                           startIcon={<EditOutlined color="secondary" />}
                           color="secondary"
                           variant="outlined"

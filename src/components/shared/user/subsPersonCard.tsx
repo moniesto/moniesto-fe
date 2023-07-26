@@ -22,7 +22,10 @@ const SubsPersonCard = (props: propTypes) => {
   const theme = useTheme();
 
   return (
-    <ListItemButton {...props} sx={{ ...props.sx, margin: "0 5px" }}>
+    <ListItemButton
+      {...props}
+      sx={{ ...props.sx, margin: "0 5px", padding: { xs: 0, md: "6px 10px" } }}
+    >
       <ListItemAvatar>
         <IconButton disableRipple size="small" sx={{ mr: 1 }}>
           {!props.loading ? (

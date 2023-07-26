@@ -5,30 +5,25 @@ type InfoChipProps = {
   title?: string;
   value: string | number;
   sx?: SxProps;
-  loading:boolean
+  loading: boolean;
 };
 
-export const InfoChip = ({
-  title,
-  value,
-  sx,
-  loading
-}: InfoChipProps) => {
+export const InfoChip = ({ title, value, sx, loading }: InfoChipProps) => {
   const theme = useTheme();
   return (
     <Stack
       sx={{
         ...sx,
         border: `1px solid ${theme.palette.background[800]}`,
-        padding: "6px 12px",
+        padding: { xs: "4px 8px", md: "6px 12px" },
         borderRadius: "100px",
       }}
       spacing={0.5}
       direction="row"
       alignItems="center"
     >
-      {
-        !loading ? <>
+      {!loading ? (
+        <>
           <Typography sx={{ opacity: 0.7 }} variant="h5">
             {title}
           </Typography>
@@ -36,16 +31,13 @@ export const InfoChip = ({
           <Typography className="infochip--value" variant="h5">
             {value}
           </Typography>
-        </> :
-          <>
-            <Skeleton animation="wave" variant="text" width={50}></Skeleton>
-            <Skeleton animation="wave" variant="text" width={30}></Skeleton>
-          </>
-      }
-
+        </>
+      ) : (
+        <>
+          <Skeleton animation="wave" variant="text" width={50}></Skeleton>
+          <Skeleton animation="wave" variant="text" width={30}></Skeleton>
+        </>
+      )}
     </Stack>
   );
 };
-
-
-

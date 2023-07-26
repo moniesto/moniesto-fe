@@ -19,16 +19,17 @@ export default function componentStyleOverrides(theme: any) {
     MuiButton: {
       styleOverrides: {
         sizeMedium: {
+          padding: "6px 24px",
           height: "38px",
-          fontSize: "0.85rem",
+        },
+        sizeSmall: {
+          padding: "4px 18px",
+          height: "32px",
+          borderRadius: "8px",
         },
         root: {
-          padding: "0 24px",
           fontWeight: 700,
-          height: "51px",
-          fontSize: "1.05rem",
           boxShadow: "unset !important",
-          minWidth: "90px",
           whiteSpace: "nowrap",
           "&.MuiButton-containedInherit": {
             color: theme.colors.primaryMain,
@@ -38,7 +39,6 @@ export default function componentStyleOverrides(theme: any) {
               theme.mode === "light"
                 ? theme?.colors?.white
                 : theme.colors.primaryMain,
-            // backgroundColor: theme?.colors.secondaryMain + "!important",
             ".MuiSvgIcon-root": {
               color:
                 theme.mode === "light"

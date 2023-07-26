@@ -8,11 +8,13 @@ export const WrappedModal = ({
   opened,
   onClose,
   width,
+  noPadding,
 }: {
   children: ReactNode;
   opened: boolean;
   onClose: () => void;
   width?: number;
+  noPadding?: boolean;
 }) => {
   const theme = useTheme();
 
@@ -32,13 +34,13 @@ export const WrappedModal = ({
       >
         <IconButton
           onClick={onClose}
-          sx={{ position: "absolute", right: 3, top: 3 }}
+          sx={{ position: "absolute", right: 3, top: 3, zIndex: 1 }}
         >
           <ClearOutlined />
         </IconButton>
         <Box
           sx={{
-            padding: "30px 20px 20px",
+            padding: noPadding ? 0 : "30px 20px 20px",
           }}
         >
           {children}
