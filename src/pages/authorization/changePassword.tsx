@@ -109,14 +109,14 @@ const ChangePassword = () => {
         <Fly>
           <Stack width={"100%"} maxWidth={500} spacing={8}>
             <Stack spacing={1.8}>
-              <Fly.Item>
+              {/* <Fly.Item>
                 <Typography fontSize={"2.2rem"}>
                   {translate("page.change_pass.title")}
                 </Typography>
-              </Fly.Item>
+              </Fly.Item> */}
               <Fly.Item>
                 <Typography fontSize={"2.6rem"} variant="h1">
-                  {translate("common.welcome")}
+                  {translate("page.change_pass.title")}
                 </Typography>
               </Fly.Item>
 
@@ -223,7 +223,7 @@ const ChangePassword = () => {
           <Typography variant="h2">
             {translate("page.change_pass.unavailable.title")}
           </Typography>
-          <Typography variant="h4">
+          <Typography variant="h3">
             {translate("page.change_pass.unavailable.body")}
             <Navigator path="/">
               <Typography fontWeight="bold" component="span" color="secondary">

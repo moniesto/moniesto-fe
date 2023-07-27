@@ -1,5 +1,4 @@
 import { Box, Button, Container, Drawer, Stack } from "@mui/material";
-import BrandText from "../../../shared/common/brandText";
 import { CloseOutlined, MenuOutlined } from "@mui/icons-material";
 import { useMemo, useState } from "react";
 import { useNavLinks } from "../../../../hooks/useNavLinks";
@@ -8,6 +7,7 @@ import { useTranslate } from "../../../../hooks/useTranslate";
 import Navigator from "../../../shared/common/navigatior";
 import { useTheme } from "@mui/system";
 import { useScrollPosition } from "../../../../hooks/useScrollPosition";
+import Logo from "../../../shared/common/logo";
 
 export const HeroNavbar = () => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
@@ -95,7 +95,7 @@ export const HeroNavbar = () => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <img width={150} src="./images/logo-dark.png" alt="logo"></img>
+            <Logo navigateHome width={150} mode="dark" />
             <MenuOutlined
               sx={{
                 fontSize: "2rem",

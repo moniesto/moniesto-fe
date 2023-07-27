@@ -72,15 +72,15 @@ const Login = () => {
     <Fly>
       <Stack width={"100%"} maxWidth={500} spacing={6}>
         <Stack spacing={1.8}>
-          <Fly.Item>
+          {/* <Fly.Item>
             <Typography fontSize={"2.2rem"}>
               {translate("page.login.title")}
             </Typography>
-          </Fly.Item>
+          </Fly.Item> */}
 
           <Fly.Item>
             <Typography fontSize={"2.6rem"} variant="h1">
-              {translate("common.welcome")}
+              {translate("page.login.title")}
             </Typography>
           </Fly.Item>
           <Fly.Item>
@@ -174,7 +174,7 @@ const Login = () => {
                 <Navigator path="/register">
                   <Typography
                     sx={{ cursor: "pointer" }}
-                    variant="h4"
+                    variant="h3"
                     color="secondary"
                   >
                     {translate("page.login.action.register")}

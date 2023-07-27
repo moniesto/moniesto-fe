@@ -1,12 +1,11 @@
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/system";
-import { Outlet, useNavigate } from "react-router-dom";
-import BrandText from "../components/shared/common/brandText";
+import { Outlet } from "react-router-dom";
 import { Trans } from "react-i18next";
+import Logo from "../components/shared/common/logo";
 
 const AuthorizationLayout = () => {
   const theme = useTheme();
-  const navigate = useNavigate();
   return (
     <Grid
       item
@@ -22,8 +21,20 @@ const AuthorizationLayout = () => {
       <Grid width={"100%"} item md={7}>
         <Box
           sx={{
+            display: { xs: "flex", md: "none" },
+            height: "40px",
+            paddingBottom: "24px",
+            alignItems: "center",
+            justifyContent: "center",
+            borderBottom: "1px solid " + theme.palette.background[800],
+          }}
+        >
+          <Logo navigateHome width={140} variant="logo-medium" />
+        </Box>
+        <Box
+          sx={{
             width: "100%",
-            height: "100%",
+            height: { xs: "calc(100% - 32px)", md: "100%" },
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -65,37 +76,14 @@ const AuthorizationLayout = () => {
             >
               <Trans i18nKey="page.landing.invest_wisely"></Trans>
             </Typography>
-            {/* <img
-              onClick={() => navigate("/")}
-              style={{
-                cursor: "pointer",
-                width: "4rem",
-                borderRadius: theme.palette.borderRadius.small,
-              }}
-              src="images/logo-light-small.png"
-              alt="Logo"
-            /> */}
             <Stack direction="column" alignItems="center" spacing={3}>
-              {/* <Typography
-                fontSize={"3.1rem"}
-                variant="h1"
-                color={theme.palette.common.white}
-              >
-                <Trans i18nKey="page.landing.invest_wisely"></Trans>
-              </Typography> */}
-
               <img
                 style={{ width: "16rem" }}
                 src="images/auth/auth_bg.gif"
                 alt=""
               />
             </Stack>
-            <img
-              style={{ width: "12rem" }}
-              src="./images/logo-light.png"
-              alt="logo"
-            ></img>
-            {/* <BrandText /> */}
+            <Logo mode="light" width={140} />
           </Stack>
         </Box>
       </Grid>

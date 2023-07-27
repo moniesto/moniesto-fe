@@ -1,9 +1,9 @@
 import { ArrowBackOutlined } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 import { Stack, useTheme } from "@mui/system";
-import BrandText from "../components/shared/common/brandText";
 import Navigator from "../components/shared/common/navigatior";
 import { useTranslate } from "../hooks/useTranslate";
+import Logo from "../components/shared/common/logo";
 
 const NotFound = () => {
   const theme = useTheme();
@@ -40,7 +40,7 @@ const NotFound = () => {
         </Stack>
       </Navigator>
       <Box sx={{ position: "absolute", bottom: "40px" }}>
-        <BrandText color={theme.palette.text.primary}></BrandText>
+        <Logo width={100} />
       </Box>
     </Stack>
   );

@@ -61,15 +61,15 @@ const ForgetPassword = () => {
     <Fly>
       <Stack width={"100%"} maxWidth={500} spacing={8}>
         <Stack spacing={1.8}>
-          <Fly.Item>
+          {/* <Fly.Item>
             <Typography fontSize={"2.2rem"}>
               {translate("page.forget_pass.title")}
             </Typography>
-          </Fly.Item>
+          </Fly.Item> */}
 
           <Fly.Item>
             <Typography fontSize={"2.6rem"} variant="h1">
-              {translate("common.welcome")}
+              {translate("page.forget_pass.title")}
             </Typography>
           </Fly.Item>
 
@@ -129,7 +129,7 @@ const ForgetPassword = () => {
                 <Navigator path="/login">
                   <Typography
                     sx={{ cursor: "pointer" }}
-                    variant="h4"
+                    variant="h3"
                     color="secondary"
                   >
                     {translate("page.forget_pass.action.login")}

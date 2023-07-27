@@ -1,5 +1,4 @@
 import { Box, Button, Container, Stack } from "@mui/material";
-import BrandText from "../../shared/common/brandText";
 import {
   CopyrightOutlined,
   Facebook,
@@ -12,6 +11,7 @@ import { useTranslate } from "../../../hooks/useTranslate";
 import { useNavLinks } from "../../../hooks/useNavLinks";
 import { useNavigateScroll } from "../../../hooks/useNavigateScroll";
 import Navigator from "../../shared/common/navigatior";
+import Logo from "../../shared/common/logo";
 
 export const Footer = () => {
   const theme = useTheme();
@@ -33,7 +33,7 @@ export const Footer = () => {
               alignItems={{ xs: "center", md: "unset" }}
               textAlign={{ xs: "center", md: "unset" }}
             >
-              <BrandText sx={{ color: theme.palette.primary.main }}></BrandText>
+              <Logo width={100} mode="dark" navigateHome />
               <Box
                 component="h3"
                 lineHeight="24px"

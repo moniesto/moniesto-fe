@@ -34,7 +34,15 @@ export const SubscribeToMoniest = ({
       })
       .then((res) => {
         setTimeout(() => {
-          window.open(res.universal_link, "_blank");
+          var windowSize =
+            "width=" +
+            window.innerWidth +
+            ",height=" +
+            window.innerHeight +
+            ",scrollbars=no";
+          window.open(res.universal_link, "popup", windowSize);
+
+          // window.open(res.universal_link, "_blank");
         });
 
         // dispatch(setIsSubscribed(true));
