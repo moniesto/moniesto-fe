@@ -1,7 +1,7 @@
 import { AddPhotoAlternateOutlined } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { useTheme } from "@mui/system";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useCallback } from "react";
 import imageService from "../../../services/imageService";
 import toastService from "../../../services/toastService";
 
@@ -17,41 +17,41 @@ export const UploadPhotoButton = ({
   handleBase64Image,
 }: propTypes) => {
   const theme = useTheme();
-  const [file, setFile] = useState<File>();
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      setFile(event.target.files[0]);
+      handleChangeFile(event.target.files[0]);
     }
   };
 
-  useEffect(() => {
-    if (!file) return;
+  const handleChangeFile = useCallback(
+    (file: File) => {
+      //5 MB MAX
+      const maxAllowedSize = 5 * 1024 * 1024;
+      if (file.size > maxAllowedSize) {
+        toastService.open({
+          message: "Your file exceeds the 5MB limit",
+          severity: "error",
+        });
+        return;
+      }
 
-    //5 MB MAX
-    const maxAllowedSize = 5 * 1024 * 1024;
-    if (file.size > maxAllowedSize) {
-      toastService.open({
-        message: "Your file exceeds the 5MB limit",
-        severity: "error",
-      });
-      return;
-    }
-
-    handleLoading(true);
-    imageService
-      .getBase64(file)
-      .then((base64Data) => {
-        setTimeout(() => {
-          handleBase64Image(base64Data as string);
-        }, 2000);
-      })
-      .finally(() =>
-        setTimeout(() => {
-          handleLoading(false);
-        }, 2000)
-      );
-  }, [file]);
+      handleLoading(true);
+      imageService
+        .getBase64(file)
+        .then((base64Data) => {
+          setTimeout(() => {
+            handleBase64Image(base64Data as string);
+          }, 2000);
+        })
+        .finally(() =>
+          setTimeout(() => {
+            handleLoading(false);
+          }, 2000)
+        );
+    },
+    [handleBase64Image, handleLoading]
+  );
 
   return (
     <IconButton

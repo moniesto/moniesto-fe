@@ -1,10 +1,8 @@
 import { Box, Container, Stack } from "@mui/material";
 import { useTranslate } from "../../../hooks/useTranslate";
-import { useTheme } from "@mui/system";
 
 export const PaymentMethod = () => {
   const translate = useTranslate();
-  const theme = useTheme();
 
   return (
     <Box

@@ -29,7 +29,7 @@ const VerifyEmail = () => {
         navigate(res.redirect_url);
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [dispatch, navigate, searchParams, user]);
 
   return (
     <Box
