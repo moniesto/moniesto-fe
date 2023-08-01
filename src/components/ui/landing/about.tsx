@@ -39,8 +39,8 @@ export const About = () => {
             >
               <Box
                 letterSpacing={3}
-                lineHeight={{ md: "55px", xs: "46px" }}
-                fontSize={{ md: 44, xs: 38 }}
+                fontSize={{ md: 54, xs: 44 }}
+                lineHeight={{ md: "68px", xs: "56px" }}
                 mb={0}
                 component="h1"
                 sx={{

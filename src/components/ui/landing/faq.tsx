@@ -102,6 +102,7 @@ export const FAQ = () => {
                     background: "var(--theme-background-secondary-light)",
                     borderRadius: "10px",
                     marginBottom: "16px",
+                    padding: 2,
                   }}
                 >
                   <Box

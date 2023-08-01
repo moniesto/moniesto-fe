@@ -43,7 +43,7 @@ export const SubscribeToMoniest = ({
           window.open(res.universal_link, "popup", windowSize);
 
           // window.open(res.universal_link, "_blank");
-        });
+        }, 200);
 
         // dispatch(setIsSubscribed(true));
         handleClose(true);

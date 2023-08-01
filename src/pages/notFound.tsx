@@ -40,7 +40,7 @@ const NotFound = () => {
         </Stack>
       </Navigator>
       <Box sx={{ position: "absolute", bottom: "40px" }}>
-        <Logo width={100} />
+        <Logo width={100} navigateHome />
       </Box>
     </Stack>
   );

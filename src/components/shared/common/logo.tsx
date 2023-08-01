@@ -1,4 +1,5 @@
 import { Box, SxProps, useTheme } from "@mui/material";
+import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 export type Variants = "logo-medium" | "logo-small";
@@ -27,19 +28,21 @@ const Logo = ({
     onClick?.();
   };
 
+  const dynamicSource = useMemo(
+    () =>
+      `./images/${variant}-${
+        mode ? mode : theme.palette.mode === "dark" ? "light" : "dark"
+      }.png`,
+    [mode, theme.palette.mode, variant]
+  );
+
   return (
     <Box
       width={width}
       sx={{ cursor: onClick || navigateHome ? "pointer" : "unset", ...sx }}
       onClick={handleClick}
     >
-      <img
-        width="100%"
-        src={`./images/${variant}-${
-          mode ? mode : theme.palette.mode === "dark" ? "light" : "dark"
-        }.png`}
-        alt="logo"
-      ></img>
+      <img loading="lazy" width="100%" src={dynamicSource} alt="logo" />
     </Box>
   );
 };

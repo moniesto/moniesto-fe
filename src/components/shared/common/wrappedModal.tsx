@@ -27,7 +27,7 @@ export const WrappedModal = ({
           left: "50%",
           transform: "translate(-50%, -50%)",
           width: { md: width || 800, xs: "90%" },
-          maxHeight: "90vh",
+          maxHeight: "88vh",
           overflowY: "scroll",
           background: theme.palette.background[600],
         }}
