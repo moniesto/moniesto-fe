@@ -35,7 +35,6 @@ export const useUsernameValidation = () => {
     ) => {
       return (
         <TextField
-          // label={translate("form.field.username")}
           fullWidth
           id="username"
           name="username"

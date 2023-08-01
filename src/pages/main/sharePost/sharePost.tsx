@@ -1,8 +1,6 @@
 import {
-  Autocomplete,
   Box,
   Card,
-  CircularProgress,
   Divider,
   FormControl,
   InputAdornment,
@@ -18,11 +16,10 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import DoNotDisturbAltOutlinedIcon from "@mui/icons-material/DoNotDisturbAltOutlined";
 import api from "../../../services/api";
-import CurrencyBitcoinOutlinedIcon from "@mui/icons-material/CurrencyBitcoinOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useMemo } from "react";
 import React from "react";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs from "dayjs";
@@ -39,9 +36,10 @@ import { useTranslate } from "../../../hooks/useTranslate";
 import { ApproximateScore } from "./approximateScore";
 import { Post } from "../../../interfaces/post";
 import { FormItem } from "../../../components/shared/common/formItem";
+import { CurrencyInput } from "./currencyInput";
+import configService from "../../../services/configService";
 
 export const SharePost = () => {
-  const [open, setOpen] = React.useState(false);
   const [calendarOpen, setCalendarOpen] = React.useState(false);
   const [showDescription, setShowDescription] = useState<boolean>(false);
 
@@ -49,20 +47,15 @@ export const SharePost = () => {
   const theme = useTheme();
 
   const maxDuration = new Date();
-  maxDuration.setDate(maxDuration.getDate() + 90);
+  maxDuration.setDate(
+    maxDuration.getDate() + configService.validations.max_duration_day
+  );
 
-  const [loading, setLoading] = useState<boolean>(false);
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const editorJs = useRef<{
     save(): Promise<any>;
   }>(null);
-
-  const [options, setOptions] = React.useState<
-    { currency: string; price: number }[]
-  >([]);
-
-  const [selectedCurrencyPrice, setSelectedCurrencyPrice] = useState<number>(0);
 
   const getMinute = (value: number) => {
     const now = new Date();
@@ -71,7 +64,10 @@ export const SharePost = () => {
   };
   const formik = useFormik({
     initialValues: {
-      currency: "",
+      crypto_currency: {
+        currency: "",
+        price: 0,
+      },
       description: "",
       direction: "long",
       duration: getMinute(5).toString(),
@@ -92,10 +88,12 @@ export const SharePost = () => {
             })
           )
           .min(getMinute(1), translate("form.validation.duration_min")),
-
-        currency: yup
-          .string()
-          .required(translate("form.validation.currency_req")),
+        crypto_currency: yup.object({
+          currency: yup
+            .string()
+            .required(translate("form.validation.currency_req")),
+          price: yup.number(),
+        }),
         stop: yup
           .number()
           .moreThan(0, translate("form.validation.stop_min"))
@@ -103,9 +101,9 @@ export const SharePost = () => {
           .when("direction", {
             is: "long",
             then: yup.number().lessThan(
-              selectedCurrencyPrice,
+              formik.values.crypto_currency.price,
               translate("form.validation.stop_lower", {
-                price: selectedCurrencyPrice,
+                price: formik.values.crypto_currency.price,
               })
             ),
           })
@@ -114,15 +112,15 @@ export const SharePost = () => {
             then: yup
               .number()
               .moreThan(
-                selectedCurrencyPrice,
+                formik.values.crypto_currency.price,
                 translate("form.validation.stop_more", {
-                  price: selectedCurrencyPrice,
+                  price: formik.values.crypto_currency.price,
                 })
               )
               .lessThan(
-                selectedCurrencyPrice * 2,
+                formik.values.crypto_currency.price * 2,
                 translate("form.validation.stop_max", {
-                  price: selectedCurrencyPrice * 2,
+                  price: formik.values.crypto_currency.price * 2,
                 })
               ),
           }),
@@ -132,18 +130,18 @@ export const SharePost = () => {
           .when("direction", {
             is: "long",
             then: yup.number().moreThan(
-              selectedCurrencyPrice,
+              formik.values.crypto_currency.price,
               translate("form.validation.tp1_more", {
-                price: selectedCurrencyPrice,
+                price: formik.values.crypto_currency.price,
               })
             ),
           })
           .when("direction", {
             is: "short",
             then: yup.number().lessThan(
-              selectedCurrencyPrice,
+              formik.values.crypto_currency.price,
               translate("form.validation.tp1_lower", {
-                price: selectedCurrencyPrice,
+                price: formik.values.crypto_currency.price,
               })
             ),
           })
@@ -185,9 +183,9 @@ export const SharePost = () => {
                 })
               )
               .lessThan(
-                selectedCurrencyPrice * 100,
+                formik.values.crypto_currency.price * 100,
                 translate("form.validation.tp3_max", {
-                  price: selectedCurrencyPrice * 100,
+                  price: formik.values.crypto_currency.price * 100,
                 })
               ),
           })
@@ -206,8 +204,9 @@ export const SharePost = () => {
       setSubmitLoading(true);
       const savedData = await editorJs.current?.save();
       if (savedData) values.description = JSON.stringify(savedData);
+
       api.post
-        .create_post(values)
+        .create_post(normalizePost)
         .then(() => {
           toastService.open({
             message: translate("page.share_post.toast.post_created"),
@@ -219,69 +218,42 @@ export const SharePost = () => {
     },
   });
 
+  const normalizePost = useMemo(() => {
+    const currency = formik.values.crypto_currency.currency;
+    const { crypto_currency, ...formData } = formik.values;
+
+    return {
+      ...formData,
+      currency,
+    };
+  }, [formik]);
+
   const handleShare = async () => {
-    if (!formik.values.currency) return formik.submitForm();
+    if (!formik.values.crypto_currency.currency) return formik.submitForm();
 
     setSubmitLoading(true);
-    const [coin] = await api.crypto.search_currencies(formik.values.currency);
-    setSelectedCurrencyPrice(Number(coin.price));
+    const [coin] = await api.crypto.search_currencies(
+      formik.values.crypto_currency.currency
+    );
+    formik.setFieldValue("crypto_currency.price", Number(coin.price));
     setSubmitLoading(false);
     formik.submitForm();
   };
-
-  const setDefaultOptions = () => {
-    setOpen(true);
-    if (options.length) return;
-
-    setLoading(true);
-    api.crypto
-      .search_currencies("usdt")
-      .then((res) => setOptions(res))
-      .finally(() => setLoading(false));
-  };
-
-  useEffect(() => {
-    if (!formik.values.currency) {
-      setOpen(false);
-      formik.setValues({
-        ...formik.values,
-        stop: 0,
-        target1: 0,
-        target2: 0,
-        target3: 0,
-      });
-      return;
-    }
-
-    setLoading(true);
-    api.crypto
-      .search_currencies(formik.values.currency)
-      .then((res) => setOptions(res))
-      .finally(() => setLoading(false));
-  }, [formik.values.currency]);
 
   const calculatedRound = (value: number = 0) =>
     value
       ? helper.parseCurrency(
           (helper.operatonByDirection(formik.values.direction) *
-            (value - selectedCurrencyPrice) *
+            (value - formik.values.crypto_currency.price) *
             100) /
-            selectedCurrencyPrice,
+            formik.values.crypto_currency.price,
           2
         )
       : 0;
 
-  const handleCurrencyChange = (event: { currency: string; price: number }) => {
-    const price = Number(event?.price) || 0;
-    formik.setFieldValue("currency", event?.currency, true);
-    setSelectedCurrencyPrice(price);
-    setOptions([{ currency: event?.currency, price }]);
-  };
-
   return (
     <Card
       sx={{
-        minHeight: "calc(100vh - 150px)",
         padding: "1.8rem 2rem",
         background: theme.palette.background[500],
         overflow: "unset",
@@ -300,74 +272,20 @@ export const SharePost = () => {
           <Stack spacing={4}>
             <Stack spacing={2}>
               <FormItem title={translate("form.field.currency")}>
-                <Autocomplete
-                  open={open}
-                  onOpen={setDefaultOptions}
-                  onClose={() => {
-                    setOpen(false);
+                <CurrencyInput
+                  value={formik.values.crypto_currency}
+                  onChange={(e) => {
+                    formik.setValues({
+                      ...formik.values,
+                      crypto_currency: e,
+                      stop: 0,
+                      target1: 0,
+                      target2: 0,
+                      target3: 0,
+                    });
                   }}
-                  isOptionEqualToValue={(option, value) =>
-                    option.currency === value.currency
-                  }
-                  getOptionLabel={(option) => option?.currency || ""}
-                  options={options}
-                  loading={loading}
-                  onChange={(_, event) => {
-                    handleCurrencyChange(event!);
-                  }}
-                  renderOption={(props, option) => (
-                    <Box component="li" {...props}>
-                      <Stack
-                        sx={{
-                          width: "100%",
-                        }}
-                        justifyContent="space-between"
-                        direction="row"
-                      >
-                        <Box>{option.currency}</Box>
-                        <Box>{helper.parseCurrency(option.price)}</Box>
-                      </Stack>
-                    </Box>
-                  )}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      name="currency"
-                      onChange={formik.handleChange}
-                      error={
-                        formik.touched.currency &&
-                        Boolean(formik.errors.currency)
-                      }
-                      helperText={
-                        formik.touched.currency && formik.errors.currency
-                      }
-                      InputProps={{
-                        ...params.InputProps,
-
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <CurrencyBitcoinOutlinedIcon />
-                          </InputAdornment>
-                        ),
-                        endAdornment: (
-                          <React.Fragment>
-                            {loading ? (
-                              <CircularProgress
-                                sx={{ mr: 1 }}
-                                color="inherit"
-                                size={20}
-                              />
-                            ) : null}
-                            <Typography variant="h4">
-                              {helper.parseCurrency(selectedCurrencyPrice)}
-                            </Typography>
-
-                            {params.InputProps.endAdornment}
-                          </React.Fragment>
-                        ),
-                      }}
-                    />
-                  )}
+                  touched={formik.touched.crypto_currency?.currency}
+                  error={formik.errors.crypto_currency?.currency}
                 />
               </FormItem>
               <FormItem title={translate("form.field.duration")}>
@@ -461,7 +379,7 @@ export const SharePost = () => {
                 >
                   <Stack direction="row" spacing={1}>
                     <TextField
-                      disabled={!selectedCurrencyPrice}
+                      disabled={!formik.values.crypto_currency.price}
                       fullWidth
                       name="target1"
                       placeholder={translate("form.field.tp_1")}
@@ -470,7 +388,11 @@ export const SharePost = () => {
                         formik.values.target1 === 0 &&
                         formik.setFieldValue("target1", "", true)
                       }
-                      value={selectedCurrencyPrice ? formik.values.target1 : 0}
+                      value={
+                        formik.values.crypto_currency.price
+                          ? formik.values.target1
+                          : 0
+                      }
                       onChange={formik.handleChange}
                       error={
                         formik.touched.target1 && Boolean(formik.errors.target1)
@@ -510,7 +432,7 @@ export const SharePost = () => {
 
                   <Stack direction="row" spacing={1}>
                     <TextField
-                      disabled={!selectedCurrencyPrice}
+                      disabled={!formik.values.crypto_currency.price}
                       fullWidth
                       name="target2"
                       placeholder={translate("form.field.tp_2")}
@@ -519,7 +441,11 @@ export const SharePost = () => {
                         formik.values.target2 === 0 &&
                         formik.setFieldValue("target2", "", true)
                       }
-                      value={selectedCurrencyPrice ? formik.values.target2 : 0}
+                      value={
+                        formik.values.crypto_currency.price
+                          ? formik.values.target2
+                          : 0
+                      }
                       onChange={formik.handleChange}
                       error={
                         formik.touched.target2 && Boolean(formik.errors.target2)
@@ -558,7 +484,7 @@ export const SharePost = () => {
                   </Stack>
                   <Stack direction="row" spacing={1}>
                     <TextField
-                      disabled={!selectedCurrencyPrice}
+                      disabled={!formik.values.crypto_currency.price}
                       fullWidth
                       name="target3"
                       placeholder={translate("form.field.tp_3")}
@@ -567,7 +493,11 @@ export const SharePost = () => {
                         formik.values.target3 === 0 &&
                         formik.setFieldValue("target3", "", true)
                       }
-                      value={selectedCurrencyPrice ? formik.values.target3 : 0}
+                      value={
+                        formik.values.crypto_currency.price
+                          ? formik.values.target3
+                          : 0
+                      }
                       onChange={formik.handleChange}
                       error={
                         formik.touched.target3 && Boolean(formik.errors.target3)
@@ -618,7 +548,7 @@ export const SharePost = () => {
                   spacing={1}
                 >
                   <TextField
-                    disabled={!selectedCurrencyPrice}
+                    disabled={!formik.values.crypto_currency.price}
                     fullWidth
                     name="stop"
                     type="number"
@@ -626,7 +556,11 @@ export const SharePost = () => {
                       formik.values.stop === 0 &&
                       formik.setFieldValue("stop", "", true)
                     }
-                    value={selectedCurrencyPrice ? formik.values.stop : 0}
+                    value={
+                      formik.values.crypto_currency.price
+                        ? formik.values.stop
+                        : 0
+                    }
                     onChange={formik.handleChange}
                     error={formik.touched.stop && Boolean(formik.errors.stop)}
                     helperText={formik.touched.stop && formik.errors.stop}
@@ -654,7 +588,7 @@ export const SharePost = () => {
                           helper.parseCurrency(
                             100 -
                               ((formik.values.stop || 1) /
-                                (selectedCurrencyPrice || 1)) *
+                                (formik.values.crypto_currency.price || 1)) *
                                 100,
                             2
                           )
@@ -695,8 +629,8 @@ export const SharePost = () => {
 
             <Box>
               <ApproximateScore
-                isValid={formik.isValid}
-                post={formik.values as Post}
+                isValid={formik.dirty && formik.isValid}
+                post={normalizePost as Post}
               ></ApproximateScore>
             </Box>
 
