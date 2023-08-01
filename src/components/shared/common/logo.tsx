@@ -30,7 +30,8 @@ const Logo = ({
 
   const dynamicSource = useMemo(
     () =>
-      `./images/${variant}-${
+      process.env.PUBLIC_URL +
+      `/images/logos/${variant}-${
         mode ? mode : theme.palette.mode === "dark" ? "light" : "dark"
       }.png`,
     [mode, theme.palette.mode, variant]
