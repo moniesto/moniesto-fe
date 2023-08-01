@@ -292,10 +292,6 @@ export const SharePost = () => {
           <Typography variant="h2" pb={1.4}>
             {translate("page.share_post.share_post")}
           </Typography>
-          {/* <ApproximateScore
-            isValid={formik.isValid}
-            post={formik.values as Post}
-          ></ApproximateScore> */}
         </Stack>
         <Divider></Divider>
       </Stack>
