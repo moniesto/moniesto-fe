@@ -33,8 +33,6 @@ export const CurrencyInput = memo(
     const [options, setOptions] = useState<CurrencyType[]>([]);
     const [searchValue, setSearchValue] = useState<string>();
 
-    console.log("value :", value);
-
     const setDefaultOptions = () => {
       setOpen(true);
       if (options.length) return;
