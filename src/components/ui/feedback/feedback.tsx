@@ -15,7 +15,6 @@ import {
   Stack,
   TextField,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 
 import { useState } from "react";
@@ -34,7 +33,6 @@ export const Feedback = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("sm"));
   const translate = useTranslate();
   const types: string[] = [
     "feature_request",
@@ -79,7 +77,6 @@ export const Feedback = () => {
         onClick={() => setOpen(true)}
         variant="contained"
         color="secondary"
-        size={matches ? "small" : "medium"}
         sx={{
           display: { xs: "block", md: "none" },
           position: "fixed",
@@ -96,7 +93,6 @@ export const Feedback = () => {
         endIcon={<ForumOutlined />}
         variant="contained"
         color="secondary"
-        size={matches ? "small" : "medium"}
         sx={{
           position: "fixed",
           display: { xs: "none", md: "flex" },
@@ -131,7 +127,7 @@ export const Feedback = () => {
 
         <Box mt={5}>
           <form onSubmit={formik.handleSubmit}>
-            <FormItem title={"* " + translate("form.field.feedback_type")}>
+            <FormItem title={translate("form.field.feedback_type")}>
               <FormControl
                 error={formik.touched.type && Boolean(formik.errors.type)}
                 fullWidth
@@ -153,7 +149,7 @@ export const Feedback = () => {
               </FormControl>
             </FormItem>
 
-            <FormItem title={"* " + translate("form.field.message")}>
+            <FormItem title={translate("form.field.message")}>
               <TextField
                 sx={{
                   ".MuiInputBase-root": {

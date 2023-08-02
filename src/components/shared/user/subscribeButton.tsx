@@ -1,18 +1,25 @@
-import { AttachMoneyOutlined, DoneOutline } from "@mui/icons-material";
+import {
+  AttachMoneyOutlined,
+  DoneOutline,
+  OpenInNewOutlined,
+} from "@mui/icons-material";
 import { useTranslate } from "../../../hooks/useTranslate";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import api from "../../../services/api";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setIsSubscribed } from "../../../store/slices/profileSlice";
 import { LoadingButton } from "@mui/lab";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { Button, useMediaQuery, useTheme } from "@mui/material";
+import { SubscriptionInfoResponse } from "../../../interfaces/requests";
+import Countdown from "../common/countdown";
 
-export const SubscribeButton = ({ onClick }: { onClick: () => void }) => {
+export const SubscribeButton = memo(({ onClick }: { onClick: () => void }) => {
   const dispatch = useAppDispatch();
   const profileState = useAppSelector((state) => state.profile);
   const [loading, setLoading] = useState<boolean>(true);
   const translate = useTranslate();
   const theme = useTheme();
+  const [info, setInfo] = useState<SubscriptionInfoResponse>();
 
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -22,12 +29,31 @@ export const SubscribeButton = ({ onClick }: { onClick: () => void }) => {
       return;
     }
     api.moniest
-      .subscribe_check(profileState.account.username as string)
-      .then((res) => dispatch(setIsSubscribed(res?.subscribed as boolean)))
+      .subscription_info(profileState.account.username as string)
+      .then((res) => {
+        setInfo(res);
+        dispatch(setIsSubscribed(res?.subscribed as boolean));
+      })
       .finally(() => setLoading(false));
   }, [profileState, dispatch]);
 
-  return (
+  return info?.pending ? (
+    <Button
+      size={matches ? "small" : "medium"}
+      color="secondary"
+      variant="outlined"
+      href={info.universal_link!}
+      endIcon={
+        <Countdown
+          startTime={info.timeout!}
+          onDone={() => setInfo(undefined)}
+        />
+      }
+      startIcon={<OpenInNewOutlined />}
+    >
+      Ödemeye git
+    </Button>
+  ) : (
     <LoadingButton
       loading={loading}
       onClick={onClick}
@@ -53,4 +79,4 @@ export const SubscribeButton = ({ onClick }: { onClick: () => void }) => {
           }`}
     </LoadingButton>
   );
-};
+});

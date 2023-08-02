@@ -65,8 +65,8 @@ export const SubscribtionInfoList = ({
             >
               {Array(12)
                 .fill(0)
-                .map((item, index) => (
-                  <MenuItem key={"month_" + item} value={index + 1}>
+                .map((_, index) => (
+                  <MenuItem key={"month_" + index} value={index + 1}>
                     {index + 1}
                   </MenuItem>
                 ))}

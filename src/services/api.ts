@@ -13,6 +13,7 @@ import {
   SendVerificationMailReq,
   SubscribeRequest,
   SubscribeResponse,
+  SubscriptionInfoResponse,
   SummaryStatsResponse,
   UsernameCheck,
   UserPostsRequest,
@@ -103,9 +104,9 @@ class api {
       ),
     unsubscribe: (username: string) =>
       httpService.post(Requests.moniest.unsubscribe(username)),
-    subscribe_check: (username: string) =>
-      httpService.get<{ subscribed: boolean }>(
-        Requests.moniest.subscribe_check(username)
+    subscription_info: (username: string) =>
+      httpService.get<SubscriptionInfoResponse>(
+        Requests.moniest.subscription_info(username)
       ),
     subscribers: (username: string, params: PaginateRequest) =>
       httpService.get<User[]>(Requests.moniest.subscribers(username), params),

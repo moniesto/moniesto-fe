@@ -56,11 +56,23 @@ export interface SubscribeRequest {
   number_of_months: number;
   returnURL: string;
 }
+
+export interface SubscriptionInfoResponse extends SubscribeResponse {
+  pending: true;
+  subscribed: true;
+  subscription_info?: {
+    payer_id: string;
+    subscription_ent_date: string;
+    subscription_start_date: string;
+  };
+  timeout?: 0;
+}
+
 export interface SubscribeResponse {
-  checkout_link: string;
-  deep_link: string;
-  qrcode_link: string;
-  universal_link: string;
+  checkout_link?: string;
+  deep_link?: string;
+  qrcode_link?: string;
+  universal_link?: string;
 }
 
 export interface PaginateRequest {
@@ -117,7 +129,7 @@ export const Requests: {
     update_profile: string;
     subscribe: (username: string) => string;
     unsubscribe: (username: string) => string;
-    subscribe_check: (username: string) => string;
+    subscription_info: (username: string) => string;
     subscribers: (username: string) => string;
   };
   post: {
@@ -168,8 +180,8 @@ export const Requests: {
     update_profile: "moniests/profile",
     subscribe: (username: string) => `moniests/${username}/subscribe`,
     unsubscribe: (username: string) => `moniests/${username}/unsubscribe`,
-    subscribe_check: (username: string) =>
-      `moniests/${username}/subscribe/check`,
+    subscription_info: (username: string) =>
+      `moniests/${username}/subscription-info`,
     subscribers: (username: string) => `moniests/${username}/subscribers`,
   },
   post: {

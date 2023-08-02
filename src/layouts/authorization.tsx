@@ -1,11 +1,13 @@
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/system";
 import { Outlet } from "react-router-dom";
-import { Trans } from "react-i18next";
 import Logo from "../components/shared/common/logo";
+import { useTranslate } from "../hooks/useTranslate";
 
 const AuthorizationLayout = () => {
   const theme = useTheme();
+  const translate = useTranslate();
+
   return (
     <Grid
       item
@@ -18,7 +20,7 @@ const AuthorizationLayout = () => {
       }}
       container
     >
-      <Grid width={"100%"} item md={7}>
+      <Grid width={"100%"} item md={6}>
         <Box
           sx={{
             display: { xs: "flex", md: "none" },
@@ -52,7 +54,7 @@ const AuthorizationLayout = () => {
           display: { xs: "none", md: "block" },
         }}
         item
-        md={5}
+        md={6}
       >
         <Box
           sx={{
@@ -69,12 +71,15 @@ const AuthorizationLayout = () => {
             justifyContent="space-between"
             height="100%"
           >
+            <Logo navigateHome mode="light" variant="logo-small" width={60} />
             <Typography
               fontSize={"3.1rem"}
               variant="h1"
               color={theme.palette.common.white}
+              textAlign="center"
+              mx={2}
             >
-              <Trans i18nKey="page.landing.invest_wisely"></Trans>
+              {translate("page.landing.invest_wisely")}
             </Typography>
             <Stack direction="column" alignItems="center" spacing={3}>
               <img
@@ -83,7 +88,7 @@ const AuthorizationLayout = () => {
                 alt=""
               />
             </Stack>
-            <Logo mode="light" width={140} />
+            <Logo navigateHome mode="light" width={140} />
           </Stack>
         </Box>
       </Grid>

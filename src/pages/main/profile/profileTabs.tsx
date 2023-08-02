@@ -15,6 +15,7 @@ const ProfileTabs = ({
   handleClickSubscribe: () => void;
 }) => {
   const theme = useTheme();
+  const profileState = useAppSelector((state) => state.profile);
   const [tabValue, setTabValue] = useState<string>("");
   const [counts, setCounts] = useState({
     posts: 0,
@@ -22,10 +23,14 @@ const ProfileTabs = ({
     subscribers: 0,
   });
 
-  const translate = useTranslate();
-  const profileState = useAppSelector((state) => state.profile);
+  const defaultTab = useMemo(
+    () => (profileState.account?.moniest ? "posts" : "subscriptions"),
+    [profileState]
+  );
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const translate = useTranslate();
+
+  const handleChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
 
@@ -72,8 +77,6 @@ const ProfileTabs = ({
 
   useEffect(() => {
     if (!profileState.account) return;
-    if (!profileState.account.moniest) setTabValue("subscriptions");
-    else setTabValue("posts");
 
     api.user.summary_stats(profileState.account.username).then((response) => {
       setCounts({
@@ -122,7 +125,7 @@ const ProfileTabs = ({
           },
         }}
         onChange={handleChange}
-        value={tabValue}
+        value={tabValue || defaultTab}
       >
         {getTabs.map((tab) => (
           <Tab

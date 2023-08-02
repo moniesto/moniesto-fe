@@ -143,7 +143,7 @@ const Profile = () => {
                     )}
                   </Stack>
                 </Box>
-                <Box mt={1.5} mb={5}>
+                <Box mt={3} mb={5}>
                   <Stack spacing={2}>
                     <Stack flexDirection="row">
                       <Stack spacing={0.3}>

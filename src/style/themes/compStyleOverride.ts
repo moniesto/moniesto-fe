@@ -21,11 +21,12 @@ export default function componentStyleOverrides(theme: any) {
         sizeMedium: {
           padding: "6px 24px",
           height: "38px",
+          borderRadius: "8px",
         },
         sizeSmall: {
           padding: "4px 18px",
           height: "32px",
-          borderRadius: "8px",
+          borderRadius: "6px",
         },
         root: {
           fontWeight: 700,

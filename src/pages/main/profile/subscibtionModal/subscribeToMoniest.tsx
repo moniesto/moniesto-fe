@@ -33,20 +33,10 @@ export const SubscribeToMoniest = ({
         number_of_months: month,
       })
       .then((res) => {
-        setTimeout(() => {
-          var windowSize =
-            "width=" +
-            window.innerWidth +
-            ",height=" +
-            window.innerHeight +
-            ",scrollbars=no";
-          window.open(res.universal_link, "popup", windowSize);
-
-          // window.open(res.universal_link, "_blank");
-        }, 200);
-
-        // dispatch(setIsSubscribed(true));
-        handleClose(true);
+        setTimeout(function () {
+          document.location.href = res.universal_link!;
+          handleClose(true);
+        }, 250);
       })
       .finally(() => setLoading(false));
   };

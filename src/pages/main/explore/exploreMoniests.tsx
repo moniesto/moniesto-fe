@@ -14,6 +14,7 @@ export const ExploreMoniests = () => {
   const theme = useTheme();
   const translate = useTranslate();
   const [moniests, setMoniests] = useState<User[]>([]);
+  const [loading, setLoading] = useState(false);
   const [paginate, setPaginate] = useState({
     limit: 4,
     offset: 0,
@@ -23,12 +24,16 @@ export const ExploreMoniests = () => {
     const dummyUser = { ...TestUser, id: "-1" };
 
     setMoniests((prev) => prev.concat(Array(paginate.limit).fill(dummyUser)));
-    api.content.moniests(paginate).then((response) => {
-      setMoniests((prev) => [
-        ...prev.filter((user) => user.id !== "-1"),
-        ...response,
-      ]);
-    });
+    setLoading(true);
+    api.content
+      .moniests(paginate)
+      .then((response) => {
+        setMoniests((prev) => [
+          ...prev.filter((user) => user.id !== "-1"),
+          ...response,
+        ]);
+      })
+      .finally(() => setLoading(false));
   }, [paginate]);
 
   useEffect(() => {
@@ -51,6 +56,7 @@ export const ExploreMoniests = () => {
 
       <Stack alignItems="center" mt={2}>
         <LoadingButton
+          disabled={loading}
           sx={{
             width: "max-content",
             background: theme.palette.background[800],
