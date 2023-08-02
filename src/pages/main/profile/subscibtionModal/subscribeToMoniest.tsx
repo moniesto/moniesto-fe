@@ -33,11 +33,12 @@ export const SubscribeToMoniest = ({
         number_of_months: month,
       })
       .then((res) => {
-        setTimeout(function () {
-          document.location.href = res.universal_link!;
-          handleClose(true);
-        }, 250);
+        var link = document.createElement("a");
+        link.href = res.universal_link!;
+        document.body.appendChild(link);
+        link.click();
       })
+      .catch(() => handleClose(false))
       .finally(() => setLoading(false));
   };
 

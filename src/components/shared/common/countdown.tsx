@@ -8,23 +8,18 @@ const Countdown = ({
   onDone: () => void;
 }) => {
   const [time, setTime] = useState(startTime);
-  console.log("render");
+
   useEffect(() => {
-    let interval: NodeJS.Timer;
-
-    const countDownUntilZero = () => {
-      setTime((prevTime) => {
-        if (prevTime === 0) {
-          clearInterval(interval);
-          onDone();
-        }
-        return prevTime - 1;
-      });
-    };
-
-    interval = setInterval(countDownUntilZero, 1000);
-    return () => clearInterval(interval);
-  }, [onDone]);
+    let timeout: NodeJS.Timeout;
+    setTimeout(() => {
+      if (time === 0) {
+        onDone();
+        return;
+      }
+      setTime((prevTime) => prevTime - 1);
+    }, 1000);
+    return () => clearTimeout(timeout);
+  }, [time, onDone]);
 
   return <>{time}</>;
 };
