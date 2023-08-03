@@ -18,7 +18,6 @@ import { Spinner } from "../../../components/shared/common/spinner";
 import { CoverImageBox } from "../../../components/shared/user/coverImageBox";
 import { EditOutlined } from "@mui/icons-material";
 import Navigator from "../../../components/shared/common/navigatior";
-import { SubscribeToMoniest } from "./subscibtionModal/subscribeToMoniest";
 import { SubscribeButton } from "../../../components/shared/user/subscribeButton";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { MoniestBadge } from "../../../components/shared/user/moniestBadge";
@@ -32,8 +31,6 @@ const Profile = () => {
   const profileState = useAppSelector((state) => state.profile);
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const [isSubscribeModalOpen, setIsSubscribeModalOpen] =
-    useState<boolean>(false);
   const { username } = useParams();
   const translate = useTranslate();
 
@@ -67,14 +64,6 @@ const Profile = () => {
     }
     getAccount(username);
   }, [username, dispatch, getAccount]);
-
-  const handleSubscribtionModalClose = (result: boolean) => {
-    setIsSubscribeModalOpen(false);
-    // TODO  polling
-    // if(result){
-    //   if(profileState.isSubscribed)
-    // }
-  };
 
   return (
     <Box sx={{ position: "relative", minHeight: "20vh" }}>
@@ -135,9 +124,7 @@ const Profile = () => {
                         </Button>
                       </Navigator>
                     ) : profileState.account.moniest ? (
-                      <SubscribeButton
-                        onClick={() => setIsSubscribeModalOpen(true)}
-                      />
+                      <SubscribeButton />
                     ) : (
                       ""
                     )}
@@ -172,9 +159,7 @@ const Profile = () => {
               </Box>
             </>
           </Card>
-          <ProfileTabs
-            handleClickSubscribe={() => setIsSubscribeModalOpen(true)}
-          ></ProfileTabs>
+          <ProfileTabs />
         </>
       ) : (
         <Card sx={{ padding: 3 }}>
@@ -184,9 +169,6 @@ const Profile = () => {
             </Typography>
           </Stack>
         </Card>
-      )}
-      {isSubscribeModalOpen && (
-        <SubscribeToMoniest handleClose={handleSubscribtionModalClose} />
       )}
     </Box>
   );

@@ -9,11 +9,7 @@ import SubscribersTab from "./tabs/subscribersTab";
 import SubscriptionsTab from "./tabs/subscriptionsTab";
 import { useAppSelector } from "../../../store/hooks";
 
-const ProfileTabs = ({
-  handleClickSubscribe,
-}: {
-  handleClickSubscribe: () => void;
-}) => {
+const ProfileTabs = () => {
   const theme = useTheme();
   const profileState = useAppSelector((state) => state.profile);
   const [tabValue, setTabValue] = useState<string>("");
@@ -39,7 +35,7 @@ const ProfileTabs = ({
       {
         title: translate("page.profile.tab.posts", { count: counts.posts }),
         value: "posts",
-        content: <PostsTab handleClickSubscribe={handleClickSubscribe} />,
+        content: <PostsTab />,
         only_moniest: true,
       },
       {
@@ -73,7 +69,7 @@ const ProfileTabs = ({
     return tabs.filter((tab) =>
       profileState.account!.moniest ? true : !tab.only_moniest
     );
-  }, [counts, handleClickSubscribe, profileState.account, translate]);
+  }, [counts, profileState.account, translate]);
 
   useEffect(() => {
     if (!profileState.account) return;
@@ -136,7 +132,10 @@ const ProfileTabs = ({
         ))}
       </Tabs>
       <Box mt={4}>
-        {getTabs.find((item) => item.value === tabValue)?.content}
+        {
+          getTabs.find((item) => item.value === (tabValue || defaultTab))
+            ?.content
+        }
       </Box>
     </Box>
   );

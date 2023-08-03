@@ -25,11 +25,7 @@ const filters: Filter[] = [
   { title: "live", value: "live", boolValue: true, icon: <StreamIcon /> },
 ];
 
-const PostsTab = ({
-  handleClickSubscribe,
-}: {
-  handleClickSubscribe: () => void;
-}) => {
+const PostsTab = () => {
   const theme = useTheme();
   const [queryParams, setQueryParams] = useState<{
     hasMore?: boolean;
@@ -207,7 +203,7 @@ const PostsTab = ({
               <Typography variant="h2">
                 {translate("page.profile.sub_for_live")}
               </Typography>
-              <SubscribeButton onClick={() => handleClickSubscribe()} />
+              <SubscribeButton />
             </Stack>
           </Box>
           <Stack sx={{ filter: "blur(3px)" }} rowGap={2}>

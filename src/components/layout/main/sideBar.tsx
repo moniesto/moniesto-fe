@@ -1,11 +1,9 @@
 import {
   Button,
-  Card,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  useTheme,
 } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
 
@@ -19,6 +17,7 @@ import Navigator from "../../shared/common/navigatior";
 import { useAppSelector } from "../../../store/hooks";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useTranslate } from "../../../hooks/useTranslate";
+import { useTheme } from "@mui/system";
 
 const SideBar = () => {
   const [selectedLink, setSelectedLink] = useState("timeline");
@@ -55,66 +54,72 @@ const SideBar = () => {
   };
 
   return (
-    <Card>
-      <Stack minHeight={"400px"} justifyContent="space-between" padding={2}>
-        <Stack>
-          <List component="nav">
-            {links.map((link) => (
-              <ListItemButton
-                key={link.path}
-                sx={{
-                  margin: "3px 0",
-                  opacity: 0.6,
-                  "&.Mui-selected": {
-                    opacity: 1,
-                    backgroundColor: "transparent",
-                  },
-                }}
-                selected={selectedLink === link.path}
-                onClick={() => handleListItemClick(link.path)}
-              >
-                <ListItemIcon>{link.icon}</ListItemIcon>
-                <ListItemText primary={link.title} />
-              </ListItemButton>
-            ))}
-          </List>
-        </Stack>
-        <Stack>
-          <Navigator path={user.moniest ? "share" : "bemoniest"}>
-            <Button
-              size="large"
-              startIcon={
-                user.moniest ? <AddOutlinedIcon /> : <RocketLaunchIcon />
-              }
-              color="secondary"
-              variant="contained"
-              fullWidth
-              type="submit"
-            >
-              {translate(
-                `navigation.${user.moniest ? "share_post" : "be_moniest"}`
-              )}
-            </Button>
-          </Navigator>
-
-          <Stack
-            padding={"20px 0"}
-            flexDirection="row"
-            alignItems="center"
-            sx={{ color: theme.palette.grey[500] }}
-          >
-            <CopyrightOutlinedIcon
+    <Stack
+      height="100%"
+      borderRight={`1px solid ${theme.palette.background[800]}`}
+      minHeight={"400px"}
+      justifyContent="space-between"
+      padding={2}
+    >
+      <Stack>
+        <List component="nav">
+          {links.map((link) => (
+            <ListItemButton
+              key={link.path}
               sx={{
-                color: theme.palette.grey[500],
-                fontSize: "1.2rem",
-                paddingBottom: "2px",
+                marginY: 0.5,
+                opacity: 0.6,
+                "&.Mui-selected": {
+                  opacity: 1,
+                },
+                "&:hover": {
+                  opacity: 1,
+                },
               }}
-            />
-            {new Date().getFullYear() + " Moniesto"}
-          </Stack>
+              selected={selectedLink === link.path}
+              onClick={() => handleListItemClick(link.path)}
+            >
+              <ListItemIcon>{link.icon}</ListItemIcon>
+              <ListItemText primary={link.title} />
+            </ListItemButton>
+          ))}
+        </List>
+      </Stack>
+      <Stack>
+        <Navigator path={user.moniest ? "share" : "bemoniest"}>
+          <Button
+            size="large"
+            startIcon={
+              user.moniest ? <AddOutlinedIcon /> : <RocketLaunchIcon />
+            }
+            color="secondary"
+            variant="contained"
+            fullWidth
+            type="submit"
+          >
+            {translate(
+              `navigation.${user.moniest ? "share_post" : "be_moniest"}`
+            )}
+          </Button>
+        </Navigator>
+
+        <Stack
+          padding={"20px 0"}
+          flexDirection="row"
+          alignItems="center"
+          sx={{ color: theme.palette.grey[500] }}
+        >
+          <CopyrightOutlinedIcon
+            sx={{
+              color: theme.palette.grey[500],
+              fontSize: "1.2rem",
+              paddingBottom: "2px",
+            }}
+          />
+          {new Date().getFullYear() + " Moniesto"}
         </Stack>
       </Stack>
-    </Card>
+    </Stack>
   );
 };
 export default SideBar;

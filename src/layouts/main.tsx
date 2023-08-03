@@ -49,7 +49,14 @@ const MainLayout = () => {
             md={3}
             minWidth="282px"
           >
-            <Box sx={{ position: "fixed", width: "100%", maxWidth: "282px" }}>
+            <Box
+              sx={{
+                position: "fixed",
+                width: "100%",
+                maxWidth: "282px",
+                height: "calc(100% - 150px)",
+              }}
+            >
               {sideBar}
             </Box>
           </Grid>

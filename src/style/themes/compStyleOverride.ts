@@ -127,6 +127,12 @@ export default function componentStyleOverrides(theme: any) {
           ".MuiTypography-root": {
             fontWeight: 600,
           },
+          "&.Mui-selected": {
+            backgroundColor: background800,
+            "&:hover": {
+              backgroundColor: background800,
+            },
+          },
         },
       },
     },

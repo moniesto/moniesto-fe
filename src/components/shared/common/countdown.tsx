@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 
 const Countdown = ({
   startTime,
@@ -10,17 +10,28 @@ const Countdown = ({
   const [time, setTime] = useState(startTime);
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    setTimeout(() => {
-      if (time === 0) {
-        onDone();
-        return;
-      }
-      setTime((prevTime) => prevTime - 1);
+    if (time < 1) {
+      onDone();
+      return;
+    }
+    const timeOut = setTimeout(() => {
+      setTime(time - 1);
     }, 1000);
-    return () => clearTimeout(timeout);
-  }, [time, onDone]);
 
-  return <>{time}</>;
+    return () => clearTimeout(timeOut);
+  }, [onDone, time]);
+
+  const formatTimer = useMemo(() => {
+    let minutes = (time / 60) | 0;
+    let seconds = time % 60 | 0;
+
+    return (
+      (minutes < 10 ? "0" + minutes : minutes) +
+      ":" +
+      (seconds < 10 ? "0" + seconds : seconds)
+    );
+  }, [time]);
+
+  return <>{formatTimer}</>;
 };
 export default memo(Countdown);
