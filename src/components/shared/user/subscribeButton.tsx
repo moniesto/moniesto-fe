@@ -12,7 +12,7 @@ import { LoadingButton } from "@mui/lab";
 import { Button, useMediaQuery, useTheme } from "@mui/material";
 import { SubscriptionInfoResponse } from "../../../interfaces/requests";
 import Countdown from "../common/countdown";
-import { SubscribeToMoniest } from "../../../pages/main/profile/subscibtionModal/subscribeToMoniest";
+import { SubscribeToMoniest } from "../../ui/user/subscibtionModal/subscribeToMoniest";
 
 export const SubscribeButton = memo(
   ({ onLinkClick }: { onLinkClick?: () => void }) => {
@@ -68,7 +68,7 @@ export const SubscribeButton = memo(
         }
         startIcon={<OpenInNewOutlined />}
       >
-        Ödemeye git
+        {translate("moniest.go_payment")}
       </Button>
     ) : (
       <>

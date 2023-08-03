@@ -9,8 +9,8 @@ import { useTranslate } from "../../../../hooks/useTranslate";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { setIsSubscribed } from "../../../../store/slices/profileSlice";
 import { SubscribtionInfoList } from "./subscribtionInfoList";
-import { WrappedModal } from "../../../../components/shared/common/wrappedModal";
-import { SubscribeButton } from "../../../../components/shared/user/subscribeButton";
+import { WrappedModal } from "../../../shared/common/wrappedModal";
+import { SubscribeButton } from "../../../shared/user/subscribeButton";
 
 export const SubscribeToMoniest = ({
   handleClose,
@@ -30,8 +30,8 @@ export const SubscribeToMoniest = ({
     setLoading(true);
     api.moniest
       .subscribe(profileState.account!.username, {
-        returnURL: window.location.href + "/returnUrl",
-        cancelURL: window.location.href + "/cancelUrl",
+        returnURL: window.location.href + "/subscription/success",
+        cancelURL: window.location.href + "/subscription/fail",
         number_of_months: month,
       })
       .then(() => setIsPendingSubscription(true))
@@ -72,10 +72,10 @@ export const SubscribeToMoniest = ({
           </Box>
           <Stack alignItems="center" gap={2}>
             <Typography textAlign="center" variant="h2">
-              Ödeme linki oluşturuldu
+              {translate("component.subscription.link_created")}
             </Typography>
             <Typography textAlign="center" variant="h3" sx={{ opacity: 0.8 }}>
-              Linke tıklayarak ödeme yapabilirsiniz
+              {translate("component.subscription.click_link")}
             </Typography>
           </Stack>
           <SubscribeButton onLinkClick={() => handleClose(true)} />

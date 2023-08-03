@@ -268,6 +268,18 @@
       "understood": "Anladım",
       "header": "Yasal Uyarı",
       "message": "Burada bulduğunuz yatırımla ilgili bilgiler, görüşler ve tavsiyeler, bir yatırım danışmanından tavsiye almakla aynı şey değildir. Buradaki görüşler ve tavsiyeler, onları yazan kişilerin kişisel görüşleridir. Bu görüşler sizin ve durumunuz için doğru olmayabilir. Dolayısıyla, burada bulduğunuz bilgileri yalnızca yatırım yapmak için kullanırsanız, istediğiniz sonuçları alamayabilirsiniz."
+    },
+    "subscription":{
+      "title":{
+        "success":"Ödeme başarıyla tamamlandı",
+        "fail":"Ödeme işlemi tamamlanamadı"
+      },
+      "message":{
+        "success":"Artık moniest'ın canlı gönderilerine erişebilirsin",
+        "fail":"Ödeme işleminiz herhangi bir sebepten dolayı tamamlanamadı. Lütfen tekrar deneyin"
+      },
+      "link_created":"Ödeme linki oluşturuldu",
+      "click_link":"Linke tıklayarak ödeme yapabilirsiniz"
     }
   },
   "form": {
@@ -356,7 +368,8 @@
     "subscribers": "Aboneler",
     "subscribed": "Abone olundu",
     "subscribe": "Abone ol",
-    "show_more": "Daha fazla göster"
+    "show_more": "Daha fazla göster",
+    "go_payment":"Ödemeye Git"
   },
   "common": {
     "welcome": "Hoş geldin",
@@ -370,7 +383,7 @@
     "cancel": "İptal"
   },
   "navigation": {
-    "timeline": "Ana sayfa",
+    "timeline": "Ana Sayfa",
     "explore": "Keşfet",
     "share_post": "Gönderi Paylaş",
     "be_moniest": "Moniest Ol",

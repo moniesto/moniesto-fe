@@ -1,5 +1,6 @@
 import { Post } from "../interfaces/post";
 import {
+  BaseResponse,
   BeMoniestReq,
   ChangePasswordReq,
   CreatePostReq,
@@ -120,6 +121,12 @@ class api {
       httpService.post<{ score: number }>(
         Requests.post.approximate_score,
         params
+      ),
+  };
+  payment = {
+    binance_transaction_check: (transaction_id: string) =>
+      httpService.post<BaseResponse>(
+        Requests.payment.binance_transaction_check(transaction_id)
       ),
   };
   user = {

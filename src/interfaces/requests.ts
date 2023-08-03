@@ -95,6 +95,11 @@ export interface SummaryStatsResponse {
   subscription_count: number;
 }
 
+export interface BaseResponse {
+  error: string;
+  error_code: string;
+}
+
 export const Requests: {
   password: {
     change_password: string;
@@ -136,6 +141,9 @@ export const Requests: {
     create_post: string;
     user_posts: (username: string) => string;
     approximate_score: string;
+  };
+  payment: {
+    binance_transaction_check: (transaction_id: string) => string;
   };
   user: {
     user_by_username: (username: string) => string;
@@ -188,6 +196,10 @@ export const Requests: {
     create_post: "moniests/posts",
     user_posts: (username: string) => `moniests/${username}/posts`,
     approximate_score: "moniests/posts/approximateScore",
+  },
+  payment: {
+    binance_transaction_check: (transaction_id: string) =>
+      `/payment/binance/transactions/check/${transaction_id}`,
   },
   user: {
     user_by_username: (username: string) => `users/${username}`,

@@ -286,6 +286,18 @@
       "understood": "Understood",
       "header": "Legal Warning",
       "message": "The information, opinions and recommendations about investing that you find here are not the same as getting advice from an investment advisor. The opinions and recommendations here are just personal opinions of the people who wrote them. Those opinions might not be right for you and your situation. So, if you only use the information you find here to make an investment, you might not get the results you want."
+    },
+    "subscription":{
+      "title":{
+        "success":"Payment completed successfully",
+        "fail":"Payment process could not be completed"
+      },
+      "message":{
+        "success":"Now you can access moniest's live posts",
+        "fail":"Your payment transaction could not be completed for any reason. Please try again"
+      },
+      "link_created":"Payment link has been created",
+      "click_link":"You can pay by clicking the link"
     }
   },
   "form": {
@@ -374,7 +386,8 @@
     "subscribers": "Subscribers",
     "subscribed": "Subscribed",
     "subscribe": "Subscribe",
-    "show_more": "Show More"
+    "show_more": "Show More",
+    "go_payment":"Go to payment"
   },
   "common": {
     "welcome": "Welcome",

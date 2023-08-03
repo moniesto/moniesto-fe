@@ -8,7 +8,7 @@ import {
   RocketLaunchOutlined,
 } from "@mui/icons-material";
 import {
-  Card,
+  Box,
   List,
   ListItem,
   ListItemButton,
@@ -26,6 +26,7 @@ import { useDispatch } from "react-redux";
 import { emptyUser } from "../../../interfaces/user";
 import { setToken } from "../../../store/slices/localStorageSlice";
 import { useTranslate } from "../../../hooks/useTranslate";
+import { useTheme } from "@mui/system";
 
 export const SettingsSideBar = () => {
   const [selectedLink, setSelectedLink] = useState("/settings/account");
@@ -33,6 +34,7 @@ export const SettingsSideBar = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const translate = useTranslate();
+  const theme = useTheme();
 
   const matches = useMediaQuery((theme: any) => theme.breakpoints.down("md"));
 
@@ -89,13 +91,21 @@ export const SettingsSideBar = () => {
   };
 
   return (
-    <Card>
+    <Box
+      height="100%"
+      borderRight={`1px solid ${theme.palette.background[800]}`}
+    >
       {matches && (
         <Typography sx={{ opacity: 0.8 }} p={3} pb={0} variant="h2">
           {translate("navigation.settings")}
         </Typography>
       )}
-      <Stack minHeight={"400px"} justifyContent="space-between" padding={2}>
+      <Stack
+        height="100%"
+        minHeight={"400px"}
+        justifyContent="space-between"
+        padding={2}
+      >
         <Stack>
           <List component="nav">
             {links.map((link) => (
@@ -138,6 +148,6 @@ export const SettingsSideBar = () => {
           </List>
         </Stack>
       </Stack>
-    </Card>
+    </Box>
   );
 };

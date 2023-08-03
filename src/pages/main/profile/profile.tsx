@@ -23,6 +23,7 @@ import { useTranslate } from "../../../hooks/useTranslate";
 import { MoniestBadge } from "../../../components/shared/user/moniestBadge";
 import { setIsMyAccount, setProfile } from "../../../store/slices/profileSlice";
 import { ScoreBadge } from "../../../components/shared/user/scoreBadge";
+import SubscriptionResultModal from "../../../components/ui/user/subscriptionResultModal";
 
 const Profile = () => {
   const theme = useTheme();
@@ -30,10 +31,8 @@ const Profile = () => {
   const user = useAppSelector((state) => state.user.user);
   const profileState = useAppSelector((state) => state.profile);
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
-
   const { username } = useParams();
   const translate = useTranslate();
-
   const dispatch = useAppDispatch();
 
   const getAccount = useCallback(
@@ -50,6 +49,7 @@ const Profile = () => {
             dispatch(setProfile(res));
             dispatch(setIsMyAccount(false));
           })
+          .catch(() => console.log("user not found"))
           .finally(() => setLoading(false));
       }
     },
@@ -66,7 +66,7 @@ const Profile = () => {
   }, [username, dispatch, getAccount]);
 
   return (
-    <Box sx={{ position: "relative", minHeight: "20vh" }}>
+    <Box position="relative" minHeight="20vh">
       {loading ? (
         <Spinner center={true} />
       ) : profileState.account ? (
@@ -160,6 +160,7 @@ const Profile = () => {
             </>
           </Card>
           <ProfileTabs />
+          <SubscriptionResultModal />
         </>
       ) : (
         <Card sx={{ padding: 3 }}>
