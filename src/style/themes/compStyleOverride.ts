@@ -69,6 +69,9 @@ export default function componentStyleOverrides(theme: any) {
       },
       styleOverrides: {
         root: {
+          "&:focus-visible": {
+            outline: "none !important",
+          },
           "&::-webkit-scrollbar": {
             width: 0,
           },

@@ -90,7 +90,7 @@ const SubscriptionResultModal = () => {
                 }}
               />
             )}
-            <Typography variant="h2">
+            <Typography textAlign="center" variant="h2">
               {translate(
                 `component.subscription.title.${isSuccess ? "success" : "fail"}`
               )}
