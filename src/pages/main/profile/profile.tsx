@@ -12,13 +12,16 @@ import ProfileTabs from "./profileTabs";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { useTheme } from "@mui/system";
 import { useParams } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import api from "../../../services/api";
 import { Spinner } from "../../../components/shared/common/spinner";
 import { CoverImageBox } from "../../../components/shared/user/coverImageBox";
 import { EditOutlined } from "@mui/icons-material";
 import Navigator from "../../../components/shared/common/navigatior";
-import { SubscribeButton } from "../../../components/shared/user/subscribeButton";
+import {
+  SubscribeButton,
+  SubscribeButtonImperativeHandleType,
+} from "../../../components/shared/user/subscribeButton";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { MoniestBadge } from "../../../components/shared/user/moniestBadge";
 import { setIsMyAccount, setProfile } from "../../../store/slices/profileSlice";
@@ -34,6 +37,8 @@ const Profile = () => {
   const { username } = useParams();
   const translate = useTranslate();
   const dispatch = useAppDispatch();
+  const subscriptionButtonRef =
+    useRef<SubscribeButtonImperativeHandleType>(null);
 
   const getAccount = useCallback(
     (username: string) => {
@@ -124,7 +129,7 @@ const Profile = () => {
                         </Button>
                       </Navigator>
                     ) : profileState.account.moniest ? (
-                      <SubscribeButton />
+                      <SubscribeButton ref={subscriptionButtonRef} />
                     ) : (
                       ""
                     )}
@@ -160,7 +165,11 @@ const Profile = () => {
             </>
           </Card>
           <ProfileTabs />
-          <SubscriptionResultModal />
+          <SubscriptionResultModal
+            onClose={(result) =>
+              result && subscriptionButtonRef.current?.reCheckSubscription()
+            }
+          />
         </>
       ) : (
         <Card sx={{ padding: 3 }}>

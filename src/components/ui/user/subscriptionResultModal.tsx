@@ -13,7 +13,11 @@ import { useTheme } from "@mui/system";
 import Confetti from "../../shared/common/confetti";
 import { useTranslate } from "../../../hooks/useTranslate";
 
-const SubscriptionResultModal = () => {
+const SubscriptionResultModal = ({
+  onClose,
+}: {
+  onClose?: (result: boolean) => void;
+}) => {
   let [searchParams] = useSearchParams();
   const match = useMatches();
   const [isOpen, setIsOpen] = useState(false);
@@ -56,6 +60,7 @@ const SubscriptionResultModal = () => {
       opened={isOpen}
       onClose={() => {
         setIsOpen(false);
+        onClose?.(isSuccess);
         navigate("/" + username, { replace: true });
       }}
     >

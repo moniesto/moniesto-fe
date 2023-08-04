@@ -120,7 +120,6 @@ export const SettingsSideBar = () => {
                     opacity: !matches ? 0.6 : 1,
                     "&.Mui-selected": {
                       opacity: 1,
-                      backgroundColor: "transparent",
                     },
                   }}
                   selected={selectedLink === link.path}
