@@ -29,45 +29,39 @@ export const NotAdvice = () => {
         {translate("component.post_card.not_advice")}
       </Box>
       <WrappedModal onClose={() => setOpen(false)} opened={open}>
-        <Box
-          sx={{
-            padding: { xs: "15px 10px 10px", md: "30px 20px 20px" },
-          }}
-        >
-          <Stack alignItems="center" spacing={4}>
-            <Stack gap={2} alignItems="center">
-              <WarningOutlined
-                sx={{
-                  padding: "6px",
-                  borderRadius: "100%",
-                  width: "40px",
-                  height: "40px",
-                  background: "var(--color-yellow-light)",
-                  color: "var(--color-yellow-primary)",
-                }}
-              />
-              <Typography variant="h2">
-                {translate("component.not_advice.header")}
-              </Typography>
-            </Stack>
-
-            <Typography
-              variant="h4"
-              sx={{ opacity: 0.6 }}
-              paddingX={{ xs: 0.5, md: 2 }}
-            >
-              {translate("component.not_advice.message")}
+        <Stack alignItems="center" spacing={4}>
+          <Stack gap={2} alignItems="center">
+            <WarningOutlined
+              sx={{
+                padding: "6px",
+                borderRadius: "100%",
+                width: "40px",
+                height: "40px",
+                background: "var(--color-yellow-light)",
+                color: "var(--color-yellow-primary)",
+              }}
+            />
+            <Typography textAlign="center" variant="h2">
+              {translate("component.not_advice.header")}
             </Typography>
-            <Button
-              onClick={() => setOpen(false)}
-              sx={{ alignSelf: "end" }}
-              color="secondary"
-              variant="contained"
-            >
-              {translate("component.not_advice.understood")}
-            </Button>
           </Stack>
-        </Box>
+
+          <Typography
+            variant="h4"
+            sx={{ opacity: 0.6, letterSpacing: "0.9px", lineHeight: "20px" }}
+            paddingX={{ xs: 0.2, md: 1 }}
+          >
+            {translate("component.not_advice.message")}
+          </Typography>
+          <Button
+            onClick={() => setOpen(false)}
+            sx={{ alignSelf: "end" }}
+            color="secondary"
+            variant="contained"
+          >
+            {translate("component.not_advice.understood")}
+          </Button>
+        </Stack>
       </WrappedModal>
     </Box>
   );
