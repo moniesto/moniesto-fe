@@ -16,7 +16,7 @@ export const NotAdvice = () => {
           left: "12px",
           bottom: "16px",
           opacity: 0.4,
-          fontSize: "0.75rem",
+          fontSize: "0.71rem",
           fontStyle: "italic",
           cursor: "pointer",
           transition: "opacity 0.2s ease",
@@ -31,7 +31,7 @@ export const NotAdvice = () => {
       <WrappedModal onClose={() => setOpen(false)} opened={open}>
         <Box
           sx={{
-            padding: "30px 20px 20px",
+            padding: { xs: "15px 10px 10px", md: "30px 20px 20px" },
           }}
         >
           <Stack alignItems="center" spacing={4}>
