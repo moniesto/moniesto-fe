@@ -15,7 +15,7 @@ export const ScoreBadge = ({
     <Stack
       sx={{
         background: "var(--color-yellow-light)",
-        padding: "4px 10px",
+        padding: "2px 12px 2px 6px",
         borderRadius: "100px",
       }}
       direction="row"

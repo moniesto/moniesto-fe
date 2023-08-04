@@ -77,6 +77,7 @@ export const Feedback = () => {
         onClick={() => setOpen(true)}
         variant="contained"
         color="secondary"
+        size="small"
         sx={{
           display: { xs: "block", md: "none" },
           position: "fixed",
@@ -117,7 +118,7 @@ export const Feedback = () => {
               }}
             />
           </Box>
-          <Typography variant="h3">
+          <Typography textAlign="center" variant="h3">
             {translate("component.feedback.header")}
           </Typography>
           <Typography variant="h4" textAlign="center" sx={{ opacity: 0.5 }}>

@@ -13,7 +13,7 @@ export const NotAdvice = () => {
       <Box
         sx={{
           position: "absolute",
-          left: "14px",
+          left: "12px",
           bottom: "16px",
           opacity: 0.4,
           fontSize: "0.75rem",

@@ -139,7 +139,7 @@ const Profile = () => {
                   <Stack spacing={1}>
                     <Stack flexDirection="row">
                       <Stack spacing={0}>
-                        <Stack flexDirection="row" alignItems="center" gap={2}>
+                        <Stack flexDirection="row" alignItems="center" gap={1}>
                           <Typography variant="h3">
                             {profileState.account.fullname}
                           </Typography>
