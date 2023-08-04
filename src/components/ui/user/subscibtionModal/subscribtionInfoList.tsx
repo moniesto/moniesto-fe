@@ -49,7 +49,7 @@ export const SubscribtionInfoList = ({
 
   return (
     <Box>
-      <Stack gap={2} justifyContent="space-between">
+      <Stack gap={1} justifyContent="space-between">
         <SubscriptionInfoItem
           title={translate("page.profile.subs_modal.subscribtion_month")}
         >
