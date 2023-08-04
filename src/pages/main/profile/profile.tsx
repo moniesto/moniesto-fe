@@ -136,9 +136,9 @@ const Profile = () => {
                   </Stack>
                 </Box>
                 <Box mt={3} mb={5}>
-                  <Stack spacing={2}>
+                  <Stack spacing={1}>
                     <Stack flexDirection="row">
-                      <Stack spacing={0.3}>
+                      <Stack spacing={0}>
                         <Stack flexDirection="row" alignItems="center" gap={2}>
                           <Typography variant="h3">
                             {profileState.account.fullname}
@@ -150,13 +150,17 @@ const Profile = () => {
                           )}
                         </Stack>
 
-                        <Typography sx={{ opacity: 0.8 }} variant="h5">
+                        <Typography sx={{ opacity: 0.7 }} variant="h4">
                           {profileState.account.username}
                         </Typography>
                       </Stack>
                     </Stack>
                     <LocationText location={profileState.account.location} />
-                    <Typography variant="body1">
+                    <Typography
+                      sx={{ opacity: 0.7 }}
+                      variant="h5"
+                      fontSize="0.77rem"
+                    >
                       {profileState.account.moniest?.bio}
                     </Typography>
                   </Stack>
