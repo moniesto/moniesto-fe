@@ -127,13 +127,15 @@ export default function componentStyleOverrides(theme: any) {
           paddingBottom: "10px",
           borderRadius: `${theme?.borderRadius.main} `,
           transition: "all 0.3s ease",
+          border: "1px solid transparent",
           ".MuiTypography-root": {
             fontWeight: 600,
           },
           "&.Mui-selected": {
-            backgroundColor: background800,
+            backgroundColor: cardBackground,
+            borderColor: background800,
             "&:hover": {
-              backgroundColor: background800,
+              backgroundColor: cardBackground,
             },
           },
         },

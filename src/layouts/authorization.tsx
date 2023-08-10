@@ -49,8 +49,9 @@ const AuthorizationLayout = () => {
         sx={{
           width: "100%",
           position: "fixed",
-          right: "24px",
-          height: "calc(100vh - 48px)",
+          right: 0,
+          top: 0,
+          height: "100vh",
           display: { xs: "none", md: "block" },
         }}
         item
@@ -60,7 +61,7 @@ const AuthorizationLayout = () => {
           sx={{
             height: "100%",
             background: theme.palette.primary.main,
-            borderRadius: theme.palette.borderRadius.large,
+            // borderRadius: theme.palette.borderRadius.large,
             color: theme.palette.text.secondary,
             paddingY: 8,
           }}

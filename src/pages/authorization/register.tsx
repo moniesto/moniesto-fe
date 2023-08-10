@@ -24,6 +24,7 @@ type RegisterForm = {
   fullname: string;
   email: string;
   password: string;
+  language: string;
 };
 
 const Register = () => {
@@ -33,6 +34,7 @@ const Register = () => {
   const dispatch = useAppDispatch();
   const { usernameValidation, usernameInput } = useUsernameValidation();
   const [loading, setLoading] = useState<boolean>(false);
+  const browserLanguage = navigator.language.split("-")[0];
 
   const handleSubmit = (values: RegisterForm) => {
     setLoading(true);
@@ -86,6 +88,7 @@ const Register = () => {
       fullname: "",
       email: "",
       password: "",
+      language: browserLanguage,
     },
     initialTouched: {
       username: true,

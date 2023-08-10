@@ -19,6 +19,7 @@ export interface User {
   created_at?: Date;
   updated_at?: Date;
   moniest?: Moniest;
+  language?: string;
 }
 export interface Moniest {
   id: string;

@@ -46,7 +46,7 @@ const TimeLine = () => {
         }
         queryParams.offset = 0;
         setQueryParams(JSON.parse(JSON.stringify(queryParams)));
-      }
+      } else queryParams.hasMore = true;
     });
   }, [queryParams]);
 

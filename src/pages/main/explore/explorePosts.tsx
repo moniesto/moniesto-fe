@@ -37,7 +37,7 @@ const ExplorePosts = () => {
         queryParams.hasMore = false;
         queryParams.offset = 0;
         setQueryParams(JSON.parse(JSON.stringify(queryParams)));
-      }
+      } else queryParams.hasMore = true;
     });
   }, [queryParams]);
 

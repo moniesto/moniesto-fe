@@ -44,9 +44,9 @@ const SubscriptionsTab = () => {
           queryParams.hasMore = false;
           queryParams.offset = 0;
           setQueryParams(JSON.parse(JSON.stringify(queryParams)));
-        }
-        setLoading(false);
-      });
+        } else queryParams.hasMore = true;
+      })
+      .finally(() => setLoading(false));
   }, [profileState.account, queryParams, users]);
 
   useEffect(() => {

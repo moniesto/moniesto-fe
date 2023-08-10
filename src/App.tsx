@@ -25,6 +25,7 @@ function App() {
   const storage = useAppSelector((state) => state.storage);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(true);
+  const browserLanguage = navigator.language.split("-")[0];
 
   const getUserByUserName = useCallback(async () => {
     const decoded = (await localStorageService
@@ -54,7 +55,7 @@ function App() {
     toastService.setDispatch(dispatch);
     configService.initialize();
 
-    dispatch(changeLanguage(storage.language || navigator.language));
+    dispatch(changeLanguage(storage.language || browserLanguage));
 
     if (!localStorageService.getStorage().token) {
       setLoading(false);
@@ -62,13 +63,13 @@ function App() {
     }
 
     getUserByUserName();
-  }, [dispatch, getUserByUserName, storage.language]);
+  }, [dispatch, getUserByUserName, storage.language, browserLanguage]);
 
   return (
     <ThemeProvider
       theme={configService.getTheme(
         storage.theme_mode,
-        storage.language || navigator.language
+        storage.language || browserLanguage
       )}
     >
       <CssBaseline />

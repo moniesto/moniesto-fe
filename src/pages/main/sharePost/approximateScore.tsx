@@ -9,9 +9,11 @@ import { ErrorOutline, HelpOutlineOutlined } from "@mui/icons-material";
 export const ApproximateScore = ({
   post,
   isValid,
+  isSubmitting,
 }: {
   post: Partial<Post>;
   isValid: boolean;
+  isSubmitting: boolean;
 }) => {
   const translate = useTranslate();
   const theme = useTheme();
@@ -19,7 +21,7 @@ export const ApproximateScore = ({
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!isValid) return;
+    if (!isValid || isSubmitting) return;
     const timeOutId = setTimeout(() => {
       setLoading(true);
       setScore(0);
@@ -34,7 +36,7 @@ export const ApproximateScore = ({
     }, 100);
 
     return () => clearTimeout(timeOutId);
-  }, [post, isValid]);
+  }, [post, isValid, isSubmitting]);
 
   return (
     <Stack

@@ -9,7 +9,7 @@ type InfiniteScrollProps = {
   pullDownToRefreshThreshold?: number;
   children: ReactNode;
   hasMore: boolean;
-  loader?: ReactNode
+  loader?: ReactNode;
 };
 
 export const InfiniteScroll = (props: InfiniteScrollProps) => {
@@ -24,4 +24,3 @@ export const InfiniteScroll = (props: InfiniteScrollProps) => {
     </InfiniteScrollComponent>
   );
 };
-

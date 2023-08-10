@@ -41,9 +41,9 @@ const SubscribersTab = () => {
         if (response.length < queryParams.limit) {
           queryParams.offset = 0;
           setQueryParams(JSON.parse(JSON.stringify(queryParams)));
-        }
-        setLoading(false);
-      });
+        } else queryParams.hasMore = true;
+      })
+      .finally(() => setLoading(false));
   }, [profileState.account, queryParams, users]);
 
   useEffect(() => {

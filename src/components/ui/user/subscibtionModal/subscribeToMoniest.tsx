@@ -131,13 +131,12 @@ export const SubscribeToMoniest = ({
             </Stack>
           </Box>
           <Box p={{ xs: 1.5, md: 3 }} pt={{ xs: 5, md: 8 }}>
-            {!profileState.isSubscribed && (
+            {!profileState.isSubscribed ? (
               <SubscribtionInfoList
                 month={month}
                 handleMonthChange={setMonth}
               />
-            )}
-            {profileState.isSubscribed ? (
+            ) : (
               <Box>
                 <Stack mb={3} spacing={1} direction="row" alignItems="center">
                   <ErrorOutline></ErrorOutline>
@@ -153,8 +152,6 @@ export const SubscribeToMoniest = ({
                   })}
                 </Typography>
               </Box>
-            ) : (
-              <Box>{/* test */}</Box>
             )}
             <Stack mt={3}>
               <LoadingButton

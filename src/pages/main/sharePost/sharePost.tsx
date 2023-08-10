@@ -629,6 +629,7 @@ export const SharePost = () => {
 
             <Box>
               <ApproximateScore
+                isSubmitting={submitLoading}
                 isValid={formik.dirty && formik.isValid}
                 post={normalizePost as Post}
               ></ApproximateScore>
