@@ -46,8 +46,6 @@ const PostsTab = () => {
   const translate = useTranslate();
   const profileState = useAppSelector((state) => state.profile);
 
-  console.log("queryParams :", queryParams);
-
   const handleFetchData = () => {
     setQueryParams((prev) => {
       return {

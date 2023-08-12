@@ -399,6 +399,8 @@
   },
   "server": {
     "error": {
+      "Account_Login_NotFoundEmail":"Bu email ile ilişkili bir hespa bulunamadı",
+      "Account_Login_WrongPassword":"Hatalı şifre",
       "Account_CheckUsername_InvalidUsername": "Kullanıcı adı geçerli değil",
       "Post_CreatePost_InvalidTargets":"TP'ler geçerli değil",
       "Moniest_CreateMoniest_InvalidBody":"Bu bilgiler moniest olmak için geçersiz",

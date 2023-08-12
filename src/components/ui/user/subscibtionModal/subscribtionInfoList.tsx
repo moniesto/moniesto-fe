@@ -39,6 +39,7 @@ export const SubscribtionInfoList = ({
 }) => {
   const translate = useTranslate();
   const profileState = useAppSelector((state) => state.profile);
+  const theme = useTheme();
   const [selectedMethod, setSelectedMethod] = useState(paymentMethods[0]);
 
   const finalDate = useMemo(() => {
@@ -119,7 +120,15 @@ export const SubscribtionInfoList = ({
                       display="flex"
                       height={20}
                     >
-                      <img src={item.image} alt={item.text} />
+                      <img
+                        style={{
+                          background: "white",
+                          border: `1px solid ${theme.palette.background[800]}`,
+                          borderRadius: "4px",
+                        }}
+                        src={item.image}
+                        alt={item.text}
+                      />
                     </Box>
 
                     {translate(

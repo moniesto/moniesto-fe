@@ -242,6 +242,7 @@ export default function componentStyleOverrides(theme: any) {
       styleOverrides: {
         root: {
           background: background800,
+          border: `1px solid ${background800}`,
         },
       },
     },

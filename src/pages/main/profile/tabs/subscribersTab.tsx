@@ -1,4 +1,4 @@
-import { Box, List, Paper, Stack, Typography } from "@mui/material";
+import { Box, Divider, List, Paper, Stack, Typography } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { User } from "../../../../interfaces/user";
 import SubsPersonCard from "../../../../components/shared/user/subsPersonCard";
@@ -68,19 +68,22 @@ const SubscribersTab = () => {
                 loading={user.id === "-1"}
                 user={user}
               ></SubsPersonCard>
+              {i + 1 !== users.length && <Divider sx={{ m: 1 }} />}
             </Navigator>
           ))}
-          {!loading && !users.length && (
-            <Stack p={2} alignItems="center">
-              <Typography variant="h5">
-                {profileState.isMyAccount
-                  ? translate("page.profile.no_subscriber")
-                  : translate("page.profile.no_subscriber_account", {
-                      username: profileState.account!.username,
-                    })}
-              </Typography>
-            </Stack>
-          )}
+          {!loading
+            ? !users.length && (
+                <Stack p={2} alignItems="center">
+                  <Typography variant="h5">
+                    {profileState.isMyAccount
+                      ? translate("page.profile.no_subscriber")
+                      : translate("page.profile.no_subscriber_account", {
+                          username: profileState.account!.username,
+                        })}
+                  </Typography>
+                </Stack>
+              )
+            : null}
         </InfiniteScroll>
       </List>
     </Paper>

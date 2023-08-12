@@ -417,6 +417,8 @@
   },
   "server": {
     "error": {
+      "Account_Login_NotFoundEmail":"No account found associated with this email",
+      "Account_Login_WrongPassword":"Wrong password en",
       "Account_CheckUsername_InvalidUsername": "Username is invalid",
       "Post_CreatePost_InvalidTargets":"TP's are invalid",
       "Moniest_CreateMoniest_InvalidBody":"These information is invalid to be moniest",

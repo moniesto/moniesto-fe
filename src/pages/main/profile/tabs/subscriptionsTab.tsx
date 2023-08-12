@@ -1,4 +1,4 @@
-import { Box, List, Paper, Typography } from "@mui/material";
+import { Box, Divider, List, Paper, Typography } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { User } from "../../../../interfaces/user";
 import SubsPersonCard from "../../../../components/shared/user/subsPersonCard";
@@ -71,6 +71,7 @@ const SubscriptionsTab = () => {
                 loading={user.id === "-1"}
                 user={user}
               ></SubsPersonCard>
+              {i + 1 !== users.length && <Divider sx={{ m: 1 }} />}
             </Navigator>
           ))}
           {!loading && !users.length && (

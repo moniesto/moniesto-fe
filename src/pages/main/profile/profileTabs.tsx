@@ -12,17 +12,17 @@ import { useAppSelector } from "../../../store/hooks";
 const ProfileTabs = () => {
   const theme = useTheme();
   const profileState = useAppSelector((state) => state.profile);
-  const [tabValue, setTabValue] = useState<string>("");
+  const defaultTab = profileState.account?.moniest ? "posts" : "subscriptions";
+  const [tabValue, setTabValue] = useState<string>(defaultTab);
   const [counts, setCounts] = useState({
     posts: 0,
     subscriptions: 0,
     subscribers: 0,
   });
 
-  const defaultTab = useMemo(
-    () => (profileState.account?.moniest ? "posts" : "subscriptions"),
-    [profileState]
-  );
+  useEffect(() => {
+    setTabValue(defaultTab);
+  }, [defaultTab, profileState.account]);
 
   const translate = useTranslate();
 
@@ -121,7 +121,7 @@ const ProfileTabs = () => {
           },
         }}
         onChange={handleChange}
-        value={tabValue || defaultTab}
+        value={tabValue}
       >
         {getTabs.map((tab) => (
           <Tab
@@ -132,10 +132,7 @@ const ProfileTabs = () => {
         ))}
       </Tabs>
       <Box mt={4}>
-        {
-          getTabs.find((item) => item.value === (tabValue || defaultTab))
-            ?.content
-        }
+        {getTabs.find((item) => item.value === tabValue)?.content}
       </Box>
     </Box>
   );

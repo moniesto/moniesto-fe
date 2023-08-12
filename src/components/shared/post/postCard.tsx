@@ -113,9 +113,15 @@ const PostCard = ({ post, loading }: PostCardProps) => {
           <Stack flexDirection="row" gap={{ md: 5, xs: 3 }}>
             <Stack alignItems="center">
               {!loading ? (
-                <Typography variant="h4" color={theme.palette.warning.dark}>
-                  {post.currency}
-                </Typography>
+                <Box
+                  component="a"
+                  target="_blank"
+                  href={`https://www.binance.com/trade/${post.currency}`}
+                >
+                  <Typography variant="h4" color={theme.palette.warning.dark}>
+                    {post.currency}
+                  </Typography>
+                </Box>
               ) : (
                 <Skeleton
                   animation="wave"
@@ -128,7 +134,9 @@ const PostCard = ({ post, loading }: PostCardProps) => {
         }
         title={
           !loading ? (
-            <Typography variant="h4">{`${post.user.fullname}`}</Typography>
+            <Navigator path={"/" + post.user.username}>
+              <Typography variant="h4">{`${post.user.fullname}`}</Typography>
+            </Navigator>
           ) : (
             <Skeleton
               animation="wave"
@@ -138,37 +146,39 @@ const PostCard = ({ post, loading }: PostCardProps) => {
           )
         }
         subheader={
-          <Stack flexDirection="row" columnGap={1} alignItems="baseline">
-            {!loading ? (
-              <Typography
-                color={theme.palette.grey[500]}
-                lineHeight="17px"
-                variant="h5"
-              >
-                {post.user.username}
-              </Typography>
-            ) : (
-              <Skeleton
-                animation="wave"
-                sx={{ width: 80, maxHeight: 20 }}
-                variant="text"
-              ></Skeleton>
-            )}
-            {!loading && (
-              <Typography color={theme.palette.grey[500]}>•</Typography>
-            )}
-            <Typography variant="h6" color={theme.palette.grey[500]}>
+          <Navigator path={"/" + post.user.username}>
+            <Stack flexDirection="row" columnGap={1} alignItems="baseline">
               {!loading ? (
-                <ReactTimeAgo date={new Date(post.created_at)} />
+                <Typography
+                  color={theme.palette.grey[500]}
+                  lineHeight="17px"
+                  variant="h5"
+                >
+                  {post.user.username}
+                </Typography>
               ) : (
                 <Skeleton
                   animation="wave"
-                  sx={{ width: 60, maxHeight: 17 }}
+                  sx={{ width: 80, maxHeight: 20 }}
                   variant="text"
                 ></Skeleton>
               )}
-            </Typography>
-          </Stack>
+              {!loading && (
+                <Typography color={theme.palette.grey[500]}>•</Typography>
+              )}
+              <Typography variant="h6" color={theme.palette.grey[500]}>
+                {!loading ? (
+                  <ReactTimeAgo date={new Date(post.created_at)} />
+                ) : (
+                  <Skeleton
+                    animation="wave"
+                    sx={{ width: 60, maxHeight: 17 }}
+                    variant="text"
+                  ></Skeleton>
+                )}
+              </Typography>
+            </Stack>
+          </Navigator>
         }
       />
       <Stack

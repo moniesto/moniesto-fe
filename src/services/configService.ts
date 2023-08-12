@@ -265,6 +265,8 @@ class config {
 
   translatedErrors = [
     "Account_CheckUsername_InvalidUsername",
+    "Account_Login_WrongPassword",
+    "Account_Login_NotFoundEmail",
     "Post_CreatePost_InvalidTargets",
     "Moniest_CreateMoniest_InvalidBody",
     "Account_EmailVerification_NotFoundToken",
