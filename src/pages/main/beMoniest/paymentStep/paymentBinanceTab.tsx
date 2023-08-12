@@ -1,10 +1,4 @@
-import {
-  IconButton,
-  InputAdornment,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { IconButton, InputAdornment, Stack, Typography } from "@mui/material";
 import { FormItem } from "../../../../components/shared/common/formItem";
 import { HelpOutlineOutlined, PermIdentityOutlined } from "@mui/icons-material";
 import { BeMoniestStepperFooter } from "../beMoniestStepperFooter";
@@ -16,6 +10,7 @@ import { useTranslate } from "../../../../hooks/useTranslate";
 import Fly from "../../../../components/shared/common/fly/fly";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { nextStep } from "../../../../store/slices/beMoniestSlice";
+import { WrappedTextField } from "../../../../components/shared/common/wrappers/wrappedTextField";
 
 export const PaymentBinanceTab = () => {
   const [binanceIDHelperModalOpened, setBinanceIDHelperModalOpened] =
@@ -74,7 +69,7 @@ export const PaymentBinanceTab = () => {
               </Stack>
             }
           >
-            <TextField
+            <WrappedTextField
               fullWidth
               id="binance_id"
               name="binance_id"

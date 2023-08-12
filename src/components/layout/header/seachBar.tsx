@@ -1,5 +1,5 @@
 import { ClearOutlined, SearchOutlined } from "@mui/icons-material";
-import { Card, IconButton, InputAdornment, TextField } from "@mui/material";
+import { Card, IconButton, InputAdornment } from "@mui/material";
 import { useTheme } from "@mui/system";
 
 import { Box, Stack } from "@mui/system";
@@ -10,6 +10,7 @@ import api from "../../../services/api";
 import Navigator from "../../shared/common/navigatior";
 import { Spinner } from "../../shared/common/spinner";
 import SearchMoniestItem from "../../shared/user/searchMoniestItem";
+import { WrappedTextField } from "../../shared/common/wrappers/wrappedTextField";
 
 const SearchBar = ({
   onTypeSearch,
@@ -55,7 +56,7 @@ const SearchBar = ({
 
   return (
     <Box sx={{ position: "relative" }}>
-      <TextField
+      <WrappedTextField
         sx={{
           minWidth: "278px",
           width: { md: focused || text ? "350px" : "278px", sm: "100%" },

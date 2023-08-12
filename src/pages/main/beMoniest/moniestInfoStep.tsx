@@ -1,4 +1,4 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -13,6 +13,7 @@ import Fly from "../../../components/shared/common/fly/fly";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { nextStep } from "../../../store/slices/beMoniestSlice";
 import { BeMoniestStepperFooter } from "./beMoniestStepperFooter";
+import { WrappedTextField } from "../../../components/shared/common/wrappers/wrappedTextField";
 
 const MoniestInfoStep = () => {
   const translate = useTranslate();
@@ -66,7 +67,7 @@ const MoniestInfoStep = () => {
             <Stack spacing={2}>
               <Fly.Item>
                 <FormItem title={translate("form.field.fee")}>
-                  <TextField
+                  <WrappedTextField
                     fullWidth
                     name="fee"
                     type="number"
@@ -90,7 +91,7 @@ const MoniestInfoStep = () => {
               </Fly.Item>
               <Fly.Item>
                 <FormItem title={translate("form.field.bio")}>
-                  <TextField
+                  <WrappedTextField
                     sx={{
                       ".MuiInputBase-root": {
                         alignItems: "baseline",
@@ -117,7 +118,7 @@ const MoniestInfoStep = () => {
               </Fly.Item>
               <Fly.Item>
                 <FormItem title={translate("form.field.desc")}>
-                  <TextField
+                  <WrappedTextField
                     sx={{
                       ".MuiInputBase-root": {
                         alignItems: "baseline",

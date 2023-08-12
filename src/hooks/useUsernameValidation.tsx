@@ -4,17 +4,13 @@ import { useTranslate } from "./useTranslate";
 import api from "../services/api";
 import { useAppSelector } from "../store/hooks";
 import { ChangeEvent, useCallback, useState } from "react";
-import {
-  CircularProgress,
-  InputAdornment,
-  TextField,
-  useTheme,
-} from "@mui/material";
+import { CircularProgress, InputAdornment, useTheme } from "@mui/material";
 import {
   DoneOutlined,
   HighlightOffOutlined,
   PermIdentity,
 } from "@mui/icons-material";
+import { WrappedTextField } from "../components/shared/common/wrappers/wrappedTextField";
 
 let debounceTimer: NodeJS.Timeout | null = null;
 export const useUsernameValidation = () => {
@@ -34,7 +30,7 @@ export const useUsernameValidation = () => {
       helperText?: string
     ) => {
       return (
-        <TextField
+        <WrappedTextField
           fullWidth
           id="username"
           name="username"

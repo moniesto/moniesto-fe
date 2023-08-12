@@ -1,10 +1,4 @@
-import {
-  Card,
-  InputAdornment,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Card, InputAdornment, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import * as yup from "yup";
 import api from "../../services/api";
@@ -13,6 +7,7 @@ import { useFormik } from "formik";
 import { LoadingButton } from "@mui/lab";
 import { KeyOutlined } from "@mui/icons-material";
 import { useTranslate } from "../../hooks/useTranslate";
+import { WrappedTextField } from "../../components/shared/common/wrappers/wrappedTextField";
 
 export const PasswordSettings = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -60,7 +55,7 @@ export const PasswordSettings = () => {
             {translate("page.settings.password.title")}
           </Typography>
           <Stack spacing={2}>
-            <TextField
+            <WrappedTextField
               fullWidth
               name="old"
               type="password"
@@ -77,7 +72,7 @@ export const PasswordSettings = () => {
                 ),
               }}
             />
-            <TextField
+            <WrappedTextField
               fullWidth
               name="new"
               type="password"

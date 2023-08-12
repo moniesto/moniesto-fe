@@ -2,7 +2,6 @@ import {
   Box,
   CircularProgress,
   InputAdornment,
-  TextField,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -19,6 +18,7 @@ import api from "../../services/api";
 import { useTranslate } from "../../hooks/useTranslate";
 import Fly from "../../components/shared/common/fly/fly";
 import configService from "../../services/configService";
+import { WrappedTextField } from "../../components/shared/common/wrappers/wrappedTextField";
 
 type ChangePasswordForm = {
   password: string;
@@ -130,7 +130,7 @@ const ChangePassword = () => {
               <Stack spacing={4}>
                 <Stack spacing={2}>
                   <Fly.Item>
-                    <TextField
+                    <WrappedTextField
                       fullWidth
                       id="password"
                       name="password"
@@ -155,7 +155,7 @@ const ChangePassword = () => {
                     />
                   </Fly.Item>
                   <Fly.Item>
-                    <TextField
+                    <WrappedTextField
                       fullWidth
                       id="repassword"
                       name="repassword"

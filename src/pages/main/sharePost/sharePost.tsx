@@ -5,9 +5,7 @@ import {
   FormControl,
   InputAdornment,
   MenuItem,
-  Select,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/system";
@@ -38,6 +36,8 @@ import { Post } from "../../../interfaces/post";
 import { FormItem } from "../../../components/shared/common/formItem";
 import { CurrencyInput } from "./currencyInput";
 import configService from "../../../services/configService";
+import { WrappedTextField } from "../../../components/shared/common/wrappers/wrappedTextField";
+import { WrappedSelect } from "../../../components/shared/common/wrappers/wrappedSelect";
 
 export const SharePost = () => {
   const [calendarOpen, setCalendarOpen] = React.useState(false);
@@ -300,7 +300,7 @@ export const SharePost = () => {
                       formik.setFieldValue("duration", value, true)
                     }
                     renderInput={(params: any) => (
-                      <TextField
+                      <WrappedTextField
                         fullWidth
                         onKeyDown={(e) => e.preventDefault()}
                         onClick={() => {
@@ -347,7 +347,7 @@ export const SharePost = () => {
                   }
                   fullWidth
                 >
-                  <Select
+                  <WrappedSelect
                     color="secondary"
                     onChange={formik.handleChange}
                     name="direction"
@@ -358,7 +358,7 @@ export const SharePost = () => {
                     <MenuItem value="short">
                       {translate("common.short")}
                     </MenuItem>
-                  </Select>
+                  </WrappedSelect>
                 </FormControl>
               </FormItem>
 
@@ -378,7 +378,7 @@ export const SharePost = () => {
                   }}
                 >
                   <Stack direction="row" spacing={1}>
-                    <TextField
+                    <WrappedTextField
                       disabled={!formik.values.crypto_currency.price}
                       fullWidth
                       name="target1"
@@ -415,7 +415,7 @@ export const SharePost = () => {
                         ),
                       }}
                     />
-                    <TextField
+                    <WrappedTextField
                       placeholder="0"
                       value={calculatedRound(formik.values.target1)}
                       InputProps={{
@@ -431,7 +431,7 @@ export const SharePost = () => {
                   </Stack>
 
                   <Stack direction="row" spacing={1}>
-                    <TextField
+                    <WrappedTextField
                       disabled={!formik.values.crypto_currency.price}
                       fullWidth
                       name="target2"
@@ -468,7 +468,7 @@ export const SharePost = () => {
                         ),
                       }}
                     />
-                    <TextField
+                    <WrappedTextField
                       placeholder="0"
                       value={calculatedRound(formik.values.target2)}
                       InputProps={{
@@ -483,7 +483,7 @@ export const SharePost = () => {
                     />
                   </Stack>
                   <Stack direction="row" spacing={1}>
-                    <TextField
+                    <WrappedTextField
                       disabled={!formik.values.crypto_currency.price}
                       fullWidth
                       name="target3"
@@ -520,7 +520,7 @@ export const SharePost = () => {
                         ),
                       }}
                     />
-                    <TextField
+                    <WrappedTextField
                       placeholder="0"
                       value={calculatedRound(formik.values.target3)}
                       InputProps={{
@@ -547,7 +547,7 @@ export const SharePost = () => {
                   direction="row"
                   spacing={1}
                 >
-                  <TextField
+                  <WrappedTextField
                     disabled={!formik.values.crypto_currency.price}
                     fullWidth
                     name="stop"
@@ -579,7 +579,7 @@ export const SharePost = () => {
                       ),
                     }}
                   />
-                  <TextField
+                  <WrappedTextField
                     placeholder="0"
                     value={
                       !formik.values.stop

@@ -1,4 +1,4 @@
-import { InputAdornment, TextField, Typography, useTheme } from "@mui/material";
+import { InputAdornment, Typography, useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -12,6 +12,7 @@ import api from "../../services/api";
 import { useTranslate } from "../../hooks/useTranslate";
 import configService from "../../services/configService";
 import Fly from "../../components/shared/common/fly/fly";
+import { WrappedTextField } from "../../components/shared/common/wrappers/wrappedTextField";
 
 type ForgetPasswordForm = {
   email: string;
@@ -83,7 +84,7 @@ const ForgetPassword = () => {
           <Stack spacing={4}>
             <Stack spacing={2}>
               <Fly.Item>
-                <TextField
+                <WrappedTextField
                   fullWidth
                   id="email"
                   name="email"

@@ -3,7 +3,6 @@ import {
   Divider,
   FormControl,
   MenuItem,
-  Select,
   Stack,
   Typography,
 } from "@mui/material";
@@ -12,6 +11,7 @@ import { ReactNode, useMemo, useState } from "react";
 import localStorageService from "../../../../services/localStorageService";
 import { useTheme } from "@mui/system";
 import { useAppSelector } from "../../../../store/hooks";
+import { WrappedSelect } from "../../../shared/common/wrappers/wrappedSelect";
 
 export const paymentMethods = [
   {
@@ -55,7 +55,7 @@ export const SubscribtionInfoList = ({
           title={translate("page.profile.subs_modal.subscribtion_month")}
         >
           <FormControl>
-            <Select
+            <WrappedSelect
               onChange={(event) =>
                 handleMonthChange(Number(event.target.value))
               }
@@ -71,14 +71,14 @@ export const SubscribtionInfoList = ({
                     {index + 1}
                   </MenuItem>
                 ))}
-            </Select>
+            </WrappedSelect>
           </FormControl>
         </SubscriptionInfoItem>
         <SubscriptionInfoItem
           title={translate("page.profile.subs_modal.payment_method.desc")}
         >
           <FormControl>
-            <Select
+            <WrappedSelect
               value={selectedMethod.value}
               onChange={(event) =>
                 setSelectedMethod(
@@ -137,7 +137,7 @@ export const SubscribtionInfoList = ({
                   </Box>
                 </MenuItem>
               ))}
-            </Select>
+            </WrappedSelect>
           </FormControl>
         </SubscriptionInfoItem>
         <SubscriptionInfoItem

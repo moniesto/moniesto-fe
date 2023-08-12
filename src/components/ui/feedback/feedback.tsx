@@ -11,9 +11,7 @@ import {
   FormHelperText,
   InputAdornment,
   MenuItem,
-  Select,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 
@@ -28,6 +26,8 @@ import toastService from "../../../services/toastService";
 import { Trans } from "react-i18next";
 import { FormItem } from "../../shared/common/formItem";
 import { WrappedModal } from "../../shared/common/wrappedModal";
+import { WrappedTextField } from "../../shared/common/wrappers/wrappedTextField";
+import { WrappedSelect } from "../../shared/common/wrappers/wrappedSelect";
 
 export const Feedback = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -133,7 +133,7 @@ export const Feedback = () => {
                 error={formik.touched.type && Boolean(formik.errors.type)}
                 fullWidth
               >
-                <Select
+                <WrappedSelect
                   color="secondary"
                   onChange={formik.handleChange}
                   name="type"
@@ -145,13 +145,13 @@ export const Feedback = () => {
                       {translate("component.feedback.type." + type)}
                     </MenuItem>
                   ))}
-                </Select>
+                </WrappedSelect>
                 <FormHelperText>{formik.errors.type}</FormHelperText>
               </FormControl>
             </FormItem>
 
             <FormItem title={translate("form.field.message")}>
-              <TextField
+              <WrappedTextField
                 sx={{
                   ".MuiInputBase-root": {
                     alignItems: "baseline",

@@ -1,4 +1,4 @@
-import { InputAdornment, TextField, Typography, useTheme } from "@mui/material";
+import { InputAdornment, Typography, useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -15,6 +15,7 @@ import toastService from "../../services/toastService";
 import { useTranslate } from "../../hooks/useTranslate";
 import Fly from "../../components/shared/common/fly/fly";
 import configService from "../../services/configService";
+import { WrappedTextField } from "../../components/shared/common/wrappers/wrappedTextField";
 
 type LoginForm = {
   identifier: string;
@@ -93,7 +94,7 @@ const Login = () => {
           <Stack spacing={4}>
             <Stack spacing={2}>
               <Fly.Item>
-                <TextField
+                <WrappedTextField
                   fullWidth
                   name="identifier"
                   placeholder={translate("form.field.email_or_username")}
@@ -117,7 +118,7 @@ const Login = () => {
                 />
               </Fly.Item>
               <Fly.Item>
-                <TextField
+                <WrappedTextField
                   fullWidth
                   name="password"
                   placeholder={translate("form.field.password")}

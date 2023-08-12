@@ -1,10 +1,4 @@
-import {
-  Card,
-  InputAdornment,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Card, InputAdornment, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import * as yup from "yup";
@@ -21,6 +15,7 @@ import { setUser } from "../../store/slices/userSlice";
 import { useTranslate } from "../../hooks/useTranslate";
 import configService from "../../services/configService";
 import { FormItem } from "../../components/shared/common/formItem";
+import { WrappedTextField } from "../../components/shared/common/wrappers/wrappedTextField";
 
 export const MoniestSettings = () => {
   const user = useAppSelector((state) => state.user.user);
@@ -101,7 +96,7 @@ export const MoniestSettings = () => {
           </Typography>
           <Stack spacing={2}>
             <FormItem title={translate("form.field.fee")}>
-              <TextField
+              <WrappedTextField
                 fullWidth
                 name="fee"
                 type="number"
@@ -119,7 +114,7 @@ export const MoniestSettings = () => {
               />
             </FormItem>
             <FormItem title={translate("form.field.bio")}>
-              <TextField
+              <WrappedTextField
                 sx={{
                   ".MuiInputBase-root": {
                     alignItems: "baseline",
@@ -144,7 +139,7 @@ export const MoniestSettings = () => {
               />
             </FormItem>
             <FormItem title={translate("form.field.desc")}>
-              <TextField
+              <WrappedTextField
                 sx={{
                   ".MuiInputBase-root": {
                     alignItems: "baseline",

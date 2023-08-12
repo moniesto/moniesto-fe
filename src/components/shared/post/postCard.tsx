@@ -90,6 +90,12 @@ const PostCard = ({ post, loading }: PostCardProps) => {
             xs: "0.8rem 0.8rem 0.2rem",
             md: "1.2rem 1.2rem 0.5rem",
           },
+          ".MuiCardHeader-avatar": {
+            marginRight: {
+              xs: 1,
+              md: 1.5,
+            },
+          },
         }}
         avatar={
           !loading ? (
@@ -150,7 +156,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
             <Stack flexDirection="row" columnGap={1} alignItems="baseline">
               {!loading ? (
                 <Typography
-                  color={theme.palette.grey[500]}
+                  sx={{ opacity: 0.7 }}
                   lineHeight="17px"
                   variant="h5"
                 >
@@ -163,10 +169,8 @@ const PostCard = ({ post, loading }: PostCardProps) => {
                   variant="text"
                 ></Skeleton>
               )}
-              {!loading && (
-                <Typography color={theme.palette.grey[500]}>•</Typography>
-              )}
-              <Typography variant="h6" color={theme.palette.grey[500]}>
+              {!loading && <Typography sx={{ opacity: 0.7 }}>•</Typography>}
+              <Typography variant="h6" sx={{ opacity: 0.7 }}>
                 {!loading ? (
                   <ReactTimeAgo date={new Date(post.created_at)} />
                 ) : (
@@ -185,6 +189,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
         spacing={2}
         pb={1}
         pr={{ xs: "10px", md: "20px" }}
+        mt={{ xs: 1.5, md: 0 }}
         direction="row"
         justifyContent="flex-end"
       >
@@ -197,8 +202,8 @@ const PostCard = ({ post, loading }: PostCardProps) => {
         )}
 
         <InfoChip
-          title={translate("component.post_card.rate")}
-          value={"%" + calculatePercentage}
+          title={`${translate("component.post_card.rate")}:`}
+          value={calculatePercentage + "%"}
           loading={loading}
         ></InfoChip>
         <InfoChip

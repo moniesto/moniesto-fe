@@ -9,9 +9,7 @@ import {
   Card,
   InputAdornment,
   MenuItem,
-  Select,
   Stack,
-  TextField,
 } from "@mui/material";
 import { useTheme } from "@mui/system";
 import { useFormik } from "formik";
@@ -30,6 +28,8 @@ import { useTranslate } from "../../hooks/useTranslate";
 import configService from "../../services/configService";
 import { useUsernameValidation } from "../../hooks/useUsernameValidation";
 import { FormItem } from "../../components/shared/common/formItem";
+import { WrappedTextField } from "../../components/shared/common/wrappers/wrappedTextField";
+import { WrappedSelect } from "../../components/shared/common/wrappers/wrappedSelect";
 
 export const AccountSettings = () => {
   const user = useAppSelector((state) => state.user.user);
@@ -203,7 +203,7 @@ export const AccountSettings = () => {
                 sx={{ flex: 1, minWidth: 200 }}
                 title={translate("form.field.fullname")}
               >
-                <TextField
+                <WrappedTextField
                   fullWidth
                   id="fullname"
                   name="fullname"
@@ -228,7 +228,7 @@ export const AccountSettings = () => {
                 sx={{ flex: 1, minWidth: 200 }}
                 title={translate("form.field.location")}
               >
-                <TextField
+                <WrappedTextField
                   fullWidth
                   id="location"
                   name="location"
@@ -255,7 +255,7 @@ export const AccountSettings = () => {
                 sx={{ flex: 1 }}
                 title={translate("form.field.language")}
               >
-                <Select
+                <WrappedSelect
                   fullWidth
                   id="language"
                   name="language"
@@ -267,7 +267,7 @@ export const AccountSettings = () => {
                 >
                   <MenuItem value={"en"}>En</MenuItem>
                   <MenuItem value={"tr"}>Tr</MenuItem>
-                </Select>
+                </WrappedSelect>
               </FormItem>
             </Stack>
           </Stack>

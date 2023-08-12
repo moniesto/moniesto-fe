@@ -1,4 +1,4 @@
-import { InputAdornment, TextField, Typography, useTheme } from "@mui/material";
+import { InputAdornment, Typography, useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -18,6 +18,7 @@ import { useTranslate } from "../../hooks/useTranslate";
 import configService from "../../services/configService";
 import Fly from "../../components/shared/common/fly/fly";
 import { useUsernameValidation } from "../../hooks/useUsernameValidation";
+import { WrappedTextField } from "../../components/shared/common/wrappers/wrappedTextField";
 
 type RegisterForm = {
   username: string;
@@ -132,7 +133,7 @@ const Register = () => {
                 )}
               </Fly.Item>
               <Fly.Item>
-                <TextField
+                <WrappedTextField
                   fullWidth
                   id="fullname"
                   name="fullname"
@@ -153,7 +154,7 @@ const Register = () => {
                 />
               </Fly.Item>
               <Fly.Item>
-                <TextField
+                <WrappedTextField
                   fullWidth
                   id="email"
                   name="email"
@@ -172,7 +173,7 @@ const Register = () => {
                 />
               </Fly.Item>
               <Fly.Item>
-                <TextField
+                <WrappedTextField
                   fullWidth
                   id="password"
                   name="password"

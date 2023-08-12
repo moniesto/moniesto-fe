@@ -4,13 +4,13 @@ import {
   CircularProgress,
   InputAdornment,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import { memo, useEffect, useState } from "react";
 import api from "../../../services/api";
 import { CurrencyBitcoinOutlined } from "@mui/icons-material";
 import helper from "../../../services/helper";
+import { WrappedTextField } from "../../../components/shared/common/wrappers/wrappedTextField";
 
 export type CurrencyType = {
   currency: string;
@@ -99,7 +99,7 @@ export const CurrencyInput = memo(
           </Box>
         )}
         renderInput={(params) => (
-          <TextField
+          <WrappedTextField
             {...params}
             name="crypto_currency"
             onChange={(e) => setSearchValue(e.target.value)}
