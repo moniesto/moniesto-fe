@@ -158,6 +158,8 @@ export default function componentStyleOverrides(theme: any) {
     MuiInputBase: {
       styleOverrides: {
         input: {
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
           color: theme.textDark,
           "&::placeholder": {
             color: theme.colors?.primary,

@@ -7,7 +7,7 @@ export const WrappedTextField = (props: WrappedTextFieldProps) => {
   return (
     <TextField
       {...props}
-      sx={{ textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+      // sx={{ textOverflow: "ellipsis", whiteSpace: "nowrap" }}
     />
   );
 };
