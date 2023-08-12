@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, memo } from "react";
 import InfiniteScrollComponent from "react-infinite-scroll-component";
 
 type InfiniteScrollProps = {
@@ -12,7 +12,8 @@ type InfiniteScrollProps = {
   loader?: ReactNode;
 };
 
-export const InfiniteScroll = (props: InfiniteScrollProps) => {
+export const InfiniteScroll = memo((props: InfiniteScrollProps) => {
+  console.log("render");
   return (
     <InfiniteScrollComponent
       dataLength={props.dataLength}
@@ -23,4 +24,4 @@ export const InfiniteScroll = (props: InfiniteScrollProps) => {
       {props.children}
     </InfiniteScrollComponent>
   );
-};
+});

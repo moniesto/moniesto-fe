@@ -8,6 +8,7 @@ import { TestPost } from "../../services/tempDatas";
 
 const TimeLine = () => {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
   const [queryParams, setQueryParams] = useState<{
     hasMore?: boolean;
     active: boolean;
@@ -19,7 +20,7 @@ const TimeLine = () => {
     hasMore: true,
     active: true,
     subscribed: true,
-    limit: 10,
+    limit: 3,
     offset: 0,
     sortBy: "created_at",
   });
@@ -29,25 +30,28 @@ const TimeLine = () => {
     setPosts((prev) => prev.concat(Array(queryParams.limit).fill(dummyPost)));
 
     delete queryParams.hasMore;
-    api.content.posts(queryParams).then((response) => {
-      setPosts((prev) => [
-        ...prev.filter((post) => post.id !== "-1"),
-        ...response,
-      ]);
-      if (response.length < queryParams.limit) {
-        if (!queryParams.active && !queryParams.subscribed) {
-          queryParams.hasMore = false;
-          return;
-        }
-        if (queryParams.active) {
-          queryParams.active = false;
-        } else if (queryParams.subscribed) {
-          queryParams.subscribed = false;
-        }
-        queryParams.offset = 0;
-        setQueryParams(JSON.parse(JSON.stringify(queryParams)));
-      } else queryParams.hasMore = true;
-    });
+    api.content
+      .posts(queryParams)
+      .then((response) => {
+        setPosts((prev) => [
+          ...prev.filter((post) => post.id !== "-1"),
+          ...response,
+        ]);
+        if (response.length < queryParams.limit) {
+          if (!queryParams.active && !queryParams.subscribed) {
+            queryParams.hasMore = false;
+            return;
+          }
+          if (queryParams.active) {
+            queryParams.active = false;
+          } else if (queryParams.subscribed) {
+            queryParams.subscribed = false;
+          }
+          queryParams.offset = 0;
+          setQueryParams(JSON.parse(JSON.stringify(queryParams)));
+        } else queryParams.hasMore = true;
+      })
+      .finally(() => setLoading(false));
   }, [queryParams]);
 
   const handleFetchData = () => {
@@ -65,7 +69,7 @@ const TimeLine = () => {
     <InfiniteScroll
       hasMore={queryParams.hasMore!}
       dataLength={posts.length}
-      fetchData={handleFetchData}
+      fetchData={() => !loading && handleFetchData()}
     >
       <Stack rowGap={2}>
         {posts.map((post, i) => (
