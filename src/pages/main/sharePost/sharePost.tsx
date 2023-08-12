@@ -254,7 +254,7 @@ export const SharePost = () => {
   return (
     <Card
       sx={{
-        padding: "1.8rem 2rem",
+        padding: { xs: "1rem 1.1rem", md: "1.8rem 2rem" },
         background: theme.palette.background[500],
         overflow: "unset",
       }}
