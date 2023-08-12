@@ -294,6 +294,7 @@ export const SharePost = () => {
                     minDateTime={dayjs(new Date().toString())}
                     ampm={false}
                     open={calendarOpen}
+                    onOpen={() => setCalendarOpen(true)}
                     onClose={() => setCalendarOpen(false)}
                     value={formik.values.duration}
                     onChange={(value) =>

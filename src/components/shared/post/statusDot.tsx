@@ -1,29 +1,22 @@
 import { Box, useTheme } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 type propTypes = {
   status: "pending" | "fail" | "success";
 };
 
 const StatusDot = ({ status }: propTypes) => {
-  const [color, setColor] = useState<string>("");
   const theme = useTheme();
 
-  useEffect(() => {
-    let newColor: string = "";
-
+  const color = useMemo(() => {
     switch (status) {
       case "success":
-        newColor = theme.palette.success.main;
-        break;
+        return theme.palette.success.main;
       case "fail":
-        newColor = theme.palette.error.main;
-        break;
+        return theme.palette.error.main;
       case "pending":
-        newColor = theme.palette.warning.main;
-        break;
+        return theme.palette.warning.main;
     }
-    setColor(newColor);
-  }, [status]);
+  }, [status, theme]);
 
   return (
     <Box

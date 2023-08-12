@@ -7,11 +7,12 @@ import {
   TableRow,
 } from "@mui/material";
 import { useTranslate } from "../../../hooks/useTranslate";
+import { ReactNode } from "react";
 
 type propTypes = {
   columns: { field: string; title: string }[];
-  rows: any[];
-  loading?: boolean
+  rows: { [key: string]: string | number | ReactNode }[];
+  loading?: boolean;
 };
 
 const PredictionDataTable = ({ columns, rows, loading }: propTypes) => {
@@ -24,19 +25,24 @@ const PredictionDataTable = ({ columns, rows, loading }: propTypes) => {
           sx={{
             th: {
               width: "120px",
-              padding: 1.1,
-              fontWeight: 600,
+              paddingX: 1,
+              paddingY: 0.3,
+              opacity: 0.6,
               border: 0,
             },
           }}
         >
           {columns.map((column) => (
             <TableCell key={column.field} align="center">
-              {
-                !loading ? translate(column.title) :
-                  <Skeleton sx={{ margin: "auto" }} variant="text" width={50}></Skeleton>
-              }
-
+              {!loading ? (
+                translate(column.title)
+              ) : (
+                <Skeleton
+                  sx={{ margin: "auto" }}
+                  variant="text"
+                  width={50}
+                ></Skeleton>
+              )}
             </TableCell>
           ))}
         </TableRow>
@@ -44,8 +50,10 @@ const PredictionDataTable = ({ columns, rows, loading }: propTypes) => {
       <TableBody
         sx={{
           td: {
-            padding: "10px",
+            paddingX: 1,
+            paddingY: 0.3,
             border: 0,
+            fontWeight: 600,
           },
         }}
       >
@@ -53,11 +61,15 @@ const PredictionDataTable = ({ columns, rows, loading }: propTypes) => {
           <TableRow key={i}>
             {columns.map((column) => (
               <TableCell key={column.field} align="center">
-                {
-                  !loading ? row[column.field] :
-                    <Skeleton sx={{ margin: "auto" }} variant="text" width={50}></Skeleton>
-                }
-
+                {!loading ? (
+                  row[column.field]
+                ) : (
+                  <Skeleton
+                    sx={{ margin: "auto" }}
+                    variant="text"
+                    width={50}
+                  ></Skeleton>
+                )}
               </TableCell>
             ))}
           </TableRow>

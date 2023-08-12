@@ -20,7 +20,7 @@ const TimeLine = () => {
     hasMore: true,
     active: true,
     subscribed: true,
-    limit: 3,
+    limit: 10,
     offset: 0,
     sortBy: "created_at",
   });

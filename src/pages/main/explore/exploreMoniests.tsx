@@ -1,7 +1,6 @@
 import { ArrowDownward } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { Box, Grid } from "@mui/material";
-import { useTheme } from "@mui/system";
 import { Stack } from "@mui/system";
 import { useCallback, useEffect, useState } from "react";
 import MoniestCard from "../../../components/shared/user/moniestCard";
@@ -11,7 +10,6 @@ import api from "../../../services/api";
 import { TestUser } from "../../../services/tempDatas";
 
 export const ExploreMoniests = () => {
-  const theme = useTheme();
   const translate = useTranslate();
   const [moniests, setMoniests] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
@@ -59,7 +57,7 @@ export const ExploreMoniests = () => {
           disabled={loading}
           sx={{
             width: "max-content",
-            background: theme.palette.background[800],
+            background: "transparent",
           }}
           color="inherit"
           endIcon={<ArrowDownward></ArrowDownward>}

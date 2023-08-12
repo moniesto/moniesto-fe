@@ -238,6 +238,15 @@ export default function componentStyleOverrides(theme: any) {
         },
       },
     },
+    MuiDialogActions: {
+      styleOverrides: {
+        root: {
+          button: {
+            color: theme.textMain,
+          },
+        },
+      },
+    },
     MuiAvatar: {
       styleOverrides: {
         root: {

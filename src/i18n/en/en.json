@@ -251,7 +251,7 @@
     "post_card": {
       "not_advice": "Not Investment Advice!",
       "table": {
-        "finish":"Finish",
+        "finish":"End time",
         "direction": "Direction",
         "start": "Start",
         "target": "Target",

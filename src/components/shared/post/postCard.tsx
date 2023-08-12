@@ -77,6 +77,9 @@ const PostCard = ({ post, loading }: PostCardProps) => {
     return color;
   };
 
+  const getColorByDirection = (direction: string) =>
+    direction === "long" ? "#03a66d" : "#f6465d";
+
   return (
     <Card sx={{ position: "relative", paddingBottom: "44px" }}>
       {!loading && <NotAdvice />}
@@ -252,7 +255,11 @@ const PostCard = ({ post, loading }: PostCardProps) => {
           ]}
           rows={[
             {
-              direction: translate("common." + post.direction).toUpperCase(),
+              direction: (
+                <Box color={getColorByDirection(post.direction)}>
+                  {translate("common." + post.direction).toUpperCase()}
+                </Box>
+              ),
               start: post.start_price,
               target: post.target3,
               time_left:
@@ -283,8 +290,8 @@ const PostCard = ({ post, loading }: PostCardProps) => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent
           sx={{
-            paddingTop: 0,
-            padding: { xs: "4px", md: 2 },
+            padding: { xs: "4px", md: 1 },
+            paddingTop: "0 !important",
             overflowX: "auto",
           }}
         >
