@@ -187,7 +187,17 @@ export default function componentStyleOverrides(theme: any) {
           //     borderColor: theme.colors?.primaryLight
           // },
           "&.MuiInputBase-multiline": {
-            padding: 1,
+            padding: "4px 0",
+            ".MuiInputAdornment-positionStart": {
+              ".MuiSvgIcon-root": {
+                position: "absolute",
+                top: "16px",
+                left: "16px",
+              },
+            },
+            "&.MuiInputBase-adornedStart": {
+              paddingLeft: "40px",
+            },
           },
         },
         input: {

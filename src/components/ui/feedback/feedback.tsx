@@ -152,12 +152,6 @@ export const Feedback = () => {
 
             <FormItem title={translate("form.field.message")}>
               <WrappedTextField
-                sx={{
-                  ".MuiInputBase-root": {
-                    alignItems: "baseline",
-                    paddingLeft: "14px !important",
-                  },
-                }}
                 multiline
                 rows={7}
                 fullWidth

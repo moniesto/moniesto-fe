@@ -33,7 +33,6 @@ import { WrappedSelect } from "../../components/shared/common/wrappers/wrappedSe
 
 export const AccountSettings = () => {
   const user = useAppSelector((state) => state.user.user);
-  const language = useAppSelector((state) => state.storage.language);
   const theme = useTheme();
   const translate = useTranslate();
   const { usernameValidation, usernameInput } = useUsernameValidation();
@@ -87,8 +86,8 @@ export const AccountSettings = () => {
     api.user
       .update_profile(values)
       .then((response) => {
-        if (language !== values.language) {
-          dispatch(changeLanguage(values.language));
+        if (user.language !== values.language) {
+          dispatch(changeLanguage(values.language!));
         }
         dispatch(setUser(response));
         toastService.open({
@@ -106,7 +105,7 @@ export const AccountSettings = () => {
       background_photo: user.background_photo_link,
       profile_photo: user.profile_photo_link,
       location: user.location,
-      language: language,
+      language: user.language,
     },
     initialTouched: {
       username: true,
@@ -253,20 +252,24 @@ export const AccountSettings = () => {
             <Stack direction="row" gap={2}>
               <FormItem
                 sx={{ flex: 1 }}
-                title={translate("form.field.language")}
+                title={translate("form.field.language.title")}
               >
                 <WrappedSelect
                   fullWidth
                   id="language"
                   name="language"
-                  placeholder={translate("form.field.language")}
+                  placeholder={translate("form.field.language.title")}
                   value={formik.values.language}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   startAdornment={<LanguageOutlined />}
                 >
-                  <MenuItem value={"en"}>En</MenuItem>
-                  <MenuItem value={"tr"}>Tr</MenuItem>
+                  <MenuItem value={"en"}>
+                    {translate("form.field.language.en")}
+                  </MenuItem>
+                  <MenuItem value={"tr"}>
+                    {translate("form.field.language.tr")}
+                  </MenuItem>
                 </WrappedSelect>
               </FormItem>
             </Stack>

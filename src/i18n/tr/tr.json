@@ -288,9 +288,13 @@
       "password": "Şifre",
       "confirm_password": "Şifreyi Onayla",
       "email": "E-posta",
-      "full": "Ad soyad",
+      "fullname": "Ad soyad",
       "location": "Konum",
-      "language": "Dil",
+      "language": {
+        "title":"Dil",
+        "en":"İngilizce",
+        "tr":"Türkçe"
+      },
       "search_moniest": "Moniest'larda arayın ...",
       "username": "Kullanıcı adı",
       "currency": "Kripto para birimi paritesini seçin",

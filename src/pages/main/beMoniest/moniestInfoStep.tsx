@@ -92,12 +92,6 @@ const MoniestInfoStep = () => {
               <Fly.Item>
                 <FormItem title={translate("form.field.bio")}>
                   <WrappedTextField
-                    sx={{
-                      ".MuiInputBase-root": {
-                        alignItems: "baseline",
-                        paddingLeft: "14px !important",
-                      },
-                    }}
                     multiline
                     rows={4}
                     fullWidth
@@ -119,12 +113,6 @@ const MoniestInfoStep = () => {
               <Fly.Item>
                 <FormItem title={translate("form.field.desc")}>
                   <WrappedTextField
-                    sx={{
-                      ".MuiInputBase-root": {
-                        alignItems: "baseline",
-                        paddingLeft: "14px !important",
-                      },
-                    }}
                     multiline
                     rows={7}
                     fullWidth

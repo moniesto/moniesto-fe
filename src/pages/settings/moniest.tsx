@@ -115,12 +115,6 @@ export const MoniestSettings = () => {
             </FormItem>
             <FormItem title={translate("form.field.bio")}>
               <WrappedTextField
-                sx={{
-                  ".MuiInputBase-root": {
-                    alignItems: "baseline",
-                    paddingLeft: "14px !important",
-                  },
-                }}
                 multiline
                 rows={4}
                 fullWidth
@@ -140,12 +134,6 @@ export const MoniestSettings = () => {
             </FormItem>
             <FormItem title={translate("form.field.desc")}>
               <WrappedTextField
-                sx={{
-                  ".MuiInputBase-root": {
-                    alignItems: "baseline",
-                    paddingLeft: "14px !important",
-                  },
-                }}
                 multiline
                 rows={7}
                 fullWidth

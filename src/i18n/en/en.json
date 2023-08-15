@@ -308,7 +308,11 @@
       "email": "Email",
       "fullname": "Full name",
       "location": "Location",
-      "language": "Language",
+      "language": {
+        "title":"Language",
+        "en":"English",
+        "tr":"Turkish"
+      },
       "search_moniest": "Search for Moniests ...",
       "username": "Username",
       "currency": "Select cryptocurrency parity",

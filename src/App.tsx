@@ -17,7 +17,7 @@ import localStorageService, {
 import { setUser } from "./store/slices/userSlice";
 import toastService from "./services/toastService";
 import { openToast } from "./store/slices/toastSlice";
-import { changeLanguage, setToken } from "./store/slices/localStorageSlice";
+import { initLanguage, setToken } from "./store/slices/localStorageSlice";
 import configService from "./services/configService";
 import api from "./services/api";
 
@@ -25,7 +25,6 @@ function App() {
   const storage = useAppSelector((state) => state.storage);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(true);
-  const browserLanguage = navigator.language.split("-")[0];
 
   const getUserByUserName = useCallback(async () => {
     const decoded = (await localStorageService
@@ -54,8 +53,7 @@ function App() {
     httpService.setDispatch(dispatch);
     toastService.setDispatch(dispatch);
     configService.initialize();
-
-    dispatch(changeLanguage(storage.language || browserLanguage));
+    dispatch(initLanguage());
 
     if (!localStorageService.getStorage().token) {
       setLoading(false);
@@ -63,14 +61,11 @@ function App() {
     }
 
     getUserByUserName();
-  }, [dispatch, getUserByUserName, storage.language, browserLanguage]);
+  }, [dispatch, getUserByUserName]);
 
   return (
     <ThemeProvider
-      theme={configService.getTheme(
-        storage.theme_mode,
-        storage.language || browserLanguage
-      )}
+      theme={configService.getTheme(storage.theme_mode, storage.language)}
     >
       <CssBaseline />
       {loading ? (
