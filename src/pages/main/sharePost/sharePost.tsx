@@ -38,6 +38,7 @@ import { CurrencyInput } from "./currencyInput";
 import configService from "../../../services/configService";
 import { WrappedTextField } from "../../../components/shared/common/wrappers/wrappedTextField";
 import { WrappedSelect } from "../../../components/shared/common/wrappers/wrappedSelect";
+import { InfoChip } from "../../../components/shared/post/infoChip";
 
 export const SharePost = () => {
   const [calendarOpen, setCalendarOpen] = React.useState(false);
@@ -364,247 +365,211 @@ export const SharePost = () => {
               </FormItem>
 
               <Divider></Divider>
-              {/* <Typography sx={{ opacity: 0.6 }} variant="h3">
-                {translate("form.field.targets")}
-              </Typography> */}
+
               <FormItem title={translate("form.field.targets")}>
                 <Stack
                   spacing={2}
-                  sx={{
-                    ">div": {
-                      ".MuiFormControl-root:last-of-type": {
-                        maxWidth: "125px",
-                      },
-                    },
-                  }}
-                >
-                  <Stack direction="row" spacing={1}>
-                    <WrappedTextField
-                      disabled={!formik.values.crypto_currency.price}
-                      fullWidth
-                      name="target1"
-                      placeholder={translate("form.field.tp_1")}
-                      type="number"
-                      onFocus={() =>
-                        formik.values.target1 === 0 &&
-                        formik.setFieldValue("target1", "", true)
-                      }
-                      value={
-                        formik.values.crypto_currency.price
-                          ? formik.values.target1
-                          : 0
-                      }
-                      onChange={formik.handleChange}
-                      error={
-                        formik.touched.target1 && Boolean(formik.errors.target1)
-                      }
-                      helperText={
-                        formik.touched.target1 && formik.errors.target1
-                      }
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <FlagOutlinedIcon />
-                          </InputAdornment>
-                        ),
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Typography sx={{ opacity: 0.7 }} variant="h4">
-                              {translate("form.field.tp_1")}
-                            </Typography>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <WrappedTextField
-                      placeholder="0"
-                      value={calculatedRound(formik.values.target1)}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Typography sx={{ opacity: 0.7 }} variant="h4">
-                              %
-                            </Typography>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Stack>
-
-                  <Stack direction="row" spacing={1}>
-                    <WrappedTextField
-                      disabled={!formik.values.crypto_currency.price}
-                      fullWidth
-                      name="target2"
-                      placeholder={translate("form.field.tp_2")}
-                      type="number"
-                      onFocus={() =>
-                        formik.values.target2 === 0 &&
-                        formik.setFieldValue("target2", "", true)
-                      }
-                      value={
-                        formik.values.crypto_currency.price
-                          ? formik.values.target2
-                          : 0
-                      }
-                      onChange={formik.handleChange}
-                      error={
-                        formik.touched.target2 && Boolean(formik.errors.target2)
-                      }
-                      helperText={
-                        formik.touched.target2 && formik.errors.target2
-                      }
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <FlagOutlinedIcon />
-                          </InputAdornment>
-                        ),
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Typography sx={{ opacity: 0.7 }} variant="h4">
-                              {translate("form.field.tp_2")}
-                            </Typography>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <WrappedTextField
-                      placeholder="0"
-                      value={calculatedRound(formik.values.target2)}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Typography sx={{ opacity: 0.7 }} variant="h4">
-                              %
-                            </Typography>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Stack>
-                  <Stack direction="row" spacing={1}>
-                    <WrappedTextField
-                      disabled={!formik.values.crypto_currency.price}
-                      fullWidth
-                      name="target3"
-                      placeholder={translate("form.field.tp_3")}
-                      type="number"
-                      onFocus={() =>
-                        formik.values.target3 === 0 &&
-                        formik.setFieldValue("target3", "", true)
-                      }
-                      value={
-                        formik.values.crypto_currency.price
-                          ? formik.values.target3
-                          : 0
-                      }
-                      onChange={formik.handleChange}
-                      error={
-                        formik.touched.target3 && Boolean(formik.errors.target3)
-                      }
-                      helperText={
-                        formik.touched.target3 && formik.errors.target3
-                      }
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <FlagOutlinedIcon />
-                          </InputAdornment>
-                        ),
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Typography sx={{ opacity: 0.7 }} variant="h4">
-                              {translate("form.field.tp_3")}
-                            </Typography>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <WrappedTextField
-                      placeholder="0"
-                      value={calculatedRound(formik.values.target3)}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Typography sx={{ opacity: 0.7 }} variant="h4">
-                              %
-                            </Typography>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Stack>
-                </Stack>
-              </FormItem>
-              <Divider></Divider>
-              <FormItem title={translate("form.field.stop_point")}>
-                <Stack
-                  sx={{
-                    ".MuiFormControl-root:last-of-type": {
-                      maxWidth: "125px",
-                    },
-                  }}
-                  direction="row"
-                  spacing={1}
+                  // sx={{
+                  //   ">div": {
+                  //     ".MuiFormControl-root:last-of-type": {
+                  //       maxWidth: "125px",
+                  //     },
+                  //   },
+                  // }}
                 >
                   <WrappedTextField
                     disabled={!formik.values.crypto_currency.price}
                     fullWidth
-                    name="stop"
+                    name="target1"
+                    placeholder={translate("form.field.tp_1")}
                     type="number"
                     onFocus={() =>
-                      formik.values.stop === 0 &&
-                      formik.setFieldValue("stop", "", true)
+                      formik.values.target1 === 0 &&
+                      formik.setFieldValue("target1", "", true)
                     }
                     value={
                       formik.values.crypto_currency.price
-                        ? formik.values.stop
+                        ? formik.values.target1
                         : 0
                     }
                     onChange={formik.handleChange}
-                    error={formik.touched.stop && Boolean(formik.errors.stop)}
-                    helperText={formik.touched.stop && formik.errors.stop}
+                    error={
+                      formik.touched.target1 && Boolean(formik.errors.target1)
+                    }
+                    helperText={formik.touched.target1 && formik.errors.target1}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <DoNotDisturbAltOutlinedIcon />
+                          <FlagOutlinedIcon />
                         </InputAdornment>
                       ),
                       endAdornment: (
                         <InputAdornment position="end">
+                          <InfoChip
+                            sx={{ marginRight: 1 }}
+                            value={`${calculatedRound(
+                              formik.values.target1
+                            )} %`}
+                            loading={false}
+                          />
+                          {/* <Box
+                              component="h4"
+                              sx={{
+                                padding: "2px 8px",
+                                marginRight: "10px",
+                                background: "rgba(0,0,0,0.03)",
+                                border: "2px solid #e8e8e8",
+                                borderRadius: "100px",
+                              }}
+                            >
+                              {calculatedRound(formik.values.target1)} %
+                            </Box> */}
                           <Typography sx={{ opacity: 0.7 }} variant="h4">
-                            {translate("form.field.stop")}
+                            {translate("form.field.tp_1")}
                           </Typography>
                         </InputAdornment>
                       ),
                     }}
                   />
+
                   <WrappedTextField
-                    placeholder="0"
-                    value={
-                      !formik.values.stop
-                        ? 0
-                        : helper.operatonByDirection(formik.values.direction) *
-                          helper.parseCurrency(
-                            100 -
-                              ((formik.values.stop || 1) /
-                                (formik.values.crypto_currency.price || 1)) *
-                                100,
-                            2
-                          )
+                    disabled={!formik.values.crypto_currency.price}
+                    fullWidth
+                    name="target2"
+                    placeholder={translate("form.field.tp_2")}
+                    type="number"
+                    onFocus={() =>
+                      formik.values.target2 === 0 &&
+                      formik.setFieldValue("target2", "", true)
                     }
+                    value={
+                      formik.values.crypto_currency.price
+                        ? formik.values.target2
+                        : 0
+                    }
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.target2 && Boolean(formik.errors.target2)
+                    }
+                    helperText={formik.touched.target2 && formik.errors.target2}
                     InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <FlagOutlinedIcon />
+                        </InputAdornment>
+                      ),
                       endAdornment: (
                         <InputAdornment position="end">
+                          <InfoChip
+                            sx={{ marginRight: 1 }}
+                            value={`${calculatedRound(
+                              formik.values.target2
+                            )} %`}
+                            loading={false}
+                          />
                           <Typography sx={{ opacity: 0.7 }} variant="h4">
-                            %
+                            {translate("form.field.tp_2")}
+                          </Typography>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+
+                  <WrappedTextField
+                    disabled={!formik.values.crypto_currency.price}
+                    fullWidth
+                    name="target3"
+                    placeholder={translate("form.field.tp_3")}
+                    type="number"
+                    onFocus={() =>
+                      formik.values.target3 === 0 &&
+                      formik.setFieldValue("target3", "", true)
+                    }
+                    value={
+                      formik.values.crypto_currency.price
+                        ? formik.values.target3
+                        : 0
+                    }
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.target3 && Boolean(formik.errors.target3)
+                    }
+                    helperText={formik.touched.target3 && formik.errors.target3}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <FlagOutlinedIcon />
+                        </InputAdornment>
+                      ),
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <InfoChip
+                            sx={{ marginRight: 1 }}
+                            value={`${calculatedRound(
+                              formik.values.target3
+                            )} %`}
+                            loading={false}
+                          />
+                          <Typography sx={{ opacity: 0.7 }} variant="h4">
+                            {translate("form.field.tp_3")}
                           </Typography>
                         </InputAdornment>
                       ),
                     }}
                   />
                 </Stack>
+              </FormItem>
+              <Divider></Divider>
+              <FormItem title={translate("form.field.stop_point")}>
+                <WrappedTextField
+                  disabled={!formik.values.crypto_currency.price}
+                  fullWidth
+                  name="stop"
+                  type="number"
+                  onFocus={() =>
+                    formik.values.stop === 0 &&
+                    formik.setFieldValue("stop", "", true)
+                  }
+                  value={
+                    formik.values.crypto_currency.price ? formik.values.stop : 0
+                  }
+                  onChange={formik.handleChange}
+                  error={formik.touched.stop && Boolean(formik.errors.stop)}
+                  helperText={formik.touched.stop && formik.errors.stop}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <DoNotDisturbAltOutlinedIcon />
+                      </InputAdornment>
+                    ),
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <InfoChip
+                          sx={{ marginRight: 1 }}
+                          value={`${
+                            !formik.values.stop
+                              ? 0
+                              : helper.operatonByDirection(
+                                  formik.values.direction
+                                ) *
+                                helper.parseCurrency(
+                                  100 -
+                                    ((formik.values.stop || 1) /
+                                      (formik.values.crypto_currency.price ||
+                                        1)) *
+                                      100,
+                                  2
+                                )
+                          } %`}
+                          loading={false}
+                        />
+                        <Typography sx={{ opacity: 0.7 }} variant="h4">
+                          {translate("form.field.stop")}
+                        </Typography>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
               </FormItem>
             </Stack>
             <Divider></Divider>

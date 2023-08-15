@@ -1,11 +1,13 @@
 import { useTheme } from "@mui/system";
-import { Card, Typography } from "@mui/material";
+import { Card } from "@mui/material";
 import { useCallback, useEffect } from "react";
 import { createReactEditorJS } from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./constants";
 import { OutputData } from "@editorjs/editorjs";
-import "./editor.scss";
 import { useTranslate } from "../../../../hooks/useTranslate";
+import { FormItem } from "../formItem";
+
+import "./editor.scss";
 
 const ReactEditorJS = createReactEditorJS();
 
@@ -34,36 +36,25 @@ export const Editor = ({
   );
 
   return (
-    <Card
-      className={`__editorjs__ ${readOnly && "readOnly"} ${
-        theme.palette.mode === "dark" && "dark-editor"
-      }`}
-      sx={{
-        padding: readOnly ? 0 : 2,
-        overflow: "unset",
-        background: !readOnly && theme.palette.background[600],
-      }}
-    >
-      {label && (
-        <Typography
-          variant="h6"
-          sx={{
-            position: "absolute",
-            marginTop: "-25px",
-            fontSize: "12px",
-          }}
-        >
-          {label}
-        </Typography>
-      )}
-
-      <ReactEditorJS
-        placeholder={translate("form.field.desc_placeholder")}
-        readOnly={readOnly}
-        tools={EDITOR_JS_TOOLS}
-        onInitialize={handleInitialize}
-        defaultValue={defaultValue}
-      />
-    </Card>
+    <FormItem title={label || ""}>
+      <Card
+        className={`__editorjs__ ${readOnly && "readOnly"} ${
+          theme.palette.mode === "dark" && "dark-editor"
+        }`}
+        sx={{
+          padding: readOnly ? 0 : 2,
+          overflow: "unset",
+          background: !readOnly && theme.palette.background[600],
+        }}
+      >
+        <ReactEditorJS
+          placeholder={translate("form.field.desc_placeholder")}
+          readOnly={readOnly}
+          tools={EDITOR_JS_TOOLS}
+          onInitialize={handleInitialize}
+          defaultValue={defaultValue}
+        />
+      </Card>
+    </FormItem>
   );
 };
