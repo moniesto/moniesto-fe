@@ -17,7 +17,7 @@ import api from "../../../services/api";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
-import { useRef, useState, useMemo } from "react";
+import { useRef, useState, useMemo, useCallback } from "react";
 import React from "react";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs from "dayjs";
@@ -26,7 +26,6 @@ import ReactTimeAgo from "react-time-ago";
 import { SwapVertOutlined } from "@mui/icons-material";
 import toastService from "../../../services/toastService";
 import { useNavigate } from "react-router-dom";
-import { Editor } from "../../../components/shared/common/editor/editor";
 import { LoadingButton } from "@mui/lab";
 import helper from "../../../services/helper";
 import { DateTimeProvider } from "../../../components/shared/common/dateTimeProvider";
@@ -39,6 +38,7 @@ import configService from "../../../services/configService";
 import { WrappedTextField } from "../../../components/shared/common/wrappers/wrappedTextField";
 import { WrappedSelect } from "../../../components/shared/common/wrappers/wrappedSelect";
 import { InfoChip } from "../../../components/shared/post/infoChip";
+import { Editor } from "../../../components/shared/common/editor/editor";
 
 export const SharePost = () => {
   const [calendarOpen, setCalendarOpen] = React.useState(false);
@@ -251,6 +251,15 @@ export const SharePost = () => {
           2
         )
       : 0;
+
+  const handleChangeDesc = useCallback(
+    (value: string) => {
+      formik.setValues({ ...formik.values, description: value });
+    },
+    [formik]
+  );
+
+  console.log("formik :", formik);
 
   return (
     <Card
@@ -576,9 +585,13 @@ export const SharePost = () => {
             {showDescription ? (
               <Editor
                 label={translate("form.field.description")}
-                editorJs={editorJs}
-              ></Editor>
+                onChange={handleChangeDesc}
+              />
             ) : (
+              // <Editor
+              //   label={translate("form.field.description")}
+              //   editorJs={editorJs}
+              // ></Editor>
               <Card
                 sx={{
                   height: "80px",

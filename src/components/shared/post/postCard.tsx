@@ -189,7 +189,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
         }
       />
       <Stack
-        spacing={2}
+        gap={{ xs: 1, md: 2 }}
         pb={1}
         pr={{ xs: "10px", md: "20px" }}
         mt={{ xs: 1.5, md: 0 }}

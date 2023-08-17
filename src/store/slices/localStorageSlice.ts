@@ -36,9 +36,10 @@ export const storageSlice = createSlice({
       return state;
     },
     initLanguage: (state) => {
-      if (!state.language) {
-        changeLanguage(browserLanguage);
-      }
+      storageSlice.caseReducers.changeLanguage(state, {
+        payload: state.language || browserLanguage,
+        type: "changeLanguage",
+      });
     },
     changeLanguage: (state, action: PayloadAction<string>) => {
       const languages = configService.getAvailableLanguages();

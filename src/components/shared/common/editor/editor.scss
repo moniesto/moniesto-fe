@@ -12,8 +12,9 @@
 }
 
 .codex-editor__redactor {
-  padding-bottom: 150px !important;
+  padding-bottom: 60px !important;
 }
+
 .dark-editor {
   .tc-wrap {
     --color-background: #454858;
@@ -28,10 +29,14 @@
   .ce-toolbar__settings-btn,
   .cdx-button,
   .ce-popover,
-  .ce-toolbar__plus:hover {
+  .ce-toolbar__plus {
     background: #15192e !important;
     color: inherit;
     border-color: #454858;
+  }
+  .ce-toolbar__settings-btn,
+  .ce-toolbar__plus {
+    background: #2e334e !important;
   }
   .ce-popover__item-icon {
     > svg {
