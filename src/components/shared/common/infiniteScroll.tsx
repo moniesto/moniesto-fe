@@ -13,7 +13,6 @@ type InfiniteScrollProps = {
 };
 
 export const InfiniteScroll = memo((props: InfiniteScrollProps) => {
-  console.log("render");
   return (
     <InfiniteScrollComponent
       dataLength={props.dataLength}

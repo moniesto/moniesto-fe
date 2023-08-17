@@ -33,10 +33,13 @@ const TimeLine = () => {
     api.content
       .posts(queryParams)
       .then((response) => {
-        setPosts((prev) => [
-          ...prev.filter((post) => post.id !== "-1"),
-          ...response,
-        ]);
+        setPosts((prev) => {
+          const arr = [...prev.filter((post) => post.id !== "-1"), ...response];
+          const uniqueArr = [
+            ...new Map(arr.map((item) => [item.id, item])).values(),
+          ];
+          return uniqueArr;
+        });
         if (response.length < queryParams.limit) {
           if (!queryParams.active && !queryParams.subscribed) {
             queryParams.hasMore = false;
