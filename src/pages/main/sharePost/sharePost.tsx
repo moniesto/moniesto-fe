@@ -17,7 +17,7 @@ import api from "../../../services/api";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
-import { useRef, useState, useMemo, useCallback } from "react";
+import { useRef, useState, useCallback } from "react";
 import React from "react";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs from "dayjs";
@@ -31,7 +31,6 @@ import helper from "../../../services/helper";
 import { DateTimeProvider } from "../../../components/shared/common/dateTimeProvider";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { ApproximateScore } from "./approximateScore";
-import { Post } from "../../../interfaces/post";
 import { FormItem } from "../../../components/shared/common/formItem";
 import { CurrencyInput } from "./currencyInput";
 import configService from "../../../services/configService";
@@ -39,6 +38,8 @@ import { WrappedTextField } from "../../../components/shared/common/wrappers/wra
 import { WrappedSelect } from "../../../components/shared/common/wrappers/wrappedSelect";
 import { InfoChip } from "../../../components/shared/post/infoChip";
 import { Editor } from "../../../components/shared/common/editor/editor";
+import { normalizePostFromForm } from "./utils";
+import { CreatePostReq } from "../../../interfaces/requests";
 
 export const SharePost = () => {
   const [calendarOpen, setCalendarOpen] = React.useState(false);
@@ -63,12 +64,20 @@ export const SharePost = () => {
     now.setMinutes(now.getMinutes() + value || 1);
     return now;
   };
-  const formik = useFormik({
+  const formik = useFormik<
+    CreatePostReq & {
+      crypto_currency: {
+        currency: string;
+        price: number;
+      };
+    }
+  >({
     initialValues: {
       crypto_currency: {
         currency: "",
         price: 0,
       },
+      currency: "",
       description: "",
       direction: "long",
       duration: getMinute(5).toString(),
@@ -207,7 +216,7 @@ export const SharePost = () => {
       if (savedData) values.description = JSON.stringify(savedData);
 
       api.post
-        .create_post(normalizePost)
+        .create_post(normalizePostFromForm(formik.values))
         .then(() => {
           toastService.open({
             message: translate("page.share_post.toast.post_created"),
@@ -218,16 +227,6 @@ export const SharePost = () => {
         .finally(() => setSubmitLoading(false));
     },
   });
-
-  const normalizePost = useMemo(() => {
-    const currency = formik.values.crypto_currency.currency;
-    const { crypto_currency, ...formData } = formik.values;
-
-    return {
-      ...formData,
-      currency,
-    };
-  }, [formik]);
 
   const handleShare = async () => {
     if (!formik.values.crypto_currency.currency) return formik.submitForm();
@@ -258,8 +257,6 @@ export const SharePost = () => {
     },
     [formik]
   );
-
-  console.log("formik :", formik);
 
   return (
     <Card
@@ -302,6 +299,7 @@ export const SharePost = () => {
                 <DateTimeProvider>
                   <DateTimePicker
                     minDateTime={dayjs(new Date().toString())}
+                    maxDate={dayjs(maxDuration.toString())}
                     ampm={false}
                     open={calendarOpen}
                     onOpen={() => setCalendarOpen(true)}
@@ -313,6 +311,7 @@ export const SharePost = () => {
                     renderInput={(params: any) => (
                       <WrappedTextField
                         fullWidth
+                        onBlur={formik.handleBlur}
                         onKeyDown={(e) => e.preventDefault()}
                         onClick={() => {
                           setCalendarOpen(!calendarOpen);
@@ -359,6 +358,7 @@ export const SharePost = () => {
                   fullWidth
                 >
                   <WrappedSelect
+                    onBlur={formik.handleBlur}
                     color="secondary"
                     onChange={formik.handleChange}
                     name="direction"
@@ -392,6 +392,7 @@ export const SharePost = () => {
                     name="target1"
                     placeholder={translate("form.field.tp_1")}
                     type="number"
+                    onBlur={formik.handleBlur}
                     onFocus={() =>
                       formik.values.target1 === 0 &&
                       formik.setFieldValue("target1", "", true)
@@ -446,6 +447,7 @@ export const SharePost = () => {
                     fullWidth
                     name="target2"
                     placeholder={translate("form.field.tp_2")}
+                    onBlur={formik.handleBlur}
                     type="number"
                     onFocus={() =>
                       formik.values.target2 === 0 &&
@@ -490,6 +492,7 @@ export const SharePost = () => {
                     name="target3"
                     placeholder={translate("form.field.tp_3")}
                     type="number"
+                    onBlur={formik.handleBlur}
                     onFocus={() =>
                       formik.values.target3 === 0 &&
                       formik.setFieldValue("target3", "", true)
@@ -542,6 +545,7 @@ export const SharePost = () => {
                   value={
                     formik.values.crypto_currency.price ? formik.values.stop : 0
                   }
+                  onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   error={formik.touched.stop && Boolean(formik.errors.stop)}
                   helperText={formik.touched.stop && formik.errors.stop}
@@ -609,8 +613,8 @@ export const SharePost = () => {
             <Box>
               <ApproximateScore
                 isSubmitting={submitLoading}
-                isValid={formik.dirty && formik.isValid}
-                post={normalizePost as Post}
+                isValid={formik.dirty && formik.isValid && !formik.isValidating}
+                post={normalizePostFromForm(formik.values)}
               ></ApproximateScore>
             </Box>
 

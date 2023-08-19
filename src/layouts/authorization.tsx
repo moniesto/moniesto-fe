@@ -15,7 +15,7 @@ const AuthorizationLayout = () => {
       sx={{
         minHeight: "100vh",
         height: "100%",
-        padding: "24px",
+        // padding: "24px",
         background: theme.palette.background.primary,
       }}
       container
@@ -40,6 +40,7 @@ const AuthorizationLayout = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            padding: 3,
           }}
         >
           <Outlet />

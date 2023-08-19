@@ -270,6 +270,7 @@ class config {
     "Post_CreatePost_InvalidTargets",
     "Moniest_CreateMoniest_InvalidBody",
     "Account_EmailVerification_NotFoundToken",
+    "Post_CreatePost_InvalidStop",
   ];
 
   initialize() {

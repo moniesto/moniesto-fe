@@ -473,7 +473,8 @@
       "Account_CheckUsername_InvalidUsername": "Kullanıcı adı geçerli değil",
       "Post_CreatePost_InvalidTargets":"TP'ler geçerli değil",
       "Moniest_CreateMoniest_InvalidBody":"Bu bilgiler moniest olmak için geçersiz",
-      "Account_EmailVerification_NotFoundToken":"E-posta doğrulama linki bozuk ya da geçersiz. Lütfen bir daha doğrulamayı deneyin."
+      "Account_EmailVerification_NotFoundToken":"E-posta doğrulama linki bozuk ya da geçersiz. Lütfen bir daha doğrulamayı deneyin.",
+      "Post_CreatePost_InvalidStop":"Stop geçerli değil"
     }
   }
 }
