@@ -65,7 +65,7 @@ export default function themeTypography(theme: any) {
       fontWeight: 400,
       lineHeight: "1.5em",
       color: theme.textMain,
-      opacity: 0.7,
+      opacity: 0.8,
     },
     button: {
       textTransform: "capitalize",

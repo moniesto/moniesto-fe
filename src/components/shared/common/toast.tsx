@@ -20,11 +20,11 @@ const Toast = () => {
 
   useEffect(() => {
     if (messageProps.message) setOpen(true);
-  }, [messageProps]);
+  }, [messageProps, translate]);
 
   const renderToast = useMemo(
     () => (
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
         <Alert
           onClose={handleClose}
           severity={messageProps.severity}

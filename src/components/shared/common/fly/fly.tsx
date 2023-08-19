@@ -1,5 +1,5 @@
 import { Box, SxProps } from "@mui/material";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import "./style.scss";
 
 const Fly = ({ children }: { children: JSX.Element }) => {
@@ -16,7 +16,7 @@ const Fly = ({ children }: { children: JSX.Element }) => {
 };
 
 type FlyItemProp = {
-  children: JSX.Element;
+  children: ReactNode;
   sx?: SxProps;
 };
 

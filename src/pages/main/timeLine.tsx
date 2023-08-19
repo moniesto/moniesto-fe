@@ -5,6 +5,7 @@ import PostCard from "../../components/shared/post/postCard";
 import { Post } from "../../interfaces/post";
 import api from "../../services/api";
 import { TestPost } from "../../services/tempDatas";
+import Fly from "../../components/shared/common/fly/fly";
 
 const TimeLine = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -20,7 +21,7 @@ const TimeLine = () => {
     hasMore: true,
     active: true,
     subscribed: true,
-    limit: 10,
+    limit: 5,
     offset: 0,
     sortBy: "created_at",
   });
@@ -52,7 +53,9 @@ const TimeLine = () => {
           }
           queryParams.offset = 0;
           setQueryParams(JSON.parse(JSON.stringify(queryParams)));
-        } else queryParams.hasMore = true;
+        } else {
+          queryParams.hasMore = true;
+        }
       })
       .finally(() => setLoading(false));
   }, [queryParams]);
@@ -60,7 +63,7 @@ const TimeLine = () => {
   const handleFetchData = () => {
     setQueryParams({
       ...queryParams,
-      offset: queryParams.offset + queryParams.limit,
+      offset: queryParams.offset + 1,
     });
   };
 
@@ -74,11 +77,15 @@ const TimeLine = () => {
       dataLength={posts.length}
       fetchData={() => !loading && handleFetchData()}
     >
-      <Stack rowGap={2}>
-        {posts.map((post, i) => (
-          <PostCard loading={post.id === "-1"} key={i} post={post} />
-        ))}
-      </Stack>
+      <Fly>
+        <Stack rowGap={2}>
+          {posts.map((post, i) => (
+            <Fly.Item key={i}>
+              <PostCard loading={post.id === "-1"} key={i} post={post} />
+            </Fly.Item>
+          ))}
+        </Stack>
+      </Fly>
     </InfiniteScroll>
   );
 };

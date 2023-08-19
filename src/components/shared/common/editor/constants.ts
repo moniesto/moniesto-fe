@@ -1,16 +1,16 @@
 import { ToolConstructable, ToolSettings } from "@editorjs/editorjs";
 import imageService from "../../../../services/imageService";
 
-const Table = require("@editorjs/table");
-const Warning = require("@editorjs/warning");
+// const Table = require("@editorjs/table");
+// const Warning = require("@editorjs/warning");
 const Image = require("@editorjs/image");
 const Header = require("@editorjs/header");
-const Quote = require("@editorjs/quote");
-const Marker = require("@editorjs/marker");
-const CheckList = require("@editorjs/checklist");
-const Delimiter = require("@editorjs/delimiter");
+// const Quote = require("@editorjs/quote");
+// const Marker = require("@editorjs/marker");
+// const CheckList = require("@editorjs/checklist");
+// const Delimiter = require("@editorjs/delimiter");
 const NestedList = require("@editorjs/nested-list");
-const AnyButton = require("editorjs-button");
+// const AnyButton = require("editorjs-button");
 
 export const EDITOR_JS_TOOLS: {
   [toolName: string]: ToolConstructable | ToolSettings;

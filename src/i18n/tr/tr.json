@@ -373,7 +373,7 @@
       "stop": "Stop",
       "add_desc": "Açıklama ekle (isteğe bağlı)",
       "description":"Açıklama",
-      "desc_placeholder":"Analizini destekleyecek açıklamalar ekle",
+      "desc_placeholder":"Analizini destekleyecek açıklamalar ekle...",
       "share": "Paylaş",
       "fee": "Kullanıcılar aboneliğiniz için aylık ne kadar ödeyecek? ( USD )",
       "bio": "Hakkınızda kısa bilgi",
@@ -474,7 +474,8 @@
       "Post_CreatePost_InvalidTargets":"TP'ler geçerli değil",
       "Moniest_CreateMoniest_InvalidBody":"Bu bilgiler moniest olmak için geçersiz",
       "Account_EmailVerification_NotFoundToken":"E-posta doğrulama linki bozuk ya da geçersiz. Lütfen bir daha doğrulamayı deneyin.",
-      "Post_CreatePost_InvalidStop":"Stop geçerli değil"
+      "Post_CreatePost_InvalidStop":"Stop geçerli değil",
+      "Account_Login_NotFoundUsername":"Kullanıcı adı sisteme kayıtlı değil"
     }
   }
 }
