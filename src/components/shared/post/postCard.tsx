@@ -123,6 +123,13 @@ const PostCard = ({ post, loading }: PostCardProps) => {
             <Stack alignItems="center">
               {!loading ? (
                 <Box
+                  sx={{
+                    borderBottom: "1px solid transparent",
+                    transition: "all 0.2s",
+                    "&:hover": {
+                      borderBottom: `1px solid ${theme.palette.warning.dark}`,
+                    },
+                  }}
                   component="a"
                   target="_blank"
                   href={`https://www.binance.com/trade/${post.currency}`}
