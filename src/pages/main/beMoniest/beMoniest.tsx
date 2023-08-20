@@ -139,7 +139,7 @@ const BeMoniest = () => {
         </Stack>
         <Divider></Divider>
         {stepperState.activeStep === 1 && (
-          <Stack spacing={1.5} mt={2}>
+          <Stack spacing={1.5} mt={3}>
             <Typography sx={{ opacity: 0.7 }} variant="h3">
               {translate("page.be_moniest.start_journey")}
             </Typography>
@@ -179,9 +179,13 @@ const BeMoniest = () => {
           },
           ".MuiStepConnector-root": {
             color: theme.palette.grey[500],
+            borderColor: "transparent",
+            ".MuiStepConnector-line": {
+              borderColor: "transparent",
+            },
             "&.Mui-completed": {
               ".MuiStepConnector-line": {
-                borderColor: theme.palette.secondary.main,
+                borderColor: "transparent",
               },
             },
           },

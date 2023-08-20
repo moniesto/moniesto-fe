@@ -59,9 +59,9 @@ const Register = () => {
     fullname: yup
       .string()
       .max(
-        configService?.validations?.max_fullname_length,
+        configService?.configs?.validation?.max_fullname_length as number,
         translate("form.validation.fullname_max", {
-          value: configService?.validations?.max_fullname_length,
+          value: configService?.configs?.validation?.max_fullname_length,
         })
       )
       .required(translate("form.validation.fullname_req")),
@@ -70,15 +70,15 @@ const Register = () => {
       .email(translate("form.validation.email_valid"))
       .required(translate("form.validation.email_req"))
       .matches(
-        configService?.validations?.email_regex,
+        configService?.configs?.validation?.email_regex as RegExp,
         translate("form.validation.email_valid")
       ),
     password: yup
       .string()
       .min(
-        configService?.validations?.password_length,
+        configService?.configs?.validation?.password_length as number,
         translate("form.validation.password_min", {
-          value: configService?.validations?.password_length,
+          value: configService?.configs?.validation?.password_length,
         })
       )
       .required(translate("form.validation.password_req")),

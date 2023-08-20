@@ -143,7 +143,7 @@
       "toast": {
         "mail_sent": "E-posta adresinize bir e-posta gönderdik."
       },
-      "already_verified_email": "E-postanız zaten doğrulandı",
+      "already_verified_email": "E-postanız doğrulandı",
       "send_mailto": "{{email}} 'a e-posta gönderdik",
       "check_mail": "Lütfen email'inizi kontrol edin",
       "need_verify": "Monest olmak için e-posta adresinizi doğrulamanız gerekir",
@@ -166,13 +166,16 @@
         }
       },
       "submit": {
-        "becoming_moniest": "Moniest oluyorsun. Tahminlerinizi şimdi dünyayla paylaşabilirsiniz. Kullanıcılar ödeme yaparak size abone ola bilir",
-        "by_price": "{{price}} $/ay.",
-        "operation_fee": "operasyon ücreti",
-        "payment_below": "Ödemelerinizi aşağıdaki hesaba alacaksınız",
-        "by_taking_agree": "Bu adımı atarak, kabul ediyorsun",
-        "terms_policy": "şartlar ve politikalar",
-        "information": "Bilgi"
+        "almost_ready":"Neredeyse Hazırsın!",
+        "becoming_moniest":"Moniest oluyorsun. Analizlerini şimdi dünya ile paylaşabilirsin.",
+        "sub_detail":{
+          "title":"Abonelik Detayları",
+          "binance_id":"Binance ID",
+          "sub_price":"Abonelik Ücreti",
+          "moniesto_fee":"Moniesto operasyon ücreti ({{percentage}}%)",
+          "payout_price":"Toplam (aylık)"
+        },
+        "change_variables":"Binance ID'ni ve Abonelik Ücreti'ni Hesap Ayarları'ndan istediğin zaman değiştirebilirsin."
       },
       "step": {
         "email_verify": "Email doğrulama",
@@ -417,8 +420,8 @@
       "tp3_lower": "TP3 {{price}} 'dan daha düşük olmalıdır",
       "tp3_more": "TP3 {{price}} 'dan fazla olmalıdır",
       "tp3_max": "TP3 {{price}} 'dan az olmalıdır",
-      "fee_min": "Ücret {{value}} 'dan daha büyük olmalıdır",
-      "fee_req": "Ücret gerekli",
+      "fee_min": "Abonelik ücreti {{value}}$ 'dan daha büyük olmalıdır",
+      "fee_req": "Abonelik Ücreti gerekli",
       "bio_max": "Bio maximum {{value}} karakter uzunluğunda olmalıdır",
       "bio_req": "Bio gerekli",
       "desc_max": "Açıklama maximum {{value}} karakter uzunluğunda olmalıdır",
@@ -449,7 +452,8 @@
     "next": "Sonraki",
     "back": "Geri",
     "edit": "Düzenle",
-    "cancel": "İptal"
+    "cancel": "İptal",
+    "complete":"Tamamla"
   },
   "navigation": {
     "timeline": "Ana Sayfa",

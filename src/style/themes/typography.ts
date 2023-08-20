@@ -11,33 +11,39 @@ export default function themeTypography(theme: any) {
       color: theme.textMain,
       fontSize: "0.75em",
       // lineHeight: 1.05
+      letterSpacing: "0.02em",
     },
     h5: {
       fontSize: "0.895em",
       color: theme.textMain,
       fontWeight: 500,
       // lineHeight: 0.75
+      letterSpacing: "0.02em",
     },
     h4: {
       fontSize: "1em",
       color: theme.textMain,
       fontWeight: 600,
       marginTop: "0",
+      letterSpacing: "0.02em",
     },
     h3: {
       fontSize: "1.25em",
       color: theme.textMain,
       fontWeight: 600,
+      letterSpacing: "0.02em",
     },
     h2: {
       fontSize: "1.5em ",
       color: theme.textMain,
       fontWeight: 700,
+      letterSpacing: "0.04em",
     },
     h1: {
       fontSize: "2.125em",
       color: theme.textMain,
       fontWeight: 900,
+      letterSpacing: "0.03em",
     },
     subtitle1: {
       fontSize: "0.875em",

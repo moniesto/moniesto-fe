@@ -25,25 +25,25 @@ const MoniestInfoStep = () => {
     fee: yup
       .number()
       .min(
-        configService?.validations?.min_fee,
+        configService?.configs?.validation?.min_fee as number,
         translate("form.validation.fee_min", {
-          value: configService?.validations?.min_fee,
+          value: configService?.configs?.validation?.min_fee,
         })
       )
       .required(translate("form.validation.fee_req")),
     bio: yup
       .string()
       .max(
-        configService?.validations?.max_bio_lenght,
+        configService?.configs?.validation?.max_bio_lenght as number,
         translate("form.validation.bio_max", {
-          value: configService?.validations?.max_bio_lenght,
+          value: configService?.configs?.validation?.max_bio_lenght,
         })
       )
       .required(translate("form.validation.bio_req")),
     description: yup.string().max(
-      configService?.validations?.max_description_length,
+      configService?.configs?.validation?.max_description_length as number,
       translate("form.validation.desc_max", {
-        value: configService?.validations?.max_description_length,
+        value: configService?.configs?.validation?.max_description_length,
       })
     ),
   });
@@ -64,7 +64,7 @@ const MoniestInfoStep = () => {
       <Stack width={"100%"} spacing={8}>
         <form onSubmit={formik.handleSubmit}>
           <Stack spacing={4}>
-            <Stack spacing={2}>
+            <Stack spacing={0}>
               <Fly.Item>
                 <FormItem title={translate("form.field.fee")}>
                   <WrappedTextField
@@ -93,7 +93,7 @@ const MoniestInfoStep = () => {
                 <FormItem title={translate("form.field.bio")}>
                   <WrappedTextField
                     multiline
-                    rows={4}
+                    rows={2}
                     fullWidth
                     name="bio"
                     value={formik.values.bio}
@@ -114,7 +114,7 @@ const MoniestInfoStep = () => {
                 <FormItem title={translate("form.field.desc")}>
                   <WrappedTextField
                     multiline
-                    rows={7}
+                    rows={4}
                     fullWidth
                     name="description"
                     value={formik.values.description}

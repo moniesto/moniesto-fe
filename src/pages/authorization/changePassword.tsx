@@ -75,7 +75,7 @@ const ChangePassword = () => {
       .min(
         6,
         translate("form.validation.password_min", {
-          value: configService?.validations?.password_length,
+          value: configService?.configs?.validation?.password_length,
         })
       )
       .required(translate("form.validation.password_req")),

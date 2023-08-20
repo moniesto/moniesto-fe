@@ -6,6 +6,7 @@ import { BeMoniestReq } from "../../interfaces/requests";
 type initialStateType = {
   data: BeMoniestReq;
   activeStep: number;
+  stepCount: number;
 };
 
 const initialState: initialStateType = {
@@ -17,6 +18,7 @@ const initialState: initialStateType = {
     message: "",
   },
   activeStep: 1,
+  stepCount: 4,
 };
 
 export const beMoniestSlice = createSlice({

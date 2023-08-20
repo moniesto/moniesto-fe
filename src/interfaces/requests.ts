@@ -84,6 +84,17 @@ export interface ExplorePostsRequest extends PaginateRequest {
   subscribed: boolean;
   sortBy: "score" | "created_at";
 }
+export interface Config {
+  error_codes: {
+    [key: string]: string | number;
+  };
+  validation: {
+    [key: string]: RegExp | string | number;
+  };
+  general_info: {
+    [key: string]: string | number;
+  };
+}
 
 export interface UserPostsRequest extends PaginateRequest {
   active?: boolean;

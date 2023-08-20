@@ -35,9 +35,9 @@ const Login = () => {
     password: yup
       .string()
       .min(
-        configService?.validations?.password_length,
+        configService?.configs?.validation?.password_length as number,
         translate("form.validation.password_min", {
-          value: configService?.validations?.password_length,
+          value: configService?.configs?.validation?.password_length,
         })
       )
       .required(translate("form.validation.password_req")),

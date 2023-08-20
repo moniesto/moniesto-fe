@@ -58,8 +58,8 @@ const SearchBar = ({
     <Box sx={{ position: "relative" }}>
       <WrappedTextField
         sx={{
-          minWidth: "278px",
-          width: { md: focused || text ? "350px" : "278px", sm: "100%" },
+          minWidth: "280px",
+          width: { md: focused || text ? "350px" : "280px", sm: "100%" },
           transition: (theme.transitions as any).create("width"),
         }}
         onFocus={() => setFocused(true)}

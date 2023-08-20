@@ -48,16 +48,16 @@ export const AccountSettings = () => {
     fullname: yup
       .string()
       .max(
-        configService?.validations?.max_fullname_length,
+        configService?.configs?.validation?.max_fullname_length as number,
         translate("form.validation.fullname_max", {
-          value: configService?.validations?.max_fullname_length,
+          value: configService?.configs?.validation?.max_fullname_length,
         })
       )
       .required(translate("form.validation.fullname_req")),
     location: yup.string().max(
-      configService?.validations?.max_location_length,
+      configService?.configs?.validation?.max_location_length as number,
       translate("form.validation.location_max", {
-        value: configService?.validations?.max_location_length,
+        value: configService?.configs?.validation?.max_location_length,
       })
     ),
   });

@@ -84,7 +84,7 @@ export const useUsernameValidation = () => {
     .string()
     .required(translate("form.validation.username_req"))
     .matches(
-      configService?.validations?.username_regex,
+      configService?.configs?.validation?.username_regex as RegExp,
       translate("form.validation.username_valid")
     )
     .test(

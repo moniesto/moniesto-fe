@@ -15,7 +15,7 @@ const AuthorizationLayout = () => {
       sx={{
         minHeight: "100vh",
         height: "100%",
-        // padding: "24px",
+        padding: { xs: 3, md: 0 },
         background: theme.palette.background.primary,
       }}
       container

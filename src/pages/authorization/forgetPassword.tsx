@@ -30,7 +30,7 @@ const ForgetPassword = () => {
       .email(translate("form.validation.email_valid"))
       .required(translate("form.validation.email_req"))
       .matches(
-        configService?.validations?.email_regex,
+        configService?.configs?.validation?.email_regex as RegExp,
         translate("form.validation.email_valid")
       ),
   });

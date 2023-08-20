@@ -51,7 +51,7 @@ class http {
         const code = error.response.data.error_code;
         const message = configService.translatedErrors.includes(code)
           ? "server.error." + code
-          : configService.errors[code];
+          : (configService.configs.error_codes[code] as string);
 
         toastService.open({ severity: "error", message });
         if (error.response.status === 401) {

@@ -50,7 +50,8 @@ export const SharePost = () => {
 
   const maxDuration = new Date();
   maxDuration.setDate(
-    maxDuration.getDate() + configService.validations.max_duration_day
+    maxDuration.getDate() +
+      (configService?.configs?.validation?.max_duration_day as number)
   );
 
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);

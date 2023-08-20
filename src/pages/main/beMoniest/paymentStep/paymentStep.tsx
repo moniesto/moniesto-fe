@@ -53,7 +53,7 @@ const PaymentStep = () => {
           <Divider></Divider>
         </Fly.Item>
         <Fly.Item>
-          <Typography variant="h4">
+          <Typography variant="h4" sx={{ opacity: 0.8 }}>
             {translate("page.be_moniest.select_payout_method")}
           </Typography>
         </Fly.Item>

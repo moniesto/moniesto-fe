@@ -159,7 +159,7 @@
       "toast": {
         "mail_sent": "We sent an email to your email address."
       },
-      "already_verified_email": "Your email is already verified",
+      "already_verified_email": "Your email has been verified",
       "send_mailto": "We sent the mail to {{email}}",
       "check_mail": "Please check your email",
       "need_verify": "You need to verify your email address to become a Moniest",
@@ -182,13 +182,16 @@
         }
       },
       "submit": {
-        "becoming_moniest": " You are becoming a Moniest. You can share your predictions now with the world. Users can subscribe you by paying",
-        "by_price": "{{price}} $/month.",
-        "operation_fee": "operation fee is",
-        "payment_below": "You will recieve your payments to account below",
-        "by_taking_agree": "By taking this step, you agree to our",
-        "terms_policy": "terms and policies",
-        "information": "Information"
+          "almost_ready":"You're Almost Ready!",
+          "becoming_moniest":"You become moniest. You can now share your analysis with the world.",
+          "sub_detail":{
+            "title":"Subscription Details",
+            "binance_id":"Binance ID",
+            "sub_price":"Subscription Fee",
+            "moniesto_fee":"Moniesto operation fee ({{percentage}}%)",
+            "payout_price":"Total (monthly)"
+          },
+          "change_variables":"You can change your Binance ID and Subscription Fee at any time in your Account Settings."
       },
       "step": {
         "email_verify": "Email verify",
@@ -417,7 +420,7 @@
       "username_exist": "This username has been taken. Try another one.",
       "username_valid": "Username must start with a lowercase letter and can contain only lowercase letters, numbers, and underscores.",
       "duration_req": "Duration is required",
-      "duration_min": "Duration must be greater than a minute",
+      "duration_min": "Duration must be higher than a minute",
       "duration_max": "Duration should be before {{date}}",
       "currency_req": "Currency is required",
       "stop_req": "Stop is required",
@@ -435,8 +438,8 @@
       "tp3_lower": "TP3 should be lower than {{price}}",
       "tp3_more": "TP3 should be more than {{price}}",
       "tp3_max": "TP3 should be lower than {{price}}",
-      "fee_min": "Fee should be greater then {{value}}",
-      "fee_req": "Fee is required",
+      "fee_min": "Subscription fee should be higher then {{value}}$",
+      "fee_req": "Subscription fee is required",
       "bio_max": "Bio should be of maximum {{value}} characters length",
       "bio_req": "Bio is required",
       "desc_max": "Description should be of maximum {{value}} characters length",
@@ -467,7 +470,8 @@
     "next": "Next",
     "back": "Back",
     "edit": "Edit",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "complete":"Complete"
   },
   "navigation": {
     "timeline": "Timeline",

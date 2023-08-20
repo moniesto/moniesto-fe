@@ -3,6 +3,7 @@ import {
   BaseResponse,
   BeMoniestReq,
   ChangePasswordReq,
+  Config,
   CreatePostReq,
   ExplorePostsRequest,
   LoginReq,
@@ -69,15 +70,7 @@ class api {
       ),
   };
   asset = {
-    configs: () =>
-      httpService.get<{
-        error_codes: {
-          [key: string]: string;
-        };
-        validation: {
-          [key: string]: string;
-        };
-      }>(Requests.asset.configs),
+    configs: () => httpService.get<Config>(Requests.asset.configs),
   };
   content = {
     moniests: (params: PaginateRequest) =>

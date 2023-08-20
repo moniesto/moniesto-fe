@@ -27,25 +27,25 @@ export const MoniestSettings = () => {
     fee: yup
       .number()
       .min(
-        configService?.validations?.min_fee,
+        configService?.configs?.validation?.min_fee as number,
         translate("form.validation.fee_min", {
-          value: configService?.validations?.min_fee,
+          value: configService?.configs?.validation?.min_fee,
         })
       )
       .required(translate("form.validation.fee_req")),
     bio: yup
       .string()
       .max(
-        configService?.validations?.max_bio_lenght,
+        configService?.configs?.validation?.max_bio_lenght as number,
         translate("form.validation.bio_max", {
-          value: configService?.validations?.max_bio_lenght,
+          value: configService?.configs?.validation?.max_bio_lenght,
         })
       )
       .required(translate("form.validation.bio_req")),
     description: yup.string().max(
-      configService?.validations?.max_description_length,
+      configService?.configs?.validation?.max_description_length as number,
       translate("form.validation.desc_max", {
-        value: configService?.validations?.max_description_length,
+        value: configService?.configs?.validation?.max_description_length,
       })
     ),
   });

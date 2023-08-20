@@ -33,7 +33,9 @@ export const BeMoniestStepperFooter = ({
         )}
 
         <Button onClick={handleNext} variant="contained" color="secondary">
-          {translate("common.next")}
+          {stepperState.activeStep === stepperState.stepCount
+            ? translate("common.complete")
+            : translate("common.next")}
         </Button>
       </Stack>
     </Stack>
