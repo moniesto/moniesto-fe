@@ -12,7 +12,7 @@ export const BeMoniestStepperFooter = ({
   const dispatch = useAppDispatch();
 
   const stepperState = useAppSelector((state) => state.beMoniest);
-  return (
+  return stepperState.activeStep <= stepperState.stepCount ? (
     <Stack alignItems="center">
       <Stack
         width="80%"
@@ -39,5 +39,5 @@ export const BeMoniestStepperFooter = ({
         </Button>
       </Stack>
     </Stack>
-  );
+  ) : null;
 };

@@ -111,8 +111,12 @@ const BeMoniest = () => {
         content = <PaymentStep />;
         break;
       case 4:
+      case 5:
         content = <SubmitStep />;
         break;
+      // case 5:
+      //   content = <DoneStep />;
+      //   break;
     }
     return content;
   }, [
