@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import {
   Box,
   Card,
@@ -17,8 +18,7 @@ import api from "../../../services/api";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
-import { useRef, useState, useCallback } from "react";
-import React from "react";
+import { useState, useCallback } from "react";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs from "dayjs";
 import ReactTimeAgo from "react-time-ago";
@@ -56,9 +56,6 @@ export const SharePost = () => {
 
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const navigate = useNavigate();
-  const editorJs = useRef<{
-    save(): Promise<any>;
-  }>(null);
 
   const getMinute = (value: number) => {
     const now = new Date();
@@ -213,11 +210,8 @@ export const SharePost = () => {
       }),
     onSubmit: async (values) => {
       setSubmitLoading(true);
-      const savedData = await editorJs.current?.save();
-      if (savedData) values.description = JSON.stringify(savedData);
-
       api.post
-        .create_post(normalizePostFromForm(formik.values))
+        .create_post(normalizePostFromForm(values))
         .then(() => {
           toastService.open({
             message: translate("page.share_post.toast.post_created"),
@@ -229,14 +223,17 @@ export const SharePost = () => {
     },
   });
 
+  const fetchCurrency = useCallback(async (currency: string) => {
+    const [coin] = await api.crypto.search_currencies(currency);
+    return coin;
+  }, []);
+
   const handleShare = async () => {
     if (!formik.values.crypto_currency.currency) return formik.submitForm();
 
     setSubmitLoading(true);
-    const [coin] = await api.crypto.search_currencies(
-      formik.values.crypto_currency.currency
-    );
-    formik.setFieldValue("crypto_currency.price", Number(coin.price));
+    const coin = await fetchCurrency(formik.values.crypto_currency.currency);
+    formik.setFieldValue("crypto_currency.price", Number(coin?.price || 0));
     setSubmitLoading(false);
     formik.submitForm();
   };
@@ -258,6 +255,17 @@ export const SharePost = () => {
     },
     [formik]
   );
+
+  useEffect(() => {
+    if (!formik.values.crypto_currency.currency) return;
+
+    const timeout = setTimeout(async () => {
+      const coin = await fetchCurrency(formik.values.crypto_currency.currency);
+      formik.setFieldValue("crypto_currency.price", Number(coin?.price || 0));
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+  }, [fetchCurrency, formik, formik.values.crypto_currency.currency]);
 
   return (
     <Card
@@ -593,10 +601,6 @@ export const SharePost = () => {
                 onChange={handleChangeDesc}
               />
             ) : (
-              // <Editor
-              //   label={translate("form.field.description")}
-              //   editorJs={editorJs}
-              // ></Editor>
               <Card
                 sx={{
                   height: "80px",
