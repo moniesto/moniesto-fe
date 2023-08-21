@@ -29,7 +29,7 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
   const handleUserClick = () => {};
 
   return (
-    <Card sx={{ height: "184px" }}>
+    <Card sx={{ height: "100%", maxHeight: "184px" }}>
       <Navigator path={`/${user.username}`}>
         <CardHeader
           onClick={handleUserClick}
@@ -90,12 +90,23 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
           }
           title={
             !loading ? (
-              <Typography variant="h4" display="flex" alignItems="center">
-                {`${user.fullname}`}
+              <Stack direction="row" alignItems="center">
+                <Typography
+                  sx={{
+                    maxWidth: "100px",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                  variant="h4"
+                  fontSize="0.75em"
+                >
+                  {`${user.fullname}`}
+                </Typography>
                 <ArrowForwardIosIcon
                   sx={{ fontSize: "0.8rem", marginLeft: 1 }}
                 ></ArrowForwardIosIcon>
-              </Typography>
+              </Stack>
             ) : (
               <Skeleton
                 animation="wave"
@@ -135,10 +146,9 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
                   sx={{ marginLeft: "10px", fontSize: "1.15rem" }}
                 />
               }
-              label={
-                ((user.moniest as any)["subscriber_count"] || 0) +
-                ` ${translate("moniest.subscribers")}`
-              }
+              label={`${
+                (user.moniest as any)["subscriber_count"] || 0
+              } ${translate("moniest.subscribers")}`}
             />
             <StarChip count={user.moniest?.score as number}></StarChip>
           </>
@@ -174,6 +184,8 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
               display: "-webkit-box",
               WebkitLineClamp: "2",
               WebkitBoxOrient: "vertical",
+              opacity: 0.8,
+              fontSize: "0.82em",
             }}
             variant="body1"
           >

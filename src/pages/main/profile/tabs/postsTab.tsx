@@ -1,4 +1,4 @@
-import { Box, Card, Typography, useTheme } from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import StreamIcon from "@mui/icons-material/Stream";
@@ -12,6 +12,7 @@ import { useTranslate } from "../../../../hooks/useTranslate";
 import { TestPost } from "../../../../services/tempDatas";
 import { useAppSelector } from "../../../../store/hooks";
 import { Spinner } from "../../../../components/shared/common/spinner";
+import { useTheme } from "@mui/system";
 
 type FilterType = "all" | "live";
 type Filter = {
@@ -198,14 +199,22 @@ const PostsTab = () => {
               justifyContent: "center",
             }}
           >
-            <Stack spacing={2} alignItems="center">
+            <Stack
+              sx={{
+                padding: "32px 16px",
+                borderRadius: "10px",
+              }}
+              gap={2}
+              alignItems="center"
+              textAlign="center"
+            >
               <Typography variant="h2">
                 {translate("page.profile.sub_for_live")}
               </Typography>
               <SubscribeButton />
             </Stack>
           </Box>
-          <Stack sx={{ filter: "blur(3px)" }} rowGap={2}>
+          <Stack sx={{ filter: "blur(4px)" }} rowGap={2}>
             {[testPost, testPost].map((post, i) => (
               <PostCard key={i} post={post} />
             ))}

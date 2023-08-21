@@ -7,6 +7,10 @@ export default function componentStyleOverrides(theme: any) {
     theme.mode === "light"
       ? theme.colors.background600
       : theme.colors.darkBackground600;
+  const background500 =
+    theme.mode === "light"
+      ? theme.colors.background500
+      : theme.colors.darkBackground500;
   const background200 =
     theme.mode === "light"
       ? theme.colors.background200
@@ -273,7 +277,8 @@ export default function componentStyleOverrides(theme: any) {
           "&.MuiChip-deletable .MuiChip-deleteIcon": {
             color: "inherit",
           },
-          background: background800,
+          background: background500,
+          border: `1px solid ${background800} `,
           height: "28px",
           ".MuiChip-label": {
             height: "18px",
@@ -292,10 +297,7 @@ export default function componentStyleOverrides(theme: any) {
     MuiAppBar: {
       styleOverrides: {
         root: {
-          background:
-            theme.mode === "light"
-              ? theme.colors.background500
-              : theme.colors.darkBackground500,
+          background: background500,
           border: "none",
           ".MuiChip-icon": {
             marginLeft: "10px",
@@ -435,10 +437,7 @@ export default function componentStyleOverrides(theme: any) {
             },
           },
           ".MuiPaper-root": {
-            background:
-              theme.mode === "light"
-                ? theme.colors.background500
-                : theme.colors.darkBackground500 + " !important",
+            background: background500 + " !important",
           },
         },
       },

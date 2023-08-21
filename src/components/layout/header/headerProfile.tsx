@@ -129,7 +129,16 @@ const HeaderProfile = () => {
             <Avatar src={user.profile_photo_thumbnail_link}></Avatar>
             <Stack>
               <Typography variant="h4">{user.fullname}</Typography>
-              <Typography fontSize="0.76rem" lineHeight="17px" variant="h6">
+              <Typography
+                sx={{
+                  maxWidth: "200px",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+                fontSize="0.76rem"
+                lineHeight="17px"
+                variant="h6"
+              >
                 {user.email}
               </Typography>
             </Stack>

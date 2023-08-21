@@ -81,7 +81,16 @@ const PostCard = ({ post, loading }: PostCardProps) => {
     direction === "long" ? "#03a66d" : "#f6465d";
 
   return (
-    <Card sx={{ position: "relative", paddingBottom: "44px" }}>
+    <Card
+      sx={{
+        position: "relative",
+        padding: {
+          xs: "0.8rem",
+          md: "1.2rem",
+        },
+        paddingBottom: "44px !important",
+      }}
+    >
       {!loading && <NotAdvice />}
       <CardHeader
         sx={{
@@ -89,10 +98,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
             alignSelf: "unset",
             marginRight: "unset",
           },
-          padding: {
-            xs: "0.8rem 0.8rem 0.2rem",
-            md: "1.2rem 1.2rem 0.5rem",
-          },
+          padding: 0,
           ".MuiCardHeader-avatar": {
             marginRight: {
               xs: 1,
@@ -198,7 +204,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
       <Stack
         gap={{ xs: 1, md: 2 }}
         pb={1}
-        pr={{ xs: "10px", md: "20px" }}
+        // pr={{ xs: "10px", md: "20px" }}
         mt={{ xs: 1.5, md: 0 }}
         direction="row"
         justifyContent="flex-end"
@@ -229,14 +235,14 @@ const PostCard = ({ post, loading }: PostCardProps) => {
       </Stack>
       <Divider
         sx={{
-          width: { xs: "calc(100% - 20px)", md: "calc(100% - 40px)" },
+          // width: { xs: "calc(100% - 20px)", md: "calc(100% - 40px)" },
           margin: "auto",
         }}
       ></Divider>
       <CardContent
         sx={{
-          paddingBottom: 0,
-          padding: { xs: "4px", md: 1 },
+          paddingX: 0,
+          paddingY: { xs: "4px", md: 1 },
           overflowX: "auto",
         }}
       >
