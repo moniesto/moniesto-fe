@@ -116,7 +116,7 @@ export const MoniestSettings = () => {
             <FormItem title={translate("form.field.bio")}>
               <WrappedTextField
                 multiline
-                rows={4}
+                rows={2}
                 fullWidth
                 name="bio"
                 value={formik.values.bio}
@@ -135,7 +135,7 @@ export const MoniestSettings = () => {
             <FormItem title={translate("form.field.desc")}>
               <WrappedTextField
                 multiline
-                rows={7}
+                rows={4}
                 fullWidth
                 name="description"
                 value={formik.values.description}

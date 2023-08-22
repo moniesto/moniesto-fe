@@ -9,7 +9,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/system";
 
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -46,7 +45,6 @@ export const SharePost = () => {
   const [showDescription, setShowDescription] = useState<boolean>(false);
 
   const translate = useTranslate();
-  const theme = useTheme();
 
   const maxDuration = new Date();
   maxDuration.setDate(
@@ -271,7 +269,6 @@ export const SharePost = () => {
     <Card
       sx={{
         padding: { xs: "1rem 1.1rem", md: "1.8rem 2rem" },
-        background: theme.palette.background[500],
         overflow: "unset",
       }}
     >
