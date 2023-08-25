@@ -188,7 +188,7 @@
     },
     "profile": {
       "user_not_found": "Kullanıcı bulunamadı",
-      "no_bio": "Moniest bio eklemedi",
+      "no_bio": "Moniest daha açıklama eklemedi",
       "subscribe": "Abone ol",
       "unsubscribe": "Aboneliği bitir",
       "sub_for_live": "Canlı gönderileri görmek için abone olun",
@@ -472,7 +472,7 @@
   },
   "server": {
     "error": {
-      "Account_Login_NotFoundEmail":"Bu email ile ilişkili bir hespa bulunamadı",
+      "Account_Login_NotFoundEmail":"Bu email ile ilişkili bir hesap bulunamadı",
       "Account_Login_WrongPassword":"Hatalı şifre",
       "Account_CheckUsername_InvalidUsername": "Kullanıcı adı geçerli değil",
       "Post_CreatePost_InvalidTargets":"TP'ler geçerli değil",

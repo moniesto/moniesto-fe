@@ -204,7 +204,7 @@
     },
     "profile": {
       "user_not_found": "User not found",
-      "no_bio": "Moniest didn't add any bio",
+      "no_bio": "Moniest didn't add any description, yet",
       "subscribe": "Subscribe",
       "unsubscribe": "Unsubscribe",
       "sub_for_live": "Subscribe to see live posts",
