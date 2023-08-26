@@ -276,7 +276,8 @@ const PostCard = ({ post, loading }: PostCardProps) => {
               start: post.start_price,
               target: post.target3,
               time_left:
-                new Date(post.duration) >= new Date() ? (
+                new Date(post.duration) >= new Date() ||
+                post.status === "pending" ? (
                   <ReactTimeAgo date={new Date(post.duration)} />
                 ) : (
                   translate("component.post_card.table.finish")

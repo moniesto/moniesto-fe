@@ -9,8 +9,10 @@ const AboutTab = ({ aboutText }: { aboutText: string }) => {
       {aboutText ? (
         <Typography letterSpacing="1px">{aboutText}</Typography>
       ) : (
-        <Stack justifyContent="center" direction="row">
-          {translate("page.profile.no_bio")}
+        <Stack alignItems="center">
+          <Typography variant="h5">
+            {translate("page.profile.no_bio")}
+          </Typography>
         </Stack>
       )}
     </Card>

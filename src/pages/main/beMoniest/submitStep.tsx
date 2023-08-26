@@ -28,15 +28,15 @@ const SubmitStep = () => {
             </Typography>
           </Fly.Item>
           <Fly.Item>
-            <Typography>
+            <Typography sx={{ opacity: 0.8 }}>
               {translate("page.be_moniest.submit.becoming_moniest")}
             </Typography>
           </Fly.Item>
           <Stack
             gap={0.8}
             sx={{
-              background: theme.palette.secondary.light,
-              padding: "10px",
+              background: theme.palette.background[500],
+              padding: "10px 16px",
               borderRadius: "10px",
             }}
           >
@@ -97,20 +97,11 @@ const SubmitStep = () => {
           </Stack>
 
           <Fly.Item>
-            <Typography variant="h5">
+            <Typography sx={{ opacity: 0.8 }} variant="h5">
               {translate("page.be_moniest.submit.change_variables")}
             </Typography>
           </Fly.Item>
-          {/* <Typography>
-          {translate("page.be_moniest.submit.payment_below")}{" "}
-        </Typography> */}
         </Stack>
-        {/* <Typography mt={4} variant="h5" textAlign="center">
-        {translate("page.be_moniest.submit.by_taking_agree")}
-        <Typography component="span" color="secondary">
-          {" " + translate("page.be_moniest.submit.terms_policy")}
-        </Typography>
-      </Typography> */}
         <Fly.Item>
           <BeMoniestStepperFooter handleNext={() => dispatch(nextStep(null))} />
         </Fly.Item>
