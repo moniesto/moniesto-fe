@@ -21,7 +21,6 @@ const browserLanguage = navigator.language.split("-")[0];
 
 export const storageSlice = createSlice({
   name: "storage",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     setThemeMode: (state, action: PayloadAction<ThemeMode>) => {

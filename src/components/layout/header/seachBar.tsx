@@ -65,7 +65,7 @@ const SearchBar = ({
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         fullWidth
-        name="Search"
+        name="search"
         value={text}
         placeholder={translate("form.field.search_moniest")}
         onChange={(e) => setText(e.target.value)}

@@ -17,7 +17,11 @@ import localStorageService, {
 import { setUser } from "./store/slices/userSlice";
 import toastService from "./services/toastService";
 import { openToast } from "./store/slices/toastSlice";
-import { initLanguage, setToken } from "./store/slices/localStorageSlice";
+import {
+  changeLanguage,
+  initLanguage,
+  setToken,
+} from "./store/slices/localStorageSlice";
 import configService from "./services/configService";
 import api from "./services/api";
 
@@ -31,8 +35,10 @@ function App() {
       .getDecodedToken()
       .catch(console.error)) as DecodeToken;
 
-    if (!decoded.user.id) {
-      dispatch(openToast({ message: "Need authorization", severity: "error" }));
+    if (!decoded?.user.id) {
+      dispatch(
+        openToast({ message: "page.login.need_auth", severity: "error" })
+      );
       dispatch(setToken(""));
       setLoading(false);
       return;
@@ -41,6 +47,7 @@ function App() {
     api.user
       .user_by_username(decoded.user.username)
       .then((res) => {
+        dispatch(changeLanguage(res.language as string));
         dispatch(setUser(res));
       })
       .catch((_) => {

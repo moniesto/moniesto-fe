@@ -9,7 +9,8 @@
         "no_account": "Hesabın yok mu?",
         "register": "Kayıt ol"
       },
-      "toast": { "login_success": "Giriş başarılı" }
+      "toast": { "login_success": "Giriş başarılı" },
+      "need_auth":"Giriş süreniz doldu. Lütfen tekrar giriş yapın."
     },
     "register": {
       "title": "Kayıt ol",
@@ -479,7 +480,8 @@
       "Moniest_CreateMoniest_InvalidBody":"Bu bilgiler moniest olmak için geçersiz",
       "Account_EmailVerification_NotFoundToken":"E-posta doğrulama linki bozuk ya da geçersiz. Lütfen bir daha doğrulamayı deneyin.",
       "Post_CreatePost_InvalidStop":"Stop geçerli değil",
-      "Account_Login_NotFoundUsername":"Kullanıcı adı sisteme kayıtlı değil"
+      "Account_Login_NotFoundUsername":"Kullanıcı adı sisteme kayıtlı değil",
+      "Account_Register_RegisteredEmail":"E-posta zaten sistemde kayıtlı"
     }
   }
 }

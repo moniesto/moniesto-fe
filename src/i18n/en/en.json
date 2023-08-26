@@ -11,7 +11,8 @@
       },
       "toast": {
         "login_success": "Login successful"
-      }
+      },
+      "need_auth":"Your authentication has expired. Please login again."
     },
     "register": {
       "title": "Register",
@@ -497,7 +498,8 @@
       "Moniest_CreateMoniest_InvalidBody":"These information is invalid to be moniest",
       "Account_EmailVerification_NotFoundToken":"The email verification link is broken or invalid. Please try to verify again.",
       "Post_CreatePost_InvalidStop":"Stop is invalid",
-      "Account_Login_NotFoundUsername":"Kullanıcı adı sisteme kayıtlı değil"
+      "Account_Login_NotFoundUsername":"Kullanıcı adı sisteme kayıtlı değil",
+      "Account_Register_RegisteredEmail":"Email is already registered"
     }
   }
 }

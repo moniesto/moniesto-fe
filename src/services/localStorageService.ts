@@ -9,7 +9,7 @@ export type StorageState = {
 export const emptyStorage: StorageState = {
   theme_mode: "light",
   token: "",
-  language: "en",
+  language: "",
 };
 export type DecodeToken = {
   id: string;

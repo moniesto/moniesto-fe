@@ -93,7 +93,7 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
               <Stack direction="row" alignItems="center">
                 <Typography
                   sx={{
-                    maxWidth: "100px",
+                    maxWidth: 140,
                     whiteSpace: "nowrap",
                     overflow: "hidden",
                     textOverflow: "ellipsis",

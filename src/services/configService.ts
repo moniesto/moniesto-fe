@@ -32,6 +32,7 @@ class config {
     "Moniest_CreateMoniest_InvalidBody",
     "Account_EmailVerification_NotFoundToken",
     "Post_CreatePost_InvalidStop",
+    "Account_Register_RegisteredEmail",
   ];
 
   initialize() {
