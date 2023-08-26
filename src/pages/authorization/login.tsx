@@ -9,7 +9,7 @@ import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
-import { setToken } from "../../store/slices/localStorageSlice";
+import { changeLanguage, setToken } from "../../store/slices/localStorageSlice";
 import api from "../../services/api";
 import toastService from "../../services/toastService";
 import { useTranslate } from "../../hooks/useTranslate";
@@ -48,6 +48,7 @@ const Login = () => {
     api.auth
       .login(values)
       .then((res) => {
+        dispatch(changeLanguage(res.user.language as string));
         toastService.open({
           severity: "success",
           message: "page.login.toast.login_success",
