@@ -107,7 +107,7 @@ const PostsTab = () => {
     if (
       !profileState.isMyAccount &&
       filterItem.boolValue === true &&
-      !profileState.isSubscribed
+      !profileState.subscriptionInfo?.subscribed
     )
       return;
 
@@ -186,7 +186,7 @@ const PostsTab = () => {
       </Card>
       {!profileState.isMyAccount &&
       activePostFilter.boolValue === true &&
-      !profileState.isSubscribed ? (
+      !profileState.subscriptionInfo?.subscribed ? (
         <Box position="relative">
           <Box
             sx={{

@@ -1,28 +1,32 @@
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box, Button, Divider, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useTheme } from "@mui/system";
-import { ErrorOutline, TaskAltOutlined } from "@mui/icons-material";
+import { TaskAltOutlined } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import api from "../../../../services/api";
 import { useTranslate } from "../../../../hooks/useTranslate";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { setIsSubscribed } from "../../../../store/slices/profileSlice";
 import { SubscribtionInfoList } from "./subscribtionInfoList";
 import { WrappedModal } from "../../../shared/common/wrappedModal";
 import { SubscribeButton } from "../../../shared/user/subscribeButton";
+import { setSubscriptionInfo } from "../../../../store/slices/profileSlice";
+import { UnsubscribtionInfoList } from "./unsubscribtionInfoList";
+import { Trans } from "react-i18next";
+import toastService from "../../../../services/toastService";
 
 export const SubscribeToMoniest = ({
   handleClose,
 }: {
-  handleClose: (result: boolean) => void;
+  handleClose: () => void;
 }) => {
   const theme = useTheme();
   const translate = useTranslate();
   const [loading, setLoading] = useState<boolean>(false);
   const profileState = useAppSelector((state) => state.profile);
   const [month, setMonth] = useState(1);
-  const [isPendingSubscription, setIsPendingSubscription] = useState(false);
+  const [isCancelConfirmModalOpened, setIsCancelConfirmModalOpened] =
+    useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -34,8 +38,10 @@ export const SubscribeToMoniest = ({
         cancelURL: window.location.href + "/subscription/fail",
         number_of_months: month,
       })
-      .then(() => setIsPendingSubscription(true))
-      .catch(() => handleClose(false))
+      .then(() => {
+        dispatch(setSubscriptionInfo(null));
+      })
+      .catch(() => handleClose())
       .finally(() => setLoading(false));
   };
 
@@ -43,8 +49,12 @@ export const SubscribeToMoniest = ({
     api.moniest
       .unsubscribe(profileState.account!.username)
       .then(() => {
-        handleClose(true);
-        dispatch(setIsSubscribed(false));
+        toastService.open({
+          message: "page.profile.subs_modal.cancel_toast",
+          severity: "success",
+        });
+        dispatch(setSubscriptionInfo(null));
+        handleClose();
       })
       .finally(() => setLoading(false));
   };
@@ -54,9 +64,9 @@ export const SubscribeToMoniest = ({
       noPadding
       width={500}
       opened={true}
-      onClose={() => handleClose(isPendingSubscription)}
+      onClose={() => handleClose()}
     >
-      {isPendingSubscription ? (
+      {profileState.subscriptionInfo?.pending ? (
         <Stack alignItems="center" p={3} gap={5} pb={7}>
           <Box>
             <TaskAltOutlined
@@ -78,7 +88,7 @@ export const SubscribeToMoniest = ({
               {translate("component.subscription.click_link")}
             </Typography>
           </Stack>
-          <SubscribeButton onLinkClick={() => handleClose(true)} />
+          <SubscribeButton onLinkClick={() => handleClose()} />
         </Stack>
       ) : (
         <>
@@ -111,53 +121,40 @@ export const SubscribeToMoniest = ({
                 justifyContent="space-between"
               >
                 <Typography variant="h4" fontWeight={500}>
-                  {translate(
-                    `page.profile.subs_modal.${
-                      profileState.isSubscribed ? "from" : "to"
-                    }`
+                  {!profileState.subscriptionInfo?.subscribed ? (
+                    <Trans
+                      values={{ username: profileState.account!.username }}
+                      i18nKey="page.profile.subs_modal.to"
+                      components={{ bold: <b /> }}
+                    ></Trans>
+                  ) : (
+                    <b>{profileState.account!.username}</b>
                   )}
-
-                  <b>{" " + profileState.account!.username}</b>
                 </Typography>
-                {!profileState.isSubscribed && (
-                  <Typography variant="h4">
-                    {profileState.account!.moniest?.subscription_info.fee}$
-                    <Typography pl={1} component="span">
-                      / {translate("page.profile.subs_modal.monthly")}
-                    </Typography>
+                <Typography variant="h4">
+                  {profileState.account!.moniest?.subscription_info.fee}$
+                  <Typography pl={1} component="span">
+                    / {translate("page.profile.subs_modal.monthly")}
                   </Typography>
-                )}
+                </Typography>
               </Stack>
             </Stack>
           </Box>
+
           <Box p={{ xs: 1.5, md: 3 }} pt={{ xs: 5, md: 8 }}>
-            {!profileState.isSubscribed ? (
+            {!profileState.subscriptionInfo?.subscribed ? (
               <SubscribtionInfoList
                 month={month}
                 handleMonthChange={setMonth}
               />
             ) : (
-              <Box>
-                <Stack mb={3} spacing={1} direction="row" alignItems="center">
-                  <ErrorOutline></ErrorOutline>
-                  <Typography variant="h4">
-                    {translate("page.profile.subs_modal.paying_currently", {
-                      fee: profileState.account!.moniest?.subscription_info.fee,
-                    })}
-                  </Typography>
-                </Stack>
-                <Typography variant="h5" letterSpacing={0.5}>
-                  {translate("page.profile.subs_modal.if_unsubscribe", {
-                    username: profileState.account!.username,
-                  })}
-                </Typography>
-              </Box>
+              <UnsubscribtionInfoList />
             )}
             <Stack mt={3}>
               <LoadingButton
                 onClick={() => {
-                  profileState.isSubscribed
-                    ? handleUnsubscribe()
+                  profileState.subscriptionInfo?.subscribed
+                    ? setIsCancelConfirmModalOpened(true)
                     : handleSubscribe();
                 }}
                 color="secondary"
@@ -166,7 +163,9 @@ export const SubscribeToMoniest = ({
               >
                 {translate(
                   `page.profile.${
-                    profileState.isSubscribed ? "unsubscribe" : "subscribe"
+                    profileState.subscriptionInfo?.subscribed
+                      ? "unsubscribe"
+                      : "subscribe"
                   }`
                 )}
               </LoadingButton>
@@ -174,6 +173,43 @@ export const SubscribeToMoniest = ({
           </Box>
         </>
       )}
+      <WrappedModal
+        width={400}
+        opened={isCancelConfirmModalOpened}
+        onClose={() => setIsCancelConfirmModalOpened(false)}
+      >
+        <Typography textAlign="center" mb={1} variant="h3">
+          {translate("page.profile.subs_modal.cancel_modal.title")}
+        </Typography>
+        <Divider sx={{ mb: 2 }} />
+        <Typography variant="h4">
+          {translate("page.profile.subs_modal.cancel_modal.message")}
+        </Typography>
+        <Typography pt={1} sx={{ mb: 4 }} variant="h4">
+          {translate("page.profile.subs_modal.cancel_modal.message_body")}
+        </Typography>
+
+        <Stack direction="row" mt={2} spacing={4}>
+          <Button
+            onClick={() => setIsCancelConfirmModalOpened(false)}
+            type="button"
+            sx={{ flex: 1 }}
+            variant="outlined"
+            color="inherit"
+          >
+            {translate("common.cancel")}
+          </Button>
+          <LoadingButton
+            sx={{ flex: 1 }}
+            type="submit"
+            color="secondary"
+            variant="contained"
+            onClick={handleUnsubscribe}
+          >
+            {translate("common.confirm")}
+          </LoadingButton>
+        </Stack>
+      </WrappedModal>
     </WrappedModal>
   );
 };

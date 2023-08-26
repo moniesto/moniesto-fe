@@ -72,7 +72,7 @@ const ProfileTabs = () => {
   }, [counts, profileState.account, translate]);
 
   useEffect(() => {
-    if (!profileState.account) return;
+    if (!profileState.account || profileState.subscriptionInfo) return;
 
     api.user.summary_stats(profileState.account.username).then((response) => {
       setCounts({
@@ -81,7 +81,7 @@ const ProfileTabs = () => {
         subscribers: response.subscriber_count || 0,
       });
     });
-  }, [profileState.account, profileState.isSubscribed]);
+  }, [profileState]);
 
   return (
     <Box

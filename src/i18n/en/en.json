@@ -221,8 +221,7 @@
         "about": "About"
       },
       "subs_modal": {
-        "to": "Subscribe to ",
-        "from": "Unsubscribe from",
+        "to": "Subscribe to <bold> {{username}} </bold>",
         "monthly": "Monthly",
         "subscribtion_month":"Subscription time (Month)",
         "payment_method":{
@@ -235,8 +234,16 @@
         "subs_end_date": "Subscription end date",
         "subs_desc":"The total of the months you set will be withdrawn from your account in one go and will be paid monthly to moniest. When you want to cancel, it will be credited back to your account if you have any remaining months. Subscription does not automatically renew after it expires.",
         "total": "Total",
-        "paying_currently": "You are paying {{fee}}$/Month currently",
-        "if_unsubscribe": "If you unsubscribe from {{username}}, you will no longer be able to access content shared by this account for subscribers."
+        "subs_detail":"Your Subscription Details",
+        "subscribed_price":"Amount You Subscribed (Monthly)",
+        "remaining_time":"Subscription Period",
+        "unsub_desc":"If you wish to cancel your subscription, the remaining amount (if any) will be transferred to your binance account with <bold>{{payer_id}}</bold> ID, deducting the operation fee (<bold>{{fee}}%</bold>) from your remaining months.",
+        "cancel_modal":{
+          "title":"Subscription Cancellation",
+          "message":"Are you sure you want to cancel your subscription?",
+          "message_body":"If you cancel, you will no longer have access to moniest's live analytics."
+        },
+        "cancel_toast":"You have successfully unsubscribed."
       },
       "post_filter": {
         "all": "All",
@@ -472,7 +479,8 @@
     "back": "Back",
     "edit": "Edit",
     "cancel": "Cancel",
-    "complete":"Complete"
+    "complete":"Complete",
+    "confirm":"Confirm"
   },
   "navigation": {
     "timeline": "Timeline",

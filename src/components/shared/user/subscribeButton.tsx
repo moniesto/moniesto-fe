@@ -14,10 +14,9 @@ import {
 } from "react";
 import api from "../../../services/api";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { setIsSubscribed } from "../../../store/slices/profileSlice";
+import { setSubscriptionInfo } from "../../../store/slices/profileSlice";
 import { LoadingButton } from "@mui/lab";
 import { Button, useMediaQuery, useTheme } from "@mui/material";
-import { SubscriptionInfoResponse } from "../../../interfaces/requests";
 import Countdown from "../common/countdown";
 import { SubscribeToMoniest } from "../../ui/user/subscibtionModal/subscribeToMoniest";
 
@@ -36,7 +35,6 @@ export const SubscribeButton = memo(
       const [loading, setLoading] = useState<boolean>();
       const translate = useTranslate();
       const theme = useTheme();
-      const [info, setInfo] = useState<SubscriptionInfoResponse>();
       const [isSubscribeModalOpen, setIsSubscribeModalOpen] =
         useState<boolean>(false);
 
@@ -47,25 +45,21 @@ export const SubscribeButton = memo(
         api.moniest
           .subscription_info(profileState.account?.username as string)
           .then((res) => {
-            setInfo(res);
-            dispatch(setIsSubscribed(res?.subscribed as boolean));
+            dispatch(setSubscriptionInfo(res));
           })
           .finally(() => setLoading(false));
       }, [dispatch, profileState.account?.username]);
 
       useEffect(() => {
-        if (!profileState.account) {
+        if (profileState.subscriptionInfo) {
           setLoading(false);
           return;
         }
         getSubsInfo();
-      }, [profileState, dispatch, getSubsInfo]);
+      }, [profileState.subscriptionInfo, dispatch, getSubsInfo]);
 
-      const handleSubscribtionModalClose = (result: boolean) => {
+      const handleSubscribtionModalClose = () => {
         setIsSubscribeModalOpen(false);
-        if (result) {
-          getSubsInfo();
-        }
       };
       useImperativeHandle(ref, () => ({
         reCheckSubscription() {
@@ -73,53 +67,65 @@ export const SubscribeButton = memo(
         },
       }));
 
-      return info?.pending ? (
-        <Button
-          size={matches ? "small" : "medium"}
-          color="secondary"
-          variant="outlined"
-          href={info.universal_link!}
-          onClick={onLinkClick}
-          endIcon={
-            <Countdown
-              startTime={info.timeout!}
-              onDone={() => setInfo(undefined)}
-            />
-          }
-          startIcon={<OpenInNewOutlined />}
-        >
-          {translate("moniest.go_payment")}
-        </Button>
-      ) : (
+      const handleDone = () => {
+        dispatch(setSubscriptionInfo(null));
+      };
+
+      return (
         <>
-          <LoadingButton
-            loading={loading}
-            onClick={() => setIsSubscribeModalOpen(true)}
-            size={matches ? "small" : "medium"}
-            sx={{
-              ".MuiButton-endIcon": {
-                marginLeft: profileState.isSubscribed ? "" : "-4px",
-                marginTop: profileState.isSubscribed ? "" : "-2px",
-              },
-            }}
-            endIcon={
-              !loading &&
-              (profileState.isSubscribed ? (
-                <DoneOutline />
-              ) : (
-                <AttachMoneyOutlined />
-              ))
-            }
-            color="secondary"
-            variant="contained"
-          >
-            {matches}
-            {profileState.isSubscribed
-              ? translate("moniest.subscribed")
-              : `${translate("moniest.subscribe")} ${
-                  profileState.account?.moniest?.subscription_info.fee
-                }`}
-          </LoadingButton>
+          {profileState.subscriptionInfo?.pending ? (
+            <Button
+              size={matches ? "small" : "medium"}
+              color="secondary"
+              variant="outlined"
+              href={profileState.subscriptionInfo?.universal_link!}
+              onClick={onLinkClick}
+              endIcon={
+                <Countdown
+                  startTime={profileState.subscriptionInfo?.timeout || 0}
+                  onDone={handleDone}
+                />
+              }
+              startIcon={<OpenInNewOutlined />}
+            >
+              {translate("moniest.go_payment")}
+            </Button>
+          ) : (
+            <>
+              <LoadingButton
+                loading={loading}
+                onClick={() => setIsSubscribeModalOpen(true)}
+                size={matches ? "small" : "medium"}
+                sx={{
+                  ".MuiButton-endIcon": {
+                    marginLeft: profileState.subscriptionInfo?.subscribed
+                      ? ""
+                      : "-4px",
+                    marginTop: profileState.subscriptionInfo?.subscribed
+                      ? ""
+                      : "-2px",
+                  },
+                }}
+                endIcon={
+                  !loading &&
+                  (profileState.subscriptionInfo?.subscribed ? (
+                    <DoneOutline />
+                  ) : (
+                    <AttachMoneyOutlined />
+                  ))
+                }
+                color="secondary"
+                variant="contained"
+              >
+                {matches}
+                {profileState.subscriptionInfo?.subscribed
+                  ? translate("moniest.subscribed")
+                  : `${translate("moniest.subscribe")} ${
+                      profileState.account?.moniest?.subscription_info.fee
+                    }`}
+              </LoadingButton>
+            </>
+          )}
           {isSubscribeModalOpen && (
             <SubscribeToMoniest handleClose={handleSubscribtionModalClose} />
           )}

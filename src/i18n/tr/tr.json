@@ -205,8 +205,7 @@
         "about": "Hakkında"
       },
       "subs_modal": {
-        "to": "Abone ol",
-        "from": "Abonelikten çık",
+        "to": "<bold> {{username}} </bold> kullanıcısına abone ol",
         "monthly": "Aylık",
         "subscribtion_month":"Abonelik süresi (Ay)",
         "payment_method":{
@@ -219,8 +218,16 @@
         "subs_end_date": "Abonelik Bitiş Tarihi",
         "subs_desc":"Belirlediğiniz ayların toplamı hesabınızdan tek seferde çekilip aylık olarak moniest'a ödenecektir. İptal etmek istediğinizde, kalan aylarınız varsa hesabınıza geri aktarılacaktır. Abonelik, süresi bittikten sonra kendi kendine yenilenmez.",
         "total": "Toplam",
-        "paying_currently": "Şu anda {{fee}} $/ay ödüyorsunuz",
-        "if_unsubscribe": "{{username}} 'dan abonelikten çıkıyorsanız, artık hesap tarafından paylaşılan içeriğe erişemeyeceksiniz."
+        "subs_detail":"Abonelik Detaylarınız",
+        "subscribed_price":"Abone Olduğunuz Tutar (Aylık)",
+        "remaining_time":"Abonelik Dönemi",
+        "unsub_desc":"Aboneliğinizi iptal etmek isterseniz, kalan tutar (eğer varsa) kalan aylarınızdan operasyon ücreti (<bold>{{fee}}%</bold>) kesilerek <bold>{{payer_id}}</bold> ID'li binance hesabınıza aktarılacaktır.",
+        "cancel_modal":{
+          "title":"Abonelik İptali",
+          "message":"Aboneliğinizi iptal etmek istediğinize emin misiniz?",
+          "message_body":"Eğer iptal ederseniz, bundan sonra moniest'ın canlı analizlerine erişemeyeceksiniz."
+        },
+        "cancel_toast":"Abonelikten başarıyla ayrıldınız."
       },
       "post_filter": {
         "all": "Hepsi",
@@ -454,7 +461,8 @@
     "back": "Geri",
     "edit": "Düzenle",
     "cancel": "İptal",
-    "complete":"Tamamla"
+    "complete":"Tamamla",
+    "confirm":"Onayla"
   },
   "navigation": {
     "timeline": "Ana Sayfa",

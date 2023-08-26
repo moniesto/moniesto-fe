@@ -1,30 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../../interfaces/user";
+import { SubscriptionInfoResponse } from "../../interfaces/requests";
 
 // Define the initial state using that type
 type initialStateType = {
   account: User | null;
-  isSubscribed: boolean;
   isMyAccount: boolean;
+  subscriptionInfo: SubscriptionInfoResponse | null;
 };
 
 const initialState: initialStateType = {
   account: null,
-  isSubscribed: false,
   isMyAccount: false,
+  subscriptionInfo: null,
 };
 
 export const profileSlice = createSlice({
-  name: "user",
+  name: "profile",
   initialState,
   reducers: {
     setProfile: (state, action: PayloadAction<User | null>) => {
       state.account = action.payload;
+      state.subscriptionInfo = null;
       return state;
     },
-    setIsSubscribed: (state, action: PayloadAction<boolean>) => {
-      state.isSubscribed = action.payload;
+    setSubscriptionInfo: (
+      state,
+      action: PayloadAction<SubscriptionInfoResponse | null>
+    ) => {
+      state.subscriptionInfo = action.payload;
       return state;
     },
     setIsMyAccount: (state, action: PayloadAction<boolean>) => {
@@ -34,10 +39,7 @@ export const profileSlice = createSlice({
   },
 });
 
-export const { setProfile, setIsSubscribed, setIsMyAccount } =
+export const { setProfile, setSubscriptionInfo, setIsMyAccount } =
   profileSlice.actions;
-
-// // Other code such as selectors can use the imported `RootState` type
-// export const getMogetModede = (state: RootState) => state.counter.value
 
 export default profileSlice.reducer;

@@ -58,14 +58,15 @@ export interface SubscribeRequest {
 }
 
 export interface SubscriptionInfoResponse extends SubscribeResponse {
-  pending: true;
-  subscribed: true;
+  pending: boolean;
+  subscribed: boolean;
   subscription_info?: {
+    subscribed_fee: number;
     payer_id: string;
-    subscription_ent_date: string;
+    subscription_end_date: string;
     subscription_start_date: string;
   };
-  timeout?: 0;
+  timeout?: number;
 }
 
 export interface SubscribeResponse {
