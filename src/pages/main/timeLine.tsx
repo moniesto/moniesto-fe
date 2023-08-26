@@ -1,5 +1,5 @@
 import { Stack } from "@mui/system";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { InfiniteScroll } from "../../components/shared/common/infiniteScroll";
 import PostCard from "../../components/shared/post/postCard";
 import { Post } from "../../interfaces/post";
@@ -10,6 +10,7 @@ import Fly from "../../components/shared/common/fly/fly";
 const TimeLine = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
+  let timeout = useRef<NodeJS.Timeout>();
   const [queryParams, setQueryParams] = useState<{
     hasMore?: boolean;
     active: boolean;
@@ -28,18 +29,26 @@ const TimeLine = () => {
 
   const getPosts = useCallback(() => {
     const dummyPost = { ...TestPost, id: "-1" };
-    setPosts((prev) => prev.concat(Array(queryParams.limit).fill(dummyPost)));
+
+    setPosts((prev) =>
+      !prev.some((item) => item.id === "-1")
+        ? prev.concat(Array(3).fill(dummyPost))
+        : prev
+    );
 
     delete queryParams.hasMore;
     api.content
       .posts(queryParams)
       .then((response) => {
         setPosts((prev) => {
-          const arr = [...prev.filter((post) => post.id !== "-1"), ...response];
           const uniqueArr = [
-            ...new Map(arr.map((item) => [item.id, item])).values(),
+            ...new Map(
+              [...prev.filter((post) => post.id !== "-1"), ...response].map(
+                (item) => [item.id, item]
+              )
+            ).values(),
           ];
-          return uniqueArr;
+          return [...uniqueArr, ...Array(3).fill(dummyPost)] as Post[];
         });
         if (response.length < queryParams.limit) {
           if (!queryParams.active && !queryParams.subscribed) {
@@ -57,7 +66,15 @@ const TimeLine = () => {
           queryParams.hasMore = true;
         }
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        if (timeout.current) clearTimeout(timeout.current);
+        timeout.current = setTimeout(() => {
+          setPosts((prev) => {
+            setLoading(false);
+            return prev.filter((post) => post.id !== "-1");
+          });
+        }, 500);
+      });
   }, [queryParams]);
 
   const handleFetchData = () => {
