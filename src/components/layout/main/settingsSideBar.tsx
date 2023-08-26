@@ -46,9 +46,9 @@ export const SettingsSideBar = () => {
         title: translate("navigation.account"),
       },
       {
-        path: "/settings/card",
+        path: "/settings/payment",
         icon: <CreditCardOutlined />,
-        title: translate("navigation.card"),
+        title: translate("navigation.payment"),
       },
       {
         path: "/settings/password",

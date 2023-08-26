@@ -17,7 +17,7 @@ import VerifyEmail from "../pages/main/verifyEmail";
 import { SharePost } from "../pages/main/sharePost/sharePost";
 import { AccountSettings } from "../pages/settings/account";
 import { MoniestSettings } from "../pages/settings/moniest";
-import { CardSettings } from "../pages/settings/card";
+import { PaymentSettings } from "../pages/settings/payment";
 import { PasswordSettings } from "../pages/settings/password";
 import { VerifyEmailSettings } from "../pages/settings/verifyEmail";
 import { SettingsList } from "../pages/settings/list";
@@ -113,8 +113,8 @@ const Router = createBrowserRouter([
                 element: <MoniestSettings />,
               },
               {
-                path: "card",
-                element: <CardSettings />,
+                path: "payment",
+                element: <PaymentSettings />,
               },
               {
                 path: "password",

@@ -1,7 +1,7 @@
 import { Stack } from "@mui/system";
 import { Divider, Tab, Tabs, Typography } from "@mui/material";
 
-import { SyntheticEvent, useMemo, useState } from "react";
+import { ReactNode, SyntheticEvent, useMemo, useState } from "react";
 import { CreditCardOutlined, CurrencyBitcoin } from "@mui/icons-material";
 
 import { PaymentBinanceTab } from "./paymentBinanceTab";
@@ -24,7 +24,17 @@ const tabs = [
   },
 ];
 
-const PaymentStep = () => {
+type PaymentStepPropType = {
+  defaults: {
+    binance_id?: string;
+  };
+  onChange: {
+    binance: (value: string) => void;
+  };
+  footer: ReactNode;
+};
+
+const PaymentMethod = ({ defaults, onChange, footer }: PaymentStepPropType) => {
   const [activeTab, setActiveTab] = useState<number>(0);
   const theme = useTheme();
   const translate = useTranslate();
@@ -40,11 +50,17 @@ const PaymentStep = () => {
     let content;
     switch (activeTab) {
       case 0:
-        content = <PaymentBinanceTab />;
+        content = (
+          <PaymentBinanceTab
+            onBinanceIdChange={(val) => onChange.binance(val)}
+            default_binance_id={defaults.binance_id}
+            footer={footer}
+          />
+        );
         break;
     }
     return content;
-  }, [activeTab]);
+  }, [activeTab, defaults.binance_id, footer, onChange]);
 
   return (
     <Fly>
@@ -85,4 +101,4 @@ const PaymentStep = () => {
     </Fly>
   );
 };
-export default PaymentStep;
+export default PaymentMethod;

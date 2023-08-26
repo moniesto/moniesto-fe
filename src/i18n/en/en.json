@@ -54,6 +54,9 @@
           "updated_success": "Your password successfully updated"
         },
         "title": "Change Password"
+      },
+      "payment":{
+        "toast": { "updated_success": "Your payout method has been successfully updated" }
       }
     },
     "forget_pass": {
@@ -488,7 +491,7 @@
     "share_post": "Share Post",
     "be_moniest": "Be Moniest",
     "account": "Account",
-    "card": "Card",
+    "payment": "Payment",
     "password": "Password",
     "verify_email": "Verify Email",
     "moniest": "Moniest",

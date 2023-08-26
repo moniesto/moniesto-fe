@@ -76,6 +76,17 @@ export interface SubscribeResponse {
   universal_link?: string;
 }
 
+export interface PayoutInfoResponse {
+  payout_methods: {
+    binance: [
+      {
+        type: string;
+        value: string;
+      }
+    ];
+  };
+}
+
 export interface PaginateRequest {
   limit: number;
   offset: number;
@@ -148,6 +159,8 @@ export const Requests: {
     unsubscribe: (username: string) => string;
     subscription_info: (username: string) => string;
     subscribers: (username: string) => string;
+    get_payout: string;
+    patch_payout: string;
   };
   post: {
     create_post: string;
@@ -203,6 +216,8 @@ export const Requests: {
     subscription_info: (username: string) =>
       `moniests/${username}/subscription-info`,
     subscribers: (username: string) => `moniests/${username}/subscribers`,
+    get_payout: "moniests/payout",
+    patch_payout: "moniests/payout",
   },
   post: {
     create_post: "moniests/posts",

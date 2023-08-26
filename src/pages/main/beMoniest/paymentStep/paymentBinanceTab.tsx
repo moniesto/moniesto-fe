@@ -1,24 +1,28 @@
 import { IconButton, InputAdornment, Stack, Typography } from "@mui/material";
 import { FormItem } from "../../../../components/shared/common/formItem";
 import { HelpOutlineOutlined, PermIdentityOutlined } from "@mui/icons-material";
-import { BeMoniestStepperFooter } from "../beMoniestStepperFooter";
 import { FindBUIDModal } from "../findBUIDModal";
-import { useState } from "react";
+import { ReactElement, ReactNode, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useTranslate } from "../../../../hooks/useTranslate";
 import Fly from "../../../../components/shared/common/fly/fly";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { nextStep } from "../../../../store/slices/beMoniestSlice";
 import { WrappedTextField } from "../../../../components/shared/common/wrappers/wrappedTextField";
+import React from "react";
 
-export const PaymentBinanceTab = () => {
+export const PaymentBinanceTab = ({
+  default_binance_id,
+  onBinanceIdChange,
+  footer,
+}: {
+  default_binance_id?: string;
+  onBinanceIdChange: (val: string) => void;
+  footer: ReactNode;
+}) => {
+  console.log("footer :", footer);
   const [binanceIDHelperModalOpened, setBinanceIDHelperModalOpened] =
     useState(false);
   const translate = useTranslate();
-  const dispatch = useAppDispatch();
-
-  const stepperState = useAppSelector((state) => state.beMoniest);
 
   const validationSchema = yup.object({
     binance_id: yup
@@ -32,13 +36,17 @@ export const PaymentBinanceTab = () => {
 
   const formik = useFormik({
     initialValues: {
-      binance_id: stepperState.data.binance_id || "",
+      binance_id: default_binance_id || "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      dispatch(nextStep(values));
+      onBinanceIdChange(values.binance_id);
     },
   });
+
+  const handleNext = () => {
+    formik.submitForm();
+  };
 
   return (
     <Fly>
@@ -89,8 +97,9 @@ export const PaymentBinanceTab = () => {
             />
           </FormItem>
         </Fly.Item>
-
-        <BeMoniestStepperFooter handleNext={() => formik.submitForm()} />
+        {React.cloneElement(footer as ReactElement, {
+          handleNext: handleNext,
+        })}
         {binanceIDHelperModalOpened && (
           <FindBUIDModal onClose={() => setBinanceIDHelperModalOpened(false)} />
         )}

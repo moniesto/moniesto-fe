@@ -9,6 +9,7 @@ import {
   LoginReq,
   LoginResponse,
   PaginateRequest,
+  PayoutInfoResponse,
   RegisterReq,
   Requests,
   SendMailReq,
@@ -104,6 +105,13 @@ class api {
       ),
     subscribers: (username: string, params: PaginateRequest) =>
       httpService.get<User[]>(Requests.moniest.subscribers(username), params),
+    get_payout: () =>
+      httpService.get<PayoutInfoResponse>(Requests.moniest.get_payout),
+    patch_payout: (params: { binance_id: string }) =>
+      httpService.patch<PayoutInfoResponse>(
+        Requests.moniest.patch_payout,
+        params
+      ),
   };
   post = {
     create_post: (params: CreatePostReq) =>

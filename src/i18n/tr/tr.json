@@ -44,6 +44,9 @@
       "password": {
         "toast": { "updated_success": "Şifreniz başarıyla güncellendi" },
         "title": "Şifre Değiştir"
+      },
+      "payment":{
+        "toast": { "updated_success": "Ödeme yönteminiz başarıyla güncellendi" }
       }
     },
     "forget_pass": {
@@ -470,7 +473,7 @@
     "share_post": "Gönderi Paylaş",
     "be_moniest": "Moniest Ol",
     "account": "Hesap",
-    "card": "Kart",
+    "payment": "Ödeme",
     "password": "Şifre",
     "verify_email": "E-posta'nı doğrula",
     "moniest": "Moniest",

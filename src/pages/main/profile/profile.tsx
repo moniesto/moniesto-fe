@@ -154,7 +154,7 @@ const Profile = () => {
                           )}
                         </Stack>
                         <Stack direction="row" justifyContent="space-between">
-                          <Typography sx={{ opacity: 0.6 }} variant="h4">
+                          <Typography sx={{ opacity: 0.8 }} variant="h4">
                             {profileState.account.username}
                           </Typography>
                           <LocationText

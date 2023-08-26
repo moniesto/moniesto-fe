@@ -15,7 +15,7 @@ import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import { Stack } from "@mui/system";
 import EmailStep from "./emailStep";
 import MoniestInfoStep from "./moniestInfoStep";
-import PaymentStep from "./paymentStep/paymentStep";
+import PaymentStep from "./paymentStep/paymentMethod";
 import SubmitStep from "./submitStep";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import api from "../../../services/api";
@@ -25,7 +25,11 @@ import { setUser } from "../../../store/slices/userSlice";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { PaymentsOutlined, RocketLaunchOutlined } from "@mui/icons-material";
 import Confetti from "../../../components/shared/common/confetti";
-import { resetMoniestStepper } from "../../../store/slices/beMoniestSlice";
+import {
+  nextStep,
+  resetMoniestStepper,
+} from "../../../store/slices/beMoniestSlice";
+import { BeMoniestStepperFooter } from "./beMoniestStepperFooter";
 
 type StepItem = {
   order: number;
@@ -108,7 +112,19 @@ const BeMoniest = () => {
         content = <MoniestInfoStep />;
         break;
       case 3:
-        content = <PaymentStep />;
+        content = (
+          <PaymentStep
+            onChange={{
+              binance: (val) => dispatch(nextStep({ binance_id: val })),
+            }}
+            defaults={{ binance_id: stepperState.data.binance_id }}
+            footer={
+              <BeMoniestStepperFooter
+                handleNext={() => console.log("hey next")}
+              />
+            }
+          />
+        );
         break;
       case 4:
       case 5:
@@ -121,9 +137,11 @@ const BeMoniest = () => {
     return content;
   }, [
     stepperState.activeStep,
-    handleChangeVerifyEmailState,
+    stepperState.data.binance_id,
     user.email,
     user.email_verified,
+    handleChangeVerifyEmailState,
+    dispatch,
   ]);
 
   return (
