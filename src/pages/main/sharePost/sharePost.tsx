@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   Box,
+  Button,
   Card,
   Divider,
   FormControl,
@@ -39,10 +40,16 @@ import { InfoChip } from "../../../components/shared/post/infoChip";
 import { Editor } from "../../../components/shared/common/editor/editor";
 import { normalizePostFromForm } from "./utils";
 import { CreatePostReq } from "../../../interfaces/requests";
+import { WrappedModal } from "../../../components/shared/common/wrappedModal";
+import PostCard from "../../../components/shared/post/postCard";
+import { Post } from "../../../interfaces/post";
+import { useAppSelector } from "../../../store/hooks";
 
 export const SharePost = () => {
   const [calendarOpen, setCalendarOpen] = React.useState(false);
+  const [previewModalOpened, setPreviewModalOpened] = useState(false);
   const [showDescription, setShowDescription] = useState<boolean>(false);
+  const user = useAppSelector((state) => state.user.user);
 
   const translate = useTranslate();
 
@@ -265,6 +272,16 @@ export const SharePost = () => {
     return () => clearTimeout(timeout);
   }, [fetchCurrency, formik, formik.values.crypto_currency.currency]);
 
+  const previewPost = useMemo(() => {
+    const postData: Post = {
+      ...(normalizePostFromForm(formik.values) as Post),
+      user: user,
+      created_at: new Date(),
+      status: "pending",
+      start_price: formik.values.crypto_currency.price,
+    };
+    return postData;
+  }, [formik.values, user]);
   return (
     <Card
       sx={{
@@ -627,7 +644,7 @@ export const SharePost = () => {
                 variant="contained"
                 color="secondary"
                 type="button"
-                onClick={handleShare}
+                onClick={() => setPreviewModalOpened(true)}
                 loading={submitLoading}
               >
                 {translate("form.field.share")}
@@ -636,6 +653,43 @@ export const SharePost = () => {
           </Stack>
         </form>
       </Stack>
+      <WrappedModal
+        width={600}
+        opened={previewModalOpened}
+        onClose={() => setPreviewModalOpened(false)}
+      >
+        <Typography textAlign="center" mb={1} variant="h3">
+          {translate("page.share_post.preview.title")}
+        </Typography>
+        <Divider sx={{ mb: 2 }} />
+        <Typography pt={1} sx={{ mb: 4 }} variant="h4">
+          {translate("page.share_post.preview.message")}
+        </Typography>
+        <PostCard loading={false} post={previewPost} />
+        <Stack direction="row" mt={4} spacing={4}>
+          <Button
+            onClick={() => setPreviewModalOpened(false)}
+            type="button"
+            sx={{ flex: 1 }}
+            variant="outlined"
+            color="inherit"
+          >
+            {translate("common.cancel")}
+          </Button>
+          <Button
+            onClick={() => {
+              setPreviewModalOpened(false);
+              handleShare();
+            }}
+            sx={{ flex: 1 }}
+            type="submit"
+            color="secondary"
+            variant="contained"
+          >
+            {translate("common.confirm")}
+          </Button>
+        </Stack>
+      </WrappedModal>
     </Card>
   );
 };

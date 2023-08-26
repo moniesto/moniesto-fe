@@ -139,7 +139,11 @@
       "approximate_score": "Yaklaşık Skor",
       "approximate_score_valid": "Alabileceğiniz en yüksek skor",
       "approximate_score_invalid": "Gönderi geçerli olduğunda hesaplanır",
-      "toast": { "post_created": "Gönderiniz başarıyla oluşturuldu" }
+      "toast": { "post_created": "Gönderiniz başarıyla oluşturuldu" },
+      "preview":{
+        "title":"Analiz Önizlemesi",
+        "message":"Analizinizi gözden geçirdikten sonra yayınlanması için onaylayabilirsiniz."
+      }
     },
     "be_moniest": {
       "be_moniest": "Moniest Ol",

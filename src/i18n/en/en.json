@@ -155,6 +155,10 @@
       "approximate_score_invalid": "Calculated when the post is valid",
       "toast": {
         "post_created": "Your post successfully created "
+      },
+      "preview":{
+        "title":"Analysis Preview",
+        "message":"After reviewing your analysis, you can approve it for publication."
       }
     },
     "be_moniest": {
