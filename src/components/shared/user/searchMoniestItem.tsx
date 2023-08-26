@@ -18,7 +18,10 @@ const SearchMoniestItem = (props: propTypes) => {
   const theme = useTheme();
 
   return (
-    <ListItemButton {...props} sx={{ ...props.sx, margin: "0 5px" }}>
+    <ListItemButton
+      {...props}
+      sx={{ ...props.sx, margin: "0 5px", padding: 0 }}
+    >
       <ListItemAvatar>
         <IconButton disableRipple size="small" sx={{ mr: 1 }}>
           <Avatar

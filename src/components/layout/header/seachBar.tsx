@@ -57,6 +57,7 @@ const SearchBar = ({
   return (
     <Box sx={{ position: "relative" }}>
       <WrappedTextField
+        size="small"
         sx={{
           minWidth: "280px",
           width: { md: focused || text ? "350px" : "280px", sm: "100%" },
@@ -77,8 +78,14 @@ const SearchBar = ({
           ),
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton onClick={handleClickDelete}>
-                <ClearOutlined sx={{ opacity: text ? 1 : 0 }} />
+              <IconButton sx={{ padding: "4px" }} onClick={handleClickDelete}>
+                <ClearOutlined
+                  sx={{
+                    opacity: text ? 1 : 0,
+                    width: "0.8em",
+                    height: "0.8em",
+                  }}
+                />
               </IconButton>
             </InputAdornment>
           ),
@@ -91,7 +98,7 @@ const SearchBar = ({
             padding: "10px 0",
             position: "absolute",
             width: "100%",
-            top: "45px",
+            top: "36px",
             borderTop: 0,
             borderTopRightRadius: 0,
             borderTopLeftRadius: 0,

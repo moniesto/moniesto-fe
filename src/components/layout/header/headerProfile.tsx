@@ -65,7 +65,7 @@ const HeaderProfile = () => {
         >
           <Avatar
             src={user.profile_photo_thumbnail_link}
-            sx={{ width: 50, height: 50 }}
+            sx={{ width: 42, height: 42 }}
           ></Avatar>
         </IconButton>
       </Stack>

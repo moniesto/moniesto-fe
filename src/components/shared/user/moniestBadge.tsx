@@ -21,7 +21,7 @@ export const MoniestBadge = ({ size = 20 }: { size?: number }) => {
         fontSize: "0.8rem",
       }}
     >
-      <Box>m</Box>
+      <Box pb="2px">m</Box>
     </Box>
   );
 };
