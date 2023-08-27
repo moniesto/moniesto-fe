@@ -49,6 +49,8 @@ export interface CreatePostReq {
   target1: number;
   target2: number;
   target3: number;
+  market_type: "futures" | "spot";
+  leverage: number;
 }
 
 export interface SubscribeRequest {

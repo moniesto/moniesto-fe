@@ -48,6 +48,8 @@ export const TestPost: Post = {
   updated_at: new Date(),
   finished: false,
   status: "pending",
+  market_type: "spot",
+  leverage: 1,
 };
 export const TestCard: Card = {
   id: "1",

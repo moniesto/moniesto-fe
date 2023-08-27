@@ -8,6 +8,8 @@ import {
   InputAdornment,
   MenuItem,
   Stack,
+  ToggleButton,
+  ToggleButtonGroup,
   Typography,
 } from "@mui/material";
 
@@ -23,7 +25,11 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs from "dayjs";
 import ReactTimeAgo from "react-time-ago";
 
-import { SwapVertOutlined } from "@mui/icons-material";
+import {
+  SwapVertOutlined,
+  UnfoldMoreDoubleOutlined,
+  UnfoldMoreOutlined,
+} from "@mui/icons-material";
 import toastService from "../../../services/toastService";
 import { useNavigate } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
@@ -44,6 +50,7 @@ import { WrappedModal } from "../../../components/shared/common/wrappedModal";
 import PostCard from "../../../components/shared/post/postCard";
 import { Post } from "../../../interfaces/post";
 import { useAppSelector } from "../../../store/hooks";
+import { LeverageScore } from "./leverageSlider";
 
 export const SharePost = () => {
   const [calendarOpen, setCalendarOpen] = React.useState(false);
@@ -81,6 +88,8 @@ export const SharePost = () => {
         price: 0,
       },
       currency: "",
+      market_type: "futures",
+      leverage: 1,
       description: "",
       direction: "long",
       duration: getMinute(5).toString(),
@@ -282,6 +291,7 @@ export const SharePost = () => {
     };
     return postData;
   }, [formik.values, user]);
+
   return (
     <Card
       sx={{
@@ -299,8 +309,28 @@ export const SharePost = () => {
       </Stack>
       <Stack width="100%" spacing={8}>
         <form onSubmit={formik.handleSubmit}>
+          <ToggleButtonGroup
+            color="primary"
+            fullWidth
+            exclusive
+            value={formik.values.market_type}
+            onChange={(_, val) => formik.setFieldValue("market_type", val)}
+          >
+            <ToggleButton value="futures">
+              <Stack direction="row" alignItems="center">
+                <UnfoldMoreDoubleOutlined fontSize="small" />
+                <Typography variant="h4">Futures</Typography>
+              </Stack>
+            </ToggleButton>
+            <ToggleButton value="spot">
+              <Stack direction="row" alignItems="center">
+                <UnfoldMoreOutlined fontSize="small" />
+                <Typography variant="h4">Spot</Typography>
+              </Stack>
+            </ToggleButton>
+          </ToggleButtonGroup>
           <Stack spacing={4}>
-            <Stack spacing={2}>
+            <Stack>
               <FormItem title={translate("form.field.currency")}>
                 <CurrencyInput
                   value={formik.values.crypto_currency}
@@ -316,6 +346,24 @@ export const SharePost = () => {
                   }}
                   touched={formik.touched.crypto_currency?.currency}
                   error={formik.errors.crypto_currency?.currency}
+                />
+              </FormItem>
+              <FormItem
+                title={
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    Kaldıracı ayarla
+                    <Typography variant="h4">
+                      {formik.values.leverage}X{" "}
+                    </Typography>
+                  </Stack>
+                }
+              >
+                <LeverageScore
+                  onChange={(val) => formik.setFieldValue("leverage", val)}
                 />
               </FormItem>
               <FormItem title={translate("form.field.duration")}>
@@ -396,19 +444,10 @@ export const SharePost = () => {
                 </FormControl>
               </FormItem>
 
-              <Divider></Divider>
+              <Divider sx={{ mt: 2, mb: 1 }}></Divider>
 
               <FormItem title={translate("form.field.targets")}>
-                <Stack
-                  spacing={2}
-                  // sx={{
-                  //   ">div": {
-                  //     ".MuiFormControl-root:last-of-type": {
-                  //       maxWidth: "125px",
-                  //     },
-                  //   },
-                  // }}
-                >
+                <Stack spacing={2}>
                   <WrappedTextField
                     disabled={!formik.values.crypto_currency.price}
                     fullWidth
