@@ -56,6 +56,7 @@
         "title": "Change Password"
       },
       "payment":{
+        "title":"Payout Method",
         "toast": { "updated_success": "Your payout method has been successfully updated" }
       }
     },

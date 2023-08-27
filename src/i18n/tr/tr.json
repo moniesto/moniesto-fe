@@ -46,6 +46,7 @@
         "title": "Şifre Değiştir"
       },
       "payment":{
+        "title":"Ödeme Yöntemi",
         "toast": { "updated_success": "Ödeme yönteminiz başarıyla güncellendi" }
       }
     },

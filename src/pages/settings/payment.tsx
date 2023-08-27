@@ -1,5 +1,4 @@
-import { Button, Card, Stack, Typography } from "@mui/material";
-// import { useTheme } from "@mui/system";
+import { Card, Stack, Typography } from "@mui/material";
 import PaymentMethod from "../main/beMoniest/paymentStep/paymentMethod";
 import api from "../../services/api";
 import { useCallback, useEffect, useState } from "react";
@@ -42,7 +41,7 @@ export const PaymentSettings = () => {
     >
       <Stack mt={2} p={3} spacing={4}>
         <Typography variant="h2" sx={{ opacity: 0.9 }}>
-          Ödeme Yöntemi
+          {translate("page.settings.payment.title")}
         </Typography>
         <PaymentMethod
           footer={<SavePayment loading={loading}></SavePayment>}
