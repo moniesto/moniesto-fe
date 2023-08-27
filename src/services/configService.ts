@@ -33,6 +33,7 @@ class config {
     "Account_EmailVerification_NotFoundToken",
     "Post_CreatePost_InvalidStop",
     "Account_Register_RegisteredEmail",
+    "Account_Authorization_InvalidToken",
   ];
 
   initialize() {

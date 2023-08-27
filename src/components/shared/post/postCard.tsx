@@ -138,7 +138,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
                   }}
                   component="a"
                   target="_blank"
-                  href={`https://app.binance.com/trade/${post.currency}`}
+                  href={`https://www.binance.com/trade/${post.currency}`}
                 >
                   <Typography variant="h4" color={theme.palette.warning.dark}>
                     {post.currency}

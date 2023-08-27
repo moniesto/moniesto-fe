@@ -497,7 +497,8 @@
       "Account_EmailVerification_NotFoundToken":"E-posta doğrulama linki bozuk ya da geçersiz. Lütfen bir daha doğrulamayı deneyin.",
       "Post_CreatePost_InvalidStop":"Stop geçerli değil",
       "Account_Login_NotFoundUsername":"Kullanıcı adı sisteme kayıtlı değil",
-      "Account_Register_RegisteredEmail":"E-posta zaten sistemde kayıtlı"
+      "Account_Register_RegisteredEmail":"E-posta zaten sistemde kayıtlı",
+      "Account_Authorization_InvalidToken":"Giriş süreniz doldu. Lütfen tekran giriş yapın"
     }
   }
 }
