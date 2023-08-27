@@ -3,8 +3,10 @@ import { useTheme } from "@mui/system";
 
 export const LeverageScore = ({
   onChange,
+  value,
 }: {
   onChange: (value: number) => void;
+  value: number;
 }) => {
   const theme = useTheme();
   return (
@@ -19,7 +21,7 @@ export const LeverageScore = ({
     >
       <Slider
         onChange={(e, val) => onChange(val as number)}
-        defaultValue={1}
+        value={value}
         step={1}
         min={1}
         max={20}

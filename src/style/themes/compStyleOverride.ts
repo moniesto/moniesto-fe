@@ -243,18 +243,19 @@ export default function componentStyleOverrides(theme: any) {
     },
     MuiSlider: {
       styleOverrides: {
-        // root: {
-        //   "&.Mui-disabled": {
-        //     color: theme.colors?.grey300,
-        //   },
-        // },
+        root: {
+          color: theme.textMain,
+          "&.Mui-disabled": {
+            color: theme.colors?.grey300,
+          },
+        },
         // mark: {
         //   backgroundColor: theme.paper,
         //   width: "4px",
         // },
-        // valueLabel: {
-        //   color: theme?.textMain,
-        // },
+        valueLabel: {
+          color: theme?.textMain,
+        },
       },
     },
     MuiDivider: {

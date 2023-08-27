@@ -69,9 +69,14 @@ export const CurrencyInput = memo(
           .finally(() => setLoading(false));
       }, 500);
     }, [searchValue]);
+    useEffect(() => {
+      console.log("value :", value);
+      setSearchValue("");
+    }, [value]);
 
     return (
       <Autocomplete
+        value={value.currency ? value : null}
         open={open}
         onOpen={setDefaultOptions}
         onClose={() => {

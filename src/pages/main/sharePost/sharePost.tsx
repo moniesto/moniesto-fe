@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import {
   Box,
   Button,
@@ -51,14 +51,17 @@ import PostCard from "../../../components/shared/post/postCard";
 import { Post } from "../../../interfaces/post";
 import { useAppSelector } from "../../../store/hooks";
 import { LeverageScore } from "./leverageSlider";
+import { useTheme } from "@mui/system";
 
 export const SharePost = () => {
   const [calendarOpen, setCalendarOpen] = React.useState(false);
   const [previewModalOpened, setPreviewModalOpened] = useState(false);
   const [showDescription, setShowDescription] = useState<boolean>(false);
   const user = useAppSelector((state) => state.user.user);
+  let currencyTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const translate = useTranslate();
+  const theme = useTheme();
 
   const maxDuration = new Date();
   maxDuration.setDate(
@@ -271,14 +274,21 @@ export const SharePost = () => {
   );
 
   useEffect(() => {
-    if (!formik.values.crypto_currency.currency) return;
+    if (!formik.values.crypto_currency.currency) {
+      if (currencyTimeout && currencyTimeout?.current)
+        clearTimeout(currencyTimeout.current);
+      return;
+    }
 
-    const timeout = setTimeout(async () => {
+    currencyTimeout.current = setTimeout(async () => {
       const coin = await fetchCurrency(formik.values.crypto_currency.currency);
       formik.setFieldValue("crypto_currency.price", Number(coin?.price || 0));
     }, 2000);
 
-    return () => clearTimeout(timeout);
+    return () =>
+      currencyTimeout.current
+        ? clearTimeout(currencyTimeout.current)
+        : undefined;
   }, [fetchCurrency, formik, formik.values.crypto_currency.currency]);
 
   const previewPost = useMemo(() => {
@@ -289,6 +299,7 @@ export const SharePost = () => {
       status: "pending",
       start_price: formik.values.crypto_currency.price,
     };
+    console.log("postData :", postData);
     return postData;
   }, [formik.values, user]);
 
@@ -314,7 +325,18 @@ export const SharePost = () => {
             fullWidth
             exclusive
             value={formik.values.market_type}
-            onChange={(_, val) => formik.setFieldValue("market_type", val)}
+            onChange={(_, val) => {
+              formik.setValues({
+                ...formik.values,
+                market_type: val,
+                leverage: 1,
+                currency: "",
+                crypto_currency: {
+                  currency: "",
+                  price: 0,
+                },
+              });
+            }}
           >
             <ToggleButton value="futures">
               <Stack direction="row" alignItems="center">
@@ -331,7 +353,10 @@ export const SharePost = () => {
           </ToggleButtonGroup>
           <Stack spacing={4}>
             <Stack>
-              <FormItem title={translate("form.field.currency")}>
+              <FormItem
+                sx={{ zIndex: 1 }}
+                title={translate("form.field.currency")}
+              >
                 <CurrencyInput
                   value={formik.values.crypto_currency}
                   onChange={(e) => {
@@ -348,24 +373,53 @@ export const SharePost = () => {
                   error={formik.errors.crypto_currency?.currency}
                 />
               </FormItem>
-              <FormItem
-                title={
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    Kaldıracı ayarla
-                    <Typography variant="h4">
-                      {formik.values.leverage}X{" "}
-                    </Typography>
-                  </Stack>
-                }
+              <Box
+                sx={{
+                  transition: "all 0.2s ease",
+                  ...(formik.values.market_type === "spot"
+                    ? {
+                        maxHeight: 0,
+                        opacity: 0,
+                        zIndex: -1,
+                        transform: "translateY(-20px)",
+                      }
+                    : {
+                        maxHeight: 500,
+                        opacity: 1,
+                        zIndex: 1,
+                        transform: "translateY(0px)",
+                      }),
+                }}
               >
-                <LeverageScore
-                  onChange={(val) => formik.setFieldValue("leverage", val)}
-                />
-              </FormItem>
+                <FormItem
+                  title={
+                    <Stack
+                      direction="row"
+                      alignItems="center"
+                      justifyContent="space-between"
+                    >
+                      Kaldıracı ayarla
+                      <Typography
+                        sx={{
+                          border: `1px solid ${theme.palette.background[800]}`,
+                          borderRadius: "6px",
+                          padding: "0 10px",
+                          paddingTop: "1px",
+                        }}
+                        variant="h4"
+                      >
+                        {formik.values.leverage} X
+                      </Typography>
+                    </Stack>
+                  }
+                >
+                  <LeverageScore
+                    value={formik.values.leverage}
+                    onChange={(val) => formik.setFieldValue("leverage", val)}
+                  />
+                </FormItem>
+              </Box>
+
               <FormItem title={translate("form.field.duration")}>
                 <DateTimeProvider>
                   <DateTimePicker
