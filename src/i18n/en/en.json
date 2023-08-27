@@ -243,7 +243,7 @@
         "total": "Total",
         "subs_detail":"Your Subscription Details",
         "subscribed_price":"Amount You Subscribed (Monthly)",
-        "remaining_time":"Subscription Period",
+        "remaining_time":"Remaining / Total Months",
         "unsub_desc":"If you wish to cancel your subscription, the remaining amount (if any) will be transferred to your Binance account with your <bold>{{payer_id}}</bold> Payment ID, deducting (<bold>{{fee}}%</bold>) of the transaction fee from your remaining months.",
         "cancel_modal":{
           "title":"Subscription Cancellation",

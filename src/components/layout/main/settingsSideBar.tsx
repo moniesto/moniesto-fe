@@ -45,11 +45,7 @@ export const SettingsSideBar = () => {
         icon: <PersonOutline />,
         title: translate("navigation.account"),
       },
-      {
-        path: "/settings/payment",
-        icon: <CreditCardOutlined />,
-        title: translate("navigation.payment"),
-      },
+
       {
         path: "/settings/password",
         icon: <KeyOutlined />,
@@ -65,11 +61,22 @@ export const SettingsSideBar = () => {
       user.moniest &&
       !items.some((item) => item.path === "/settings/moniest")
     ) {
-      items.splice(1, 0, {
-        path: "/settings/moniest",
-        icon: <RocketLaunchOutlined />,
-        title: translate("navigation.moniest"),
-      });
+      items.splice(
+        1,
+        0,
+        ...[
+          {
+            path: "/settings/moniest",
+            icon: <RocketLaunchOutlined />,
+            title: translate("navigation.moniest"),
+          },
+          {
+            path: "/settings/payment",
+            icon: <CreditCardOutlined />,
+            title: translate("navigation.payment"),
+          },
+        ]
+      );
     }
     return items;
   }, [translate, user.moniest]);

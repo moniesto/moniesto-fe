@@ -227,7 +227,7 @@
         "total": "Toplam",
         "subs_detail":"Abonelik Detaylarınız",
         "subscribed_price":"Abone Olduğunuz Tutar (Aylık)",
-        "remaining_time":"Abonelik Dönemi",
+        "remaining_time":"Kalan / Toplam Ay",
         "unsub_desc":" Aboneliğinizi iptal etmek isterseniz, kalan tutar (eğer varsa) kalan aylarınızdan operasyon ücreti (<bold>{{fee}}%</bold>) kesilerek, ödeme yaptığınız <bold>{{payer_id}}</bold> Ödeme Kimlik'li binance hesabınıza aktarılacaktır.",
         "cancel_modal":{
           "title":"Abonelik İptali",
