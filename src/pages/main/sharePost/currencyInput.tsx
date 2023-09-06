@@ -9,8 +9,8 @@ import {
 import { memo, useEffect, useState } from "react";
 import api from "../../../services/api";
 import { CurrencyBitcoinOutlined } from "@mui/icons-material";
-import helper from "../../../services/helper";
 import { WrappedTextField } from "../../../components/shared/common/wrappers/wrappedTextField";
+import { roundNumber } from "./utils";
 
 export type CurrencyType = {
   currency: string;
@@ -99,7 +99,7 @@ export const CurrencyInput = memo(
               direction="row"
             >
               <Box>{option.currency}</Box>
-              <Box>{helper.parseCurrency(option.price)}</Box>
+              <Box>{roundNumber(option.price)}</Box>
             </Stack>
           </Box>
         )}
@@ -128,7 +128,7 @@ export const CurrencyInput = memo(
                     />
                   ) : null}
                   <Typography variant="h4">
-                    {helper.parseCurrency(value.price) || ""}
+                    {roundNumber(value.price) || ""}
                   </Typography>
 
                   {params.InputProps.endAdornment}

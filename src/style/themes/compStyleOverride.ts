@@ -249,10 +249,10 @@ export default function componentStyleOverrides(theme: any) {
             color: theme.colors?.grey300,
           },
         },
-        // mark: {
-        //   backgroundColor: theme.paper,
-        //   width: "4px",
-        // },
+        markLabel: {
+          top: "28px",
+          fontSize: "0.800rem",
+        },
         valueLabel: {
           color: theme?.textMain,
         },

@@ -8,6 +8,7 @@ export interface Post {
   currency: string;
   start_price: number;
   duration: Date | string;
+  tp: number;
   target1: number;
   target2: number;
   target3: number;
@@ -19,6 +20,13 @@ export interface Post {
   score: number;
   finished: boolean;
   status: "pending" | "fail" | "success";
-  market_type: "futures" | "spot";
+  market_type: MarketTypeValues;
   leverage: number;
 }
+
+export enum MarketTypeKeys {
+  Futures = "futures",
+  Spot = "spot",
+}
+
+export type MarketTypeValues = `${MarketTypeKeys}`;
