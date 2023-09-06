@@ -12,6 +12,7 @@ import { useAppSelector } from "../../../../store/hooks";
 import { Spinner } from "../../../../components/shared/common/spinner";
 
 const SubscriptionsTab = () => {
+  sendAnalytic({ hitType: "pageview", page: "Subscriptions Tab" });
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -91,3 +92,6 @@ const SubscriptionsTab = () => {
   );
 };
 export default SubscriptionsTab;
+function sendAnalytic(arg0: { hitType: string; page: string }) {
+  throw new Error("Function not implemented.");
+}

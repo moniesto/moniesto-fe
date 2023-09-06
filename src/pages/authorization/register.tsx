@@ -19,6 +19,7 @@ import configService from "../../services/configService";
 import Fly from "../../components/shared/common/fly/fly";
 import { useUsernameValidation } from "../../hooks/useUsernameValidation";
 import { WrappedTextField } from "../../components/shared/common/wrappers/wrappedTextField";
+import { sendAnalytic } from "../../services/analytic";
 
 type RegisterForm = {
   username: string;
@@ -29,6 +30,7 @@ type RegisterForm = {
 };
 
 const Register = () => {
+  sendAnalytic({ hitType: "pageview", page: "Register" });
   const theme = useTheme();
   const translate = useTranslate();
   const navigate = useNavigate();

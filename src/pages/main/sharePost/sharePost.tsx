@@ -44,8 +44,10 @@ import { WrappedModal } from "../../../components/shared/common/wrappedModal";
 import PostCard from "../../../components/shared/post/postCard";
 import { Post } from "../../../interfaces/post";
 import { useAppSelector } from "../../../store/hooks";
+import { sendAnalytic } from "../../../services/analytic";
 
 export const SharePost = () => {
+  sendAnalytic({ hitType: "pageview", page: "Share Post" });
   const [calendarOpen, setCalendarOpen] = React.useState(false);
   const [previewModalOpened, setPreviewModalOpened] = useState(false);
   const [showDescription, setShowDescription] = useState<boolean>(false);

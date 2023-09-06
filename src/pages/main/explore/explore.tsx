@@ -4,8 +4,10 @@ import { useState } from "react";
 import SearchBar from "../../../components/layout/header/seachBar";
 import { ExploreMoniests } from "./exploreMoniests";
 import ExplorePosts from "./explorePosts";
+import { sendAnalytic } from "../../../services/analytic";
 
 const Explore = () => {
+  sendAnalytic({ hitType: "pageview", page: "Explore" });
   const [searchText, setSearchText] = useState<string>();
 
   const searchBarOverlay = searchText && {

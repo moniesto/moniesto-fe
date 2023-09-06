@@ -14,8 +14,10 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { nextStep } from "../../../store/slices/beMoniestSlice";
 import { BeMoniestStepperFooter } from "./beMoniestStepperFooter";
 import { WrappedTextField } from "../../../components/shared/common/wrappers/wrappedTextField";
+import { sendAnalytic } from "../../../services/analytic";
 
 const MoniestInfoStep = () => {
+  sendAnalytic({ hitType: "pageview", page: "Be Moniest Moniest Info Step" });
   const translate = useTranslate();
   const dispatch = useAppDispatch();
 

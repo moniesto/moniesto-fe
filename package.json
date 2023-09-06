@@ -45,6 +45,7 @@
     "react-credit-card-input": "^1.1.5",
     "react-dom": "^18.2.0",
     "react-editor-js": "^2.0.3",
+    "react-ga4": "^2.1.0",
     "react-i18next": "^12.2.0",
     "react-infinite-scroll-component": "^6.1.0",
     "react-payment-inputs": "^1.1.9",

@@ -7,8 +7,10 @@ import { nextStep } from "../../../store/slices/beMoniestSlice";
 import configService from "../../../services/configService";
 import { useTheme } from "@mui/system";
 import Fly from "../../../components/shared/common/fly/fly";
+import { sendAnalytic } from "../../../services/analytic";
 
 const SubmitStep = () => {
+  sendAnalytic({ hitType: "pageview", page: "Be Moniest Submit Step" });
   const translate = useTranslate();
   const dispatch = useAppDispatch();
   const theme = useTheme();

@@ -30,6 +30,7 @@ import {
   resetMoniestStepper,
 } from "../../../store/slices/beMoniestSlice";
 import { BeMoniestStepperFooter } from "./beMoniestStepperFooter";
+import { sendAnalytic } from "../../../services/analytic";
 
 type StepItem = {
   order: number;
@@ -59,6 +60,7 @@ const steps: StepItem[] = [
   },
 ];
 const BeMoniest = () => {
+  sendAnalytic({ hitType: "pageview", page: "Be Moniest" });
   const theme = useTheme();
   const translate = useTranslate();
   const [isConfettiVisible, setIsConfettiVisible] = useState(false);

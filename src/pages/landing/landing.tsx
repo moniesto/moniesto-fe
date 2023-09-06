@@ -7,9 +7,11 @@ import { Footer } from "../../components/ui/landing/footer";
 import { About } from "../../components/ui/landing/about";
 import { PaymentMethod } from "../../components/ui/landing/paymentMethod";
 import { Contact } from "../../components/ui/landing/contact";
+import { sendAnalytic } from "../../services/analytic";
 
 export const Landing = () => {
   const theme = useTheme();
+  sendAnalytic({ hitType: "pageview", page: "Landing" });
   return (
     <Box
       className="landing-page"

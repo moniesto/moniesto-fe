@@ -24,8 +24,12 @@ import {
 } from "./store/slices/localStorageSlice";
 import configService from "./services/configService";
 import api from "./services/api";
+import ReactGA from "react-ga4";
 
 function App() {
+  const GA_MEASUREMENT_ID = "G-XY6DB52M21";
+  ReactGA.initialize(GA_MEASUREMENT_ID);
+
   const storage = useAppSelector((state) => state.storage);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(true);

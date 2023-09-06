@@ -6,8 +6,10 @@ import { Post } from "../../interfaces/post";
 import api from "../../services/api";
 import { TestPost } from "../../services/tempDatas";
 import Fly from "../../components/shared/common/fly/fly";
+import { sendAnalytic } from "../../services/analytic";
 
 const TimeLine = () => {
+  sendAnalytic({ hitType: "pageview", page: "Timeline" });
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   let timeout = useRef<NodeJS.Timeout>();

@@ -7,8 +7,10 @@ import { useTranslate } from "../../hooks/useTranslate";
 import api from "../../services/api";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
+import { sendAnalytic } from "../../services/analytic";
 
 const VerifyEmail = () => {
+  sendAnalytic({ hitType: "pageview", page: "Verify Email" });
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();

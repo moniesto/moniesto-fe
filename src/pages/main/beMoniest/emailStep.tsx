@@ -9,6 +9,7 @@ import Fly from "../../../components/shared/common/fly/fly";
 import { useAppDispatch } from "../../../store/hooks";
 import { nextStep } from "../../../store/slices/beMoniestSlice";
 import { BeMoniestStepperFooter } from "./beMoniestStepperFooter";
+import { sendAnalytic } from "../../../services/analytic";
 
 type propType = {
   handleVerifyEmail: () => void;
@@ -17,6 +18,7 @@ type propType = {
 };
 
 const EmailStep = ({ emailVerified, email, handleVerifyEmail }: propType) => {
+  sendAnalytic({ hitType: "pageview", page: "Be Moniest Email Step" });
   const [isSendVerifyMail, setIsSendVerifyMail] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const theme = useTheme();

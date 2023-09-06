@@ -19,6 +19,7 @@ import { useTranslate } from "../../hooks/useTranslate";
 import Fly from "../../components/shared/common/fly/fly";
 import configService from "../../services/configService";
 import { WrappedTextField } from "../../components/shared/common/wrappers/wrappedTextField";
+import { sendAnalytic } from "../../services/analytic";
 
 type ChangePasswordForm = {
   password: string;
@@ -26,6 +27,7 @@ type ChangePasswordForm = {
 };
 
 const ChangePassword = () => {
+  sendAnalytic({ hitType: "pageview", page: "Change Password" });
   const theme = useTheme();
   const translate = useTranslate();
   const navigate = useNavigate();
