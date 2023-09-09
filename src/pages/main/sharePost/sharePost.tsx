@@ -368,10 +368,13 @@ export const SharePost = () => {
     [navigate, previewModalOpened]
   );
 
-  const fetchCurrency = useCallback(async (currency: string) => {
-    const [coin] = await api.crypto.search_currencies(currency);
-    return coin;
-  }, []);
+  const fetchCurrency = useCallback(
+    async (currency: string, market_type: string) => {
+      const [coin] = await api.crypto.search_currencies(currency, market_type);
+      return coin;
+    },
+    []
+  );
 
   const handleShare = async () => {
     if (!formik.values.crypto_currency.currency) {
@@ -381,7 +384,10 @@ export const SharePost = () => {
     }
 
     setSubmitLoading(true);
-    const coin = await fetchCurrency(formik.values.crypto_currency.currency);
+    const coin = await fetchCurrency(
+      formik.values.crypto_currency.currency,
+      formik.values.market_type
+    );
     formik.setFieldValue("crypto_currency.price", Number(coin?.price || 0));
     setSubmitLoading(false);
     formik.submitForm();
@@ -428,7 +434,10 @@ export const SharePost = () => {
     }
 
     currencyTimeout.current = setTimeout(async () => {
-      const coin = await fetchCurrency(formik.values.crypto_currency.currency);
+      const coin = await fetchCurrency(
+        formik.values.crypto_currency.currency,
+        formik.values.market_type
+      );
       formik.setFieldValue("crypto_currency.price", Number(coin?.price || 0));
     }, 2000);
 

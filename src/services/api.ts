@@ -82,9 +82,9 @@ class api {
       httpService.get<User[]>(Requests.content.moniest_search, params),
   };
   crypto = {
-    search_currencies: (name: string) =>
+    search_currencies: (name: string, market_type: string) =>
       httpService.get<{ currency: string; price: number }[]>(
-        Requests.crypto.search_currencies(name)
+        Requests.crypto.search_currencies(name, market_type)
       ),
   };
   moniest = {

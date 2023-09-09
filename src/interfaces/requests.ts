@@ -153,7 +153,7 @@ export const Requests: {
     moniest_search: string;
   };
   crypto: {
-    search_currencies: (name: string) => string;
+    search_currencies: (name: string, market_type: string) => string;
   };
   moniest: {
     be_moniest: string;
@@ -209,7 +209,8 @@ export const Requests: {
     moniest_search: "content/moniests/search",
   },
   crypto: {
-    search_currencies: (name: string) => `crypto/currencies?name=${name}`,
+    search_currencies: (name: string, market_type: string) =>
+      `crypto/currencies?name=${name}&market_type=${market_type}`,
   },
   moniest: {
     be_moniest: "moniests",
