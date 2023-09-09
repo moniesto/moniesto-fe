@@ -8,7 +8,7 @@ export interface Post {
   currency: string;
   start_price: number;
   duration: Date | string;
-  tp: number;
+  take_profit: number;
   target1: number;
   target2: number;
   target3: number;

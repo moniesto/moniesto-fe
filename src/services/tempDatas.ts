@@ -37,7 +37,7 @@ export const TestPost: Post = {
   currency: "BTCUSDT",
   start_price: 18.5,
   duration: new Date(),
-  tp: 18.8,
+  take_profit: 18.8,
   target1: 18.542,
   target2: 18.56,
   target3: 18.73,

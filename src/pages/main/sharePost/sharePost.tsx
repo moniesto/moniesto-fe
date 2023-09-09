@@ -104,7 +104,7 @@ export const SharePost = () => {
       direction: "long",
       duration: getMinute(5).toString(),
       stop: 0,
-      tp: 0,
+      take_profit: 0,
       target1: 0,
       target2: 0,
       target3: 0,
@@ -179,7 +179,7 @@ export const SharePost = () => {
               ),
           }),
 
-        tp: yup
+        take_profit: yup
           .number()
           .moreThan(0, translate("form.validation.tp_more", { price: 0 }))
           .when("direction", {
@@ -232,9 +232,9 @@ export const SharePost = () => {
                     })
                   )
                   .lessThan(
-                    formik.values.tp || 0,
+                    formik.values.take_profit || 0,
                     translate("form.validation.tp1_lower", {
-                      price: roundNumber(formik.values.tp || 0),
+                      price: roundNumber(formik.values.take_profit || 0),
                     })
                   ),
               })
@@ -251,9 +251,9 @@ export const SharePost = () => {
                     })
                   )
                   .moreThan(
-                    formik.values.tp || 0,
+                    formik.values.take_profit || 0,
                     translate("form.validation.tp1_more", {
-                      price: roundNumber(formik.values.tp || 0),
+                      price: roundNumber(formik.values.take_profit || 0),
                     })
                   ),
               })
@@ -274,9 +274,9 @@ export const SharePost = () => {
                     })
                   )
                   .lessThan(
-                    formik.values.tp || 0,
+                    formik.values.take_profit || 0,
                     translate("form.validation.tp2_lower", {
-                      price: roundNumber(formik.values.tp || 0),
+                      price: roundNumber(formik.values.take_profit || 0),
                     })
                   ),
               })
@@ -291,9 +291,9 @@ export const SharePost = () => {
                     })
                   )
                   .moreThan(
-                    formik.values.tp || 0,
+                    formik.values.take_profit || 0,
                     translate("form.validation.tp2_more", {
-                      price: roundNumber(formik.values.tp || 0),
+                      price: roundNumber(formik.values.take_profit || 0),
                     })
                   ),
               })
@@ -315,9 +315,9 @@ export const SharePost = () => {
                     })
                   )
                   .lessThan(
-                    formik.values.tp || 0,
+                    formik.values.take_profit || 0,
                     translate("form.validation.tp3_lower", {
-                      price: roundNumber(formik.values.tp || 0),
+                      price: roundNumber(formik.values.take_profit || 0),
                     })
                   ),
               })
@@ -332,9 +332,9 @@ export const SharePost = () => {
                     })
                   )
                   .moreThan(
-                    formik.values.tp || 0,
+                    formik.values.take_profit || 0,
                     translate("form.validation.tp3_more", {
-                      price: roundNumber(formik.values.tp || 0),
+                      price: roundNumber(formik.values.take_profit || 0),
                     })
                   ),
               })
@@ -639,22 +639,30 @@ export const SharePost = () => {
               </FormControl>
             </FormItem>
 
-            <FormItem title={translate("form.field.tp")}>
+            <FormItem title={translate("form.field.take_profit")}>
               <WrappedTextField
                 disabled={!formik.values.crypto_currency.price}
                 fullWidth
-                name="tp"
+                name="take_profit"
                 type="number"
                 onBlur={formik.handleBlur}
                 onFocus={() =>
-                  formik.values.tp === 0 && formik.setFieldValue("tp", "", true)
+                  formik.values.take_profit === 0 &&
+                  formik.setFieldValue("take_profit", "", true)
                 }
                 value={
-                  formik.values.crypto_currency.price ? formik.values.tp : 0
+                  formik.values.crypto_currency.price
+                    ? formik.values.take_profit
+                    : 0
                 }
                 onChange={formik.handleChange}
-                error={formik.touched.tp && Boolean(formik.errors.tp)}
-                helperText={formik.touched.tp && formik.errors.tp}
+                error={
+                  formik.touched.take_profit &&
+                  Boolean(formik.errors.take_profit)
+                }
+                helperText={
+                  formik.touched.take_profit && formik.errors.take_profit
+                }
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -665,7 +673,9 @@ export const SharePost = () => {
                     <InputAdornment position="end">
                       <InfoChip
                         sx={{ marginRight: 1 }}
-                        value={`${calculatedRound(formik.values.tp)} %`}
+                        value={`${calculatedRound(
+                          formik.values.take_profit
+                        )} %`}
                       />
                     </InputAdornment>
                   ),
@@ -828,14 +838,16 @@ export const SharePost = () => {
                   sx={{
                     border: 0,
                     height: "50px",
-                    cursor: formik.values.tp ? "pointer" : "default",
+                    cursor: formik.values.take_profit ? "pointer" : "default",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                     transition: "0.2s ease",
-                    opacity: formik.values.tp ? 1 : 0.6,
+                    opacity: formik.values.take_profit ? 1 : 0.6,
                   }}
-                  onClick={() => (formik.values.tp ? handleAddTarget() : null)}
+                  onClick={() =>
+                    formik.values.take_profit ? handleAddTarget() : null
+                  }
                 >
                   <Stack gap={0.5} alignItems="center" direction="row">
                     <Box component="span" fontSize="1.2rem">

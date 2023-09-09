@@ -45,7 +45,7 @@ export interface CreatePostReq {
   description: string;
   direction: string;
   duration: string;
-  tp: number;
+  take_profit: number;
   stop: number;
   target1: number;
   target2: number;
