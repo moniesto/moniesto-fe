@@ -19,6 +19,7 @@ export type CurrencyType = {
 
 type CurrencyInputPropsType = {
   value: CurrencyType;
+  market_type: string;
   onChange: (value: CurrencyType) => void;
   touched?: boolean;
   error?: string;
@@ -27,7 +28,13 @@ type CurrencyInputPropsType = {
 let timeoutId: NodeJS.Timeout;
 
 export const CurrencyInput = memo(
-  ({ value, onChange, touched, error }: CurrencyInputPropsType) => {
+  ({
+    value,
+    onChange,
+    touched,
+    error,
+    market_type,
+  }: CurrencyInputPropsType) => {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [options, setOptions] = useState<CurrencyType[]>([]);
@@ -39,7 +46,7 @@ export const CurrencyInput = memo(
 
       setLoading(true);
       api.crypto
-        .search_currencies("usdt")
+        .search_currencies("usdt", market_type)
         .then((res) => setOptions(res))
         .finally(() => setLoading(false));
     };
@@ -64,11 +71,12 @@ export const CurrencyInput = memo(
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         api.crypto
-          .search_currencies(searchValue)
+          .search_currencies(searchValue, market_type)
           .then((res) => setOptions(res))
           .finally(() => setLoading(false));
       }, 500);
-    }, [searchValue]);
+    }, [searchValue, market_type]);
+
     useEffect(() => {
       console.log("value :", value);
       setSearchValue("");

@@ -541,6 +541,7 @@ export const SharePost = () => {
               title={translate("form.field.currency")}
             >
               <CurrencyInput
+                market_type={formik.values.market_type}
                 value={formik.values.crypto_currency}
                 onChange={(e) => {
                   formik.setValues({
