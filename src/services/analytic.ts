@@ -6,8 +6,10 @@ export const sendAnalytic = ({
 }: {
   hitType: "pageview" | string;
   page: string;
-}) =>
-  ReactGA.send({
-    hitType,
-    page,
-  });
+}) => {
+  console.log("send analytic :", "hitType :", hitType, "page :", page);
+  // ReactGA.send({
+  //   hitType,
+  //   page,
+  // });
+};

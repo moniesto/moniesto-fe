@@ -10,6 +10,7 @@ import { useTranslate } from "../../../../hooks/useTranslate";
 import { TestUser } from "../../../../services/tempDatas";
 import { useAppSelector } from "../../../../store/hooks";
 import { Spinner } from "../../../../components/shared/common/spinner";
+import { sendAnalytic } from "../../../../services/analytic";
 
 const SubscriptionsTab = () => {
   sendAnalytic({ hitType: "pageview", page: "Subscriptions Tab" });
@@ -92,6 +93,3 @@ const SubscriptionsTab = () => {
   );
 };
 export default SubscriptionsTab;
-function sendAnalytic(arg0: { hitType: string; page: string }) {
-  throw new Error("Function not implemented.");
-}
