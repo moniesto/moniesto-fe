@@ -21,11 +21,14 @@ import { Post } from "../../../interfaces/post";
 import Navigator from "../common/navigatior";
 import ReactTimeAgo from "react-time-ago";
 import { Editor } from "../common/editor/editor";
-import helper from "../../../services/helper";
 import { useTheme } from "@mui/system";
 import { InfoChip } from "./infoChip";
 import { NotAdvice } from "../../ui/post/notAdvice";
 import { useTranslate } from "../../../hooks/useTranslate";
+import {
+  operationByDirection,
+  roundNumber,
+} from "../../../pages/main/sharePost/utils";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -54,8 +57,8 @@ const PostCard = ({ post, loading }: PostCardProps) => {
   const theme = useTheme();
   const translate = useTranslate();
 
-  const calculatePercentage = helper.parseCurrency(
-    helper.operatonByDirection(post.direction) *
+  const calculatePercentage = roundNumber(
+    operationByDirection(post.direction) *
       ((post.target3 - post.start_price) / post.start_price) *
       100,
     3

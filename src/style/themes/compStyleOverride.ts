@@ -186,12 +186,6 @@ export default function componentStyleOverrides(theme: any) {
         root: {
           border: `1px solid ${background800} `,
           background: background600,
-          // '& .MuiOutlinedInput-notchedOutline': {
-          //     borderColor: theme.colors?.grey400
-          // },
-          // '&:hover $notchedOutline': {
-          //     borderColor: theme.colors?.primaryLight
-          // },
           "&.MuiInputBase-multiline": {
             padding: "4px 0",
             ".MuiInputAdornment-positionStart": {
@@ -232,19 +226,35 @@ export default function componentStyleOverrides(theme: any) {
         },
       },
     },
+    MuiToggleButtonGroup: {
+      styleOverrides: {
+        root: {
+          backgroundColor: cardBackground,
+          ".MuiToggleButton-root": {
+            opacity: 0.6,
+            transition: "opacity 0.2s",
+            "&.Mui-selected": {
+              backgroundColor: background500 + " !important",
+              opacity: 1,
+            },
+          },
+        },
+      },
+    },
     MuiSlider: {
       styleOverrides: {
         root: {
+          color: theme.textMain,
           "&.Mui-disabled": {
             color: theme.colors?.grey300,
           },
         },
-        mark: {
-          backgroundColor: theme.paper,
-          width: "4px",
+        markLabel: {
+          top: "28px",
+          fontSize: "0.800rem",
         },
         valueLabel: {
-          color: theme?.colors?.primaryLight,
+          color: theme?.textMain,
         },
       },
     },

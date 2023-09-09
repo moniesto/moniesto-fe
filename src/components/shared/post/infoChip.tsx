@@ -5,10 +5,15 @@ type InfoChipProps = {
   title?: string;
   value: string | number;
   sx?: SxProps;
-  loading: boolean;
+  loading?: boolean;
 };
 
-export const InfoChip = ({ title, value, sx, loading }: InfoChipProps) => {
+export const InfoChip = ({
+  title,
+  value,
+  sx,
+  loading = false,
+}: InfoChipProps) => {
   const theme = useTheme();
   return (
     <Stack

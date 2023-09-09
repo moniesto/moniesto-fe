@@ -45,10 +45,13 @@ export interface CreatePostReq {
   description: string;
   direction: string;
   duration: string;
+  tp: number;
   stop: number;
   target1: number;
   target2: number;
   target3: number;
+  market_type: "futures" | "spot";
+  leverage: number;
 }
 
 export interface SubscribeRequest {

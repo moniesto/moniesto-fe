@@ -37,6 +37,7 @@ export const TestPost: Post = {
   currency: "BTCUSDT",
   start_price: 18.5,
   duration: new Date(),
+  tp: 18.8,
   target1: 18.542,
   target2: 18.56,
   target3: 18.73,
@@ -48,6 +49,8 @@ export const TestPost: Post = {
   updated_at: new Date(),
   finished: false,
   status: "pending",
+  market_type: "spot",
+  leverage: 1,
 };
 export const TestCard: Card = {
   id: "1",
