@@ -47,9 +47,9 @@ export interface CreatePostReq {
   duration: string;
   take_profit: number;
   stop: number;
-  target1: number;
-  target2: number;
-  target3: number;
+  target1?: number;
+  target2?: number;
+  target3?: number;
   market_type: "futures" | "spot";
   leverage: number;
 }

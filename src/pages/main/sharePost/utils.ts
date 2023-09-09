@@ -10,12 +10,22 @@ export const normalizePostFromForm = (
 ): CreatePostReq => {
   const currency = formValue.crypto_currency.currency;
   const { crypto_currency, ...formData } = formValue;
-
-  return {
+  const normalized = {
     ...formData,
     duration: new Date(formData.duration).toISOString(),
     currency,
   };
+  if (!normalized.target1) {
+    delete normalized.target1;
+  }
+  if (!normalized.target2) {
+    delete normalized.target2;
+  }
+  if (!normalized.target3) {
+    delete normalized.target3;
+  }
+
+  return normalized;
 };
 
 export const roundNumber = (value: number = 0, digitAfterComma: number = 6) => {
