@@ -195,12 +195,12 @@ export const SharePost = () => {
               .lessThan(
                 formik.values.crypto_currency.price *
                   (configService.configs.validation
-                    .long_max_target_multiplier as number),
+                    .long_max_take_profit_multiplier as number),
                 translate("form.validation.tp_lower", {
                   price: roundNumber(
                     formik.values.crypto_currency.price *
                       (configService.configs.validation
-                        .long_max_target_multiplier as number)
+                        .long_max_take_profit_multiplier as number)
                   ),
                 })
               ),

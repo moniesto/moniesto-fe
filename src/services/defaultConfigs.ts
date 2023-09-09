@@ -12,7 +12,7 @@ export const defaultConfigs: Config = {
     max_location_length: 30,
     password_length: 6,
     max_duration_day: 90,
-    long_max_target_multiplier: 100,
+    long_max_take_profit_multiplier: 10,
     short_max_stop_multiplier: 2,
   },
   error_codes: {
