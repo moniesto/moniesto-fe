@@ -78,7 +78,6 @@ export const CurrencyInput = memo(
     }, [searchValue, market_type]);
 
     useEffect(() => {
-      console.log("value :", value);
       setSearchValue("");
     }, [value]);
 

@@ -13,7 +13,6 @@ import { TestPost } from "../../../../services/tempDatas";
 import { useAppSelector } from "../../../../store/hooks";
 import { Spinner } from "../../../../components/shared/common/spinner";
 import { useTheme } from "@mui/system";
-import { sendAnalytic } from "../../../../services/analytic";
 
 type FilterType = "all" | "live";
 type Filter = {
@@ -28,7 +27,6 @@ const filters: Filter[] = [
 ];
 
 const PostsTab = () => {
-  sendAnalytic({ hitType: "pageview", page: "Posts Tab" });
   const theme = useTheme();
   const [queryParams, setQueryParams] = useState<{
     hasMore?: boolean;

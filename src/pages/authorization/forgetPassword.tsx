@@ -13,14 +13,12 @@ import { useTranslate } from "../../hooks/useTranslate";
 import configService from "../../services/configService";
 import Fly from "../../components/shared/common/fly/fly";
 import { WrappedTextField } from "../../components/shared/common/wrappers/wrappedTextField";
-import { sendAnalytic } from "../../services/analytic";
 
 type ForgetPasswordForm = {
   email: string;
 };
 
 const ForgetPassword = () => {
-  sendAnalytic({ hitType: "pageview", page: "Forget Password" });
   const navigate = useNavigate();
   const theme = useTheme();
   const translate = useTranslate();

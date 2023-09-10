@@ -1,30 +1,32 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { emptyUser, User } from "../../interfaces/user"
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { emptyUser, User } from "../../interfaces/user";
+import analytic from "../../services/analytic";
 
 // Define the initial state using that type
 type initialStateType = {
-    user: User
-}
+  user: User;
+};
 
 const initialState: initialStateType = {
-    user: emptyUser
-}
+  user: emptyUser,
+};
 
 export const userSlice = createSlice({
-    name: 'user',
-    initialState,
-    reducers: {
-        setUser: (state, action: PayloadAction<User>) => {
-            state.user = action.payload;
-            return state
-        },
+  name: "user",
+  initialState,
+  reducers: {
+    setUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
+      analytic.setUser(state.user);
+      return state;
     },
-})
+  },
+});
 
-export const { setUser } = userSlice.actions
+export const { setUser } = userSlice.actions;
 
 // // Other code such as selectors can use the imported `RootState` type
 // export const getMogetModede = (state: RootState) => state.counter.value
 
-export default userSlice.reducer
+export default userSlice.reducer;

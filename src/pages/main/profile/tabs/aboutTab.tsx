@@ -1,10 +1,8 @@
 import { Card, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useTranslate } from "../../../../hooks/useTranslate";
-import { sendAnalytic } from "../../../../services/analytic";
 
 const AboutTab = ({ aboutText }: { aboutText: string }) => {
-  sendAnalytic({ hitType: "pageview", page: "About Tab" });
   const translate = useTranslate();
   return (
     <Card sx={{ padding: 3 }}>

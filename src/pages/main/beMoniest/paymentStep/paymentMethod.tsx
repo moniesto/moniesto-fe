@@ -8,7 +8,6 @@ import { PaymentBinanceTab } from "./paymentBinanceTab";
 import Fly from "../../../../components/shared/common/fly/fly";
 import { useTheme } from "@mui/system";
 import { useTranslate } from "../../../../hooks/useTranslate";
-import { sendAnalytic } from "../../../../services/analytic";
 
 const tabs = [
   {
@@ -36,7 +35,6 @@ type PaymentStepPropType = {
 };
 
 const PaymentMethod = ({ defaults, onChange, footer }: PaymentStepPropType) => {
-  sendAnalytic({ hitType: "pageview", page: "Payment Method" });
   const [activeTab, setActiveTab] = useState<number>(0);
   const theme = useTheme();
   const translate = useTranslate();

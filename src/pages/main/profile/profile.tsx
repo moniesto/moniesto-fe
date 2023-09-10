@@ -27,10 +27,8 @@ import { MoniestBadge } from "../../../components/shared/user/moniestBadge";
 import { setIsMyAccount, setProfile } from "../../../store/slices/profileSlice";
 import { ScoreBadge } from "../../../components/shared/user/scoreBadge";
 import SubscriptionResultModal from "../../../components/ui/user/subscriptionResultModal";
-import { sendAnalytic } from "../../../services/analytic";
 
 const Profile = () => {
-  sendAnalytic({ hitType: "pageview", page: "Profile" });
   const theme = useTheme();
   const [loading, setLoading] = useState<boolean>(true);
   const user = useAppSelector((state) => state.user.user);

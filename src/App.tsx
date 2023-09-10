@@ -24,12 +24,9 @@ import {
 } from "./store/slices/localStorageSlice";
 import configService from "./services/configService";
 import api from "./services/api";
-import ReactGA from "react-ga4";
+import analytic from "./services/analytic";
 
 function App() {
-  const GA_MEASUREMENT_ID = "G-XY6DB52M21";
-  ReactGA.initialize(GA_MEASUREMENT_ID);
-
   const storage = useAppSelector((state) => state.storage);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(true);
@@ -65,6 +62,8 @@ function App() {
     toastService.setDispatch(dispatch);
     configService.initialize();
     dispatch(initLanguage());
+    analytic.initialize();
+    analytic.logAnalyticEvent("page_view");
 
     if (!localStorageService.getStorage().token) {
       setLoading(false);

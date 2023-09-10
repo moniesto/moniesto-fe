@@ -4,10 +4,8 @@ import { Stack, useTheme } from "@mui/system";
 import Navigator from "../components/shared/common/navigatior";
 import { useTranslate } from "../hooks/useTranslate";
 import Logo from "../components/shared/common/logo";
-import { sendAnalytic } from "../services/analytic";
 
 const NotFound = () => {
-  sendAnalytic({ hitType: "pageview", page: "404" });
   const theme = useTheme();
   const translate = useTranslate();
   return (

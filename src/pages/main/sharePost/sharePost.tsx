@@ -44,7 +44,7 @@ import {
   roundNumber,
 } from "./utils";
 import { CreatePostReq } from "../../../interfaces/requests";
-import { sendAnalytic } from "../../../services/analytic";
+
 import { PreviewPost } from "./previewPost";
 import { SelectMarket } from "./selectMarket";
 import { LeverageSliderWrapper } from "./leverageSliderWrapper";
@@ -63,7 +63,6 @@ export type TargetType = {
 };
 
 export const SharePost = () => {
-  sendAnalytic({ hitType: "pageview", page: "Share Post" });
   const [calendarOpen, setCalendarOpen] = React.useState(false);
   const [previewModalOpened, setPreviewModalOpened] = useState(false);
   const [showDescription, setShowDescription] = useState<boolean>(false);

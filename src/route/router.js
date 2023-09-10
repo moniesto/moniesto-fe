@@ -21,122 +21,128 @@ import { PaymentSettings } from "../pages/settings/payment";
 import { PasswordSettings } from "../pages/settings/password";
 import { VerifyEmailSettings } from "../pages/settings/verifyEmail";
 import { SettingsList } from "../pages/settings/list";
+import { AnalytcPageView } from "../components/layout/analyticPageView";
 
 const Router = createBrowserRouter([
   {
-    element: <UnprotectedRoutes />,
+    element: <AnalytcPageView />,
     children: [
       {
-        path: "/",
-        // element: <Landing />
-        element: <Landing />,
-      },
-      {
-        element: <Authorization />,
+        element: <UnprotectedRoutes />,
         children: [
           {
-            path: "login",
-            element: <Login />,
+            path: "/",
+            // element: <Landing />
+            element: <Landing />,
           },
           {
-            path: "register",
-            element: <Register />,
-          },
+            element: <Authorization />,
+            children: [
+              {
+                path: "login",
+                element: <Login />,
+              },
+              {
+                path: "register",
+                element: <Register />,
+              },
 
-          {
-            path: "forget-password",
-            element: <ForgetPassword />,
-          },
+              {
+                path: "forget-password",
+                element: <ForgetPassword />,
+              },
 
-          {
-            path: "change-password",
-            element: <ChangePassword />,
+              {
+                path: "change-password",
+                element: <ChangePassword />,
+              },
+            ],
           },
         ],
       },
-    ],
-  },
-  {
-    element: <ProtectedRoutes />,
-    children: [
       {
-        element: <MainLayout />,
+        element: <ProtectedRoutes />,
         children: [
           {
-            path: ":username",
-            element: <Profile />,
+            element: <MainLayout />,
             children: [
               {
-                path: "subscription",
+                path: ":username",
+                element: <Profile />,
                 children: [
                   {
-                    path: "fail",
-                    id: "fail",
+                    path: "subscription",
+                    children: [
+                      {
+                        path: "fail",
+                        id: "fail",
+                      },
+                      {
+                        path: "success",
+                        id: "success",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                path: "timeline",
+                element: <TimeLine />,
+              },
+              {
+                path: "explore",
+                element: <Explore />,
+              },
+              {
+                path: "bemoniest",
+                element: <BeMoniest />,
+              },
+              {
+                path: "share",
+                element: <SharePost />,
+              },
+              {
+                path: "settings",
+                children: [
+                  {
+                    path: "",
+                    element: <SettingsList />,
                   },
                   {
-                    path: "success",
-                    id: "success",
+                    path: "account",
+                    element: <AccountSettings />,
+                  },
+                  {
+                    path: "moniest",
+                    element: <MoniestSettings />,
+                  },
+                  {
+                    path: "payment",
+                    element: <PaymentSettings />,
+                  },
+                  {
+                    path: "password",
+                    element: <PasswordSettings />,
+                  },
+                  {
+                    path: "verify-email",
+                    element: <VerifyEmailSettings />,
                   },
                 ],
               },
             ],
           },
-          {
-            path: "timeline",
-            element: <TimeLine />,
-          },
-          {
-            path: "explore",
-            element: <Explore />,
-          },
-          {
-            path: "bemoniest",
-            element: <BeMoniest />,
-          },
-          {
-            path: "share",
-            element: <SharePost />,
-          },
-          {
-            path: "settings",
-            children: [
-              {
-                path: "",
-                element: <SettingsList />,
-              },
-              {
-                path: "account",
-                element: <AccountSettings />,
-              },
-              {
-                path: "moniest",
-                element: <MoniestSettings />,
-              },
-              {
-                path: "payment",
-                element: <PaymentSettings />,
-              },
-              {
-                path: "password",
-                element: <PasswordSettings />,
-              },
-              {
-                path: "verify-email",
-                element: <VerifyEmailSettings />,
-              },
-            ],
-          },
         ],
       },
+      {
+        path: "verify-email",
+        element: <VerifyEmail />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
     ],
-  },
-  {
-    path: "verify-email",
-    element: <VerifyEmail />,
-  },
-  {
-    path: "*",
-    element: <NotFound />,
   },
 ]);
 

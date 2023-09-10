@@ -1,10 +1,8 @@
 import { Divider, Stack, Typography } from "@mui/material";
 import { WrappedModal } from "../../../components/shared/common/wrappedModal";
 import { useTranslate } from "../../../hooks/useTranslate";
-import { sendAnalytic } from "../../../services/analytic";
 
 export const FindBUIDModal = ({ onClose }: { onClose: () => void }) => {
-  sendAnalytic({ hitType: "pageview", page: "Find BUID Modal" });
   const translate = useTranslate();
 
   return (

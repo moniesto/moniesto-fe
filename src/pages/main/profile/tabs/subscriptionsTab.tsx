@@ -10,10 +10,8 @@ import { useTranslate } from "../../../../hooks/useTranslate";
 import { TestUser } from "../../../../services/tempDatas";
 import { useAppSelector } from "../../../../store/hooks";
 import { Spinner } from "../../../../components/shared/common/spinner";
-import { sendAnalytic } from "../../../../services/analytic";
 
 const SubscriptionsTab = () => {
-  sendAnalytic({ hitType: "pageview", page: "Subscriptions Tab" });
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
