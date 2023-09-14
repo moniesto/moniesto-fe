@@ -25,8 +25,8 @@ import {
 import { useTranslate } from "../../../hooks/useTranslate";
 import { MoniestBadge } from "../../../components/shared/user/moniestBadge";
 import { setIsMyAccount, setProfile } from "../../../store/slices/profileSlice";
-import { ScoreBadge } from "../../../components/shared/user/scoreBadge";
 import SubscriptionResultModal from "../../../components/ui/user/subscriptionResultModal";
+import { ProfileStatistics } from "./profileStatistics";
 
 const Profile = () => {
   const theme = useTheme();
@@ -106,7 +106,9 @@ const Profile = () => {
                     }}
                     src={profileState.account?.profile_photo_link}
                   ></Avatar>
-                  {profileState.account.moniest && <MoniestBadge size={26} />}
+                  {profileState.account.moniest && (
+                    <MoniestBadge size="large" />
+                  )}
                 </Box>
               </CoverImageBox>
               <Box paddingX={{ md: 3, xs: 2 }}>
@@ -135,10 +137,10 @@ const Profile = () => {
                     )}
                   </Stack>
                 </Box>
-                <Box mt={3} mb={5}>
+                <Box mt={2} mb={4}>
                   <Stack spacing={1}>
                     <Stack flexDirection="row">
-                      <Stack spacing={0.5} width="100%">
+                      <Stack spacing={0.3} width="100%">
                         <Stack
                           flexDirection="row"
                           alignItems="center"
@@ -147,14 +149,9 @@ const Profile = () => {
                           <Typography variant="h3">
                             {profileState.account.fullname}
                           </Typography>
-                          {profileState.account.moniest && (
-                            <ScoreBadge
-                              value={profileState.account.moniest?.score || 0}
-                            />
-                          )}
                         </Stack>
                         <Stack direction="row" justifyContent="space-between">
-                          <Typography sx={{ opacity: 0.8 }} variant="h4">
+                          <Typography sx={{ opacity: 0.7 }} variant="h4">
                             {profileState.account.username}
                           </Typography>
                           <LocationText
@@ -171,6 +168,7 @@ const Profile = () => {
                       {profileState.account.moniest?.bio}
                     </Typography>
                   </Stack>
+                  {profileState.account.moniest && <ProfileStatistics />}
                 </Box>
               </Box>
             </>

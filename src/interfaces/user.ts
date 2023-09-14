@@ -25,8 +25,19 @@ export interface Moniest {
   id: string;
   bio: string;
   description?: string;
-  score?: number;
+  post_statistics: {
+    pnl_7days: number;
+    pnl_30days: number;
+    pnl_total: number;
+    roi_7days: number;
+    roi_30days: number;
+    roi_total: number;
+    win_rate_7days: number;
+    win_rate_30days: number;
+    win_rate_total: number;
+  };
   subscription_info: SubscriptionInfo;
+  subscriber_count?: number;
 }
 export interface SubscriptionInfo {
   fee: number;

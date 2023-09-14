@@ -206,6 +206,14 @@
       "no_subscriber_account": "{{username}} henüz abonesi yok",
       "no_subscription": "Henüz aboneliğiniz yok",
       "no_subscription_account": "{{username}} henüz aboneliği yok",
+      "statistics":{
+        "win_rate":"Kazanma Oranı",
+        "roi":"ROI",
+        "pnl":"PNL",
+        "7d":"7G",
+        "30d":"30G",
+        "total":"Toplam"
+      },
       "tab": {
         "posts": "Gönderiler {{count}}",
         "subscribers": "Aboneler {{count}}",
@@ -251,11 +259,12 @@
     "search": { "no_user_found": "{{text}} diye bir kullanıcı bulunamadı" },
     "post_card": {
       "not_advice": "Yatırım Tavsiyesi Değildir!",
+      "target_points":"Hedef Noktalar",
       "table": {
         "finish":"Bitti",
         "direction": "Yön",
-        "start": "Başlangıç",
-        "target": "Hedef",
+        "start": "Giriş Noktası",
+        "take_profit":"Kar Al",
         "time_left": "Bitiş süresi",
         "tp_1": "TP 1",
         "tp_2": "TP 2",
@@ -267,7 +276,10 @@
         "fail": "Başarısız",
         "success": "Başarılı"
       },
-      "rate": "Oran"
+      "roi": "ROI",
+      "pnl": "PNL",
+      "max_roi": "Max ROI",
+      "max_pnl": "Max PNL"
     },
     "feedback": {
       "title": "Geri bildirim",

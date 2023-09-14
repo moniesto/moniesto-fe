@@ -12,8 +12,18 @@ export const TestMoniest: Moniest = {
   id: "1",
   bio: "test bio",
   description: "test description",
-  score: 20,
   subscription_info: TestSubscriptionInfo,
+  post_statistics: {
+    pnl_7days: 0,
+    pnl_30days: 0,
+    pnl_total: 0,
+    roi_7days: 0,
+    roi_30days: 0,
+    roi_total: 0,
+    win_rate_7days: 0,
+    win_rate_30days: 0,
+    win_rate_total: 0,
+  },
 };
 
 export const TestUser: User = {
@@ -42,7 +52,6 @@ export const TestPost: Post = {
   target2: 18.56,
   target3: 18.73,
   stop: 18.3,
-  score: 20,
   direction: "long",
   created_at: new Date(),
   description: "",
@@ -51,6 +60,8 @@ export const TestPost: Post = {
   status: "pending",
   market_type: "spot",
   leverage: 1,
+  pnl: 11,
+  roi: 22,
 };
 export const TestCard: Card = {
   id: "1",

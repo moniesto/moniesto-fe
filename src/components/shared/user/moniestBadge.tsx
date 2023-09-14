@@ -1,14 +1,21 @@
 import { Box } from "@mui/material";
 import { useTheme } from "@mui/system";
 
-export const MoniestBadge = ({ size = 20 }: { size?: number }) => {
+export const MoniestBadge = ({
+  size = "medium",
+}: {
+  size?: "medium" | "large";
+}) => {
   const theme = useTheme();
+  const sizeNumber = size === "large" ? 26 : 20;
+  const fontSize = size === "large" ? 1 : 0.75;
+
   return (
     <Box
       sx={{
         borderRadius: "100%",
-        width: size,
-        height: size,
+        width: sizeNumber,
+        height: sizeNumber,
         position: "absolute",
         border: `1px solid ${theme.palette.secondary.main}`,
         background: theme.palette.background[500],
@@ -18,7 +25,7 @@ export const MoniestBadge = ({ size = 20 }: { size?: number }) => {
         bottom: "5px",
         display: "grid",
         placeContent: "center",
-        fontSize: "0.8rem",
+        fontSize: `${fontSize}rem`,
       }}
     >
       <Box pb="2px">m</Box>

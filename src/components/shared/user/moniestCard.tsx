@@ -146,11 +146,11 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
                   sx={{ marginLeft: "10px", fontSize: "1.15rem" }}
                 />
               }
-              label={`${
-                (user.moniest as any)["subscriber_count"] || 0
-              } ${translate("moniest.subscribers")}`}
+              label={`${user.moniest?.subscriber_count || 0} ${translate(
+                "moniest.subscribers"
+              )}`}
             />
-            <StarChip count={user.moniest?.score as number}></StarChip>
+            {/* <StarChip count={user.moniest?.score as number}></StarChip> */}
           </>
         ) : (
           <>

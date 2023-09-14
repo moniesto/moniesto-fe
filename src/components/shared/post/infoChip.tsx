@@ -20,7 +20,7 @@ export const InfoChip = ({
       sx={{
         ...sx,
         border: `1px solid ${theme.palette.background[800]}`,
-        padding: { xs: "4px 8px", md: "6px 12px" },
+        padding: { xs: "4px 8px", md: "4px 8px" },
         borderRadius: "100px",
       }}
       spacing={0.5}
@@ -29,11 +29,11 @@ export const InfoChip = ({
     >
       {!loading ? (
         <>
-          <Typography sx={{ opacity: 0.7 }} variant="h5">
+          <Typography sx={{ opacity: 0.7 }} variant="h6">
             {title}
           </Typography>
 
-          <Typography className="infochip--value" variant="h5">
+          <Typography className="infochip--value" variant="h6" fontWeight={900}>
             {value}
           </Typography>
         </>

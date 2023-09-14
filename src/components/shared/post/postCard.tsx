@@ -25,10 +25,7 @@ import { useTheme } from "@mui/system";
 import { InfoChip } from "./infoChip";
 import { NotAdvice } from "../../ui/post/notAdvice";
 import { useTranslate } from "../../../hooks/useTranslate";
-import {
-  operationByDirection,
-  roundNumber,
-} from "../../../pages/main/sharePost/utils";
+import { AccessTimeOutlined } from "@mui/icons-material";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -57,31 +54,18 @@ const PostCard = ({ post, loading }: PostCardProps) => {
   const theme = useTheme();
   const translate = useTranslate();
 
-  const calculatePercentage = roundNumber(
-    operationByDirection(post.direction) *
-      ((post.target3 - post.start_price) / post.start_price) *
-      100,
-    3
-  );
+  const getColorByStatus = (status: PostSatus) =>
+    status === "pending"
+      ? ""
+      : status === "success"
+      ? "var(--color-success)"
+      : "var(--color-fail)";
 
-  const getColorByStatus = (status: PostSatus) => {
-    let color = "";
-    switch (status) {
-      case "pending":
-        color = theme.palette.grey[600];
-        break;
-      case "fail":
-        color = theme.palette.orange.dark;
-        break;
-      case "success":
-        color = theme.palette.success.dark;
-        break;
-    }
-    return color;
-  };
+  const pnlColor = (value?: number) =>
+    value ? (value > 0 ? "var(--color-success)" : "var(--color-fail)") : "";
 
   const getColorByDirection = (direction: string) =>
-    direction === "long" ? "#03a66d" : "#f6465d";
+    direction === "long" ? "var(--color-success)" : "var(--color-fail)";
 
   return (
     <Card
@@ -89,12 +73,11 @@ const PostCard = ({ post, loading }: PostCardProps) => {
         position: "relative",
         padding: {
           xs: "0.8rem",
-          md: "1.2rem",
+          md: "1rem",
         },
-        paddingBottom: "44px !important",
+        paddingBottom: post.description ? "44px !important" : "",
       }}
     >
-      {!loading && <NotAdvice />}
       <CardHeader
         sx={{
           ".MuiCardHeader-action": {
@@ -129,24 +112,44 @@ const PostCard = ({ post, loading }: PostCardProps) => {
         }
         action={
           <Stack flexDirection="row" gap={{ md: 5, xs: 3 }}>
-            <Stack alignItems="center">
+            <Stack alignItems="end">
               {!loading ? (
-                <Box
-                  sx={{
-                    borderBottom: "1px solid transparent",
-                    transition: "all 0.2s",
-                    "&:hover": {
-                      borderBottom: `1px solid ${theme.palette.warning.dark}`,
-                    },
-                  }}
-                  component="a"
-                  target="_blank"
-                  href={`https://www.binance.com/trade/${post.currency}`}
-                >
-                  <Typography variant="h4" color={theme.palette.warning.dark}>
-                    {post.currency}
-                  </Typography>
-                </Box>
+                <>
+                  <Box
+                    sx={{
+                      borderBottom: "1px solid transparent",
+                      transition: "all 0.2s",
+                      "&:hover": {
+                        borderBottom: `1px solid ${theme.palette.warning.dark}`,
+                      },
+                    }}
+                    component="a"
+                    target="_blank"
+                    href={`https://www.binance.com/trade/${post.currency}`}
+                  >
+                    <Typography variant="h4" color={theme.palette.warning.dark}>
+                      {post.currency}
+                    </Typography>
+                  </Box>
+                  <Stack alignItems="center" gap={0.4} direction="row">
+                    <Typography
+                      variant="h6"
+                      fontWeight="bold"
+                      sx={{ opacity: 0.6 }}
+                    >
+                      {new Date(post.duration) >= new Date() ||
+                      post.status === "pending" ? (
+                        <ReactTimeAgo date={new Date(post.duration)} />
+                      ) : (
+                        translate("component.post_card.table.finish")
+                      )}
+                    </Typography>
+
+                    <AccessTimeOutlined
+                      sx={{ fontSize: "0.8rem", opacity: 0.6 }}
+                    />
+                  </Stack>
+                </>
               ) : (
                 <Skeleton
                   animation="wave"
@@ -172,7 +175,12 @@ const PostCard = ({ post, loading }: PostCardProps) => {
         }
         subheader={
           <Navigator path={"/" + post.user.username}>
-            <Stack flexDirection="row" columnGap={1} alignItems="baseline">
+            <Stack
+              flexWrap="wrap"
+              flexDirection="row"
+              columnGap={1}
+              alignItems="baseline"
+            >
               {!loading ? (
                 <Typography
                   sx={{ opacity: 0.7 }}
@@ -205,31 +213,43 @@ const PostCard = ({ post, loading }: PostCardProps) => {
         }
       />
       <Stack
-        gap={{ xs: 1, md: 2 }}
+        gap={{ xs: 0.8, md: 1 }}
         pb={1}
-        // pr={{ xs: "10px", md: "20px" }}
-        mt={{ xs: 1.5, md: 0 }}
+        mt={{ xs: 1.5, md: 1 }}
         direction="row"
         justifyContent="flex-end"
       >
-        {post.score && !loading && (
-          <InfoChip
-            loading={loading}
-            title="Score"
-            value={post.score}
-          ></InfoChip>
-        )}
-
         <InfoChip
-          title={`${translate("component.post_card.rate")}:`}
-          value={calculatePercentage + "%"}
+          title={
+            translate(
+              `component.post_card.${
+                post.status === "pending" ? "max_roi" : "roi"
+              }`
+            ) + ":"
+          }
+          value={(post.roi || "--") + "%"}
+          loading={loading}
+        ></InfoChip>
+        <InfoChip
+          sx={{
+            ".infochip--value": {
+              color: pnlColor(post.pnl),
+            },
+          }}
+          title={
+            translate(
+              `component.post_card.${
+                post.status === "pending" ? "max_pnl" : "pnl"
+              }`
+            ) + ":"
+          }
+          value={(post.pnl || "--") + "$"}
           loading={loading}
         ></InfoChip>
         <InfoChip
           sx={{
             ".infochip--value": {
               color: getColorByStatus(post.status),
-              textShadow: "0.5px 0 " + getColorByStatus(post.status),
             },
           }}
           loading={loading}
@@ -238,7 +258,6 @@ const PostCard = ({ post, loading }: PostCardProps) => {
       </Stack>
       <Divider
         sx={{
-          // width: { xs: "calc(100% - 20px)", md: "calc(100% - 40px)" },
           margin: "auto",
         }}
       ></Divider>
@@ -262,11 +281,11 @@ const PostCard = ({ post, loading }: PostCardProps) => {
             },
             {
               field: "target",
-              title: "component.post_card.table.target",
+              title: "component.post_card.table.take_profit",
             },
             {
-              field: "time_left",
-              title: "component.post_card.table.time_left",
+              field: "stop",
+              title: "component.post_card.table.stop",
             },
           ]}
           rows={[
@@ -274,20 +293,52 @@ const PostCard = ({ post, loading }: PostCardProps) => {
               direction: (
                 <Box color={getColorByDirection(post.direction)}>
                   {translate("common." + post.direction).toUpperCase()}
+                  {` ${
+                    post.market_type === "futures"
+                      ? " · " + post.leverage + "X"
+                      : ""
+                  }`}
                 </Box>
               ),
               start: post.start_price,
-              target: post.target3,
-              time_left:
-                new Date(post.duration) >= new Date() ||
-                post.status === "pending" ? (
-                  <ReactTimeAgo date={new Date(post.duration)} />
-                ) : (
-                  translate("component.post_card.table.finish")
-                ),
+              target: post.take_profit,
+              stop: post.stop,
             },
           ]}
         ></PredictionDataTable>
+        {post?.target1 && (
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            mt={2}
+            gap={1}
+            flexWrap="wrap"
+          >
+            <Stack
+              sx={{
+                border: `1px solid ${theme.palette.background[800]}`,
+                borderRadius: "10px",
+                padding: "4px 8px",
+                width: "max-content",
+              }}
+              gap={1}
+              pl={1}
+              direction="row"
+              pt={1.5}
+            >
+              <Typography variant="h6" sx={{ opacity: 0.6 }} fontWeight="bold">
+                {translate("component.post_card.target_points")}:
+              </Typography>
+              <Typography variant="h6" fontWeight="bold" sx={{ opacity: 0.8 }}>
+                {post.target1 ? post.target1 : ""}
+                {post.target2 ? " ➜ " + post.target2 : ""}
+                {post.target3 ? " ➜ " + post.target3 : ""}
+              </Typography>
+            </Stack>
+            {!loading && <NotAdvice />}
+          </Stack>
+        )}
       </CardContent>
       <CardActions
         sx={{
@@ -298,7 +349,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
           transform: "translateX(-50%)",
         }}
       >
-        {!loading && (
+        {!loading && post.description && (
           <ExpandMore expand={expanded} onClick={() => setExpanded(!expanded)}>
             <ExpandMoreIcon />
           </ExpandMore>
@@ -312,35 +363,6 @@ const PostCard = ({ post, loading }: PostCardProps) => {
             overflowX: "auto",
           }}
         >
-          <PredictionDataTable
-            columns={[
-              {
-                field: "tp_1",
-                title: "component.post_card.table.tp_1",
-              },
-              {
-                field: "tp_2",
-                title: "component.post_card.table.tp_2",
-              },
-              {
-                field: "tp_3",
-                title: "component.post_card.table.tp_3",
-              },
-              {
-                field: "stop",
-                title: "component.post_card.table.stop",
-              },
-            ]}
-            rows={[
-              {
-                tp_1: post.target1,
-                tp_2: post.target2,
-                tp_3: post.target3,
-                stop: post.stop,
-              },
-            ]}
-          ></PredictionDataTable>
-
           <Stack sx={{ padding: "0 10px" }}>
             {post.description && (
               <Box>

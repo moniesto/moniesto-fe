@@ -12,9 +12,7 @@ export const NotAdvice = () => {
     <Box>
       <Box
         sx={{
-          position: "absolute",
-          left: "12px",
-          bottom: "16px",
+          pr: "2px",
           opacity: 0.4,
           fontSize: "0.71rem",
           fontStyle: "italic",
@@ -28,7 +26,7 @@ export const NotAdvice = () => {
       >
         {translate("component.post_card.not_advice")}
       </Box>
-      <WrappedModal onClose={() => setOpen(false)} opened={open}>
+      <WrappedModal width={500} onClose={() => setOpen(false)} opened={open}>
         <Stack alignItems="center" spacing={4}>
           <Stack gap={2} alignItems="center">
             <WarningOutlined

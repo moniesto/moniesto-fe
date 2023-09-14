@@ -11,7 +11,6 @@ import { SubscribeButton } from "../../../../components/shared/user/subscribeBut
 import { useTranslate } from "../../../../hooks/useTranslate";
 import { TestPost } from "../../../../services/tempDatas";
 import { useAppSelector } from "../../../../store/hooks";
-import { Spinner } from "../../../../components/shared/common/spinner";
 import { useTheme } from "@mui/system";
 
 type FilterType = "all" | "live";
@@ -41,7 +40,6 @@ const PostsTab = () => {
   });
 
   const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
   const [activePostFilter, setActivePostFilter] = useState<Filter>(filters[0]);
   const [isInitialRender, setIsInitialRender] = useState(true);
   const translate = useTranslate();
@@ -82,7 +80,7 @@ const PostsTab = () => {
             setQueryParams(JSON.parse(JSON.stringify(queryParams)));
           } else queryParams.hasMore = true;
         })
-        .finally(() => setLoading(false));
+        .catch(console.error);
     },
     [profileState.account, queryParams]
   );
@@ -111,7 +109,6 @@ const PostsTab = () => {
     )
       return;
 
-    setLoading(true);
     setQueryParams({
       ...queryParams,
       active: filterItem.boolValue,
@@ -139,11 +136,7 @@ const PostsTab = () => {
       ? theme.palette.secondary.main
       : theme.palette.text.primary;
 
-  return loading ? (
-    <Box sx={{ position: "relative", minHeight: 100, width: "100%" }}>
-      <Spinner center={true} />
-    </Box>
-  ) : (
+  return (
     <Stack spacing={2}>
       <Card>
         <Stack

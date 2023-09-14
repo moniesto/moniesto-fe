@@ -222,6 +222,14 @@
       "no_subscriber_account": "{{username}} doesn't have any subscribers yet",
       "no_subscription": "You don't have any subscriptions yet",
       "no_subscription_account": "{{username}} doesn't have any subscriptions yet",
+      "statistics":{
+        "win_rate":"Win Rate",
+        "roi":"ROI",
+        "pnl":"PNL",
+        "7d":"7D",
+        "30d":"30D",
+        "total":"Total"
+      },
       "tab": {
         "posts": "Posts {{count}}",
         "subscribers": "Subscribers {{count}}",
@@ -269,6 +277,7 @@
     },
     "post_card": {
       "not_advice": "Not Investment Advice!",
+      "target_points":"Target Points",
       "table": {
         "finish":"End time",
         "direction": "Direction",
@@ -404,7 +413,7 @@
       "direction": "Direction",
       "set_leverage":"Adjust Leverage",
       "new_tp":"Add New Take Profit (optional)",
-      "tp": "Take Profit",
+      "take_profit": "Take Profit",
       "tp_1": "TP 1",
       "tp_2": "TP 2",
       "tp_3": "TP 3",

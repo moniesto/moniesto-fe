@@ -5,12 +5,13 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { ReactNode } from "react";
 
 type propTypes = {
-  columns: { field: string; title: string }[];
+  columns: { field: string; title?: string }[];
   rows: { [key: string]: string | number | ReactNode }[];
   loading?: boolean;
 };
@@ -33,9 +34,11 @@ const PredictionDataTable = ({ columns, rows, loading }: propTypes) => {
           }}
         >
           {columns.map((column) => (
-            <TableCell key={column.field} align="center">
+            <TableCell key={column.field} align="left">
               {!loading ? (
-                translate(column.title)
+                <Typography variant="h5" fontWeight="bold">
+                  {column.title && translate(column.title)}
+                </Typography>
               ) : (
                 <Skeleton
                   sx={{ margin: "auto" }}
@@ -60,9 +63,11 @@ const PredictionDataTable = ({ columns, rows, loading }: propTypes) => {
         {rows.map((row, i) => (
           <TableRow key={i}>
             {columns.map((column) => (
-              <TableCell key={column.field} align="center">
+              <TableCell key={column.field} align="left">
                 {!loading ? (
-                  row[column.field]
+                  <Typography variant="h5" fontWeight="bold">
+                    {row[column.field]}
+                  </Typography>
                 ) : (
                   <Skeleton
                     sx={{ margin: "auto" }}
