@@ -307,7 +307,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
             },
           ]}
         ></PredictionDataTable>
-        {post?.target1 && !loading && (
+        {!loading && (
           <Stack
             direction="row"
             alignItems="center"
@@ -316,28 +316,41 @@ const PostCard = ({ post, loading }: PostCardProps) => {
             gap={1}
             flexWrap="wrap"
           >
-            <Stack
-              sx={{
-                border: `1px solid ${theme.palette.background[800]}`,
-                borderRadius: "10px",
-                padding: "4px 8px",
-                width: "max-content",
-              }}
-              gap={1}
-              pl={1}
-              direction="row"
-              pt={1.5}
-            >
-              <Typography variant="h6" sx={{ opacity: 0.6 }} fontWeight="bold">
-                {translate("component.post_card.target_points")}:
-              </Typography>
-              <Typography variant="h6" fontWeight="bold" sx={{ opacity: 0.8 }}>
-                {post.target1 ? post.target1 : ""}
-                {post.target2 ? " ➜ " + post.target2 : ""}
-                {post.target3 ? " ➜ " + post.target3 : ""}
-              </Typography>
-            </Stack>
-            {!loading && <NotAdvice />}
+            <Box>
+              {post?.target1 && (
+                <Stack
+                  sx={{
+                    border: `1px solid ${theme.palette.background[800]}`,
+                    borderRadius: "10px",
+                    padding: "4px 8px",
+                    width: "max-content",
+                  }}
+                  gap={1}
+                  pl={1}
+                  direction="row"
+                  pt={1.5}
+                >
+                  <Typography
+                    variant="h6"
+                    sx={{ opacity: 0.6 }}
+                    fontWeight="bold"
+                  >
+                    {translate("component.post_card.target_points")}:
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    fontWeight="bold"
+                    sx={{ opacity: 0.8 }}
+                  >
+                    {post.target1 ? post.target1 : ""}
+                    {post.target2 ? " ➜ " + post.target2 : ""}
+                    {post.target3 ? " ➜ " + post.target3 : ""}
+                  </Typography>
+                </Stack>
+              )}
+            </Box>
+
+            <NotAdvice />
           </Stack>
         )}
       </CardContent>
