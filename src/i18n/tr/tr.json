@@ -272,7 +272,7 @@
         "stop": "Stop"
       },
       "status": {
-        "pending": "Devam ediyor",
+        "pending": "Devam Ediyor",
         "fail": "Başarısız",
         "success": "Başarılı"
       },

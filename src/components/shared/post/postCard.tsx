@@ -26,6 +26,7 @@ import { InfoChip } from "./infoChip";
 import { NotAdvice } from "../../ui/post/notAdvice";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { AccessTimeOutlined } from "@mui/icons-material";
+import { TimeAgo } from "../common/timeAgo";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -139,7 +140,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
                     >
                       {new Date(post.duration) >= new Date() ||
                       post.status === "pending" ? (
-                        <ReactTimeAgo date={new Date(post.duration)} />
+                        <TimeAgo date={post.duration as string} />
                       ) : (
                         translate("component.post_card.table.finish")
                       )}
@@ -306,7 +307,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
             },
           ]}
         ></PredictionDataTable>
-        {post?.target1 && (
+        {post?.target1 && !loading && (
           <Stack
             direction="row"
             alignItems="center"
