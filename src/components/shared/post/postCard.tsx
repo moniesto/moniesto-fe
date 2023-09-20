@@ -219,6 +219,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
         mt={{ xs: 1.5, md: 1 }}
         direction="row"
         justifyContent="flex-end"
+        flexWrap="wrap"
       >
         <InfoChip
           title={
@@ -228,7 +229,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
               }`
             ) + ":"
           }
-          value={(post.roi || "--") + "%"}
+          value={(post.roi || 0) + "%"}
           loading={loading}
         ></InfoChip>
         <InfoChip
@@ -244,7 +245,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
               }`
             ) + ":"
           }
-          value={(post.pnl || "--") + "$"}
+          value={(post.pnl || 0) + "$"}
           loading={loading}
         ></InfoChip>
         <InfoChip

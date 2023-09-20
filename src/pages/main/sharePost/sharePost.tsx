@@ -943,14 +943,16 @@ export const SharePost = () => {
           </Stack>
         </form>
       </Stack>
-      <PreviewPost
-        values={formik.values}
-        opened={previewModalOpened}
-        onClose={() => setPreviewModalOpened(false)}
-        onOkClik={() => {
-          handleShare();
-        }}
-      />
+      {previewModalOpened && (
+        <PreviewPost
+          values={formik.values}
+          opened={previewModalOpened}
+          onClose={() => setPreviewModalOpened(false)}
+          onOkClik={() => {
+            handleShare();
+          }}
+        />
+      )}
     </Card>
   );
 };

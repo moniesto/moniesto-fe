@@ -3,11 +3,12 @@ import { WrappedModal } from "../../../components/shared/common/wrappedModal";
 import PostCard from "../../../components/shared/post/postCard";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { useAppSelector } from "../../../store/hooks";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Post } from "../../../interfaces/post";
 
 import { normalizePostFromForm } from "./utils";
 import { PostFormType } from "./sharePost";
+import api from "../../../services/api";
 
 export const PreviewPost = ({
   opened,
@@ -22,6 +23,10 @@ export const PreviewPost = ({
 }) => {
   const translate = useTranslate();
   const user = useAppSelector((state) => state.user.user);
+  const [pnlRoiResult, setPnlRoiResult] = useState<{
+    pnl: number;
+    roi: number;
+  }>();
 
   const previewPost = useMemo(() => {
     const postData: Post = {
@@ -30,9 +35,24 @@ export const PreviewPost = ({
       created_at: new Date(),
       status: "pending",
       start_price: values.crypto_currency.price,
+      pnl: pnlRoiResult?.pnl || 0,
+      roi: pnlRoiResult?.roi || 0,
     };
+
     return postData;
-  }, [values, user]);
+  }, [values, user, pnlRoiResult]);
+
+  useEffect(() => {
+    api.post
+      .calculate_pnl_roi({
+        leverage: values.leverage,
+        direction: values.direction,
+        start_price: values.crypto_currency.price,
+        take_profit: values.take_profit,
+      })
+      .then(setPnlRoiResult)
+      .catch(console.error);
+  }, [values]);
 
   return (
     <WrappedModal width={600} opened={opened} onClose={onClose}>

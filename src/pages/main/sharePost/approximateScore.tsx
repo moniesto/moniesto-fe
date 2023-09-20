@@ -30,12 +30,12 @@ export const ApproximateScore = memo(
         if (timeout?.current) clearTimeout(timeout.current);
 
         timeout.current = setTimeout(() => {
-          api.post
-            .approximate_score(post)
-            .then((res) => {
-              setScore(res.score);
-            })
-            .finally(() => setLoading(false));
+          // api.post
+          //   .approximate_score(post)
+          //   .then((res) => {
+          //     setScore(res.score);
+          //   })
+          //   .finally(() => setLoading(false));
         }, 300);
       },
       [timeout]

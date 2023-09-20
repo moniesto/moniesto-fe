@@ -29,9 +29,11 @@ export const InfoChip = ({
     >
       {!loading ? (
         <>
-          <Typography sx={{ opacity: 0.7 }} variant="h6">
-            {title}
-          </Typography>
+          {title && (
+            <Typography sx={{ opacity: 0.7 }} variant="h6">
+              {title}
+            </Typography>
+          )}
 
           <Typography className="infochip--value" variant="h6" fontWeight={900}>
             {value}

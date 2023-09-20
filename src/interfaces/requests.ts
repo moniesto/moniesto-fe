@@ -54,6 +54,13 @@ export interface CreatePostReq {
   leverage: number;
 }
 
+export interface CalculatePnlRoiReq {
+  direction: string;
+  leverage: number;
+  start_price: number;
+  take_profit: number;
+}
+
 export interface SubscribeRequest {
   cancelURL: string;
   number_of_months: number;
@@ -168,7 +175,7 @@ export const Requests: {
   post: {
     create_post: string;
     user_posts: (username: string) => string;
-    approximate_score: string;
+    calculate_pnl_roi: string;
   };
   payment: {
     binance_transaction_check: (transaction_id: string) => string;
@@ -226,7 +233,7 @@ export const Requests: {
   post: {
     create_post: "moniests/posts",
     user_posts: (username: string) => `moniests/${username}/posts`,
-    approximate_score: "moniests/posts/approximateScore",
+    calculate_pnl_roi: "moniests/posts/calculate-pnl-roi",
   },
   payment: {
     binance_transaction_check: (transaction_id: string) =>

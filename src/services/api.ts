@@ -2,6 +2,7 @@ import { Post } from "../interfaces/post";
 import {
   BaseResponse,
   BeMoniestReq,
+  CalculatePnlRoiReq,
   ChangePasswordReq,
   Config,
   CreatePostReq,
@@ -118,9 +119,9 @@ class api {
       httpService.post<Post>(Requests.post.create_post, params),
     user_posts: (username: string, params: UserPostsRequest) =>
       httpService.get<Post[]>(Requests.post.user_posts(username), params),
-    approximate_score: (params: CreatePostReq) =>
-      httpService.post<{ score: number }>(
-        Requests.post.approximate_score,
+    calculate_pnl_roi: (params: CalculatePnlRoiReq) =>
+      httpService.post<{ pnl: number; roi: number }>(
+        Requests.post.calculate_pnl_roi,
         params
       ),
   };
