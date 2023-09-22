@@ -107,11 +107,11 @@ const SideBar = () => {
           padding={"20px 0"}
           flexDirection="row"
           alignItems="center"
-          sx={{ color: theme.palette.grey[500] }}
+          sx={{ opacity: 0.7 }}
         >
           <CopyrightOutlinedIcon
             sx={{
-              color: theme.palette.grey[500],
+              opacity: 0.7,
               fontSize: "1.2rem",
               paddingBottom: "2px",
             }}

@@ -48,7 +48,10 @@ class http {
         return Promise.resolve(response.data);
       },
       (error) => {
-        const code = error.response.data.error_code;
+        const code = error?.response?.data?.error_code;
+        if (!code) {
+          return;
+        }
         const message = configService.translatedErrors.includes(code)
           ? "server.error." + code
           : (configService.configs.error_codes[code] as string);

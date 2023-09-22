@@ -27,6 +27,7 @@ import { NotAdvice } from "../../ui/post/notAdvice";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { AccessTimeOutlined } from "@mui/icons-material";
 import { TimeAgo } from "../common/timeAgo";
+import { colorByNumberValue } from "../../../services/utils";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -56,17 +57,9 @@ const PostCard = ({ post, loading }: PostCardProps) => {
   const translate = useTranslate();
 
   const getColorByStatus = (status: PostSatus) =>
-    status === "pending"
-      ? ""
-      : status === "success"
-      ? "var(--color-success)"
-      : "var(--color-fail)";
-
-  const pnlColor = (value?: number) =>
-    value ? (value > 0 ? "var(--color-success)" : "var(--color-fail)") : "";
-
-  const getColorByDirection = (direction: string) =>
-    direction === "long" ? "var(--color-success)" : "var(--color-fail)";
+    colorByNumberValue(
+      status === "pending" ? 0 : status === "success" ? 1 : -1
+    );
 
   return (
     <Card
@@ -222,6 +215,13 @@ const PostCard = ({ post, loading }: PostCardProps) => {
         flexWrap="wrap"
       >
         <InfoChip
+          sx={{
+            ".infochip--value": {
+              color: colorByNumberValue(
+                post.status === "pending" ? 0 : post.roi
+              ),
+            },
+          }}
           title={
             translate(
               `component.post_card.${
@@ -235,7 +235,9 @@ const PostCard = ({ post, loading }: PostCardProps) => {
         <InfoChip
           sx={{
             ".infochip--value": {
-              color: pnlColor(post.pnl),
+              color: colorByNumberValue(
+                post.status === "pending" ? 0 : post.pnl
+              ),
             },
           }}
           title={
@@ -293,7 +295,9 @@ const PostCard = ({ post, loading }: PostCardProps) => {
           rows={[
             {
               direction: (
-                <Box color={getColorByDirection(post.direction)}>
+                <Box
+                  color={colorByNumberValue(post.direction === "long" ? 1 : -1)}
+                >
                   {translate("common." + post.direction).toUpperCase()}
                   {` ${
                     post.market_type === "futures"

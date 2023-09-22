@@ -5,7 +5,7 @@ export const WrappedTextField = (props: WrappedTextFieldProps) => {
   return (
     <TextField
       {...props}
-      onWheelCapture={(e) =>
+      onFocusCapture={(e) =>
         props.type === "number"
           ? e.target.addEventListener(
               "wheel",

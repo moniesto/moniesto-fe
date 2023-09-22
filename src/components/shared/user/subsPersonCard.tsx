@@ -8,7 +8,6 @@ import {
   Skeleton,
   Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/system";
 import { User } from "../../../interfaces/user";
 import LocationText from "../common/locationText";
 import { MoniestBadge } from "./moniestBadge";
@@ -20,8 +19,6 @@ type propTypes = {
 };
 
 const SubsPersonCard = ({ user, loading, props }: propTypes) => {
-  const theme = useTheme();
-
   return (
     <ListItemButton
       {...props}
@@ -61,7 +58,7 @@ const SubsPersonCard = ({ user, loading, props }: propTypes) => {
         secondary={
           !loading ? (
             <Typography
-              color={theme.palette.grey[500]}
+              sx={{ opacity: 0.7 }}
               lineHeight="17px"
               variant="h5"
               mt="2px"

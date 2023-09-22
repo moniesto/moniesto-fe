@@ -395,6 +395,17 @@
         "filter":"Filter",
         "notfound":"Nothing found"
       }
+    },
+    "moniest_card":{
+      "7d_roi":"7G ROI",
+      "30d_roi":"30G ROI",
+      "total_roi":"Toplam ROI",
+      "7d_pnl":"7G PNL",
+      "30d_pnl":"30G PNL",
+      "total_pnl":"Total PNL",
+      "7d_win_rate":"7G Win Rate",
+      "30d_win_rate":"30G Win Rate",
+      "total_win_rate":"Total Win Rate"
     }
   },
   "form": {
@@ -487,7 +498,7 @@
     }
   },
   "moniest": {
-    "per_month": "per month",
+    "per_month": "Monthly",
     "subscribers": "Subscribers",
     "subscribed": "Subscribed",
     "subscribe": "Subscribe",

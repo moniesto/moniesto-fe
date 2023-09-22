@@ -7,7 +7,6 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/system";
 import { User } from "../../../interfaces/user";
 
 type propTypes = ListItemButtonProps & {
@@ -15,8 +14,6 @@ type propTypes = ListItemButtonProps & {
 };
 
 const SearchMoniestItem = (props: propTypes) => {
-  const theme = useTheme();
-
   return (
     <ListItemButton
       {...props}
@@ -34,7 +31,7 @@ const SearchMoniestItem = (props: propTypes) => {
         primary={<Typography variant="h4">{props.user.fullname}</Typography>}
         secondary={
           <Typography
-            color={theme.palette.grey[500]}
+            sx={{ opacity: 0.7 }}
             lineHeight="17px"
             variant="h5"
             mt="2px"

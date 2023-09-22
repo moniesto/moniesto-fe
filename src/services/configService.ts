@@ -12,7 +12,7 @@ import { defaultConfigs } from "./defaultConfigs";
 class config {
   private languages = ["en", "tr"];
   private languagesLocale: string[] = ["enUS", "trTR"];
-  configs = defaultConfigs;
+  public configs = defaultConfigs;
   // errors: {
   //   [key: string]: string;
   // } = defaultResponse.error_codes;
@@ -37,9 +37,12 @@ class config {
   ];
 
   initialize() {
-    api.asset.configs().then((res) => {
-      this.configs = res;
-    });
+    api.asset
+      .configs()
+      .then((res) => {
+        this.configs = res ? res : this.configs;
+      })
+      .catch(console.error);
     TimeAgo.addDefaultLocale(en);
     TimeAgo.addLocale(tr);
   }

@@ -144,8 +144,7 @@ const Login = () => {
                 <Navigator path="/forget-password">
                   <Stack
                     alignItems="end"
-                    color={theme.palette.grey[500]}
-                    sx={{ cursor: "pointer" }}
+                    sx={{ cursor: "pointer", opacity: 0.7 }}
                   >
                     {translate("page.login.action.forget_pass")}
                   </Stack>

@@ -376,6 +376,17 @@
         "filter":"Filtrele",
         "notfound":"Birşey bulunamadı"
       }
+    },
+    "moniest_card":{
+      "7d_roi":"7G ROI",
+      "30d_roi":"30G ROI",
+      "total_roi":"Toplam ROI",
+      "7d_pnl":"7G PNL",
+      "30d_pnl":"30G PNL",
+      "total_pnl":"Toplam PNL",
+      "7d_win_rate":"7G Kazanma Oranı",
+      "30d_win_rate":"30G Kazanma Oranı",
+      "total_win_rate":"Toplam Kazanma Oranı"
     }
   },
   "form": {
@@ -468,7 +479,7 @@
     }
   },
   "moniest": {
-    "per_month": "her ay",
+    "per_month": "Aylık",
     "subscribers": "Abone",
     "subscribed": "Abone olundu",
     "subscribe": "Abone ol",

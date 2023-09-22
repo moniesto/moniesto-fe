@@ -369,7 +369,8 @@ export const SharePost = () => {
 
   const fetchCurrency = useCallback(
     async (currency: string, market_type: string) => {
-      const [coin] = await api.crypto.search_currencies(currency, market_type);
+      const coins = await api.crypto.search_currencies(currency, market_type);
+      const coin = coins.find((item) => item.currency === currency);
       return coin;
     },
     []

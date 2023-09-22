@@ -8,14 +8,12 @@ import {
   Skeleton,
   Stack,
   Typography,
-  useTheme,
 } from "@mui/material";
 import { User } from "../../../interfaces/user";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import Navigator from "../common/navigatior";
-import { StarChip } from "../common/starChip";
 import { useTranslate } from "../../../hooks/useTranslate";
+import { GroupOutlined } from "@mui/icons-material";
+import { colorByNumberValue } from "../../../services/utils";
 
 type MoniestCardProps = {
   user: User;
@@ -23,20 +21,59 @@ type MoniestCardProps = {
 };
 
 const MoniestCard = ({ user, loading }: MoniestCardProps) => {
-  const theme = useTheme();
   const translate = useTranslate();
 
   const handleUserClick = () => {};
 
+  const statistics = user?.moniest?.post_statistics;
+
+  const statisticSection = (
+    label: string,
+    symbol: string,
+    value?: number,
+    isTotal?: boolean
+  ) => (
+    <Stack flex={isTotal ? 1.2 : 1}>
+      <Typography
+        variant="h5"
+        fontWeight="bold"
+        sx={{ color: colorByNumberValue(value) }}
+      >
+        {value}
+        {symbol}
+      </Typography>
+      <Typography
+        variant="h6"
+        sx={{
+          opacity: 0.7,
+          ...(isTotal
+            ? {
+                maxWidth: "88px",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }
+            : {}),
+        }}
+      >
+        {label}
+      </Typography>
+    </Stack>
+  );
+
   return (
-    <Card sx={{ height: "100%", maxHeight: "184px" }}>
+    <Card sx={{ height: "100%" }}>
       <Navigator path={`/${user.username}`}>
         <CardHeader
           onClick={handleUserClick}
           sx={{
+            padding: 2,
             ".MuiCardHeader-action": {
               alignSelf: "unset",
               marginRight: 0,
+            },
+            ".MuiCardHeader-avatar": {
+              marginRight: 1,
             },
             cursor: "pointer",
           }}
@@ -64,14 +101,22 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
           action={
             <Stack alignItems="center">
               {!loading ? (
-                <>
+                <Stack alignItems="center">
                   <Typography variant="h4">
-                    {user.moniest?.subscription_info.fee} $
+                    {user.moniest?.subscriber_count}
                   </Typography>
-                  <Typography variant="h5">
-                    {translate("moniest.per_month")}
-                  </Typography>
-                </>
+                  <Stack direction="row" alignItems="center" gap={0.2}>
+                    <GroupOutlined
+                      sx={{
+                        fontSize: "0.8rem",
+                        opacity: 0.6,
+                      }}
+                    />
+                    <Typography variant="h6" sx={{ opacity: 0.7 }}>
+                      {translate("moniest.subscribers")}
+                    </Typography>
+                  </Stack>
+                </Stack>
               ) : (
                 <>
                   <Skeleton
@@ -103,9 +148,6 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
                 >
                   {`${user.fullname}`}
                 </Typography>
-                <ArrowForwardIosIcon
-                  sx={{ fontSize: "0.8rem", marginLeft: 1 }}
-                ></ArrowForwardIosIcon>
               </Stack>
             ) : (
               <Skeleton
@@ -119,7 +161,7 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
             <Stack flexDirection="row" columnGap={1} alignItems="center">
               {!loading ? (
                 <Typography
-                  color={theme.palette.grey[500]}
+                  sx={{ opacity: 0.7 }}
                   lineHeight="17px"
                   variant="h5"
                 >
@@ -136,47 +178,91 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
           }
         />
       </Navigator>
-      <Stack padding="0 20px" flexDirection="row" columnGap={1}>
-        {!loading ? (
-          <>
-            <Chip
-              sx={{ fontWeight: "600", fontSize: "0.7rem" }}
-              icon={
-                <PersonOutlineOutlinedIcon
-                  sx={{ marginLeft: "10px", fontSize: "1.15rem" }}
+      <CardContent
+        sx={{ paddingBottom: "16px !important", padding: 2, paddingTop: 0 }}
+      >
+        <Stack gap={1.5}>
+          {!loading ? (
+            <>
+              <Stack>
+                <Chip
+                  sx={{
+                    fontWeight: "600",
+                    fontSize: "0.7rem",
+                  }}
+                  label={
+                    <Stack direction="row" alignItems="baseline" gap={0.6}>
+                      {user.moniest?.subscription_info?.fee || 0}$
+                      <Typography variant="h5" sx={{ opacity: 0.7 }}>
+                        /{translate("moniest.per_month")}
+                      </Typography>
+                    </Stack>
+                  }
                 />
-              }
-              label={`${user.moniest?.subscriber_count || 0} ${translate(
-                "moniest.subscribers"
-              )}`}
-            />
-            {/* <StarChip count={user.moniest?.score as number}></StarChip> */}
-          </>
-        ) : (
-          <>
-            <Chip
-              label={
-                <Skeleton
-                  animation="wave"
-                  sx={{ width: 60, maxHeight: 17 }}
-                  variant="text"
-                ></Skeleton>
-              }
-            ></Chip>
-            <Chip
-              label={
-                <Skeleton
-                  animation="wave"
-                  sx={{ width: 60, maxHeight: 17 }}
-                  variant="text"
-                ></Skeleton>
-              }
-            ></Chip>
-          </>
-        )}
-      </Stack>
-      <CardContent sx={{ paddingBottom: "1rem !important" }}>
-        {!loading ? (
+              </Stack>
+              <Stack gap={1}>
+                <Stack direction="row" gap={0.2}>
+                  {statisticSection(
+                    translate("component.moniest_card.30d_roi"),
+                    "%",
+                    statistics?.roi_30days
+                  )}
+                  {statisticSection(
+                    translate("component.moniest_card.30d_pnl"),
+                    "$",
+                    statistics?.pnl_30days
+                  )}
+                  {statisticSection(
+                    translate("component.moniest_card.30d_win_rate"),
+                    "%",
+                    statistics?.win_rate_30days,
+                    true
+                  )}
+                </Stack>
+                <Stack direction="row" gap={0.2}>
+                  {statisticSection(
+                    translate("component.moniest_card.total_roi"),
+                    "%",
+                    statistics?.roi_total
+                  )}
+                  {statisticSection(
+                    translate("component.moniest_card.total_pnl"),
+                    "$",
+                    statistics?.pnl_total
+                  )}
+                  {statisticSection(
+                    translate("component.moniest_card.total_win_rate"),
+                    "%",
+                    statistics?.win_rate_total,
+                    true
+                  )}
+                </Stack>
+              </Stack>
+            </>
+          ) : (
+            <>
+              <Chip
+                label={
+                  <Skeleton
+                    animation="wave"
+                    sx={{ width: 60, maxHeight: 17 }}
+                    variant="text"
+                  ></Skeleton>
+                }
+              ></Chip>
+              <Chip
+                label={
+                  <Skeleton
+                    animation="wave"
+                    sx={{ width: 60, maxHeight: 17 }}
+                    variant="text"
+                  ></Skeleton>
+                }
+              ></Chip>
+            </>
+          )}
+        </Stack>
+        {/* {!loading ? (
           <Typography
             sx={{
               overflow: "hidden",
@@ -204,7 +290,7 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
               variant="text"
             ></Skeleton>
           </>
-        )}
+        )} */}
       </CardContent>
     </Card>
   );

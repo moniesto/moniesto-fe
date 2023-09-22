@@ -10,15 +10,13 @@ import {
 import { useTheme } from "@mui/system";
 import { useAppSelector } from "../../../store/hooks";
 import { useTranslate } from "../../../hooks/useTranslate";
+import { colorByNumberValue } from "../../../services/utils";
 
 export const ProfileStatistics = () => {
   const theme = useTheme();
   const translate = useTranslate();
   const profileState = useAppSelector((state) => state.profile);
-  const statistics = profileState.account?.moniest?.post_statistics;
-
-  const pnlColor = (value?: number) =>
-    value ? (value > 0 ? "var(--color-success)" : "var(--color-fail)") : "";
+  const statistics = profileState?.account?.moniest?.post_statistics;
 
   return (
     <Stack
@@ -110,7 +108,7 @@ export const ProfileStatistics = () => {
               <Typography
                 variant="h5"
                 textAlign="end"
-                sx={{ color: pnlColor(statistics?.pnl_7days) }}
+                sx={{ color: colorByNumberValue(statistics?.pnl_7days) }}
               >
                 {statistics?.pnl_7days || "--"}$
               </Typography>
@@ -119,7 +117,7 @@ export const ProfileStatistics = () => {
               <Typography
                 variant="h5"
                 textAlign="end"
-                sx={{ color: pnlColor(statistics?.pnl_30days) }}
+                sx={{ color: colorByNumberValue(statistics?.pnl_30days) }}
               >
                 {statistics?.pnl_30days || "--"}$
               </Typography>
@@ -128,7 +126,7 @@ export const ProfileStatistics = () => {
               <Typography
                 variant="h5"
                 textAlign="end"
-                sx={{ color: pnlColor(statistics?.pnl_total) }}
+                sx={{ color: colorByNumberValue(statistics?.pnl_total) }}
               >
                 {statistics?.pnl_total || "--"}$
               </Typography>
