@@ -19,6 +19,7 @@ export default function componentStyleOverrides(theme: any) {
     theme.mode === "light"
       ? theme.colors.white
       : theme.colors.darkBackground600;
+
   return {
     MuiButton: {
       styleOverrides: {

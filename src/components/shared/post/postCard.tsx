@@ -172,7 +172,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
             <Stack
               flexWrap="wrap"
               flexDirection="row"
-              columnGap={1}
+              gap={0.5}
               alignItems="baseline"
             >
               {!loading ? (

@@ -1,5 +1,5 @@
 import { ClearOutlined, SearchOutlined } from "@mui/icons-material";
-import { Card, IconButton, InputAdornment } from "@mui/material";
+import { Card, IconButton, InputAdornment, Typography } from "@mui/material";
 import { useTheme } from "@mui/system";
 
 import { Box, Stack } from "@mui/system";
@@ -62,6 +62,12 @@ const SearchBar = ({
           minWidth: "280px",
           width: { md: focused || text ? "350px" : "280px", sm: "100%" },
           transition: (theme.transitions as any).create("width"),
+          ".MuiInputBase-root": {
+            background:
+              theme.palette.mode === "light"
+                ? "white"
+                : theme.palette.background[600],
+          },
         }}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
@@ -94,7 +100,10 @@ const SearchBar = ({
       {text && (
         <Card
           sx={{
-            background: theme.palette.background[600],
+            background:
+              theme.palette.mode === "light"
+                ? "white"
+                : theme.palette.background[600],
             padding: "10px 0",
             position: "absolute",
             width: "100%",
@@ -122,7 +131,9 @@ const SearchBar = ({
             </Stack>
           ) : (
             <Box sx={{ wordBreak: "break-word" }} px={2}>
-              {translate("component.search.no_user_found", { text: text })}
+              <Typography variant="h5" sx={{ opacity: 0.7 }}>
+                {translate("component.search.no_user_found", { text: text })}
+              </Typography>
             </Box>
           )}
         </Card>

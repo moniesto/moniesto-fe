@@ -29,7 +29,7 @@ const MainLayout = () => {
         position="fixed"
       >
         <Toolbar
-          sx={{ height: { xs: 56, md: 80 }, minHeight: { xs: 56, md: 80 } }}
+          sx={{ height: { xs: 56, md: 70 }, minHeight: { xs: 56, md: 70 } }}
         >
           <Header></Header>
         </Toolbar>
@@ -37,7 +37,7 @@ const MainLayout = () => {
       <Container
         sx={{
           marginTop: { xs: 7, md: 10 },
-          minHeight: { xs: "calc(100vh - 56px)", md: "calc(100vh - 80px)" },
+          minHeight: { xs: "calc(100vh - 56px)", md: "calc(100vh - 70px)" },
           padding: { xs: "10px 12px 66px", md: "35px" },
         }}
         maxWidth="lg"
