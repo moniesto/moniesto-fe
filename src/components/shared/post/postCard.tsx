@@ -131,11 +131,11 @@ const PostCard = ({ post, loading }: PostCardProps) => {
                       fontWeight="bold"
                       sx={{ opacity: 0.6 }}
                     >
-                      {new Date(post.duration) >= new Date() ||
-                      post.status === "pending" ? (
-                        <TimeAgo date={post.duration as string} />
-                      ) : (
+                      {new Date(post.duration) <= new Date() ||
+                      post.status !== "pending" ? (
                         translate("component.post_card.table.finish")
+                      ) : (
+                        <TimeAgo date={post.duration as string} />
                       )}
                     </Typography>
 

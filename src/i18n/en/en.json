@@ -269,6 +269,10 @@
     "404": {
       "page_not_found": "Page Not Found",
       "go_home": "Go home"
+    },
+    "explore":{
+      "explore_moniests":"Explore Moniests",
+      "explore_analysis":"Discover Best Analysis"
     }
   },
   "component": {

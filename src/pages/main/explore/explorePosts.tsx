@@ -1,10 +1,11 @@
-import { Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { InfiniteScroll } from "../../../components/shared/common/infiniteScroll";
 import PostCard from "../../../components/shared/post/postCard";
 import { Post } from "../../../interfaces/post";
 import api from "../../../services/api";
 import { TestPost } from "../../../services/tempDatas";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 const ExplorePosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -21,6 +22,7 @@ const ExplorePosts = () => {
     offset: 0,
     sortBy: "score",
   });
+  const translate = useTranslate();
 
   const getPosts = useCallback(() => {
     const dummyPost = { ...TestPost, id: "-1" };
@@ -53,18 +55,23 @@ const ExplorePosts = () => {
   }, [queryParams, getPosts]);
 
   return (
-    <InfiniteScroll
-      hasMore={queryParams.hasMore!}
-      dataLength={posts.length}
-      fetchData={handleFetchData}
-      loader={<PostCard post={TestPost} loading={true} />}
-    >
-      <Stack rowGap={2}>
-        {posts.map((post, i) => (
-          <PostCard key={i} loading={post.id === "-1"} post={post} />
-        ))}
-      </Stack>
-    </InfiniteScroll>
+    <Box>
+      <Typography variant="h3" mb={1}>
+        {translate("page.explore.explore_analysis")}
+      </Typography>
+      <InfiniteScroll
+        hasMore={queryParams.hasMore!}
+        dataLength={posts.length}
+        fetchData={handleFetchData}
+        loader={<PostCard post={TestPost} loading={true} />}
+      >
+        <Stack rowGap={2}>
+          {posts.map((post, i) => (
+            <PostCard key={i} loading={post.id === "-1"} post={post} />
+          ))}
+        </Stack>
+      </InfiniteScroll>
+    </Box>
   );
 };
 export default ExplorePosts;

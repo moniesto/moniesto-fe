@@ -37,7 +37,7 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
       <Typography
         variant="h5"
         fontWeight="bold"
-        sx={{ color: colorByNumberValue(value) }}
+        sx={{ color: colorByNumberValue(isTotal ? 0 : value) }}
       >
         {value}
         {symbol}
@@ -103,19 +103,11 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
               {!loading ? (
                 <Stack alignItems="center">
                   <Typography variant="h4">
-                    {user.moniest?.subscriber_count}
+                    {user.moniest?.subscription_info.fee}$
                   </Typography>
-                  <Stack direction="row" alignItems="center" gap={0.2}>
-                    <GroupOutlined
-                      sx={{
-                        fontSize: "0.8rem",
-                        opacity: 0.6,
-                      }}
-                    />
-                    <Typography variant="h6" sx={{ opacity: 0.7 }}>
-                      {translate("moniest.subscribers")}
-                    </Typography>
-                  </Stack>
+                  <Typography variant="h6" sx={{ opacity: 0.7 }}>
+                    {translate("moniest.per_month")}
+                  </Typography>
                 </Stack>
               ) : (
                 <>
@@ -190,11 +182,19 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
                     fontWeight: "600",
                     fontSize: "0.7rem",
                   }}
+                  icon={
+                    <GroupOutlined
+                      sx={{
+                        fontSize: "0.8rem",
+                        opacity: 0.6,
+                      }}
+                    />
+                  }
                   label={
                     <Stack direction="row" alignItems="baseline" gap={0.6}>
-                      {user.moniest?.subscription_info?.fee || 0}$
+                      {user.moniest?.subscriber_count || 0}
                       <Typography variant="h5" sx={{ opacity: 0.7 }}>
-                        /{translate("moniest.per_month")}
+                        {translate("moniest.subscribers")}
                       </Typography>
                     </Stack>
                   }

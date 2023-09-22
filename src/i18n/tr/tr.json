@@ -253,6 +253,10 @@
     "404": {
       "page_not_found": "Sayfa bulunamadı",
       "go_home": "Anasayfaya git"
+    },
+    "explore":{
+      "explore_moniests":"Moniest'leri Keşfet",
+      "explore_analysis":"En İyi Analizleri Keşfet"
     }
   },
   "component": {
