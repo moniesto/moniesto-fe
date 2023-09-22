@@ -36,7 +36,7 @@ const MainLayout = () => {
       </AppBar>
       <Container
         sx={{
-          marginTop: { xs: 7, md: 10 },
+          marginTop: { xs: "56px", md: "60px" },
           minHeight: { xs: "calc(100vh - 56px)", md: "calc(100vh - 70px)" },
           padding: { xs: "10px 12px 66px", md: "35px" },
         }}
