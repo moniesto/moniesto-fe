@@ -1,4 +1,4 @@
-import { Box, Divider, List, Paper, Typography } from "@mui/material";
+import { Divider, List, Paper, Typography } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { User } from "../../../../interfaces/user";
 import SubsPersonCard from "../../../../components/shared/user/subsPersonCard";
@@ -9,7 +9,6 @@ import { Stack } from "@mui/system";
 import { useTranslate } from "../../../../hooks/useTranslate";
 import { TestUser } from "../../../../services/tempDatas";
 import { useAppSelector } from "../../../../store/hooks";
-import { Spinner } from "../../../../components/shared/common/spinner";
 
 const SubscriptionsTab = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -53,11 +52,7 @@ const SubscriptionsTab = () => {
     if (queryParams.hasMore) getSubscriptions();
   }, [queryParams, getSubscriptions]);
 
-  return loading ? (
-    <Box sx={{ position: "relative", minHeight: 100, width: "100%" }}>
-      <Spinner center={true} />
-    </Box>
-  ) : (
+  return (
     <Paper>
       <List>
         <InfiniteScroll
