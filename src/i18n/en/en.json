@@ -12,7 +12,7 @@
       "toast": {
         "login_success": "Login successful"
       },
-      "need_auth":"Your authentication has expired. Please login again."
+      "need_auth": "Your authentication has expired. Please login again."
     },
     "register": {
       "title": "Register",
@@ -55,9 +55,11 @@
         },
         "title": "Change Password"
       },
-      "payment":{
-        "title":"Payout Method",
-        "toast": { "updated_success": "Your payout method has been successfully updated" }
+      "payment": {
+        "title": "Payout Method",
+        "toast": {
+          "updated_success": "Your payout method has been successfully updated"
+        }
       }
     },
     "forget_pass": {
@@ -103,44 +105,46 @@
         "terms": "Terms",
         "privacy_policy": "Privacy Policy"
       },
-      "about":{
-        "discover":{
-          "title":"Discover Moniesto",
-          "desc":"Platform where those who share their cryptocurrency analysis and people who invest in the cryptocurrency exchange come together",
-          "subscribe":{
-            "title":"Subscribe",
-            "desc":"Find the moniest with the best rating and price for you"
+      "about": {
+        "discover": {
+          "title": "Discover Moniesto",
+          "desc": "Platform where those who share their cryptocurrency analysis and people who invest in the cryptocurrency exchange come together",
+          "subscribe": {
+            "title": "Subscribe",
+            "desc": "Find the moniest with the best statistics and price for you"
           },
-          "see_analysis":{
-            "title":"See analysis",
-            "desc":"See the analysis of the moniest you subscribe to and direct your investments"
+          "see_analysis": {
+            "title": "See Analysis",
+            "desc": "See the analysis of the moniest you subscribe to and direct your investments"
           }
         },
-        "be_moniest":{
-          "title":"Become a Moniest, Turn Your Analysis Into Money",
-          "desc":"If you have knowledge on the cryptocurrency exchange and want to make money",
-          "step1":"Set your fee",
-          "step2":"Enter your Binance ID",
-          "step3":"Show your analysis to the world"
+        "be_moniest": {
+          "title": "Become a Moniest, Turn Your Analysis Into Money",
+          "desc": "If you have knowledge on the cryptocurrency exchange and want to make money",
+          "step1": "Set your fee",
+          "step2": "Enter your Binance ID",
+          "step3": "Show your analysis to the world"
         }
       },
-      "payment":{
-        "title":"Pay and Get Payments with Crypto",
-        "sub_title":"You can subscribe with crypto!",
-        "desc":"Binance Pay is a contactless, borderless and secure cryptocurrency payment technology designed by Binance."
+      "payment": {
+        "title": "Pay and Get Payments with Crypto",
+        "sub_title": "You can subscribe with crypto!",
+        "desc": "Binance Pay is a contactless, borderless and secure cryptocurrency payment technology designed by Binance."
       },
       "faq": {
-        "title": "Frequently asked questions",
+        "title": "Frequently Asked Questions",
         "questions": {
-          "question1": "How do I become a Moniest on Moniesto?",
-          "answer1": "After registering on our platform, you can become a moniest in a few steps. Then you are ready to share your analysis with users. Being a Binance user is mandatory as we only make payments through Binance for now.",
-          "question2": "How the scoring system works",
-          "answer2": "Our AI-powered algorithm is designed to detect the accuracy of analyzes by Moniests and provide a score based on their success rate. This helps us identify the most reliable and accurate Moniests.",
-          "question3": "Can I see a Moniest's score before subscribing?",
-          "answer3": "Yes, you can see a Moniest's score on their profile page before subscribing to them. This can help you make an informed decision about which Moniest to subscribe to. You can even see their outdated analysis and their results before subscribing.",
-          "question4": "How do I subscribe to a Moniest?",
-          "answer4": "From Moniest's profile, choose how many months to subscribe to it. You can then access their analysis after paying the subscription fee via binance, which we will automatically direct you to."
-         }
+          "question0": "Who is called 'Moniest'?",
+          "answer0": "'Moniest' is a term that represents users or analysts who provide valuable information about the crypto markets, a key component of our platform.",
+          "question1": "How do I become Moniest?",
+          "answer1": "After registering on our platform, you can become Moniest in a few steps. Then, you're ready to share your insights with users. Since we only make payments through Binance for now, it is mandatory to be a Binance user.",
+          "question2": "How can I decide whether to subscribe to a Moniest?",
+          "answer2": "By entering Moniest's profile page, you can access 7-day, 30-Day and Total statistics of ROI, PNL, and Win Rates, as well as previous analysis. This will help you subscribe to Moniest that is most suitable for you.",
+          "question3": "How do I subscribe to a Moniest?",
+          "answer3": "From Moniest's profile, determine how many months you will subscribe to it. You can then access their analysis after paying the subscription fee through Binance, to which we will automatically redirect you.",
+          "question4": "How can I cancel my subscription to Moniest?",
+          "answer4": "When you want to cancel your subscription, if you have any remaining months, your payment will be transferred back to your Binance account. The subscription does not automatically renew after it expires."
+        }
       },
       "still_question": {
         "title": "Still have questions?",
@@ -157,9 +161,9 @@
       "toast": {
         "post_created": "Your post successfully created "
       },
-      "preview":{
-        "title":"Analysis Preview",
-        "message":"After reviewing your analysis, you can approve it for publication."
+      "preview": {
+        "title": "Analysis Preview",
+        "message": "After reviewing your analysis, you can approve it for publication."
       }
     },
     "be_moniest": {
@@ -173,34 +177,34 @@
       "check_mail": "Please check your email",
       "need_verify": "You need to verify your email address to become a Moniest",
       "verify_email": "Verify Email",
-      "select_payout_method":"Determine which payment instrument your subscribers will pay you with.",
-      "payout_method":{
-        "binance":"Binance",
-        "bank":"Bank(Soon)"
+      "select_payout_method": "Determine which payment instrument your subscribers will pay you with.",
+      "payout_method": {
+        "binance": "Binance",
+        "bank": "Bank(Soon)"
       },
-      "get_binance_id":{
-        "title":"How to Find My User ID (BUID) on Binance.com",
-        "description":"Binance ID or UID is a unique identifier allocated to each account. Follow the below steps to find it on the Binance website or App.",
-        "on_app":{
-          "title":"On Binance App:",
+      "get_binance_id": {
+        "title": "How to Find My User ID (BUID) on Binance.com",
+        "description": "Binance ID or UID is a unique identifier allocated to each account. Follow the below steps to find it on the Binance website or App.",
+        "on_app": {
+          "title": "On Binance App:",
           "desc": "Tap the [Profile] icon on the top left corner. You will then see your user ID under your email address."
         },
-        "on_website":{
-          "title":"On Binance website:",
+        "on_website": {
+          "title": "On Binance website:",
           "desc": "Log in to your account and go to [Profile] - [Dashboard]. You'll see your User ID next to your email address at the top of the page."
         }
       },
       "submit": {
-          "almost_ready":"You're Almost Ready!",
-          "becoming_moniest":"You become moniest. You can now share your analysis with the world.",
-          "sub_detail":{
-            "title":"Subscription Details",
-            "binance_id":"Binance ID",
-            "sub_price":"Subscription Fee",
-            "moniesto_fee":"Moniesto operation fee ({{percentage}}%)",
-            "payout_price":"Total (monthly)"
-          },
-          "change_variables":"You can change your Binance ID and Subscription Fee at any time in your Account Settings."
+        "almost_ready": "You're Almost Ready!",
+        "becoming_moniest": "You become moniest. You can now share your analysis with the world.",
+        "sub_detail": {
+          "title": "Subscription Details",
+          "binance_id": "Binance ID",
+          "sub_price": "Subscription Fee",
+          "moniesto_fee": "Moniesto operation fee ({{percentage}}%)",
+          "payout_price": "Total (monthly)"
+        },
+        "change_variables": "You can change your Binance ID and Subscription Fee at any time in your Account Settings."
       },
       "step": {
         "email_verify": "Email verify",
@@ -222,13 +226,13 @@
       "no_subscriber_account": "{{username}} doesn't have any subscribers yet",
       "no_subscription": "You don't have any subscriptions yet",
       "no_subscription_account": "{{username}} doesn't have any subscriptions yet",
-      "statistics":{
-        "win_rate":"Win Rate",
-        "roi":"ROI",
-        "pnl":"PNL",
-        "7d":"7D",
-        "30d":"30D",
-        "total":"Total"
+      "statistics": {
+        "win_rate": "Win Rate",
+        "roi": "ROI",
+        "pnl": "PNL",
+        "7d": "7D",
+        "30d": "30D",
+        "total": "Total"
       },
       "tab": {
         "posts": "Posts {{count}}",
@@ -239,27 +243,27 @@
       "subs_modal": {
         "to": "Subscribe to <bold> {{username}} </bold>",
         "monthly": "Monthly",
-        "subscribtion_month":"Subscription time (Month)",
-        "payment_method":{
-          "desc":"Payment method",
-          "bank":"Bank",
-          "binance_pay":"Binance Pay"
+        "subscribtion_month": "Subscription time (Month)",
+        "payment_method": {
+          "desc": "Payment method",
+          "bank": "Bank",
+          "binance_pay": "Binance Pay"
         },
         "monthly_payment": "Monthly payment",
         "subs_start_date": "Subscription start date",
         "subs_end_date": "Subscription end date",
-        "subs_desc":"The total of the months you set will be withdrawn from your account in one go and will be paid monthly to moniest. When you want to cancel, it will be credited back to your account if you have any remaining months. Subscription does not automatically renew after it expires.",
+        "subs_desc": "The total of the months you set will be withdrawn from your account in one go and will be paid monthly to moniest. When you want to cancel, it will be credited back to your account if you have any remaining months. Subscription does not automatically renew after it expires.",
         "total": "Total",
-        "subs_detail":"Your Subscription Details",
-        "subscribed_price":"Amount You Subscribed (Monthly)",
-        "remaining_time":"Remaining / Total Months",
-        "unsub_desc":"If you wish to cancel your subscription, the remaining amount (if any) will be transferred to your Binance account with your <bold>{{payer_id}}</bold> Payment ID, deducting (<bold>{{fee}}%</bold>) of the transaction fee from your remaining months.",
-        "cancel_modal":{
-          "title":"Subscription Cancellation",
-          "message":"Are you sure you want to cancel your subscription?",
-          "message_body":"If you cancel, you will no longer have access to moniest's live analytics."
+        "subs_detail": "Your Subscription Details",
+        "subscribed_price": "Amount You Subscribed (Monthly)",
+        "remaining_time": "Remaining / Total Months",
+        "unsub_desc": "If you wish to cancel your subscription, the remaining amount (if any) will be transferred to your Binance account with your <bold>{{payer_id}}</bold> Payment ID, deducting (<bold>{{fee}}%</bold>) of the transaction fee from your remaining months.",
+        "cancel_modal": {
+          "title": "Subscription Cancellation",
+          "message": "Are you sure you want to cancel your subscription?",
+          "message_body": "If you cancel, you will no longer have access to moniest's live analytics."
         },
-        "cancel_toast":"You have successfully unsubscribed."
+        "cancel_toast": "You have successfully unsubscribed."
       },
       "post_filter": {
         "all": "All",
@@ -270,9 +274,9 @@
       "page_not_found": "Page Not Found",
       "go_home": "Go home"
     },
-    "explore":{
-      "explore_moniests":"Explore Moniests",
-      "explore_analysis":"Discover Best Analysis"
+    "explore": {
+      "explore_moniests": "Explore Moniests",
+      "explore_analysis": "Discover Best Analysis"
     }
   },
   "component": {
@@ -281,14 +285,14 @@
     },
     "post_card": {
       "not_advice": "Not Investment Advice!",
-      "target_points":"Target Points",
+      "target_points": "Target Points",
       "table": {
-        "finish":"Finished",
+        "finish": "Finished",
         "direction": "Direction",
         "start": "Start",
         "target": "Target",
         "time_left": "Time Left",
-        "take_profit":"Take Profit",
+        "take_profit": "Take Profit",
         "tp_1": "TP 1",
         "tp_2": "TP 2",
         "tp_3": "TP 3",
@@ -323,93 +327,93 @@
       "header": "Legal Warning",
       "message": "The information, opinions and recommendations about investing that you find here are not the same as getting advice from an investment advisor. The opinions and recommendations here are just personal opinions of the people who wrote them. Those opinions might not be right for you and your situation. So, if you only use the information you find here to make an investment, you might not get the results you want."
     },
-    "subscription":{
-      "title":{
-        "success":"Payment completed successfully",
-        "fail":"Payment process could not be completed"
+    "subscription": {
+      "title": {
+        "success": "Payment completed successfully",
+        "fail": "Payment process could not be completed"
       },
-      "message":{
-        "success":"Now you can access moniest's live posts",
-        "fail":"Your payment transaction could not be completed for any reason. Please try again"
+      "message": {
+        "success": "Now you can access moniest's live posts",
+        "fail": "Your payment transaction could not be completed for any reason. Please try again"
       },
-      "link_created":"Payment link has been created",
-      "click_link":"You can pay by clicking the link"
+      "link_created": "Payment link has been created",
+      "click_link": "You can pay by clicking the link"
     },
-    "editor":{
-      "ui":{
-        "blockTunes":{
-          "toggler":{
-            "click_tune":"Click to tune",
-            "drag_move":"or drag to move"
+    "editor": {
+      "ui": {
+        "blockTunes": {
+          "toggler": {
+            "click_tune": "Click to tune",
+            "drag_move": "or drag to move"
           }
         },
-        "inlineToolbar":{
-          "converter":{
-            "convert_to":"Convert to"
+        "inlineToolbar": {
+          "converter": {
+            "convert_to": "Convert to"
           }
         },
-        "toolbar":{
-          "toolbox":{
-            "add":"Add"
+        "toolbar": {
+          "toolbox": {
+            "add": "Add"
           }
         }
       },
-      "toolNames":{
-        "text":"Text",
-        "heading":"Heading",
-        "list":"List",
-        "warning":"Warning",
-        "image":"Image"
+      "toolNames": {
+        "text": "Text",
+        "heading": "Heading",
+        "list": "List",
+        "warning": "Warning",
+        "image": "Image"
       },
-      "tools":{
-        "warning":{
-          "title":"Title",
-          "message":"Message"
+      "tools": {
+        "warning": {
+          "title": "Title",
+          "message": "Message"
         },
-        "image":{
-          "caption":"Caption",
-          "upload":"Upload an image",
-          "with_border":"With border",
-          "stretch":"Stretch image",
-          "with_background":"With background"
+        "image": {
+          "caption": "Caption",
+          "upload": "Upload an image",
+          "with_border": "With border",
+          "stretch": "Stretch image",
+          "with_background": "With background"
         },
-        "header":{
-          "header":"Header",
-          "heading_1":"Heading 1",
-          "heading_2":"Heading 2",
-          "heading_3":"Heading 3",
-          "heading_4":"Heading 4",
-          "heading_5":"Heading 5",
-          "heading_6":"Heading 6"
+        "header": {
+          "header": "Header",
+          "heading_1": "Heading 1",
+          "heading_2": "Heading 2",
+          "heading_3": "Heading 3",
+          "heading_4": "Heading 4",
+          "heading_5": "Heading 5",
+          "heading_6": "Heading 6"
         },
-        "list":{
-          "ordered":"Ordered",
-          "unordered":"Unordered"
+        "list": {
+          "ordered": "Ordered",
+          "unordered": "Unordered"
         }
       },
-      "blockTunes":{
-        "delete":{
-          "main":"Delete",
-          "click_delete":"Click to delete"
+      "blockTunes": {
+        "delete": {
+          "main": "Delete",
+          "click_delete": "Click to delete"
         },
-        "moveup":"Move up",
-        "movedown":"Move down"
+        "moveup": "Move up",
+        "movedown": "Move down"
       },
-      "popover":{
-        "filter":"Filter",
-        "notfound":"Nothing found"
+      "popover": {
+        "filter": "Filter",
+        "notfound": "Nothing found"
       }
     },
-    "moniest_card":{
-      "7d_roi":"7G ROI",
-      "30d_roi":"30G ROI",
-      "total_roi":"Toplam ROI",
-      "7d_pnl":"7G PNL",
-      "30d_pnl":"30G PNL",
-      "total_pnl":"Total PNL",
-      "7d_win_rate":"7G Win Rate",
-      "30d_win_rate":"30G Win Rate",
-      "total_win_rate":"Total Win Rate"
+    "moniest_card": {
+      "7d_roi": "7G ROI",
+      "30d_roi": "30G ROI",
+      "total_roi": "Toplam ROI",
+      "7d_pnl": "7G PNL",
+      "30d_pnl": "30G PNL",
+      "total_pnl": "Total PNL",
+      "7d_win_rate": "7G Win Rate",
+      "30d_win_rate": "30G Win Rate",
+      "total_win_rate": "Total Win Rate"
     }
   },
   "form": {
@@ -421,17 +425,17 @@
       "fullname": "Full name",
       "location": "Location",
       "language": {
-        "title":"Language",
-        "en":"English",
-        "tr":"Turkish"
+        "title": "Language",
+        "en": "English",
+        "tr": "Turkish"
       },
       "search_moniest": "Search for Moniests ...",
       "username": "Username",
       "currency": "Select Cryptocurrency Parity",
       "duration": "Estimated End Time",
       "direction": "Direction",
-      "set_leverage":"Adjust Leverage",
-      "new_tp":"Add New Take Profit (optional)",
+      "set_leverage": "Adjust Leverage",
+      "new_tp": "Add New Take Profit (optional)",
       "take_profit": "Take Profit",
       "tp_1": "TP 1",
       "tp_2": "TP 2",
@@ -439,8 +443,8 @@
       "stop_point": "Stop Point",
       "stop": "Stop",
       "add_desc": "Add Description (optional)",
-      "description":"Description",
-      "desc_placeholder":"Add comments to support your analysis...",
+      "description": "Description",
+      "desc_placeholder": "Add comments to support your analysis...",
       "share": "Share",
       "fee": "How much will users pay monthly for your subscription? ( USD )",
       "bio": "Short information about you",
@@ -450,8 +454,8 @@
       "message": "Message",
       "enter_message": "Enter a message",
       "feedback_type": "Feedback type",
-      "binance_id":"Please enter your Binance User ID",
-      "how_can_find":"How can I find"
+      "binance_id": "Please enter your Binance User ID",
+      "how_can_find": "How can I find"
     },
     "validation": {
       "identifier_req": "Email or username is required",
@@ -498,7 +502,7 @@
       "location_max": "Location should be of maximum {{value}} characters length",
       "type_req": "Feedback type is required",
       "binance_id_valid": "Invalid Binance User ID",
-      "binance_id_req":"Binance User ID is required"
+      "binance_id_req": "Binance User ID is required"
     }
   },
   "moniest": {
@@ -507,7 +511,7 @@
     "subscribed": "Subscribed",
     "subscribe": "Subscribe",
     "show_more": "Show More",
-    "go_payment":"Go to payment"
+    "go_payment": "Go to payment"
   },
   "common": {
     "welcome": "Welcome",
@@ -519,8 +523,8 @@
     "back": "Back",
     "edit": "Edit",
     "cancel": "Cancel",
-    "complete":"Complete",
-    "confirm":"Confirm"
+    "complete": "Complete",
+    "confirm": "Confirm"
   },
   "navigation": {
     "timeline": "Timeline",
@@ -539,16 +543,16 @@
   },
   "server": {
     "error": {
-      "Account_Login_NotFoundEmail":"No account found associated with this email",
-      "Account_Login_WrongPassword":"Wrong password en",
+      "Account_Login_NotFoundEmail": "No account found associated with this email",
+      "Account_Login_WrongPassword": "Wrong password en",
       "Account_CheckUsername_InvalidUsername": "Username is invalid",
-      "Post_CreatePost_InvalidTargets":"TP's are invalid",
-      "Moniest_CreateMoniest_InvalidBody":"These information is invalid to be moniest",
-      "Account_EmailVerification_NotFoundToken":"The email verification link is broken or invalid. Please try to verify again.",
-      "Post_CreatePost_InvalidStop":"Stop is invalid",
-      "Account_Login_NotFoundUsername":"Kullanıcı adı sisteme kayıtlı değil",
-      "Account_Register_RegisteredEmail":"Email is already registered",
-      "Account_Authorization_InvalidToken":"Your login period has expired. Please login again."
+      "Post_CreatePost_InvalidTargets": "TP's are invalid",
+      "Moniest_CreateMoniest_InvalidBody": "These information is invalid to be moniest",
+      "Account_EmailVerification_NotFoundToken": "The email verification link is broken or invalid. Please try to verify again.",
+      "Post_CreatePost_InvalidStop": "Stop is invalid",
+      "Account_Login_NotFoundUsername": "Kullanıcı adı sisteme kayıtlı değil",
+      "Account_Register_RegisteredEmail": "Email is already registered",
+      "Account_Authorization_InvalidToken": "Your login period has expired. Please login again."
     }
   }
 }

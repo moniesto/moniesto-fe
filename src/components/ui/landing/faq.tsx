@@ -20,11 +20,11 @@ export const FAQ = () => {
     setExpanded(expanded === panel ? -1 : panel);
   };
 
-  const faqs: { question: string; answer: string }[] = [...Array(4)].map(
+  const faqs: { question: string; answer: string }[] = [...Array(5)].map(
     (x, i) => {
       return {
-        question: "question" + (i + 1),
-        answer: "answer" + (i + 1),
+        question: "question" + i,
+        answer: "answer" + i,
       };
     }
   );

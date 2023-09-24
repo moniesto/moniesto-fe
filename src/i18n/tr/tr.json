@@ -10,7 +10,7 @@
         "register": "Kayıt ol"
       },
       "toast": { "login_success": "Giriş başarılı" },
-      "need_auth":"Giriş süreniz doldu. Lütfen tekrar giriş yapın."
+      "need_auth": "Giriş süreniz doldu. Lütfen tekrar giriş yapın."
     },
     "register": {
       "title": "Kayıt ol",
@@ -45,8 +45,8 @@
         "toast": { "updated_success": "Şifreniz başarıyla güncellendi" },
         "title": "Şifre Değiştir"
       },
-      "payment":{
-        "title":"Ödeme Yöntemi",
+      "payment": {
+        "title": "Ödeme Yöntemi",
         "toast": { "updated_success": "Ödeme yönteminiz başarıyla güncellendi" }
       }
     },
@@ -89,44 +89,47 @@
         "contact": "İletişim",
         "terms": "Şartlar",
         "privacy_policy": "Gizlilik Politikası"
-      }, 
-      "about":{
-        "discover":{
-          "title":"Moniesto'yu Keşfet",
-          "desc":"Kripto para analizlerini paylaşanlar ile kripto para borsasında yatırım yapan insanların bir araya geldiği platform",
-          "subscribe":{
-            "title":"Abone ol",
-            "desc":"Senin için en uygun puan ve ücreti olan moniest'ı bul"
+      },
+      "about": {
+        "discover": {
+          "title": "Moniesto'yu Keşfet",
+          "desc": "Kripto para analizlerini paylaşanlar ile kripto para borsasında yatırım yapan insanların bir araya geldiği platform",
+          "subscribe": {
+            "title": "Abone Ol",
+            "desc": "Senin için en uygun istatistik ve ücreti olan moniest'ı bul"
           },
-          "see_analysis":{
-            "title":"Analizleri gör",
-            "desc":"Abone olduğun moniest'ın analizlerini gör ve yatırımlarına yön ver"
+          "see_analysis": {
+            "title": "Analizleri Gör",
+            "desc": "Abone olduğun moniest'ın analizlerini gör ve yatırımlarına yön ver"
           }
         },
-        "be_moniest":{
-          "title":"Moniest Ol, Analizlerin Paraya Dönüşsün",
-          "desc":"Kripto para borsasında bilgi sahibiysen ve para kazanmak istiyorsan",
-          "step1":"Ücretini belirle",
-          "step2":"Binance ID'ni gir",
-          "step3":"Analizlerini dünyaya göster"
+        "be_moniest": {
+          "title": "Moniest Ol, Analizlerin Paraya Dönüşsün",
+          "desc": "Kripto para borsasında bilgi sahibiysen ve para kazanmak istiyorsan",
+          "step1": "Ücretini belirle",
+          "step2": "Binance ID'ni gir",
+          "step3": "Analizlerini dünyaya göster"
         }
       },
-      "payment":{
-        "title":"Kripto ile Ödeme Yapın ve Ödeme Alın",
-        "sub_title":"Kripto ile abone olabilirsin!",
-        "desc":"Binance Pay, Binance tarafından tasarlanan temassız, sınırsız ve güvenli bir kripto para birimi ödeme teknolojisidir."
+      "payment": {
+        "title": "Kripto ile Ödeme Yapın ve Ödeme Alın",
+        "sub_title": "Kripto ile abone olabilirsin!",
+        "desc": "Binance Pay, Binance tarafından tasarlanan temassız, sınırsız ve güvenli bir kripto para birimi ödeme teknolojisidir."
       },
       "faq": {
-      "title": "Sıkça Sorulan Sorular",
-      "questions": {
-        "question1": "Moniesto'da nasıl Moniest olurum?",
-        "answer1": "Platformumuza kayıt olduktan sonra birkaç adımda moniest olabilirsin. Ardından, analizlerini kullanıcılarla paylaşmaya hazırsınız. Şimdilik ödemeleri sadece Binance üzerinden yaptığımızdan dolayı Binance kullanıcısı olmak zorunludur.",
-        "question2": "Puanlama sistemi nasıl işliyor?",
-        "answer2": "Yapay Zeka  destekli algoritmamız, Moniest'lar tarafından yapılan analizlerin doğruluğunu tespit etmek ve başarı oranlarına göre bir puan sağlamak için tasarlanmıştır. Bu, en güvenilir ve doğru Moniest'ları belirlememize yardımcı olur.",
-        "question3": "Abone olmadan önce Moniest puanını görebilir miyim?",
-        "answer3": "Evet, bir Moniest'a abone olmadan önce profil sayfalarında puanlarını görebilirsiniz. Bu, hangi Moniest'a abone olacağınız konusunda bilinçli bir karar vermenize yardımcı olabilir. Abone olmadan önce eski analizlerini ve sonuçlarını bile görebilirsiniz.",
-        "question4": "Bir Moniest'a nasıl abone olurum?",
-        "answer4": "Moniest'ın profilinden, ona kaç aylık abone olacağınızı belirleyin. Daha sonra abonelik ücretini, sizi otomatik olarak yönlendireceğimiz binance üzerinden ödedikten sonra analizlerine erişebilirsiniz."      }
+        "title": "Sıkça Sorulan Sorular",
+        "questions": {
+          "question0": "'Moniest' kime denir?",
+          "answer0": "'Moniest' platformumuzun önemli bir bileşeni olan, kripto piyasaları hakkında değerli bilgiler sunan kullanıcı veya analistleri temsil eden bir terimdir.",
+          "question1": "Nasıl Moniest olurum?",
+          "answer1": "Platformumuza kayıt olduktan sonra birkaç adımda moniest olabilirsin. Ardından, analizlerini kullanıcılarla paylaşmaya hazırsınız. Şimdilik ödemeleri sadece Binance üzerinden yaptığımızdan dolayı Binance kullanıcısı olmak zorunludur.",
+          "question2": "Bir Moniest'a abone olabileceğime nasıl karar verebilirim?",
+          "answer2": "Moniest'ın profil sayfasına girerek, ROI, PNL, ve Kazanma Oranılarının 7 günlük, 30 Günlük ve Toplam istatistiklerine ve aynı zamanda eski analizlerine de erişim sağlayabilirsin. Bu senin için en uygun Moniest'a abone olmanda yardımcı olacaktır.",
+          "question3": "Bir Moniest'a nasıl abone olurum?",
+          "answer3": "Moniest'ın profilinden, ona kaç aylık abone olacağınızı belirleyin. Daha sonra abonelik ücretini, sizi otomatik olarak yönlendireceğimiz binance üzerinden ödedikten sonra analizlerine erişebilirsiniz.",
+          "question4": "Bir Moniest'a olan aboneliğimi nasıl iptal edebilirim?",
+          "answer4": "Aboneliğinizi iptal etmek istediğinizde, kalan aylarınız varsa, ödeme yaptığınız Binance hesabınıza geri aktarılacaktır. Abonelik, süresi bittikten sonra kendi kendine yenilenmez."
+        }
       },
       "still_question": {
         "title": "Hala sorularınız mı var?",
@@ -141,9 +144,9 @@
       "approximate_score_valid": "Alabileceğiniz en yüksek skor",
       "approximate_score_invalid": "Gönderi geçerli olduğunda hesaplanır",
       "toast": { "post_created": "Gönderiniz başarıyla oluşturuldu" },
-      "preview":{
-        "title":"Analiz Önizlemesi",
-        "message":"Analizinizi gözden geçirdikten sonra yayınlanması için onaylayabilirsiniz."
+      "preview": {
+        "title": "Analiz Önizlemesi",
+        "message": "Analizinizi gözden geçirdikten sonra yayınlanması için onaylayabilirsiniz."
       }
     },
     "be_moniest": {
@@ -157,34 +160,34 @@
       "check_mail": "Lütfen email'inizi kontrol edin",
       "need_verify": "Monest olmak için e-posta adresinizi doğrulamanız gerekir",
       "verify_email": "E-posta'ı doğrula",
-      "select_payout_method":"Abonelerinizin size hangi ödeme aracı ile ödeme yapacağını belirleyin.",
-      "payout_method":{
-        "binance":"Binance",
-        "bank":"Banka(Yakında)"
+      "select_payout_method": "Abonelerinizin size hangi ödeme aracı ile ödeme yapacağını belirleyin.",
+      "payout_method": {
+        "binance": "Binance",
+        "bank": "Banka(Yakında)"
       },
-      "get_binance_id":{
-        "title":"Binance.com'da Kullanıcı Numaramı (BUID) Nasıl Bulabilirim?",
-        "description":"Binance kimliği veya kullanıcı numarası her hesaba tahsis edilmiş benzersiz bir tanımlayıcıdır. Binance web sitesinde veya Binance uygulamasında Kullanıcı Numaranızı bulmak için aşağıdaki adımları takip edin. ",
-        "on_app":{
-          "title":"Binance Uygulamasında:",
+      "get_binance_id": {
+        "title": "Binance.com'da Kullanıcı Numaramı (BUID) Nasıl Bulabilirim?",
+        "description": "Binance kimliği veya kullanıcı numarası her hesaba tahsis edilmiş benzersiz bir tanımlayıcıdır. Binance web sitesinde veya Binance uygulamasında Kullanıcı Numaranızı bulmak için aşağıdaki adımları takip edin. ",
+        "on_app": {
+          "title": "Binance Uygulamasında:",
           "desc": "Sol üst köşedeki [Profil] simgesine dokunun. Bunun ardından, Kullanıcı Numaranızı e-posta adresinizin altında göreceksiniz."
         },
-        "on_website":{
-          "title":"Binance web sitesinde:",
+        "on_website": {
+          "title": "Binance web sitesinde:",
           "desc": "Hesabınıza giriş yapın ve [Profil] - [Pano] bölümüne gidin. Kullanıcı Numaranızı sayfanın üst kısmında e-posta adresinizin yanında göreceksiniz."
         }
       },
       "submit": {
-        "almost_ready":"Neredeyse Hazırsın!",
-        "becoming_moniest":"Moniest oluyorsun. Analizlerini şimdi dünya ile paylaşabilirsin.",
-        "sub_detail":{
-          "title":"Abonelik Detayları",
-          "binance_id":"Binance ID",
-          "sub_price":"Abonelik Ücreti",
-          "moniesto_fee":"Moniesto operasyon ücreti ({{percentage}}%)",
-          "payout_price":"Toplam (aylık)"
+        "almost_ready": "Neredeyse Hazırsın!",
+        "becoming_moniest": "Moniest oluyorsun. Analizlerini şimdi dünya ile paylaşabilirsin.",
+        "sub_detail": {
+          "title": "Abonelik Detayları",
+          "binance_id": "Binance ID",
+          "sub_price": "Abonelik Ücreti",
+          "moniesto_fee": "Moniesto operasyon ücreti ({{percentage}}%)",
+          "payout_price": "Toplam (aylık)"
         },
-        "change_variables":"Binance ID'ni ve Abonelik Ücreti'ni Hesap Ayarları'ndan istediğin zaman değiştirebilirsin."
+        "change_variables": "Binance ID'ni ve Abonelik Ücreti'ni Hesap Ayarları'ndan istediğin zaman değiştirebilirsin."
       },
       "step": {
         "email_verify": "Email doğrulama",
@@ -206,13 +209,13 @@
       "no_subscriber_account": "{{username}} henüz abonesi yok",
       "no_subscription": "Henüz aboneliğiniz yok",
       "no_subscription_account": "{{username}} henüz aboneliği yok",
-      "statistics":{
-        "win_rate":"Kazanma Oranı",
-        "roi":"ROI",
-        "pnl":"PNL",
-        "7d":"7G",
-        "30d":"30G",
-        "total":"Toplam"
+      "statistics": {
+        "win_rate": "Kazanma Oranı",
+        "roi": "ROI",
+        "pnl": "PNL",
+        "7d": "7G",
+        "30d": "30G",
+        "total": "Toplam"
       },
       "tab": {
         "posts": "Gönderiler {{count}}",
@@ -223,27 +226,27 @@
       "subs_modal": {
         "to": "<bold> {{username}} </bold> kullanıcısına abone ol",
         "monthly": "Aylık",
-        "subscribtion_month":"Abonelik süresi (Ay)",
-        "payment_method":{
-          "desc":"Ödeme yöntemi",
-          "bank":"Banka",
-          "binance_pay":"Binance Ödeme"
+        "subscribtion_month": "Abonelik süresi (Ay)",
+        "payment_method": {
+          "desc": "Ödeme yöntemi",
+          "bank": "Banka",
+          "binance_pay": "Binance Ödeme"
         },
         "monthly_payment": "Aylık ödeme",
         "subs_start_date": "Abonelik Başlangıç Tarihi",
         "subs_end_date": "Abonelik Bitiş Tarihi",
-        "subs_desc":"Belirlediğiniz ayların toplamı hesabınızdan tek seferde çekilip aylık olarak moniest'a ödenecektir. İptal etmek istediğinizde, kalan aylarınız varsa hesabınıza geri aktarılacaktır. Abonelik, süresi bittikten sonra kendi kendine yenilenmez.",
+        "subs_desc": "Belirlediğiniz ayların toplamı hesabınızdan tek seferde çekilip aylık olarak moniest'a ödenecektir. İptal etmek istediğinizde, kalan aylarınız varsa hesabınıza geri aktarılacaktır. Abonelik, süresi bittikten sonra kendi kendine yenilenmez.",
         "total": "Toplam",
-        "subs_detail":"Abonelik Detaylarınız",
-        "subscribed_price":"Abone Olduğunuz Tutar (Aylık)",
-        "remaining_time":"Kalan / Toplam Ay",
-        "unsub_desc":" Aboneliğinizi iptal etmek isterseniz, kalan tutar (eğer varsa) kalan aylarınızdan operasyon ücreti (<bold>{{fee}}%</bold>) kesilerek, ödeme yaptığınız <bold>{{payer_id}}</bold> Ödeme Kimlik'li binance hesabınıza aktarılacaktır.",
-        "cancel_modal":{
-          "title":"Abonelik İptali",
-          "message":"Aboneliğinizi iptal etmek istediğinize emin misiniz?",
-          "message_body":"Eğer iptal ederseniz, bundan sonra moniest'ın canlı analizlerine erişemeyeceksiniz."
+        "subs_detail": "Abonelik Detaylarınız",
+        "subscribed_price": "Abone Olduğunuz Tutar (Aylık)",
+        "remaining_time": "Kalan / Toplam Ay",
+        "unsub_desc": " Aboneliğinizi iptal etmek isterseniz, kalan tutar (eğer varsa) kalan aylarınızdan operasyon ücreti (<bold>{{fee}}%</bold>) kesilerek, ödeme yaptığınız <bold>{{payer_id}}</bold> Ödeme Kimlik'li binance hesabınıza aktarılacaktır.",
+        "cancel_modal": {
+          "title": "Abonelik İptali",
+          "message": "Aboneliğinizi iptal etmek istediğinize emin misiniz?",
+          "message_body": "Eğer iptal ederseniz, bundan sonra moniest'ın canlı analizlerine erişemeyeceksiniz."
         },
-        "cancel_toast":"Abonelikten başarıyla ayrıldınız."
+        "cancel_toast": "Abonelikten başarıyla ayrıldınız."
       },
       "post_filter": {
         "all": "Hepsi",
@@ -254,21 +257,21 @@
       "page_not_found": "Sayfa bulunamadı",
       "go_home": "Anasayfaya git"
     },
-    "explore":{
-      "explore_moniests":"Moniest'leri Keşfet",
-      "explore_analysis":"En İyi Analizleri Keşfet"
+    "explore": {
+      "explore_moniests": "Moniest'leri Keşfet",
+      "explore_analysis": "En İyi Analizleri Keşfet"
     }
   },
   "component": {
     "search": { "no_user_found": "{{text}} diye bir kullanıcı bulunamadı" },
     "post_card": {
       "not_advice": "Yatırım Tavsiyesi Değildir!",
-      "target_points":"Hedef Noktalar",
+      "target_points": "Hedef Noktalar",
       "table": {
-        "finish":"Bitti",
+        "finish": "Bitti",
         "direction": "Yön",
         "start": "Giriş Noktası",
-        "take_profit":"Kar Al",
+        "take_profit": "Kar Al",
         "time_left": "Bitiş süresi",
         "tp_1": "TP 1",
         "tp_2": "TP 2",
@@ -304,93 +307,93 @@
       "header": "Yasal Uyarı",
       "message": "Burada bulduğunuz yatırımla ilgili bilgiler, görüşler ve tavsiyeler, bir yatırım danışmanından tavsiye almakla aynı şey değildir. Buradaki görüşler ve tavsiyeler, onları yazan kişilerin kişisel görüşleridir. Bu görüşler sizin ve durumunuz için doğru olmayabilir. Dolayısıyla, burada bulduğunuz bilgileri yalnızca yatırım yapmak için kullanırsanız, istediğiniz sonuçları alamayabilirsiniz."
     },
-    "subscription":{
-      "title":{
-        "success":"Ödeme başarıyla tamamlandı",
-        "fail":"Ödeme işlemi tamamlanamadı"
+    "subscription": {
+      "title": {
+        "success": "Ödeme başarıyla tamamlandı",
+        "fail": "Ödeme işlemi tamamlanamadı"
       },
-      "message":{
-        "success":"Artık moniest'ın canlı gönderilerine erişebilirsin",
-        "fail":"Ödeme işleminiz herhangi bir sebepten dolayı tamamlanamadı. Lütfen tekrar deneyin"
+      "message": {
+        "success": "Artık moniest'ın canlı gönderilerine erişebilirsin",
+        "fail": "Ödeme işleminiz herhangi bir sebepten dolayı tamamlanamadı. Lütfen tekrar deneyin"
       },
-      "link_created":"Ödeme linki oluşturuldu",
-      "click_link":"Linke tıklayarak ödeme yapabilirsiniz"
+      "link_created": "Ödeme linki oluşturuldu",
+      "click_link": "Linke tıklayarak ödeme yapabilirsiniz"
     },
-    "editor":{
-      "ui":{
-        "blockTunes":{
-          "toggler":{
-            "click_tune":"Ayarlamak için tıklayın",
-            "drag_move":"veya taşımak için sürükleyin"
+    "editor": {
+      "ui": {
+        "blockTunes": {
+          "toggler": {
+            "click_tune": "Ayarlamak için tıklayın",
+            "drag_move": "veya taşımak için sürükleyin"
           }
         },
-        "inlineToolbar":{
-          "converter":{
-            "convert_to":"Dönüştür"
+        "inlineToolbar": {
+          "converter": {
+            "convert_to": "Dönüştür"
           }
         },
-        "toolbar":{
-          "toolbox":{
-            "add":"Ekle"
+        "toolbar": {
+          "toolbox": {
+            "add": "Ekle"
           }
         }
       },
-      "toolNames":{
-        "text":"Metin",
-        "heading":"Başlık",
-        "list":"Liste",
-        "warning":"Uyarı",
-        "image":"İmaj"
+      "toolNames": {
+        "text": "Metin",
+        "heading": "Başlık",
+        "list": "Liste",
+        "warning": "Uyarı",
+        "image": "İmaj"
       },
-      "tools":{
-        "warning":{
-          "title":"Başlık",
-          "message":"Mesaj"
+      "tools": {
+        "warning": {
+          "title": "Başlık",
+          "message": "Mesaj"
         },
-        "image":{
-          "caption":"Başlık",
-          "upload":"Fotoğraf yükle",
-          "with_border":"Köşe kenarlar ile",
-          "stretch":"Resmi uzat",
-          "with_background":"Arka plan ile"
+        "image": {
+          "caption": "Başlık",
+          "upload": "Fotoğraf yükle",
+          "with_border": "Köşe kenarlar ile",
+          "stretch": "Resmi uzat",
+          "with_background": "Arka plan ile"
         },
-        "header":{
-          "header":"Başlık",
-          "heading_1":"Başlık 1",
-          "heading_2":"Başlık 2",
-          "heading_3":"Başlık 3",
-          "heading_4":"Başlık 4",
-          "heading_5":"Başlık 5",
-          "heading_6":"Başlık 6"
+        "header": {
+          "header": "Başlık",
+          "heading_1": "Başlık 1",
+          "heading_2": "Başlık 2",
+          "heading_3": "Başlık 3",
+          "heading_4": "Başlık 4",
+          "heading_5": "Başlık 5",
+          "heading_6": "Başlık 6"
         },
-        "list":{
-          "ordered":"Sıralı",
-          "unordered":"Noktalı"
+        "list": {
+          "ordered": "Sıralı",
+          "unordered": "Noktalı"
         }
       },
-      "blockTunes":{
-        "delete":{
-          "main":"Sil",
-          "click_delete":"Silmek için tıkla"
+      "blockTunes": {
+        "delete": {
+          "main": "Sil",
+          "click_delete": "Silmek için tıkla"
         },
-        "moveup":"Yukarı taşı",
-        "movedown":"Aşağı taşı"
+        "moveup": "Yukarı taşı",
+        "movedown": "Aşağı taşı"
       },
-      "popover":{
-        "filter":"Filtrele",
-        "notfound":"Birşey bulunamadı"
+      "popover": {
+        "filter": "Filtrele",
+        "notfound": "Birşey bulunamadı"
       }
     },
-    "moniest_card":{
-      "7d_roi":"7G ROI",
-      "30d_roi":"30G ROI",
-      "total_roi":"Toplam ROI",
-      "7d_pnl":"7G PNL",
-      "30d_pnl":"30G PNL",
-      "total_pnl":"Toplam PNL",
-      "7d_win_rate":"7G Kazanma Oranı",
-      "30d_win_rate":"30G Kazanma Oranı",
-      "total_win_rate":"Toplam Kazanma Oranı"
+    "moniest_card": {
+      "7d_roi": "7G ROI",
+      "30d_roi": "30G ROI",
+      "total_roi": "Toplam ROI",
+      "7d_pnl": "7G PNL",
+      "30d_pnl": "30G PNL",
+      "total_pnl": "Toplam PNL",
+      "7d_win_rate": "7G Kazanma Oranı",
+      "30d_win_rate": "30G Kazanma Oranı",
+      "total_win_rate": "Toplam Kazanma Oranı"
     }
   },
   "form": {
@@ -402,17 +405,17 @@
       "fullname": "Ad Soyad",
       "location": "Konum",
       "language": {
-        "title":"Dil",
-        "en":"İngilizce",
-        "tr":"Türkçe"
+        "title": "Dil",
+        "en": "İngilizce",
+        "tr": "Türkçe"
       },
       "search_moniest": "Moniest'larda arayın ...",
       "username": "Kullanıcı Adı",
       "currency": "Kripto Para Birimi Paritesini Seçin",
       "duration": "Tahmini Bitiş Zamanı",
       "direction": "Yön",
-      "set_leverage":"Kaldıracı Ayarla",
-      "new_tp":"Yeni Kar Alma Ekle (opsiyonel)",
+      "set_leverage": "Kaldıracı Ayarla",
+      "new_tp": "Yeni Kar Alma Ekle (opsiyonel)",
       "take_profit": "Kar Al",
       "tp_1": "TP 1",
       "tp_2": "TP 2",
@@ -420,8 +423,8 @@
       "stop_point": "Zararı Durdur",
       "stop": "Stop",
       "add_desc": "Açıklama Ekle (isteğe bağlı)",
-      "description":"Açıklama",
-      "desc_placeholder":"Analizini destekleyecek açıklamalar ekle...",
+      "description": "Açıklama",
+      "desc_placeholder": "Analizini destekleyecek açıklamalar ekle...",
       "share": "Paylaş",
       "fee": "Kullanıcılar aboneliğiniz için aylık ne kadar ödeyecek? ( USD )",
       "bio": "Hakkınızda kısa bilgi",
@@ -431,8 +434,8 @@
       "message": "Mesaj",
       "enter_message": "Bir mesaj girin",
       "feedback_type": "Geri bildirim tipi",
-      "binance_id":"Lütfen Binance Kullancı ID'nizi giriniz.",
-      "how_can_find":"Nasıl bulabilirim"
+      "binance_id": "Lütfen Binance Kullancı ID'nizi giriniz.",
+      "how_can_find": "Nasıl bulabilirim"
     },
     "validation": {
       "identifier_req": "E-posta veya kullanıcı adı gerekli",
@@ -479,7 +482,7 @@
       "location_max": "Lokasyon maximum {{value}} karakter uzunluğunda olmalıdır",
       "type_req": "Geri bildirim tipi gerekli",
       "binance_id_valid": "Geçersiz Binance Kullanıcı ID",
-      "binance_id_req":"Binance Kullanıcı ID zorunlu"
+      "binance_id_req": "Binance Kullanıcı ID zorunlu"
     }
   },
   "moniest": {
@@ -488,7 +491,7 @@
     "subscribed": "Abone olundu",
     "subscribe": "Abone ol",
     "show_more": "Daha fazla göster",
-    "go_payment":"Ödemeye Git"
+    "go_payment": "Ödemeye Git"
   },
   "common": {
     "welcome": "Hoş geldin",
@@ -500,8 +503,8 @@
     "back": "Geri",
     "edit": "Düzenle",
     "cancel": "İptal",
-    "complete":"Tamamla",
-    "confirm":"Onayla"
+    "complete": "Tamamla",
+    "confirm": "Onayla"
   },
   "navigation": {
     "timeline": "Ana Sayfa",
@@ -520,16 +523,16 @@
   },
   "server": {
     "error": {
-      "Account_Login_NotFoundEmail":"Bu email ile ilişkili bir hesap bulunamadı",
-      "Account_Login_WrongPassword":"Hatalı şifre",
+      "Account_Login_NotFoundEmail": "Bu email ile ilişkili bir hesap bulunamadı",
+      "Account_Login_WrongPassword": "Hatalı şifre",
       "Account_CheckUsername_InvalidUsername": "Kullanıcı adı geçerli değil",
-      "Post_CreatePost_InvalidTargets":"TP'ler geçerli değil",
-      "Moniest_CreateMoniest_InvalidBody":"Bu bilgiler moniest olmak için geçersiz",
-      "Account_EmailVerification_NotFoundToken":"E-posta doğrulama linki bozuk ya da geçersiz. Lütfen bir daha doğrulamayı deneyin.",
-      "Post_CreatePost_InvalidStop":"Stop geçerli değil",
-      "Account_Login_NotFoundUsername":"Kullanıcı adı sisteme kayıtlı değil",
-      "Account_Register_RegisteredEmail":"E-posta zaten sistemde kayıtlı",
-      "Account_Authorization_InvalidToken":"Giriş süreniz doldu. Lütfen tekran giriş yapın"
+      "Post_CreatePost_InvalidTargets": "TP'ler geçerli değil",
+      "Moniest_CreateMoniest_InvalidBody": "Bu bilgiler moniest olmak için geçersiz",
+      "Account_EmailVerification_NotFoundToken": "E-posta doğrulama linki bozuk ya da geçersiz. Lütfen bir daha doğrulamayı deneyin.",
+      "Post_CreatePost_InvalidStop": "Stop geçerli değil",
+      "Account_Login_NotFoundUsername": "Kullanıcı adı sisteme kayıtlı değil",
+      "Account_Register_RegisteredEmail": "E-posta zaten sistemde kayıtlı",
+      "Account_Authorization_InvalidToken": "Giriş süreniz doldu. Lütfen tekran giriş yapın"
     }
   }
 }

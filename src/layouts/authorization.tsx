@@ -57,9 +57,11 @@ const AuthorizationLayout = () => {
         }}
         item
         md={6}
+        lg={5}
       >
         <Box
           sx={{
+            // maxWidth: 500,
             height: "100%",
             background: theme.palette.primary.main,
             // borderRadius: theme.palette.borderRadius.large,

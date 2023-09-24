@@ -12,12 +12,19 @@ export const PaymentMethod = () => {
       component="section"
     >
       <Container maxWidth="lg">
-        <Stack alignItems="center" padding="5rem 0">
+        <Stack
+          alignItems="center"
+          padding="5rem 0"
+          justifyContent="center"
+          sx={{
+            height: "100vh",
+          }}
+        >
           <Box
             href="https://pay.binance.com/"
             target="_blank"
             component="a"
-            margin="auto"
+            // margin="auto"
             position="relative"
             maxWidth={200}
             minWidth={80}
