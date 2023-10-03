@@ -3,6 +3,7 @@ import { useTheme } from "@mui/system";
 import { Outlet } from "react-router-dom";
 import Logo from "../components/shared/common/logo";
 import { useTranslate } from "../hooks/useTranslate";
+import { MaintenanceMode } from "../components/layout/maintenanceMode";
 
 const AuthorizationLayout = () => {
   const theme = useTheme();
@@ -20,6 +21,7 @@ const AuthorizationLayout = () => {
       }}
       container
     >
+      <MaintenanceMode />
       <Grid width={"100%"} item md={6}>
         <Box
           sx={{

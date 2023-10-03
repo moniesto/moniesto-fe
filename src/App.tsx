@@ -28,6 +28,7 @@ import analytic from "./services/analytic";
 
 function App() {
   const storage = useAppSelector((state) => state.storage);
+
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -78,6 +79,7 @@ function App() {
       theme={configService.getTheme(storage.theme_mode, storage.language)}
     >
       <CssBaseline />
+
       {loading ? (
         <Box
           sx={{
@@ -92,6 +94,7 @@ function App() {
       ) : (
         <RouterProvider router={Router} />
       )}
+
       <Toast />
     </ThemeProvider>
   );

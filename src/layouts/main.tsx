@@ -7,6 +7,7 @@ import { BottomNavBar } from "../components/layout/main/bottomNavBar";
 import { SettingsSideBar } from "../components/layout/main/settingsSideBar";
 import SideBar from "../components/layout/main/sideBar";
 import { Feedback } from "../components/ui/feedback/feedback";
+import { MaintenanceMode } from "../components/layout/maintenanceMode";
 
 const MainLayout = () => {
   const theme = useTheme();
@@ -21,6 +22,7 @@ const MainLayout = () => {
 
   return (
     <Stack sx={{ background: theme.palette.background[500] }}>
+      <MaintenanceMode />
       <AppBar
         elevation={0}
         sx={{

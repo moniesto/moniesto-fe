@@ -7,6 +7,7 @@ import localStorageService from "./localStorageService";
 import toastService from "./toastService";
 import configService from "./configService";
 import { setToken } from "../store/slices/localStorageSlice";
+import { setInMaintenance } from "../store/slices/globalSlice";
 
 class http {
   private dispatch!: Dispatch<AnyAction>;
@@ -48,10 +49,16 @@ class http {
         return Promise.resolve(response.data);
       },
       (error) => {
+        const Maintenance_Code = "General_Maintenance";
         const code = error?.response?.data?.error_code;
         if (!code) {
           return;
         }
+        if (Maintenance_Code === code) {
+          this.dispatch(setInMaintenance(true));
+          return;
+        }
+
         const message = configService.translatedErrors.includes(code)
           ? "server.error." + code
           : (configService.configs.error_codes[code] as string);
