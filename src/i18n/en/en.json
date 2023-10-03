@@ -414,6 +414,10 @@
       "7d_win_rate": "7G Win Rate",
       "30d_win_rate": "30G Win Rate",
       "total_win_rate": "Total Win Rate"
+    },
+    "maintenance_mode": {
+      "title": "We'll be right back!",
+      "message": "We are currently in maintenance mode. We will be back online soon!"
     }
   },
   "form": {

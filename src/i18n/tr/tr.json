@@ -394,6 +394,10 @@
       "7d_win_rate": "7G Kazanma Oranı",
       "30d_win_rate": "30G Kazanma Oranı",
       "total_win_rate": "Toplam Kazanma Oranı"
+    },
+    "maintenance_mode": {
+      "title": "Hemen geri döneceğiz!",
+      "message": "Şu anda bakım modundayız. Çok yakında tekrar çevrimiçi olacağız!"
     }
   },
   "form": {
