@@ -232,7 +232,7 @@ export default function componentStyleOverrides(theme: any) {
         root: {
           backgroundColor: cardBackground,
           ".MuiToggleButton-root": {
-            opacity: 0.6,
+            opacity: 0.4,
             transition: "opacity 0.2s",
             "&.Mui-selected": {
               backgroundColor: background500 + " !important",

@@ -129,10 +129,20 @@ export const Footer = () => {
               alignItems="center"
               spacing={1}
             >
-              <Twitter />
-              <LinkedIn />
-              <Facebook />
-              <Instagram />
+              <Box
+                component="a"
+                target="_blank"
+                href="https://twitter.com/moniesto_app"
+              >
+                <Twitter />
+              </Box>
+              <Box
+                component="a"
+                target="_blank"
+                href="https://www.instagram.com/moniesto_app"
+              >
+                <Instagram />
+              </Box>
             </Stack>
           </Stack>
         </Box>

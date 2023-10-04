@@ -435,7 +435,7 @@
       },
       "search_moniest": "Search for Moniests ...",
       "username": "Username",
-      "currency": "Select Cryptocurrency Parity",
+      "currency": "Select Cryptocurrency Parity (Binance Only)",
       "duration": "Estimated End Time",
       "direction": "Direction",
       "set_leverage": "Adjust Leverage",
