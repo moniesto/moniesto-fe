@@ -3,7 +3,7 @@ import { Stack } from "@mui/system";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import StreamIcon from "@mui/icons-material/Stream";
 import PostCard from "../../../../components/shared/post/postCard";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Post } from "../../../../interfaces/post";
 import { InfiniteScroll } from "../../../../components/shared/common/infiniteScroll";
 import api from "../../../../services/api";
@@ -94,28 +94,26 @@ const PostsTab = () => {
     );
   }, [profileState.account]);
 
+  const notShowLivePost = useMemo(
+    () =>
+      !profileState.isMyAccount &&
+      activePostFilter.boolValue === true &&
+      !profileState.subscriptionInfo?.subscribed,
+    [activePostFilter, profileState]
+  );
+
   useEffect(() => {
-    queryParams.hasMore && getPosts(activePostFilter.boolValue);
-  }, [queryParams, getPosts, activePostFilter.boolValue]);
+    queryParams.hasMore &&
+      !notShowLivePost &&
+      getPosts(activePostFilter.boolValue);
+  }, [queryParams, getPosts, activePostFilter.boolValue, notShowLivePost]);
 
   const handleChangeFilter = (filterItem: Filter) => {
     if (filterItem.value === activePostFilter.value) return;
     setActivePostFilter(filterItem);
     setPosts([]);
 
-    if (
-      !profileState.isMyAccount &&
-      filterItem.boolValue === true &&
-      !profileState.subscriptionInfo?.subscribed
-    )
-      return;
-
-    console.log(
-      "handleChangeFilter ---- profileState :",
-      profileState,
-      "filterItem :",
-      filterItem
-    );
+    if (notShowLivePost) return;
 
     setQueryParams({
       ...queryParams,
