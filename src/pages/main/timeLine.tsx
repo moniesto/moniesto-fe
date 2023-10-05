@@ -80,7 +80,7 @@ const TimeLine = () => {
   const handleFetchData = () => {
     setQueryParams({
       ...queryParams,
-      offset: queryParams.offset + 1,
+      offset: queryParams.offset + queryParams.limit,
     });
   };
 

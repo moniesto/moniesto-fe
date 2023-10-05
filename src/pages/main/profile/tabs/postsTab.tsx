@@ -12,6 +12,7 @@ import { useTranslate } from "../../../../hooks/useTranslate";
 import { TestPost } from "../../../../services/tempDatas";
 import { useAppSelector } from "../../../../store/hooks";
 import { useTheme } from "@mui/system";
+import Fly from "../../../../components/shared/common/fly/fly";
 
 type FilterType = "all" | "live";
 type Filter = {
@@ -108,6 +109,13 @@ const PostsTab = () => {
       !profileState.subscriptionInfo?.subscribed
     )
       return;
+
+    console.log(
+      "handleChangeFilter ---- profileState :",
+      profileState,
+      "filterItem :",
+      filterItem
+    );
 
     setQueryParams({
       ...queryParams,
@@ -214,26 +222,34 @@ const PostsTab = () => {
           </Stack>
         </Box>
       ) : (
-        <InfiniteScroll
-          hasMore={queryParams.hasMore!}
-          fetchData={handleFetchData}
-          dataLength={posts.length}
-        >
-          <Stack rowGap={2}>
-            {posts.map((post, i) => (
-              <PostCard loading={post.id === "-1"} key={i} post={post} />
-            ))}
-          </Stack>
-          {!posts.length && (
-            <Card>
-              <Stack p={3} alignItems="center">
-                <Typography variant="h5">
-                  {translate("page.profile.no_post")}
-                </Typography>
+        <Fly>
+          <InfiniteScroll
+            hasMore={queryParams.hasMore!}
+            fetchData={handleFetchData}
+            dataLength={posts.length}
+          >
+            <Fly.Item>
+              <Stack rowGap={2}>
+                {posts.map((post, i) => (
+                  <Fly.Item key={i}>
+                    <PostCard loading={post.id === "-1"} post={post} />
+                  </Fly.Item>
+                ))}
               </Stack>
-            </Card>
-          )}
-        </InfiniteScroll>
+            </Fly.Item>
+            {!posts.length && (
+              <Fly.Item>
+                <Card>
+                  <Stack p={3} alignItems="center">
+                    <Typography variant="h5">
+                      {translate("page.profile.no_post")}
+                    </Typography>
+                  </Stack>
+                </Card>
+              </Fly.Item>
+            )}
+          </InfiniteScroll>
+        </Fly>
       )}
     </Stack>
   );

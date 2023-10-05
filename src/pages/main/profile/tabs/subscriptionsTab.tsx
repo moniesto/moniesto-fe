@@ -27,7 +27,10 @@ const SubscriptionsTab = () => {
   });
 
   const handleFetchData = () => {
-    setQueryParams({ ...queryParams, offset: queryParams.offset + 1 });
+    setQueryParams({
+      ...queryParams,
+      offset: queryParams.offset + queryParams.limit,
+    });
   };
 
   const getSubscriptions = useCallback(() => {

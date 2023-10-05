@@ -24,7 +24,11 @@ import {
 } from "../../../components/shared/user/subscribeButton";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { MoniestBadge } from "../../../components/shared/user/moniestBadge";
-import { setIsMyAccount, setProfile } from "../../../store/slices/profileSlice";
+import {
+  setIsMyAccount,
+  setProfile,
+  setSummaryStats,
+} from "../../../store/slices/profileSlice";
 import SubscriptionResultModal from "../../../components/ui/user/subscriptionResultModal";
 import { ProfileStatistics } from "./profileStatistics";
 
@@ -69,6 +73,19 @@ const Profile = () => {
     }
     getAccount(username);
   }, [username, dispatch, getAccount]);
+
+  useEffect(() => {
+    if (
+      !profileState.account ||
+      profileState.subscriptionInfo ||
+      profileState.summary_stats
+    )
+      return;
+
+    api.user.summary_stats(profileState.account.username).then((response) => {
+      dispatch(setSummaryStats(response));
+    });
+  }, [profileState, dispatch]);
 
   return (
     <Box position="relative" minHeight="20vh">

@@ -321,6 +321,7 @@ export default function componentStyleOverrides(theme: any) {
     MuiBottomNavigation: {
       styleOverrides: {
         root: {
+          height: 64,
           boxShadow: "1px -5px 16px 1px " + background200,
           ".MuiBottomNavigationAction-root": {
             minWidth: 0,

@@ -18,6 +18,38 @@ export const ProfileStatistics = () => {
   const profileState = useAppSelector((state) => state.profile);
   const statistics = profileState?.account?.moniest?.post_statistics;
 
+  const tableHeaderCell = (text: string) => (
+    <TableCell>
+      <Typography textAlign="end" variant="h5" fontWeight={900}>
+        {text}
+      </Typography>
+    </TableCell>
+  );
+
+  const tableRowHeaderCell = (text: string) => (
+    <TableCell>
+      <Typography variant="h5" fontWeight={900}>
+        {text}
+      </Typography>
+    </TableCell>
+  );
+  const tableRowCell = (
+    value: number | undefined,
+    symbol: string,
+    hasColor: boolean = true
+  ) => (
+    <TableCell>
+      <Typography
+        variant="h5"
+        textAlign="end"
+        sx={{ color: colorByNumberValue(hasColor ? value : 0) }}
+      >
+        {value || (profileState.summary_stats?.post_count ? 0 : "--")}
+        {symbol}
+      </Typography>
+    </TableCell>
+  );
+
   return (
     <Stack
       mt={1}
@@ -36,101 +68,29 @@ export const ProfileStatistics = () => {
         <TableHead>
           <TableRow>
             <TableCell></TableCell>
-            <TableCell>
-              <Typography textAlign="end" variant="h5" fontWeight={900}>
-                {translate("page.profile.statistics.7d")}
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography textAlign="end" variant="h5" fontWeight={900}>
-                {translate("page.profile.statistics.30d")}
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography textAlign="end" variant="h5" fontWeight={900}>
-                {translate("page.profile.statistics.total")}
-              </Typography>
-            </TableCell>
+            {tableHeaderCell(translate("page.profile.statistics.7d"))}
+            {tableHeaderCell(translate("page.profile.statistics.30d"))}
+            {tableHeaderCell(translate("page.profile.statistics.total"))}
           </TableRow>
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell>
-              <Typography variant="h5" fontWeight={900}>
-                {translate("page.profile.statistics.win_rate")}
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="h5" textAlign="end">
-                {statistics?.win_rate_7days || "--"}%
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="h5" textAlign="end">
-                {statistics?.win_rate_30days || "--"}%
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="h5" textAlign="end">
-                {statistics?.win_rate_total || "--"}%
-              </Typography>
-            </TableCell>
+            {tableRowHeaderCell(translate("page.profile.statistics.win_rate"))}
+            {tableRowCell(statistics?.win_rate_7days, "%", false)}
+            {tableRowCell(statistics?.win_rate_30days, "%", false)}
+            {tableRowCell(statistics?.win_rate_total, "%", false)}
           </TableRow>
           <TableRow>
-            <TableCell>
-              <Typography variant="h5" fontWeight={900}>
-                {translate("page.profile.statistics.roi")}
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="h5" textAlign="end">
-                {statistics?.roi_7days || "--"}%
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="h5" textAlign="end">
-                {statistics?.roi_30days || "--"}%
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="h5" textAlign="end">
-                {statistics?.roi_total || "--"}%
-              </Typography>
-            </TableCell>
+            {tableRowHeaderCell(translate("page.profile.statistics.roi"))}
+            {tableRowCell(statistics?.roi_7days, "%")}
+            {tableRowCell(statistics?.roi_30days, "%")}
+            {tableRowCell(statistics?.roi_total, "%")}
           </TableRow>
           <TableRow>
-            <TableCell>
-              <Typography variant="h5" fontWeight={900}>
-                {translate("page.profile.statistics.pnl")}
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography
-                variant="h5"
-                textAlign="end"
-                sx={{ color: colorByNumberValue(statistics?.pnl_7days) }}
-              >
-                {statistics?.pnl_7days || "--"}$
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography
-                variant="h5"
-                textAlign="end"
-                sx={{ color: colorByNumberValue(statistics?.pnl_30days) }}
-              >
-                {statistics?.pnl_30days || "--"}$
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography
-                variant="h5"
-                textAlign="end"
-                sx={{ color: colorByNumberValue(statistics?.pnl_total) }}
-              >
-                {statistics?.pnl_total || "--"}$
-              </Typography>
-            </TableCell>
+            {tableRowHeaderCell(translate("page.profile.statistics.pnl"))}
+            {tableRowCell(statistics?.pnl_7days, "$")}
+            {tableRowCell(statistics?.pnl_30days, "$")}
+            {tableRowCell(statistics?.pnl_total, "$")}
           </TableRow>
         </TableBody>
       </Table>

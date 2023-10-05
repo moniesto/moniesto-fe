@@ -2,7 +2,6 @@ import Tabs from "@mui/material/Tabs";
 import { Box, Tab, useTheme } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslate } from "../../../hooks/useTranslate";
-import api from "../../../services/api";
 import AboutTab from "./tabs/aboutTab";
 import PostsTab from "./tabs/postsTab";
 import SubscribersTab from "./tabs/subscribersTab";
@@ -14,11 +13,6 @@ const ProfileTabs = () => {
   const profileState = useAppSelector((state) => state.profile);
   const defaultTab = profileState.account?.moniest ? "posts" : "subscriptions";
   const [tabValue, setTabValue] = useState<string>(defaultTab);
-  const [counts, setCounts] = useState({
-    posts: 0,
-    subscriptions: 0,
-    subscribers: 0,
-  });
 
   useEffect(() => {
     setTabValue(defaultTab);
@@ -33,14 +27,16 @@ const ProfileTabs = () => {
   const getTabs = useMemo(() => {
     let tabs = [
       {
-        title: translate("page.profile.tab.posts", { count: counts.posts }),
+        title: translate("page.profile.tab.posts", {
+          count: profileState.summary_stats?.post_count || 0,
+        }),
         value: "posts",
         content: <PostsTab />,
         only_moniest: true,
       },
       {
         title: translate("page.profile.tab.subscribers", {
-          count: counts.subscribers,
+          count: profileState.summary_stats?.subscriber_count || 0,
         }),
         value: "subscribers",
         content: <SubscribersTab />,
@@ -48,7 +44,7 @@ const ProfileTabs = () => {
       },
       {
         title: translate("page.profile.tab.subscriptions", {
-          count: counts.subscriptions,
+          count: profileState.summary_stats?.subscription_count || 0,
         }),
         value: "subscriptions",
         content: <SubscriptionsTab />,
@@ -69,19 +65,7 @@ const ProfileTabs = () => {
     return tabs.filter((tab) =>
       profileState.account!.moniest ? true : !tab.only_moniest
     );
-  }, [counts, profileState.account, translate]);
-
-  useEffect(() => {
-    if (!profileState.account || profileState.subscriptionInfo) return;
-
-    api.user.summary_stats(profileState.account.username).then((response) => {
-      setCounts({
-        posts: response.post_count || 0,
-        subscriptions: response.subscription_count,
-        subscribers: response.subscriber_count || 0,
-      });
-    });
-  }, [profileState]);
+  }, [profileState, translate]);
 
   return (
     <Box
