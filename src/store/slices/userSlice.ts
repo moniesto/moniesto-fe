@@ -18,7 +18,7 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
-      analytic.setUser(state.user);
+      action.payload?.username && analytic.setUser(state.user);
       return state;
     },
   },

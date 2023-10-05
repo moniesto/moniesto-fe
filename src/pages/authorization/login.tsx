@@ -16,6 +16,7 @@ import { useTranslate } from "../../hooks/useTranslate";
 import Fly from "../../components/shared/common/fly/fly";
 import configService from "../../services/configService";
 import { WrappedTextField } from "../../components/shared/common/wrappers/wrappedTextField";
+import analytic from "../../services/analytic";
 
 type LoginForm = {
   identifier: string;
@@ -48,6 +49,7 @@ const Login = () => {
     api.auth
       .login(values)
       .then((res) => {
+        analytic.login();
         dispatch(changeLanguage(res.user.language as string));
         toastService.open({
           severity: "success",

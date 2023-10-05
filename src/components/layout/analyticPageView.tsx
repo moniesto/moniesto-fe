@@ -5,8 +5,7 @@ import analytic from "../../services/analytic";
 export const AnalytcPageView = () => {
   const { pathname } = useLocation();
   useEffect(() => {
-    console.log("pathname :", pathname);
-    analytic.logAnalyticEvent();
+    analytic.pageView(window.location.href);
   }, [pathname]);
 
   return <Outlet />;

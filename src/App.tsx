@@ -64,7 +64,6 @@ function App() {
     configService.initialize();
     dispatch(initLanguage());
     analytic.initialize();
-    analytic.logAnalyticEvent("page_view");
 
     if (!localStorageService.getStorage().token) {
       setLoading(false);
