@@ -50,7 +50,7 @@ export const ExploreMoniests = () => {
       </Typography>
       <Fly>
         <Grid container spacing={2}>
-          {moniests.map((moniest, i) => (
+          {moniests?.map((moniest, i) => (
             <Grid key={i} item xs={12} md={6}>
               <Fly.Item>
                 <MoniestCard loading={moniest.id === "-1"} user={moniest} />

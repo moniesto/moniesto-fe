@@ -572,27 +572,24 @@ export const SharePost = () => {
                   open={calendarOpen}
                   onOpen={() => setCalendarOpen(true)}
                   onClose={() => setCalendarOpen(false)}
-                  value={formik.values.duration}
+                  value={dayjs(formik.values.duration)}
                   onChange={(value) =>
                     formik.setFieldValue("duration", value, true)
                   }
-                  renderInput={(params: any) => (
-                    <WrappedTextField
-                      fullWidth
-                      onBlur={formik.handleBlur}
-                      onKeyDown={(e) => e.preventDefault()}
-                      onClick={() => {
+                  slotProps={{
+                    textField: {
+                      fullWidth: true,
+                      onBlur: formik.handleBlur,
+                      onKeyDown: (e) => e.preventDefault(),
+                      onClick: () => {
                         setCalendarOpen(!calendarOpen);
-                      }}
-                      {...params}
-                      error={
+                      },
+                      error:
                         formik.touched.duration &&
-                        Boolean(formik.errors.duration)
-                      }
-                      helperText={
-                        formik.touched.duration && formik.errors.duration
-                      }
-                      InputProps={{
+                        Boolean(formik.errors.duration),
+                      helperText:
+                        formik.touched.duration && formik.errors.duration,
+                      InputProps: {
                         startAdornment: (
                           <InputAdornment position="start">
                             <CalendarMonthOutlinedIcon
@@ -611,9 +608,9 @@ export const SharePost = () => {
                             </Typography>
                           </InputAdornment>
                         ),
-                      }}
-                    />
-                  )}
+                      },
+                    },
+                  }}
                 />
               </DateTimeProvider>
             </FormItem>

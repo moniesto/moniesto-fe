@@ -393,55 +393,111 @@ export default function componentStyleOverrides(theme: any) {
         },
       },
     },
-    MuiCalendarPicker: {
+    MuiDateCalendar: {
       styleOverrides: {
         root: {
           ".MuiPickersDay-root": {
-            "&.Mui-selected": {
+            "&.Mui-selected,&.Mui-selected:focus": {
+              background:
+                theme.mode === "light" ? theme.colors?.primaryMain : "white",
               color: theme.textSecondary,
             },
           },
         },
       },
     },
-    MuiCalendarOrClockPicker: {
+    MuiMultiSectionDigitalClockSection: {
       styleOverrides: {
         root: {
-          ".MuiDateTimePickerToolbar-timeContainer": {
-            ">button": {
-              height: "20px",
+          ".Mui-selected,.Mui-selected:focus": {
+            borderRadius: 6,
+            background:
+              theme.mode === "light" ? theme.colors?.primaryMain : "white",
+            color: theme.textSecondary,
+          },
+        },
+      },
+    },
+    MuiPickersLayout: {
+      styleOverrides: {
+        root: {
+          ".MuiDateTimePickerToolbar-timeDigitsContainer": {
+            alignItems: "center",
+          },
+          ".MuiDateTimePickerTabs-root": {
+            ".MuiTabs-indicator": {
+              color: theme.textSecondary,
             },
           },
-          ".MuiClockPointer-root": {
-            height: "74px !important",
+          ".MuiPickersYear-yearButton": {
+            backgroundColor:
+              (theme.mode === "light" ? theme.colors?.primaryMain : "white") +
+              " !important",
+            color:
+              (theme.mode === "light" ? "white" : theme.colors?.primaryMain) +
+              " !important",
+            opacity: 0.6,
+            "&.Mui-selected": {
+              opacity: 1,
+            },
+          },
+          ".MuiTimeClock-root": {
+            ".MuiClock-pin": {
+              background:
+                theme.mode === "light" ? theme.colors?.primaryMain : "white",
+            },
+            ".MuiClockPointer-root": {
+              background:
+                theme.mode === "light" ? theme.colors?.primaryLight : "white",
+              opacity: 0.6,
+            },
             ".MuiClockPointer-thumb": {
-              background: "unset !important",
-              top: "-34px !important",
-              border: `2px solid ${theme.colors.primaryMain} !important`,
-              width: "32px !important",
-              height: "32px !important",
+              borderColor:
+                theme.mode === "light" ? theme.colors?.primaryLight : "white",
+              background:
+                theme.mode === "light" ? theme.colors?.primaryLight : "white",
             },
           },
         },
       },
     },
-    MuiClockPicker: {
-      styleOverrides: {
-        root: {
-          ".MuiClock-clock": {
-            backgroundColor: background800 + " !important",
-          },
-          ".MuiClockNumber-root": {
-            "&.Mui-selected": { color: theme.textMain + " !important" },
-          },
-        },
-      },
-    },
+    // MuiCalendarOrClockPicker: {
+    //   styleOverrides: {
+    //     root: {
+    //       ".MuiDateTimePickerToolbar-timeContainer": {
+    //         ">button": {
+    //           height: "20px",
+    //         },
+    //       },
+    //       ".MuiClockPointer-root": {
+    //         height: "74px !important",
+    //         ".MuiClockPointer-thumb": {
+    //           background: "unset !important",
+    //           top: "-34px !important",
+    //           border: `2px solid ${theme.colors.primaryMain} !important`,
+    //           width: "32px !important",
+    //           height: "32px !important",
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
+    // MuiClockPicker: {
+    //   styleOverrides: {
+    //     root: {
+    //       ".MuiClock-clock": {
+    //         backgroundColor: background800 + " !important",
+    //       },
+    //       ".MuiClockNumber-root": {
+    //         "&.Mui-selected": { color: theme.textMain + " !important" },
+    //       },
+    //     },
+    //   },
+    // },
     MuiAutocomplete: {
       styleOverrides: {
         popper: {
           border: "unset",
-          // border: `1px solid ${background800} !important`,
           borderRadius: theme?.borderRadius.main,
           ".MuiAutocomplete-listbox": {
             ".MuiAutocomplete-option": {
