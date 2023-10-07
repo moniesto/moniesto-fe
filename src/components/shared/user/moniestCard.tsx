@@ -71,6 +71,7 @@ const MoniestCard = ({ user, loading }: MoniestCardProps) => {
             ".MuiCardHeader-action": {
               alignSelf: "unset",
               marginRight: 0,
+              marginLeft: 1,
             },
             ".MuiCardHeader-avatar": {
               marginRight: 1,

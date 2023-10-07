@@ -82,7 +82,7 @@ export const MoniestSettings = () => {
       handleSaveAccount();
     },
   });
-
+  const pattern = /^(?!0)[0-9]*(?:\.[0-9]{1,2})?$/;
   return (
     <Card
       sx={{
@@ -101,7 +101,15 @@ export const MoniestSettings = () => {
                 name="fee"
                 type="number"
                 value={formik.values.fee}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  pattern.test(e.target.value.replace(",", ".").toString()) &&
+                    formik.setFieldValue(
+                      "fee",
+                      e.target.value
+                        ? Number(e.target.value.replace(",", "."))
+                        : ""
+                    );
+                }}
                 error={formik.touched.fee && Boolean(formik.errors.fee)}
                 helperText={formik.touched.fee && formik.errors.fee}
                 InputProps={{

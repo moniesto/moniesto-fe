@@ -34,6 +34,7 @@ class config {
     "Post_CreatePost_InvalidStop",
     "Account_Register_RegisteredEmail",
     "Account_Authorization_InvalidToken",
+    "Account_ChangePassword_WrongPassword",
   ];
 
   initialize() {

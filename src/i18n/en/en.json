@@ -102,7 +102,7 @@
         "payment": "Payment Method",
         "faq": "FAQ",
         "contact": "Contact",
-        "terms": "Terms",
+        "terms": "Terms and Conditions",
         "privacy_policy": "Privacy Policy"
       },
       "about": {
@@ -418,6 +418,11 @@
     "maintenance_mode": {
       "title": "We'll be right back!",
       "message": "We are currently in maintenance mode. We will be back online soon!"
+    },
+    "legals": {
+      "legal_info": "Legals",
+      "privacy_policy": "Privacy Policy",
+      "terms_and_conditions": "Terms and Conditions"
     }
   },
   "form": {
@@ -556,7 +561,8 @@
       "Post_CreatePost_InvalidStop": "Stop is invalid",
       "Account_Login_NotFoundUsername": "Kullanıcı adı sisteme kayıtlı değil",
       "Account_Register_RegisteredEmail": "Email is already registered",
-      "Account_Authorization_InvalidToken": "Your login period has expired. Please login again."
+      "Account_Authorization_InvalidToken": "Your login period has expired. Please login again.",
+      "Account_ChangePassword_WrongPassword": "Wrong old password."
     }
   }
 }

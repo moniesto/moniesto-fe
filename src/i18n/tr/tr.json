@@ -87,7 +87,7 @@
         "payment": "Ödeme Yöntemi",
         "faq": "SSS",
         "contact": "İletişim",
-        "terms": "Şartlar",
+        "terms": "Şartlar ve Koşullar",
         "privacy_policy": "Gizlilik Politikası"
       },
       "about": {
@@ -398,6 +398,11 @@
     "maintenance_mode": {
       "title": "Hemen geri döneceğiz!",
       "message": "Şu anda bakım modundayız. Çok yakında tekrar çevrimiçi olacağız!"
+    },
+    "legals": {
+      "legal_info": "Yasal Bilgiler",
+      "privacy_policy": "Gizlilik Politikası",
+      "terms_and_conditions": "Şartlar ve Koşullar"
     }
   },
   "form": {
@@ -536,7 +541,8 @@
       "Post_CreatePost_InvalidStop": "Stop geçerli değil",
       "Account_Login_NotFoundUsername": "Kullanıcı adı sisteme kayıtlı değil",
       "Account_Register_RegisteredEmail": "E-posta zaten sistemde kayıtlı",
-      "Account_Authorization_InvalidToken": "Giriş süreniz doldu. Lütfen tekran giriş yapın"
+      "Account_Authorization_InvalidToken": "Giriş süreniz doldu. Lütfen tekran giriş yapın",
+      "Account_ChangePassword_WrongPassword": "Eski şifreniz yanlış."
     }
   }
 }

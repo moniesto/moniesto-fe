@@ -59,6 +59,8 @@ const MoniestInfoStep = () => {
     },
   });
 
+  const pattern = /^(?!0)[0-9]*(?:\.[0-9]{1,2})?$/;
+
   return (
     <Fly>
       <Stack width={"100%"} spacing={8}>
@@ -76,7 +78,17 @@ const MoniestInfoStep = () => {
                       formik.values.fee === 0 &&
                       formik.setFieldValue("fee", "", true)
                     }
-                    onChange={formik.handleChange}
+                    onChange={(e) => {
+                      pattern.test(
+                        e.target.value.replace(",", ".").toString()
+                      ) &&
+                        formik.setFieldValue(
+                          "fee",
+                          e.target.value
+                            ? Number(e.target.value.replace(",", "."))
+                            : ""
+                        );
+                    }}
                     error={formik.touched.fee && Boolean(formik.errors.fee)}
                     helperText={formik.touched.fee && formik.errors.fee}
                     InputProps={{
