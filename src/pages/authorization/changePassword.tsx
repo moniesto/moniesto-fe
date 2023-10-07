@@ -73,9 +73,15 @@ const ChangePassword = () => {
     password: yup
       .string()
       .min(
-        6,
+        configService?.configs?.validation?.min_password_length as number,
         translate("form.validation.password_min", {
-          value: configService?.configs?.validation?.password_length,
+          value: configService?.configs?.validation?.min_password_length,
+        })
+      )
+      .max(
+        configService?.configs?.validation?.max_password_length as number,
+        translate("form.validation.password_max", {
+          value: configService?.configs?.validation?.max_password_length,
         })
       )
       .required(translate("form.validation.password_req")),

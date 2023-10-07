@@ -8,14 +8,43 @@ import { LoadingButton } from "@mui/lab";
 import { KeyOutlined } from "@mui/icons-material";
 import { useTranslate } from "../../hooks/useTranslate";
 import { WrappedTextField } from "../../components/shared/common/wrappers/wrappedTextField";
+import configService from "../../services/configService";
 
 export const PasswordSettings = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const translate = useTranslate();
 
   const validationSchema = yup.object({
-    old: yup.string().required(translate("form.validation.old_pass_req")),
-    new: yup.string().required(translate("form.validation.new_pass_req")),
+    old: yup
+      .string()
+      .min(
+        configService?.configs?.validation?.min_password_length as number,
+        translate("form.validation.password_min", {
+          value: configService?.configs?.validation?.min_password_length,
+        })
+      )
+      .max(
+        configService?.configs?.validation?.max_password_length as number,
+        translate("form.validation.password_max", {
+          value: configService?.configs?.validation?.max_password_length,
+        })
+      )
+      .required(translate("form.validation.old_pass_req")),
+    new: yup
+      .string()
+      .min(
+        configService?.configs?.validation?.min_password_length as number,
+        translate("form.validation.password_min", {
+          value: configService?.configs?.validation?.min_password_length,
+        })
+      )
+      .max(
+        configService?.configs?.validation?.max_password_length as number,
+        translate("form.validation.password_max", {
+          value: configService?.configs?.validation?.max_password_length,
+        })
+      )
+      .required(translate("form.validation.new_pass_req")),
   });
 
   const handleSaveAccount = () => {

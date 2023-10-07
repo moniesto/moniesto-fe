@@ -32,6 +32,12 @@ export const MoniestSettings = () => {
           value: configService?.configs?.validation?.min_fee,
         })
       )
+      .max(
+        configService?.configs?.validation?.max_fee as number,
+        translate("form.validation.fee_max", {
+          value: configService?.configs?.validation?.max_fee,
+        })
+      )
       .required(translate("form.validation.fee_req")),
     bio: yup
       .string()

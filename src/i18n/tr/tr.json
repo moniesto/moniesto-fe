@@ -305,7 +305,7 @@
     "not_advice": {
       "understood": "Anladım",
       "header": "Yasal Uyarı",
-      "message": "Burada bulduğunuz yatırımla ilgili bilgiler, görüşler ve tavsiyeler, bir yatırım danışmanından tavsiye almakla aynı şey değildir. Buradaki görüşler ve tavsiyeler, onları yazan kişilerin kişisel görüşleridir. Bu görüşler sizin ve durumunuz için doğru olmayabilir. Dolayısıyla, burada bulduğunuz bilgileri yalnızca yatırım yapmak için kullanırsanız, istediğiniz sonuçları alamayabilirsiniz."
+      "message": "Başarılı olmanızı istiyoruz ve bu da yatırımdaki riskleri anlamakla başlar. <br> <br> Yatırım işlemlerine başlamadan önce gerekli bilgiye sahip olmanız, analizleri doğrudan uygulamamanız, kendi araştırmanızı yapmanız ve sizin için en uygun gelir sağlayacak yatırım modelini uygulamanız tavsiye edilir. Analizler sonucunda elde edeceğiniz kar ve zararların tamamen sizin sorumluluğunuzda olduğunu unutmayın. Stop seviyelerini kullanarak pozisyonları etkin bir şekilde yönetmenizi öneririz. <br><br>Moniesto platformunda paylaşılan içerikler herhangi bir yatırım tavsiyesi içermemektedir. Moniesto burada paylaşılan hiçbir içerikten sorumlu değildir. Moniesto yatırım piyasasındaki riskleri kontrol etmez veya etkilemez.<br><br> Bir analizde yer alan tüm bilgiler, yalnızca Analistler (Moniest'ler) tarafından yatırımcılara yardımcı olmak amacıyla paylaşılır. Moniesto bu paylaşılan bilgilerden sorumlu değildir."
     },
     "subscription": {
       "title": {
@@ -401,6 +401,7 @@
     },
     "legals": {
       "legal_info": "Yasal Bilgiler",
+      "disclaimer": "Sorumluluk Reddi Beyanı",
       "privacy_policy": "Gizlilik Politikası",
       "terms_and_conditions": "Şartlar ve Koşullar"
     }
@@ -449,6 +450,7 @@
     "validation": {
       "identifier_req": "E-posta veya kullanıcı adı gerekli",
       "password_min": "Şifre en az {{value}} karakter uzunluğunda olmalı",
+      "password_max": "Şifre en fazla {{value}} karakter uzunluğunda olmalı",
       "password_req": "Şifre gereklidir",
       "email_valid": "Geçerli bir e-posta adresi girin",
       "email_req": "Email gereklidir",
@@ -480,7 +482,8 @@
       "tp3_more": "TP3 {{price}} 'dan fazla olmalıdır",
       "tp3_max": "TP3 {{price}} 'dan az olmalıdır",
       "fee_min": "Abonelik ücreti {{value}}$ 'dan daha büyük olmalıdır",
-      "fee_req": "Abonelik Ücreti gerekli",
+      "fee_max": "Abonelik ücreti {{value}}$ 'dan daha düşük olmalıdır",
+      "fee_req": "Abonelik ücreti gerekli",
       "bio_max": "Bio maximum {{value}} karakter uzunluğunda olmalıdır",
       "bio_req": "Bio gerekli",
       "desc_max": "Açıklama maximum {{value}} karakter uzunluğunda olmalıdır",

@@ -21,6 +21,8 @@ html {
 }
 a {
   text-decoration: none;
+  color: unset;
+  font-weight: bold;
 }
 
 input[type="number"]::-webkit-outer-spin-button,

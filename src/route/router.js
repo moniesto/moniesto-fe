@@ -22,6 +22,9 @@ import { PasswordSettings } from "../pages/settings/password";
 import { VerifyEmailSettings } from "../pages/settings/verifyEmail";
 import { SettingsList } from "../pages/settings/list";
 import { AnalytcPageView } from "../components/layout/analyticPageView";
+import { PrivacyPolicy } from "../pages/settings/legals/privacyPolicy/privacyPolicy";
+import { TermsConditions } from "../pages/settings/legals/termsConditions";
+import { Disclaimer } from "../pages/settings/legals/disclaimer";
 
 const Router = createBrowserRouter([
   {
@@ -127,6 +130,23 @@ const Router = createBrowserRouter([
                   {
                     path: "verify-email",
                     element: <VerifyEmailSettings />,
+                  },
+                  {
+                    path: "legals",
+                    children: [
+                      {
+                        path: "disclaimer",
+                        element: <Disclaimer />,
+                      },
+                      {
+                        path: "privacy-policy",
+                        element: <PrivacyPolicy />,
+                      },
+                      {
+                        path: "terms-and-conditions",
+                        element: <TermsConditions />,
+                      },
+                    ],
                   },
                 ],
               },

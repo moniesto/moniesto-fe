@@ -5,12 +5,14 @@ export const defaultConfigs: Config = {
     email_regex: "^[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,4}$",
     username_regex: "^[a-z][a-z0-9_]{0,29}$",
     min_fee: 5,
+    max_fee: 9999,
     max_bio_lenght: 150,
     max_description_length: 5000,
     max_subscription_message_length: 150,
     max_fullname_length: 50,
     max_location_length: 30,
-    password_length: 6,
+    min_password_length: 6,
+    max_password_length: 30,
     max_duration_day: 90,
     long_max_take_profit_multiplier: 10,
     short_max_stop_multiplier: 2,
@@ -101,6 +103,8 @@ export const defaultConfigs: Config = {
       "Server error on checking username",
     Account_Register_ServerErrorCreateUser: "Server error on creating user",
     Account_Register_ServerErrorPassword: "Server error on password operation",
+    Account_Register_UnsupportedLanguage:
+      "Language is not supported. Supported languages: [en, tr]",
     Account_UpdateUserProfile_InvalidBody:
       "Update user profile request body is invalid",
     Account_UpdateUserProfile_InvalidFullname: "Fullname is invalid",
@@ -125,6 +129,16 @@ export const defaultConfigs: Config = {
       "Server error on uploading background photo",
     Account_UpdateUserProfile_ServerErrorUploadProfilePhoto:
       "Server error on uploading profile photo",
+    Account_UpdateUserProfile_UnsupportedLanguage:
+      "Language is not supported. Supported languages: [en, tr]",
+    Admin_GetMetrics_ServerErrorPaymentMetrics:
+      "Server error on getting payment metrics",
+    Admin_GetMetrics_ServerErrorPayoutMetrics:
+      "Server error on getting payout metrics",
+    Admin_GetMetrics_ServerErrorPostMetrics:
+      "Server error on getting post metrics",
+    Admin_GetMetrics_ServerErrorUserMetrics:
+      "Server error on getting user metrics",
     Content_GetMoniests_InvalidParam: "Get Moniests request param is invalid",
     Content_GetMoniests_ServerErrorGetMoniests:
       "Server error on getting moniests",
@@ -144,13 +158,19 @@ export const defaultConfigs: Config = {
       "Create feedback request body is invalid",
     Feedback_CreateFeedback_ServerErrorCreateFeedback:
       "Server error on creating feedback",
+    General_CalculatePNLandROI: "Error while calculating pnl and roi",
+    General_Maintenance: "Server is in maintenance mode",
     General_MoniestNotFoundByUsername: "No moniest with this username",
+    General_Not_Admin: "Not admin",
     General_ServerErrorCheckMoniestByUserID:
       "Server error on checking user is moniest by user ID",
     General_ServerErrorCheckMoniestByUsername:
       "Server error on checking user is moniest by username",
     General_ServerErrorGetMoniestByUsername:
       "Server error on getting moniest by username",
+    General_ServerErrorGettingUserLanguageByEmail:
+      "Server error on getting user language by email",
+    General_ServerErrorUserLanguageNotFound: "User language not found",
     General_UserNotFoundByID: "User not found with this user ID",
     General_UserNotFoundByUsername: "User not found with this username",
     General_UserNotMoniest: "User is not moniest",
@@ -167,6 +187,8 @@ export const defaultConfigs: Config = {
     Moniest_CreatePayoutInfo_InvalidBinanceID: "Binance ID is not valid",
     Moniest_CreatePayoutInfo_ServerErrorOnCreate:
       "Server error on create payout info",
+    Moniest_CreatePostStatistics_ServerErrorOnCreate:
+      "Server error on create post statistics",
     Moniest_CreateSubscriptionInfo_InvalidFee: "Fee is invalid",
     Moniest_CreateSubscriptionInfo_InvalidSubscriptionMessage:
       "Subscription message is invalid",
@@ -202,6 +224,8 @@ export const defaultConfigs: Config = {
       "Server error on creating binance payment link",
     Moniest_Subscribe_ServerErrorCreateSubscriptionDB:
       "Server error on creating subscription on DB",
+    Moniest_Subscribe_ServerErrorGetProductName:
+      "Server error on getting product name",
     Moniest_Subscribe_ServerErrorGetSubscription:
       "Server error on getting subscription",
     Moniest_Subscribe_SubscribeOwn: "User can't subscribe to own",
@@ -245,7 +269,11 @@ export const defaultConfigs: Config = {
     Post_CreatePost_InvalidCurrency: "Currency is invalid",
     Post_CreatePost_InvalidCurrencyPrice: "Currency price is invalid",
     Post_CreatePost_InvalidDuration: "Duration is invalid",
+    Post_CreatePost_InvalidLeverage: "Leverage is not valid",
+    Post_CreatePost_InvalidMarketType:
+      "Market type is invalid. Supported market types: [spot, futures]",
     Post_CreatePost_InvalidStop: "Stop is invalid",
+    Post_CreatePost_InvalidTakeProfit: "Take Profit is invalid",
     Post_CreatePost_InvalidTargets: "Targets are invalid",
     Post_CreatePost_ServerErrorCreateDescription:
       "Server error on creating description",

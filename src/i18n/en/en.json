@@ -325,7 +325,7 @@
     "not_advice": {
       "understood": "Understood",
       "header": "Legal Warning",
-      "message": "The information, opinions and recommendations about investing that you find here are not the same as getting advice from an investment advisor. The opinions and recommendations here are just personal opinions of the people who wrote them. Those opinions might not be right for you and your situation. So, if you only use the information you find here to make an investment, you might not get the results you want."
+      "message": "We want you to succeed, and that starts with understanding the risks in investment. <br> <br> Before you start doing investment transactions, it's advised to have the necessary knowledge, not directly apply analyses, conduct your own research, and implement the investment model that suits you best for potential income. Remember that the profits and losses you get based on analyses are entirely your responsibility. We recommend you to manage positions effectively using stop levels. <br><br>The content shared on the Moniesto platform doesn't include any investment advice. Moniesto is not responsible for any content shared here. Moniesto don't control or influence the risks in the investment market.<br><br>  All the information contained in an analysis is shared only to assist investors by Analysts (Moniests). Moniesto is not responsible for that shared information."
     },
     "subscription": {
       "title": {
@@ -421,6 +421,7 @@
     },
     "legals": {
       "legal_info": "Legals",
+      "disclaimer": "Disclaimer",
       "privacy_policy": "Privacy Policy",
       "terms_and_conditions": "Terms and Conditions"
     }
@@ -469,6 +470,7 @@
     "validation": {
       "identifier_req": "Email or username is required",
       "password_min": "Password must be at least {{value}} characters long",
+      "password_max": "Password should be of maximum {{value}} characters length",
       "password_req": "Password is required",
       "email_valid": "Enter a valid email address",
       "email_req": "Email is required",
@@ -500,6 +502,7 @@
       "tp3_more": "TP3 should be more than {{price}}",
       "tp3_max": "TP3 should be lower than {{price}}",
       "fee_min": "Subscription fee should be higher then {{value}}$",
+      "fee_max": "Subscription fee should be lower then {{value}}$",
       "fee_req": "Subscription fee is required",
       "bio_max": "Bio should be of maximum {{value}} characters length",
       "bio_req": "Bio is required",

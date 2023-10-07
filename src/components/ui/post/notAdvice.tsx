@@ -3,6 +3,7 @@ import { useTranslate } from "../../../hooks/useTranslate";
 import { useState } from "react";
 import { WarningOutlined } from "@mui/icons-material";
 import { WrappedModal } from "../../shared/common/wrappedModal";
+import { Trans } from "react-i18next";
 
 export const NotAdvice = () => {
   const translate = useTranslate();
@@ -46,10 +47,10 @@ export const NotAdvice = () => {
 
           <Typography
             variant="h4"
-            sx={{ opacity: 0.6, letterSpacing: "0.9px", lineHeight: "20px" }}
+            sx={{ opacity: 0.8, lineHeight: "20px" }}
             paddingX={{ xs: 0.2, md: 1 }}
           >
-            {translate("component.not_advice.message")}
+            <Trans i18nKey="component.not_advice.message"></Trans>
           </Typography>
           <Button
             onClick={() => setOpen(false)}

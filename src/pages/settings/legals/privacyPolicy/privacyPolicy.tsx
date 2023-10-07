@@ -9,12 +9,12 @@ export const PrivacyPolicy = () => {
   let component;
 
   switch (storage.language) {
-    case "en":
-      component = <PrivacyPolicyEn />;
-      break;
-    case "tr":
-      component = <PrivacyPolicyTr />;
-      break;
+    // case "en":
+    //   component = <PrivacyPolicyEn />;
+    //   break;
+    // case "tr":
+    //   component = <PrivacyPolicyTr />;
+    //   break;
     default:
       component = <PrivacyPolicyEn />;
       break;

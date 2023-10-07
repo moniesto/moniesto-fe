@@ -2,13 +2,17 @@ import {
   ChevronRightOutlined,
   CreditCardOutlined,
   EmailOutlined,
+  GavelOutlined,
   KeyOutlined,
   LogoutOutlined,
   PersonOutline,
+  PolicyOutlined,
   RocketLaunchOutlined,
+  TextSnippetOutlined,
 } from "@mui/icons-material";
 import {
   Box,
+  Collapse,
   List,
   ListItem,
   ListItemButton,
@@ -27,6 +31,7 @@ import { emptyUser } from "../../../interfaces/user";
 import { setToken } from "../../../store/slices/localStorageSlice";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { useTheme } from "@mui/system";
+import React from "react";
 
 export const SettingsSideBar = () => {
   const [selectedLink, setSelectedLink] = useState("/settings/account");
@@ -35,6 +40,8 @@ export const SettingsSideBar = () => {
   const dispatch = useDispatch();
   const translate = useTranslate();
   const theme = useTheme();
+
+  const [openedLink, setOpenedLink] = useState("");
 
   const matches = useMediaQuery((theme: any) => theme.breakpoints.down("md"));
 
@@ -55,6 +62,25 @@ export const SettingsSideBar = () => {
         path: "/settings/verify-email",
         icon: <EmailOutlined />,
         title: translate("navigation.verify_email"),
+      },
+      {
+        path: "/settings/legals",
+        icon: <PolicyOutlined />,
+        title: translate("component.legals.legal_info"),
+        child: [
+          {
+            path: "/settings/legals/disclaimer",
+            title: translate("component.legals.disclaimer"),
+          },
+          {
+            path: "/settings/legals/privacy-policy",
+            title: translate("component.legals.privacy_policy"),
+          },
+          {
+            path: "/settings/legals/terms-and-conditions",
+            title: translate("component.legals.terms_and_conditions"),
+          },
+        ],
       },
     ];
     if (
@@ -87,9 +113,19 @@ export const SettingsSideBar = () => {
     setSelectedLink(pathname);
   }, [links, pathname, translate, user]);
 
-  const handleListItemClick = (link: string) => {
-    setSelectedLink(link);
-    navigate(link);
+  const handleListItemClick = (
+    link: string,
+    hasChild: boolean,
+    inChild: boolean = false
+  ) => {
+    if (hasChild) {
+      setOpenedLink(link === openedLink ? "" : link);
+    } else {
+      if (!inChild) setOpenedLink("");
+
+      navigate(link);
+      setSelectedLink(link);
+    }
   };
 
   const handleLogout = () => {
@@ -114,28 +150,53 @@ export const SettingsSideBar = () => {
         padding={2}
       >
         <Stack>
-          <List component="nav">
+          <List component="nav" disablePadding>
             {links.map((link) => (
-              <ListItem
-                key={link.path}
-                disablePadding
-                secondaryAction={matches ? <ChevronRightOutlined /> : ""}
-              >
+              <React.Fragment key={link.path}>
                 <ListItemButton
                   sx={{
                     margin: "3px 0",
-                    opacity: !matches ? 0.6 : 1,
+                    opacity: !matches && openedLink !== link.path ? 0.6 : 1,
                     "&.Mui-selected": {
                       opacity: 1,
                     },
                   }}
                   selected={selectedLink === link.path}
-                  onClick={() => handleListItemClick(link.path)}
+                  onClick={() => handleListItemClick(link.path, !!link.child)}
                 >
                   <ListItemIcon>{link.icon}</ListItemIcon>
                   <ListItemText primary={link.title} />
                 </ListItemButton>
-              </ListItem>
+                {link.child && (
+                  <Collapse
+                    in={openedLink === link.path}
+                    timeout="auto"
+                    unmountOnExit
+                  >
+                    <List component="div" disablePadding>
+                      {link?.child?.map((subLink) => (
+                        <ListItemButton
+                          key={subLink.path}
+                          sx={{
+                            margin: "3px 0",
+                            ml: 4,
+                            opacity: !matches ? 0.6 : 1,
+                            "&.Mui-selected": {
+                              opacity: 1,
+                            },
+                          }}
+                          onClick={() =>
+                            handleListItemClick(subLink.path, false, true)
+                          }
+                          selected={selectedLink === subLink.path}
+                        >
+                          <ListItemText primary={subLink.title} />
+                        </ListItemButton>
+                      ))}
+                    </List>
+                  </Collapse>
+                )}
+              </React.Fragment>
             ))}
 
             {matches && (
