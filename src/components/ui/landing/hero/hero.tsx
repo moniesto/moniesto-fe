@@ -6,11 +6,13 @@ import { useNavigateScroll } from "../../../../hooks/useNavigateScroll";
 import { HeroNavbar } from "./heroNavbar";
 import { StarCanvas } from "./starCanvas";
 import { useScrollPosition } from "../../../../hooks/useScrollPosition";
+import { useAppSelector } from "../../../../store/hooks";
 
 export const Hero = () => {
   const translate = useTranslate();
   const theme = useTheme();
   const navigateScroll = useNavigateScroll();
+  const language = useAppSelector((state) => state.storage.language);
 
   const scrollPosition = useScrollPosition();
 
@@ -110,7 +112,7 @@ export const Hero = () => {
               }}
               height="100%"
               width="100%"
-              src="./images/landing/desktop.png"
+              src={`./images/landing/desktop_${language}.png`}
               alt="desktop"
             />
           </Box>

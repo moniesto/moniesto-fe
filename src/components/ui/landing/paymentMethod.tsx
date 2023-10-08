@@ -17,14 +17,13 @@ export const PaymentMethod = () => {
           padding="5rem 0"
           justifyContent="center"
           sx={{
-            height: "100vh",
+            minHeight: "100vh",
           }}
         >
           <Box
             href="https://pay.binance.com/"
             target="_blank"
             component="a"
-            // margin="auto"
             position="relative"
             maxWidth={200}
             minWidth={80}
