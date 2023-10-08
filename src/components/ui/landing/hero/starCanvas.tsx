@@ -8,7 +8,7 @@ export const StarCanvas = () => {
     let screen: any, stars: Star[];
     let params = {
       speed: 2,
-      number: window.innerWidth < 720 ? 60 : 120,
+      number: window.innerWidth < 720 ? 60 : 500,
       extinction: 4,
     };
 
@@ -40,7 +40,7 @@ export const StarCanvas = () => {
           rad > params.extinction ? 1.5 * (2 - rad / params.extinction) : 1;
 
         ctx.beginPath();
-        ctx.fillStyle = "rgba(38, 40, 61, " + opacity + ")";
+        ctx.fillStyle = "rgba(36, 212, 179, " + opacity + ")";
         ctx.arc(x, y, rad, 0, Math.PI * 2);
         ctx.fill();
       };

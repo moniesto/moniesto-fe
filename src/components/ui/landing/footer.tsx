@@ -1,27 +1,15 @@
 import { Box, Button, Container, Stack } from "@mui/material";
-import {
-  CopyrightOutlined,
-  Facebook,
-  Instagram,
-  LinkedIn,
-  Twitter,
-} from "@mui/icons-material";
+import { CopyrightOutlined, Instagram, Twitter } from "@mui/icons-material";
 import { useTheme } from "@mui/system";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { useNavLinks } from "../../../hooks/useNavLinks";
 import { useNavigateScroll } from "../../../hooks/useNavigateScroll";
 import Navigator from "../../shared/common/navigatior";
 import Logo from "../../shared/common/logo";
-import { WrappedModal } from "../../shared/common/wrappedModal";
-import { useState } from "react";
-import { TermsConditions } from "../../../pages/settings/legals/termsConditions";
-import { PrivacyPolicy } from "../../../pages/settings/legals/privacyPolicy/privacyPolicy";
-import { Disclaimer } from "../../../pages/settings/legals/disclaimer";
 import { useNavigate } from "react-router-dom";
 
 export const Footer = () => {
   const theme = useTheme();
-  const [openedModalKey, setOpenedModalKey] = useState("");
   const navigate = useNavigate();
 
   const translate = useTranslate();
@@ -36,6 +24,7 @@ export const Footer = () => {
             flexWrap="wrap"
             direction="row"
             justifyContent={{ xs: "center", md: "space-between" }}
+            gap={2}
           >
             <Stack
               alignItems={{ xs: "center", md: "unset" }}
@@ -82,11 +71,10 @@ export const Footer = () => {
                   </Box>
                 ))}
 
-                {/* <Box onClick={() => setOpenedModalKey("terms")}> */}
                 <Box onClick={() => navigate("/terms-and-conditions")}>
                   {translate("page.landing.links.terms")}
                 </Box>
-                {/* <Box onClick={() => setOpenedModalKey("policy")}> */}
+
                 <Box onClick={() => navigate("/privacy-policy")}>
                   {translate("page.landing.links.privacy_policy")}
                 </Box>
@@ -161,31 +149,6 @@ export const Footer = () => {
           </Stack>
         </Box>
       </Container>
-      <WrappedModal
-        opened={!!openedModalKey}
-        onClose={() => setOpenedModalKey("")}
-        sx={{
-          ".wrappedModalContainer": {
-            ".MuiCard-root": {
-              background: "transparent",
-              border: "unset",
-              ">div": {
-                padding: "0 12px",
-              },
-            },
-          },
-        }}
-      >
-        {openedModalKey ? (
-          openedModalKey === "terms" ? (
-            <TermsConditions />
-          ) : openedModalKey === "policy" ? (
-            <PrivacyPolicy />
-          ) : (
-            <Disclaimer />
-          )
-        ) : null}
-      </WrappedModal>
     </Box>
   );
 };

@@ -5,11 +5,15 @@ import Navigator from "../../../shared/common/navigatior";
 import { useNavigateScroll } from "../../../../hooks/useNavigateScroll";
 import { HeroNavbar } from "./heroNavbar";
 import { StarCanvas } from "./starCanvas";
+import { useScrollPosition } from "../../../../hooks/useScrollPosition";
 
 export const Hero = () => {
   const translate = useTranslate();
   const theme = useTheme();
   const navigateScroll = useNavigateScroll();
+
+  const scrollPosition = useScrollPosition();
+  console.log("scrollPosition :", scrollPosition);
 
   return (
     <Box id="navbar" component="section">
@@ -93,12 +97,17 @@ export const Hero = () => {
           justifyContent="center"
           flexDirection="row"
         >
-          <Box zIndex={2}>
+          <Box zIndex={2} sx={{ perspective: 500 }}>
             <img
               style={{
                 boxShadow: "var(--theme-shadow-primary)",
-                maxHeight: 430,
+                maxHeight: 560,
                 borderRadius: "10px",
+                transition: "transform 0.1s ease",
+                transform: `rotateX(${Math.max(
+                  10 - scrollPosition.scrollY / 20,
+                  0
+                )}deg)`,
               }}
               height="100%"
               width="100%"
