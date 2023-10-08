@@ -61,6 +61,7 @@ export const SubscribeToMoniest = ({
 
   return (
     <WrappedModal
+      headerBackgroundColor={theme.palette.background[800]}
       noPadding
       width={500}
       opened={true}
@@ -94,7 +95,7 @@ export const SubscribeToMoniest = ({
         <>
           <Box
             mb={2}
-            height={120}
+            height={60}
             position="relative"
             sx={{ background: theme.palette.background[800] }}
           >

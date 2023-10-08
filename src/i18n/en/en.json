@@ -24,6 +24,10 @@
       },
       "toast": {
         "register_success": "Registration successful"
+      },
+      "form": {
+        "terms_policy": "I have read and agreed <terms>Terms & Conditions</terms> and <policy>Privacy Policy</policy>",
+        "disclaimer": "I have read and agreed <disclaimer>Disclaimer</disclaimer>"
       }
     },
     "settings": {
@@ -514,7 +518,9 @@
       "location_max": "Location should be of maximum {{value}} characters length",
       "type_req": "Feedback type is required",
       "binance_id_valid": "Invalid Binance User ID",
-      "binance_id_req": "Binance User ID is required"
+      "binance_id_req": "Binance User ID is required",
+      "terms_policy": "You must mark that you have read and agreed to the Privacy Policy and Terms and Conditions",
+      "disclaimer": "You must mark that you have read and agreed to the disclaimer"
     }
   },
   "moniest": {

@@ -1,5 +1,13 @@
 import { ClearOutlined } from "@mui/icons-material";
-import { Box, Card, IconButton, Modal } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardHeader,
+  IconButton,
+  Modal,
+  SxProps,
+  Typography,
+} from "@mui/material";
 import { ReactNode } from "react";
 import { useTheme } from "@mui/system";
 
@@ -9,17 +17,23 @@ export const WrappedModal = ({
   onClose,
   width,
   noPadding,
+  title,
+  headerBackgroundColor,
+  sx,
 }: {
   children: ReactNode;
   opened: boolean;
   onClose: () => void;
   width?: number;
   noPadding?: boolean;
+  title?: string;
+  headerBackgroundColor?: string;
+  sx?: SxProps;
 }) => {
   const theme = useTheme();
 
   return (
-    <Modal open={opened} onClose={onClose}>
+    <Modal open={opened} onClose={onClose} sx={sx}>
       <Card
         sx={{
           position: "absolute",
@@ -32,15 +46,33 @@ export const WrappedModal = ({
           background: theme.palette.background[600],
         }}
       >
-        <IconButton
-          onClick={onClose}
-          sx={{ position: "absolute", right: 3, top: 3, zIndex: 1 }}
-        >
-          <ClearOutlined />
-        </IconButton>
-        <Box
+        <CardHeader
           sx={{
-            padding: noPadding ? 0 : "30px 20px 20px",
+            position: "sticky",
+            top: 0,
+            background: headerBackgroundColor || theme.palette.background[600],
+            minHeight: 60,
+            zIndex: 2,
+          }}
+          title={
+            <Typography variant="h3" textAlign="center">
+              {title}{" "}
+            </Typography>
+          }
+          action={
+            <IconButton
+              onClick={onClose}
+              sx={{ position: "absolute", right: 10, top: 10, zIndex: 1 }}
+            >
+              <ClearOutlined />
+            </IconButton>
+          }
+        ></CardHeader>
+
+        <Box
+          className="wrappedModalContainer"
+          sx={{
+            padding: noPadding ? 0 : "0px 30px 20px 20px",
           }}
         >
           {children}

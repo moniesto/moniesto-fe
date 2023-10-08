@@ -1,4 +1,11 @@
-import { InputAdornment, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  InputAdornment,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { Stack } from "@mui/system";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -19,6 +26,11 @@ import configService from "../../services/configService";
 import Fly from "../../components/shared/common/fly/fly";
 import { useUsernameValidation } from "../../hooks/useUsernameValidation";
 import { WrappedTextField } from "../../components/shared/common/wrappers/wrappedTextField";
+import { Trans } from "react-i18next";
+import { WrappedModal } from "../../components/shared/common/wrappedModal";
+import { TermsConditions } from "../settings/legals/termsConditions";
+import { PrivacyPolicy } from "../settings/legals/privacyPolicy/privacyPolicy";
+import { Disclaimer } from "../settings/legals/disclaimer";
 
 type RegisterForm = {
   username: string;
@@ -26,6 +38,8 @@ type RegisterForm = {
   email: string;
   password: string;
   language: string;
+  privacy_terms: boolean;
+  disclaimer: boolean;
 };
 
 const Register = () => {
@@ -36,6 +50,8 @@ const Register = () => {
   const { usernameValidation, usernameInput } = useUsernameValidation();
   const [loading, setLoading] = useState<boolean>(false);
   const browserLanguage = navigator.language.split("-")[0];
+
+  const [openedModalKey, setOpenedModalKey] = useState("");
 
   const handleSubmit = (values: RegisterForm) => {
     setLoading(true);
@@ -88,6 +104,12 @@ const Register = () => {
         })
       )
       .required(translate("form.validation.password_req")),
+    privacy_terms: yup
+      .boolean()
+      .oneOf([true], translate("form.validation.terms_policy")),
+    disclaimer: yup
+      .boolean()
+      .oneOf([true], translate("form.validation.disclaimer")),
   });
   const formik = useFormik<RegisterForm>({
     initialValues: {
@@ -96,6 +118,8 @@ const Register = () => {
       email: "",
       password: "",
       language: browserLanguage,
+      privacy_terms: false,
+      disclaimer: false,
     },
     initialTouched: {
       username: true,
@@ -106,15 +130,23 @@ const Register = () => {
     },
   });
 
+  const errorStyle = {
+    fontSize: "0.75em",
+    fontWeight: 400,
+    lineHeight: 1.66,
+    letterSpacing: "0.03333em",
+    textAlign: "left",
+    marginTop: "3px",
+    marginRight: "14px",
+    marginBottom: 0,
+    marginLeft: "14px",
+    color: "#f44336",
+  };
+
   return (
     <Fly>
       <Stack width={"100%"} maxWidth={500} spacing={6}>
         <Stack spacing={1.8}>
-          {/* <Fly.Item>
-            <Typography fontSize={"2.2rem"}>
-              {translate("page.register.title")}
-            </Typography>
-          </Fly.Item> */}
           <Fly.Item>
             <Typography fontSize={"2.6rem"} variant="h1">
               {translate("page.register.title")}
@@ -201,6 +233,84 @@ const Register = () => {
                   }}
                 />
               </Fly.Item>
+              <Fly.Item>
+                <Box className="MuiFormControl-root" sx={{ opacity: 0.8 }}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        sx={{ p: 0, ml: "9px", mr: "6px" }}
+                        checked={formik.values.privacy_terms}
+                      />
+                    }
+                    label={
+                      <Trans
+                        i18nKey="page.register.form.terms_policy"
+                        components={{
+                          terms: (
+                            <Box
+                              sx={{ fontWeight: 600, opacity: 0.9 }}
+                              component="span"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setOpenedModalKey("terms");
+                              }}
+                            />
+                          ),
+                          policy: (
+                            <Box
+                              sx={{ fontWeight: 600, opacity: 0.9 }}
+                              component="span"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setOpenedModalKey("policy");
+                              }}
+                            />
+                          ),
+                        }}
+                      />
+                    }
+                    name="privacy_terms"
+                    onChange={formik.handleChange}
+                  />
+                  <Box sx={errorStyle}>
+                    {formik.touched.privacy_terms &&
+                      formik.errors.privacy_terms}
+                  </Box>
+                </Box>
+
+                <Box className="MuiFormControl-root" sx={{ opacity: 0.8 }}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        sx={{ p: 0, ml: "9px", mr: "6px" }}
+                        checked={formik.values.disclaimer}
+                      />
+                    }
+                    label={
+                      <Trans
+                        i18nKey="page.register.form.disclaimer"
+                        components={{
+                          disclaimer: (
+                            <Box
+                              sx={{ fontWeight: 600, opacity: 0.9 }}
+                              component="span"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setOpenedModalKey("disclaimer");
+                              }}
+                            />
+                          ),
+                        }}
+                      />
+                    }
+                    name="disclaimer"
+                    onChange={formik.handleChange}
+                  />
+                  <Box sx={errorStyle}>
+                    {formik.touched.disclaimer && formik.errors.disclaimer}
+                  </Box>
+                </Box>
+              </Fly.Item>
             </Stack>
             <Fly.Item>
               <LoadingButton
@@ -236,6 +346,31 @@ const Register = () => {
             </Fly.Item>
           </Stack>
         </form>
+        <WrappedModal
+          opened={!!openedModalKey}
+          onClose={() => setOpenedModalKey("")}
+          sx={{
+            ".wrappedModalContainer": {
+              ".MuiCard-root": {
+                background: "transparent",
+                border: "unset",
+                ">div": {
+                  padding: "0 12px",
+                },
+              },
+            },
+          }}
+        >
+          {openedModalKey ? (
+            openedModalKey === "terms" ? (
+              <TermsConditions />
+            ) : openedModalKey === "policy" ? (
+              <PrivacyPolicy />
+            ) : (
+              <Disclaimer />
+            )
+          ) : null}
+        </WrappedModal>
       </Stack>
     </Fly>
   );

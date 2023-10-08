@@ -20,7 +20,11 @@
         "have_account": "Hesabın var mı?",
         "register": "Kayıt ol"
       },
-      "toast": { "register_success": "Kayıt başarılı" }
+      "toast": { "register_success": "Kayıt başarılı" },
+      "form": {
+        "terms_policy": "<terms>Şartlar ve Koşullar</terms> ile <policy>Gizlilik Politikası</policy>'nı okudum ve kabul ediyorum",
+        "disclaimer": "<disclaimer>Sorumluluk reddini</disclaimer> okudum ve kabul ediyorum"
+      }
     },
     "settings": {
       "account": {
@@ -494,7 +498,9 @@
       "location_max": "Lokasyon maximum {{value}} karakter uzunluğunda olmalıdır",
       "type_req": "Geri bildirim tipi gerekli",
       "binance_id_valid": "Geçersiz Binance Kullanıcı ID",
-      "binance_id_req": "Binance Kullanıcı ID zorunlu"
+      "binance_id_req": "Binance Kullanıcı ID zorunlu",
+      "terms_policy": "Gizlilik Politikasını ve Şartlar ve Koşulları okuduğunuzu ve kabul ettiğinizi işaretlemelisiniz",
+      "disclaimer": "Sorumluluk reddini okuduğunuzu ve kabul ettiğinizi işaretlemelisiniz"
     }
   },
   "moniest": {

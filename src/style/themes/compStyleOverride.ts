@@ -101,10 +101,10 @@ export default function componentStyleOverrides(theme: any) {
         root: {
           color: theme.colors?.textDark,
           padding: "20px",
-          button: {
-            padding: 0,
-            marginLeft: 0,
-          },
+          // button: {
+          //   padding: 0,
+          //   marginLeft: 0,
+          // },
         },
         title: {
           fontSize: "1.125rem",

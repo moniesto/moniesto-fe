@@ -55,10 +55,15 @@ export const PreviewPost = ({
   }, [values]);
 
   return (
-    <WrappedModal width={600} opened={opened} onClose={onClose}>
-      <Typography textAlign="center" mb={1} variant="h3">
+    <WrappedModal
+      title={translate("page.share_post.preview.title")}
+      width={600}
+      opened={opened}
+      onClose={onClose}
+    >
+      {/* <Typography textAlign="center" mb={1} variant="h3">
         {translate("page.share_post.preview.title")}
-      </Typography>
+      </Typography> */}
       <Divider sx={{ mb: 2 }} />
       <Typography pt={1} sx={{ mb: 4 }} variant="h4">
         {translate("page.share_post.preview.message")}

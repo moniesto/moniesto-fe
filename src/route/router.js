@@ -159,6 +159,14 @@ const Router = createBrowserRouter([
         element: <VerifyEmail />,
       },
       {
+        path: "privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "terms-and-conditions",
+        element: <TermsConditions />,
+      },
+      {
         path: "*",
         element: <NotFound />,
       },

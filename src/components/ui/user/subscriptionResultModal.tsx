@@ -55,7 +55,6 @@ const SubscriptionResultModal = ({
 
   return (
     <WrappedModal
-      noPadding
       width={500}
       opened={isOpen}
       onClose={() => {

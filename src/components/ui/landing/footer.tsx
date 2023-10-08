@@ -12,9 +12,17 @@ import { useNavLinks } from "../../../hooks/useNavLinks";
 import { useNavigateScroll } from "../../../hooks/useNavigateScroll";
 import Navigator from "../../shared/common/navigatior";
 import Logo from "../../shared/common/logo";
+import { WrappedModal } from "../../shared/common/wrappedModal";
+import { useState } from "react";
+import { TermsConditions } from "../../../pages/settings/legals/termsConditions";
+import { PrivacyPolicy } from "../../../pages/settings/legals/privacyPolicy/privacyPolicy";
+import { Disclaimer } from "../../../pages/settings/legals/disclaimer";
+import { useNavigate } from "react-router-dom";
 
 export const Footer = () => {
   const theme = useTheme();
+  const [openedModalKey, setOpenedModalKey] = useState("");
+  const navigate = useNavigate();
 
   const translate = useTranslate();
   const links = useNavLinks();
@@ -74,8 +82,14 @@ export const Footer = () => {
                   </Box>
                 ))}
 
-                <Box>{translate("page.landing.links.terms")} </Box>
-                <Box>{translate("page.landing.links.privacy_policy")} </Box>
+                {/* <Box onClick={() => setOpenedModalKey("terms")}> */}
+                <Box onClick={() => navigate("/terms-and-conditions")}>
+                  {translate("page.landing.links.terms")}
+                </Box>
+                {/* <Box onClick={() => setOpenedModalKey("policy")}> */}
+                <Box onClick={() => navigate("/privacy-policy")}>
+                  {translate("page.landing.links.privacy_policy")}
+                </Box>
               </Stack>
             </Stack>
 
@@ -147,6 +161,31 @@ export const Footer = () => {
           </Stack>
         </Box>
       </Container>
+      <WrappedModal
+        opened={!!openedModalKey}
+        onClose={() => setOpenedModalKey("")}
+        sx={{
+          ".wrappedModalContainer": {
+            ".MuiCard-root": {
+              background: "transparent",
+              border: "unset",
+              ">div": {
+                padding: "0 12px",
+              },
+            },
+          },
+        }}
+      >
+        {openedModalKey ? (
+          openedModalKey === "terms" ? (
+            <TermsConditions />
+          ) : openedModalKey === "policy" ? (
+            <PrivacyPolicy />
+          ) : (
+            <Disclaimer />
+          )
+        ) : null}
+      </WrappedModal>
     </Box>
   );
 };
