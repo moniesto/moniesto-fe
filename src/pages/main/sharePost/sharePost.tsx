@@ -422,6 +422,9 @@ export const SharePost = () => {
   );
 
   useEffect(() => {
+    if (previewModalOpened && Object.keys(formik.errors).length) {
+      setPreviewModalOpened(false);
+    }
     if (!formik.values.crypto_currency.currency) {
       if (currencyTimeout && currencyTimeout?.current)
         clearTimeout(currencyTimeout.current);
@@ -445,7 +448,7 @@ export const SharePost = () => {
       currencyTimeout.current
         ? clearTimeout(currencyTimeout.current)
         : undefined;
-  }, [fetchCurrency, formik, submitLoading]);
+  }, [fetchCurrency, formik, previewModalOpened, submitLoading]);
 
   const handleAddTarget = useCallback(() => {
     const newTargets = displayedTargets;
