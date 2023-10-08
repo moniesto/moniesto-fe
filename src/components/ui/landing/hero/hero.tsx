@@ -13,7 +13,6 @@ export const Hero = () => {
   const navigateScroll = useNavigateScroll();
 
   const scrollPosition = useScrollPosition();
-  console.log("scrollPosition :", scrollPosition);
 
   return (
     <Box id="navbar" component="section">

@@ -19,7 +19,6 @@ export const PaymentBinanceTab = ({
   onBinanceIdChange: (val: string) => void;
   footer: ReactNode;
 }) => {
-  console.log("footer :", footer);
   const [binanceIDHelperModalOpened, setBinanceIDHelperModalOpened] =
     useState(false);
   const translate = useTranslate();

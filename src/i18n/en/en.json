@@ -208,7 +208,7 @@
           "moniesto_fee": "Moniesto operation fee ({{percentage}}%)",
           "payout_price": "Total (monthly)"
         },
-        "change_variables": "You can change your Binance ID and Subscription Fee at any time in your Account Settings."
+        "change_variables": "You can change your Binance ID and Subscription Fee at any time in your Account Settings. The total amount you will earn per subscription will be {{value}}$."
       },
       "step": {
         "email_verify": "Email verify",
@@ -428,6 +428,9 @@
       "disclaimer": "Disclaimer",
       "privacy_policy": "Privacy Policy",
       "terms_and_conditions": "Terms and Conditions"
+    },
+    "image_upload": {
+      "exceed": "Your file exceeds the {{value}}MB limit."
     }
   },
   "form": {

@@ -162,7 +162,7 @@
       "already_verified_email": "E-postanız doğrulandı",
       "send_mailto": "{{email}} 'a e-posta gönderdik",
       "check_mail": "Lütfen email'inizi kontrol edin",
-      "need_verify": "Monest olmak için e-posta adresinizi doğrulamanız gerekir",
+      "need_verify": "Moniest olmak için e-posta adresinizi doğrulamanız gerekir",
       "verify_email": "E-posta'ı doğrula",
       "select_payout_method": "Abonelerinizin size hangi ödeme aracı ile ödeme yapacağını belirleyin.",
       "payout_method": {
@@ -191,7 +191,7 @@
           "moniesto_fee": "Moniesto operasyon ücreti ({{percentage}}%)",
           "payout_price": "Toplam (aylık)"
         },
-        "change_variables": "Binance ID'ni ve Abonelik Ücreti'ni Hesap Ayarları'ndan istediğin zaman değiştirebilirsin."
+        "change_variables": "Binance ID'ni ve Abonelik Ücreti'ni Hesap Ayarları'ndan istediğin zaman değiştirebilirsin. Abonelik başına toplam kazanacağınız tutar {{value}}$ olacaktır."
       },
       "step": {
         "email_verify": "Email doğrulama",
@@ -408,6 +408,9 @@
       "disclaimer": "Sorumluluk Reddi Beyanı",
       "privacy_policy": "Gizlilik Politikası",
       "terms_and_conditions": "Şartlar ve Koşullar"
+    },
+    "image_upload": {
+      "exceed": "Dosyanız {{value}}MB sınırını aşıyor."
     }
   },
   "form": {

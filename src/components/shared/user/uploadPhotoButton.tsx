@@ -4,6 +4,7 @@ import { useTheme } from "@mui/system";
 import { ChangeEvent, useCallback } from "react";
 import imageService from "../../../services/imageService";
 import toastService from "../../../services/toastService";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 type propTypes = {
   loading: boolean;
@@ -17,6 +18,7 @@ export const UploadPhotoButton = ({
   handleBase64Image,
 }: propTypes) => {
   const theme = useTheme();
+  const translate = useTranslate();
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -26,11 +28,11 @@ export const UploadPhotoButton = ({
 
   const handleChangeFile = useCallback(
     (file: File) => {
-      //5 MB MAX
-      const maxAllowedSize = 5 * 1024 * 1024;
+      //8 MB MAX
+      const maxAllowedSize = 8 * 1024 * 1024;
       if (file.size > maxAllowedSize) {
         toastService.open({
-          message: "Your file exceeds the 5MB limit",
+          message: translate("component.image_upload.exceed", { value: 8 }),
           severity: "error",
         });
         return;
@@ -50,7 +52,7 @@ export const UploadPhotoButton = ({
           }, 2000)
         );
     },
-    [handleBase64Image, handleLoading]
+    [handleBase64Image, handleLoading, translate]
   );
 
   return (

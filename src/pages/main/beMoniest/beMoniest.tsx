@@ -120,7 +120,7 @@ const BeMoniest = () => {
             defaults={{ binance_id: stepperState.data.binance_id }}
             footer={
               <BeMoniestStepperFooter
-                handleNext={() => console.log("hey next")}
+                handleNext={() => console.log("next step")}
               />
             }
           />

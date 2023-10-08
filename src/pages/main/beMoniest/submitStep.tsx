@@ -15,8 +15,9 @@ const SubmitStep = () => {
   const stepperState = useAppSelector((state) => state.beMoniest);
 
   const moniestoFee =
-    stepperState.data.fee /
-    (configService.configs.general_info.operation_fee_percentage as number);
+    (stepperState.data.fee *
+      (configService.configs.general_info.operation_fee_percentage as number)) /
+    100;
 
   return (
     <Fly>
@@ -98,7 +99,9 @@ const SubmitStep = () => {
 
           <Fly.Item>
             <Typography sx={{ opacity: 0.8 }} variant="h5">
-              {translate("page.be_moniest.submit.change_variables")}
+              {translate("page.be_moniest.submit.change_variables", {
+                value: (stepperState.data.fee - moniestoFee).toFixed(2),
+              })}
             </Typography>
           </Fly.Item>
         </Stack>
