@@ -16,7 +16,7 @@ import { useTranslate } from "../../hooks/useTranslate";
 import Fly from "../../components/shared/common/fly/fly";
 import configService from "../../services/configService";
 import { WrappedTextField } from "../../components/shared/common/wrappers/wrappedTextField";
-import analytic from "../../services/analytic";
+import analytic from "../../services/googleAnalytic/analytic";
 
 type LoginForm = {
   identifier: string;

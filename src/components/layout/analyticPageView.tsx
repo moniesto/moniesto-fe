@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import analytic from "../../services/analytic";
+import analytic from "../../services/googleAnalytic/analytic";
 import { useTranslate } from "../../hooks/useTranslate";
 
 export const AnalytcPageView = () => {

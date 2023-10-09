@@ -4,7 +4,7 @@ import { useState } from "react";
 import { WarningOutlined } from "@mui/icons-material";
 import { WrappedModal } from "../../shared/common/wrappedModal";
 import { Trans } from "react-i18next";
-import analytic from "../../../services/analytic";
+import analytic from "../../../services/googleAnalytic/analytic";
 
 export const NotAdvice = () => {
   const translate = useTranslate();
@@ -26,7 +26,10 @@ export const NotAdvice = () => {
         }}
         onClick={() => {
           setOpen(true);
-          analytic.sendEvent("NotAdvice", "Post Not Advice Clicked");
+          analytic.sendEvent(
+            analytic.events.NotAdviceCategory,
+            analytic.events.NotAdviceClickAction
+          );
         }}
       >
         {translate("component.post_card.not_advice")}

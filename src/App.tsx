@@ -24,7 +24,7 @@ import {
 } from "./store/slices/localStorageSlice";
 import configService from "./services/configService";
 import api from "./services/api";
-import analytic from "./services/analytic";
+import analytic from "./services/googleAnalytic/analytic";
 
 function App() {
   const storage = useAppSelector((state) => state.storage);
