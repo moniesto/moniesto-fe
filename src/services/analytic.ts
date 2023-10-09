@@ -71,5 +71,8 @@ class analytic {
   login = () => {
     ReactGA.event("login", {});
   };
+  sendEvent = (event: string, params: any) => {
+    ReactGA.event(event, params);
+  };
 }
 export default new analytic();

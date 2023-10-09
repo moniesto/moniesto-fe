@@ -7,7 +7,9 @@ const AboutTab = ({ aboutText }: { aboutText: string }) => {
   return (
     <Card sx={{ padding: 3 }}>
       {aboutText ? (
-        <Typography letterSpacing="1px">{aboutText}</Typography>
+        <Typography letterSpacing="0.4px" whiteSpace="break-spaces">
+          {aboutText}
+        </Typography>
       ) : (
         <Stack alignItems="center">
           <Typography variant="h5">

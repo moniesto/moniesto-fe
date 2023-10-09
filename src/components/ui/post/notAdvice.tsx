@@ -4,6 +4,7 @@ import { useState } from "react";
 import { WarningOutlined } from "@mui/icons-material";
 import { WrappedModal } from "../../shared/common/wrappedModal";
 import { Trans } from "react-i18next";
+import analytic from "../../../services/analytic";
 
 export const NotAdvice = () => {
   const translate = useTranslate();
@@ -23,13 +24,16 @@ export const NotAdvice = () => {
             opacity: 0.8,
           },
         }}
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          setOpen(true);
+          analytic.sendEvent("NotAdvice", "Post Not Advice Clicked");
+        }}
       >
         {translate("component.post_card.not_advice")}
       </Box>
       <WrappedModal width={500} onClose={() => setOpen(false)} opened={open}>
         <Stack alignItems="center" spacing={4}>
-          <Stack gap={2} alignItems="center">
+          <Stack gap={1.5} alignItems="center">
             <WarningOutlined
               sx={{
                 padding: "6px",
