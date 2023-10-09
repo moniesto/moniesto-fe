@@ -1,8 +1,14 @@
-import { Card, Stack, Typography } from "@mui/material";
-import { useTranslate } from "../../../hooks/useTranslate";
+import { Card, Stack } from "@mui/material";
+import { useEffect } from "react";
 
 export const TermsConditions = () => {
-  const translate = useTranslate();
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <Card
       sx={{

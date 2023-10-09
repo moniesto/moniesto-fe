@@ -42,7 +42,7 @@ const AuthorizationLayout = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: 3,
+            padding: { xs: 0.5, md: 3 },
           }}
         >
           <Outlet />

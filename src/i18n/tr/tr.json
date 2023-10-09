@@ -530,8 +530,8 @@
   "navigation": {
     "timeline": "Ana Sayfa",
     "explore": "Keşfet",
-    "share_post": "Gönderi Paylaş",
-    "be_moniest": "Moniest Ol",
+    "share": "Gönderi Paylaş",
+    "bemoniest": "Moniest Ol",
     "account": "Hesap",
     "payment": "Ödeme",
     "password": "Şifre",
@@ -540,7 +540,10 @@
     "settings": "Ayarlar",
     "profile": "Profil",
     "logout": "Çıkış Yap",
-    "home": "Ana Sayfa"
+    "home": "Ana Sayfa",
+    "login": "Giriş Yap",
+    "register": "Kayıt Ol",
+    "forget-password": "Şifremi Unuttum"
   },
   "server": {
     "error": {

@@ -550,8 +550,8 @@
   "navigation": {
     "timeline": "Timeline",
     "explore": "Explore",
-    "share_post": "Share Post",
-    "be_moniest": "Be Moniest",
+    "share": "Share Post",
+    "bemoniest": "Be Moniest",
     "account": "Account",
     "payment": "Payment",
     "password": "Password",
@@ -560,7 +560,10 @@
     "settings": "Settings",
     "profile": "Profile",
     "logout": "Logout",
-    "home": "Home"
+    "home": "Home",
+    "login": "Login",
+    "register": "Register",
+    "forget-password": "Forget Password"
   },
   "server": {
     "error": {

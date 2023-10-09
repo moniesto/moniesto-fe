@@ -1,10 +1,17 @@
 import { Card, Stack } from "@mui/material";
 import { useAppSelector } from "../../../../store/hooks";
 import { PrivacyPolicyEn } from "./privacyPolicyEn";
-import { PrivacyPolicyTr } from "./privacyPolicyTr";
+// import { PrivacyPolicyTr } from "./privacyPolicyTr";
+import { useEffect } from "react";
 
 export const PrivacyPolicy = () => {
   const storage = useAppSelector((state) => state.storage);
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   let component;
 

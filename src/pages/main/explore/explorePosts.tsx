@@ -56,7 +56,7 @@ const ExplorePosts = () => {
 
   return (
     <Box>
-      <Typography variant="h3" mb={1}>
+      <Typography variant="h3" mb={1.5}>
         {translate("page.explore.explore_analysis")}
       </Typography>
       <InfiniteScroll

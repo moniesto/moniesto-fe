@@ -97,9 +97,7 @@ const SideBar = () => {
             fullWidth
             type="submit"
           >
-            {translate(
-              `navigation.${user.moniest ? "share_post" : "be_moniest"}`
-            )}
+            {translate(`navigation.${user.moniest ? "share" : "bemoniest"}`)}
           </Button>
         </Navigator>
 
