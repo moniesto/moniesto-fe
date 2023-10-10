@@ -39,6 +39,13 @@ export const storageSlice = createSlice({
         payload: state.language || browserLanguage,
         type: "changeLanguage",
       });
+
+      if (!state.hasOwnProperty("displayPostHelpButton")) {
+        // !TODO remove after a whle
+        state.displayPostHelpButton = true;
+        setStorage("displayPostHelpButton", true);
+        return state;
+      }
     },
     changeLanguage: (state, action: PayloadAction<string>) => {
       const languages = configService.getAvailableLanguages();
@@ -51,11 +58,21 @@ export const storageSlice = createSlice({
       setStorage("language", language);
       return state;
     },
+    hidePostHelpButton: (state, action: PayloadAction) => {
+      state.displayPostHelpButton = false;
+      setStorage("displayPostHelpButton", false);
+      return state;
+    },
   },
 });
 
-export const { setThemeMode, setToken, changeLanguage, initLanguage } =
-  storageSlice.actions;
+export const {
+  setThemeMode,
+  setToken,
+  changeLanguage,
+  initLanguage,
+  hidePostHelpButton,
+} = storageSlice.actions;
 
 // // Other code such as selectors can use the imported `RootState` type
 // export const getMogetModede = (state: RootState) => state.counter.value

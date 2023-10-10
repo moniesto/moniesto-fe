@@ -3,10 +3,16 @@
 :root {
   --theme-color-primary: #26283d;
   --theme-color-secondary: #22d4b3;
+
   --color-yellow-light: #efb90b1f;
   --color-yellow-primary: #efb90b;
+
   --color-success: #03a66d;
+  --color-success-light: #53b78b1c;
+
   --color-fail: #f6465d;
+  --color-fail-light: #f6465e17;
+
   --theme-shadow-primary: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   --theme-background-secondary-light: #ebf6f478;
@@ -38,7 +44,8 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  &::-webkit-scrollbar {
+  &::-webkit-scrollbar,
+  ::-webkit-scrollbar {
     width: 0;
   }
 }

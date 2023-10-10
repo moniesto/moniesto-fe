@@ -27,7 +27,12 @@ import { NotAdvice } from "../../ui/post/notAdvice";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { AccessTimeOutlined } from "@mui/icons-material";
 import { TimeAgo } from "../common/timeAgo";
-import { colorByNumberValue } from "../../../services/utils";
+import {
+  colorByNumberValue,
+  colorLightByNumberValue,
+} from "../../../services/utils";
+import { HelpfullInfo } from "./helpfullInfo";
+import { useAppSelector } from "../../../store/hooks";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -52,14 +57,26 @@ type PostCardProps = {
 };
 
 const PostCard = ({ post, loading }: PostCardProps) => {
-  const [expanded, setExpanded] = useState<boolean>(false);
   const theme = useTheme();
   const translate = useTranslate();
+  const storage = useAppSelector((state) => state.storage);
 
-  const getColorByStatus = (status: PostSatus) =>
-    colorByNumberValue(
-      status === "pending" ? 0 : status === "success" ? 1 : -1
-    );
+  const [expanded, setExpanded] = useState<boolean>(false);
+
+  const getColorByStatus = (status: PostSatus) => {
+    return {
+      primary:
+        status === "pending"
+          ? ""
+          : colorByNumberValue(status === "success" ? 1 : -1),
+      light:
+        status === "pending"
+          ? theme.palette.mode === "light"
+            ? theme.palette.grey[100]
+            : "rgba(66,66,66,0.4)"
+          : colorLightByNumberValue(status === "success" ? 1 : -1),
+    };
+  };
 
   return (
     <Card
@@ -92,7 +109,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
               <IconButton disableRipple size="small" sx={{ ml: 2 }}>
                 <Avatar
                   src={post.user.profile_photo_thumbnail_link}
-                  sx={{ width: 50, height: 50 }}
+                  sx={{ width: { xs: 42, md: 50 }, height: { xs: 42, md: 50 } }}
                 ></Avatar>
               </IconButton>
             </Navigator>
@@ -206,14 +223,21 @@ const PostCard = ({ post, loading }: PostCardProps) => {
           </Navigator>
         }
       />
+
       <Stack
+        mt={{ xs: 1.5, md: 1 }}
         gap={{ xs: 0.8, md: 1 }}
         pb={1}
-        mt={{ xs: 1.5, md: 1 }}
         direction="row"
         justifyContent="flex-end"
         flexWrap="wrap"
+        alignItems="end"
       >
+        {loading ? (
+          <Skeleton animation="wave" variant="circular" width={25}></Skeleton>
+        ) : storage.displayPostHelpButton ? (
+          <HelpfullInfo />
+        ) : null}
         <InfoChip
           sx={{
             ".infochip--value": {
@@ -252,14 +276,16 @@ const PostCard = ({ post, loading }: PostCardProps) => {
         ></InfoChip>
         <InfoChip
           sx={{
+            background: getColorByStatus(post.status).light,
             ".infochip--value": {
-              color: getColorByStatus(post.status),
+              color: getColorByStatus(post.status).primary,
             },
           }}
           loading={loading}
           value={translate("component.post_card.status." + post.status)}
         ></InfoChip>
       </Stack>
+
       <Divider
         sx={{
           margin: "auto",

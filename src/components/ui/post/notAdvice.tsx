@@ -4,7 +4,7 @@ import { useState } from "react";
 import { WarningOutlined } from "@mui/icons-material";
 import { WrappedModal } from "../../shared/common/wrappedModal";
 import { Trans } from "react-i18next";
-import analytic from "../../../services/googleAnalytic/analytic";
+import analytic from "../../../services/analytic";
 
 export const NotAdvice = () => {
   const translate = useTranslate();

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { emptyUser, User } from "../../interfaces/user";
-import analytic from "../../services/googleAnalytic/analytic";
+import analytic from "../../services/analytic";
 
 // Define the initial state using that type
 type initialStateType = {

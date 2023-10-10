@@ -411,6 +411,15 @@
     },
     "image_upload": {
       "exceed": "Dosyanız {{value}}MB sınırını aşıyor."
+    },
+    "help_info": {
+      "title": "Yararlı Bilgiler",
+      "desc": "Platformumuzda PNL ve ROI, her bir analize 1000$ yatırıldığı varsayılarak hesaplanır. PNL, ROI tanımı ve diğer yararlı bilgileri aşağıda bulabilirsiniz.",
+      "roi_desc": "Bir analizin yatırım getirisi oranıdır. Örneğin; ROI +10% ise, yatırım yapılan 1000$'ın 10%'u kadar bir getiri sağlamış demektir.",
+      "pnl_desc": "Bir analizin kar ve zarar sonucudur. Örneğin; PNL +100$ ise, yatırım yapılan 1000$'dan 100$ getiri sağlamış demektir.",
+      "max_roi_desc": "Devam eden bir analizin, başarılı olduğu senaryoda maximum alabileceği yatırım getirisi oranıdır.",
+      "max_pnl_desc": "Devam eden bir analizin, başarılı olduğu senaryoda maximum alabileceği kar turarıdır.",
+      "not_show_again": "Bir Daha Gösterme"
     }
   },
   "form": {
@@ -525,7 +534,8 @@
     "edit": "Düzenle",
     "cancel": "İptal",
     "complete": "Tamamla",
-    "confirm": "Onayla"
+    "confirm": "Onayla",
+    "ok": "Tamam"
   },
   "navigation": {
     "timeline": "Ana Sayfa",

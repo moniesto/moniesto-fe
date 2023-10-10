@@ -56,7 +56,7 @@ export const WrappedModal = ({
           }}
           title={
             <Typography variant="h3" textAlign="center">
-              {title}{" "}
+              {title}
             </Typography>
           }
           action={

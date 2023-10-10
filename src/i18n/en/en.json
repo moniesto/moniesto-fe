@@ -303,7 +303,7 @@
         "stop": "Stop"
       },
       "status": {
-        "pending": "Pending",
+        "pending": "In Progress",
         "fail": "Fail",
         "success": "Success"
       },
@@ -431,6 +431,15 @@
     },
     "image_upload": {
       "exceed": "Your file exceeds the {{value}}MB limit."
+    },
+    "help_info": {
+      "title": "Useful Information",
+      "desc": "On our platform, PNL and ROI are calculated assuming $1000 is invested in each analysis. You can find the PNL, ROI definition and other useful information below.",
+      "roi_desc": "It is the return on investment rate of an analysis. For example, if the ROI is +10%, it means that it provided a return of 10% of the $1000 invested.",
+      "pnl_desc": "The profit and loss result of an analysis. For example, if PNL is +100$, it means that the invested $1000 yielded a return of $100.",
+      "max_roi_desc": "It is the maximum return on investment that an analysis in 'in progress' status can receive in a successful scenario.",
+      "max_pnl_desc": "The maximum amount of profit an analysis with 'in progress' status can receive in a successful scenario",
+      "not_show_again": "Don't Show It Again"
     }
   },
   "form": {
@@ -545,7 +554,8 @@
     "edit": "Edit",
     "cancel": "Cancel",
     "complete": "Complete",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "ok": "Okay"
   },
   "navigation": {
     "timeline": "Timeline",

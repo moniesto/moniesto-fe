@@ -4,12 +4,14 @@ export type StorageState = {
   theme_mode: ThemeMode;
   token: string;
   language: string;
+  displayPostHelpButton: boolean;
 };
 
 export const emptyStorage: StorageState = {
   theme_mode: "light",
   token: "",
   language: "",
+  displayPostHelpButton: true,
 };
 export type DecodeToken = {
   id: string;
