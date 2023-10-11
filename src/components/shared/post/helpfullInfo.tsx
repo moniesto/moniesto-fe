@@ -140,7 +140,7 @@ export const HelpfullInfo = () => {
             <Button
               onClick={handleNotShow}
               type="button"
-              sx={{ flex: 1, minWidth: 120 }}
+              sx={{ flex: 1, minWidth: 140 }}
               variant="outlined"
               color="inherit"
             >
@@ -148,7 +148,7 @@ export const HelpfullInfo = () => {
             </Button>
             <Button
               onClick={() => setOpen(false)}
-              sx={{ alignSelf: "end", flex: 1, minWidth: 120 }}
+              sx={{ alignSelf: "end", flex: 1, minWidth: 140 }}
               color="secondary"
               variant="contained"
             >

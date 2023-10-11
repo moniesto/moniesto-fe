@@ -81,7 +81,7 @@ export const Feedback = () => {
         sx={{
           display: { xs: "block", md: "none" },
           position: "fixed",
-          right: "-30px",
+          right: "-34px",
           transform: "rotate(270deg)",
           bottom: "110px",
           padding: "0 12px",

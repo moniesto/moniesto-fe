@@ -6,7 +6,7 @@
       "action": {
         "forget_pass": "Forget Password?",
         "login": "Login",
-        "no_account": "No account?",
+        "no_account": "Don't have an account?",
         "register": "Register"
       },
       "toast": {
