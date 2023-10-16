@@ -52,11 +52,11 @@ class http {
         const Maintenance_Code = "General_Maintenance";
         const code = error?.response?.data?.error_code;
         if (!code) {
-          return;
+          return Promise.reject(error.response.data);
         }
         if (Maintenance_Code === code) {
           this.dispatch(setInMaintenance(true));
-          return;
+          return Promise.reject(error.response.data);
         }
 
         const message = configService.translatedErrors.includes(code)
@@ -64,6 +64,7 @@ class http {
           : (configService.configs.error_codes[code] as string);
 
         toastService.open({ severity: "error", message });
+
         if (error.response.status === 401) {
           this.dispatch(setUser(emptyUser));
           this.dispatch(setToken(""));

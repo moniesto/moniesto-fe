@@ -66,6 +66,7 @@ const TimeLine = () => {
           queryParams.hasMore = true;
         }
       })
+      .catch()
       .finally(() => {
         if (timeout.current) clearTimeout(timeout.current);
         timeout.current = setTimeout(() => {

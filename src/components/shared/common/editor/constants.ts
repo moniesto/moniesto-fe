@@ -27,13 +27,18 @@ export const EDITOR_JS_TOOLS: {
     config: {
       uploader: {
         uploadByFile(file: File) {
-          return imageService.getBase64(file).then((data) => {
-            return {
-              success: 1,
-              file: {
-                url: data,
-              },
-            };
+          return new Promise((res, rej) => {
+            imageService
+              .getBase64(file)
+              .then((data) => {
+                res({
+                  success: 1,
+                  file: {
+                    url: data,
+                  },
+                });
+              })
+              .catch(rej);
           });
         },
       },

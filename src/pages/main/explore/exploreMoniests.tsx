@@ -32,6 +32,7 @@ export const ExploreMoniests = () => {
           ...response,
         ]);
       })
+      .catch()
       .finally(() => setLoading(false));
   }, [paginate]);
 

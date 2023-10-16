@@ -73,6 +73,7 @@ export const MoniestSettings = () => {
           severity: "success",
         });
       })
+      .catch()
       .finally(() => setLoading(false));
   };
 

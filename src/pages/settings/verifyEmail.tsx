@@ -28,6 +28,7 @@ export const VerifyEmailSettings = () => {
         });
         setIsSendVerifyMail(true);
       })
+      .catch()
       .finally(() => setLoading(false));
   };
 
@@ -74,14 +75,14 @@ export const VerifyEmailSettings = () => {
                 })}
               </Typography>
               <Typography pt={2} variant="h4">
-              {translate("page.settings.verify_email.check_mail")}
+                {translate("page.settings.verify_email.check_mail")}
               </Typography>
             </Stack>
           </>
         ) : (
           <>
             <Typography pb={2} sx={{ paddingTop: "2rem", fontSize: "1rem" }}>
-            {translate("page.settings.verify_email.instructions_send")}
+              {translate("page.settings.verify_email.instructions_send")}
             </Typography>
             <LoadingButton
               fullWidth
@@ -94,7 +95,6 @@ export const VerifyEmailSettings = () => {
               variant="contained"
             >
               {translate("page.settings.verify_email.verify")}
-              
             </LoadingButton>
           </>
         )}

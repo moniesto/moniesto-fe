@@ -30,17 +30,20 @@ const ExplorePosts = () => {
     setPosts((prev) => prev.concat(Array(queryParams.limit).fill(dummyPost)));
 
     delete queryParams.hasMore;
-    api.content.posts(queryParams).then((response) => {
-      setPosts((prev) => [
-        ...prev.filter((post) => post.id !== "-1"),
-        ...response,
-      ]);
-      if (response.length < queryParams.limit) {
-        queryParams.hasMore = false;
-        queryParams.offset = 0;
-        setQueryParams(JSON.parse(JSON.stringify(queryParams)));
-      } else queryParams.hasMore = true;
-    });
+    api.content
+      .posts(queryParams)
+      .then((response) => {
+        setPosts((prev) => [
+          ...prev.filter((post) => post.id !== "-1"),
+          ...response,
+        ]);
+        if (response.length < queryParams.limit) {
+          queryParams.hasMore = false;
+          queryParams.offset = 0;
+          setQueryParams(JSON.parse(JSON.stringify(queryParams)));
+        } else queryParams.hasMore = true;
+      })
+      .catch();
   }, [queryParams]);
 
   const handleFetchData = () => {

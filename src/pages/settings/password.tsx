@@ -57,6 +57,7 @@ export const PasswordSettings = () => {
           severity: "success",
         });
       })
+      .catch()
       .finally(() => setLoading(false));
   };
 

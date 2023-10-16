@@ -67,6 +67,7 @@ const Register = () => {
           message: "page.register.toast.register_success",
         });
       })
+      .catch()
       .finally(() => setLoading(false));
   };
 

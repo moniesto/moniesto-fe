@@ -588,7 +588,8 @@
       "Account_Login_NotFoundUsername": "Kullanıcı adı sisteme kayıtlı değil",
       "Account_Register_RegisteredEmail": "Email is already registered",
       "Account_Authorization_InvalidToken": "Your login period has expired. Please login again.",
-      "Account_ChangePassword_WrongPassword": "Wrong old password."
+      "Account_ChangePassword_WrongPassword": "Wrong old password.",
+      "General_UserNotFoundByUsername": "User not found with this username"
     }
   }
 }

@@ -64,6 +64,7 @@ export const Feedback = () => {
             severity: "success",
           });
         })
+        .catch()
         .finally(() => {
           setLoading(false);
           setOpen(false);

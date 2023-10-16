@@ -30,6 +30,7 @@ export const PaymentSettings = () => {
           severity: "success",
         });
       })
+      .catch()
       .finally(() => setLoading(false));
   };
 

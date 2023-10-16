@@ -36,6 +36,7 @@ class config {
     "Account_Authorization_InvalidToken",
     "Account_ChangePassword_WrongPassword",
     "Account_Login_InvalidUsername",
+    "General_UserNotFoundByUsername",
   ];
 
   initialize() {

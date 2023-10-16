@@ -56,6 +56,7 @@ export const SubscribeToMoniest = ({
         dispatch(setSubscriptionInfo(null));
         handleClose();
       })
+      .catch()
       .finally(() => setLoading(false));
   };
 

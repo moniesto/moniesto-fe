@@ -64,6 +64,7 @@ const Login = () => {
         dispatch(setUser(res.user));
         dispatch(setToken(res.token));
       })
+      .catch()
       .finally(() => setLoading(false));
   };
 

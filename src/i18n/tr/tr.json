@@ -568,7 +568,8 @@
       "Account_Login_NotFoundUsername": "Kullanıcı adı sisteme kayıtlı değil",
       "Account_Register_RegisteredEmail": "E-posta zaten sistemde kayıtlı",
       "Account_Authorization_InvalidToken": "Giriş süreniz doldu. Lütfen tekran giriş yapın",
-      "Account_ChangePassword_WrongPassword": "Eski şifreniz yanlış."
+      "Account_ChangePassword_WrongPassword": "Eski şifreniz yanlış.",
+      "General_UserNotFoundByUsername": "Bu kullanıcı adı ile ilişkili bir hesap bulunamadı"
     }
   }
 }

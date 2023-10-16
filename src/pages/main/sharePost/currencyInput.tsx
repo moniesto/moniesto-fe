@@ -48,6 +48,7 @@ export const CurrencyInput = memo(
       api.crypto
         .search_currencies("usdt", market_type)
         .then((res) => setOptions(res))
+        .catch()
         .finally(() => setLoading(false));
     };
 
@@ -73,6 +74,7 @@ export const CurrencyInput = memo(
         api.crypto
           .search_currencies(searchValue, market_type)
           .then((res) => setOptions(res))
+          .catch()
           .finally(() => setLoading(false));
       }, 500);
     }, [searchValue, market_type]);
