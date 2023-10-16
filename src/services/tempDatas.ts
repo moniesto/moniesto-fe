@@ -33,9 +33,10 @@ export const TestUser: User = {
   email: "davutturug@gmail.com",
   email_verified: false,
   location: "Antalya",
-  profile_photo_link: "/images/user/Avatar.png",
-  background_photo_link: "/images/user/Avatar_thumbnail.png",
-  background_photo_thumbnail_link: "/images/user/profil_bg.webp",
+  profile_photo_link: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mia",
+  background_photo_link: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mia",
+  background_photo_thumbnail_link:
+    "https://api.dicebear.com/7.x/avataaars/svg?seed=Mia",
   created_at: new Date(),
   updated_at: new Date(),
   moniest: TestMoniest,

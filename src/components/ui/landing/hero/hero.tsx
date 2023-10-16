@@ -7,6 +7,7 @@ import { HeroNavbar } from "./heroNavbar";
 import { StarCanvas } from "./starCanvas";
 import { useScrollPosition } from "../../../../hooks/useScrollPosition";
 import { useAppSelector } from "../../../../store/hooks";
+import imageService from "../../../../services/imageService";
 
 export const Hero = () => {
   const translate = useTranslate();
@@ -112,7 +113,9 @@ export const Hero = () => {
               }}
               height="100%"
               width="100%"
-              src={`./images/landing/desktop_${language}.png`}
+              src={imageService.getFirebaseImagePath(
+                `landing/desktop_${language}.png`
+              )}
               alt="desktop"
             />
           </Box>

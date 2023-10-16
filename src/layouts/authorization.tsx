@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import Logo from "../components/shared/common/logo";
 import { useTranslate } from "../hooks/useTranslate";
 import { MaintenanceMode } from "../components/layout/maintenanceMode";
+import imageService from "../services/imageService";
 
 const AuthorizationLayout = () => {
   const theme = useTheme();
@@ -90,7 +91,7 @@ const AuthorizationLayout = () => {
             <Stack direction="column" alignItems="center" spacing={3}>
               <img
                 style={{ width: "16rem" }}
-                src="images/auth/auth_bg.gif"
+                src={imageService.getFirebaseImagePath("auth/auth_bg.gif")}
                 alt=""
               />
             </Stack>

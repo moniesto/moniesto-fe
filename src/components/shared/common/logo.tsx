@@ -1,6 +1,7 @@
 import { Box, SxProps, useTheme } from "@mui/material";
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import imageService from "../../../services/imageService";
 
 export type Variants = "logo-medium" | "logo-small";
 export type ThemeMode = "light" | "dark";
@@ -30,10 +31,11 @@ const Logo = ({
 
   const dynamicSource = useMemo(
     () =>
-      process.env.PUBLIC_URL +
-      `/images/logos/${variant}-${
-        mode ? mode : theme.palette.mode === "dark" ? "light" : "dark"
-      }.png`,
+      imageService.getFirebaseImagePath(
+        `logos/${variant}-${
+          mode ? mode : theme.palette.mode === "dark" ? "light" : "dark"
+        }.png`
+      ),
     [mode, theme.palette.mode, variant]
   );
 

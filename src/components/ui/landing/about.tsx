@@ -5,6 +5,7 @@ import {
   PriceCheckOutlined,
 } from "@mui/icons-material";
 import { useTranslate } from "../../../hooks/useTranslate";
+import imageService from "../../../services/imageService";
 
 export const About = () => {
   const translate = useTranslate();
@@ -135,7 +136,7 @@ export const About = () => {
                 <img
                   width="100%"
                   height="100%"
-                  src="./images/landing/mobile.png"
+                  src={imageService.getFirebaseImagePath("landing/mobile.png")}
                   alt="vector-crypto-invest"
                 />
                 <Box
@@ -155,7 +156,9 @@ export const About = () => {
                     }}
                     width="100%"
                     height="100%"
-                    src="./images/landing/mobile-moniest.png"
+                    src={imageService.getFirebaseImagePath(
+                      "landing/mobile-moniest.png"
+                    )}
                     alt="vector-crypto-invest"
                   />
                 </Box>
