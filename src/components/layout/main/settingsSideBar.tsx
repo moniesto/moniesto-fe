@@ -1,20 +1,18 @@
 import {
-  ChevronRightOutlined,
   CreditCardOutlined,
   EmailOutlined,
-  GavelOutlined,
+  ExpandLess,
+  ExpandMore,
   KeyOutlined,
   LogoutOutlined,
   PersonOutline,
   PolicyOutlined,
   RocketLaunchOutlined,
-  TextSnippetOutlined,
 } from "@mui/icons-material";
 import {
   Box,
   Collapse,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -166,6 +164,13 @@ export const SettingsSideBar = () => {
                 >
                   <ListItemIcon>{link.icon}</ListItemIcon>
                   <ListItemText primary={link.title} />
+                  {link.child ? (
+                    openedLink === link.path ? (
+                      <ExpandLess />
+                    ) : (
+                      <ExpandMore />
+                    )
+                  ) : null}
                 </ListItemButton>
                 {link.child && (
                   <Collapse

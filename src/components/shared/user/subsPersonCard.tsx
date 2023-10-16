@@ -75,7 +75,7 @@ const SubsPersonCard = ({ user, loading, props }: propTypes) => {
         }
       />
       {!loading ? (
-        <LocationText location={user.location} />
+        <LocationText sx={{ pr: "5px", ml: 1 }} location={user.location} />
       ) : (
         <Skeleton
           animation="wave"

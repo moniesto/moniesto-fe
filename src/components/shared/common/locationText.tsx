@@ -1,13 +1,14 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, SxProps, Typography } from "@mui/material";
 import { LocationOnOutlined } from "@mui/icons-material";
 
 type propTypes = {
   location: string;
+  sx?: SxProps;
 };
 
-const LocationText = ({ location }: propTypes) => {
+const LocationText = ({ location, sx }: propTypes) => {
   return (
-    <Stack sx={{ opacity: 0.8 }} flexDirection="row" columnGap={1}>
+    <Stack sx={{ opacity: 0.8, ...sx }} flexDirection="row" columnGap={1}>
       {location && (
         <>
           <LocationOnOutlined sx={{ opacity: 0.8, fontSize: "1rem" }} />
