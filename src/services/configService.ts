@@ -35,6 +35,7 @@ class config {
     "Account_Register_RegisteredEmail",
     "Account_Authorization_InvalidToken",
     "Account_ChangePassword_WrongPassword",
+    "Account_Login_InvalidUsername",
   ];
 
   initialize() {
