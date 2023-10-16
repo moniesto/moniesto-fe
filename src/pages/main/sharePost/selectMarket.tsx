@@ -23,7 +23,7 @@ export const SelectMarket = ({
       fullWidth
       exclusive
       value={value}
-      onChange={(_, val) => onChange(val)}
+      onChange={(_, market) => market && onChange(market)}
     >
       <ToggleButton value="futures">
         <Stack direction="row" alignItems="center">
