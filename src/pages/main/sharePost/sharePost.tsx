@@ -948,7 +948,7 @@ export const SharePost = () => {
       {previewModalOpened && (
         <PreviewPost
           values={formik.values}
-          opened={previewModalOpened}
+          opened={previewModalOpened && !submitLoading}
           onClose={() => setPreviewModalOpened(false)}
           onOkClik={() => {
             handleShare();

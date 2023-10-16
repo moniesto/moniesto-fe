@@ -61,9 +61,6 @@ export const PreviewPost = ({
       opened={opened}
       onClose={onClose}
     >
-      {/* <Typography textAlign="center" mb={1} variant="h3">
-        {translate("page.share_post.preview.title")}
-      </Typography> */}
       <Divider sx={{ mb: 2 }} />
       <Typography pt={1} sx={{ mb: 4 }} variant="h4">
         {translate("page.share_post.preview.message")}
