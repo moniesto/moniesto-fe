@@ -8,11 +8,12 @@ import toastService from "./toastService";
 import configService from "./configService";
 import { setToken } from "../store/slices/localStorageSlice";
 import { setInMaintenance } from "../store/slices/globalSlice";
+import { API_URL } from "./environment";
 
 class http {
   private dispatch!: Dispatch<AnyAction>;
   private instance!: AxiosInstance;
-  private BASE_URL = "https://moniesto-test-be-1.onrender.com/";
+  private BASE_URL = API_URL;
   constructor() {
     this.createInstance(localStorageService.getStorage().token);
   }
