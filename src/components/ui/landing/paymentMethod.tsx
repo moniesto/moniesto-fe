@@ -1,5 +1,6 @@
 import { Box, Container, Stack } from "@mui/material";
 import { useTranslate } from "../../../hooks/useTranslate";
+import imageService from "../../../services/imageService";
 
 export const PaymentMethod = () => {
   const translate = useTranslate();
@@ -75,7 +76,9 @@ export const PaymentMethod = () => {
                 <img
                   width="100%"
                   height="100%"
-                  src="./images/landing/vector-btc.svg"
+                  src={imageService.getFirebaseImagePath(
+                    "landing/vector-btc.svg"
+                  )}
                   alt="vector-btc"
                 />
               </Box>

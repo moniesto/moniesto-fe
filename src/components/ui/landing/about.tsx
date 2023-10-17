@@ -81,7 +81,9 @@ export const About = () => {
                         <img
                           width="100%"
                           height="100%"
-                          src={`./images/landing/${item.img_source}`}
+                          src={imageService.getFirebaseImagePath(
+                            `landing/${item.img_source}`
+                          )}
                           alt="vector-crypto-invest"
                         />
                       </Box>

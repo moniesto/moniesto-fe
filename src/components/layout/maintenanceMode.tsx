@@ -1,6 +1,7 @@
 import { Card, Stack, Typography } from "@mui/material";
 import { useAppSelector } from "../../store/hooks";
 import { useTranslate } from "../../hooks/useTranslate";
+import imageService from "../../services/imageService";
 
 export const MaintenanceMode = () => {
   const globalState = useAppSelector((state) => state.global);
@@ -31,7 +32,11 @@ export const MaintenanceMode = () => {
         }}
       >
         <Stack alignItems="center" gap={8}>
-          <img width="300" src="./images/auth/maintain.svg" alt="desktop" />
+          <img
+            width="300"
+            src={imageService.getFirebaseImagePath("auth/maintain.svg")}
+            alt="desktop"
+          />
           <Stack alignItems="center" gap={2}>
             <Typography textAlign="center" variant="h1">
               {translate("component.maintenance_mode.title")}{" "}
