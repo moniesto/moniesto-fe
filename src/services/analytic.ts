@@ -1,5 +1,6 @@
 import ReactGA from "react-ga4";
 import { User } from "../interfaces/user";
+import { GA_MEASUREMENT_ID } from "./environment";
 
 class analytic {
   events = {
@@ -11,7 +12,7 @@ class analytic {
   };
   user!: User;
   initialize = () => {
-    ReactGA.initialize("G-XY6DB52M21");
+    ReactGA.initialize(GA_MEASUREMENT_ID as string);
   };
 
   setUser = (user: User) => {
@@ -41,6 +42,7 @@ class analytic {
         ? { userId: this.user?.id, username: this.user?.username }
         : {}),
     };
+    console.log("finaldata :", finaldata);
     ReactGA.event({
       category: category,
       action: action,
