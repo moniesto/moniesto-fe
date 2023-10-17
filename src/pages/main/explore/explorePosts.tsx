@@ -9,7 +9,6 @@ import { useTranslate } from "../../../hooks/useTranslate";
 
 const ExplorePosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
 
   const [queryParams, setQueryParams] = useState<{
     hasMore?: boolean;
@@ -45,12 +44,10 @@ const ExplorePosts = () => {
           setQueryParams(JSON.parse(JSON.stringify(queryParams)));
         } else queryParams.hasMore = true;
       })
-      .catch()
-      .finally(() => setLoading(false));
+      .catch();
   }, [queryParams]);
 
   const handleFetchData = () => {
-    setLoading(true);
     setQueryParams({
       ...queryParams,
       offset: queryParams.offset + queryParams.limit,
