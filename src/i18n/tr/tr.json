@@ -143,11 +143,11 @@
       "all_rights_reserved": "Bütün hakları saklıdır."
     },
     "share_post": {
-      "share_post": "Gönderi Paylaş",
+      "share_post": "Analiz Paylaş",
       "approximate_score": "Yaklaşık Skor",
       "approximate_score_valid": "Alabileceğiniz en yüksek skor",
       "approximate_score_invalid": "Gönderi geçerli olduğunda hesaplanır",
-      "toast": { "post_created": "Gönderiniz başarıyla oluşturuldu" },
+      "toast": { "post_created": "Analiz başarıyla oluşturuldu" },
       "preview": {
         "title": "Analiz Önizlemesi",
         "message": "Analizinizi gözden geçirdikten sonra yayınlanması için onaylayabilirsiniz."
@@ -207,8 +207,8 @@
       "no_bio": "Moniest daha açıklama eklemedi",
       "subscribe": "Abone ol",
       "unsubscribe": "Aboneliği bitir",
-      "sub_for_live": "Canlı gönderileri görmek için abone olun",
-      "no_post": "Henüz gönderi yok",
+      "sub_for_live": "Canlı analizleri görmek için abone olun",
+      "no_post": "Henüz analiz yok",
       "no_subscriber": "Henüz aboneniz yok",
       "no_subscriber_account": "{{username}} henüz abonesi yok",
       "no_subscription": "Henüz aboneliğiniz yok",
@@ -222,7 +222,7 @@
         "total": "Toplam"
       },
       "tab": {
-        "posts": "Gönderiler {{count}}",
+        "posts": "Analizler {{count}}",
         "subscribers": "Aboneler {{count}}",
         "subscriptions": "Abonelikler {{count}}",
         "about": "Hakkında"
@@ -262,8 +262,12 @@
       "go_home": "Anasayfaya git"
     },
     "explore": {
-      "explore_moniests": "Moniest'leri Keşfet",
+      "explore_moniests": "Moniest'ları Keşfet",
       "explore_analysis": "En İyi Analizleri Keşfet"
+    },
+    "timeline": {
+      "past_analyzes_title": "Geçmiş Analizler",
+      "unsub_analyzes_title": "Abonesi Olmadığın Moniest'ların Analizleri"
     }
   },
   "component": {
@@ -274,7 +278,7 @@
       "table": {
         "finish": "Bitti",
         "direction": "Yön",
-        "start": "Giriş Noktası",
+        "start": "Gir Noktası",
         "take_profit": "Kar Al",
         "time_left": "Bitiş süresi",
         "tp_1": "TP 1",
@@ -317,7 +321,7 @@
         "fail": "Ödeme işlemi tamamlanamadı"
       },
       "message": {
-        "success": "Artık moniest'ın canlı gönderilerine erişebilirsin",
+        "success": "Artık moniest'ın canlı analizlerine erişebilirsin",
         "fail": "Ödeme işleminiz herhangi bir sebepten dolayı tamamlanamadı. Lütfen tekrar deneyin"
       },
       "link_created": "Ödeme linki oluşturuldu",
@@ -540,7 +544,7 @@
   "navigation": {
     "timeline": "Ana Sayfa",
     "explore": "Keşfet",
-    "share": "Gönderi Paylaş",
+    "share": "Analiz Paylaş",
     "bemoniest": "Moniest Ol",
     "account": "Hesap",
     "payment": "Ödeme",

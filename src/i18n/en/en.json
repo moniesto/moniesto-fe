@@ -158,12 +158,12 @@
       "all_rights_reserved": "All rights reserved."
     },
     "share_post": {
-      "share_post": "Share Post",
+      "share_post": "Share Analysis",
       "approximate_score": "Approximate Score",
       "approximate_score_valid": "The highest score you can get",
       "approximate_score_invalid": "Calculated when the post is valid",
       "toast": {
-        "post_created": "Your post successfully created "
+        "post_created": "Your analysis successfully created "
       },
       "preview": {
         "title": "Analysis Preview",
@@ -224,8 +224,8 @@
       "no_bio": "Moniest didn't add any description, yet",
       "subscribe": "Subscribe",
       "unsubscribe": "Unsubscribe",
-      "sub_for_live": "Subscribe to see live posts",
-      "no_post": "There are no posts yet",
+      "sub_for_live": "Subscribe to see live analysis",
+      "no_post": "There are no analysis yet",
       "no_subscriber": "You don't have any subscribers yet",
       "no_subscriber_account": "{{username}} doesn't have any subscribers yet",
       "no_subscription": "You don't have any subscriptions yet",
@@ -239,7 +239,7 @@
         "total": "Total"
       },
       "tab": {
-        "posts": "Posts {{count}}",
+        "posts": "Analyzes {{count}}",
         "subscribers": "Subscribers {{count}}",
         "subscriptions": "Subscriptions {{count}}",
         "about": "About"
@@ -281,6 +281,10 @@
     "explore": {
       "explore_moniests": "Explore Moniests",
       "explore_analysis": "Discover Best Analysis"
+    },
+    "timeline": {
+      "past_analyzes_title": "Past Analyzes",
+      "unsub_analyzes_title": "Analysis of Moniests You Are Not Subscribed to"
     }
   },
   "component": {
@@ -337,7 +341,7 @@
         "fail": "Payment process could not be completed"
       },
       "message": {
-        "success": "Now you can access moniest's live posts",
+        "success": "Now you can access moniest's live analyzes",
         "fail": "Your payment transaction could not be completed for any reason. Please try again"
       },
       "link_created": "Payment link has been created",
@@ -560,7 +564,7 @@
   "navigation": {
     "timeline": "Timeline",
     "explore": "Explore",
-    "share": "Share Post",
+    "share": "Share Analysis",
     "bemoniest": "Be Moniest",
     "account": "Account",
     "payment": "Payment",
@@ -585,7 +589,7 @@
       "Moniest_CreateMoniest_InvalidBody": "These information is invalid to be moniest",
       "Account_EmailVerification_NotFoundToken": "The email verification link is broken or invalid. Please try to verify again.",
       "Post_CreatePost_InvalidStop": "Stop is invalid",
-      "Account_Login_NotFoundUsername": "Kullanıcı adı sisteme kayıtlı değil",
+      "Account_Login_NotFoundUsername": "User not found with this username",
       "Account_Register_RegisteredEmail": "Email is already registered",
       "Account_Authorization_InvalidToken": "Your login period has expired. Please login again.",
       "Account_ChangePassword_WrongPassword": "Wrong old password.",

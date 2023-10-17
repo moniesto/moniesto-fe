@@ -1,4 +1,4 @@
-import { Box, Divider } from "@mui/material";
+import { Box } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState } from "react";
 import SearchBar from "../../../components/layout/header/seachBar";
@@ -20,7 +20,7 @@ const Explore = () => {
   const contentPadding = searchText && { paddingTop: "68px" };
 
   return (
-    <Stack rowGap={2}>
+    <Stack gap={2}>
       <Box
         sx={{
           width: "100%",
@@ -31,9 +31,8 @@ const Explore = () => {
       >
         <SearchBar onTypeSearch={(text) => setSearchText(text)}></SearchBar>
       </Box>
-      <Stack rowGap={2} sx={{ ...contentPadding }}>
+      <Stack rowGap={4} sx={{ ...contentPadding }}>
         <ExploreMoniests></ExploreMoniests>
-        <Divider></Divider>
         <ExplorePosts></ExplorePosts>
       </Stack>
     </Stack>

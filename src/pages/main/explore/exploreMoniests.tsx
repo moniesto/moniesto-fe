@@ -13,7 +13,7 @@ import Fly from "../../../components/shared/common/fly/fly";
 export const ExploreMoniests = () => {
   const translate = useTranslate();
   const [moniests, setMoniests] = useState<User[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [paginate, setPaginate] = useState({
     limit: 4,
     offset: 0,
@@ -47,7 +47,7 @@ export const ExploreMoniests = () => {
   return (
     <Box>
       <Typography variant="h3" mb={1.5}>
-        {translate("page.explore.explore_moniests")}
+        • {translate("page.explore.explore_moniests")}
       </Typography>
       <Fly>
         <Grid container spacing={2}>
