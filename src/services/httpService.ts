@@ -53,11 +53,11 @@ class http {
         const Maintenance_Code = "General_Maintenance";
         const code = error?.response?.data?.error_code;
         if (!code) {
-          return Promise.reject(error.response.data);
+          return Promise.reject("no error code");
         }
         if (Maintenance_Code === code) {
           this.dispatch(setInMaintenance(true));
-          return Promise.reject(error.response.data);
+          return Promise.reject(error?.response?.data);
         }
 
         const message = configService.translatedErrors.includes(code)
@@ -71,7 +71,7 @@ class http {
           this.dispatch(setToken(""));
         }
 
-        return Promise.reject(error.response.data);
+        return Promise.reject(error?.response?.data);
       }
     );
   }
