@@ -101,7 +101,7 @@ export const SharePost = () => {
       leverage: 1,
       description: "",
       direction: "long",
-      duration: getMinute(5).toString(),
+      duration: getMinute(0.5).toString(),
       stop: 0,
       take_profit: 0,
       target1: 0,
