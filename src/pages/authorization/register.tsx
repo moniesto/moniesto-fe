@@ -16,7 +16,7 @@ import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
 import { setToken } from "../../store/slices/localStorageSlice";
 import api from "../../services/api";
@@ -49,7 +49,7 @@ const Register = () => {
   const dispatch = useAppDispatch();
   const { usernameValidation, usernameInput } = useUsernameValidation();
   const [loading, setLoading] = useState<boolean>(false);
-  const browserLanguage = navigator.language.split("-")[0];
+  const language = useAppSelector((state) => state.storage.language);
 
   const [openedModalKey, setOpenedModalKey] = useState("");
 
@@ -118,7 +118,7 @@ const Register = () => {
       fullname: "",
       email: "",
       password: "",
-      language: browserLanguage,
+      language,
       privacy_terms: false,
       disclaimer: false,
     },
