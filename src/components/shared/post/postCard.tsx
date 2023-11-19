@@ -33,6 +33,7 @@ import {
 } from "../../../services/utils";
 import { HelpfullInfo } from "./helpfullInfo";
 import { useAppSelector } from "../../../store/hooks";
+import { PostCardMenu } from "./postCardMenu/postCardMenu";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -54,9 +55,10 @@ const ExpandMore: any = styled((props: ExpandMoreProps) => {
 type PostCardProps = {
   post: Post;
   loading: boolean;
+  displayEdit?: boolean;
 };
 
-const PostCard = ({ post, loading }: PostCardProps) => {
+const PostCard = ({ post, loading, displayEdit }: PostCardProps) => {
   const theme = useTheme();
   const translate = useTranslate();
   const storage = useAppSelector((state) => state.storage);
@@ -122,7 +124,11 @@ const PostCard = ({ post, loading }: PostCardProps) => {
           )
         }
         action={
-          <Stack flexDirection="row" gap={{ md: 5, xs: 3 }}>
+          <Stack
+            flexDirection="row"
+            gap={{ md: 0.8, xs: 0.4 }}
+            alignItems="center"
+          >
             <Stack alignItems="end">
               {!loading ? (
                 <>
@@ -169,6 +175,7 @@ const PostCard = ({ post, loading }: PostCardProps) => {
                 ></Skeleton>
               )}
             </Stack>
+            {displayEdit && <PostCardMenu post={post} />}
           </Stack>
         }
         title={

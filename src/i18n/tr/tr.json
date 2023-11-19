@@ -294,7 +294,16 @@
       "roi": "ROI",
       "pnl": "PNL",
       "max_roi": "Max ROI",
-      "max_pnl": "Max PNL"
+      "max_pnl": "Max PNL",
+      "menu": {
+        "share": {
+          "title": "Paylaş",
+          "entry_price": "Giriş Fiyatı",
+          "current_price": "Güncel Fiyat",
+          "closed_price": "Kapanış Fiyatı",
+          "date": "Tarih"
+        }
+      }
     },
     "feedback": {
       "title": "Geri bildirim",

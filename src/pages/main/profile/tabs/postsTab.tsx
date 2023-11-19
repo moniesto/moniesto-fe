@@ -45,6 +45,7 @@ const PostsTab = () => {
   const [isInitialRender, setIsInitialRender] = useState(true);
   const translate = useTranslate();
   const profileState = useAppSelector((state) => state.profile);
+  const userState = useAppSelector((state) => state.user);
 
   const handleFetchData = () => {
     setQueryParams((prev) => {
@@ -230,7 +231,11 @@ const PostsTab = () => {
               <Stack rowGap={2}>
                 {posts.map((post, i) => (
                   <Fly.Item key={i}>
-                    <PostCard loading={post.id === "-1"} post={post} />
+                    <PostCard
+                      displayEdit={userState.user.id === post.user.id}
+                      loading={post.id === "-1"}
+                      post={post}
+                    />
                   </Fly.Item>
                 ))}
               </Stack>

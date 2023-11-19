@@ -314,7 +314,16 @@
       "roi": "ROI",
       "pnl": "PNL",
       "max_roi": "Max ROI",
-      "max_pnl": "Max PNL"
+      "max_pnl": "Max PNL",
+      "menu": {
+        "share": {
+          "title": "Share",
+          "entry_price": "Entry Price",
+          "current_price": "Current Price",
+          "closed_price": "Closed Price",
+          "date": "Date"
+        }
+      }
     },
     "feedback": {
       "title": "Feedback",
