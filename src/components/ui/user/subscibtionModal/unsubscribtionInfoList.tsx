@@ -88,12 +88,24 @@ export const UnsubscribtionInfoList = () => {
         <Typography variant="h5" sx={{ opacity: 0.8 }}>
           <Trans
             values={{
+              oldFee: 10,
               fee: configService.configs.general_info.operation_fee_percentage,
               payer_id:
                 profileState.subscriptionInfo?.subscription_info?.payer_id,
             }}
             i18nKey="page.profile.subs_modal.unsub_desc"
-            components={{ bold: <b /> }}
+            components={{
+              bold: <b />,
+              line: (
+                <span
+                  style={{
+                    textDecoration: "line-through",
+                    padding: "0 2px",
+                    opacity: 0.7,
+                  }}
+                />
+              ),
+            }}
           ></Trans>
         </Typography>
       </Stack>
