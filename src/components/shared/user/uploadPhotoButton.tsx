@@ -46,7 +46,7 @@ export const UploadPhotoButton = ({
             handleBase64Image(base64Data as string);
           }, 2000);
         })
-        .catch()
+        .catch(console.error)
         .finally(() =>
           setTimeout(() => {
             handleLoading(false);

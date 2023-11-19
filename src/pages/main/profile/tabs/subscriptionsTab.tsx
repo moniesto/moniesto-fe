@@ -35,22 +35,25 @@ const SubscriptionsTab = () => {
 
   const getSubscriptions = useCallback(() => {
     const dummyUser = { ...TestUser, id: "-1" };
-    setUsers(users.concat(Array(queryParams.limit).fill(dummyUser)));
+    setUsers((prev) => prev.concat(Array(queryParams.limit).fill(dummyUser)));
 
     delete queryParams.hasMore;
     api.user
       .subscriptions(profileState.account!.username, queryParams)
       .then((response) => {
-        setUsers([...users.filter((user) => user.id !== "-1"), ...response]);
+        setUsers((prev) => [
+          ...prev.filter((user) => user.id !== "-1"),
+          ...response,
+        ]);
         if (response.length < queryParams.limit) {
           queryParams.hasMore = false;
           queryParams.offset = 0;
           setQueryParams(JSON.parse(JSON.stringify(queryParams)));
         } else queryParams.hasMore = true;
       })
-      .catch()
+      .catch(console.error)
       .finally(() => setLoading(false));
-  }, [profileState.account, queryParams, users]);
+  }, [profileState.account, queryParams]);
 
   useEffect(() => {
     if (queryParams.hasMore) getSubscriptions();
