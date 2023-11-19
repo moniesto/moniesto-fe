@@ -188,7 +188,7 @@
           "title": "Abonelik Detayları",
           "binance_id": "Binance ID",
           "sub_price": "Abonelik Ücreti",
-          "moniesto_fee": "Moniesto operasyon ücreti ({{percentage}}%)",
+          "moniesto_fee": "Moniesto operasyon ücreti (<line>{{oldFee}}% </line> {{percentage}}%)",
           "payout_price": "Toplam (aylık)"
         },
         "change_variables": "Binance ID'ni ve Abonelik Ücreti'ni Hesap Ayarları'ndan istediğin zaman değiştirebilirsin. Abonelik başına toplam kazanacağınız tutar {{value}}$ olacaktır."

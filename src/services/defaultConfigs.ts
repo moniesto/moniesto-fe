@@ -288,6 +288,6 @@ export const defaultConfigs: Config = {
     User_GetUser_ServerErrorGetUser: "Server error on getting user",
   },
   general_info: {
-    operation_fee_percentage: 18,
+    operation_fee_percentage: 2.99,
   },
 };

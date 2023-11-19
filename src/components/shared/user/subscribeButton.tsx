@@ -87,6 +87,7 @@ export const SubscribeButton = memo(
                 />
               }
               startIcon={<OpenInNewOutlined />}
+              sx={{ padding: { xs: "6px 10px", md: "6px 24px" } }}
             >
               {translate("moniest.go_payment")}
             </Button>
