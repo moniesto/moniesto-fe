@@ -32,7 +32,7 @@ export const ExploreMoniests = () => {
           ...response,
         ]);
       })
-      .catch()
+      .catch(console.error)
       .finally(() => setLoading(false));
   }, [paginate]);
 

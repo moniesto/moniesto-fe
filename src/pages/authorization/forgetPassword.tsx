@@ -46,7 +46,7 @@ const ForgetPassword = () => {
         });
         navigate("/login");
       })
-      .catch()
+      .catch(console.error)
       .finally(() => setLoading(false));
   };
   const formik = useFormik<ForgetPasswordForm>({

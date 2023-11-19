@@ -28,7 +28,7 @@ export const VerifyEmailSettings = () => {
         });
         setIsSendVerifyMail(true);
       })
-      .catch()
+      .catch(console.error)
       .finally(() => setLoading(false));
   };
 

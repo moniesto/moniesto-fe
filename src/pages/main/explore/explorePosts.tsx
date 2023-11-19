@@ -44,7 +44,7 @@ const ExplorePosts = () => {
           setQueryParams(JSON.parse(JSON.stringify(queryParams)));
         } else queryParams.hasMore = true;
       })
-      .catch();
+      .catch(console.error);
   }, [queryParams]);
 
   const handleFetchData = () => {

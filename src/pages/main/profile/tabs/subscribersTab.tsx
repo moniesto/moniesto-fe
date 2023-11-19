@@ -14,6 +14,7 @@ const SubscribersTab = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const translate = useTranslate();
   const profileState = useAppSelector((state) => state.profile);
+
   const [queryParams, setQueryParams] = useState<{
     hasMore?: boolean;
     limit: number;
@@ -33,24 +34,30 @@ const SubscribersTab = () => {
 
   const getSubscribers = useCallback(() => {
     const dummyUser = { ...TestUser, id: "-1" };
-    setUsers(users.concat(Array(queryParams.limit).fill(dummyUser)));
+    setUsers((prev) => prev.concat(Array(queryParams.limit).fill(dummyUser)));
 
     delete queryParams.hasMore;
     api.moniest
       .subscribers(profileState.account!.username, queryParams)
       .then((response) => {
-        setUsers([...users.filter((user) => user.id !== "-1"), ...response]);
+        setUsers((prev) => [
+          ...prev.filter((user) => user.id !== "-1"),
+          ...response,
+        ]);
         if (response.length < queryParams.limit) {
+          queryParams.hasMore = false;
           queryParams.offset = 0;
           setQueryParams(JSON.parse(JSON.stringify(queryParams)));
-        } else queryParams.hasMore = true;
+        } else {
+          queryParams.hasMore = true;
+        }
       })
-      .catch()
+      .catch(console.error)
       .finally(() => setLoading(false));
-  }, [profileState.account, queryParams, users]);
+  }, [profileState.account, queryParams]);
 
   useEffect(() => {
-    if (queryParams.hasMore) getSubscribers();
+    queryParams.hasMore && getSubscribers();
   }, [queryParams, getSubscribers]);
 
   return (

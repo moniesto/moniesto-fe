@@ -28,7 +28,7 @@ const VerifyEmail = () => {
         dispatch(setUser({ ...user, email_verified: true }));
         navigate(res.redirect_url);
       })
-      .catch()
+      .catch(console.error)
       .finally(() => setLoading(false));
   }, [dispatch, navigate, searchParams, user]);
 

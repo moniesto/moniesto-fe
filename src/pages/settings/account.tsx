@@ -95,7 +95,7 @@ export const AccountSettings = () => {
           severity: "success",
         });
       })
-      .catch()
+      .catch(console.error)
       .finally(() => setLoading(false));
   };
 

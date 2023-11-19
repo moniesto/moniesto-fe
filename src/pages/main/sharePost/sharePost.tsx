@@ -362,7 +362,7 @@ export const SharePost = () => {
           });
           navigate("/timeline");
         })
-        .catch()
+        .catch(console.error)
         .finally(() => setSubmitLoading(false));
     },
     [navigate, previewModalOpened]

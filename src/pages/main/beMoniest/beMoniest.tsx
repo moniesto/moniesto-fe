@@ -88,7 +88,7 @@ const BeMoniest = () => {
             dispatch(resetMoniestStepper());
           }, 1500);
         })
-        .catch();
+        .catch(console.error);
     }
   }, [dispatch, stepperState.activeStep, stepperState.data]);
 

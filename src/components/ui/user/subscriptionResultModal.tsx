@@ -33,7 +33,6 @@ const SubscriptionResultModal = ({
       .then(() => {
         console.log("transaction success");
       })
-      .catch()
       .catch(() => {
         console.log("transaction error");
       });
