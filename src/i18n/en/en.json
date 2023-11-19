@@ -205,7 +205,7 @@
           "title": "Subscription Details",
           "binance_id": "Binance ID",
           "sub_price": "Subscription Fee",
-          "moniesto_fee": "Moniesto operation fee ({{percentage}}%)",
+          "moniesto_fee": "Moniesto operation fee (<line>{{oldFee}}% </line> {{percentage}}%)",
           "payout_price": "Total (monthly)"
         },
         "change_variables": "You can change your Binance ID and Subscription Fee at any time in your Account Settings. The total amount you will earn per subscription will be {{value}}$."

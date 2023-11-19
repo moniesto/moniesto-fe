@@ -7,6 +7,7 @@ import { nextStep } from "../../../store/slices/beMoniestSlice";
 import configService from "../../../services/configService";
 import { useTheme } from "@mui/system";
 import Fly from "../../../components/shared/common/fly/fly";
+import { Trans } from "react-i18next";
 
 const SubmitStep = () => {
   const translate = useTranslate();
@@ -69,11 +70,24 @@ const SubmitStep = () => {
             <Fly.Item>
               <Stack direction="row" justifyContent="space-between">
                 <Typography variant="h5">
-                  {translate("page.be_moniest.submit.sub_detail.moniesto_fee", {
-                    percentage:
-                      configService.configs.general_info
-                        .operation_fee_percentage,
-                  })}
+                  <Trans
+                    values={{
+                      percentage: 2.99,
+                      oldFee: 10,
+                    }}
+                    i18nKey="page.be_moniest.submit.sub_detail.moniesto_fee"
+                    components={{
+                      line: (
+                        <span
+                          style={{
+                            textDecoration: "line-through",
+                            padding: "0 2px",
+                            opacity: 0.7,
+                          }}
+                        />
+                      ),
+                    }}
+                  />
                 </Typography>
                 <Typography fontWeight="bold" variant="h5">
                   -{moniestoFee.toFixed(2)}$
