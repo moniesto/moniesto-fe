@@ -8,12 +8,14 @@ import { TestPost } from "../../services/tempDatas";
 import Fly from "../../components/shared/common/fly/fly";
 import { Typography } from "@mui/material";
 import { useTranslate } from "../../hooks/useTranslate";
+import { useAppSelector } from "../../store/hooks";
 
 const TimeLine = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   let timeout = useRef<NodeJS.Timeout>();
   const translate = useTranslate();
+  const user = useAppSelector((state) => state.user.user);
 
   const [queryParams, setQueryParams] = useState<{
     hasMore?: boolean;
@@ -63,7 +65,6 @@ const TimeLine = () => {
 
           return [...uniqueArr, ...Array(3).fill(dummyPost)] as Post[];
         });
-
         if (response.length < queryParams.limit) {
           if (!queryParams.active && !queryParams.subscribed) {
             queryParams.hasMore = false;
@@ -110,11 +111,9 @@ const TimeLine = () => {
   }, [queryParams, getPosts]);
 
   const postCounts = useMemo(() => {
-    const totalPasivePostCount = queryParams.pastPostsStartIndex
-      ? queryParams.unsubPostsStartIndex
-        ? queryParams.unsubPostsStartIndex - queryParams.pastPostsStartIndex
-        : posts.length - queryParams.pastPostsStartIndex
-      : 0;
+    const totalPasivePostCount = queryParams.unsubPostsStartIndex
+      ? queryParams.unsubPostsStartIndex - queryParams.pastPostsStartIndex
+      : posts.length - queryParams.pastPostsStartIndex;
 
     const totalUnsubPostCount =
       !queryParams.activePostCount || queryParams.unsubPostsStartIndex
@@ -147,7 +146,10 @@ const TimeLine = () => {
                       </Typography>
                     ) : null}
                     {postCounts.totalUnsubPostCount &&
-                    i === queryParams.unsubPostsStartIndex ? (
+                    i === queryParams.unsubPostsStartIndex &&
+                    !(
+                      i === 0 && posts.some((item) => item.user.id === user.id)
+                    ) ? (
                       <Typography variant="h3" mb={1.5}>
                         • {translate("page.timeline.unsub_analyzes_title")}
                       </Typography>
