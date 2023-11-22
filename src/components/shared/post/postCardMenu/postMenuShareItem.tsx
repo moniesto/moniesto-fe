@@ -23,6 +23,7 @@ import api from "../../../../services/api";
 import localStorageService from "../../../../services/localStorageService";
 import AnimatedNumbers from "react-animated-numbers";
 import { Spinner } from "../../common/spinner";
+import { LoadingButton } from "@mui/lab";
 
 export const PostMenushareItem = ({
   post,
@@ -32,6 +33,7 @@ export const PostMenushareItem = ({
   onClose: () => void;
 }) => {
   const translate = useTranslate();
+  const [loading, setLoading] = useState(false);
 
   const domEl = useRef<HTMLElement | null>(null);
 
@@ -90,15 +92,17 @@ export const PostMenushareItem = ({
   }, [fetchCurrency, post]);
 
   const downloadImage = async () => {
+    setLoading(true);
     const dataUrl = await htmlToImage.toPng(domEl.current as HTMLElement);
     const blob = await (await fetch(dataUrl)).blob();
 
     const file = new File([blob], "moniesto.png", { type: blob.type });
     try {
-      navigator.share({
-        text: "Moniesto",
-        files: [file],
-      });
+      navigator
+        .share({
+          files: [file],
+        })
+        .finally(() => setLoading(false));
     } catch (error) {
       console.log("error :", error);
 
@@ -106,6 +110,7 @@ export const PostMenushareItem = ({
       link.download = `moniesto_${new Date().getTime()}.png`;
       link.href = dataUrl;
       link.click();
+      setLoading(false);
     }
   };
 
@@ -320,7 +325,8 @@ export const PostMenushareItem = ({
             >
               {translate("common.cancel")}
             </Button>
-            <Button
+            <LoadingButton
+              loading={loading}
               onClick={downloadImage}
               sx={{ flex: 1 }}
               color="secondary"
@@ -328,7 +334,7 @@ export const PostMenushareItem = ({
               startIcon={<DownloadOutlined />}
             >
               {translate("common.save")}
-            </Button>
+            </LoadingButton>
           </Stack>
         </>
       )}
