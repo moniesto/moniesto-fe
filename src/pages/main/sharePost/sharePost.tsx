@@ -398,8 +398,9 @@ export const SharePost = () => {
     value && formik.values.crypto_currency.price
       ? operationByDirection(formik.values.direction) *
         roundNumber(
-          ((value - formik.values.crypto_currency.price) * 100) /
-            formik.values.crypto_currency.price,
+          formik.values.leverage *
+            (((value - formik.values.crypto_currency.price) * 100) /
+              formik.values.crypto_currency.price),
           2
         )
       : "";
@@ -408,10 +409,11 @@ export const SharePost = () => {
     ? ""
     : operationByDirection(formik.values.direction) *
       roundNumber(
-        100 -
-          ((formik.values.stop || 1) /
-            (formik.values.crypto_currency.price || 1)) *
-            100,
+        formik.values.leverage *
+          (100 -
+            ((formik.values.stop || 1) /
+              (formik.values.crypto_currency.price || 1)) *
+              100),
         2
       );
 

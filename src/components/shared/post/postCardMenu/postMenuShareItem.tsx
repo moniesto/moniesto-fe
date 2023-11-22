@@ -8,6 +8,8 @@ import {
   TableCell,
   TableRow,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { WrappedModal } from "../../common/wrappedModal";
@@ -20,6 +22,7 @@ import { Post } from "../../../../interfaces/post";
 import api from "../../../../services/api";
 import localStorageService from "../../../../services/localStorageService";
 import AnimatedNumbers from "react-animated-numbers";
+import { Spinner } from "../../common/spinner";
 
 export const PostMenushareItem = ({
   post,
@@ -32,16 +35,21 @@ export const PostMenushareItem = ({
 
   const domEl = useRef<HTMLElement | null>(null);
 
-  const [pnlRoi, setPnlRoi] = useState({
+  const [values, setValues] = useState({
     pnl: 0,
     roi: 0,
     price: 0,
   });
 
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
+
   const date =
     new Date().toLocaleDateString(localStorageService.getStorage().language) +
     " " +
-    new Date().toLocaleTimeString(localStorageService.getStorage().language);
+    new Date()
+      .toLocaleTimeString(localStorageService.getStorage().language)
+      .substring(0, 5);
 
   const fetchCurrency = useCallback(
     async (currency: string, market_type: string) => {
@@ -55,15 +63,23 @@ export const PostMenushareItem = ({
   useEffect(() => {
     fetchCurrency(post.currency, post.market_type)
       .then((resCurrency) => {
+        if (post.finished) {
+          setValues({
+            pnl: post.pnl,
+            roi: post.roi,
+            price: resCurrency?.price || 0,
+          });
+          return;
+        }
         api.post
           .calculate_pnl_roi({
             direction: post.direction,
             leverage: post.leverage,
             start_price: post.start_price,
-            take_profit: post.take_profit,
+            take_profit: Number(resCurrency?.price) || 0,
           })
           .then((roiPnlRes) => {
-            setPnlRoi({
+            setValues({
               ...roiPnlRes,
               price: resCurrency?.price || 0,
             });
@@ -77,7 +93,7 @@ export const PostMenushareItem = ({
     const dataUrl = await htmlToImage.toPng(domEl.current as HTMLElement);
     const blob = await (await fetch(dataUrl)).blob();
 
-    const file = new File([blob], "fileName.png", { type: blob.type });
+    const file = new File([blob], "moniesto.png", { type: blob.type });
     try {
       navigator.share({
         text: "Moniesto",
@@ -87,193 +103,235 @@ export const PostMenushareItem = ({
       console.log("error :", error);
 
       const link = document.createElement("a");
-      link.download = "html-to-img.png";
+      link.download = `moniesto_${new Date().getTime()}.png`;
       link.href = dataUrl;
       link.click();
     }
   };
 
+  const imagePath =
+    values.price &&
+    imageService.getFirebaseImagePath(
+      `analysis/${values.roi >= 0 ? "rocket" : "meteor4"}.jpg`
+    );
+
   return (
     <WrappedModal opened={true} onClose={onClose} width={600}>
-      <Stack
-        ref={domEl}
-        gap={4}
-        sx={{
-          background: "var(--theme-color-primary)",
-          padding: { xs: "20px 12.5px", md: "30px 20px" },
-          borderRadius: "8px",
-          minHeight: 380,
-          position: "relative",
-        }}
-        justifyContent="space-around"
-      >
-        <Logo mode="light" width={130}></Logo>
-
-        <Box
-          sx={{
-            width: { xs: 120, md: 240 },
-            position: "absolute",
-            right: 0,
-            top: "50%",
-            transform: "translateY(-50%)",
-          }}
-        >
-          <img
-            width="100%"
-            src={imageService.getFirebaseImagePath("analysis/rocket.png")}
-            alt="rocket"
-          />
+      {!values.price ? (
+        <Box height={360}>
+          <Spinner center sx={{ color: "white", zIndex: 2 }} />
         </Box>
+      ) : (
+        <>
+          <Stack
+            ref={domEl}
+            gap={4}
+            sx={{
+              background: "var(--theme-color-primary)",
+              padding: { xs: "20px 12.5px", md: "30px 20px" },
+              borderRadius: "8px",
+              minHeight: 360,
+              position: "relative",
+              backgroundImage: `url('${imagePath}')`,
+              backgroundBlendMode: "soft-light",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            justifyContent="space-around"
+          >
+            <Stack
+              justifyContent="space-between"
+              direction={{ xs: "column-reverse", md: "row" }}
+              alignItems={{ xs: "unset", md: "center" }}
+              gap={{ xs: 3, md: 1 }}
+            >
+              <Stack direction="row" alignItems="center" gap={1}>
+                <Box
+                  width={40}
+                  component="img"
+                  src={post.user.profile_photo_thumbnail_link}
+                  sx={{
+                    borderRadius: "100%",
+                    border: "2px solid rgba(255,255,255,0.3)",
+                  }}
+                />
+                <Stack gap={0.5}>
+                  <Typography
+                    sx={{ color: "white", opacity: 0.8 }}
+                    variant="h4"
+                  >
+                    {post.user.username}
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    sx={{ color: "white", opacity: 0.8 }}
+                  >
+                    {date}
+                  </Typography>
+                </Stack>
+              </Stack>
+              <Logo mode="light" width={matches ? 100 : 130}></Logo>
+            </Stack>
 
-        <Stack gap={3}>
-          <Stack gap={1} direction="row" alignItems="center">
-            <Typography
-              variant="h4"
-              sx={{ color: "var(--color-yellow-primary)" }}
-            >
-              {post.currency}
-            </Typography>
-            <Typography variant="h4" sx={{ color: "white" }}>
-              {" "}
-              |{" "}
-            </Typography>
-            <Typography
-              variant="h4"
-              sx={{
-                color: colorByNumberValue(post.direction === "long" ? 1 : -1),
-              }}
-            >
-              {translate(`common.${post.direction}`).toUpperCase()}
-            </Typography>
-            <Typography variant="h4" sx={{ color: "white" }}>
-              {post.leverage !== 1 && ` |  ${post.leverage}X`}
-            </Typography>
-          </Stack>
-          <Stack>
-            <Typography
-              sx={{
-                color: colorByNumberValue(post.direction === "long" ? 1 : -1),
-                fontSize: { xs: 32, md: 52 },
-                display: "flex",
-              }}
-              variant="h1"
-            >
-              +
-              {pnlRoi.price && (
-                <AnimatedNumbers
-                  includeComma
-                  animateToNumber={post.finished ? post.roi : pnlRoi.roi}
-                  fontStyle={{ fontSize: 52 }}
-                  locale="en-US"
-                ></AnimatedNumbers>
-              )}
-              %
-            </Typography>
-          </Stack>
-        </Stack>
+            <Stack gap={3}>
+              <Stack gap={1} direction="row" alignItems="center">
+                <Typography
+                  variant="h4"
+                  sx={{ color: "var(--color-yellow-primary)" }}
+                >
+                  {post.currency}
+                </Typography>
+                <Typography variant="h4" sx={{ color: "white" }}>
+                  {" "}
+                  |{" "}
+                </Typography>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    color: colorByNumberValue(
+                      post.direction === "long" ? 1 : -1
+                    ),
+                  }}
+                >
+                  {translate(`common.${post.direction}`).toUpperCase()}
+                </Typography>
+                <Typography variant="h4" sx={{ color: "white" }}>
+                  {post.leverage !== 1 && ` |  ${post.leverage}X`}
+                </Typography>
+              </Stack>
+              <Stack>
+                <Typography
+                  sx={{
+                    color: colorByNumberValue(values.roi),
+                    fontSize: { xs: 34, md: 52 },
+                    display: "flex",
+                    alignItems: "center",
+                    ">div": {
+                      fontSize: { xs: 34, md: 52 },
+                    },
+                  }}
+                  variant="h1"
+                >
+                  {values.roi > 0 && "+"}
+                  {values.price && (
+                    <AnimatedNumbers
+                      includeComma
+                      animateToNumber={values.roi}
+                      locale="en-US"
+                    ></AnimatedNumbers>
+                  )}
+                  %
+                </Typography>
+              </Stack>
+            </Stack>
 
-        <Stack
-          gap={1}
-          sx={{
-            background: "#3d3f51",
-            padding: { xs: 1, md: 1.5 },
-            borderRadius: "12px",
-          }}
-        >
-          <Table sx={{ width: 180 }}>
-            <TableBody
+            <Stack
+              gap={1}
               sx={{
-                td: {
-                  borderBottom: 0,
-                  padding: { xs: "2px 4px", md: 0.5 },
-                },
+                // padding: { xs: 1, md: 1.5 },
+                borderRadius: "12px",
               }}
             >
-              <TableRow>
-                <TableCell>
-                  <Typography
-                    variant="h5"
-                    sx={{ color: "white", opacity: 0.7 }}
-                  >
-                    {translate("component.post_card.menu.share.entry_price")}
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography
-                    fontWeight={600}
-                    variant="h5"
-                    sx={{ color: "white" }}
-                  >
-                    : {post.start_price}
-                  </Typography>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  <Typography
-                    variant="h5"
-                    sx={{ color: "white", opacity: 0.7 }}
-                  >
-                    {translate(
-                      `component.post_card.menu.share.${
-                        post.finished ? "closed_price" : "current_price"
-                      }`
-                    )}
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography
-                    fontWeight={600}
-                    variant="h5"
-                    sx={{ color: "white" }}
-                  >
-                    : {pnlRoi.price}$
-                  </Typography>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  <Typography
-                    variant="h5"
-                    sx={{ color: "white", opacity: 0.7 }}
-                  >
-                    {translate("component.post_card.menu.share.date")}
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography
-                    fontWeight={600}
-                    variant="h5"
-                    sx={{ color: "white" }}
-                  >
-                    : {date}
-                  </Typography>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </Stack>
-      </Stack>
-      <Stack direction="row" mt={2} spacing={4}>
-        <Button
-          onClick={onClose}
-          type="button"
-          sx={{ flex: 1 }}
-          variant="outlined"
-          color="inherit"
-        >
-          {translate("common.cancel")}
-        </Button>
-        <Button
-          onClick={downloadImage}
-          sx={{ flex: 1 }}
-          color="secondary"
-          variant="contained"
-          startIcon={<DownloadOutlined />}
-        >
-          {translate("common.save")}
-        </Button>
-      </Stack>
+              <Table sx={{ width: 180 }}>
+                <TableBody
+                  sx={{
+                    td: {
+                      borderBottom: 0,
+                      padding: { xs: "2px 4px", md: 0.5 },
+                    },
+                  }}
+                >
+                  <TableRow>
+                    <TableCell>
+                      <Typography
+                        variant="h5"
+                        sx={{ color: "white", opacity: 0.95 }}
+                      >
+                        {translate(
+                          "component.post_card.menu.share.entry_price"
+                        )}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        fontWeight={600}
+                        variant="h5"
+                        sx={{ color: "white" }}
+                      >
+                        : {post.start_price}
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <Typography
+                        variant="h5"
+                        sx={{ color: "white", opacity: 0.95 }}
+                      >
+                        {translate(
+                          `component.post_card.menu.share.${
+                            post.finished ? "closed_price" : "current_price"
+                          }`
+                        )}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        fontWeight={600}
+                        variant="h5"
+                        sx={{ color: "white" }}
+                      >
+                        : {post.finished ? post.hit_price : values.price}
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <Typography
+                        variant="h5"
+                        sx={{ color: "white", opacity: 0.95 }}
+                      >
+                        {translate("component.post_card.status.title")}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        fontWeight={600}
+                        variant="h5"
+                        sx={{ color: "white" }}
+                      >
+                        :{" "}
+                        {translate("component.post_card.status." + post.status)}
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </Stack>
+          </Stack>
+          <Stack direction="row" mt={2} gap={{ xs: 2, md: 4 }}>
+            <Button
+              onClick={onClose}
+              type="button"
+              sx={{ flex: 1 }}
+              variant="outlined"
+              color="inherit"
+            >
+              {translate("common.cancel")}
+            </Button>
+            <Button
+              onClick={downloadImage}
+              sx={{ flex: 1 }}
+              color="secondary"
+              variant="contained"
+              startIcon={<DownloadOutlined />}
+            >
+              {translate("common.save")}
+            </Button>
+          </Stack>
+        </>
+      )}
     </WrappedModal>
   );
 };

@@ -3,7 +3,6 @@ import { IconButton, ListItemIcon, Menu, MenuItem } from "@mui/material";
 import { MenuProps } from "../../common/menuProps";
 import { useState } from "react";
 import { Post } from "../../../../interfaces/post";
-import { useTheme } from "@mui/system";
 import { PostMenushareItem } from "./postMenuShareItem";
 import { useTranslate } from "../../../../hooks/useTranslate";
 
@@ -11,7 +10,6 @@ export const PostCardMenu = ({ post }: { post: Post }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedItem, setSelectedItem] = useState<"share">();
   const translate = useTranslate();
-  const theme = useTheme();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
