@@ -20,6 +20,7 @@ export interface Post {
   description: string;
   updated_at: Date;
   finished: boolean;
+  hit_price?: number;
   status: "pending" | "fail" | "success";
   market_type: MarketTypeValues;
   leverage: number;
