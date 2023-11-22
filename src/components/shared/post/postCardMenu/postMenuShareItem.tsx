@@ -34,6 +34,7 @@ export const PostMenushareItem = ({
 }) => {
   const translate = useTranslate();
   const [loading, setLoading] = useState(false);
+  const [imgLoading, setImgLoading] = useState(true);
 
   const domEl = useRef<HTMLElement | null>(null);
 
@@ -61,6 +62,12 @@ export const PostMenushareItem = ({
     },
     []
   );
+
+  const imagePath =
+    values.price &&
+    imageService.getFirebaseImagePath(
+      `analysis/${values.roi >= 0 ? "rocket" : "meteor4"}.jpg`
+    );
 
   useEffect(() => {
     fetchCurrency(post.currency, post.market_type)
@@ -116,15 +123,15 @@ export const PostMenushareItem = ({
     }, 100);
   };
 
-  const imagePath =
-    values.price &&
-    imageService.getFirebaseImagePath(
-      `analysis/${values.roi >= 0 ? "rocket" : "meteor4"}.jpg`
-    );
-
   return (
     <WrappedModal opened={true} onClose={onClose} width={600}>
-      {!values.price ? (
+      <img
+        style={{ display: "none" }}
+        src={imagePath as string}
+        onLoad={() => setImgLoading(false)}
+        alt=""
+      />
+      {!values.price || imgLoading ? (
         <Box height={360}>
           <Spinner center sx={{ color: "white", zIndex: 2 }} />
         </Box>
