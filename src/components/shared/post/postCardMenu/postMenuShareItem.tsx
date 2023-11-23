@@ -36,6 +36,8 @@ export const PostMenushareItem = ({
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(true);
 
+  const sharingIframe = useRef<HTMLIFrameElement>();
+
   const domEl = useRef<HTMLElement | null>(null);
 
   const [values, setValues] = useState({
@@ -98,43 +100,52 @@ export const PostMenushareItem = ({
       .catch(console.error);
   }, [fetchCurrency, post]);
 
-  // create an invisible "sharing iframe" once
-  var sharingIframe = document.createElement("iframe");
-  var sharingIframeBlob = new Blob([`<!DOCTYPE html><html>`], {
-    type: "text/html",
-  });
-  sharingIframe.src = URL.createObjectURL(sharingIframeBlob);
+  useEffect(() => {
+    // create an invisible "sharing iframe" once
+    sharingIframe.current = document.createElement("iframe");
+    var sharingIframeBlob = new Blob([`<!DOCTYPE html><html>`], {
+      type: "text/html",
+    });
+    sharingIframe.current.src = URL.createObjectURL(sharingIframeBlob);
+    sharingIframe.current.id = "shareIframe";
 
-  sharingIframe.style.display = "none"; // make it so that it is hidden
+    sharingIframe.current.style.display = "none"; // make it so that it is hidden
 
-  document.documentElement.appendChild(sharingIframe); // add it to the DOM
+    document.documentElement.appendChild(sharingIframe.current); // add it to the DOM
 
-  const downloadImage = () => {
+    return () => {
+      const child = document.getElementById("shareIframe");
+      document.documentElement.removeChild(child as Node);
+    };
+  }, []);
+
+  const downloadImage = async () => {
     setLoading(true);
-    setTimeout(async () => {
-      const dataUrl = await htmlToImage.toPng(domEl.current as HTMLElement);
-      const blob = await (await fetch(dataUrl)).blob();
 
-      const file = new File([blob], "moniesto.png", { type: blob.type });
-      try {
-        sharingIframe.contentWindow?.navigator
-          .share({
-            files: [file],
-          })
-          .finally(() => {
-            setLoading(false);
-            sharingIframe.contentWindow?.location.reload();
-          });
-      } catch (error) {
-        console.log("error :", error);
+    const dataUrl = await htmlToImage.toPng(domEl.current as HTMLElement);
+    const blob = await (await fetch(dataUrl)).blob();
 
-        const link = document.createElement("a");
-        link.download = `moniesto_${new Date().getTime()}.png`;
-        link.href = dataUrl;
-        link.click();
-        setLoading(false);
-      }
-    }, 100);
+    const file = new File([blob], "moniesto.png", { type: blob.type });
+
+    console.log("sharingIframe :", sharingIframe, "file :", file);
+    try {
+      sharingIframe.current?.contentWindow?.navigator
+        .share({
+          files: [file],
+        })
+        .finally(() => {
+          setLoading(false);
+          sharingIframe.current?.contentWindow?.location.reload();
+        });
+    } catch (error) {
+      console.log("catch error :", error);
+
+      const link = document.createElement("a");
+      link.download = `moniesto_${new Date().getTime()}.png`;
+      link.href = dataUrl;
+      link.click();
+      setLoading(false);
+    }
   };
 
   return (
