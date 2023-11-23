@@ -125,29 +125,28 @@ export const PostMenushareItem = ({
     };
   }, []);
 
-  const downloadImage = async () => {
+  const downloadImage = useCallback(async () => {
     setLoading(true);
 
     console.log("sharingIframe :", sharingIframe, "file :", sharedData);
-    try {
+    if (sharingIframe.current?.contentWindow?.navigator.canShare()) {
       await sharingIframe.current?.contentWindow?.navigator
         .share({
           files: [sharedData.current?.file as File],
         })
+        .catch((error) => console.log("catch error :", error))
         .finally(() => {
           setLoading(false);
           sharingIframe.current?.contentWindow?.location.reload();
         });
-    } catch (error) {
-      console.log("catch error :", error);
-
+    } else {
       const link = document.createElement("a");
       link.download = `moniesto_${new Date().getTime()}.png`;
       link.href = sharedData.current?.dataUrl as string;
       link.click();
       setLoading(false);
     }
-  };
+  }, [sharedData]);
 
   const handleImageLoad = async () => {
     setImgLoading(false);
