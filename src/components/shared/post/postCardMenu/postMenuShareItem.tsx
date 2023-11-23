@@ -128,8 +128,15 @@ export const PostMenushareItem = ({
   const downloadImage = useCallback(async () => {
     setLoading(true);
 
-    console.log("sharingIframe :", sharingIframe, "file :", sharedData);
+    console.log(
+      "sharingIframe :",
+      sharingIframe,
+      "sharedData :",
+      sharedData.current,
+      sharedData.current?.file
+    );
     if (sharingIframe.current?.contentWindow?.navigator.canShare()) {
+      console.log("can share");
       await sharingIframe.current?.contentWindow?.navigator
         .share({
           files: [sharedData.current?.file as File],
@@ -146,7 +153,7 @@ export const PostMenushareItem = ({
       link.click();
       setLoading(false);
     }
-  }, [sharedData]);
+  }, [sharedData, sharingIframe]);
 
   const handleImageLoad = async () => {
     setImgLoading(false);
