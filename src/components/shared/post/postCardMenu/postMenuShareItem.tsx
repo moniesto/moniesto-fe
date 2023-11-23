@@ -131,7 +131,11 @@ export const PostMenushareItem = ({
 
     console.log("dataUrl :", dataUrl, "file :", file, "navigator :", navigator);
 
-    if (navigator.canShare()) {
+    if (
+      navigator.canShare({
+        files: [file],
+      })
+    ) {
       console.log("can share");
       await navigator
         .share({
