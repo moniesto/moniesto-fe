@@ -98,6 +98,17 @@ export const PostMenushareItem = ({
       .catch(console.error);
   }, [fetchCurrency, post]);
 
+  // create an invisible "sharing iframe" once
+  var sharingIframe = document.createElement("iframe");
+  var sharingIframeBlob = new Blob([`<!DOCTYPE html><html>`], {
+    type: "text/html",
+  });
+  sharingIframe.src = URL.createObjectURL(sharingIframeBlob);
+
+  sharingIframe.style.display = "none"; // make it so that it is hidden
+
+  document.documentElement.appendChild(sharingIframe); // add it to the DOM
+
   const downloadImage = () => {
     setLoading(true);
     setTimeout(async () => {
@@ -106,11 +117,14 @@ export const PostMenushareItem = ({
 
       const file = new File([blob], "moniesto.png", { type: blob.type });
       try {
-        navigator
+        sharingIframe.contentWindow?.navigator
           .share({
             files: [file],
           })
-          .finally(() => setLoading(false));
+          .finally(() => {
+            setLoading(false);
+            sharingIframe.contentWindow?.location.reload();
+          });
       } catch (error) {
         console.log("error :", error);
 
