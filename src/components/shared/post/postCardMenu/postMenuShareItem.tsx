@@ -36,7 +36,7 @@ export const PostMenushareItem = ({
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(true);
 
-  const sharingIframe = useRef<HTMLIFrameElement>();
+  // const sharingIframe = useRef<HTMLIFrameElement>();
 
   const domEl = useRef<HTMLElement | null>(null);
   const sharedData = useRef<{
@@ -104,47 +104,47 @@ export const PostMenushareItem = ({
       .catch(console.error);
   }, [fetchCurrency, post]);
 
-  useEffect(() => {
-    // create an invisible "sharing iframe" once
-    sharingIframe.current = document.createElement("iframe");
-    var sharingIframeBlob = new Blob([`<!DOCTYPE html><html>`], {
-      type: "text/html",
-    });
-    sharingIframe.current.src = URL.createObjectURL(sharingIframeBlob);
-    sharingIframe.current.id = "shareIframe";
-    sharingIframe.current.allow = "web-share";
+  // useEffect(() => {
+  //   // create an invisible "sharing iframe" once
+  //   sharingIframe.current = document.createElement("iframe");
+  //   var sharingIframeBlob = new Blob([`<!DOCTYPE html><html>`], {
+  //     type: "text/html",
+  //   });
+  //   sharingIframe.current.src = URL.createObjectURL(sharingIframeBlob);
+  //   sharingIframe.current.id = "shareIframe";
+  //   sharingIframe.current.allow = "web-share";
 
-    sharingIframe.current.style.display = "none"; // make it so that it is hidden
+  //   sharingIframe.current.style.display = "none"; // make it so that it is hidden
 
-    document.documentElement.appendChild(sharingIframe.current); // add it to the DOM
+  //   document.documentElement.appendChild(sharingIframe.current); // add it to the DOM
 
-    return () => {
-      console.log("remove iframe", sharingIframe);
-      const child = document.getElementById("shareIframe");
-      document.documentElement.removeChild(child as Node);
-    };
-  }, []);
+  //   return () => {
+  //     console.log("remove iframe", sharingIframe);
+  //     const child = document.getElementById("shareIframe");
+  //     document.documentElement.removeChild(child as Node);
+  //   };
+  // }, []);
 
   const downloadImage = useCallback(async () => {
     setLoading(true);
 
     console.log(
-      "sharingIframe :",
-      sharingIframe,
+      // "sharingIframe :",
+      // sharingIframe,
       "sharedData :",
       sharedData.current,
       sharedData.current?.file
     );
-    if (sharingIframe.current?.contentWindow?.navigator.canShare()) {
+    if (navigator.canShare()) {
       console.log("can share");
-      await sharingIframe.current?.contentWindow?.navigator
+      await navigator
         .share({
           files: [sharedData.current?.file as File],
         })
         .catch((error) => console.log("catch error :", error))
         .finally(() => {
           setLoading(false);
-          sharingIframe.current?.contentWindow?.location.reload();
+          // sharingIframe.current?.contentWindow?.location.reload();
         });
     } else {
       const link = document.createElement("a");
@@ -153,7 +153,7 @@ export const PostMenushareItem = ({
       link.click();
       setLoading(false);
     }
-  }, [sharedData, sharingIframe]);
+  }, [sharedData]);
 
   const handleImageLoad = async () => {
     setImgLoading(false);
