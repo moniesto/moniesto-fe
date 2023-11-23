@@ -39,10 +39,6 @@ export const PostMenushareItem = ({
   // const sharingIframe = useRef<HTMLIFrameElement>();
 
   const domEl = useRef<HTMLElement | null>(null);
-  const sharedData = useRef<{
-    file: File;
-    dataUrl: string;
-  }>();
 
   const [values, setValues] = useState({
     pnl: 0,
@@ -128,18 +124,18 @@ export const PostMenushareItem = ({
   const downloadImage = useCallback(async () => {
     setLoading(true);
 
-    console.log(
-      // "sharingIframe :",
-      // sharingIframe,
-      "sharedData :",
-      sharedData.current,
-      sharedData.current?.file
-    );
+    const dataUrl = await htmlToImage.toPng(domEl.current as HTMLElement);
+    const blob = await (await fetch(dataUrl)).blob();
+
+    const file = new File([blob], "moniesto.png", { type: blob.type });
+
+    console.log("dataUrl :", dataUrl, "file :", file, "navigator :", navigator);
+
     if (navigator.canShare()) {
       console.log("can share");
       await navigator
         .share({
-          files: [sharedData.current?.file as File],
+          files: [file],
         })
         .catch((error) => console.log("catch error :", error))
         .finally(() => {
@@ -147,25 +143,17 @@ export const PostMenushareItem = ({
           // sharingIframe.current?.contentWindow?.location.reload();
         });
     } else {
+      console.log("can not share");
       const link = document.createElement("a");
       link.download = `moniesto_${new Date().getTime()}.png`;
-      link.href = sharedData.current?.dataUrl as string;
+      link.href = dataUrl;
       link.click();
       setLoading(false);
     }
-  }, [sharedData]);
+  }, []);
 
-  const handleImageLoad = async () => {
+  const handleImageLoad = () => {
     setImgLoading(false);
-    const dataUrl = await htmlToImage.toPng(domEl.current as HTMLElement);
-    const blob = await (await fetch(dataUrl)).blob();
-
-    const sharedFile = new File([blob], "moniesto.png", { type: blob.type });
-
-    sharedData.current = {
-      file: sharedFile,
-      dataUrl,
-    };
   };
 
   return (
