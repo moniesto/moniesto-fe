@@ -1513,6 +1513,11 @@
   resolved "https://registry.npmjs.org/@floating-ui/utils/-/utils-0.1.6.tgz"
   integrity sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==
 
+"@hugocxl/react-to-image@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@hugocxl/react-to-image/-/react-to-image-0.0.8.tgz#fb6d3b4abf6a29aadac3e88c6279535a4df68e98"
+  integrity sha512-nwTQ2vzxUVHr5/UxPJH52nPpfriHabGvcjBYBOwcMPm1pW5DsP01V5xabD4NRjf1mPx1/xEX8Fww6ShEzB7JPg==
+
 "@humanwhocodes/config-array@^0.10.5":
   version "0.10.7"
   resolved "https://registry.npmjs.org/@humanwhocodes/config-array/-/config-array-0.10.7.tgz"

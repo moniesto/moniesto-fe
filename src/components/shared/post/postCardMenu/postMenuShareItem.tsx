@@ -11,7 +11,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { WrappedModal } from "../../common/wrappedModal";
 import Logo from "../../common/logo";
 import imageService from "../../../../services/imageService";
@@ -24,6 +24,7 @@ import localStorageService from "../../../../services/localStorageService";
 import AnimatedNumbers from "react-animated-numbers";
 import { Spinner } from "../../common/spinner";
 import { LoadingButton } from "@mui/lab";
+import { useToPng } from "@hugocxl/react-to-image";
 
 export const PostMenushareItem = ({
   post,
@@ -35,10 +36,40 @@ export const PostMenushareItem = ({
   const translate = useTranslate();
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(true);
+  const [, convert, ref] = useToPng<HTMLDivElement>({
+    quality: 0.8,
+    onSuccess: async (data) => {
+      setLoading(true);
+      const blob = await (await fetch(data)).blob();
+      const file = new File([blob], "moniesto.png", { type: blob.type });
+      if (
+        navigator &&
+        navigator.canShare &&
+        navigator?.canShare({
+          files: [file],
+        })
+      ) {
+        console.log("can share");
+        await navigator
+          .share({
+            files: [file],
+          })
+          .catch((error) => console.log("catch error :", error))
+          .finally(() => {
+            setLoading(false);
+            // sharingIframe.current?.contentWindow?.location.reload();
+          });
+      } else {
+        console.log("can not share");
+        const link = document.createElement("a");
+        link.download = `moniesto_${new Date().getTime()}.png`;
+        link.href = data;
+        link.click();
 
-  // const sharingIframe = useRef<HTMLIFrameElement>();
-
-  const domEl = useRef<HTMLElement | null>(null);
+        setLoading(false);
+      }
+    },
+  });
 
   const [values, setValues] = useState({
     pnl: 0,
@@ -67,21 +98,24 @@ export const PostMenushareItem = ({
 
   const imagePath =
     values.price &&
-    imageService.getFirebaseImagePath(
-      `analysis/${values.roi >= 0 ? "rocket" : "meteor4"}.jpg`
-    );
+    // imageService.getFirebaseImagePath(
+    values.roi >= 0
+      ? "https://res.cloudinary.com/dniupzza6/image/upload/v1700860206/Photo/BackgroundPhotos/6400d94d-1852-4743-aae0-ef56df885d27.jpg"
+      : "https://res.cloudinary.com/dniupzza6/image/upload/v1700860303/Photo/BackgroundPhotos/593a4f2e-c342-4fe8-b614-9f222834a529.jpg";
+  // `analysis/${values.roi >= 0 ? "rocket" : "meteor4"}.jpg`
+  // );
 
   useEffect(() => {
+    if (post.finished) {
+      setValues({
+        pnl: post.pnl,
+        roi: post.roi,
+        price: post?.hit_price || 0,
+      });
+      return;
+    }
     fetchCurrency(post.currency, post.market_type)
       .then((resCurrency) => {
-        if (post.finished) {
-          setValues({
-            pnl: post.pnl,
-            roi: post.roi,
-            price: resCurrency?.price || 0,
-          });
-          return;
-        }
         api.post
           .calculate_pnl_roi({
             direction: post.direction,
@@ -100,66 +134,49 @@ export const PostMenushareItem = ({
       .catch(console.error);
   }, [fetchCurrency, post]);
 
-  // useEffect(() => {
-  //   // create an invisible "sharing iframe" once
-  //   sharingIframe.current = document.createElement("iframe");
-  //   var sharingIframeBlob = new Blob([`<!DOCTYPE html><html>`], {
-  //     type: "text/html",
-  //   });
-  //   sharingIframe.current.src = URL.createObjectURL(sharingIframeBlob);
-  //   sharingIframe.current.id = "shareIframe";
-  //   sharingIframe.current.allow = "web-share";
+  // const downloadImage = useCallback(async () => {
+  //   convert();
+  //   return;
+  //   // setLoading(true);
 
-  //   sharingIframe.current.style.display = "none"; // make it so that it is hidden
+  //   // // const dataUrl = await htmlToImage.toPng(domEl.current as HTMLElement);
+  //   // // const blob = await (await fetch(dataUrl)).blob();
 
-  //   document.documentElement.appendChild(sharingIframe.current); // add it to the DOM
+  //   // // const file = new File([blob], "moniesto.png", { type: blob.type });
 
-  //   return () => {
-  //     console.log("remove iframe", sharingIframe);
-  //     const child = document.getElementById("shareIframe");
-  //     document.documentElement.removeChild(child as Node);
-  //   };
+  //   // // console.log("dataUrl :", dataUrl, "file :", file, "navigator :", navigator);
+
+  //   // if (
+  //   //   navigator?.canShare({
+  //   //     title: "moniesto test title",
+  //   //     // files: [file],
+  //   //   })
+  //   // ) {
+  //   //   console.log("can share");
+  //   //   await navigator
+  //   //     .share({
+  //   //       title: "moniesto test title",
+  //   //       // files: [file],
+  //   //     })
+  //   //     .catch((error) => console.log("catch error :", error))
+  //   //     .finally(() => {
+  //   //       setLoading(false);
+  //   //       // sharingIframe.current?.contentWindow?.location.reload();
+  //   //     });
+  //   // } else {
+  //   //   console.log("can not share");
+  //   //   // const link = document.createElement("a");
+  //   //   // link.download = `moniesto_${new Date().getTime()}.png`;
+  //   //   // link.href = dataUrl;
+  //   //   // link.click();
+  //   //   setLoading(false);
+  //   // }
   // }, []);
 
-  const downloadImage = useCallback(async () => {
-    setLoading(true);
-
-    // const dataUrl = await htmlToImage.toPng(domEl.current as HTMLElement);
-    // const blob = await (await fetch(dataUrl)).blob();
-
-    // const file = new File([blob], "moniesto.png", { type: blob.type });
-
-    // console.log("dataUrl :", dataUrl, "file :", file, "navigator :", navigator);
-
-    if (
-      navigator.canShare({
-        title: "moniesto test title",
-        // files: [file],
-      })
-    ) {
-      console.log("can share");
-      await navigator
-        .share({
-          title: "moniesto test title",
-          // files: [file],
-        })
-        .catch((error) => console.log("catch error :", error))
-        .finally(() => {
-          setLoading(false);
-          // sharingIframe.current?.contentWindow?.location.reload();
-        });
-    } else {
-      console.log("can not share");
-      // const link = document.createElement("a");
-      // link.download = `moniesto_${new Date().getTime()}.png`;
-      // link.href = dataUrl;
-      // link.click();
-      setLoading(false);
-    }
-  }, []);
-
   const handleImageLoad = () => {
-    setImgLoading(false);
+    setTimeout(() => {
+      setImgLoading(false);
+    }, 300);
   };
 
   return (
@@ -173,7 +190,7 @@ export const PostMenushareItem = ({
       {!values.price && <Spinner center sx={{ color: "white", zIndex: 2 }} />}
       <Stack sx={{ borderRadius: "8px", overflow: "hidden" }}>
         <Stack
-          ref={domEl}
+          ref={ref}
           gap={4}
           sx={{
             background: "var(--theme-color-primary)",
@@ -321,7 +338,7 @@ export const PostMenushareItem = ({
                       variant="h5"
                       sx={{ color: "white" }}
                     >
-                      : {post.finished ? post.hit_price : values.price}
+                      : {values.price}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -362,7 +379,7 @@ export const PostMenushareItem = ({
         <LoadingButton
           disabled={imgLoading}
           loading={loading}
-          onClick={downloadImage}
+          onClick={convert}
           sx={{ flex: 1 }}
           color="secondary"
           variant="contained"
