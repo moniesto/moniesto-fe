@@ -124,22 +124,23 @@ export const PostMenushareItem = ({
   const downloadImage = useCallback(async () => {
     setLoading(true);
 
-    const dataUrl = await htmlToImage.toPng(domEl.current as HTMLElement);
-    const blob = await (await fetch(dataUrl)).blob();
+    // const dataUrl = await htmlToImage.toPng(domEl.current as HTMLElement);
+    // const blob = await (await fetch(dataUrl)).blob();
 
-    const file = new File([blob], "moniesto.png", { type: blob.type });
+    // const file = new File([blob], "moniesto.png", { type: blob.type });
 
-    console.log("dataUrl :", dataUrl, "file :", file, "navigator :", navigator);
+    // console.log("dataUrl :", dataUrl, "file :", file, "navigator :", navigator);
 
     if (
       navigator.canShare({
-        files: [file],
+        title: "moniesto test title",
+        // files: [file],
       })
     ) {
       console.log("can share");
       await navigator
         .share({
-          files: [file],
+          // files: [file],
         })
         .catch((error) => console.log("catch error :", error))
         .finally(() => {
@@ -148,10 +149,10 @@ export const PostMenushareItem = ({
         });
     } else {
       console.log("can not share");
-      const link = document.createElement("a");
-      link.download = `moniesto_${new Date().getTime()}.png`;
-      link.href = dataUrl;
-      link.click();
+      // const link = document.createElement("a");
+      // link.download = `moniesto_${new Date().getTime()}.png`;
+      // link.href = dataUrl;
+      // link.click();
       setLoading(false);
     }
   }, []);
