@@ -17,7 +17,7 @@ import Logo from "../../common/logo";
 import imageService from "../../../../services/imageService";
 import { colorByNumberValue } from "../../../../services/utils";
 import { useTranslate } from "../../../../hooks/useTranslate";
-import * as htmlToImage from "html-to-image";
+// import * as htmlToImage from "html-to-image";
 import { Post } from "../../../../interfaces/post";
 import api from "../../../../services/api";
 import localStorageService from "../../../../services/localStorageService";
