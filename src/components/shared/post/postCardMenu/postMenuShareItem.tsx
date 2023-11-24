@@ -176,7 +176,7 @@ export const PostMenushareItem = ({
   const handleImageLoad = () => {
     setTimeout(() => {
       setImgLoading(false);
-    }, 2000);
+    }, 1000);
   };
 
   return (
@@ -377,7 +377,7 @@ export const PostMenushareItem = ({
         </Button>
         <LoadingButton
           disabled={imgLoading}
-          loading={loading}
+          loading={loading || imgLoading}
           onClick={convert}
           sx={{ flex: 1 }}
           color="secondary"

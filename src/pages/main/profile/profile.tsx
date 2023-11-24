@@ -206,6 +206,14 @@ const Profile = () => {
           </Stack>
         </Card>
       )}
+      <img
+        src="https://res.cloudinary.com/dniupzza6/image/upload/v1700860206/Photo/BackgroundPhotos/6400d94d-1852-4743-aae0-ef56df885d27.jpg"
+        alt=""
+      />
+      <img
+        src="https://res.cloudinary.com/dniupzza6/image/upload/v1700860303/Photo/BackgroundPhotos/593a4f2e-c342-4fe8-b614-9f222834a529.jpg"
+        alt=""
+      />
     </Box>
   );
 };
