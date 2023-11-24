@@ -82,9 +82,6 @@ const MainLayout = () => {
 
       <BottomNavBar />
       <Feedback></Feedback>
-
-      <img src="./img/analysis/rocket-min.jpg" alt="rocket" />
-      <img src="./img/analysis/meteor4-min.jpg" alt="rocket" />
     </Stack>
   );
 };
