@@ -14,7 +14,7 @@ import {
 import { useCallback, useEffect, useState } from "react";
 import { WrappedModal } from "../../common/wrappedModal";
 import Logo from "../../common/logo";
-import imageService from "../../../../services/imageService";
+// import imageService from "../../../../services/imageService";
 import { colorByNumberValue } from "../../../../services/utils";
 import { useTranslate } from "../../../../hooks/useTranslate";
 // import * as htmlToImage from "html-to-image";
