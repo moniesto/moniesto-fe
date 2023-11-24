@@ -9,8 +9,8 @@ import {
   TableRow,
   Typography,
   useMediaQuery,
-  useTheme,
 } from "@mui/material";
+import { useTheme } from "@mui/system";
 import { useCallback, useEffect, useState } from "react";
 import { WrappedModal } from "../../common/wrappedModal";
 import Logo from "../../common/logo";
@@ -25,6 +25,7 @@ import AnimatedNumbers from "react-animated-numbers";
 import { Spinner } from "../../common/spinner";
 import { LoadingButton } from "@mui/lab";
 import { useToPng } from "@hugocxl/react-to-image";
+import { Buffer } from "buffer";
 
 export const PostMenushareItem = ({
   post,
@@ -37,29 +38,41 @@ export const PostMenushareItem = ({
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(true);
 
-  const convertBlob = async (data: string) => {
-    const blob = await (await fetch(data)).blob();
-    const file = new File([blob], "moniesto.png", { type: blob.type });
-    return file;
+  // const convertBlob = async (data: string) => {
+  //   const blob = await (await fetch(data)).blob();
+  //   const file = new File([blob], "moniesto.png", { type: blob.type });
+  //   return file;
+  // };
+
+  const dataUrlToFile = (dataUrl: string) => {
+    const arr = dataUrl.split(",");
+    if (arr.length < 2) {
+      return undefined;
+    }
+    const mimeArr = arr[0].match(/:(.*?);/);
+    if (!mimeArr || mimeArr.length < 2) {
+      return undefined;
+    }
+    const mime = mimeArr[1];
+    const buff = Buffer.from(arr[1], "base64");
+    return new File([buff], "moniesto.png", { type: mime });
   };
 
   const [, convert, ref] = useToPng<HTMLDivElement>({
     quality: 0.8,
     onSuccess: async (data) => {
       setLoading(true);
-
-      if (navigator) {
-        console.log("can share");
+      try {
         await navigator
           .share({
-            files: [await convertBlob(data)],
+            files: [dataUrlToFile(data) as File],
           })
           .catch((error) => console.log("catch error :", error))
           .finally(() => {
             setLoading(false);
             // sharingIframe.current?.contentWindow?.location.reload();
           });
-      } else {
+      } catch (error) {
         console.log("can not share");
         const link = document.createElement("a");
         link.download = `moniesto_${new Date().getTime()}.png`;
@@ -100,8 +113,8 @@ export const PostMenushareItem = ({
     values.price &&
     // imageService.getFirebaseImagePath(
     values.roi >= 0
-      ? "https://res.cloudinary.com/dniupzza6/image/upload/v1700860206/Photo/BackgroundPhotos/6400d94d-1852-4743-aae0-ef56df885d27.jpg"
-      : "https://res.cloudinary.com/dniupzza6/image/upload/v1700860303/Photo/BackgroundPhotos/593a4f2e-c342-4fe8-b614-9f222834a529.jpg";
+      ? "./img/analysis/rocket-min.jpg"
+      : "./img/analysis/meteor4-min.jpg";
   // `analysis/${values.roi >= 0 ? "rocket" : "meteor4"}.jpg`
   // );
 
@@ -176,11 +189,11 @@ export const PostMenushareItem = ({
   const handleImageLoad = () => {
     setTimeout(() => {
       setImgLoading(false);
-    }, 1000);
+    }, 4000);
   };
 
   return (
-    <WrappedModal opened={true} onClose={onClose} width={600}>
+    <WrappedModal opened onClose={onClose} width={600}>
       <img
         style={{ display: "none" }}
         src={imagePath as string}
