@@ -140,6 +140,7 @@ export const PostMenushareItem = ({
       console.log("can share");
       await navigator
         .share({
+          title: "moniesto test title",
           // files: [file],
         })
         .catch((error) => console.log("catch error :", error))
