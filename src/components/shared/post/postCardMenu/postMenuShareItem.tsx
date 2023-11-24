@@ -36,23 +36,23 @@ export const PostMenushareItem = ({
   const translate = useTranslate();
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(true);
+
+  const convertBlob = async (data: string) => {
+    const blob = await (await fetch(data)).blob();
+    const file = new File([blob], "moniesto.png", { type: blob.type });
+    return file;
+  };
+
   const [, convert, ref] = useToPng<HTMLDivElement>({
     quality: 0.8,
     onSuccess: async (data) => {
       setLoading(true);
-      const blob = await (await fetch(data)).blob();
-      const file = new File([blob], "moniesto.png", { type: blob.type });
-      if (
-        navigator &&
-        navigator.canShare &&
-        navigator?.canShare({
-          files: [file],
-        })
-      ) {
+
+      if (navigator) {
         console.log("can share");
         await navigator
           .share({
-            files: [file],
+            files: [await convertBlob(data)],
           })
           .catch((error) => console.log("catch error :", error))
           .finally(() => {
@@ -176,7 +176,7 @@ export const PostMenushareItem = ({
   const handleImageLoad = () => {
     setTimeout(() => {
       setImgLoading(false);
-    }, 300);
+    }, 2000);
   };
 
   return (
@@ -195,7 +195,6 @@ export const PostMenushareItem = ({
           sx={{
             background: "var(--theme-color-primary)",
             padding: { xs: "20px 12.5px", md: "30px 20px" },
-
             minHeight: 360,
             position: "relative",
             backgroundImage: `url('${imagePath}')`,
