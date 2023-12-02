@@ -73,8 +73,6 @@ const TimeLine = () => {
           if (queryParams.active) {
             queryParams.active = false;
             queryParams.pastPostsStartIndex = finalPosts.length;
-            queryParams.activePostCount =
-              queryParams.activePostCount || finalPosts.length;
             //Past analyzes
           } else if (queryParams.subscribed) {
             queryParams.subscribed = false;
@@ -84,6 +82,7 @@ const TimeLine = () => {
           queryParams.offset = 0;
           setQueryParams(JSON.parse(JSON.stringify(queryParams)));
         } else {
+          queryParams.activePostCount = finalPosts.length;
           queryParams.hasMore = true;
         }
       })
@@ -113,7 +112,9 @@ const TimeLine = () => {
   const postCounts = useMemo(() => {
     const totalPasivePostCount = queryParams.unsubPostsStartIndex
       ? queryParams.unsubPostsStartIndex - queryParams.pastPostsStartIndex
-      : posts.length - queryParams.pastPostsStartIndex;
+      : queryParams.pastPostsStartIndex
+      ? posts.length - queryParams.pastPostsStartIndex
+      : 0;
 
     const totalUnsubPostCount =
       !queryParams.activePostCount || queryParams.unsubPostsStartIndex
@@ -125,6 +126,8 @@ const TimeLine = () => {
       totalUnsubPostCount,
     };
   }, [posts.length, queryParams]);
+
+  console.log("postCounts :", postCounts, "queryParams :", queryParams);
 
   return (
     <InfiniteScroll
