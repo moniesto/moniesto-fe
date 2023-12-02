@@ -45,7 +45,7 @@ const Logo = ({
       sx={{ cursor: onClick || navigateHome ? "pointer" : "unset", ...sx }}
       onClick={handleClick}
     >
-      <img loading="lazy" width="100%" src={dynamicSource} alt="logo" />
+      <img width="100%" src={dynamicSource} alt="logo" />
     </Box>
   );
 };
