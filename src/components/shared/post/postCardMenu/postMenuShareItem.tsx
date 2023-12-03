@@ -95,12 +95,15 @@ export const PostMenushareItem = ({
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const time = new Date().toLocaleTimeString(
+    localStorageService.getStorage().language
+  );
   const date =
     new Date().toLocaleDateString(localStorageService.getStorage().language) +
     " " +
-    new Date()
-      .toLocaleTimeString(localStorageService.getStorage().language)
-      .substring(0, 5);
+    time.split(":")[0] +
+    ":" +
+    time.split(":")[1];
 
   const fetchCurrency = useCallback(
     async (currency: string, market_type: string) => {
