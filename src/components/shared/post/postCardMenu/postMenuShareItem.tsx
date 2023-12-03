@@ -1,5 +1,6 @@
 import { DownloadOutlined } from "@mui/icons-material";
 import {
+  Avatar,
   Box,
   Button,
   Stack,
@@ -115,12 +116,18 @@ export const PostMenushareItem = ({
   );
 
   const share = async () => {
+    setLoading(true);
+
     const canvas = await html2canvas(contentRef.current as HTMLElement, {
       useCORS: true,
       allowTaint: true,
     });
+    if (!canvas) {
+      setLoading(false);
+      return;
+    }
     const dataURL = canvas.toDataURL("image/png");
-    setLoading(true);
+
     try {
       await navigator
         .share({
@@ -259,15 +266,10 @@ export const PostMenushareItem = ({
               gap={{ xs: 3, md: 1 }}
             >
               <Stack direction="row" alignItems="center" gap={1}>
-                <Box
-                  width={40}
-                  component="img"
+                <Avatar
                   src={post.user.profile_photo_thumbnail_link}
-                  sx={{
-                    borderRadius: "100%",
-                    border: "2px solid rgba(255,255,255,0.3)",
-                  }}
-                />
+                  sx={{ width: 40, border: "2px solid rgba(255,255,255,0.3)" }}
+                ></Avatar>
                 <Stack gap={0.5}>
                   <Typography
                     sx={{ color: "white", opacity: 0.8 }}
