@@ -24,7 +24,7 @@ import localStorageService from "../../../../services/localStorageService";
 import AnimatedNumbers from "react-animated-numbers";
 import { Spinner } from "../../common/spinner";
 import { LoadingButton } from "@mui/lab";
-import { useToPng } from "@hugocxl/react-to-image";
+// import { useToPng } from "@hugocxl/react-to-image";
 import { Buffer } from "buffer";
 import html2canvas from "html2canvas";
 
@@ -60,31 +60,31 @@ export const PostMenushareItem = ({
     return new File([buff], "moniesto.png", { type: mime });
   };
 
-  const [, convert, ref] = useToPng<HTMLDivElement>({
-    quality: 0.8,
-    onSuccess: async (data) => {
-      setLoading(true);
-      try {
-        await navigator
-          .share({
-            files: [dataUrlToFile(data) as File],
-          })
-          .catch((error) => console.log("catch error :", error))
-          .finally(() => {
-            setLoading(false);
-            // sharingIframe.current?.contentWindow?.location.reload();
-          });
-      } catch (error) {
-        console.log("can not share");
-        const link = document.createElement("a");
-        link.download = `moniesto_${new Date().getTime()}.png`;
-        link.href = data;
-        link.click();
+  // const [, convert, ref] = useToPng<HTMLDivElement>({
+  //   quality: 0.8,
+  //   onSuccess: async (data) => {
+  //     setLoading(true);
+  //     try {
+  //       await navigator
+  //         .share({
+  //           files: [dataUrlToFile(data) as File],
+  //         })
+  //         .catch((error) => console.log("catch error :", error))
+  //         .finally(() => {
+  //           setLoading(false);
+  //           // sharingIframe.current?.contentWindow?.location.reload();
+  //         });
+  //     } catch (error) {
+  //       console.log("can not share");
+  //       const link = document.createElement("a");
+  //       link.download = `moniesto_${new Date().getTime()}.png`;
+  //       link.href = data;
+  //       link.click();
 
-        setLoading(false);
-      }
-    },
-  });
+  //       setLoading(false);
+  //     }
+  //   },
+  // });
 
   const [values, setValues] = useState({
     pnl: 0,
