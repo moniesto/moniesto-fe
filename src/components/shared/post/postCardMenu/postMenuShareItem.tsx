@@ -28,6 +28,7 @@ import { LoadingButton } from "@mui/lab";
 // import { useToPng } from "@hugocxl/react-to-image";
 import { Buffer } from "buffer";
 import html2canvas from "html2canvas";
+import imageService from "../../../../services/imageService";
 
 export const PostMenushareItem = ({
   post,
@@ -39,54 +40,9 @@ export const PostMenushareItem = ({
   const translate = useTranslate();
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(true);
+  const [isDownloadEnable, setIsDownloadEnable] = useState(false);
   const contentRef = useRef<HTMLElement>(null);
-
-  // const convertBlob = async (data: string) => {
-  //   const blob = await (await fetch(data)).blob();
-  //   const file = new File([blob], "moniesto.png", { type: blob.type });
-  //   return file;
-  // };
-
-  const dataUrlToFile = (dataUrl: string) => {
-    const arr = dataUrl.split(",");
-    if (arr.length < 2) {
-      return undefined;
-    }
-    const mimeArr = arr[0].match(/:(.*?);/);
-    if (!mimeArr || mimeArr.length < 2) {
-      return undefined;
-    }
-    const mime = mimeArr[1];
-    const buff = Buffer.from(arr[1], "base64");
-    return new File([buff], "moniesto.png", { type: mime });
-  };
-
-  // const [, convert, ref] = useToPng<HTMLDivElement>({
-  //   quality: 0.8,
-  //   onSuccess: async (data) => {
-  //     setLoading(true);
-  //     try {
-  //       await navigator
-  //         .share({
-  //           files: [dataUrlToFile(data) as File],
-  //         })
-  //         .catch((error) => console.log("catch error :", error))
-  //         .finally(() => {
-  //           setLoading(false);
-  //           // sharingIframe.current?.contentWindow?.location.reload();
-  //         });
-  //     } catch (error) {
-  //       console.log("can not share");
-  //       const link = document.createElement("a");
-  //       link.download = `moniesto_${new Date().getTime()}.png`;
-  //       link.href = data;
-  //       link.click();
-
-  //       setLoading(false);
-  //     }
-  //   },
-  // });
-
+  const canvas = useRef<HTMLCanvasElement>();
   const [values, setValues] = useState({
     pnl: 0,
     roi: 0,
@@ -106,6 +62,20 @@ export const PostMenushareItem = ({
     ":" +
     time.split(":")[1];
 
+  const dataUrlToFile = (dataUrl: string) => {
+    const arr = dataUrl.split(",");
+    if (arr.length < 2) {
+      return undefined;
+    }
+    const mimeArr = arr[0].match(/:(.*?);/);
+    if (!mimeArr || mimeArr.length < 2) {
+      return undefined;
+    }
+    const mime = mimeArr[1];
+    const buff = Buffer.from(arr[1], "base64");
+    return new File([buff], "moniesto.png", { type: mime });
+  };
+
   const fetchCurrency = useCallback(
     async (currency: string, market_type: string) => {
       const coins = await api.crypto.search_currencies(currency, market_type);
@@ -118,15 +88,11 @@ export const PostMenushareItem = ({
   const share = async () => {
     setLoading(true);
 
-    const canvas = await html2canvas(contentRef.current as HTMLElement, {
-      useCORS: true,
-      allowTaint: true,
-    });
-    if (!canvas) {
+    if (!canvas.current) {
       setLoading(false);
       return;
     }
-    const dataURL = canvas.toDataURL("image/png");
+    const dataURL = canvas.current.toDataURL("image/png");
 
     try {
       await navigator
@@ -136,7 +102,6 @@ export const PostMenushareItem = ({
         .catch((error) => console.log("catch error :", error))
         .finally(() => {
           setLoading(false);
-          // sharingIframe.current?.contentWindow?.location.reload();
         });
     } catch (error) {
       console.log("can not share");
@@ -147,20 +112,7 @@ export const PostMenushareItem = ({
 
       setLoading(false);
     }
-    // const link = document.createElement("a");
-    // link.download = `moniesto_${new Date().getTime()}.png`;
-    // link.href = dataURL;
-    // link.click();
   };
-
-  // const imagePath =
-  //   values.price &&
-  //   // imageService.getFirebaseImagePath(
-  //   values.roi >= 0
-  //     ? "./img/analysis/rocket-min.jpg"
-  //     : "./img/analysis/meteor4-min.jpg";
-  // `analysis/${values.roi >= 0 ? "rocket" : "meteor4"}.jpg`
-  // );
 
   useEffect(() => {
     if (post.finished) {
@@ -193,44 +145,19 @@ export const PostMenushareItem = ({
       .catch(console.error);
   }, [fetchCurrency, post]);
 
-  // const downloadImage = useCallback(async () => {
-  //   convert();
-  //   return;
-  //   // setLoading(true);
-
-  //   // // const dataUrl = await htmlToImage.toPng(domEl.current as HTMLElement);
-  //   // // const blob = await (await fetch(dataUrl)).blob();
-
-  //   // // const file = new File([blob], "moniesto.png", { type: blob.type });
-
-  //   // // console.log("dataUrl :", dataUrl, "file :", file, "navigator :", navigator);
-
-  //   // if (
-  //   //   navigator?.canShare({
-  //   //     title: "moniesto test title",
-  //   //     // files: [file],
-  //   //   })
-  //   // ) {
-  //   //   console.log("can share");
-  //   //   await navigator
-  //   //     .share({
-  //   //       title: "moniesto test title",
-  //   //       // files: [file],
-  //   //     })
-  //   //     .catch((error) => console.log("catch error :", error))
-  //   //     .finally(() => {
-  //   //       setLoading(false);
-  //   //       // sharingIframe.current?.contentWindow?.location.reload();
-  //   //     });
-  //   // } else {
-  //   //   console.log("can not share");
-  //   //   // const link = document.createElement("a");
-  //   //   // link.download = `moniesto_${new Date().getTime()}.png`;
-  //   //   // link.href = dataUrl;
-  //   //   // link.click();
-  //   //   setLoading(false);
-  //   // }
-  // }, []);
+  useEffect(() => {
+    if (values.price && !imgLoading) {
+      html2canvas(contentRef.current as HTMLElement, {
+        useCORS: true,
+        allowTaint: true,
+      })
+        .then((canvasRes) => {
+          canvas.current = canvasRes;
+          setIsDownloadEnable(true);
+        })
+        .catch(console.error);
+    }
+  }, [canvas, values, imgLoading, contentRef]);
 
   return (
     <WrappedModal opened onClose={onClose} width={600}>
@@ -247,11 +174,11 @@ export const PostMenushareItem = ({
               background: "var(--theme-color-primary)",
               minHeight: 360,
               position: "relative",
-              backgroundImage: `url('${
+              backgroundImage: `url('${imageService.getFirebaseImagePath(
                 values.roi >= 0
-                  ? "./img/analysis/rocket-min.jpg"
-                  : "./img/analysis/meteor4-min.jpg"
-              }')`,
+                  ? "analysis/rocket-min.jpg"
+                  : "analysis/meteor4-min.jpg"
+              )}')`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               backgroundPosition: "center",
@@ -438,7 +365,7 @@ export const PostMenushareItem = ({
           {translate("common.cancel")}
         </Button>
         <LoadingButton
-          disabled={imgLoading}
+          disabled={!isDownloadEnable}
           loading={loading}
           onClick={share}
           sx={{ flex: 1 }}
