@@ -25,6 +25,7 @@ import { AnalytcPageView } from "../components/layout/analyticPageView";
 import { PrivacyPolicy } from "../pages/settings/legals/privacyPolicy/privacyPolicy";
 import { TermsConditions } from "../pages/settings/legals/termsConditions";
 import { Disclaimer } from "../pages/settings/legals/disclaimer";
+import { PostDetail } from "../pages/main/postDetail";
 
 const Router = createBrowserRouter([
   {
@@ -85,6 +86,15 @@ const Router = createBrowserRouter([
                         id: "success",
                       },
                     ],
+                  },
+                ],
+              },
+              {
+                path: "post",
+                children: [
+                  {
+                    path: ":postId",
+                    element: <PostDetail />,
                   },
                 ],
               },

@@ -158,6 +158,7 @@ export const Requests: {
     moniests: string;
     posts: string;
     moniest_search: string;
+    post: (id: string) => string;
   };
   crypto: {
     search_currencies: (name: string, market_type: string) => string;
@@ -214,6 +215,7 @@ export const Requests: {
     moniests: "content/moniests",
     posts: "content/posts",
     moniest_search: "content/moniests/search",
+    post: (id: string) => `content/post/${id}`,
   },
   crypto: {
     search_currencies: (name: string, market_type: string) =>

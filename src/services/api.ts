@@ -81,6 +81,7 @@ class api {
       httpService.get<Post[]>(Requests.content.posts, params),
     moniest_search: (params: PaginateRequest & { searchText: string }) =>
       httpService.get<User[]>(Requests.content.moniest_search, params),
+    post: (id: string) => httpService.get<Post>(Requests.content.post(id)),
   };
   crypto = {
     search_currencies: (name: string, market_type: string) =>
