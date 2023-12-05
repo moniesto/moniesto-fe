@@ -22,7 +22,7 @@ import { useTranslate } from "../../../../hooks/useTranslate";
 import { Post } from "../../../../interfaces/post";
 import api from "../../../../services/api";
 import localStorageService from "../../../../services/localStorageService";
-import AnimatedNumbers from "react-animated-numbers";
+// import AnimatedNumbers from "react-animated-numbers";
 import { Spinner } from "../../common/spinner";
 import { LoadingButton } from "@mui/lab";
 // import { useToPng } from "@hugocxl/react-to-image";
@@ -250,20 +250,24 @@ export const PostMenushareItem = ({
                     fontSize: { xs: 34, md: 52 },
                     display: "flex",
                     alignItems: "center",
-                    ">div": {
-                      fontSize: { xs: 34, md: 52 },
-                    },
+                    // ">div": {
+                    //   fontSize: { xs: 34, md: 52 },
+                    // },
                   }}
                   variant="h1"
                 >
                   {values.roi > 0 && "+"}
-                  {values.price && (
-                    <AnimatedNumbers
-                      includeComma
-                      animateToNumber={values.roi}
-                      locale="en-US"
-                    ></AnimatedNumbers>
-                  )}
+                  {
+                    values.price && values.roi
+
+                    // (
+                    //   <AnimatedNumbers
+                    //     includeComma
+                    //     animateToNumber={values.roi}
+                    //     locale="en-US"
+                    //   ></AnimatedNumbers>
+                    // )
+                  }
                   %
                 </Typography>
               </Stack>
