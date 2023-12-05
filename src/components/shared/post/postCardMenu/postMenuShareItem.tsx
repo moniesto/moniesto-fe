@@ -147,15 +147,17 @@ export const PostMenushareItem = ({
 
   useEffect(() => {
     if (values.price && !imgLoading) {
-      html2canvas(contentRef.current as HTMLElement, {
-        useCORS: true,
-        allowTaint: true,
-      })
-        .then((canvasRes) => {
-          canvas.current = canvasRes;
-          setIsDownloadEnable(true);
+      setTimeout(() => {
+        html2canvas(contentRef.current as HTMLElement, {
+          useCORS: true,
+          allowTaint: true,
         })
-        .catch(console.error);
+          .then((canvasRes) => {
+            canvas.current = canvasRes;
+            setIsDownloadEnable(true);
+          })
+          .catch(console.error);
+      }, 500);
     }
   }, [canvas, values, imgLoading, contentRef]);
 
