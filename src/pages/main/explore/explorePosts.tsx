@@ -9,6 +9,7 @@ import { useTranslate } from "../../../hooks/useTranslate";
 
 const ExplorePosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const [queryParams, setQueryParams] = useState<{
     hasMore?: boolean;
@@ -44,7 +45,8 @@ const ExplorePosts = () => {
           setQueryParams(JSON.parse(JSON.stringify(queryParams)));
         } else queryParams.hasMore = true;
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setLoading(false));
   }, [queryParams]);
 
   const handleFetchData = () => {
@@ -66,7 +68,7 @@ const ExplorePosts = () => {
       <InfiniteScroll
         hasMore={queryParams.hasMore!}
         dataLength={posts.length}
-        fetchData={handleFetchData}
+        fetchData={() => !loading && handleFetchData()}
         loader={<PostCard post={TestPost} loading={true} />}
       >
         <Stack rowGap={2}>

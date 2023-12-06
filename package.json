@@ -18,7 +18,6 @@
     "@editorjs/warning": "latest",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@hugocxl/react-to-image": "^0.0.8",
     "@mui/icons-material": "^5.10.9",
     "@mui/lab": "^5.0.0-alpha.111",
     "@mui/material": "^5.10.13",
@@ -39,7 +38,6 @@
     "editorjs-button": "^1.0.3",
     "env-cmd": "^10.1.0",
     "formik": "^2.4.2",
-    "html-to-image": "^1.11.11",
     "html2canvas": "^1.4.1",
     "i18next": "^22.4.12",
     "javascript-time-ago": "^2.5.9",
@@ -90,5 +88,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-infinite-scroller": "^1.2.5"
   }
 }
